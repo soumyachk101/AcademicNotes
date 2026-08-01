@@ -500,6 +500,31 @@
                 </div>
             </div>
             <div class="qa-card" id="gb-2">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 14px !important; padding: 1.8rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff !important;">
+    <svg width="650" height="190" viewBox="0 0 650 190" xmlns="http://www.w3.org/2000/svg">
+    <rect width="650" height="190" fill="#f8fafc" rx="8"/>
+    <!-- States -->
+    <circle cx="80" cy="95" r="22" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="80" y="100" font-size="12" font-weight="800" text-anchor="middle" fill="#c2410c">q0</text>
+    <circle cx="220" cy="95" r="22" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="220" y="100" font-size="12" font-weight="800" text-anchor="middle" fill="#c2410c">q1</text>
+    <circle cx="360" cy="95" r="22" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="360" y="100" font-size="12" font-weight="800" text-anchor="middle" fill="#c2410c">q2</text>
+    <circle cx="520" cy="95" r="22" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5"/>
+    <circle cx="520" cy="95" r="17" fill="none" stroke="#16a34a" stroke-width="2"/>
+    <text x="520" y="100" font-size="12" font-weight="800" text-anchor="middle" fill="#15803d">q3</text>
+    <!-- Transitions -->
+    <path d="M 75 73 C 55 35, 105 35, 85 72" fill="none" stroke="#ea580c" stroke-width="2"/>
+    <text x="80" y="30" font-size="11" font-weight="800" text-anchor="middle" fill="#ea580c">a, b</text>
+    <line x1="102" y1="95" x2="198" y2="95" stroke="#334155" stroke-width="2"/>
+    <text x="150" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#2563eb">a</text>
+    <line x1="242" y1="95" x2="338" y2="95" stroke="#334155" stroke-width="2"/>
+    <text x="290" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#2563eb">b</text>
+    <line x1="382" y1="95" x2="498" y2="95" stroke="#334155" stroke-width="2"/>
+    <text x="440" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#2563eb">b</text>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem !important; color: #475569 !important; margin-top: 1.1rem !important; font-style: italic !important; font-weight: 600 !important; letter-spacing: 0.02em !important;">Figure: Thompson NFA State Machine for Pattern (a|b)*abb</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q2</span><span>Explain Thompson's Construction to convert regular expression (a|b)*a into NFA.</span></div>
                 <div class="a-text">
                     <p><b>Thompson's Construction</b> builds an NFA from a regular expression by recursively composing small NFA fragments, one per operator, where every fragment has exactly one start state and one accepting state.</p>

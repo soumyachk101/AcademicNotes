@@ -443,6 +443,42 @@
                 </div>
             </div>
             <div class="qa-card" id="gb-2">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 14px !important; padding: 1.8rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff !important;">
+    <svg width="650" height="230" viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg">
+    <rect width="650" height="230" fill="#f8fafc" rx="8"/>
+    <g transform="translate(25, 20)">
+        <rect x="0" y="0" width="600" height="30" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+        <text x="75" y="20" font-size="10" font-weight="800" text-anchor="middle">Version (4b)</text>
+        <text x="225" y="20" font-size="10" font-weight="800" text-anchor="middle">IHL (4b)</text>
+        <text x="375" y="20" font-size="10" font-weight="800" text-anchor="middle">Type of Service (8b)</text>
+        <text x="525" y="20" font-size="10" font-weight="800" text-anchor="middle">Total Length (16b)</text>
+        <line x1="150" y1="0" x2="150" y2="30" stroke="#0284c7"/>
+        <line x1="300" y1="0" x2="300" y2="30" stroke="#0284c7"/>
+        <line x1="450" y1="0" x2="450" y2="30" stroke="#0284c7"/>
+
+        <rect x="0" y="30" width="600" height="30" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+        <text x="150" y="50" font-size="10" font-weight="800" text-anchor="middle">Identification (16b)</text>
+        <text x="375" y="50" font-size="10" font-weight="800" text-anchor="middle">Flags (3b)</text>
+        <text x="525" y="50" font-size="10" font-weight="800" text-anchor="middle">Fragment Offset (13b)</text>
+        <line x1="300" y1="30" x2="300" y2="60" stroke="#d97706"/>
+        <line x1="450" y1="30" x2="450" y2="60" stroke="#d97706"/>
+
+        <rect x="0" y="60" width="600" height="30" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+        <text x="100" y="80" font-size="10" font-weight="800" text-anchor="middle">Time to Live TTL (8b)</text>
+        <text x="300" y="80" font-size="10" font-weight="800" text-anchor="middle">Protocol (8b)</text>
+        <text x="500" y="80" font-size="10" font-weight="800" text-anchor="middle">Header Checksum (16b)</text>
+        <line x1="200" y1="60" x2="200" y2="90" stroke="#16a34a"/>
+        <line x1="400" y1="60" x2="400" y2="90" stroke="#16a34a"/>
+
+        <rect x="0" y="90" width="600" height="35" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+        <text x="300" y="112" font-size="12" font-weight="800" text-anchor="middle" fill="#6b21a8">Source IPv4 Address (32 bits)</text>
+
+        <rect x="0" y="125" width="600" height="35" fill="#f3e8ff" stroke="#9333ea" stroke-width="1.5"/>
+        <text x="300" y="147" font-size="12" font-weight="800" text-anchor="middle" fill="#6b21a8">Destination IPv4 Address (32 bits)</text>
+    </g>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem !important; color: #475569 !important; margin-top: 1.1rem !important; font-style: italic !important; font-weight: 600 !important; letter-spacing: 0.02em !important;">Figure: IPv4 Datagram 32-bit Header Structure</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q2</span><span>Compare OSI Model vs TCP/IP Model.</span></div>
                 <div class="a-text">
                     <p><b>Ans:</b> The OSI model is a 7-layer theoretical reference model, while TCP/IP is a 4-layer practical protocol suite that actually runs the Internet.</p>
@@ -566,6 +602,30 @@ Receiver: divide received frame by G
                 </div>
             </div>
             <div class="qa-card" id="gb-6">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 14px !important; padding: 1.8rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff !important;">
+    <svg width="640" height="210" viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg">
+    <rect width="640" height="210" fill="#f8fafc" rx="8"/>
+    <!-- Client & Server -->
+    <rect x="60" y="20" width="100" height="40" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="110" y="45" font-size="12" font-weight="800" text-anchor="middle" fill="#0369a1">CLIENT</text>
+    <line x1="110" y1="60" x2="110" y2="190" stroke="#475569" stroke-width="2" stroke-dasharray="4,4"/>
+
+    <rect x="480" y="20" width="100" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="530" y="45" font-size="12" font-weight="800" text-anchor="middle" fill="#15803d">SERVER</text>
+    <line x1="530" y1="60" x2="530" y2="190" stroke="#475569" stroke-width="2" stroke-dasharray="4,4"/>
+
+    <!-- Arrows -->
+    <line x1="110" y1="80" x2="530" y2="110" stroke="#0284c7" stroke-width="2.5"/>
+    <text x="320" y="88" font-size="11" font-weight="800" text-anchor="middle" fill="#0284c7">1. SYN (seq = x)</text>
+
+    <line x1="530" y1="115" x2="110" y2="145" stroke="#d97706" stroke-width="2.5"/>
+    <text x="320" y="123" font-size="11" font-weight="800" text-anchor="middle" fill="#d97706">2. SYN-ACK (seq = y, ack = x+1)</text>
+
+    <line x1="110" y1="150" x2="530" y2="180" stroke="#16a34a" stroke-width="2.5"/>
+    <text x="320" y="158" font-size="11" font-weight="800" text-anchor="middle" fill="#16a34a">3. ACK (seq = x+1, ack = y+1)</text>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem !important; color: #475569 !important; margin-top: 1.1rem !important; font-style: italic !important; font-weight: 600 !important; letter-spacing: 0.02em !important;">Figure: TCP 3-Way Handshake Connection Protocol</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Error Correction using Hamming Code with an example.</span></div>
                 <div class="a-text">
                     <p><b>Ans:</b> <b>Hamming Code</b> adds redundant parity bits at positions that are powers of 2 so that not only can an error be detected, its exact bit position can also be located and corrected (single-error correction).</p>

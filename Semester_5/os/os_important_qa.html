@@ -766,6 +766,38 @@ do {
                 </div>
             </div>
             <div class="qa-card" id="gb-16">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 14px !important; padding: 1.8rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff !important;">
+    <svg width="650" height="220" viewBox="0 0 650 220" xmlns="http://www.w3.org/2000/svg">
+    <defs><filter id="pShadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/></filter></defs>
+    <rect width="650" height="220" fill="#f8fafc" rx="8"/>
+    <!-- CPU -->
+    <rect x="30" y="80" width="80" height="60" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" filter="url(#pShadow)"/>
+    <text x="70" y="115" font-size="14" font-weight="800" text-anchor="middle" fill="#0369a1">CPU</text>
+    <!-- Logical Addr -->
+    <rect x="150" y="90" width="100" height="40" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="175" y="115" font-size="12" font-weight="800" text-anchor="middle" fill="#92400e">p</text>
+    <text x="225" y="115" font-size="12" font-weight="800" text-anchor="middle" fill="#92400e">d</text>
+    <line x1="200" y1="90" x2="200" y2="130" stroke="#d97706" stroke-dasharray="2,2"/>
+    <!-- Page Table -->
+    <rect x="300" y="50" width="90" height="120" rx="8" fill="#ffffff" stroke="#334155" stroke-width="2" filter="url(#pShadow)"/>
+    <text x="345" y="40" font-size="11" font-weight="800" text-anchor="middle" fill="#334155">Page Table</text>
+    <rect x="310" y="90" width="70" height="20" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="345" y="104" font-size="10" font-weight="800" text-anchor="middle" fill="#15803d">Frame f</text>
+    <!-- Physical Addr -->
+    <rect x="440" y="90" width="100" height="40" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="465" y="115" font-size="12" font-weight="800" text-anchor="middle" fill="#15803d">f</text>
+    <text x="515" y="115" font-size="12" font-weight="800" text-anchor="middle" fill="#15803d">d</text>
+    <!-- RAM -->
+    <rect x="580" y="30" width="50" height="160" rx="6" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+    <text x="605" y="20" font-size="11" font-weight="800" text-anchor="middle" fill="#6b21a8">RAM</text>
+    <!-- Arrows -->
+    <path d="M 110 110 L 150 110" stroke="#334155" stroke-width="2"/>
+    <path d="M 175 90 L 175 70 L 300 70" stroke="#334155" stroke-width="2"/>
+    <path d="M 380 100 L 440 100" stroke="#16a34a" stroke-width="2"/>
+    <path d="M 540 110 L 580 110" stroke="#16a34a" stroke-width="2"/>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem !important; color: #475569 !important; margin-top: 1.1rem !important; font-style: italic !important; font-weight: 600 !important; letter-spacing: 0.02em !important;">Figure: Paging Address Translation Hardware Architecture</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain Paging Architecture with Address Translation diagram.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
@@ -876,6 +908,27 @@ do {
                 </div>
             </div>
             <div class="qa-card" id="gb-20">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 14px !important; padding: 1.8rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff !important;">
+    <svg width="650" height="210" viewBox="0 0 650 210" xmlns="http://www.w3.org/2000/svg">
+    <rect width="650" height="210" fill="#f8fafc" rx="8"/>
+    <rect x="20" y="80" width="90" height="45" rx="6" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="65" y="107" font-size="10" font-weight="800" text-anchor="middle" fill="#b91c1c">1. Trap Page Fault</text>
+    <rect x="140" y="80" width="100" height="45" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="190" y="107" font-size="10" font-weight="800" text-anchor="middle" fill="#92400e">2. Save Process State</text>
+    <rect x="270" y="80" width="110" height="45" rx="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="325" y="107" font-size="10" font-weight="800" text-anchor="middle" fill="#0369a1">3. Read Page from Disk</text>
+    <rect x="410" y="80" width="110" height="45" rx="6" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+    <text x="465" y="107" font-size="10" font-weight="800" text-anchor="middle" fill="#15803d">4. Update Page Table</text>
+    <rect x="540" y="80" width="90" height="45" rx="6" fill="#f3e8ff" stroke="#9333ea" stroke-width="2"/>
+    <text x="585" y="107" font-size="10" font-weight="800" text-anchor="middle" fill="#6b21a8">5. Restart Instruction</text>
+    <!-- Connectors -->
+    <path d="M 110 102 L 140 102" stroke="#334155" stroke-width="2"/>
+    <path d="M 240 102 L 270 102" stroke="#334155" stroke-width="2"/>
+    <path d="M 380 102 L 410 102" stroke="#334155" stroke-width="2"/>
+    <path d="M 520 102 L 540 102" stroke="#334155" stroke-width="2"/>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem !important; color: #475569 !important; margin-top: 1.1rem !important; font-style: italic !important; font-weight: 600 !important; letter-spacing: 0.02em !important;">Figure: 5-Step Page Fault Handling Sequence</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q20</span><span>Explain Demand Paging and Page Fault Handling process.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
@@ -1079,6 +1132,35 @@ do {
                 </div>
             </div>
             <div class="qa-card" id="gb-28">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 14px !important; padding: 1.8rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff !important;">
+    <svg width="650" height="230" viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg">
+    <rect width="650" height="230" fill="#f8fafc" rx="8"/>
+    <!-- Inode Header -->
+    <rect x="40" y="30" width="130" height="170" rx="8" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+    <text x="105" y="55" font-size="12" font-weight="800" text-anchor="middle" fill="#0369a1">INODE BLOCK</text>
+    <line x1="40" y1="65" x2="170" y2="65" stroke="#0284c7"/>
+    <text x="50" y="85" font-size="10" fill="#334155">Mode / Owner</text>
+    <text x="50" y="105" font-size="10" fill="#334155">Size / Timestamps</text>
+    <rect x="45" y="115" width="120" height="22" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="105" y="130" font-size="9" font-weight="800" text-anchor="middle" fill="#15803d">Direct Pointers (0-11)</text>
+    <rect x="45" y="142" width="120" height="22" fill="#fef3c7" stroke="#d97706"/>
+    <text x="105" y="157" font-size="9" font-weight="800" text-anchor="middle" fill="#92400e">Single Indirect Pointer</text>
+    <rect x="45" y="169" width="120" height="22" fill="#fee2e2" stroke="#dc2626"/>
+    <text x="105" y="184" font-size="9" font-weight="800" text-anchor="middle" fill="#b91c1c">Double Indirect Pointer</text>
+    <!-- Target Blocks -->
+    <rect x="240" y="115" width="100" height="22" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="290" y="130" font-size="10" text-anchor="middle" fill="#15803d">Data Block 0..11</text>
+    <rect x="240" y="142" width="100" height="22" fill="#fef3c7" stroke="#d97706"/>
+    <text x="290" y="157" font-size="10" text-anchor="middle" fill="#92400e">Index Block</text>
+    <rect x="400" y="142" width="100" height="22" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="450" y="157" font-size="10" text-anchor="middle" fill="#15803d">Data Block 12..</text>
+    <!-- Connectors -->
+    <path d="M 165 126 L 240 126" stroke="#16a34a" stroke-width="2"/>
+    <path d="M 165 153 L 240 153" stroke="#d97706" stroke-width="2"/>
+    <path d="M 340 153 L 400 153" stroke="#d97706" stroke-width="2"/>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem !important; color: #475569 !important; margin-top: 1.1rem !important; font-style: italic !important; font-weight: 600 !important; letter-spacing: 0.02em !important;">Figure: UNIX Inode Block Structure & Pointer Hierarchy</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain UNIX Inode structure and block pointers.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
