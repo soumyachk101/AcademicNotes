@@ -472,6 +472,43 @@
                 </div>
             </div>
             <div class="qa-card" id="gb-4">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.8rem; margin: 2.2rem 0; text-align: center; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff;">
+    <svg width="650" height="230" viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="tcpShadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/></filter>
+    </defs>
+    <pattern id="tcpGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="2,2"/></pattern>
+    <rect width="650" height="230" fill="url(#tcpGrid)" opacity="0.3" rx="8"/>
+
+    <!-- Axis -->
+    <line x1="50" y1="190" x2="610" y2="190" stroke="#334155" stroke-width="2"/>
+    <line x1="50" y1="20" x2="50" y2="190" stroke="#334155" stroke-width="2"/>
+    <text x="330" y="215" font-size="11" font-weight="700" text-anchor="middle" fill="#334155">Transmission Time RTTs</text>
+    <text x="25" y="105" font-size="11" font-weight="700" text-anchor="middle" fill="#334155" transform="rotate(-90 25 105)">Congestion Window (cwnd)</text>
+
+    <!-- ssthresh Line -->
+    <line x1="50" y1="100" x2="600" y2="100" stroke="#d97706" stroke-width="2" stroke-dasharray="4,4"/>
+    <text x="540" y="94" font-size="10" font-weight="800" fill="#b45309">ssthresh threshold</text>
+
+    <!-- cwnd curve -->
+    <!-- Slow Start Exponential -->
+    <path d="M 50 190 Q 120 170 180 100" fill="none" stroke="#2563eb" stroke-width="3"/>
+    <text x="110" y="140" font-size="10" font-weight="800" fill="#1d4ed8">Slow Start (Exponential)</text>
+
+    <!-- Congestion Avoidance Linear -->
+    <line x1="180" y1="100" x2="350" y2="40" stroke="#059669" stroke-width="3"/>
+    <text x="270" y="55" font-size="10" font-weight="800" fill="#047857">Congestion Avoidance (Linear)</text>
+
+    <!-- Timeout Loss Drop -->
+    <line x1="350" y1="40" x2="350" y2="190" stroke="#dc2626" stroke-width="2" stroke-dasharray="3,3"/>
+    <circle cx="350" cy="40" r="5" fill="#dc2626"/>
+    <text x="350" y="30" font-size="10" font-weight="800" text-anchor="middle" fill="#dc2626">Timeout Drop!</text>
+
+    <!-- Recovery -->
+    <path d="M 350 190 Q 420 170 480 140 L 600 90" fill="none" stroke="#2563eb" stroke-width="3"/>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem; color: #475569; margin-top: 1.1rem; font-style: italic; font-weight: 600; letter-spacing: 0.02em;">Figure: TCP Congestion Window (cwnd) Growth, ssthresh Threshold & Timeout Loss Drop</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain Switching Techniques: Circuit Switching vs Packet Switching.</span></div>
                 <div class="a-text">
                     <p><b>Ans:</b> Switching decides how data travels through intermediate nodes from source to destination.</p>

@@ -444,6 +444,39 @@ Dynamic.</span></div>
                 </div>
             </div>
             <div class="qa-card" id="gb-3">
+<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #cbd5e1; border-radius: 14px; padding: 1.8rem; margin: 2.2rem 0; text-align: center; box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px #fff;">
+    <svg width="650" height="230" viewBox="0 0 650 230" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter id="hillShadow" x="-10%" y="-10%" width="130%" height="130%"><feDropShadow dx="0" dy="4" stdDeviation="4" flood-color="#0f172a" flood-opacity="0.08"/></filter>
+        <linearGradient id="terrainGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#c084fc"/><stop offset="100%" stop-color="#f3e8ff"/></linearGradient>
+    </defs>
+    <pattern id="hillGrid" width="20" height="20" patternUnits="userSpaceOnUse"><path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="2,2"/></pattern>
+    <rect width="650" height="230" fill="url(#hillGrid)" opacity="0.3" rx="8"/>
+
+    <!-- Terrain Surface -->
+    <path d="M 40 190 Q 90 120 140 130 T 240 70 T 350 150 T 480 30 T 610 190 L 610 200 L 40 200 Z" fill="url(#terrainGrad)" stroke="#9333ea" stroke-width="3" opacity="0.85"/>
+
+    <!-- Flags / Labels -->
+    <!-- Local Maximum -->
+    <line x1="240" y1="70" x2="240" y2="40" stroke="#d97706" stroke-width="2"/>
+    <polygon points="240,40 270,50 240,60" fill="#f59e0b"/>
+    <text x="240" y="32" font-size="11" font-weight="800" text-anchor="middle" fill="#b45309">Local Maximum</text>
+
+    <!-- Global Maximum -->
+    <line x1="480" y1="30" x2="480" y2="5" stroke="#16a34a" stroke-width="2"/>
+    <polygon points="480,5 515,15 480,25" fill="#22c55e"/>
+    <text x="480" y="-2" font-size="11" font-weight="800" text-anchor="middle" fill="#15803d">GLOBAL MAXIMUM</text>
+
+    <!-- Shoulder / Plateau -->
+    <text x="140" y="150" font-size="10" font-weight="700" text-anchor="middle" fill="#6b21a8">Shoulder</text>
+    <text x="350" y="170" font-size="10" font-weight="700" text-anchor="middle" fill="#6b21a8">Plateau Region</text>
+
+    <!-- Axis Labels -->
+    <line x1="30" y1="200" x2="620" y2="200" stroke="#475569" stroke-width="2"/>
+    <text x="325" y="218" font-size="11" font-weight="700" text-anchor="middle" fill="#334155">State Space / Objective Function Evaluation</text>
+</svg>
+    <div class="diagram-caption" style="font-size: 0.88rem; color: #475569; margin-top: 1.1rem; font-style: italic; font-weight: 600; letter-spacing: 0.02em;">Figure: Hill Climbing Search State Space Objective Function Landscape</div>
+</div>
                 <div class="q-text"><span class="q-badge b5">Q3</span><span>Explain Uninformed Search Algorithms: BFS, DFS, Depth-Limited, IDDFS.</span></div>
                 <div class="a-text">
                     <p><b>Definition:</b> Uninformed (blind) search algorithms explore the state space using only the problem definition, without any domain-specific heuristic guidance.</p>
