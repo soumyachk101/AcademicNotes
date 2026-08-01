@@ -433,8 +433,8 @@
                                 <line x1="260" y1="130" x2="318" y2="130" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="266" y="122" font-size="10">dispatch</text>
                                 <line x1="320" y1="140" x2="262" y2="140" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="266" y="153" font-size="10">interrupt</text>
                                 <line x1="420" y1="122" x2="488" y2="122" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="428" y="114" font-size="10">exit</text>
-                                <line x1="360" y1="108" x2="360" y2="52" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="365" y="80" font-size="10">I/O or event wait</text>
-                                <line x1="382" y1="52" x2="382" y2="108" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="386" y="80" font-size="10">event completion</text>
+                                <line x1="350" y1="108" x2="350" y2="52" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="345" y="75" font-size="10" text-anchor="end">I/O or event wait</text>
+                                <line x1="392" y1="52" x2="392" y2="108" stroke="#1e3a8a" marker-end="url(#ar1)"/><text x="397" y="95" font-size="10">event completion</text>
                             </g>
                         </svg>
                         <p class="diagram-caption">Fig: Five-state process model — New → Ready → Running → Terminated, with Running ↔ Waiting for I/O/event and Running → Ready on time-slice expiry.</p>
@@ -914,11 +914,12 @@ do {
                                 <rect x="10" y="80" width="80" height="40" fill="#dbeafe" stroke="#2563eb"/><text x="50" y="104" text-anchor="middle">CPU</text>
                                 <line x1="90" y1="100" x2="150" y2="100" stroke="#0f172a" marker-end="url(#ar5)"/>
                                 <rect x="152" y="60" width="110" height="40" fill="#bbf7d0" stroke="#16a34a"/><text x="207" y="84" text-anchor="middle">TLB (hit)</text>
-                                <line x1="207" y1="60" x2="207" y2="20" stroke="#16a34a" marker-end="url(#ar5)"/><text x="215" y="35" font-size="10">hit → frame #</text>
+                                <line x1="207" y1="60" x2="207" y2="20" stroke="#16a34a" marker-end="url(#ar5)"/><text x="213" y="17" font-size="10">hit → frame #</text>
                                 <line x1="262" y1="110" x2="330" y2="140" stroke="#dc2626" marker-end="url(#ar5)"/><text x="255" y="132" font-size="10" fill="#dc2626">miss</text>
                                 <rect x="332" y="130" width="120" height="40" fill="#fecaca" stroke="#dc2626"/><text x="392" y="154" text-anchor="middle">Page Table (RAM)</text>
                                 <line x1="392" y1="130" x2="392" y2="30" stroke="#0f172a"/>
-                                <line x1="392" y1="30" x2="220" y2="30" stroke="#0f172a" marker-end="url(#ar5)"/><text x="300" y="24" font-size="10">load into TLB</text>
+                                <line x1="392" y1="30" x2="245" y2="30" stroke="#0f172a"/>
+                                <line x1="245" y1="30" x2="245" y2="60" stroke="#0f172a" marker-end="url(#ar5)"/><text x="300" y="24" font-size="10">load into TLB</text>
                                 <rect x="452" y="70" width="90" height="40" fill="#f1f5f9" stroke="#94a3b8"/><text x="497" y="94" text-anchor="middle" font-size="11">Main Memory</text>
                                 <line x1="207" y1="20" x2="497" y2="70" stroke="#0f172a" marker-end="url(#ar5)"/>
                             </g>
@@ -1238,7 +1239,7 @@ do {
                                 <text x="80" y="14" font-weight="700" text-anchor="middle">Many-to-One</text>
                                 <circle cx="55" cy="35" r="10" fill="#bbf7d0" stroke="#16a34a"/><circle cx="80" cy="35" r="10" fill="#bbf7d0" stroke="#16a34a"/><circle cx="105" cy="35" r="10" fill="#bbf7d0" stroke="#16a34a"/>
                                 <line x1="55" y1="45" x2="80" y2="70" stroke="#0f172a"/><line x1="80" y1="45" x2="80" y2="70" stroke="#0f172a"/><line x1="105" y1="45" x2="80" y2="70" stroke="#0f172a"/>
-                                <rect x="60" y="72" width="40" height="20" fill="#dbeafe" stroke="#2563eb"/><text x="80" y="86" text-anchor="middle" font-size="9">Kernel Th.</text>
+                                <rect x="48" y="72" width="64" height="20" fill="#dbeafe" stroke="#2563eb"/><text x="80" y="86" text-anchor="middle" font-size="9">Kernel Th.</text>
 
                                 <text x="270" y="14" font-weight="700" text-anchor="middle">One-to-One</text>
                                 <circle cx="240" cy="35" r="10" fill="#bbf7d0" stroke="#16a34a"/><circle cx="270" cy="35" r="10" fill="#bbf7d0" stroke="#16a34a"/><circle cx="300" cy="35" r="10" fill="#bbf7d0" stroke="#16a34a"/>
@@ -1360,7 +1361,7 @@ int main() {
                                 <rect x="225" y="54" width="164" height="18" fill="#fde68a"/>
                                 <text x="227" y="67" font-size="10" font-weight="700">frame 1: PID4, pg7</text>
                                 <text x="227" y="86" font-size="10">frame 2: PID1, pg0</text>
-                                <line x1="307" y1="63" x2="450" y2="100" stroke="#0f172a" marker-end="url(#ar9)"/>
+                                <line x1="397" y1="63" x2="450" y2="100" stroke="#0f172a" marker-end="url(#ar9)"/>
                                 <rect x="400" y="90" width="90" height="30" fill="#bbf7d0" stroke="#16a34a"/><text x="445" y="109" text-anchor="middle" font-size="10">Frame 1</text>
                             </g>
                         </svg>
@@ -1374,7 +1375,7 @@ int main() {
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
                     <div class="diagram-container">
-                        <svg viewBox="0 0 560 150" width="100%" style="max-width:520px">
+                        <svg viewBox="0 0 590 150" width="100%" style="max-width:540px">
                             <defs><marker id="ar10" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#0f172a"/></marker></defs>
                             <g font-family="Inter,sans-serif" font-size="11" fill="#0f172a">
                                 <text x="120" y="14" font-weight="700" text-anchor="middle">Shared Memory</text>
@@ -1382,14 +1383,14 @@ int main() {
                                 <rect x="170" y="24" width="70" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="205" y="45" text-anchor="middle">P2</text>
                                 <rect x="95" y="64" width="70" height="30" fill="#bbf7d0" stroke="#16a34a"/><text x="130" y="83" text-anchor="middle" font-size="10">Shared region</text>
                                 <line x1="55" y1="58" x2="120" y2="64" stroke="#0f172a"/><line x1="205" y1="58" x2="140" y2="64" stroke="#0f172a"/>
-                                <text x="120" y="115" font-size="10">direct R/W, no kernel calls after setup</text>
+                                <text x="120" y="115" text-anchor="middle" font-size="10">direct R/W, no kernel calls after setup</text>
 
-                                <text x="440" y="14" font-weight="700" text-anchor="middle">Message Passing</text>
+                                <text x="470" y="14" font-weight="700" text-anchor="middle">Message Passing</text>
                                 <rect x="360" y="24" width="70" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="395" y="45" text-anchor="middle">P1</text>
                                 <rect x="510" y="24" width="70" height="34" fill="#dbeafe" stroke="#2563eb"/><text x="545" y="45" text-anchor="middle">P2</text>
                                 <rect x="435" y="64" width="70" height="30" fill="#fecaca" stroke="#dc2626"/><text x="470" y="83" text-anchor="middle" font-size="9">Kernel (mailbox)</text>
                                 <line x1="395" y1="58" x2="460" y2="64" stroke="#0f172a" marker-end="url(#ar10)"/><line x1="480" y1="64" x2="545" y2="58" stroke="#0f172a" marker-end="url(#ar10)"/>
-                                <text x="470" y="115" font-size="10">send()/receive() via kernel each time</text>
+                                <text x="470" y="115" text-anchor="middle" font-size="9">send()/receive() via kernel each time</text>
                             </g>
                         </svg>
                         <p class="diagram-caption">Fig: Shared memory needs one kernel setup then direct reads/writes; message passing routes every exchange through the kernel via send()/receive().</p>
@@ -1487,7 +1488,7 @@ do {
                                 <rect x="410" y="54" width="36" height="26" fill="#fecaca" stroke="#dc2626"/><text x="428" y="71" text-anchor="middle" font-size="9">Bp</text>
                                 <rect x="450" y="54" width="36" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="468" y="71" text-anchor="middle" font-size="9">B1</text>
                                 <rect x="490" y="54" width="36" height="26" fill="#fef9c3" stroke="#ca8a04"/><text x="508" y="71" text-anchor="middle" font-size="9">B2</text>
-                                <text x="470" y="100" font-size="9">Parity distributed across disks</text>
+                                <text x="468" y="100" text-anchor="middle" font-size="9">Parity distributed across disks</text>
                             </g>
                         </svg>
                         <p class="diagram-caption">Fig: RAID 0 stripes data across disks (speed, no fault tolerance); RAID 1 mirrors every block (fault-tolerant, costly); RAID 5 stripes data with a rotating parity block (fault-tolerant, better capacity than RAID 1).</p>
@@ -1516,11 +1517,11 @@ do {
                                 <text x="130" y="118" text-anchor="middle" font-size="9">— all run together, one address space —</text>
 
                                 <text x="430" y="14" font-weight="700" text-anchor="middle">Microkernel</text>
-                                <rect x="330" y="24" width="200" height="30" fill="#dbeafe" stroke="#2563eb"/><text x="430" y="43" text-anchor="middle" font-size="9">Kernel: IPC, basic scheduling, minimal memory mgmt</text>
-                                <rect x="330" y="62" width="60" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="360" y="79" text-anchor="middle" font-size="8">FS server</text>
-                                <rect x="400" y="62" width="60" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="430" y="79" text-anchor="middle" font-size="8">Driver</text>
-                                <rect x="470" y="62" width="60" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="500" y="79" text-anchor="middle" font-size="8">Net server</text>
-                                <text x="430" y="105" text-anchor="middle" font-size="9">(each runs as user-space process)</text>
+                                <rect x="330" y="24" width="200" height="42" fill="#dbeafe" stroke="#2563eb"/><text x="430" y="40" text-anchor="middle" font-size="8">Kernel: IPC, basic scheduling,</text><text x="430" y="52" text-anchor="middle" font-size="8">minimal memory management</text>
+                                <rect x="330" y="74" width="60" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="360" y="91" text-anchor="middle" font-size="8">FS server</text>
+                                <rect x="400" y="74" width="60" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="430" y="91" text-anchor="middle" font-size="8">Driver</text>
+                                <rect x="470" y="74" width="60" height="26" fill="#bbf7d0" stroke="#16a34a"/><text x="500" y="91" text-anchor="middle" font-size="8">Net server</text>
+                                <text x="430" y="117" text-anchor="middle" font-size="9">(each runs as user-space process)</text>
                             </g>
                         </svg>
                         <p class="diagram-caption">Fig: Monolithic kernel runs OS services in one kernel address space; microkernel keeps only bare essentials in kernel mode and runs services as user-space servers communicating via IPC.</p>
@@ -2231,7 +2232,7 @@ b) Detail DMA controller working cycle.</span></div>
                             <g font-family="Inter,sans-serif" font-size="9" fill="#0f172a">
                                 <text x="60" y="14" text-anchor="middle" font-weight="700">CPU involvement per word</text>
                                 <rect x="10" y="24" width="130" height="20" fill="#fecaca" stroke="#dc2626"/><text x="75" y="38" text-anchor="middle" font-size="8">PIO: full CPU busy-wait</text>
-                                <rect x="150" y="24" width="150" height="20" fill="#fef9c3" stroke="#ca8a04"/><text x="225" y="38" text-anchor="middle" font-size="8">Interrupt-driven: CPU per word, but not polling</text>
+                                <rect x="150" y="24" width="150" height="20" fill="#fef9c3" stroke="#ca8a04"/><text x="225" y="38" text-anchor="middle" font-size="8">CPU per word, not polling</text>
                                 <rect x="310" y="24" width="140" height="20" fill="#bbf7d0" stroke="#16a34a"/><text x="380" y="38" text-anchor="middle" font-size="8">DMA: CPU only at start/end</text>
                             </g>
                         </svg>
@@ -2444,7 +2445,7 @@ b) Differentiate Strict 2PL vs Rigorous 2PL.</span></div>
                             <g font-family="Inter,sans-serif" font-size="10" fill="#0f172a">
                                 <polyline points="20,80 100,20 180,20 340,80" fill="none" stroke="#2563eb" stroke-width="2"/>
                                 <text x="60" y="60" fill="#16a34a" font-size="9">Growing (acquire)</text>
-                                <text x="230" y="60" fill="#dc2626" font-size="9">Shrinking (release)</text>
+                                <text x="220" y="95" fill="#dc2626" font-size="9">Shrinking (release)</text>
                                 <circle cx="140" cy="20" r="3" fill="#0f172a"/><text x="140" y="12" text-anchor="middle" font-size="8">Lock Point</text>
                             </g>
                         </svg>
@@ -2696,11 +2697,11 @@ b) Trace Buddy System allocation for memory requests 100KB, 240KB, 60KB in 1MB t
                                 <rect x="10" y="10" width="480" height="24" fill="#f1f5f9" stroke="#94a3b8"/><text x="250" y="26" text-anchor="middle">1024 KB</text>
                                 <rect x="10" y="38" width="240" height="20" fill="#f1f5f9" stroke="#94a3b8"/><text x="130" y="52" text-anchor="middle" font-size="8">512 (free, B)</text>
                                 <rect x="250" y="38" width="240" height="20" fill="#f1f5f9" stroke="#94a3b8"/><text x="370" y="52" text-anchor="middle" font-size="8">512 (A)</text>
-                                <rect x="250" y="62" width="120" height="18" fill="#bbf7d0" stroke="#16a34a"/><text x="310" y="75" text-anchor="middle" font-size="8">256 → allocated (240K req)</text>
+                                <rect x="250" y="62" width="120" height="18" fill="#bbf7d0" stroke="#16a34a"/><text x="310" y="75" text-anchor="middle" font-size="8">256 → alloc (240K)</text>
                                 <rect x="370" y="62" width="120" height="18" fill="#f1f5f9" stroke="#94a3b8"/><text x="430" y="75" text-anchor="middle" font-size="8">256 (A2, free)</text>
-                                <rect x="370" y="84" width="60" height="16" fill="#fef9c3" stroke="#ca8a04"/><text x="400" y="96" text-anchor="middle" font-size="7">128 → alloc (100K)</text>
-                                <rect x="430" y="84" width="60" height="16" fill="#f1f5f9" stroke="#94a3b8"/><text x="460" y="96" text-anchor="middle" font-size="7">128 (free)</text>
-                                <rect x="430" y="104" width="30" height="14" fill="#e9d5ff" stroke="#7c3aed"/><text x="445" y="115" text-anchor="middle" font-size="6">64 alloc (60K)</text>
+                                <rect x="370" y="84" width="60" height="16" fill="#fef9c3" stroke="#ca8a04"/><text x="400" y="96" text-anchor="middle" font-size="7">128→100K</text>
+                                <rect x="430" y="84" width="60" height="16" fill="#f1f5f9" stroke="#94a3b8"/><text x="460" y="96" text-anchor="middle" font-size="7">128 free</text>
+                                <rect x="430" y="104" width="30" height="14" fill="#e9d5ff" stroke="#7c3aed"/><text x="445" y="115" text-anchor="middle" font-size="6">64→60K</text>
                                 <rect x="460" y="104" width="30" height="14" fill="#f1f5f9" stroke="#94a3b8"/><text x="475" y="115" text-anchor="middle" font-size="6">64 free</text>
                             </g>
                         </svg>
