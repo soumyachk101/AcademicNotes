@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Array and Vector Pipeline - Detailed Answers</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Link to Shared Notes Stylesheet -->
+    <link rel="stylesheet" href="notes.css">
+
+    <!-- Page Specific Variable Colors -->
+    <style>
+        :root {
+            --primary-color: var(--color-u4, #0ea5e9); /* Ocean Sky Accent */
+            --primary-light: rgba(14, 165, 233, 0.05);
+            --border-color: rgba(14, 165, 233, 0.15);
+        }
+    
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            padding: 1.8rem !important;
+            margin: 2.2rem 0 !important;
+            text-align: center !important;
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+        }
+        .diagram-caption {
+            font-size: 0.88rem !important;
+            color: #475569 !important;
+            margin-top: 1.1rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <a href="architecture_index.html">← COA Menu</a>
+    <span class="nav-title">Module IV of V</span>
+    <div style="display:flex;gap:0.5rem;">
+        <a href="ilp.html">← Previous</a>
+        <a href="multiprocessor.html">Next →</a>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <h1>Module IV: Array &amp; Vector Pipeline</h1>
+        <p class="subtitle">Simple Answers &amp; Key Points · 19 Questions</p>
+        <div class="book-divider">
+            <span class="line"></span>
+            <span class="ornament">❖</span>
+            <span class="line"></span>
+        </div>
+    </header>
+    <div class="section">
+
+<div class="qa-card">
+<h4 class="qa-question">1. Define array processor with an example.</h4>
+<div class="answer">
+    <p>An <b>Array Processor</b> (also called a SIMD processor) is a type of parallel computer that consists of multiple identical Processing Elements (PEs) operating <b>synchronously</b> under the control of a single Control Unit (CU). All PEs execute the <b>same instruction</b> at the same time, but each PE operates on its own <b>different data</b> from its own local memory.</p>
+
+    <p><span class="highlight">Architecture:</span></p>
+    <ul>
+        <li><b>Control Unit (CU):</b> Fetches and decodes one instruction at a time, then broadcasts the control signals to all PEs.</li>
+        <li><b>Processing Elements (PEs):</b> Each PE is a simple ALU with its own local memory. All PEs execute the broadcast instruction in lockstep.</li>
+        <li><b>Interconnection Network:</b> Connects PEs to allow inter-PE data communication (e.g., shifting data between neighbors).</li>
+        <li><b>Masking:</b> Individual PEs can be disabled (masked) so that only a subset of PEs participates in an operation (used for conditional operations).</li>
+    </ul>
+
+    <p><span class="highlight">Example:</span></p>
+    <ul>
+        <li><b>ILLIAC IV:</b> One of the earliest array processors (1972). It had 64 PEs, each with its own 2KB local memory. The CU broadcast a single instruction to all 64 PEs to perform parallel operations on 64 data elements simultaneously.</li>
+        <li><b>Modern GPUs:</b> Modern Graphics Processing Units (like NVIDIA CUDA cores) are essentially massively parallel array processors with thousands of PEs (CUDA cores), optimized for data-parallel graphics and scientific computations.</li>
+    </ul>
+
+    <p><span class="highlight">Classification:</span> Array processors fall under <b>Flynn's SIMD</b> (Single Instruction, Multiple Data) category, as one instruction stream operates on multiple data streams.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">2. What is a vector processor? Give one key application area.</h4>
+<div class="answer">
+    <p>A <b>Vector Processor</b> is a CPU designed to operate on entire <b>vectors</b> (one-dimensional arrays of data) using a single instruction. Instead of using a loop to process each element one at a time (scalar processing), a vector processor issues one instruction like <code>VADD V1, V2, V3</code> which adds every element of vector V2 to every element of vector V3, storing results in V1.</p>
+
+    <p><span class="highlight">Architecture:</span></p>
+    <ul>
+        <li><b>Vector Registers:</b> Large registers (e.g., V0-V7) that can hold 64 or more elements each (e.g., 64 double-precision floating-point numbers).</li>
+        <li><b>Deeply Pipelined Functional Units:</b> The ALU/FPU is deeply pipelined (e.g., 6-10 stages). After an initial startup latency, it produces one result per clock cycle.</li>
+        <li><b>Vector Load/Store Units:</b> Specialized memory units that can fetch entire vectors from memory in a streaming fashion.</li>
+        <li><b>Vector Length Register (VLR):</b> Specifies how many elements of the vector register to process (handles vectors shorter than the register length).</li>
+        <li><b>Vector Mask Register:</b> A boolean register that enables/disables individual element operations (for conditional vector processing).</li>
+    </ul>
+
+    <p><span class="highlight">Key Application Area:</span></p>
+    <ul>
+        <li><b>Scientific Computing and Weather Forecasting:</b> Climate models involve massive matrix operations, fluid dynamics simulations, and linear algebra — all perfectly suited for vector processing. The Cray-1 and Cray X-MP supercomputers, which were vector processors, were heavily used by national weather services worldwide.</li>
+        <li>Other applications: Molecular dynamics, computational fluid dynamics (CFD), seismic analysis, image processing.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">3. List two differences between scalar and vector processing.</h4>
+<div class="answer">
+    <table>
+        <tr><th>Feature</th><th>Scalar Processing</th><th>Vector Processing</th></tr>
+        <tr><td><b>1. Operand Type</b></td><td>Operates on <b>one data element at a time</b>. An ADD instruction adds two individual numbers.</td><td>Operates on <b>entire vectors (arrays) at a time</b>. A VADD instruction adds two arrays element-by-element.</td></tr>
+        <tr><td><b>2. Loop Overhead</b></td><td>Requires an explicit software <b>loop</b> (with counter increment, comparison, and branch instructions) to process an array. This overhead (fetch, decode, branch for every element) is significant.</td><td>Processes the array with a <b>single instruction</b>. The loop is implicit in the hardware — the vector unit automatically iterates through all elements. This eliminates branch overhead entirely.</td></tr>
+        <tr><td><b>3. Instruction Fetch</b></td><td>For N elements, N×(number of instructions per iteration) instructions must be fetched and decoded.</td><td>For N elements, only <b>one</b> instruction is fetched and decoded. This dramatically reduces instruction bandwidth requirements.</td></tr>
+        <tr><td><b>4. Memory Access</b></td><td>Individual, scattered load/store instructions. May suffer from cache miss penalties on each access.</td><td>Streaming, pipelined memory access. Vector load units access memory in a predictable, sequential pattern, allowing the memory system to optimize prefetching.</td></tr>
+    </table>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">4. What is pipelining in vector processors?</h4>
+<div class="answer">
+    <p>In vector processors, pipelining refers to the deep segmentation of the <b>arithmetic functional units</b> (like Floating-Point Adders, Multipliers) into multiple stages. This allows a new pair of vector elements to enter the pipeline every clock cycle, achieving a sustained throughput of <b>one result per clock cycle</b> after the initial startup latency.</p>
+
+    <p><span class="highlight">How It Works:</span></p>
+    <ol>
+        <li>A vector instruction (e.g., <code>VADD V3, V1, V2</code> — add 64 elements) is issued.</li>
+        <li>The floating-point adder pipeline has, say, 6 stages (Compare Exponents → Align Mantissa → Add → Normalize → Round → Pack).</li>
+        <li><b>Cycle 1:</b> Element pair (V1[0], V2[0]) enters Stage 1.</li>
+        <li><b>Cycle 2:</b> (V1[0], V2[0]) moves to Stage 2. (V1[1], V2[1]) enters Stage 1.</li>
+        <li><b>Cycle 6:</b> (V1[0], V2[0]) exits Stage 6 — the first result V3[0] is produced. Elements V1[1]–V1[5] are in various pipeline stages.</li>
+        <li><b>Cycle 7 onwards:</b> One result is produced every single clock cycle. V3[1] in cycle 7, V3[2] in cycle 8, etc.</li>
+        <li><b>Cycle 69:</b> V3[63] (the last result for a 64-element vector) is produced.</li>
+    </ol>
+
+    <p><span class="highlight">Key Formula:</span></p>
+    <div class="formula-box">Total Cycles = Startup Latency (k stages) + Vector Length (N) - 1<br>
+    = k + N - 1</div>
+
+    <p><span class="highlight">Significance:</span> Without pipelining, 64 additions would take 64 × 6 = 384 cycles. With pipelining, it takes only 6 + 63 = 69 cycles. The throughput approaches 1 element/cycle for long vectors.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">5. Define speedup in vector pipelining.</h4>
+<div class="answer">
+    <p><b>Speedup</b> in vector pipelining is the ratio of the time taken by a scalar (non-pipelined) processor to process a vector operation compared to the time taken by a pipelined vector processor for the same operation.</p>
+
+    <div class="formula-box">Speedup = Time_scalar / Time_vector</div>
+
+    <p><span class="highlight">Derivation:</span></p>
+    <ul>
+        <li><b>Scalar Time:</b> If the operation takes <i>k</i> clock cycles for one element (because the functional unit has <i>k</i> stages), and the vector has <i>N</i> elements:
+        <div class="formula-box">Time_scalar = N × k cycles</div></li>
+        <li><b>Vector (Pipelined) Time:</b> The first result takes <i>k</i> cycles (startup). After that, one result per cycle for the remaining <i>N-1</i> elements:
+        <div class="formula-box">Time_vector = k + (N - 1) cycles</div></li>
+        <li><b>Speedup:</b>
+        <div class="formula-box">Speedup = (N × k) / (k + N - 1)</div></li>
+    </ul>
+
+    <p><span class="highlight">Limiting Behavior:</span></p>
+    <ul>
+        <li>As N → ∞ (very long vectors): Speedup → <b>k</b> (the number of pipeline stages). The startup cost becomes negligible.</li>
+        <li>As N = 1 (single element): Speedup = k/k = <b>1</b> (no benefit from pipelining).</li>
+    </ul>
+
+    <p><b>Conclusion:</b> Vector pipelining is most effective for long vectors, where the throughput approaches the theoretical maximum of one result per cycle.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">6. What is a mask register in vector operations?</h4>
+<div class="answer">
+    <p>A <b>Mask Register</b> (or Vector Mask Register) is a special hardware register in a vector processor that holds a vector of <b>boolean values (0 or 1)</b>, one bit per vector element. It is used to implement <b>conditional operations</b> on individual elements within a vector instruction.</p>
+
+    <p><span class="highlight">Why It's Needed:</span></p>
+    <p>Consider the scalar code:</p>
+    <pre>
+for (i = 0; i &lt; N; i++) {
+    if (A[i] &gt; 0)
+        B[i] = A[i] + C[i];
+}
+    </pre>
+    <p>In scalar processing, the <code>if</code> statement is a branch. In vector processing, there are no branches within a vector operation. Instead, the mask register selectively enables or disables the operation for each element.</p>
+
+    <p><span class="highlight">How It Works:</span></p>
+    <ol>
+        <li><b>Set the Mask:</b> A vector comparison instruction (e.g., <code>VCMP.GT VM, V_A, 0</code>) compares each element of V_A against 0 and sets the corresponding bit in the mask register VM. If A[i] &gt; 0, VM[i] = 1; otherwise VM[i] = 0.</li>
+        <li><b>Masked Operation:</b> The subsequent vector ADD instruction (<code>VADD V_B, V_A, V_C, VM</code>) only executes the addition for elements where VM[i] = 1. Elements where VM[i] = 0 are skipped (or their results are not written back).</li>
+    </ol>
+
+    <p><span class="highlight">Significance:</span> The mask register allows vector processors to handle <code>if-else</code> constructs without branches, maintaining the streaming pipeline efficiency of vector execution even for conditional computations.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">7. Name two real-world examples of SIMD array processors.</h4>
+<div class="answer">
+    <p><span class="highlight">1. ILLIAC IV (1972):</span></p>
+    <ul>
+        <li>One of the earliest and most iconic SIMD array processors.</li>
+        <li>Built at the University of Illinois and operated at NASA Ames Research Center.</li>
+        <li>Featured 64 Processing Elements, each with its own local memory, controlled by a single Control Unit.</li>
+        <li>Used for aerodynamic simulations and weather modeling.</li>
+    </ul>
+
+    <p><span class="highlight">2. Connection Machine CM-2 (1987):</span></p>
+    <ul>
+        <li>Designed by Thinking Machines Corporation.</li>
+        <li>Contained up to 65,536 simple 1-bit processors arranged in a hypercube interconnection network.</li>
+        <li>Each processor had its own local memory. The CU broadcast instructions to all processors.</li>
+        <li>Used for massively parallel applications like fluid dynamics, AI, and database search.</li>
+    </ul>
+
+    <p><span class="highlight">Modern Examples:</span></p>
+    <ul>
+        <li><b>NVIDIA GPUs (CUDA architecture):</b> Thousands of CUDA cores execute the same instruction (kernel) on different data elements — a modern, massively parallel SIMD architecture.</li>
+        <li><b>Intel SSE/AVX extensions:</b> SIMD instruction sets within x86 CPUs that process 4-16 data elements per instruction using 128-512 bit wide registers.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">8. Differentiate between array processor and vector processor with block diagrams.</h4>
+<div class="answer">
+    <p>Both exploit data-level parallelism (DLP), but they do so through fundamentally different architectural approaches.</p>
+
+    <table>
+        <tr><th>Feature</th><th>Array Processor</th><th>Vector Processor</th></tr>
+        <tr><td><b>Parallelism Type</b></td><td><b>Spatial Parallelism:</b> Multiple ALUs operating simultaneously on different data.</td><td><b>Temporal Parallelism:</b> A single, deeply pipelined ALU processing elements sequentially but overlapping them in time.</td></tr>
+        <tr><td><b>Number of ALUs</b></td><td>Many (e.g., 64 or more simple ALUs).</td><td>Few (e.g., 1-4 deeply pipelined functional units).</td></tr>
+        <tr><td><b>Control</b></td><td>Single CU broadcasts one instruction to ALL PEs. All PEs operate in lockstep.</td><td>Single instruction sequentially feeds elements through a pipeline. No broadcast needed.</td></tr>
+        <tr><td><b>Memory</b></td><td>Each PE has its own <b>local (distributed) memory</b>.</td><td>Uses <b>Vector Registers</b> fed from a centralized shared memory system.</td></tr>
+        <tr><td><b>Synchronization</b></td><td>Implicit — all PEs execute the same instruction at the same time.</td><td>Implicit — the pipeline handles ordering automatically.</td></tr>
+        <tr><td><b>Best For</b></td><td>Massively parallel operations on independent data (image processing, cellular automata).</td><td>Regular, streaming computations (linear algebra, FFT, weather simulation).</td></tr>
+        <tr><td><b>Example</b></td><td>ILLIAC IV, Connection Machine, GPUs.</td><td>Cray-1, NEC SX series.</td></tr>
+    </table>
+
+    <p><span class="highlight">Conceptual Block Diagrams:</span></p>
+    <p><b>Array Processor:</b></p>
+    <pre>
+    Control Unit (CU)
+    ┌──────────────┐
+    │  Fetch &amp; Decode  │──── broadcasts instruction ────┐
+    └──────────────┘                                    │
+         ┌──────┐  ┌──────┐  ┌──────┐  ┌──────┐       │
+         │ PE 0 │  │ PE 1 │  │ PE 2 │  │ PE N │ ◄─────┘
+         │ ALU  │  │ ALU  │  │ ALU  │  │ ALU  │  (all execute same op)
+         │ Mem  │  │ Mem  │  │ Mem  │  │ Mem  │
+         └──────┘  └──────┘  └──────┘  └──────┘
+    </pre>
+    <p><b>Vector Processor:</b></p>
+    <pre>
+    Scalar Unit ──► Vector Control Unit
+                        │
+         ┌──────────────┼──────────────┐
+         │              │              │
+    ┌─────────┐  ┌─────────┐   ┌─────────────┐
+    │ V Reg 0 │  │ V Reg 1 │   │ V Reg N     │
+    │ 64 elems│  │ 64 elems│   │ 64 elems    │
+    └────┬────┘  └────┬────┘   └──────┬──────┘
+         │            │               │
+         └──►  Pipelined FP Adder  ◄──┘
+              [S1|S2|S3|S4|S5|S6]
+              ──► 1 result/cycle after startup
+    </pre>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">9. Explain the working of a vector pipeline. Mention its stages with an example.</h4>
+<div class="answer">
+    <p>A vector pipeline processes an entire vector of data through a deeply segmented functional unit, producing one result per clock cycle after an initial fill-up period.</p>
+
+    <p><span class="highlight">Example: Vector Floating-Point Addition (VADD V3, V1, V2)</span></p>
+    <p>This instruction adds corresponding elements of vector registers V1 and V2, storing results in V3. The floating-point adder pipeline typically has 4-6 stages:</p>
+
+    <ol>
+        <li><b>Stage 1 — Compare Exponents:</b> Compare the exponents of the two floating-point operands to determine the difference.</li>
+        <li><b>Stage 2 — Align Mantissa:</b> Shift the mantissa of the smaller number right by the exponent difference so both numbers have the same exponent.</li>
+        <li><b>Stage 3 — Add Mantissas:</b> Perform the actual addition (or subtraction) of the aligned mantissas.</li>
+        <li><b>Stage 4 — Normalize:</b> Shift the result mantissa so it is in normalized form (leading 1 before the decimal point) and adjust the exponent accordingly.</li>
+    </ol>
+
+    <p><span class="highlight">Pipeline Timing (Vector Length = 6, Stages = 4):</span></p>
+    <pre>
+Cycle:    1    2    3    4    5    6    7    8    9
+Stage 1:  E0   E1   E2   E3   E4   E5
+Stage 2:       E0   E1   E2   E3   E4   E5
+Stage 3:            E0   E1   E2   E3   E4   E5
+Stage 4:                 E0   E1   E2   E3   E4   E5
+Output:                  V3[0] V3[1] V3[2] V3[3] V3[4] V3[5]
+    </pre>
+
+    <p><b>Total Cycles = 4 + 6 - 1 = 9 cycles</b> (vs. 4 × 6 = 24 cycles without pipelining).</p>
+    <p><b>Speedup = 24/9 = 2.67x</b></p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">10. What is vector chaining? How does it improve performance?</h4>
+<div class="answer">
+    <p><b>Vector Chaining</b> is an optimization technique in vector processors that allows the output of one vector functional unit to be fed directly into the input of another vector functional unit <b>without waiting for the first operation to complete on the entire vector</b>. It is the vector equivalent of data forwarding in scalar pipelines.</p>
+
+    <p><span class="highlight">Example Without Chaining:</span></p>
+    <pre>
+VMUL V3, V1, V2    ; V3 = V1 × V2 (takes k + N - 1 cycles)
+VADD V5, V3, V4    ; V5 = V3 + V4 (must wait until VMUL finishes ALL elements)
+    </pre>
+    <p>Total time ≈ 2 × (k + N - 1) cycles. The VADD cannot start until the entire VMUL is done.</p>
+
+    <p><span class="highlight">Example With Chaining:</span></p>
+    <ul>
+        <li>As soon as the VMUL pipeline produces V3[0] (after its startup latency), that result is immediately forwarded to the VADD pipeline input.</li>
+        <li>One cycle later, V3[1] is forwarded, and so on.</li>
+        <li>The two pipelines operate concurrently, with the VADD pipeline trailing the VMUL pipeline by just the startup latency.</li>
+    </ul>
+    <p>Total time ≈ k_mul + k_add + N - 1 cycles (much less than the sequential sum).</p>
+
+    <p><span class="highlight">Performance Improvement:</span></p>
+    <ul>
+        <li>For long vectors, chaining nearly halves the execution time for a sequence of two dependent vector operations.</li>
+        <li>Multiple chains can be active simultaneously if the processor has multiple independent functional units.</li>
+        <li>Chaining was a hallmark feature of the <b>Cray-1</b> supercomputer, contributing significantly to its legendary performance.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">11. Explain data-level parallelism in array processors.</h4>
+<div class="answer">
+    <p><b>Data-Level Parallelism (DLP)</b> is a form of parallelism that arises when the <b>same operation</b> is applied to <b>multiple independent data elements</b> simultaneously. Array processors are specifically designed to exploit DLP.</p>
+
+    <p><span class="highlight">How Array Processors Exploit DLP:</span></p>
+    <ol>
+        <li><b>Data Distribution:</b> The dataset is distributed across the local memories of the Processing Elements (PEs). For example, if you have a 64-element array and 64 PEs, element A[i] is stored in PE[i]'s local memory.</li>
+        <li><b>Instruction Broadcast:</b> The Control Unit (CU) fetches a single instruction (e.g., "ADD the value from local memory address X to register R1") and broadcasts it to all PEs simultaneously.</li>
+        <li><b>Parallel Execution:</b> All 64 PEs execute the ADD instruction at the exact same time, each operating on its own local data. In one clock cycle, 64 additions are performed.</li>
+        <li><b>Conditional Execution (Masking):</b> If only some elements need to be processed (e.g., <code>if A[i] > 0</code>), a mask register disables the PEs that don't meet the condition, while the active PEs proceed.</li>
+    </ol>
+
+    <p><span class="highlight">Example — Vector Addition:</span></p>
+    <p>To compute C[i] = A[i] + B[i] for i = 0 to 63:</p>
+    <ul>
+        <li>A[i] is stored in PE[i]'s memory at address 100.</li>
+        <li>B[i] is stored in PE[i]'s memory at address 200.</li>
+        <li>CU broadcasts: <code>LOAD R1, [100]</code> → All 64 PEs load their respective A[i].</li>
+        <li>CU broadcasts: <code>LOAD R2, [200]</code> → All 64 PEs load their respective B[i].</li>
+        <li>CU broadcasts: <code>ADD R3, R1, R2</code> → All 64 PEs compute C[i] = A[i] + B[i] simultaneously.</li>
+        <li>CU broadcasts: <code>STORE R3, [300]</code> → All 64 PEs store their C[i].</li>
+    </ul>
+    <p>4 instructions process 64 elements — a massive exploitation of DLP.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">12. Vector addition with 5 pipeline stages. Length = 100. Calculate cycles and efficiency.</h4>
+<div class="answer">
+    <p><b>Given:</b></p>
+    <ul>
+        <li>Number of pipeline stages (k) = 5</li>
+        <li>Vector length (N) = 100</li>
+    </ul>
+
+    <p><b>a) Total Clock Cycles Required:</b></p>
+    <div class="formula-box">Total Cycles = k + (N - 1) = 5 + (100 - 1) = 5 + 99 = 104 cycles</div>
+    <p>Explanation: The pipeline takes 5 cycles to fill (startup latency for the first element). After that, one element completes every cycle for the remaining 99 elements.</p>
+
+    <p><b>b) Pipeline Efficiency:</b></p>
+    <p>Pipeline efficiency measures how well the pipeline utilizes its hardware compared to the ideal case.</p>
+    <div class="formula-box">Efficiency = (Ideal execution time) / (Actual execution time)<br>
+    = N / (k + N - 1)<br>
+    = 100 / 104<br>
+    = 0.9615 = 96.15%</div>
+
+    <p><span class="highlight">Interpretation:</span></p>
+    <ul>
+        <li>The pipeline is <b>96.15%</b> efficient, meaning only 3.85% of the pipeline's capacity is wasted (during the 4 startup cycles where not all stages are active).</li>
+        <li>For comparison, if the vector length were only 10: Efficiency = 10/(5+9) = 10/14 = 71.4%. Short vectors are much less efficient.</li>
+        <li>The <b>speedup</b> over scalar execution = (N × k) / (k + N - 1) = (100 × 5) / 104 = 500/104 = <b>4.81x</b>.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">13. Array processor with 64 PEs performing 64×64 matrix multiplication. Explain data flow.</h4>
+<div class="answer">
+    <p><b>Problem:</b> Multiply two 64×64 matrices: C = A × B, where C[i][j] = Σ(A[i][k] × B[k][j]) for k = 0 to 63.</p>
+
+    <p><span class="highlight">Data Distribution:</span></p>
+    <ul>
+        <li>We have 64 PEs. Assign each PE to compute one element of a result row.</li>
+        <li><b>PE[j]</b> stores: Column j of Matrix B (i.e., B[0][j], B[1][j], ..., B[63][j]) in its local memory.</li>
+        <li>Matrix A rows will be broadcast by the Control Unit.</li>
+    </ul>
+
+    <p><span class="highlight">Algorithm (Row-at-a-Time):</span></p>
+    <ol>
+        <li><b>For each row i of Matrix A (i = 0 to 63):</b>
+            <ol>
+                <li>Initialize: Each PE sets its accumulator R_acc = 0.</li>
+                <li><b>For each k = 0 to 63:</b>
+                    <ul>
+                        <li>CU broadcasts A[i][k] to all 64 PEs.</li>
+                        <li>Each PE[j] loads B[k][j] from its local memory.</li>
+                        <li>Each PE[j] computes: R_acc = R_acc + A[i][k] × B[k][j].</li>
+                    </ul>
+                </li>
+                <li>After the inner loop: PE[j] stores R_acc → C[i][j].</li>
+            </ol>
+        </li>
+    </ol>
+
+    <p><span class="highlight">Data Flow Summary:</span></p>
+    <ul>
+        <li><b>Broadcast:</b> A[i][k] is broadcast from the CU to all PEs (one scalar value per inner loop step).</li>
+        <li><b>Local Read:</b> Each PE reads B[k][j] from its own local memory.</li>
+        <li><b>Parallel Compute:</b> All 64 PEs perform a multiply-accumulate simultaneously.</li>
+    </ul>
+
+    <p><b>Total Steps:</b> 64 (rows) × 64 (inner loop) = 4,096 multiply-accumulate steps. But since each step involves 64 PEs working in parallel, the effective work is 64 × 64 × 64 = 262,144 multiplications in 4,096 steps. Without the array processor, a scalar machine would need 262,144 sequential steps.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">14. Vector length 128, initiation rate 1/cycle, 6-stage pipeline. Calculate time for dot product.</h4>
+<div class="answer">
+    <p><b>Given:</b></p>
+    <ul>
+        <li>Vector length (N) = 128 elements</li>
+        <li>Initiation rate = 1 element per cycle (one new pair enters the pipeline each cycle)</li>
+        <li>Number of pipeline stages (k) = 6</li>
+    </ul>
+
+    <p><b>Note:</b> A dot product involves two operations: element-wise multiplication followed by a summation (reduction). Let's calculate the time for the multiplication phase first.</p>
+
+    <p><b>Step 1: Vector Multiply Time (V3 = V1 × V2)</b></p>
+    <div class="formula-box">Time_multiply = k + (N - 1) = 6 + (128 - 1) = 6 + 127 = 133 cycles</div>
+
+    <p><b>Step 2: Reduction (Summation)</b></p>
+    <p>After multiplication, we have 128 products that must be summed. A vector reduction (tree-based summation) takes log₂(N) passes:</p>
+    <ul>
+        <li>Pass 1: Add pairs → 64 partial sums (pipeline time: 6 + 63 = 69 cycles)</li>
+        <li>Pass 2: Add pairs → 32 partial sums (6 + 31 = 37 cycles)</li>
+        <li>Pass 3: 16 sums (6 + 15 = 21 cycles)</li>
+        <li>Pass 4: 8 sums (6 + 7 = 13 cycles)</li>
+        <li>Pass 5: 4 sums (6 + 3 = 9 cycles)</li>
+        <li>Pass 6: 2 sums (6 + 1 = 7 cycles)</li>
+        <li>Pass 7: 1 final sum (6 + 0 = 6 cycles)</li>
+    </ul>
+    <p>Total reduction = 69 + 37 + 21 + 13 + 9 + 7 + 6 = <b>162 cycles</b>.</p>
+
+    <p><b>With Vector Chaining:</b> If chaining is supported, the multiply and the first reduction pass can overlap, saving significant time.</p>
+
+    <p><b>Total Time (without chaining):</b> 133 + 162 = <b>295 cycles</b> for the complete dot product.</p>
+    <p><b>If only multiplication is asked:</b> <b>133 cycles</b>.</p>
+</div>
+</div>
+
+</div>
+
+<div class="section">
+<h2>Hard Questions</h2>
+
+<div class="qa-card">
+<h4 class="qa-question">H1. Describe the architecture of an array processor. How does it execute arithmetic on data arrays?</h4>
+<div class="answer">
+    <p>An array processor (SIMD machine) is designed to execute a single instruction simultaneously across many data elements using multiple, identical Processing Elements.</p>
+
+    <p><span class="highlight">Detailed Architecture:</span></p>
+    <ol>
+        <li><b>Control Unit (CU):</b>
+            <ul>
+                <li>A conventional scalar processor that fetches instructions from main memory.</li>
+                <li>Decodes each instruction and determines whether it is a scalar operation (handled by the CU itself) or a parallel array operation (broadcast to the PEs).</li>
+                <li>For array operations, the CU broadcasts the opcode and operand addresses to all PEs simultaneously.</li>
+            </ul>
+        </li>
+        <li><b>Processing Elements (PEs):</b>
+            <ul>
+                <li>Each PE contains: a simple ALU, a set of local registers, and its own local memory module.</li>
+                <li>All PEs are identical in hardware.</li>
+                <li>Each PE has an <b>Activity Flag (Enable/Disable bit)</b> that can be set by mask instructions. Disabled PEs ignore the broadcast instruction.</li>
+            </ul>
+        </li>
+        <li><b>Interconnection Network:</b>
+            <ul>
+                <li>Connects PEs to each other for inter-PE data exchange (e.g., shifting data to neighbor, routing data to a specific PE).</li>
+                <li>Common topologies: Linear array, 2D mesh, hypercube.</li>
+            </ul>
+        </li>
+        <li><b>I/O System:</b> A separate system for loading data into PE local memories and reading results out.</li>
+    </ol>
+
+    <p><span class="highlight">Executing Arithmetic on Data Arrays:</span></p>
+    <p>To compute C[i] = A[i] + B[i] for all i:</p>
+    <ol>
+        <li>Data is pre-loaded: A[i] resides at address 100 and B[i] at address 200 in PE[i]'s local memory.</li>
+        <li>CU broadcasts <code>LOAD R1, [100]</code>: All PEs load A[i] from their local address 100 into register R1.</li>
+        <li>CU broadcasts <code>LOAD R2, [200]</code>: All PEs load B[i] into R2.</li>
+        <li>CU broadcasts <code>ADD R3, R1, R2</code>: All PEs compute A[i] + B[i] in parallel.</li>
+        <li>CU broadcasts <code>STORE R3, [300]</code>: All PEs store C[i] to address 300.</li>
+    </ol>
+    <p>All N additions are completed in the time of a single addition instruction.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">H2. Pipelined vector instructions in a Cray-like architecture with timing diagrams.</h4>
+<div class="answer">
+    <p>The <b>Cray-1</b> (1976) was a landmark vector processor. Its architecture featured Vector Registers and deeply pipelined functional units with vector chaining.</p>
+
+    <p><span class="highlight">Cray-1 Architecture Highlights:</span></p>
+    <ul>
+        <li>8 Vector Registers (V0-V7), each holding 64 elements of 64 bits each.</li>
+        <li>Pipelined Functional Units: FP Add (6 stages), FP Multiply (7 stages), FP Reciprocal (14 stages), Integer Add, Logical, Shift.</li>
+        <li>Two Load/Store pipelines for memory-to-register and register-to-memory transfers.</li>
+        <li>Vector chaining supported between functional units.</li>
+    </ul>
+
+    <p><span class="highlight">Example: Compute V3 = V1 × V2 + V4</span></p>
+    <pre>
+Instruction 1: VMUL V3, V1, V2   (7-stage multiply pipeline)
+Instruction 2: VADD V5, V3, V4   (6-stage add pipeline, chained to VMUL)
+    </pre>
+
+    <p><b>Timing Diagram (Vector Length = 8, simplified):</b></p>
+    <pre>
+Cycle:  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17 18 19 20
+VMUL:  [--- 7 stages for E0 ---]
+        E0 E1 E2 E3 E4 E5 E6 E7    ← one element enters per cycle
+Output:                      M0 M1 M2 M3 M4 M5 M6 M7
+
+VADD (chained):              [--- 6 stages for E0 ---]
+                              M0 enters immediately when produced
+Output:                                     A0 A1 A2 A3 A4 A5 A6 A7
+    </pre>
+
+    <p><b>Without Chaining:</b> VMUL finishes at cycle 14. VADD starts at cycle 15, finishes at cycle 14 + 6 + 7 = 27. Total = 27 cycles.</p>
+    <p><b>With Chaining:</b> VADD starts at cycle 8 (when M0 is produced). VADD finishes at cycle 8 + 6 + 7 = 20. Total = <b>20 cycles</b>. Saving 7 cycles (25% faster).</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">H3. Compare array and vector pipelines in terms of Architecture, Control, Performance, Applications.</h4>
+<div class="answer">
+    <table>
+        <tr><th>Aspect</th><th>Array Processor</th><th>Vector Processor</th></tr>
+        <tr><td><b>Architecture</b></td><td>Multiple identical ALUs (Processing Elements), each with local memory, connected via an interconnection network. Exploits <b>spatial parallelism</b>.</td><td>Few deeply pipelined functional units operating on data stored in large Vector Registers. Exploits <b>temporal parallelism</b>.</td></tr>
+        <tr><td><b>Control Mechanism</b></td><td>Single Control Unit <b>broadcasts</b> one instruction to all PEs. All PEs execute in lockstep synchronization. Conditional execution via masking.</td><td>A control unit issues vector instructions. The pipeline hardware <b>sequentially streams</b> elements through the stages automatically. No broadcast needed.</td></tr>
+        <tr><td><b>Performance</b></td><td>Performance scales directly with the number of PEs. Adding more PEs = more parallelism. <b>Best for massive, embarrassingly parallel problems</b> where all elements need the same operation. Overhead: inter-PE communication and data distribution.</td><td>Performance depends on pipeline depth and vector length. <b>Best for regular, streaming computations</b> (linear algebra, FFTs). Overhead: pipeline startup latency for short vectors.</td></tr>
+        <tr><td><b>Application Domains</b></td><td>Image processing, cellular automata, neural network inference, database searching, cryptography. Any domain with massive, regular, independent data.</td><td>Scientific computing, weather forecasting, molecular dynamics, computational fluid dynamics (CFD), seismic analysis. Domains with heavy floating-point array arithmetic.</td></tr>
+    </table>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">H4. FP multiply pipeline with 6 stages. Vector length = 64. Calculate cycles and speedup.</h4>
+<div class="answer">
+    <p><b>Given:</b></p>
+    <ul>
+        <li>Number of pipeline stages (k) = 6</li>
+        <li>Vector length (N) = 64 elements</li>
+        <li>Scalar execution time = 6 cycles per element (one element uses all 6 stages sequentially)</li>
+    </ul>
+
+    <p><b>a) Total Clock Cycles for Pipelined Vector Multiply:</b></p>
+    <div class="formula-box">Pipelined Time = k + (N - 1)<br>
+    = 6 + (64 - 1)<br>
+    = 6 + 63<br>
+    = 69 cycles</div>
+
+    <p><b>b) Speedup over Scalar Execution:</b></p>
+    <div class="formula-box">Scalar Time = N × k = 64 × 6 = 384 cycles<br><br>
+    Speedup = Scalar Time / Pipelined Time<br>
+    = 384 / 69<br>
+    = 5.565...</div>
+
+    <p><b>Conclusion:</b></p>
+    <ul>
+        <li>Pipelined execution takes <b>69 cycles</b>.</li>
+        <li>The speedup is approximately <b>5.57x</b>.</li>
+        <li>The theoretical maximum speedup equals the number of pipeline stages (k = 6). The achieved 5.57x is very close to this maximum because the vector length (64) is much larger than the number of stages (6), making the startup overhead negligible.</li>
+        <li>Pipeline Efficiency = N / (k + N - 1) = 64/69 = <b>92.75%</b>.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">H5. Advantages and limitations of using array and vector pipelines in modern processors.</h4>
+<div class="answer">
+    <p><span class="highlight">Advantages:</span></p>
+    <ol>
+        <li><b>Massive Throughput for Regular Data:</b> Both architectures can process hundreds or thousands of data elements per clock cycle for regular, structured computations, far exceeding the throughput of scalar processors.</li>
+        <li><b>Reduced Instruction Overhead:</b> A single vector or array instruction replaces an entire loop (which would involve many fetch-decode-branch cycles). This reduces instruction cache pressure and branch prediction overhead.</li>
+        <li><b>Energy Efficiency:</b> Fetching and decoding one instruction to process 64 or more elements is far more energy-efficient than fetching and decoding 64 separate scalar instructions. The control overhead per operation is amortized over many data elements.</li>
+        <li><b>Predictable Memory Access:</b> Vector load/store operations access memory in regular, predictable patterns (stride-1, stride-N), allowing the memory controller to optimize prefetching and bank access, hiding memory latency.</li>
+        <li><b>Simplified Programming for DLP:</b> High-level constructs (array operations in Fortran, CUDA kernels) map naturally to vector/array hardware.</li>
+    </ol>
+
+    <p><span class="highlight">Limitations:</span></p>
+    <ol>
+        <li><b>Poor Scalar Performance:</b> Both architectures are inefficient for scalar, sequential code (e.g., pointer-chasing, tree traversal, irregular graph algorithms). The massive parallel hardware sits idle during scalar operations.</li>
+        <li><b>Conditional Execution Penalties:</b> Branches and if-else statements within data-parallel operations are handled via masking, which disables some PEs/elements. In the worst case (50% of elements masked), half the hardware is wasted.</li>
+        <li><b>Short Vector Penalty:</b> For very short vectors, the pipeline startup latency dominates, making pipelining inefficient. Array processors with 64 PEs processing only 10 elements waste 54 PEs.</li>
+        <li><b>Data Redistribution Overhead:</b> Array processors incur significant overhead when PEs need to exchange data (e.g., matrix transposition, scatter/gather operations). The interconnection network becomes a bottleneck.</li>
+        <li><b>Memory Bandwidth Demands:</b> Vector and array processors can consume data far faster than memory can supply it. If the memory system cannot keep the pipelines fed, performance drops dramatically (memory wall).</li>
+    </ol>
+</div>
+</div>
+</div>
+    <script src="notes.js"></script>
+</div>
+</body>
+</html>

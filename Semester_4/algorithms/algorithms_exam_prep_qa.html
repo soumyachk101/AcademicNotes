@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DAA Exam Prep Q&A (Comprehensive Version)</title>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fcfcfc;
+        }
+        h1 {
+            text-align: center;
+            color: #d9534f;
+            border-bottom: 2px solid #d9534f;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #0275d8;
+            margin-top: 40px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #292b2c;
+            margin-top: 25px;
+        }
+        p {
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #fff;
+        }
+        th, td {
+            border: 1px solid #bbb;
+            padding: 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #f7f7f7;
+            font-weight: bold;
+        }
+        .marks {
+            color: #d9534f;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        .answer {
+            background-color: #fff;
+            padding: 15px;
+            border-left: 4px solid #5cb85c;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        ul {
+            padding-left: 20px;
+        }
+    
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            padding: 1.8rem !important;
+            margin: 2.2rem 0 !important;
+            text-align: center !important;
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+        }
+        .diagram-caption {
+            font-size: 0.88rem !important;
+            color: #475569 !important;
+            margin-top: 1.1rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div style="margin-bottom: 20px;">
+        <a href="algorithms_index.html" style="text-decoration: none; color: #0275d8;">← Back to DAA Menu</a>
+    </div>
+
+    <h1>DAA Exam Prep Q&A (Comprehensive List)</h1>
+    <p style="text-align: center; color: #666;">Complete collection of important PYQ topics with simple tables and explanations.</p>
+    
+    <h2>1. Divide &amp; Conquer and Complexity Analysis</h2>
+    
+    <h3>1. State Master's Theorem. <span class="marks">[5 Marks]</span></h3>
+    <div class="answer">
+        <p>Master's Theorem provides a fast method to solve recurrence relations of the form \(T(n) = aT(n/b) + f(n)\), where \(a \ge 1\) and \(b > 1\). It compares \(f(n)\) to the critical polynomial \(n^{\log_b a}\).</p>
+        <ul>
+            <li><b>Case 1:</b> If \(f(n) = O(n^{\log_b a - \epsilon})\) (grows polynomially slower), then \(T(n) = \Theta(n^{\log_b a})\).</li>
+            <li><b>Case 2:</b> If \(f(n) = \Theta(n^{\log_b a})\) (grows at the same rate), then \(T(n) = \Theta(n^{\log_b a} \log n)\).</li>
+            <li><b>Case 3:</b> If \(f(n) = \Omega(n^{\log_b a + \epsilon})\) (grows polynomially faster) AND \(a f(n/b) \le c f(n)\) for \(c < 1\), then \(T(n) = \Theta(f(n))\).</li>
+        </ul>
+    </div>
+
+    <h3>2. Differentiate between Recursion and Iteration. <span class="marks">[4 Marks]</span></h3>
+    <div class="answer">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Recursion</th>
+                <th>Iteration</th>
+            </tr>
+            <tr>
+                <td><b>Definition</b></td>
+                <td>A function calls itself to solve smaller instances of the problem.</td>
+                <td>Uses looping constructs (for, while) to repeat a block of code.</td>
+            </tr>
+            <tr>
+                <td><b>Memory Overhead</b></td>
+                <td>High overhead due to maintaining the system call stack. Can cause Stack Overflow.</td>
+                <td>Very low memory overhead, runs in constant space \(O(1)\).</td>
+            </tr>
+            <tr>
+                <td><b>Speed</b></td>
+                <td>Generally slower because of function call overhead.</td>
+                <td>Generally faster.</td>
+            </tr>
+            <tr>
+                <td><b>Code Structure</b></td>
+                <td>Shorter, more elegant, and closer to mathematical formulations.</td>
+                <td>Can be longer and slightly more complex to write for tree/graph traversals.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>3. Define Asymptotic Notations: Big-O, Omega (\(\Omega\)), and Theta (\(\Theta\)). <span class="marks">[3 Marks]</span></h3>
+    <div class="answer">
+        <ul>
+            <li><b>Big-O (\(O\)):</b> Asymptotic <b>Upper Bound</b>. The algorithm will not take more time than this. (Worst case)</li>
+            <li><b>Omega (\(\Omega\)):</b> Asymptotic <b>Lower Bound</b>. The algorithm will take at least this much time. (Best case)</li>
+            <li><b>Theta (\(\Theta\)):</b> Asymptotic <b>Tight Bound</b>. The algorithm's time grows exactly at this rate. (Average/Exact case)</li>
+            <li><b>Little Omega (\(\omega\)):</b> A strictly loose lower bound (grows infinitely faster).</li>
+        </ul>
+    </div>
+
+    <h2>2. Greedy Algorithms</h2>
+
+    <h3>4. Explain the differences between Prim's Algorithm and Kruskal's Algorithm. <span class="marks">[5 Marks]</span></h3>
+    <div class="answer">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Prim's Algorithm</th>
+                <th>Kruskal's Algorithm</th>
+            </tr>
+            <tr>
+                <td><b>Approach</b></td>
+                <td>Builds a single tree, growing it by adding the cheapest edge from the tree to an unvisited vertex.</td>
+                <td>Maintains a forest of trees, sorting all edges and adding the cheapest edge that doesn't form a cycle.</td>
+            </tr>
+            <tr>
+                <td><b>Data Structure</b></td>
+                <td>Uses a <b>Min-Priority Queue</b> (or Heap).</td>
+                <td>Uses a <b>Disjoint-Set (Union-Find)</b>.</td>
+            </tr>
+            <tr>
+                <td><b>Best for</b></td>
+                <td>Dense graphs (many edges).</td>
+                <td>Sparse graphs.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>5. Explain the Fractional Knapsack Algorithm and its Time Complexity. <span class="marks">[5 Marks]</span></h3>
+    <div class="answer">
+        <p>The Fractional Knapsack problem allows taking fractions of items to maximize profit.</p>
+        <ol>
+            <li>Calculate the ratio \(Profit / Weight\) for each item.</li>
+            <li>Sort all items in descending order based on this ratio.</li>
+            <li>Initialize total profit = 0.</li>
+            <li>Iterate through the sorted items:
+                <ul>
+                    <li>If the item's weight \(\le\) remaining capacity, add the whole item and update profit and capacity.</li>
+                    <li>If the item's weight \(>\) remaining capacity, add a fraction of the item that completely fills the knapsack, update profit, and break.</li>
+                </ul>
+            </li>
+        </ol>
+        <p><b>Time Complexity:</b> \(O(n \log n)\) dominated by the sorting step.</p>
+    </div>
+
+    <h3>6. Write down the algorithm for Job Sequencing with Deadlines. <span class="marks">[5 Marks]</span></h3>
+    <div class="answer">
+        <p><b>Goal:</b> Maximize profit by scheduling jobs (each taking 1 unit time) before their deadlines.</p>
+        <ol>
+            <li>Sort all jobs in descending order of their profits.</li>
+            <li>Find the maximum deadline among all jobs to determine the maximum number of time slots available.</li>
+            <li>Initialize an array of slots to track free/occupied time slots.</li>
+            <li>For each job (from highest profit to lowest):
+                <ul>
+                    <li>Start from its deadline and check slots backwards down to 1.</li>
+                    <li>Assign the job to the first available free slot found.</li>
+                </ul>
+            </li>
+        </ol>
+        <p><b>Time Complexity:</b> \(O(n^2)\) worst case due to nested loops searching for free slots.</p>
+    </div>
+
+    <h2>3. Dynamic Programming</h2>
+
+    <h3>7. Differentiate between Dynamic Programming and Divide &amp; Conquer. <span class="marks">[4 Marks]</span></h3>
+    <div class="answer">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Dynamic Programming (DP)</th>
+                <th>Divide &amp; Conquer (D&amp;C)</th>
+            </tr>
+            <tr>
+                <td><b>Subproblems</b></td>
+                <td>Subproblems are <b>dependent</b> and overlap (they share sub-subproblems).</td>
+                <td>Subproblems are completely <b>independent</b> and non-overlapping.</td>
+            </tr>
+            <tr>
+                <td><b>Memory (Memoization)</b></td>
+                <td>Stores results of subproblems in a table to avoid redundant calculations.</td>
+                <td>Does not store results; recalculates them every time.</td>
+            </tr>
+            <tr>
+                <td><b>Approach</b></td>
+                <td>Usually Bottom-Up.</td>
+                <td>Always Top-Down.</td>
+            </tr>
+            <tr>
+                <td><b>Examples</b></td>
+                <td>0/1 Knapsack, Matrix Chain Multiplication, Floyd-Warshall.</td>
+                <td>Merge Sort, Quick Sort, Binary Search.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>8. Why does the Greedy method fail for the 0/1 Knapsack problem? <span class="marks">[3 Marks]</span></h3>
+    <div class="answer">
+        <p>In the <b>0/1 Knapsack problem</b>, items cannot be broken into fractions. The Greedy method makes irrevocable local optimal choices by picking items based on the highest profit-to-weight ratio.</p>
+        <p>If a high-ratio item consumes almost all the capacity but leaves a small, unusable gap, it might prevent picking a combination of slightly lower-ratio items that perfectly fill the knapsack and yield a higher total profit. DP explores all combinations to guarantee optimality.</p>
+    </div>
+
+    <h3>9. Explain the Floyd-Warshall Algorithm. <span class="marks">[5 Marks]</span></h3>
+    <div class="answer">
+        <p>The Floyd-Warshall Algorithm uses Dynamic Programming to find the <b>All-Pairs Shortest Path</b> in a weighted graph (even with negative weights, provided there are no negative cycles).</p>
+        <p>It works by considering every vertex as an intermediate vertex. For a graph with \(V\) vertices, it maintains a 2D distance matrix. In the \(k\)-th iteration, it checks if a path going through vertex \(k\) is shorter than the currently known path:</p>
+        <p>\(D^{(k)}[i][j] = \min( D^{(k-1)}[i][j], D^{(k-1)}[i][k] + D^{(k-1)}[k][j] ) \)</p>
+        <p><b>Time Complexity:</b> \(O(V^3)\) due to three nested loops.</p>
+    </div>
+
+    <h2>4. Graph Algorithms &amp; Network Flow</h2>
+
+    <h3>10. Differentiate between Dijkstra's and Bellman-Ford algorithms. <span class="marks">[5 Marks]</span></h3>
+    <div class="answer">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Dijkstra's Algorithm</th>
+                <th>Bellman-Ford Algorithm</th>
+            </tr>
+            <tr>
+                <td><b>Paradigm</b></td>
+                <td><b>Greedy approach</b> (picks the closest unvisited vertex).</td>
+                <td><b>Dynamic Programming approach</b> (relaxes all edges iteratively).</td>
+            </tr>
+            <tr>
+                <td><b>Negative Edge Weights</b></td>
+                <td><b>Fails</b> with negative weights.</td>
+                <td>Fully <b>supports</b> negative edge weights.</td>
+            </tr>
+            <tr>
+                <td><b>Negative Cycle Detection</b></td>
+                <td>Cannot handle or detect negative cycles.</td>
+                <td>Can <b>detect</b> negative weight cycles (if distances update on the \(V\)-th iteration).</td>
+            </tr>
+            <tr>
+                <td><b>Time Complexity</b></td>
+                <td>\(O(E \log V)\) (with Min-Heap).</td>
+                <td>\(O(V \cdot E)\).</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>11. State the Max-Flow Min-Cut Theorem. <span class="marks">[4 Marks]</span></h3>
+    <div class="answer">
+        <p>The <b>Max-Flow Min-Cut Theorem</b> states that in a flow network, the maximum amount of flow passing from the source to the sink is exactly equal to the total capacity of the minimum cut separating the source and the sink.</p>
+        <p>A "cut" partitions the network into two sets of vertices (one containing the source, one containing the sink). The theorem proves that the "bottleneck" (minimum cut) of the network strictly dictates the maximum flow it can handle.</p>
+    </div>
+
+    <h2>5. Backtracking and Branch &amp; Bound</h2>
+
+    <h3>12. What is the difference between Backtracking and Branch and Bound? <span class="marks">[4 Marks]</span></h3>
+    <div class="answer">
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>Backtracking</th>
+                <th>Branch and Bound</th>
+            </tr>
+            <tr>
+                <td><b>Objective</b></td>
+                <td>Finds <i>all</i> feasible solutions to a constraint satisfaction problem (e.g., N-Queens).</td>
+                <td>Finds the <i>single optimal</i> solution to an optimization problem (e.g., TSP).</td>
+            </tr>
+            <tr>
+                <td><b>Search Technique</b></td>
+                <td>Explores state-space tree using <b>Depth-First Search (DFS)</b>.</td>
+                <td>Uses <b>Breadth-First Search (BFS)</b> or Best-First Search.</td>
+            </tr>
+            <tr>
+                <td><b>Memory Usage</b></td>
+                <td>Requires much less memory \(O(V)\) due to the DFS stack.</td>
+                <td>Requires exponential memory to store the active queue of nodes.</td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>13. Explain the m-Coloring Problem (Graph Coloring). <span class="marks">[3 Marks]</span></h3>
+    <div class="answer">
+        <p>The <b>Graph Coloring Problem</b> asks whether we can color all vertices of a graph using at most \(m\) colors such that no two adjacent vertices (vertices connected by a direct edge) have the same color. It is typically solved using Backtracking (DFS). The smallest number of colors needed is called the Chromatic Number.</p>
+    </div>
+
+    <h2>6. Complexity Classes &amp; NP-Completeness</h2>
+
+    <h3>14. Define the Complexity Classes P, NP, NP-Hard, and NP-Complete. <span class="marks">[6 Marks]</span></h3>
+    <div class="answer">
+        <ul>
+            <li><b>P (Polynomial Time):</b> Decision problems that can be <b>solved</b> in polynomial time by a deterministic Turing machine.</li>
+            <li><b>NP (Non-Deterministic Polynomial Time):</b> Decision problems where a proposed solution (certificate) can be <b>verified</b> as correct in polynomial time.</li>
+            <li><b>NP-Hard:</b> Problems that are at least as hard as the hardest problems in NP. Any problem in NP can be reduced to an NP-Hard problem in polynomial time.</li>
+            <li><b>NP-Complete:</b> The intersection of NP and NP-Hard. A problem is NP-Complete if it is in NP AND it is NP-Hard. E.g., Circuit-SAT, TSP.</li>
+        </ul>
+    </div>
+
+    <h3>15. State Cook's Theorem. <span class="marks">[3 Marks]</span></h3>
+    <div class="answer">
+        <p><b>Cook's Theorem</b> (or Cook-Levin Theorem) states that the Boolean Satisfiability Problem (SAT) is NP-Complete. It was the very first problem proven to be NP-Complete, forming the foundation for proving other problems are NP-Complete through polynomial reductions.</p>
+    </div>
+    
+    <h3>16. Define Polynomial Reduction (Reducibility). <span class="marks">[2 Marks]</span></h3>
+    <div class="answer">
+        <p>Polynomial Reducibility (\(A \le_p B\)) means there is a polynomial-time algorithm that transforms any instance of problem A into an instance of problem B. Therefore, if we can solve problem B in polynomial time, we can also solve problem A in polynomial time.</p>
+    </div>
+
+    <h2>🎯 7. Quick 1-Mark &amp; 2-Mark Hit List</h2>
+
+    <h3>17. Time Complexities of common sorting algorithms:</h3>
+    <div class="answer">
+        <ul>
+            <li><b>Heap Sort:</b> \(O(n \log n)\) in Best, Average, and Worst cases.</li>
+            <li><b>Quick Sort:</b> Best/Average case is \(O(n \log n)\). Worst case is \(O(n^2)\) (occurs when the array is already sorted).</li>
+            <li><b>Merge Sort:</b> \(O(n \log n)\) in all cases.</li>
+        </ul>
+    </div>
+
+    <h3>18. What is the time complexity of Binary Search?</h3>
+    <div class="answer"><p><b>Answer:</b> Best case \(O(1)\), Average/Worst case \(O(\log n)\). It is a polynomial-time algorithm.</p></div>
+
+    <h3>19. State True/False: An Adjacency Matrix and a Path Matrix are the same.</h3>
+    <div class="answer"><p><b>Answer:</b> False. An adjacency matrix shows direct 1-step edges. A path matrix (transitive closure) shows if a path of <i>any</i> length exists between vertices.</p></div>
+
+    <h3>20. What is the time complexity of finding an augmenting path in Ford-Fulkerson (Edmonds-Karp)?</h3>
+    <div class="answer"><p><b>Answer:</b> \(O(V \cdot E^2)\).</p></div>
+
+    <h3>21. Which graph search algorithm does Backtracking use?</h3>
+    <div class="answer"><p><b>Answer:</b> Depth-First Search (DFS).</p></div>
+
+    <h3>22. How many solutions exist for the 8-Queens problem on an 8x8 board?</h3>
+    <div class="answer"><p><b>Answer:</b> 92 total solutions (or 12 fundamental unique solutions if symmetry is excluded).</p></div>
+
+    <h3>23. What data structure is used for Breadth-First Search (BFS)?</h3>
+    <div class="answer"><p><b>Answer:</b> Queue (FIFO).</p></div>
+
+    <h3>24. What data structure is used for Depth-First Search (DFS)?</h3>
+    <div class="answer"><p><b>Answer:</b> Stack (LIFO).</p></div>
+    
+    <h3>25. Define a Clique.</h3>
+    <div class="answer"><p><b>Answer:</b> A Clique is a subset of vertices in an undirected graph such that every two distinct vertices in the subset are connected by a direct edge (a complete subgraph).</p></div>
+
+</body>
+</html>

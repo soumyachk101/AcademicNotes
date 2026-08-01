@@ -447,6 +447,29 @@
             text-align: right;
         }
 
+        .section-divider-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin: 3.5rem 0 1.5rem;
+            border-bottom: 2px dashed rgba(44, 62, 80, 0.15);
+            padding-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .section-divider-title .sem-badge {
+            font-size: 0.85rem;
+            font-family: 'Inter', sans-serif;
+            background: #2563eb;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
         /* RESPONSIVE LAYOUT adjustments */
         @media (max-width: 768px) {
             body {
@@ -476,6 +499,30 @@
                 min-height: auto;
             }
         }
+    
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            padding: 1.8rem !important;
+            margin: 2.2rem 0 !important;
+            text-align: center !important;
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+        }
+        .diagram-caption {
+            font-size: 0.88rem !important;
+            color: #475569 !important;
+            margin-top: 1.1rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
     </style>
 </head>
 <body>
@@ -498,54 +545,293 @@
         
         <div class="book-stats">
             <div class="stat-item">
-                <span class="stat-val">7</span>
+                <span class="stat-val">10</span>
                 <span class="stat-lbl">Subjects</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-                <span class="stat-val">420+</span>
-                <span class="stat-lbl">Questions</span>
+                <span class="stat-val">4th & 5th Sem</span>
+                <span class="stat-lbl">Curriculum</span>
             </div>
             <div class="stat-divider"></div>
             <div class="stat-item">
-                <span class="stat-val">Detailed</span>
-                <span class="stat-lbl">Solutions</span>
+                <span class="stat-val">900+ Qs</span>
+                <span class="stat-lbl">Detailed Solutions</span>
             </div>
         </div>
     </header>
 
-    <!-- CHAPTERS GRID -->
+    <!-- MAIN SEMESTER FOLDERS SECTION -->
+    <div class="section-divider-title">
+        <span>Semester Folders</span>
+        <span class="sem-badge" style="background: #2563eb;">Curriculum Folders</span>
+    </div>
+
     <section class="chapters-grid">
         
-        <!-- COMPUTER ARCHITECTURE FOLDER -->
-        <a href="architecture/architecture_index.html" class="chapter-card" style="--chapter-color: var(--color-u1);" id="module-coa">
+        <!-- 4TH SEMESTER FOLDER CARD -->
+        <a href="Semester_4/index.html" class="chapter-card" style="--chapter-color: #2563eb;" id="folder-sem4">
             <div class="card-content">
                 <div class="chapter-header">
-                    <div class="chapter-num">Subject</div>
+                    <div class="chapter-num">Semester 4</div>
+                    <h2 class="chapter-title">4th Semester Folder</h2>
+                    <p class="chapter-desc">Dedicated folder for all 4th Semester subjects: Algorithms, Computer Architecture, Automata, Environment & Biology.</p>
+                </div>
+                
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/algorithms/algorithms_index.html';">
+                        <span class="toc-lbl">Design & Analysis of Algorithms</span><span class="toc-dots"></span><span class="toc-idx">DAA</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/architecture/architecture_index.html';">
+                        <span class="toc-lbl">Computer Architecture</span><span class="toc-dots"></span><span class="toc-idx">COA</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/automata/automata_index.html';">
+                        <span class="toc-lbl">Formal Language & Automata</span><span class="toc-dots"></span><span class="toc-idx">FLAT</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/environment/Environmental_Sciences.html';">
+                        <span class="toc-lbl">Environmental Sciences</span><span class="toc-dots"></span><span class="toc-idx">ENV</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/biology/Biology.html';">
+                        <span class="toc-lbl">Biology</span><span class="toc-dots"></span><span class="toc-idx">BIO</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">5 Subjects</span>
+                <span class="read-action">Open 4th Sem Folder <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <!-- 5TH SEMESTER FOLDER CARD -->
+        <a href="Semester_5/index.html" class="chapter-card" style="--chapter-color: #8b5cf6;" id="folder-sem5">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">Semester 5</div>
+                    <h2 class="chapter-title">5th Semester Folder</h2>
+                    <p class="chapter-desc">Dedicated folder for all 5th Semester subjects: Operating Systems, AI, Computer Networks, Compiler Design & Software Eng.</p>
+                </div>
+                
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/os/os_important_qa.html';">
+                        <span class="toc-lbl">Operating Systems</span><span class="toc-dots"></span><span class="toc-idx">OS</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/ai/ai_important_qa.html';">
+                        <span class="toc-lbl">Artificial Intelligence</span><span class="toc-dots"></span><span class="toc-idx">AI</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/networks/networks_important_qa.html';">
+                        <span class="toc-lbl">Computer Networks</span><span class="toc-dots"></span><span class="toc-idx">CN</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/compiler/compiler_important_qa.html';">
+                        <span class="toc-lbl">Compiler Design</span><span class="toc-dots"></span><span class="toc-idx">CD</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/se/se_important_qa.html';">
+                        <span class="toc-lbl">Software Engineering</span><span class="toc-dots"></span><span class="toc-idx">SE</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">5 Subjects</span>
+                <span class="read-action">Open 5th Sem Folder <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+    </section>
+
+    <!-- 5TH SEMESTER SUBJECTS SECTION -->
+    <div class="section-divider-title">
+        <span>5th Semester Direct Subject Cards</span>
+        <span class="sem-badge" style="background: #8b5cf6;">Semester 5</span>
+    </div>
+
+    <section class="chapters-grid">
+        
+        <!-- OPERATING SYSTEMS CARD -->
+        <a href="Semester_5/os/os_important_qa.html" class="chapter-card" style="--chapter-color: #2563eb;" id="card-os">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">PCC-CS502</div>
+                    <h2 class="chapter-title">Operating Systems</h2>
+                    <p class="chapter-desc">Process scheduling, synchronization, deadlocks, paging, virtual memory, disk scheduling, UNIX inodes & system calls.</p>
+                </div>
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/os/os_important_qa.html#group-a';">
+                        <span class="toc-lbl">Group A: 53 Short Qs (1 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/os/os_important_qa.html#group-b';">
+                        <span class="toc-lbl">Group B: 40 Descriptive Qs (5 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/os/os_important_qa.html#group-c';">
+                        <span class="toc-lbl">Group C: 30 Long & Numericals (15 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">123 Solved Qs</span>
+                <span class="read-action">Open Q&A Bank <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <!-- ARTIFICIAL INTELLIGENCE CARD -->
+        <a href="Semester_5/ai/ai_important_qa.html" class="chapter-card" style="--chapter-color: #8b5cf6;" id="card-ai">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">PEC-CS501B</div>
+                    <h2 class="chapter-title">Artificial Intelligence</h2>
+                    <p class="chapter-desc">PEAS agent model, A* & heuristic search, Hill climbing, Minimax, Alpha-Beta pruning, FOL resolution, Fuzzy logic & BBNs.</p>
+                </div>
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/ai/ai_important_qa.html#group-a';">
+                        <span class="toc-lbl">Group A: 53 Short Qs (1 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/ai/ai_important_qa.html#group-b';">
+                        <span class="toc-lbl">Group B: 40 Descriptive Qs (5 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/ai/ai_important_qa.html#group-c';">
+                        <span class="toc-lbl">Group C: 30 Long & Numericals (15 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">123 Solved Qs</span>
+                <span class="read-action">Open Q&A Bank <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <!-- COMPUTER NETWORKS CARD -->
+        <a href="Semester_5/networks/networks_important_qa.html" class="chapter-card" style="--chapter-color: #059669;" id="card-cn">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">PCC-CS504</div>
+                    <h2 class="chapter-title">Computer Networks</h2>
+                    <p class="chapter-desc">OSI 7-layer model, TCP/IP, CRC error detection, Subnetting & CIDR, TCP Congestion Control, RSA cryptography & routing.</p>
+                </div>
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/networks/networks_important_qa.html#group-a';">
+                        <span class="toc-lbl">Group A: 53 Short Qs (1 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/networks/networks_important_qa.html#group-b';">
+                        <span class="toc-lbl">Group B: 40 Descriptive Qs (5 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/networks/networks_important_qa.html#group-c';">
+                        <span class="toc-lbl">Group C: 30 Long & Numericals (15 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">123 Solved Qs</span>
+                <span class="read-action">Open Q&A Bank <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <!-- COMPILER DESIGN CARD -->
+        <a href="Semester_5/compiler/compiler_important_qa.html" class="chapter-card" style="--chapter-color: #ea580c;" id="card-cd">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">PCC-CS501</div>
+                    <h2 class="chapter-title">Compiler Design</h2>
+                    <p class="chapter-desc">Lexical analysis, Thompson NFA, LL(1) parsing, FIRST & FOLLOW sets, SLR/LALR/CLR parsers, Three-Address Code & CFGs.</p>
+                </div>
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/compiler/compiler_important_qa.html#group-a';">
+                        <span class="toc-lbl">Group A: 52 Short Qs (1 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/compiler/compiler_important_qa.html#group-b';">
+                        <span class="toc-lbl">Group B: 40 Descriptive Qs (5 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/compiler/compiler_important_qa.html#group-c';">
+                        <span class="toc-lbl">Group C: 30 Long & Numericals (15 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">122 Solved Qs</span>
+                <span class="read-action">Open Q&A Bank <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <!-- SOFTWARE ENGINEERING CARD -->
+        <a href="Semester_5/se/se_important_qa.html" class="chapter-card" style="--chapter-color: #0284c7;" id="card-se">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">ESC501</div>
+                    <h2 class="chapter-title">Software Engineering</h2>
+                    <p class="chapter-desc">Waterfall & Agile Scrum, SRS, DFD Level 0/1, Cohesion & Coupling, COCOMO model, Function Points & McCabe Complexity.</p>
+                </div>
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/se/se_important_qa.html#group-a';">
+                        <span class="toc-lbl">Group A: 52 Short Qs (1 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/se/se_important_qa.html#group-b';">
+                        <span class="toc-lbl">Group B: 40 Descriptive Qs (5 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/se/se_important_qa.html#group-c';">
+                        <span class="toc-lbl">Group C: 30 Long & Numericals (15 M)</span><span class="toc-dots"></span><span class="toc-idx">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">122 Solved Qs</span>
+                <span class="read-action">Open Q&A Bank <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+    </section>
+
+    <!-- 4TH SEMESTER SUBJECTS SECTION -->
+    <div class="section-divider-title">
+        <span>4th Semester Direct Subject Cards</span>
+        <span class="sem-badge" style="background: #2563eb;">Semester 4</span>
+    </div>
+
+    <section class="chapters-grid">
+        
+        <!-- DAA CARD -->
+        <a href="Semester_4/algorithms/algorithms_index.html" class="chapter-card" style="--chapter-color: #2563eb;" id="module-daa">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">PCC-CS402</div>
+                    <h2 class="chapter-title">Design & Analysis of Algorithms</h2>
+                    <p class="chapter-desc">Comprehensive solved previous year questions (2017, 2023, 2024) and detailed algorithm design solutions.</p>
+                </div>
+                
+                <div class="mini-toc">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/algorithms/algorithms_important_questions.html';">
+                        <span class="toc-lbl">Important Q&amp;A Bank</span>
+                        <span class="toc-dots"></span>
+                        <span class="toc-idx">69 Qs</span>
+                    </div>
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/algorithms/algorithms_pyq_2024.html';">
+                        <span class="toc-lbl">2023-24 Solved Paper</span>
+                        <span class="toc-dots"></span>
+                        <span class="toc-idx">100%</span>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="badge-count">4 Sections</span>
+                <span class="read-action">Open Folder <span class="arrow">→</span></span>
+            </div>
+        </a>
+
+        <!-- COMPUTER ARCHITECTURE CARD -->
+        <a href="Semester_4/architecture/architecture_index.html" class="chapter-card" style="--chapter-color: #3b82f6;" id="module-coa">
+            <div class="card-content">
+                <div class="chapter-header">
+                    <div class="chapter-num">PCC-CS401</div>
                     <h2 class="chapter-title">Computer Architecture</h2>
                     <p class="chapter-desc">Comprehensive curriculum library containing simple answers, key points, and PYQ solutions for Computer Architecture.</p>
                 </div>
                 
                 <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='architecture/pipelining.html';">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/architecture/pipelining.html';">
                         <span class="toc-lbl">Pipelining & Memory</span>
                         <span class="toc-dots"></span>
                         <span class="toc-idx">Ch 1-2</span>
                     </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='architecture/ilp.html';">
-                        <span class="toc-lbl">ILP & Vector Processing</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">Ch 3-4</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='architecture/multiprocessor.html';">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/architecture/multiprocessor.html';">
                         <span class="toc-lbl">Multiprocessor Systems</span>
                         <span class="toc-dots"></span>
                         <span class="toc-idx">Ch 5</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='architecture/pyq.html';">
-                        <span class="toc-lbl">PYQs & Important QA</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">Bonus</span>
                     </div>
                 </div>
             </div>
@@ -555,32 +841,22 @@
             </div>
         </a>
 
-        <!-- FLAT FOLDER -->
-        <a href="automata/automata_index.html" class="chapter-card" style="--chapter-color: var(--color-u2);" id="module-flat">
+        <!-- AUTOMATA (FLAT) CARD -->
+        <a href="Semester_4/automata/automata_index.html" class="chapter-card" style="--chapter-color: #8b5cf6;" id="module-flat">
             <div class="card-content">
                 <div class="chapter-header">
-                    <div class="chapter-num">Subject</div>
+                    <div class="chapter-num">PCC-CS403</div>
                     <h2 class="chapter-title">Formal Language & Automata</h2>
                     <p class="chapter-desc">Detailed PYQ solutions and notes for Formal Language and Automata Theory (FLAT).</p>
                 </div>
                 
                 <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='automata/automata_pyq_2023_cs.html';">
-                        <span class="toc-lbl">2023 Solved Paper (CS)</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='automata/automata_pyq_2023_cse.html';">
-                        <span class="toc-lbl">2023 Solved Paper (CSE)</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='automata/automata_pyq_2024.html';">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/automata/automata_pyq_2024.html';">
                         <span class="toc-lbl">2024 Solved Paper (CS)</span>
                         <span class="toc-dots"></span>
                         <span class="toc-idx">100%</span>
                     </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='automata/toc_important_qa.html';">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/automata/toc_important_qa.html';">
                         <span class="toc-lbl">Complete Q&A Bank</span>
                         <span class="toc-dots"></span>
                         <span class="toc-idx">Featured</span>
@@ -593,71 +869,18 @@
             </div>
         </a>
 
-        <!-- CHEMISTRY PYQ -->
-        <a href="chemistry/chemistry_pyq.html" class="chapter-card" style="--chapter-color: #3b82f6;" id="module-chem-pyq">
+        <!-- ENVIRONMENTAL SCIENCES CARD -->
+        <a href="Semester_4/environment/Environmental_Sciences.html" class="chapter-card" style="--chapter-color: #10b981;" id="module-env">
             <div class="card-content">
                 <div class="chapter-header">
-                    <div class="chapter-num">Bonus</div>
-                    <h2 class="chapter-title">Chemistry PYQs</h2>
-                    <p class="chapter-desc">Detailed solutions for Chemistry-1 Previous Year Questions from 2019 to 2025.</p>
+                    <div class="chapter-num">MC-CS401</div>
+                    <h2 class="chapter-title">Environmental Sciences</h2>
+                    <p class="chapter-desc">Detailed solutions for Environmental Sciences Previous Year Questions and Most Probable Questions.</p>
                 </div>
                 
                 <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='chemistry/chemistry_pyq_2025.html';">
-                        <span class="toc-lbl">2025 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='chemistry/chemistry_pyq_2024.html';">
-                        <span class="toc-lbl">2024 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='chemistry/chemistry_pyq_2023_sem1.html';">
-                        <span class="toc-lbl">2023 Solved Papers</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='chemistry/chemistry_pyq_2019.html';">
-                        <span class="toc-lbl">2019 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <span class="badge-count">5 Papers</span>
-                <span class="read-action">Open Divider <span class="arrow">→</span></span>
-            </div>
-        </a>
-
-        <!-- DAA FOLDER -->
-        <a href="algorithms/algorithms_index.html" class="chapter-card" style="--chapter-color: #2563eb;" id="module-daa">
-            <div class="card-content">
-                <div class="chapter-header">
-                    <div class="chapter-num">Subject</div>
-                    <h2 class="chapter-title">Design & Analysis of Algorithms</h2>
-                    <p class="chapter-desc">Comprehensive solved previous year questions (2017, 2023, 2024) and detailed algorithm design solutions.</p>
-                </div>
-                
-                <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='algorithms/algorithms_important_questions.html';">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/environment/environment_index.html';">
                         <span class="toc-lbl">Important Q&amp;A Bank</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">69 Qs</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='algorithms/algorithms_pyq_2024.html';">
-                        <span class="toc-lbl">2023-24 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='algorithms/algorithms_pyq_2023.html';">
-                        <span class="toc-lbl">2022-23 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='algorithms/algorithms_pyq_2017.html';">
-                        <span class="toc-lbl">2016-17 Solved Paper</span>
                         <span class="toc-dots"></span>
                         <span class="toc-idx">100%</span>
                     </div>
@@ -669,116 +892,25 @@
             </div>
         </a>
 
-        <!-- ENVIRONMENTAL SCIENCES FOLDER -->
-        <a href="environment/Environmental_Sciences.html" class="chapter-card" style="--chapter-color: #10b981;" id="module-env">
+        <!-- BIOLOGY CARD -->
+        <a href="Semester_4/biology/Biology.html" class="chapter-card" style="--chapter-color: #ec4899;" id="module-bio">
             <div class="card-content">
                 <div class="chapter-header">
-                    <div class="chapter-num">Subject</div>
-                    <h2 class="chapter-title">Environmental Sciences</h2>
-                    <p class="chapter-desc">Detailed solutions for Environmental Sciences Previous Year Questions and Most Probable Questions.</p>
-                </div>
-                
-                <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='environment/environment_index.html';">
-                        <span class="toc-lbl">Important Q&amp;A Bank</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='environment/environment_2025.html';">
-                        <span class="toc-lbl">2025 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='environment/environment_2024.html';">
-                        <span class="toc-lbl">2024 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='environment/environment_2023.html';">
-                        <span class="toc-lbl">2023 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <span class="badge-count">4 SECTIONS</span>
-                <span class="read-action">Open Folder <span class="arrow">→</span></span>
-            </div>
-        </a>
-
-        <!-- BIOLOGY FOLDER -->
-        <a href="biology/Biology.html" class="chapter-card" style="--chapter-color: #8b5cf6;" id="module-bio">
-            <div class="card-content">
-                <div class="chapter-header">
-                    <div class="chapter-num">Subject</div>
+                    <div class="chapter-num">BS-BIO401</div>
                     <h2 class="chapter-title">Biology</h2>
                     <p class="chapter-desc">Detailed solutions for Biology Previous Year Questions from 2023 to 2025.</p>
                 </div>
                 
                 <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='biology/Biology_index.html';">
+                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/biology/Biology_index.html';">
                         <span class="toc-lbl">Important Q&amp;A Bank</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='biology/biology_2025.html';">
-                        <span class="toc-lbl">2025 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='biology/biology_2024.html';">
-                        <span class="toc-lbl">2024 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='biology/biology_2023.html';">
-                        <span class="toc-lbl">2023 Solved Paper</span>
                         <span class="toc-dots"></span>
                         <span class="toc-idx">100%</span>
                     </div>
                 </div>
             </div>
             <div class="card-footer">
-                <span class="badge-count">4 SECTIONS</span>
-                <span class="read-action">Open Folder <span class="arrow">→</span></span>
-            </div>
-        </a>
-
-        <!-- PROGRAMMING FOR PROBLEM SOLVING FOLDER -->
-        <a href="PPS/pps_index.html" class="chapter-card" style="--chapter-color: #0d9488;" id="module-pps">
-            <div class="card-content">
-                <div class="chapter-header">
-                    <div class="chapter-num">Subject</div>
-                    <h2 class="chapter-title">Programming for Problem Solving</h2>
-                    <p class="chapter-desc">Comprehensive C programming notes, algorithms, data structures, and complete marks-wise PYQ solutions (2023–2025).</p>
-                </div>
-                
-                <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='PPS/pps_important_questions.html';">
-                        <span class="toc-lbl">Important Q&amp;A Bank</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">100%</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='PPS/pps_pyq_2025.html';">
-                        <span class="toc-lbl">2024–25 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">70/70 M</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='PPS/pps_pyq_2024.html';">
-                        <span class="toc-lbl">2023–24 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">70/70 M</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='PPS/pps_pyq_2023.html';">
-                        <span class="toc-lbl">2022–23 Solved Paper</span>
-                        <span class="toc-dots"></span>
-                        <span class="toc-idx">70/70 M</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <span class="badge-count">4 SECTIONS</span>
+                <span class="badge-count">4 Sections</span>
                 <span class="read-action">Open Folder <span class="arrow">→</span></span>
             </div>
         </a>

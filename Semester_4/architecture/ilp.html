@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Instruction-Level Parallelism - Detailed Answers</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Link to Shared Notes Stylesheet -->
+    <link rel="stylesheet" href="notes.css">
+
+    <!-- Page Specific Variable Colors -->
+    <style>
+        :root {
+            --primary-color: var(--color-u3, #f97316); /* Terracotta Orange Accent */
+            --primary-light: rgba(249, 115, 22, 0.05);
+            --border-color: rgba(249, 115, 22, 0.15);
+        }
+    
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            padding: 1.8rem !important;
+            margin: 2.2rem 0 !important;
+            text-align: center !important;
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+        }
+        .diagram-caption {
+            font-size: 0.88rem !important;
+            color: #475569 !important;
+            margin-top: 1.1rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <a href="architecture_index.html">← COA Menu</a>
+    <span class="nav-title">Module III of V</span>
+    <div style="display:flex;gap:0.5rem;">
+        <a href="memory.html">← Previous</a>
+        <a href="vector.html">Next →</a>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <h1>Module III: Instruction-Level Parallelism (ILP)</h1>
+        <p class="subtitle">Simple Answers &amp; Key Points · 22 Questions</p>
+        <div class="book-divider">
+            <span class="line"></span>
+            <span class="ornament">❖</span>
+            <span class="line"></span>
+        </div>
+    </header>
+    <div class="section">
+
+<div class="qa-card">
+<h4 class="qa-question">1. Explain Instruction-Level Parallelism (ILP).</h4>
+<div class="answer">
+    <p><b>Instruction-Level Parallelism (ILP)</b> refers to the potential for simultaneous execution of multiple instructions within a single processor. It measures how many operations in a program's instruction stream are truly independent and can, in theory, be executed at the same time.</p>
+
+    <p><span class="highlight">Key Concepts:</span></p>
+    <ul>
+        <li><b>Independence:</b> Two instructions can execute in parallel only if neither depends on the result of the other. The degree of ILP is determined by the density of independent instructions in the code.</li>
+        <li><b>Exploitation Methods:</b> ILP can be exploited through hardware techniques (Superscalar processors, Out-of-Order execution) or software techniques (compiler reordering, loop unrolling, VLIW scheduling).</li>
+        <li><b>Ideal vs. Practical ILP:</b> Studies have shown that typical programs contain an average ILP of 3-7 independent instructions at any point (with perfect branch prediction and infinite resources). Practical processors extract ILP of 1.5-4 due to hardware limitations and imperfect predictions.</li>
+    </ul>
+
+    <p><span class="highlight">Why ILP Matters:</span></p>
+    <p>Increasing clock frequency has hit a power wall (~2005). ILP is one of the key architectural approaches to improve performance without increasing frequency — by doing more useful work per clock cycle. This is quantified as <b>IPC (Instructions Per Cycle)</b>. A superscalar processor achieving IPC &gt; 1 is exploiting ILP.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">2. Explain the difference between static and dynamic ILP.</h4>
+<div class="answer">
+    <p>Static and Dynamic ILP refer to <i>who</i> is responsible for discovering and scheduling independent instructions — the compiler (software) or the processor hardware.</p>
+
+    <table>
+        <tr><th>Feature</th><th>Static ILP (Compiler-Based)</th><th>Dynamic ILP (Hardware-Based)</th></tr>
+        <tr><td><b>Responsible Party</b></td><td>The compiler (software).</td><td>The processor (hardware).</td></tr>
+        <tr><td><b>Scheduling Time</b></td><td>Compile-time (static).</td><td>Run-time (dynamic).</td></tr>
+        <tr><td><b>Mechanism</b></td><td>Compiler reorders instructions, unrolls loops, and schedules VLIW execution.</td><td>Hardware uses Reservation Stations, Reorder Buffers, and Register Renaming to run instructions out-of-order.</td></tr>
+        <tr><td><b>Adaptability</b></td><td>Cannot adapt to dynamic runtime events (like cache misses or data-dependent branches).</td><td>Highly adaptable; dynamically schedules instructions around cache misses and runtime branches.</td></tr>
+        <tr><td><b>Binary Compatibility</b></td><td>Poor. Binaries are tied to the specific processor generation; require recompilation for newer CPUs.</td><td>Excellent. Legacy binaries run on newer processors without recompilation.</td></tr>
+        <tr><td><b>Hardware Overhead</b></td><td>Minimal. Simple control logic, highly power-efficient.</td><td>High. Complex control logic, power-hungry, and consumes significant chip area.</td></tr>
+        <tr><td><b>Examples</b></td><td>VLIW processors (e.g., Intel Itanium, TI C6000 DSPs).</td><td>Superscalar processors (e.g., Intel Core, AMD Ryzen, Apple Silicon).</td></tr>
+    </table>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">3. Explain RAW, WAR, and WAW hazards (types of instruction dependencies that limit ILP).</h4>
+<div class="answer">
+    <p>These are the three types of data dependencies between instructions. They define the limits of ILP because dependent instructions cannot execute simultaneously.</p>
+
+    <p><span class="highlight">1. RAW — Read After Write (True Dependency):</span></p>
+    <ul>
+        <li><b>Scenario:</b> Instruction J tries to read a register that Instruction I has not yet written to.</li>
+        <li><b>Example:</b><br>
+        <code>I: ADD R1, R2, R3</code> (writes to R1)<br>
+        <code>J: SUB R4, R1, R5</code> (reads R1)</li>
+        <li><b>Nature:</b> This is a <b>true data dependency</b>. J genuinely needs the result produced by I. It CANNOT be eliminated by any renaming trick.</li>
+        <li><b>Impact on ILP:</b> J must wait until I produces R1's value. This serializes the instructions.</li>
+    </ul>
+
+    <p><span class="highlight">2. WAR — Write After Read (Anti-Dependency):</span></p>
+    <ul>
+        <li><b>Scenario:</b> Instruction J tries to write to a register that Instruction I has not yet finished reading.</li>
+        <li><b>Example:</b><br>
+        <code>I: SUB R4, R1, R5</code> (reads R1)<br>
+        <code>J: ADD R1, R2, R3</code> (writes to R1)</li>
+        <li><b>Nature:</b> This is a <b>false dependency</b> (name dependency). There is no actual data flow from I to J. The conflict arises only because both happen to use the same register name R1.</li>
+        <li><b>Resolution:</b> <b>Register Renaming</b> can eliminate WAR. Rename J's destination to a different physical register (e.g., R1' = R2 + R3), allowing J to execute freely alongside I.</li>
+    </ul>
+
+    <p><span class="highlight">3. WAW — Write After Write (Output Dependency):</span></p>
+    <ul>
+        <li><b>Scenario:</b> Instruction J tries to write to the same register that Instruction I also writes to.</li>
+        <li><b>Example:</b><br>
+        <code>I: ADD R1, R2, R3</code> (writes to R1)<br>
+        <code>J: MUL R1, R4, R5</code> (also writes to R1)</li>
+        <li><b>Nature:</b> Another <b>false dependency</b>. The final value of R1 must be J's result. If J completes before I (in out-of-order execution), I's stale result would incorrectly overwrite J's.</li>
+        <li><b>Resolution:</b> <b>Register Renaming</b> eliminates WAW. Map each write to a unique physical register. The commit logic ensures the correct final value is visible.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">4. Role of compiler optimization in exploiting ILP?</h4>
+<div class="answer">
+    <p>The compiler plays a critical role in exposing and organizing ILP for the hardware to exploit. Even in superscalar processors with dynamic scheduling, compiler optimizations significantly boost performance.</p>
+
+    <p><span class="highlight">Key Compiler Techniques:</span></p>
+    <ol>
+        <li><b>Instruction Scheduling (Code Reordering):</b> The compiler analyzes data dependencies and reorders independent instructions to fill pipeline slots that would otherwise be wasted as stalls. For example, it moves an independent <code>LOAD</code> instruction before a dependent <code>ADD</code> to hide the memory access latency.</li>
+        <li><b>Loop Unrolling:</b> The compiler duplicates the loop body multiple times and adjusts the loop counter. This removes branch overhead and, more importantly, exposes independent instructions from different original iterations that the hardware can execute in parallel.</li>
+        <li><b>Software Pipelining:</b> An advanced technique where the compiler interleaves instructions from different loop iterations into a single iteration body. This creates a "pipeline" of iterations at the instruction level, maximizing functional unit utilization.</li>
+        <li><b>Register Allocation:</b> Efficient register allocation reduces spills to memory. More values held in registers means fewer slow Load/Store operations and more opportunities for the hardware to find ILP.</li>
+        <li><b>Trace Scheduling:</b> The compiler identifies the most frequently executed paths through the program (traces) and optimizes those paths aggressively by reordering instructions across basic block boundaries and branch points.</li>
+    </ol>
+
+    <p><span class="highlight">Significance:</span> Without compiler optimization, even the most advanced superscalar hardware would find far fewer independent instructions to execute in parallel. The compiler's global view of the program enables optimizations that localized hardware logic cannot achieve.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">5. Major challenges in increasing ILP in modern processors?</h4>
+<div class="answer">
+    <p>Despite decades of architectural innovation, extracting more ILP from programs faces several fundamental limits:</p>
+
+    <ol>
+        <li><span class="highlight">True Data Dependencies (RAW):</span> These cannot be eliminated by any hardware or software technique. If instruction B needs the result of instruction A, B must wait. The critical path of data dependencies defines the theoretical maximum ILP of any program.</li>
+        <li><span class="highlight">Control Dependencies (Branches):</span> Programs contain 15-25% branch instructions. Each branch creates uncertainty about which instructions to execute next. Even with 97% prediction accuracy, a 3% misprediction rate causes significant pipeline flushes in deep pipelines, wasting many cycles of speculative work.</li>
+        <li><span class="highlight">Memory Latency (Cache Misses):</span> An L1 cache miss stalls the dependent instruction chain for 10-15 cycles (L2 hit) or 100+ cycles (DRAM access). This latency is nearly impossible to hide if subsequent instructions depend on the loaded data.</li>
+        <li><span class="highlight">Finite Hardware Resources:</span> The processor has a limited number of ALUs, load/store units, and physical registers. Even if 10 independent instructions exist, if the processor only has 4 ALUs, only 4 can execute per cycle.</li>
+        <li><span class="highlight">Power and Complexity Wall:</span> Out-of-order logic (Reorder Buffers, Reservation Stations, Register Rename tables) consumes enormous chip area and power. The energy cost of the ILP extraction logic can exceed the energy cost of the actual computation. Diminishing returns set in rapidly beyond 4-6 wide issue.</li>
+        <li><span class="highlight">Window Size Limitation:</span> The hardware can only "see" a limited number of instructions ahead (the instruction window, typically 128-300 instructions). ILP opportunities beyond this window are invisible to the hardware.</li>
+    </ol>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">6. Explain loop unrolling.</h4>
+<div class="answer">
+    <p><b>Loop unrolling</b> is a compiler optimization technique that replicates the body of a loop multiple times within a single iteration and adjusts the loop control accordingly. Its primary purpose is to expose more ILP and reduce loop overhead.</p>
+
+    <p><span class="highlight">Before Unrolling (Original Loop):</span></p>
+    <pre>
+for (i = 0; i &lt; 100; i++) {
+    A[i] = A[i] + B[i];
+}
+    </pre>
+    <p>Each iteration has: 1 load A[i], 1 load B[i], 1 add, 1 store A[i], 1 branch (loop test). That's 5 instructions, with the branch consuming 20% of the work.</p>
+
+    <p><span class="highlight">After Unrolling by Factor 4:</span></p>
+    <pre>
+for (i = 0; i &lt; 100; i += 4) {
+    A[i]   = A[i]   + B[i];
+    A[i+1] = A[i+1] + B[i+1];
+    A[i+2] = A[i+2] + B[i+2];
+    A[i+3] = A[i+3] + B[i+3];
+}
+    </pre>
+    <p>Now each iteration has: 4 loads A, 4 loads B, 4 adds, 4 stores, 1 branch = 17 instructions. The branch now consumes only ~6% of the work.</p>
+
+    <p><span class="highlight">Benefits:</span></p>
+    <ol>
+        <li><b>Reduced Branch Overhead:</b> The loop executes 25 iterations (instead of 100), reducing the number of branch instructions and associated prediction penalties by 75%.</li>
+        <li><b>Exposed ILP:</b> The 4 add operations in the unrolled body are completely independent of each other (they access different array elements). A superscalar processor can issue all 4 adds simultaneously if it has enough ALUs.</li>
+        <li><b>Better Register Utilization:</b> The compiler can now schedule loads early and keep values in registers longer, hiding memory latency.</li>
+    </ol>
+
+    <p><span class="highlight">Drawback:</span> Increased code size (instruction cache pressure). If unrolled too aggressively, the larger loop body may not fit in the I-Cache, causing instruction cache misses.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">7. Explain how superscalar processors achieve ILP.</h4>
+<div class="answer">
+    <p>A <b>Superscalar processor</b> is a CPU that can issue and execute <b>more than one instruction per clock cycle</b> by having multiple parallel execution pipelines (functional units).</p>
+
+    <p><span class="highlight">Architecture:</span></p>
+    <ul>
+        <li>A superscalar processor with an <b>issue width of N</b> can fetch, decode, and dispatch up to N instructions per clock cycle.</li>
+        <li>It contains multiple functional units: e.g., 2 integer ALUs, 2 FP units, 2 Load/Store units, 1 Branch unit.</li>
+    </ul>
+
+    <p><span class="highlight">How ILP is Achieved (Step-by-Step):</span></p>
+    <ol>
+        <li><b>Fetch Multiple Instructions:</b> The front-end fetches N instructions from the I-Cache per cycle (e.g., 4-6 instructions on modern CPUs).</li>
+        <li><b>Decode & Rename:</b> The decoder checks for dependencies. The <b>Register Renaming</b> unit maps architectural registers to a larger pool of physical registers, eliminating WAR and WAW false dependencies.</li>
+        <li><b>Dynamic Scheduling (Dispatch to Reservation Stations):</b> Decoded instructions are placed into Reservation Stations in front of each functional unit. Instructions wait here until all their operands are available.</li>
+        <li><b>Out-of-Order Issue:</b> As soon as an instruction in any Reservation Station has all its operands ready, it is <b>issued</b> to the corresponding functional unit for execution, regardless of program order.</li>
+        <li><b>Execute in Parallel:</b> Multiple functional units operate simultaneously, executing independent instructions in the same clock cycle.</li>
+        <li><b>In-Order Commit (via ROB):</b> Completed results are held in the Reorder Buffer. Instructions are committed (results written to architectural state) strictly in original program order to maintain correctness and support precise exceptions.</li>
+    </ol>
+
+    <p><span class="highlight">Example:</span> A 4-wide superscalar processor with ideal conditions can retire up to 4 instructions per cycle, achieving an IPC (Instructions Per Cycle) of up to 4.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">8. What is out-of-order execution? How does it relate to ILP?</h4>
+<div class="answer">
+    <p><b>Out-of-Order (OoO) Execution</b> is a hardware technique where the processor executes instructions in an order determined by the availability of their input data, rather than strictly following the original program order.</p>
+
+    <p><span class="highlight">Why OoO is Needed:</span></p>
+    <p>Consider instructions: I1 (slow cache miss), I2 (depends on I1), I3 (independent of I1 and I2). In an in-order processor, I3 is blocked behind I2, which is blocked behind I1. In an OoO processor, I3 can execute immediately while I1 is still waiting for memory.</p>
+
+    <p><span class="highlight">How OoO Works:</span></p>
+    <ol>
+        <li><b>In-Order Front-End:</b> Instructions are fetched and decoded in program order.</li>
+        <li><b>Register Renaming:</b> Architectural registers are mapped to physical registers to eliminate WAR/WAW false dependencies.</li>
+        <li><b>Dispatch to Reservation Stations:</b> Instructions are dispatched to waiting areas (Reservation Stations) associated with specific functional units.</li>
+        <li><b>Out-of-Order Issue & Execute:</b> Each clock cycle, the hardware scans the Reservation Stations. Any instruction whose operands are ALL available is issued to its functional unit for execution, bypassing older instructions that are still waiting.</li>
+        <li><b>In-Order Commit (Retirement):</b> Completed results are buffered in the <b>Reorder Buffer (ROB)</b>. The ROB retires instructions strictly in program order, writing their results to the architectural register file. This ensures precise exceptions and correct program behavior.</li>
+    </ol>
+
+    <p><span class="highlight">Relation to ILP:</span> OoO execution is the <b>primary hardware mechanism</b> for exploiting dynamic ILP. By looking ahead through the instruction window and executing independent instructions whenever possible, OoO processors extract significantly more ILP than in-order processors. Modern OoO cores can look at windows of 200-300 instructions to find parallelism.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">9. Describe Tomasulo's algorithm and how it helps in achieving ILP.</h4>
+<div class="answer">
+    <p><b>Tomasulo's Algorithm</b> (developed by Robert Tomasulo at IBM in 1967) is a pioneering hardware scheme for dynamic instruction scheduling that enables out-of-order execution. It was first implemented in the IBM System/360 Model 91 floating-point unit.</p>
+
+    <p><span class="highlight">Key Hardware Components:</span></p>
+    <ol>
+        <li><b>Reservation Stations (RS):</b> Buffers in front of each functional unit. Each RS entry holds an instruction, its operands (or tags pointing to the sources that will produce them), and the operation code. Instructions wait here until their data is ready.</li>
+        <li><b>Common Data Bus (CDB):</b> A broadcast bus. When a functional unit produces a result, it broadcasts the result along with the RS tag on the CDB. All Reservation Stations and the Register File simultaneously listen and capture the value if they were waiting for that tag.</li>
+        <li><b>Register File with Tags:</b> Instead of just storing values, each register entry can also store a <b>tag</b> indicating which Reservation Station will produce the value. This is Tomasulo's form of register renaming.</li>
+    </ol>
+
+    <p><span class="highlight">Algorithm Steps:</span></p>
+    <ol>
+        <li><b>Issue:</b> Decode the instruction. If a Reservation Station is free for the required functional unit, issue the instruction into it. Read available operands from the Register File. If an operand is not ready, store the tag of the RS that will produce it.</li>
+        <li><b>Execute:</b> The RS monitors the CDB. When both operands become available (either from the register file or via CDB broadcast), the instruction is sent to the functional unit for execution.</li>
+        <li><b>Write Result:</b> When execution completes, the result is broadcast on the CDB. All waiting RSs and register file entries that are expecting this tag capture the value.</li>
+    </ol>
+
+    <p><span class="highlight">How It Achieves ILP:</span></p>
+    <ul>
+        <li><b>Eliminates WAR/WAW:</b> Because operands are copied into Reservation Stations (or captured via CDB), the original register can be overwritten safely. This is an implicit form of register renaming.</li>
+        <li><b>Enables OoO Execution:</b> Instructions execute as soon as their data is available, not necessarily in program order.</li>
+        <li><b>Distributed Scheduling:</b> Each RS independently decides when its instruction is ready, creating a highly parallel scheduling mechanism.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">10. How do register renaming techniques eliminate false dependencies?</h4>
+<div class="answer">
+    <p><b>Register Renaming</b> is a hardware technique that maps the limited set of <b>architectural registers</b> (the registers defined by the ISA, e.g., R0-R31) to a much larger pool of hidden <b>physical registers</b>. This eliminates WAR and WAW false dependencies.</p>
+
+    <p><span class="highlight">The Problem (False Dependencies):</span></p>
+    <pre>
+I1: ADD R1, R2, R3   (Writes R1)
+I2: SUB R4, R1, R5   (Reads R1 — True RAW dependency on I1)
+I3: MUL R1, R6, R7   (Writes R1 — WAW with I1, WAR with I2)
+    </pre>
+    <p>I3 cannot execute before I2 reads R1 (WAR). I3 cannot execute before I1 writes R1 (WAW). But I3 doesn't actually need I1's result — it just happens to reuse the name "R1".</p>
+
+    <p><span class="highlight">The Solution (Register Renaming):</span></p>
+    <p>The hardware maintains a Rename Table that maps each architectural register to a physical register. Every instruction that writes to a register gets a <b>new, unique physical register</b>.</p>
+    <pre>
+I1: ADD P31, P2, P3   (R1 → P31)
+I2: SUB P4, P31, P5   (Still reads P31 — RAW preserved)
+I3: MUL P32, P6, P7   (R1 → P32, a NEW physical register)
+    </pre>
+    <p>Now:</p>
+    <ul>
+        <li>The WAW between I1 and I3 is gone: they write to P31 and P32 respectively.</li>
+        <li>The WAR between I2 and I3 is gone: I2 reads P31 (a fixed snapshot), I3 writes to P32. They can execute in any order or simultaneously.</li>
+        <li>The true RAW between I1 and I2 is preserved: I2 still waits for I1 to produce P31.</li>
+    </ul>
+
+    <p><span class="highlight">ILP Impact:</span> By eliminating false dependencies, register renaming dramatically increases the number of instructions that can execute in parallel, unlocking ILP that was hidden by the limited number of architectural register names.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">11. Pipeline hazards restricting ILP. What is speculative execution?</h4>
+<div class="answer">
+    <p><span class="highlight">How Pipeline Hazards Restrict ILP:</span></p>
+    <ul>
+        <li><b>Data Hazards (RAW):</b> Create serial chains of dependent instructions that cannot be parallelized. The critical path of RAW dependencies is the fundamental limit on ILP.</li>
+        <li><b>Control Hazards (Branches):</b> At every branch, the processor doesn't know which instructions to execute next. If it guesses wrong, all speculatively executed instructions must be flushed, wasting cycles and energy.</li>
+        <li><b>Structural Hazards:</b> Limited functional units restrict how many independent instructions can execute simultaneously. If there are 6 independent ADD instructions but only 2 ALUs, only 2 can execute per cycle.</li>
+    </ul>
+
+    <p><span class="highlight">Speculative Execution:</span></p>
+    <p><b>Definition:</b> Speculative execution is a technique where the processor predicts the outcome of a branch (using a branch predictor) and <b>begins executing instructions from the predicted path before the branch condition is actually resolved</b>.</p>
+
+    <p><span class="highlight">How It Contributes to ILP:</span></p>
+    <ol>
+        <li><b>Eliminates Control Hazard Stalls:</b> Instead of stalling the pipeline waiting for the branch to resolve, the processor keeps the pipeline full by executing predicted instructions.</li>
+        <li><b>Correct Prediction:</b> If the prediction is correct (~95%+ of the time), the speculative instructions are committed normally. Zero performance loss.</li>
+        <li><b>Incorrect Prediction:</b> If wrong, the Reorder Buffer discards all speculatively computed results, the pipeline is flushed, and execution restarts from the correct path. This incurs a penalty, but the average benefit across all branches far outweighs the occasional cost.</li>
+        <li><b>Enabling OoO Past Branches:</b> Without speculation, the OoO window stops at every branch. With speculation, the window extends past multiple branches, finding far more ILP.</li>
+    </ol>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">12. Loop with 4 dependent instructions. How can loop unrolling improve ILP?</h4>
+<div class="answer">
+    <p><span class="highlight">The Problem:</span></p>
+    <p>Consider a loop where the 4 instructions within a single iteration form a chain of RAW dependencies:</p>
+    <pre>
+Loop:  LOAD  R1, 0(R2)      ; I1: Load from memory
+       ADD   R1, R1, R3     ; I2: Depends on I1 (RAW)
+       MUL   R1, R1, R4     ; I3: Depends on I2 (RAW)
+       STORE R1, 0(R2)      ; I4: Depends on I3 (RAW)
+       ADDI  R2, R2, 4      ; Increment pointer
+       BNE   R2, R5, Loop   ; Branch
+    </pre>
+    <p>Within a single iteration, I1→I2→I3→I4 is a strict serial chain. The ILP within one iteration is effectively 1 (no parallelism).</p>
+
+    <p><span class="highlight">The Solution — Unrolling by 4:</span></p>
+    <pre>
+Loop:  LOAD  R1,  0(R2)     ; Iteration 1
+       LOAD  R6,  4(R2)     ; Iteration 2 (INDEPENDENT of R1)
+       LOAD  R7,  8(R2)     ; Iteration 3 (INDEPENDENT)
+       LOAD  R8, 12(R2)     ; Iteration 4 (INDEPENDENT)
+       ADD   R1, R1, R3     ; Depends on Load 1
+       ADD   R6, R6, R3     ; Depends on Load 2 (INDEPENDENT of ADD R1)
+       ADD   R7, R7, R3     ; Depends on Load 3 (INDEPENDENT)
+       ADD   R8, R8, R3     ; Depends on Load 4 (INDEPENDENT)
+       MUL   R1, R1, R4     ; ...and so on
+       ...
+    </pre>
+
+    <p><span class="highlight">Why This Improves ILP:</span></p>
+    <ul>
+        <li>The 4 LOAD instructions are independent (different addresses). A superscalar processor can issue all 4 simultaneously if it has 2 load units.</li>
+        <li>The 4 ADD instructions are independent (different registers). They can be issued in parallel.</li>
+        <li>While waiting for Load 1's result (memory latency), the processor is doing useful work: executing Loads 2, 3, and 4. Memory latency is <b>hidden</b>.</li>
+        <li>Inter-iteration parallelism is now visible within a single iteration body.</li>
+    </ul>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">13. Given instruction sequence, identify dependencies and determine parallel issue (width=2).</h4>
+<div class="answer">
+    <p><span class="highlight">General Exam Approach:</span></p>
+    <ol>
+        <li><b>List all instructions</b> and identify their source and destination registers.</li>
+        <li><b>Build a dependency graph:</b> For each instruction pair (I, J) where J comes after I, check:
+            <ul>
+                <li>RAW: J reads a register that I writes? → True dependency (J must wait for I).</li>
+                <li>WAR: J writes a register that I reads? → Anti-dependency (can be renamed).</li>
+                <li>WAW: J writes a register that I writes? → Output dependency (can be renamed).</li>
+            </ul>
+        </li>
+        <li><b>Determine issue groups:</b> With issue width = 2, pair up instructions that have NO RAW dependency between them.</li>
+    </ol>
+
+    <p><span class="highlight">Example:</span></p>
+    <pre>
+I1: ADD  R1, R2, R3    (Writes R1)
+I2: SUB  R4, R1, R5    (Reads R1 — RAW on I1)
+I3: MUL  R6, R7, R8    (Independent of I1 and I2)
+I4: AND  R9, R6, R1    (Reads R6 — RAW on I3, Reads R1 — RAW on I1)
+    </pre>
+
+    <p><b>Dependency Analysis:</b></p>
+    <ul>
+        <li>I2 depends on I1 (RAW via R1) → Cannot issue together.</li>
+        <li>I3 is independent of I1 and I2 → Can issue with either.</li>
+        <li>I4 depends on I1 (R1) and I3 (R6) → Must wait for both.</li>
+    </ul>
+
+    <p><b>Issue Schedule (Width = 2):</b></p>
+    <table>
+        <tr><th>Cycle</th><th>Slot 1</th><th>Slot 2</th></tr>
+        <tr><td>1</td><td>I1: ADD R1, R2, R3</td><td>I3: MUL R6, R7, R8</td></tr>
+        <tr><td>2</td><td>I2: SUB R4, R1, R5</td><td>(stall — I4 not ready)</td></tr>
+        <tr><td>3</td><td>I4: AND R9, R6, R1</td><td>—</td></tr>
+    </table>
+    <p>Total: 3 cycles for 4 instructions. IPC = 4/3 = 1.33.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">14. Machine issues 4 instr/clock, CPI = 1.2. Calculate IPC and potential ILP.</h4>
+<div class="answer">
+    <p><b>Given:</b></p>
+    <ul>
+        <li>Issue Width = 4 instructions per clock cycle</li>
+        <li>Measured CPI (Cycles Per Instruction) = 1.2</li>
+    </ul>
+
+    <p><b>Step 1: Calculate IPC (Instructions Per Cycle)</b></p>
+    <div class="formula-box">IPC = 1 / CPI = 1 / 1.2 = 0.833 instructions per cycle</div>
+
+    <p><b>Step 2: Determine Potential ILP</b></p>
+    <ul>
+        <li>The <b>potential ILP</b> of this machine (its maximum theoretical throughput) is equal to its issue width = <b>4 instructions per cycle</b>.</li>
+        <li>This would correspond to a best-case CPI of 1/4 = 0.25.</li>
+    </ul>
+
+    <p><b>Step 3: Analyze the Gap</b></p>
+    <ul>
+        <li>The machine is achieving only 0.833 IPC out of a possible 4 IPC.</li>
+        <li><b>Utilization = Actual IPC / Maximum IPC = 0.833 / 4 = 20.8%</b>.</li>
+        <li>This means approximately 79% of the processor's execution slots are wasted every cycle due to data dependencies, branch mispredictions, cache misses, and structural hazards.</li>
+    </ul>
+
+    <p><b>Conclusion:</b> IPC = <b>0.833</b>. The potential ILP of the architecture is <b>4</b>, but the actual program only exploits about 21% of it. This illustrates the ILP wall — real programs simply do not have enough independent instructions to fully utilize wide-issue processors.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">15. Compiler eliminates 3 stalls. Original CPI = 2.5. New CPI?</h4>
+<div class="answer">
+    <p><b>Interpretation:</b> The question likely means the compiler reorders instructions to eliminate 3 stall cycles per instruction on average from the original pipeline.</p>
+
+    <p><b>Given:</b></p>
+    <ul>
+        <li>Original CPI = 2.5 (which means: Ideal CPI of 1.0 + 1.5 stall cycles per instruction)</li>
+        <li>The compiler optimization eliminates 3 stall cycles. However, since the total stall component is only 1.5, the compiler can at most eliminate all 1.5 stall cycles.</li>
+    </ul>
+
+    <p><span class="highlight">Interpretation A (3 stalls eliminated from total program, not per instruction):</span></p>
+    <p>If 3 stall cycles are eliminated from an N-instruction sequence:</p>
+    <div class="formula-box">New Total Cycles = (N × 2.5) - 3<br>
+    New CPI = 2.5 - (3/N)</div>
+    <p>For large N, this approaches 2.5 (negligible improvement).</p>
+
+    <p><span class="highlight">Interpretation B (Stall penalty per hazard reduced by eliminating 3 types of stalls):</span></p>
+    <p>If the compiler reduces the stall component from 1.5 to a lower value (e.g., by scheduling away 3 categories of stall):</p>
+    <div class="formula-box">New CPI = Ideal CPI + Remaining Stalls = 1.0 + (1.5 - reduction)</div>
+    <p>If all stalls are eliminated: New CPI = 1.0 (the ideal).</p>
+
+    <p><b>Most Likely Intended Answer:</b> If the original CPI includes 1.5 stall cycles and the compiler manages to eliminate all of them → <b>New CPI = 1.0</b>. If the "3 stalls" means the penalty is reduced by 3 stall cycles (not possible since only 1.5 exist), the minimum is still <b>CPI = 1.0</b>.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">16. Determine achievable ILP assuming ideal branch prediction and no cache misses.</h4>
+<div class="answer">
+    <p>Under ideal conditions (perfect branch prediction, no cache misses, infinite resources), the achievable ILP is limited solely by <b>True Data Dependencies (RAW dependencies)</b>.</p>
+
+    <p><span class="highlight">Method to Determine ILP:</span></p>
+    <ol>
+        <li><b>Build a Data Flow Graph (DFG):</b> Represent each instruction as a node. Draw directed edges from instruction I to instruction J if J has a RAW dependency on I.</li>
+        <li><b>Find the Critical Path:</b> The longest chain of dependent instructions through the graph. This is the minimum number of cycles required, even with infinite parallelism.</li>
+        <li><b>Calculate ILP:</b>
+        <div class="formula-box">ILP = Total Number of Instructions / Length of Critical Path (in cycles)</div></li>
+    </ol>
+
+    <p><span class="highlight">Example:</span></p>
+    <pre>
+I1: LOAD R1, mem     ; 1 cycle (assume)
+I2: LOAD R2, mem     ; 1 cycle (independent of I1)
+I3: ADD R3, R1, R2   ; 1 cycle (depends on I1 AND I2)
+I4: MUL R4, R3, R5   ; 1 cycle (depends on I3)
+I5: LOAD R6, mem     ; 1 cycle (independent)
+I6: ADD R7, R6, R4   ; 1 cycle (depends on I4 AND I5)
+    </pre>
+    <p>Critical Path: I1 → I3 → I4 → I6 = 4 cycles. Total instructions = 6.</p>
+    <div class="formula-box">ILP = 6 / 4 = 1.5</div>
+    <p>Even with infinite resources, this code can only achieve an IPC of 1.5 due to the chain of true dependencies.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">17. What is VLIW (Very Long Instruction Word) architecture?</h4>
+<div class="answer">
+    <p><b>VLIW</b> is a processor architecture where the compiler explicitly packages multiple independent operations into a single, very wide instruction word. The hardware executes all operations within the word simultaneously without performing any runtime dependency checking.</p>
+
+    <p><span class="highlight">Architecture Details:</span></p>
+    <ul>
+        <li>A VLIW instruction word is typically 128-1024 bits wide, containing multiple "slots" (e.g., 2 integer ops + 2 FP ops + 2 memory ops + 1 branch op).</li>
+        <li>The compiler is entirely responsible for filling these slots with independent operations. If no independent operation is available for a slot, the compiler inserts a NOP.</li>
+        <li>The hardware has multiple functional units (one per slot) that execute in lockstep based on the instruction word.</li>
+    </ul>
+
+    <p><span class="highlight">Key Characteristics:</span></p>
+    <ol>
+        <li><b>No Dynamic Scheduling Hardware:</b> No Reservation Stations, no Reorder Buffer, no Register Renaming. All scheduling is done statically by the compiler.</li>
+        <li><b>Simple, Power-Efficient Hardware:</b> The chip area saved from removing OoO logic can be used for more functional units, larger caches, or lower power consumption.</li>
+        <li><b>Compiler Dependency:</b> The quality of the generated code depends heavily on the compiler's ability to find ILP. A poor compiler produces many NOPs and underutilizes the hardware.</li>
+    </ol>
+
+    <p><span class="highlight">Examples:</span> Intel Itanium (IA-64/EPIC), Texas Instruments C6000 DSPs, some embedded and signal processing architectures.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">18. How does VLIW exploit ILP?</h4>
+<div class="answer">
+    <p>VLIW exploits ILP entirely through <b>static, compile-time analysis and scheduling</b>. The compiler does all the heavy lifting that would otherwise be done by expensive runtime hardware in a superscalar processor.</p>
+
+    <p><span class="highlight">The Process:</span></p>
+    <ol>
+        <li><b>Dependency Analysis:</b> The compiler builds a complete dependency graph of the entire program (or large regions of it), identifying all RAW, WAR, and WAW dependencies.</li>
+        <li><b>Register Allocation & Renaming:</b> The compiler eliminates WAR and WAW by using different registers (it has full visibility of the register file at compile time).</li>
+        <li><b>Instruction Scheduling:</b> The compiler groups independent operations together and assigns them to specific functional unit slots in the VLIW instruction word.</li>
+        <li><b>Loop Unrolling & Software Pipelining:</b> The compiler aggressively unrolls loops and applies software pipelining (interleaving iterations) to fill as many VLIW slots as possible.</li>
+        <li><b>Speculative Code Motion:</b> The compiler may move instructions above branches speculatively. If the branch is mispredicted, the results are simply ignored (using predicated execution or speculative loads).</li>
+    </ol>
+
+    <p><span class="highlight">Example VLIW Word (4 slots):</span></p>
+    <pre>
+| ADD R1, R2, R3 | MUL R4, R5, R6 | LOAD R7, 0(R8) | BNE R9, Loop |
+    </pre>
+    <p>All four operations execute simultaneously in a single clock cycle.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">19. Compare superscalar and VLIW approaches to ILP.</h4>
+<div class="answer">
+    <table>
+        <tr><th>Feature</th><th>Superscalar</th><th>VLIW</th></tr>
+        <tr><td><b>ILP Discovery</b></td><td>Dynamic (by hardware at runtime)</td><td>Static (by compiler at compile-time)</td></tr>
+        <tr><td><b>Hardware Complexity</b></td><td>Very complex (OoO logic, ROB, RS, Rename)</td><td>Simple (just multiple functional units)</td></tr>
+        <tr><td><b>Compiler Complexity</b></td><td>Standard (basic optimizations)</td><td>Very complex (must find all ILP)</td></tr>
+        <tr><td><b>Power Consumption</b></td><td>High (complex control logic)</td><td>Lower (simpler control)</td></tr>
+        <tr><td><b>Binary Compatibility</b></td><td>Excellent (old binaries run on new CPUs)</td><td>Poor (must recompile for new hardware)</td></tr>
+        <tr><td><b>Cache Miss Handling</b></td><td>Good (OoO hides latency dynamically)</td><td>Poor (compile-time scheduling can't predict misses)</td></tr>
+        <tr><td><b>Code Size</b></td><td>Compact (standard ISA)</td><td>Large (many NOPs in unfilled slots)</td></tr>
+        <tr><td><b>Examples</b></td><td>Intel Core, AMD Ryzen, Apple M-series</td><td>Intel Itanium, TI C6000 DSPs</td></tr>
+        <tr><td><b>Market Success</b></td><td>Dominant in general-purpose computing</td><td>Niche (DSPs, embedded, GPUs)</td></tr>
+    </table>
+
+    <p><span class="highlight">Key Insight:</span> Superscalar won the general-purpose market because it can handle unpredictable runtime behavior (cache misses, data-dependent branches) gracefully. VLIW thrives in domains with predictable, regular computation (signal processing, media encoding) where the compiler can schedule effectively.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">20. Role of reservation stations in out-of-order execution?</h4>
+<div class="answer">
+    <p><b>Reservation Stations (RS)</b> are specialized hardware buffers placed in front of each functional unit in a dynamically scheduled (out-of-order) processor. They are central to Tomasulo's algorithm and modern superscalar designs.</p>
+
+    <p><span class="highlight">Structure of a Reservation Station Entry:</span></p>
+    <table>
+        <tr><th>Field</th><th>Purpose</th></tr>
+        <tr><td>Op</td><td>The operation to perform (ADD, MUL, etc.)</td></tr>
+        <tr><td>Vj, Vk</td><td>The actual values of the source operands (if available)</td></tr>
+        <tr><td>Qj, Qk</td><td>Tags identifying which RS will produce the operand (if not yet available)</td></tr>
+        <tr><td>Busy</td><td>Whether this RS entry is occupied</td></tr>
+    </table>
+
+    <p><span class="highlight">Role in OoO Execution:</span></p>
+    <ol>
+        <li><b>Buffering Instructions:</b> After decode, instructions are dispatched to a free RS. The RS holds the instruction until all its operands are ready, decoupling the decode stage from the execute stage.</li>
+        <li><b>Operand Monitoring:</b> Each RS continuously monitors the <b>Common Data Bus (CDB)</b>. When a result is broadcast with a matching tag (Qj or Qk), the RS captures the value into Vj or Vk.</li>
+        <li><b>Implicit Register Renaming:</b> Because operand values are copied into the RS (or referenced by tag), the original register can be freely overwritten by later instructions. This eliminates WAR and WAW hazards without a separate rename table.</li>
+        <li><b>Distributed, Parallel Scheduling:</b> Each RS independently determines when its instruction is ready. Multiple RSs can simultaneously detect readiness and issue their instructions to different functional units in the same clock cycle, maximizing parallelism.</li>
+        <li><b>Enabling OoO Issue:</b> A younger instruction in one RS can issue before an older instruction in another RS if the younger instruction's operands are ready first.</li>
+    </ol>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">21. How does the reorder buffer (ROB) work in preserving program order?</h4>
+<div class="answer">
+    <p>The <b>Reorder Buffer (ROB)</b> is a circular hardware queue that allows instructions to <b>execute out of order</b> but <b>commit (retire) in strict program order</b>. It is essential for supporting precise exceptions and correct speculative execution.</p>
+
+    <p><span class="highlight">Structure of an ROB Entry:</span></p>
+    <table>
+        <tr><th>Field</th><th>Purpose</th></tr>
+        <tr><td>Instruction Type</td><td>Branch, Store, Register Write, etc.</td></tr>
+        <tr><td>Destination</td><td>The architectural register or memory address to update</td></tr>
+        <tr><td>Value</td><td>The computed result (filled when execution completes)</td></tr>
+        <tr><td>Ready</td><td>Whether execution has completed</td></tr>
+    </table>
+
+    <p><span class="highlight">How It Works:</span></p>
+    <ol>
+        <li><b>Issue (Allocate):</b> When an instruction is decoded, it is assigned an entry in the ROB in program order. The ROB entry number becomes the instruction's unique identifier (tag).</li>
+        <li><b>Execute (Out of Order):</b> The instruction is dispatched to a Reservation Station and executes whenever its operands are ready. The result is written to the ROB entry (not the architectural register file).</li>
+        <li><b>Commit (In Order):</b> The ROB has a head pointer pointing to the oldest instruction. Every cycle, the hardware checks if the instruction at the head is marked "Ready" (execution complete). If so:
+            <ul>
+                <li>For register writes: The value is copied from the ROB entry to the architectural Register File.</li>
+                <li>For stores: The data is written to the Data Cache.</li>
+                <li>For branches: If mispredicted, the ROB is flushed from this point onward.</li>
+            </ul>
+            The head pointer advances to the next entry.
+        </li>
+    </ol>
+
+    <p><span class="highlight">Why This Preserves Order:</span></p>
+    <p>Because the head pointer only advances sequentially, instructions always commit in program order, even though they may have completed execution in any order. If an older instruction causes an exception, all younger instructions (behind it in the ROB) are simply discarded, preserving a precise machine state.</p>
+</div>
+</div>
+
+<div class="qa-card">
+<h4 class="qa-question">22. Explain dynamic scheduling and how it supports ILP.</h4>
+<div class="answer">
+    <p><b>Dynamic Scheduling</b> is a hardware technique where the processor rearranges the order of instruction execution at runtime to reduce stalls and maximize functional unit utilization.</p>
+
+    <p><span class="highlight">Key Difference from Static Scheduling:</span></p>
+    <ul>
+        <li><b>Static:</b> The compiler determines instruction order at compile time. The hardware executes instructions exactly as arranged.</li>
+        <li><b>Dynamic:</b> The hardware examines instructions at runtime, determines dependencies, and issues instructions to functional units as soon as operands are available, regardless of program order.</li>
+    </ul>
+
+    <p><span class="highlight">How Dynamic Scheduling Supports ILP:</span></p>
+    <ol>
+        <li><b>Bypasses Stalled Instructions:</b> If instruction I2 is stalled waiting for a cache miss, dynamic scheduling allows independent instructions I3, I4, I5 to execute past I2. In a statically scheduled (in-order) processor, all instructions behind I2 would stall.</li>
+        <li><b>Handles Unpredictable Latencies:</b> Cache misses, variable-latency operations (e.g., divides), and data-dependent timing are impossible to predict at compile time. Dynamic scheduling adapts to these at runtime.</li>
+        <li><b>Exploits ILP Across Basic Blocks:</b> Combined with branch prediction and speculative execution, dynamic scheduling can find and exploit ILP across multiple branches, which is very difficult for a compiler to do statically.</li>
+        <li><b>Register Renaming:</b> Dynamic scheduling hardware typically includes register renaming, which eliminates WAR and WAW false dependencies, further increasing the pool of independent instructions.</li>
+    </ol>
+
+    <p><span class="highlight">Implementation:</span> Dynamic scheduling is implemented using Tomasulo's algorithm (Reservation Stations + CDB) or Scoreboarding (an earlier, simpler approach). Modern processors combine dynamic scheduling with ROBs for speculative execution.</p>
+</div>
+</div>
+</div>
+    <script src="notes.js"></script>
+</div>
+</body>
+</html>

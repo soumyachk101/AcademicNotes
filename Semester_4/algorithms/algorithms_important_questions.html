@@ -1,0 +1,1557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Important Questions - Design and Analysis of Algorithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="notes.css">
+    <style>
+        :root {
+            --primary-color: #2563eb; 
+            --primary-light: rgba(37, 99, 235, 0.05);
+            --border-color: rgba(37, 99, 235, 0.15);
+        }
+    
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            padding: 1.8rem !important;
+            margin: 2.2rem 0 !important;
+            text-align: center !important;
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+        }
+        .diagram-caption {
+            font-size: 0.88rem !important;
+            color: #475569 !important;
+            margin-top: 1.1rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <a href="algorithms_index.html">← DAA Menu</a>
+    <span class="nav-title">DAA Important Questions</span>
+    <div style="display:flex;gap:0.5rem;">
+        <span style="opacity: 0.3; cursor: not-allowed; padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Next →</span>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <h1>Design and Analysis of Algorithms</h1>
+        <p class="subtitle">Complete Detailed Solutions · Important Questions</p>
+        <div class="book-divider">
+            <span class="line"></span>
+            <span class="ornament">❖</span>
+            <span class="line"></span>
+        </div>
+    </header>
+    
+    <div class="section">
+        <h2 id="group-a" style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; margin-top: 3rem;">Group A — Multiple Choice Questions</h2>
+        <div class="qa-card">
+            <div class="answer">
+                <p><b>1. Merge sort is based on</b></p>
+                <p>Answer: <span class="highlight">b) Divide and conquer</span></p>
+
+                <p><b>2. Prim's algorithm is used to find</b></p>
+                <p>Answer: <span class="highlight">b) MST (Minimum Spanning Tree)</span></p>
+
+                <p><b>3. DFS uses</b></p>
+                <p>Answer: <span class="highlight">b) Stack</span></p>
+
+                <p><b>4. In dynamic programming, solutions are stored in</b></p>
+                <p>Answer: <span class="highlight">b) Table/Memorization</span></p>
+
+                <p><b>5. Topological sorting is applicable to</b></p>
+                <p>Answer: <span class="highlight">b) Directed acyclic graph (DAG)</span></p>
+
+                <p><b>6. Greedy algorithms always make</b></p>
+                <p>Answer: <span class="highlight">b) Optimal local choice</span></p>
+
+                <p><b>7. Binary search works only on</b></p>
+                <p>Answer: <span class="highlight">b) Sorted array</span></p>
+
+                <p><b>8. Recurrence relation is used in</b></p>
+                <p>Answer: <span class="highlight">b) Divide and conquer</span></p>
+
+                <p><b>9. Bellman-Ford algorithm can detect</b></p>
+                <p>Answer: <span class="highlight">b) Negative weight cycles</span></p>
+
+                <p><b>10. Relaxation in shortest path algorithms means</b></p>
+                <p>Answer: <span class="highlight">b) Updating minimum distance</span></p>
+
+                <p><b>11. Kruskal's algorithm is a</b></p>
+                <p>Answer: <span class="highlight">b) Greedy algorithm</span></p>
+
+                <p><b>12. Which of the following algorithm is used to find the all pair shortest path problem?</b></p>
+                <p>Answer: <span class="highlight">c) Floyd's Algorithm</span></p>
+
+                <p><b>13. The example of a non-comparison-based sorting technique is</b></p>
+                <p>Answer: <span class="highlight">d) Bucket sort</span></p>
+
+                <p><b>14. Lower bound of any comparison-based sorting algorithm is</b></p>
+                <p>Answer: <span class="highlight">d) O(n log n)</span></p>
+
+                <p><b>15. The Big-O notation of the expression f(n) = n² + n log n + 1 is</b></p>
+                <p>Answer: <span class="highlight">a) O(n²)</span></p>
+
+                <p><b>16. Bellman-Ford requires how many iterations over edges?</b></p>
+                <p>Answer: <span class="highlight">b) V-1</span></p>
+
+                <p><b>17. Consider a graph G=(V, E), V = {v1...v100}, E={(vi, vj) | i < j}. Weight of edge is |i-j|. Weight of MST is:</b></p>
+                <p>Answer: <span class="highlight">a) 99. The graph is complete, and taking edges (v1,v2), (v2,v3)...(v99,v100) all with weight 1 gives an MST of weight 99.</span></p>
+
+                <p><b>18. Relationship between O(n) and Ω(n)?</b></p>
+                <p>Answer: <span class="highlight">d) There's no relationship between O(n) and Ω(n) (One is upper bound, the other is lower bound).</span></p>
+
+                <p><b>19. A graph with no cycles is called</b></p>
+                <p>Answer: <span class="highlight">b) Acyclic graph</span></p>
+
+                <p><b>20. Best case of merge sort is</b></p>
+                <p>Answer: <span class="highlight">b) O(n log n)</span></p>
+
+                <p><b>21. Algorithm design technique for all pairs of shortest distances</b></p>
+                <p>Answer: <span class="highlight">a) Dynamic programming (Floyd-Warshall is DP).</span></p>
+
+                <p><b>22. To implement Dijkstra's on unweighted graphs in linear time, data structure is:</b></p>
+                <p>Answer: <span class="highlight">a) Queue (Essentially becoming BFS).</span></p>
+
+                <p><b>23. Data structure useful for BFS</b></p>
+                <p>Answer: <span class="highlight">c) Queue</span></p>
+
+                <p><b>24. O(1) means computing time is</b></p>
+                <p>Answer: <span class="highlight">a) Constant</span></p>
+
+                <p><b>25. Which of the following is true</b></p>
+                <p>Answer: <span class="highlight">a) P is subset of NP</span></p>
+
+                <p><b>26. Properties of a dynamic programming problem?</b></p>
+                <p>Answer: <span class="highlight">d) Both optimal substructure and overlapping sub problems</span></p>
+
+                <p><b>27. In the context of 0/1 Knapsack, a 'feasible solution' is</b></p>
+                <p>Answer: <span class="highlight">a) Any solution that does not exceed the knapsack's capacity.</span></p>
+
+                <p><b>28. Time complexity of Floyd-Warshall algorithm</b></p>
+                <p>Answer: <span class="highlight">d) O(V³)</span></p>
+
+                <p><b>29. Main purpose of branch and bound</b></p>
+                <p>Answer: <span class="highlight">c) Both A and B (Find best solution and eliminate non-promising solutions).</span></p>
+
+                <p><b>30. Which type of search is typically used in the branch and bound algorithm?</b></p>
+                <p>Answer: <span class="highlight">b) Breadth-first search (or Best-First Search)</span></p>
+
+
+            </div>
+          <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; margin-top: 3rem;">Group B & C — Subjective Questions</h2>
+
+        <div class="qa-card" id="sub-0">
+            <h4 class="qa-question">1. Define minimum spanning tree. Differentiate between Prim's Algorithm and Kruskal's Algorithm.</h4>
+            <div class="answer">
+                <p><b>Minimum Spanning Tree (MST):</b> Given a connected, undirected, and weighted graph \(G = (V, E)\), a spanning tree is an acyclic subgraph that connects all the vertices in the graph. The Minimum Spanning Tree is a spanning tree whose sum of edge weights is minimized. Key properties of an MST include:</p>
+                <ul>
+                    <li>It must contain all vertices of the original graph (\(V\)).</li>
+                    <li>It must have exactly \(|V| - 1\) edges.</li>
+                    <li>It must contain no cycles (acyclic).</li>
+                </ul>
+                <p><b>Differences between Prim's and Kruskal's Algorithms:</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Prim's Algorithm</th>
+                            <th>Kruskal's Algorithm</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Basic Approach</b></td>
+                            <td>Grows the tree by starting from an arbitrary root vertex and adding the nearest unvisited vertex at each step (vertex-centric).</td>
+                            <td>Grows the forest by sorting all edges and adding the smallest edge that does not create a cycle (edge-centric).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Intermediate State</b></td>
+                            <td>The intermediate structure is always a single connected tree.</td>
+                            <td>The intermediate structure can be a disconnected forest of trees that merge over time.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Data Structures</b></td>
+                            <td>Uses a Min-Priority Queue (Binary or Fibonacci Heap) to retrieve the next minimum-weight edge.</td>
+                            <td>Uses a Disjoint-Set (Union-Find) data structure to check for cycles and sort the edges.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Cycle Detection</b></td>
+                            <td>No explicit cycle detection is needed, as it only adds edges to unvisited vertices.</td>
+                            <td>Explicit cycle detection is required, handled efficiently using the Union-Find data structure.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Suitability</b></td>
+                            <td>Highly suitable for dense graphs (where \(E \approx V^2\)).</td>
+                            <td>Highly suitable for sparse graphs (where \(E \approx V\)).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Time Complexity</b></td>
+                            <td>
+                                <ul>
+                                    <li>With Binary Heap: \(O(E \log V)\)</li>
+                                    <li>With Fibonacci Heap: \(O(E + V \log V)\)</li>
+                                </ul>
+                            </td>
+                            <td>\(O(E \log E)\) or \(O(E \log V)\) due to sorting of edges.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-1">
+            <h4 class="qa-question">2. What is Dynamic Programming? How does it differ from the Greedy Method?</h4>
+            <div class="answer">
+                <p><b>Dynamic Programming (DP):</b> An algorithmic paradigm that solves a complex problem by breaking it into overlapping subproblems, solving each subproblem exactly once, and storing their solutions (in a table) to avoid redundant computations. It is built on two primary principles:</p>
+                <ol>
+                    <li><b>Optimal Substructure:</b> An optimal solution to the problem contains optimal solutions to its subproblems.</li>
+                    <li><b>Overlapping Subproblems:</b> The recursive algorithm solves the same subproblems repeatedly, rather than generating new ones.</li>
+                </ol>
+                <p><b>Differences from the Greedy Method:</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criteria</th>
+                            <th>Dynamic Programming</th>
+                            <th>Greedy Method</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Choice Selection</b></td>
+                            <td>Evaluates all possible options at each stage and chooses the global optimum. Past decisions can be reconsidered.</td>
+                            <td>Makes the local optimal choice at each step without looking ahead or reconsidering past choices.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Optimality</b></td>
+                            <td>Always guarantees a global optimal solution (provided optimal substructure exists).</td>
+                            <td>Does not always guarantee a global optimal solution (though it works for specific problems like Fractional Knapsack).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Subproblem Dependency</b></td>
+                            <td>Subproblems are highly overlapping. Solutions are built bottom-up (tabulation) or top-down (memoization).</td>
+                            <td>Subproblems are solved sequentially. No overlapping subproblems are required.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Efficiency</b></td>
+                            <td>Generally slower and computationally heavier, but polynomial in time.</td>
+                            <td>Generally faster and much simpler (often \(O(n)\) or \(O(n \log n)\)).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Memory Overhead</b></td>
+                            <td>High memory overhead due to storing subproblem solutions in a DP table or memoization map.</td>
+                            <td>Low memory overhead as it doesn't need to maintain a state table.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-2">
+            <h4 class="qa-question">3. What is the time complexity of fun(int n)?</h4>
+            <div class="answer">
+                <pre><code>int fun(int n) {
+    int count = 0;
+    for (int i = n; i > 0; i /= 2) {
+        for (int j = 0; j < i; j++) {
+            count += 1;
+        }
+    }
+    return count;
+}</code></pre>
+                <p><b>Mathematical Analysis:</b></p>
+                <ul>
+                    <li>The outer loop initializes <code>i = n</code> and halves it in each iteration (<code>i /= 2</code>) until <code>i <= 0</code>. The sequence of values of <code>i</code> is: \(n, n/2, n/4, n/8, \dots, 1\).</li>
+                    <li>The inner loop runs exactly <code>i</code> times for each value of <code>i</code> in the outer loop (from <code>j = 0</code> to <code>j < i - 1</code>).</li>
+                    <li>Therefore, the total number of operations (executions of the inner statement <code>count += 1</code>) is the sum of the inner loop counts across all iterations:
+                        <br>
+                        \[\text{Total Iterations} = n + \frac{n}{2} + \frac{n}{4} + \frac{n}{8} + \dots + 1\]
+                    </li>
+                    <li>This is a geometric series with first term \(a = n\) and common ratio \(r = 1/2\). Using the infinite geometric series sum formula \(S = \frac{a}{1 - r}\):
+                        <br>
+                        \[S \approx \frac{n}{1 - 1/2} = 2n\]
+                    </li>
+                </ul>
+                <div class="formula-box">Time Complexity: \(\Theta(n)\) (Linear Time Complexity)</div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-3">
+            <h4 class="qa-question">4. Differentiate between Big-O and Omega notation with an example.</h4>
+            <div class="answer">
+                <p><b>Asymptotic Notations</b> represent the rates of growth of algorithms. Big-O and Omega notation serve as upper and lower bounds respectively.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>Big-O (O) Notation</th>
+                            <th>Omega (Ω) Notation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Definition</b></td>
+                            <td>Represents the <b>asymptotic upper bound</b> of an algorithm's time complexity. It describes the worst-case scenario.</td>
+                            <td>Represents the <b>asymptotic lower bound</b> of an algorithm's time complexity. It describes the best-case scenario.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Mathematical Definition</b></td>
+                            <td>\(f(n) = O(g(n))\) if there exist positive constants \(c\) and \(n_0\) such that:<br>\(0 \le f(n) \le c \cdot g(n)\) for all \(n \ge n_0\).</td>
+                            <td>\(f(n) = \Omega(g(n))\) if there exist positive constants \(c\) and \(n_0\) such that:<br>\(0 \le c \cdot g(n) \le f(n)\) for all \(n \ge n_0\).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Graphical Behavior</b></td>
+                            <td>The function \(c \cdot g(n)\) lies <b>above or on</b> \(f(n)\) for all sufficiently large \(n\).</td>
+                            <td>The function \(c \cdot g(n)\) lies <b>below or on</b> \(f(n)\) for all sufficiently large \(n\).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Use Case</b></td>
+                            <td>Provides a guarantee that the algorithm will not take longer than this time.</td>
+                            <td>Provides a guarantee that the algorithm will take at least this much time.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p><b>Example (Insertion Sort):</b></p>
+                <ul>
+                    <li><b>Worst-Case (Reverse Sorted Input):</b> Insertion sort requires shifting elements at every position, yielding a quadratic running time. Thus, the worst-case time complexity is \(O(n^2)\).</li>
+                    <li><b>Best-Case (Already Sorted Input):</b> Insertion sort only performs one comparison per element and no shifts, yielding a linear running time. Thus, the best-case complexity is \(\Omega(n)\).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-4">
+            <h4 class="qa-question">5. What kind of problems can we solve using dynamic programming? Can we solve the all-pair shortest path problem using Dijkstra algorithm?</h4>
+            <div class="answer">
+                <p><b>Problems Solved by Dynamic Programming:</b> DP is applicable to optimization problems that exhibit two critical properties:</p>
+                <ol>
+                    <li><b>Optimal Substructure:</b> An optimal solution to the global problem can be constructed from the optimal solutions of its subproblems.</li>
+                    <li><b>Overlapping Subproblems:</b> The space of subproblems is small, meaning a recursive algorithm visits the same subproblems repeatedly, rather than generating new ones.</li>
+                </ol>
+                <p>Common examples include: Matrix Chain Multiplication (MCM), Longest Common Subsequence (LCS), 0/1 Knapsack, Bellman-Ford (Single-source shortest path with negative edges), and Floyd-Warshall (All-pairs shortest path).</p>
+                
+                <p><b>Can we solve All-Pairs Shortest Path (APSP) using Dijkstra's Algorithm?</b></p>
+                <p><b>Yes</b>, we can solve APSP by running Dijkstra's algorithm \(|V|\) times, using each vertex as the source once. Let's analyze the properties of this approach:</p>
+                <ul>
+                    <li><b>Complexity:</b> If we implement Dijkstra using a Min-Heap/Priority Queue, the cost for a single run is \(O(E \log V)\). Running it \(V\) times results in a total complexity of \(O(V \cdot E \log V)\). For sparse graphs, this is \(O(V^2 \log V)\), which is highly efficient.</li>
+                    <li><b>Limitations:</b> Dijkstra's algorithm cannot handle graphs with <b>negative weight edges</b>. If any negative edge weights exist, we must use the Floyd-Warshall algorithm (\(O(V^3)\)) or Johnson's Algorithm (\(O(V^2 \log V + VE)\)), which reweights edges to allow Dijkstra's to run safely.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-5">
+            <h4 class="qa-question">6. Using dynamic programming, determine the optimal order of matrix multiplication and the minimum number of scalar multiplications required for the matrices A1(2×3), A2(3×4) and A3(4×5).</h4>
+            <div class="answer">
+                <p>Given matrices \(A_1(2 \times 3)\), \(A_2(3 \times 4)\), and \(A_3(4 \times 5)\), the dimensions array is \(P = [2, 3, 4, 5]\) with \(n = 3\) matrices. The cost recurrence relation is:</p>
+                <div class="formula-box">\(m[i, j] = \min_{i \le k < j} \{m[i, k] + m[k+1, j] + P[i-1] \cdot P[k] \cdot P[j]\}\)</div>
+                <p><b>Step-by-Step DP Computation:</b></p>
+                <ol>
+                    <li><b>Chain Length 1 (Base Case):</b>
+                        <br>\(m[1, 1] = m[2, 2] = m[3, 3] = 0\) (No multiplication needed for a single matrix)
+                    </li>
+                    <li><b>Chain Length 2:</b>
+                        <ul>
+                            <li><b>\(m[1, 2]\) (Multiplying \(A_1 A_2\)):</b> Only one split possible (\(k = 1\)):
+                                <br>\(m[1, 2] = m[1, 1] + m[2, 2] + P[0] \cdot P[1] \cdot P[2] = 0 + 0 + 2 \times 3 \times 4 = 24\).
+                                <br>Split record: \(s[1, 2] = 1\).
+                            </li>
+                            <li><b>\(m[2, 3]\) (Multiplying \(A_2 A_3\)):</b> Only one split possible (\(k = 2\)):
+                                <br>\(m[2, 3] = m[2, 2] + m[3, 3] + P[1] \cdot P[2] \cdot P[3] = 0 + 0 + 3 \times 4 \times 5 = 60\).
+                                <br>Split record: \(s[2, 3] = 2\).
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>Chain Length 3 (\(m[1, 3]\) - Multiplying \(A_1 A_2 A_3\)):</b> We evaluate two possible splits:
+                        <ul>
+                            <li><b>Split at \(k = 1\) (\(A_1 \times (A_2 A_3)\)):</b>
+                                <br>\(cost = m[1, 1] + m[2, 3] + P[0] \cdot P[1] \cdot P[3] = 0 + 60 + 2 \times 3 \times 5 = 60 + 30 = 90\)
+                            </li>
+                            <li><b>Split at \(k = 2\) (\((A_1 A_2) \times A_3\)):</b>
+                                <br>\(cost = m[1, 2] + m[3, 3] + P[0] \cdot P[2] \cdot P[3] = 24 + 0 + 2 \times 4 \times 5 = 24 + 40 = 64\)
+                            </li>
+                        </ul>
+                        We take the minimum: \(\min(90, 64) = 64\) at split \(k = 2\).
+                        <br>Split record: \(s[1, 3] = 2\).
+                    </li>
+                </ol>
+                <div class="formula-box">
+                    Minimum Scalar Multiplications: <b>64</b><br>
+                    Optimal Parenthesization: <b>\((A_1 \times A_2) \times A_3\)</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-6">
+            <h4 class="qa-question">7. Write the Ford-Fulkerson algorithm for maximum flow in a network.</h4>
+            <div class="answer">
+                <p>The <b>Ford-Fulkerson Algorithm</b> computes the maximum possible flow in a flow network from a source node \(S\) to a sink node \(T\). It works by repeatedly finding "augmenting paths" in the "residual graph" and adding their bottleneck capacities to the total flow.</p>
+                <pre><code>Ford-Fulkerson(Graph G, Node S, Node T):
+    1. Initialize flow f(u, v) = 0 for all edges (u, v) in G
+    2. Construct the residual graph G_f where:
+       - Forward edge capacity: c_f(u, v) = c(u, v) - f(u, v)
+       - Reverse edge capacity: c_f(v, u) = f(u, v)
+       
+    3. While there exists a path P from S to T in G_f such that c_f(u, v) > 0 for all (u, v) in P:
+       a. Find the bottleneck capacity of the path:
+          c_f(P) = min { c_f(u, v) : (u, v) is in P }
+          
+       b. Update flow along path P:
+          For each edge (u, v) in P:
+             If (u, v) is a forward edge in G:
+                f(u, v) = f(u, v) + c_f(P)   // Augment flow
+             Else:
+                f(v, u) = f(v, u) - c_f(P)   // Decrease reverse flow (push back)
+                
+       c. Update the capacities in the residual graph G_f
+       
+    4. Return the maximum flow (sum of flow leaving source S)</code></pre>
+                <p><b>Time Complexity Analysis:</b></p>
+                <ul>
+                    <li>If augmenting paths are found using standard DFS, the runtime is \(O(E \cdot |f^*|)\), where \(|f^*|\) is the maximum flow value. This is pseudopolynomial since it depends on the capacities.</li>
+                    <li>If we find augmenting paths using BFS, the algorithm is called the <b>Edmonds-Karp Algorithm</b>, which guarantees a polynomial time complexity of \(O(V \cdot E^2)\).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-7">
+            <h4 class="qa-question">8. Solve the recurrence relations using Master's theorem: a) T(n) = 2T(n/2) + n log n</h4>
+            <div class="answer">
+                <p>The recurrence relation is \(T(n) = 2T(n/2) + n \log n\). We compare this with the standard Master's Theorem form:</p>
+                <div class="formula-box">\(T(n) = a T(n/b) + f(n)\)</div>
+                <p>Here, we identify:</p>
+                <ul>
+                    <li>\(a = 2\) (number of subproblems)</li>
+                    <li>\(b = 2\) (subproblem division factor)</li>
+                    <li>\(f(n) = n \log n\)</li>
+                </ul>
+                <p><b>Step 1: Compute \(n^{\log_b a}\)</b></p>
+                <p>\[n^{\log_b a} = n^{\log_2 2} = n^1 = n\]</p>
+                <p><b>Step 2: Compare \(f(n)\) with \(n^{\log_b a}\)</b></p>
+                <p>We notice that \(f(n) = n \log n\) grows faster than \(n\), but not by a polynomial factor. It matches the <b>Extended Case 2</b> of the Master Theorem:</p>
+                <p>If \(f(n) = \Theta(n^{\log_b a} \log^k n)\) for some \(k \ge 0\):</p>
+                <ul>
+                    <li>Here, \(n^{\log_b a} = n\), and \(f(n) = n \log^1 n\), which perfectly fits with \(k = 1\).</li>
+                </ul>
+                <p>According to this case, the solution is:</p>
+                <p>\[T(n) = \Theta(n^{\log_b a} \log^{k+1} n)\]</p>
+                <p>Substituting the values:</p>
+                <p>\[T(n) = \Theta(n^1 \log^{1+1} n) = \Theta(n \log^2 n)\]</p>
+                <div class="formula-box">Complexity: \(T(n) = \Theta(n \log^2 n)\)</div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-8">
+            <h4 class="qa-question">9. Write the algorithm for activity selection problem.</h4>
+            <div class="answer">
+                <p>The <b>Activity Selection Problem</b> is a classic optimization problem. Given \(n\) activities with start times \(S[i]\) and finish times \(F[i]\), we want to find the size of the largest subset of mutually compatible activities (where no two selected activities overlap).</p>
+                <p>This is solved optimally using a <b>Greedy Algorithm</b>: we sort activities by finish times, then greedily pick the next compatible activity that finishes earliest.</p>
+                <pre><code>Activity-Selection(Start[], Finish[], n):
+    1. Sort the activities according to their finish times in ascending order.
+       Assume the sorted activities are A_1, A_2, ..., A_n.
+       
+    2. Select the first activity A_1 (it has the earliest finish time).
+       Print/Store A_1.
+       
+    3. Initialize last_selected_finish = Finish[1]
+    
+    4. For i = 2 to n:
+       a. If Start[i] >= last_selected_finish:
+          i. Activity A_i is compatible. Select it.
+          ii. Update last_selected_finish = Finish[i]
+          
+    5. Return the list of selected activities.</code></pre>
+                <p><b>Complexity Analysis:</b></p>
+                <ul>
+                    <li>Sorting the activities takes \(O(n \log n)\) time.</li>
+                    <li>The single linear scan for selection takes \(O(n)\) time.</li>
+                    <li>Overall Time Complexity is <b>\(O(n \log n)\)</b>.</li>
+                </ul>
+                <p><b>Why this Greedy Strategy is Optimal:</b> Picking the activity that finishes first leaves the maximum possible resource window open for subsequent activities, guaranteeing an optimal choice (Greedy Choice Property).</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-9">
+            <h4 class="qa-question">10. Write the difference between dynamic programming and divide and conquer algorithm. Define greedy algorithm.</h4>
+            <div class="answer">
+                <p><b>Differences between Dynamic Programming and Divide & Conquer:</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Dynamic Programming</th>
+                            <th>Divide and Conquer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Subproblem Relationship</b></td>
+                            <td>Solves problems with <b>overlapping subproblems</b>. Subproblems share results.</td>
+                            <td>Solves problems with <b>independent (disjoint) subproblems</b>. Subproblems do not share results.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Redundant Work</b></td>
+                            <td>Avoids redundant work by storing results in a table (memoization/tabulation).</td>
+                            <td>May recalculate the same subproblems repeatedly if they happen to overlap (e.g., naive recursive Fibonacci).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Structure</b></td>
+                            <td>Typically built bottom-up or top-down with memoization.</td>
+                            <td>Strictly top-down recursion (Divide, Conquer, and Combine).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Memory Usage</b></td>
+                            <td>High memory requirements to hold the lookup tables.</td>
+                            <td>Low memory overhead, utilizing only the execution call stack.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Examples</b></td>
+                            <td>Matrix Chain Multiplication, Floyd-Warshall, Edit Distance.</td>
+                            <td>Merge Sort, Quick Sort, Binary Search.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><b>Greedy Algorithm Definition:</b></p>
+                <p>A greedy algorithm is an algorithmic paradigm that builds a solution step-by-step, making the locally optimal choice at each stage in the hope that this choice will lead to a globally optimal solution. It is characterized by two key properties: <b>Greedy Choice Property</b> (a global optimum can be reached by making local choices) and <b>Optimal Substructure</b>. Once a greedy choice is made, it is never revised (no backtracking), making it fast but not universally applicable.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-10">
+            <h4 class="qa-question">11. Explain the concept of backtracking and how it is related to recursion. Write the difference between backtracking and branch and bound.</h4>
+            <div class="answer">
+                <p><b>Backtracking:</b> Backtracking is an algorithmic technique for solving constraint-satisfaction problems by searching a state-space tree incrementally. It builds candidate solutions step-by-step. As soon as it determines that a partial candidate cannot possibly be extended to a valid complete solution, it abandons it ("backtracks") to the previous decision point.</p>
+                <p><b>Relationship to Recursion:</b> Backtracking is fundamentally implemented using recursion. The recursive function calls represent deeper levels of exploration in the state-space tree. The activation records on the call stack keep track of the path from the root node. When a dead-end is hit, returning from a recursive function call naturally cleans up local states and steps back up the tree, making backtracking highly clean to express recursively.</p>
+                <br>
+                <p><b>Differences between Backtracking and Branch & Bound:</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Characteristic</th>
+                            <th>Backtracking</th>
+                            <th>Branch and Bound</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Search Space Traversal</b></td>
+                            <td>Traverses using Depth-First Search (DFS).</td>
+                            <td>Traverses using Breadth-First Search (BFS) or Best-First Search.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Problem Type</b></td>
+                            <td>Used for decision, game-playing, and constraint satisfaction problems (e.g., finding *any* or *all* valid states).</td>
+                            <td>Used exclusively for <b>optimization problems</b> (finding the single global minimum/maximum cost path).</td>
+                        </tr>
+                        <tr>
+                            <td><b>Pruning Mechanism</b></td>
+                            <td>Prunes a path when a hard constraint is violated (feasibility test).</td>
+                            <td>Prunes a path when its estimated cost (bound) is worse than the cost of the best solution found so far.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Data Structure</b></td>
+                            <td>Uses a LIFO Stack (implicitly via recursion).</td>
+                            <td>Uses a FIFO Queue or a Priority Queue (Min-Heap) to track active nodes.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Memory Overhead</b></td>
+                            <td>Very low space complexity (\(O(d)\) where \(d\) is max depth).</td>
+                            <td>Very high space complexity because it keeps many open nodes in memory.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-11">
+            <h4 class="qa-question">12. Define the single source shortest path problem. When does the shortest path not exist?</h4>
+            <div class="answer">
+                <p><b>Single Source Shortest Path (SSSP):</b> Given a weighted graph \(G = (V, E)\) (directed or undirected) and a designated source vertex \(S \in V\), the SSSP problem is to find the path of minimum total weight from \(S\) to every other vertex \(v \in V\). The path weight is defined as the sum of all individual edge weights along that path.</p>
+                <p><b>When does the Shortest Path NOT exist?</b></p>
+                <p>A shortest path from a source vertex \(S\) to a destination vertex \(D\) is undefined/does not exist in the following conditions:</p>
+                <ol>
+                    <li><b>Disconnected Graph:</b> If there is no reachable path in the graph from \(S\) to \(D\), the distance is defined as infinity (\(\infty\)).</li>
+                    <li><b>Negative Weight Cycle:</b> If the graph contains a cycle whose sum of edge weights is negative, and this cycle is reachable from \(S\) and can reach \(D\). In this scenario, we can loop around the negative cycle infinitely many times, reducing the total path weight to negative infinity (\(-\infty\)). Thus, no "shortest" path can exist because a path with a smaller weight can always be generated.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-12">
+            <h4 class="qa-question">13. Define the characteristics of the greedy algorithm. Why we cannot solve 0/1 knapsack algorithm using greedy algorithm?</h4>
+            <div class="answer">
+                <p><b>Characteristics of Greedy Algorithms:</b></p>
+                <ul>
+                    <li><b>Greedy-Choice Property:</b> A global optimal solution can be arrived at by making locally optimal (greedy) choices at each step.</li>
+                    <li><b>Optimal Substructure:</b> An optimal solution to the problem contains optimal solutions to its subproblems.</li>
+                    <li><b>No Backtracking:</b> Once a choice is made, it cannot be undone or adjusted.</li>
+                    <li><b>Efficiency:</b> High efficiency, usually taking \(O(n)\) or \(O(n \log n)\) time.</li>
+                </ul>
+                <p><b>Why Greedy Fails for the 0/1 Knapsack Problem:</b></p>
+                <p>In the 0/1 Knapsack, an item must be chosen in its entirety or left behind (no fractional items allowed). When we make choices greedily based on the highest profit-to-weight ratio, we might leave empty space in the knapsack that cannot be filled, making the total value suboptimal. A non-greedy combination of items with lower individual ratios might fill the knapsack capacity perfectly and yield a higher overall profit.</p>
+                <p><b>Example Counter-Example:</b></p>
+                <ul>
+                    <li>Capacity = 10 kg</li>
+                    <li>Item A: Weight = 6 kg, Value = \$60 (Ratio = 10)</li>
+                    <li>Item B: Weight = 5 kg, Value = \$45 (Ratio = 9)</li>
+                    <li>Item C: Weight = 5 kg, Value = \$45 (Ratio = 9)</li>
+                </ul>
+                <p>Greedy choice picks Item A first (highest ratio 10). Remaining capacity = 4 kg. Neither B nor C can fit. Total profit = <b>\$60</b>.</p>
+                <p>Optimal choice picks Item B and Item C. Total weight = 10 kg, Total profit = \$45 + \$45 = <b>\$90</b>. This proves greedy fails.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-13">
+            <h4 class="qa-question">14. Analyse the time complexity of quick sort algorithm for best case and worst case using recurrence relations.</h4>
+            <div class="answer">
+                <p>Quick Sort is based on the Divide and Conquer strategy. The time complexity depends heavily on how balanced the partitions are after selecting a pivot.</p>
+                <p><b>1. Best Case Analysis:</b></p>
+                <p>Occurs when the pivot selection always splits the array into two equal halves of size \(n/2\) at each level of recursion. The recurrence relation is:</p>
+                <p>\[T(n) = 2T(n/2) + \Theta(n)\]</p>
+                <p>Where \(\Theta(n)\) represents the partition time. Using the Master's Theorem:</p>
+                <ul>
+                    <li>\(a = 2, b = 2, f(n) = \Theta(n)\)</li>
+                    <li>Compute \(n^{\log_b a} = n^{\log_2 2} = n^1 = n\)</li>
+                    <li>Since \(f(n) = \Theta(n^{\log_b a})\), this falls under Case 2 of Master's Theorem.</li>
+                    <li>Thus, \(T(n) = \Theta(n^{\log_b a} \log n) = \Theta(n \log n)\).</li>
+                </ul>
+                <div class="formula-box">Best Case Complexity: \(O(n \log n)\)</div>
+                
+                <p><b>2. Worst Case Analysis:</b></p>
+                <p>Occurs when the pivot is always the smallest or largest element, splitting the array into partitions of size \(0\) and \(n-1\). This happens if the array is already sorted and we choose the first or last element as pivot. The recurrence relation is:</p>
+                <p>\[T(n) = T(n-1) + T(0) + c \cdot n = T(n-1) + c \cdot n\]</p>
+                <p>We solve this using the substitution method:</p>
+                <ul>
+                    <li>\(T(n) = T(n-1) + cn\)</li>
+                    <li>\(T(n) = (T(n-2) + c(n-1)) + cn = T(n-2) + c(n + n-1)\)</li>
+                    <li>\(T(n) = T(n-k) + c \sum_{i=0}^{k-1} (n - i)\)</li>
+                    <li>For base case \(n-k = 1 \implies k = n-1\):</li>
+                    <li>\(T(n) = T(1) + c \sum_{i=2}^n i = T(1) + c \left[\frac{n(n+1)}{2} - 1\right]\)</li>
+                </ul>
+                <p>Since the highest term is quadratic, the complexity is:</p>
+                <div class="formula-box">Worst Case Complexity: \(O(n^2)\)</div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-14">
+            <h4 class="qa-question">15. Write the Floyd-Warshall Algorithm for all-pairs shortest path problem. What will be the time complexity?</h4>
+            <div class="answer">
+                <p>The <b>Floyd-Warshall Algorithm</b> is a dynamic programming algorithm that finds the shortest paths between all pairs of vertices in a weighted directed graph. It supports positive and negative edge weights, but must not contain negative cycles.</p>
+                <p><b>DP Formulation:</b> Let \(d_{ij}^{(k)}\) be the weight of the shortest path from vertex \(i\) to vertex \(j\) using only vertices in the set \(\{1, 2, \dots, k\}\) as intermediate nodes. The recurrence relation is:</p>
+                <div class="formula-box">\(d_{ij}^{(k)} = \min \left( d_{ij}^{(k-1)}, d_{ik}^{(k-1)} + d_{kj}^{(k-1)} \right)\)</div>
+                
+                <p><b>Algorithm Pseudocode:</b></p>
+                <pre><code>Floyd-Warshall(Graph W, V):
+    1. Let D^(0) be the initial V x V weight matrix where:
+       D^(0)[i][j] = 0           if i == j
+       D^(0)[i][j] = weight(i,j) if edge (i,j) exists
+       D^(0)[i][j] = Infinity    if no edge exists
+       
+    2. For k = 1 to V:          // k represents the intermediate vertex
+       For i = 1 to V:       // i is the source vertex
+          For j = 1 to V:    // j is the destination vertex
+             D^(k)[i][j] = min( D^(k-1)[i][j], D^(k-1)[i][k] + D^(k-1)[k][j] )
+             
+    3. Return D^(V)          // Contains all-pairs shortest path distances</code></pre>
+                <p><b>Complexity Analysis:</b></p>
+                <ul>
+                    <li>The algorithm contains three nested loops, each executing exactly \(V\) times.</li>
+                    <li>Inside the nested loops, only constant-time comparisons and additions are performed.</li>
+                    <li>Thus, the <b>Time Complexity is \(\Theta(V^3)\)</b>.</li>
+                    <li>Space complexity is \(O(V^2)\) since we only need to maintain the current and previous distance tables.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-15">
+            <h4 class="qa-question">16. For the given set of 5 items and the knapsack capacity of 10 kg, find the maximum profit. (Fractional knapsack, Wi={3,3,2,5,1}, Pi={10,15,10,12,8})</h4>
+            <div class="answer">
+                <p>We solve the <b>Fractional Knapsack Problem</b> using the Greedy Approach. We are given capacity \(M = 10\) kg and five items with weights \(W\) and profits \(P\).</p>
+                <p><b>Step 1: Calculate Profit-to-Weight ratios (\(P_i / W_i\))</b></p>
+                <ul>
+                    <li>Item 1: \(P_1 = 10, W_1 = 3 \implies Ratio_1 = 10/3 \approx 3.33\)</li>
+                    <li>Item 2: \(P_2 = 15, W_2 = 3 \implies Ratio_2 = 15/3 = 5.00\)</li>
+                    <li>Item 3: \(P_3 = 10, W_3 = 2 \implies Ratio_3 = 10/2 = 5.00\)</li>
+                    <li>Item 4: \(P_4 = 12, W_4 = 5 \implies Ratio_4 = 12/5 = 2.40\)</li>
+                    <li>Item 5: \(P_5 = 8,  W_5 = 1 \implies Ratio_5 = 8/1  = 8.00\)</li>
+                </ul>
+                
+                <p><b>Step 2: Sort items in descending order of ratios</b></p>
+                <p>Order: <b>Item 5</b> (8.00) \(\to\) <b>Item 2</b> (5.00) \(\to\) <b>Item 3</b> (5.00) \(\to\) <b>Item 1</b> (3.33) \(\to\) <b>Item 4</b> (2.40).</p>
+                
+                <p><b>Step 3: Greedily load the knapsack (Capacity limit = 10 kg)</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Step</th>
+                            <th>Item Picked</th>
+                            <th>Weight (\(W_i\))</th>
+                            <th>Profit (\(P_i\))</th>
+                            <th>Fraction Taken</th>
+                            <th>Remaining Capacity</th>
+                            <th>Total Profit Accumulated</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Item 5</td>
+                            <td>1 kg</td>
+                            <td>8</td>
+                            <td>1.0 (All)</td>
+                            <td>\(10 - 1 = 9\) kg</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Item 2</td>
+                            <td>3 kg</td>
+                            <td>15</td>
+                            <td>1.0 (All)</td>
+                            <td>\(9 - 3 = 6\) kg</td>
+                            <td>\(8 + 15 = 23\)</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Item 3</td>
+                            <td>2 kg</td>
+                            <td>10</td>
+                            <td>1.0 (All)</td>
+                            <td>\(6 - 2 = 4\) kg</td>
+                            <td>\(23 + 10 = 33\)</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>Item 1</td>
+                            <td>3 kg</td>
+                            <td>10</td>
+                            <td>1.0 (All)</td>
+                            <td>\(4 - 3 = 1\) kg</td>
+                            <td>\(33 + 10 = 43\)</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>Item 4</td>
+                            <td>5 kg</td>
+                            <td>12</td>
+                            <td>\(1/5 = 0.2\) (Fraction)</td>
+                            <td>\(1 - 1 = 0\) kg</td>
+                            <td>\(43 + (12 \times 0.2) = 45.4\)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="formula-box">Maximum Achievable Profit: <b>45.4</b> units</div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-16">
+            <h4 class="qa-question">17. Write short note on Randomized algorithms.</h4>
+            <div class="answer">
+                <p>A <b>Randomized Algorithm</b> is an algorithm that uses random numbers to influence its decision-making logic. Instead of executing deterministically based on the input, it leverages a random source to obtain average-case behavior on worst-case inputs.</p>
+                <p>Randomized algorithms are broadly classified into two main types:</p>
+                <ol>
+                    <li><b>Las Vegas Algorithms:</b> These algorithms <b>always produce the correct result</b>, but their execution time is a random variable. The goal is to minimize the expected running time.
+                        <br><i>Example:</i> <b>Randomized Quick Sort</b> (choosing a random pivot avoids worst-case \(O(n^2)\) splits, guaranteeing expected \(O(n \log n)\) time).
+                    </li>
+                    <li><b>Monte Carlo Algorithms:</b> These algorithms have a <b>deterministic execution time</b>, but their outputs have a small, bounded probability of being incorrect. The accuracy probability can be improved by running the algorithm multiple times.
+                        <br><i>Example:</i> <b>Miller-Rabin Primality Test</b> (checks if a number is prime in polynomial time with a tiny error probability), or <b>Karger's Min-Cut Algorithm</b>.
+                    </li>
+                </ol>
+                <p><b>Key Advantages:</b> They are typically simpler, faster, and require less memory than their deterministic counterparts, making them essential for cryptography, load balancing, and large data processing.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-17">
+            <h4 class="qa-question">18. Define the concept of an algorithm and explain its characteristics.</h4>
+            <div class="answer">
+                <p><b>Algorithm:</b> An algorithm is a finite, step-by-step sequence of well-defined, unambiguous instructions designed to solve a specific problem or compute a particular output from a given set of inputs.</p>
+                <p>According to Donald Knuth, any valid algorithm must satisfy these five essential characteristics:</p>
+                <ol>
+                    <li><b>Input:</b> It must accept zero or more quantities externally as input.</li>
+                    <li><b>Output:</b> It must produce at least one output quantity that has a specified relation to the inputs.</li>
+                    <li><b>Definiteness (Unambiguity):</b> Each step of the algorithm must be clear, precise, and unambiguous. There should be no doubt about what operation is to be performed.</li>
+                    <li><b>Finiteness:</b> The algorithm must terminate after a finite number of execution steps. It cannot run into an infinite loop.</li>
+                    <li><b>Effectiveness:</b> Every instruction must be basic enough to be carried out in practice, using simple pencil and paper in a finite amount of time.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-18">
+            <h4 class="qa-question">19. Find the minimum number of multiplications required for Matrix Chain Multiplication: A(10×20), B(20×50), C(50×1), D(1×100).</h4>
+            <div class="answer">
+                <p>Given matrices \(A_1(10 \times 20)\), \(A_2(20 \times 50)\), \(A_3(50 \times 1)\), and \(A_4(1 \times 100)\). The dimensions array is \(P = [10, 20, 50, 1, 100]\) for \(n = 4\) matrices. The recurrence relation is:</p>
+                <div class="formula-box">\(m[i, j] = \min_{i \le k < j} \{m[i, k] + m[k+1, j] + P[i-1] \cdot P[k] \cdot P[j]\}\)</div>
+                <p><b>DP Calculation Table:</b></p>
+                <ol>
+                    <li><b>Chain Length 1:</b>
+                        <br>\(m[1, 1] = m[2, 2] = m[3, 3] = m[4, 4] = 0\)
+                    </li>
+                    <li><b>Chain Length 2:</b>
+                        <ul>
+                            <li>\(m[1, 2] = 10 \times 20 \times 50 = 10,000\) (Split \(s[1,2] = 1\))</li>
+                            <li>\(m[2, 3] = 20 \times 50 \times 1 = 1,000\) (Split \(s[2,3] = 2\))</li>
+                            <li>\(m[3, 4] = 50 \times 1 \times 100 = 5,000\) (Split \(s[3,4] = 3\))</li>
+                        </ul>
+                    </li>
+                    <li><b>Chain Length 3:</b>
+                        <ul>
+                            <li><b>\(m[1, 3]\) (Multiplying \(A B C\)):</b> Possible splits:
+                                <ul>
+                                    <li>\(k = 1\): \(m[1, 1] + m[2, 3] + P[0] \cdot P[1] \cdot P[3] = 0 + 1000 + 10 \times 20 \times 1 = 1200\)</li>
+                                    <li>\(k = 2\): \(m[1, 2] + m[3, 3] + P[0] \cdot P[2] \cdot P[3] = 10000 + 0 + 10 \times 50 \times 1 = 10500\)</li>
+                                </ul>
+                                Minimum is <b>1,200</b> at split \(s[1, 3] = 1\).
+                            </li>
+                            <li><b>\(m[2, 4]\) (Multiplying \(B C D\)):</b> Possible splits:
+                                <ul>
+                                    <li>\(k = 2\): \(m[2, 2] + m[3, 4] + P[1] \cdot P[2] \cdot P[4] = 0 + 5000 + 20 \times 50 \times 100 = 105,000\)</li>
+                                    <li>\(k = 3\): \(m[2, 3] + m[4, 4] + P[1] \cdot P[3] \cdot P[4] = 1000 + 0 + 20 \times 1 \times 100 = 3,000\)</li>
+                                </ul>
+                                Minimum is <b>3,000</b> at split \(s[2, 4] = 3\).
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>Chain Length 4 (\(m[1, 4]\) - Multiplying \(A B C D\)):</b> Possible splits:
+                        <ul>
+                            <li>\(k = 1\): \(m[1, 1] + m[2, 4] + P[0] \cdot P[1] \cdot P[4] = 0 + 3000 + 10 \times 20 \times 100 = 23,000\)</li>
+                            <li>\(k = 2\): \(m[1, 2] + m[3, 4] + P[0] \cdot P[2] \cdot P[4] = 10000 + 5000 + 10 \times 50 \times 100 = 65,000\)</li>
+                            <li>\(k = 3\): \(m[1, 3] + m[4, 4] + P[0] \cdot P[3] \cdot P[4] = 1200 + 0 + 10 \times 1 \times 100 = 2,200\)</li>
+                        </ul>
+                        Minimum is <b>2,200</b> at split \(s[1, 4] = 3\).
+                    </li>
+                </ol>
+                <div class="formula-box">
+                    Minimum Scalar Multiplications: <b>2,200</b><br>
+                    Optimal Parenthesization: <b>\(((A \times B) \times C) \times D\)</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-19">
+            <h4 class="qa-question">20. Write the algorithm for single source shortest path (-ve edge weights allowed) [Bellman-Ford].</h4>
+            <div class="answer">
+                <p>The <b>Bellman-Ford Algorithm</b> solves the Single Source Shortest Path problem in graphs containing negative edge weights. It runs in \(O(V \cdot E)\) time. It relaxes all edges \(|V| - 1\) times and runs a final check to detect negative-weight cycles.</p>
+                <pre><code>Bellman-Ford(Graph G, Source S):
+    1. Initialize distances:
+       For each vertex v in G:
+          dist[v] = Infinity
+       dist[S] = 0
+       
+    2. Relax all edges |V| - 1 times:
+       For i = 1 to |V| - 1:
+          For each edge (u, v) in G with weight w:
+             If dist[u] != Infinity and dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                
+    3. Detect negative weight cycles:
+       For each edge (u, v) in G with weight w:
+          If dist[u] != Infinity and dist[u] + w < dist[v]:
+             Return "Graph contains a negative weight cycle!"
+             
+    4. Return dist</code></pre>
+                <p><b>Why \(|V| - 1\) iterations?</b> The shortest path between any two vertices in a graph without negative cycles contains at most \(|V| - 1\) edges. Thus, relaxing all edges \(|V| - 1\) times guarantees that the shortest paths propagate throughout the graph.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-20">
+            <h4 class="qa-question">21. Discuss the advantages and drawbacks of Dynamic Programming.</h4>
+            <div class="answer">
+                <p>Dynamic Programming (DP) is a robust paradigm, but it comes with distinct trade-offs.</p>
+                <p><b>Advantages:</b></p>
+                <ul>
+                    <li><b>Optimality:</b> Unlike greedy methods, DP evaluates all possible combinations systematically, guaranteeing a globally optimal solution.</li>
+                    <li><b>Avoids Redundant Calculations:</b> Drastically reduces time complexities (e.g., from exponential \(O(2^n)\) to polynomial \(O(n^2)\) or \(O(n)\)) by storing subproblem answers so they are never solved twice.</li>
+                    <li><b>Standard Abstractions:</b> Provides structured math formulas (recurrences) that are easy to analyze and verify.</li>
+                </ul>
+                <p><b>Drawbacks:</b></p>
+                <ul>
+                    <li><b>High Space Complexity:</b> Storing subproblem solutions in tables requires significant memory, which can be prohibitive for multi-dimensional DP state spaces.</li>
+                    <li><b>Complexity in Design:</b> Determining states, choices, and mapping transitions requires creative math skills, which is much harder than coding greedy or simple recursive solutions.</li>
+                    <li><b>Strict Requirements:</b> Only works if the problem satisfies the strict conditions of Overlapping Subproblems and Optimal Substructure.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-21">
+            <h4 class="qa-question">22. Using Dijkstra's Algorithm, find the shortest distance from source vertex 'S' to remaining vertices in the following graph.</h4>
+            <div class="answer">
+                <p><b>Graph Edges:</b> \(S \to a (1)\), \(S \to b (5)\), \(a \to c (2)\), \(a \to d (3)\), \(b \to c (2)\), \(b \to d (1)\), \(c \to e (3)\), \(d \to e (2)\), \(c \to d (5)\).</p>
+                <p><b>Step-by-Step Execution Trace:</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Iteration</th>
+                            <th>Visited Set</th>
+                            <th>dist[S]</th>
+                            <th>dist[a]</th>
+                            <th>dist[b]</th>
+                            <th>dist[c]</th>
+                            <th>dist[d]</th>
+                            <th>dist[e]</th>
+                            <th>Action / Relaxations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Init</td>
+                            <td>{}</td>
+                            <td><b>0</b></td>
+                            <td>∞</td>
+                            <td>∞</td>
+                            <td>∞</td>
+                            <td>∞</td>
+                            <td>∞</td>
+                            <td>Initialize distances. Source \(S\) is at distance 0.</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>{S}</td>
+                            <td>0</td>
+                            <td><b>1</b></td>
+                            <td>5</td>
+                            <td>∞</td>
+                            <td>∞</td>
+                            <td>∞</td>
+                            <td>Pick min unvisited: \(S\) (0). Relax edges from \(S\): \(S \to a(1)\), \(S \to b(5)\).</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>{S, a}</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td><b>3</b></td>
+                            <td><b>4</b></td>
+                            <td>∞</td>
+                            <td>Pick min unvisited: \(a\) (1). Relax edges from \(a\): \(a \to c(1+2=3)\), \(a \to d(1+3=4)\).</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>{S, a, c}</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td><b>6</b></td>
+                            <td>Pick min unvisited: \(c\) (3). Relax edges from \(c\): \(c \to e(3+3=6)\).</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>{S, a, c, d}</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>Pick min unvisited: \(d\) (4). Relax edges from \(d\): \(d \to e\) (already 6, no change).</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>{S, a, c, d, b}</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>Pick min unvisited: \(b\) (5). No updates possible.</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>{S, a, c, d, b, e}</td>
+                            <td>0</td>
+                            <td>1</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>Pick min unvisited: \(e\) (6). All vertices visited. Terminate.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="formula-box">Final Shortest Distances: <b>S = 0, a = 1, b = 5, c = 3, d = 4, e = 6</b></div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-22">
+            <h4 class="qa-question">23. Write and explain the classes P, NP, NP-Hard and NP complete.</h4>
+            <div class="answer">
+                <p>Complexity theory classifies decision problems based on the computational resources needed to solve or verify them.</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Full Form & Definition</th>
+                            <th>Solvability (Poly-time)</th>
+                            <th>Verifiability (Poly-time)</th>
+                            <th>Relationship / Property</th>
+                            <th>Classic Examples</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>P</b></td>
+                            <td><b>Polynomial Time:</b> Problems that can be solved by a deterministic Turing machine in polynomial time.</td>
+                            <td>Yes</td>
+                            <td>Yes</td>
+                            <td>\(P \subseteq NP\). These are considered computationally tractable.</td>
+                            <td>Binary Search, Merge Sort, Dijkstra's algorithm.</td>
+                        </tr>
+                        <tr>
+                            <td><b>NP</b></td>
+                            <td><b>Non-deterministic Polynomial Time:</b> Decision problems where a "yes" certificate can be verified in polynomial time.</td>
+                            <td>Unknown (Yes, if \(P = NP\))</td>
+                            <td>Yes</td>
+                            <td>Contains \(P\) and all \(NP\)-Complete problems.</td>
+                            <td>Subset Sum, Travelling Salesperson (Decision version).</td>
+                        </tr>
+                        <tr>
+                            <td><b>NP-Hard</b></td>
+                            <td><b>NP-Hard:</b> Problems that are at least as hard as the hardest problems in NP. Need not be in NP.</td>
+                            <td>Unknown</td>
+                            <td>Unknown</td>
+                            <td>Any problem in NP can be reduced to an NP-Hard problem in polynomial time.</td>
+                            <td>Halting Problem (undecidable), TSP (Optimization version).</td>
+                        </tr>
+                        <tr>
+                            <td><b>NP-Complete</b></td>
+                            <td><b>NP-Complete:</b> The subset of problems in NP that are also NP-Hard. They represent the hardest problems in NP.</td>
+                            <td>Unknown</td>
+                            <td>Yes</td>
+                            <td>If any NPC problem is solved in polynomial time, then \(P = NP\).</td>
+                            <td>3-SAT, Clique, Vertex Cover, Vertex Coloring.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-23">
+            <h4 class="qa-question">24. Explain: "If NP complete problem can be solved in polynomial time, then P=NP"</h4>
+            <div class="answer">
+                <p>This statement is a fundamental theorem of complexity theory. Let's prove it logically:</p>
+                <ol>
+                    <li>By definition, a problem \(L\) is <b>NP-Complete</b> if:
+                        <ul>
+                            <li>\(L \in NP\), and</li>
+                            <li>For every problem \(X \in NP\), there exists a polynomial-time reduction to \(L\) (written as \(X \le_p L\)).</li>
+                        </ul>
+                    </li>
+                    <li>A polynomial-time reduction (\(X \le_p L\)) means we can transform any instance of \(X\) into an instance of \(L\) using a deterministic machine in \(O(n^k)\) time.</li>
+                    <li>If we can solve \(L\) itself in polynomial time (say, in \(O(n^m)\) time), then to solve any problem \(X \in NP\), we can:
+                        <br>a. Convert \(X\) to \(L\) in polynomial time.
+                        <br>b. Solve the resulting instance of \(L\) in polynomial time.
+                    </li>
+                    <li>The combined execution time is the composition of two polynomial functions, which is also polynomial. Therefore, every problem \(X \in NP\) would be solvable in polynomial time, which means \(NP \subseteq P\).</li>
+                    <li>Since \(P \subseteq NP\) by definition, this implies <b>\(P = NP\)</b>.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-24">
+            <h4 class="qa-question">25. What is reducibility?</h4>
+            <div class="answer">
+                <p><b>Reducibility</b> is a formal method of transforming one problem into another. If a problem \(A\) is reducible to a problem \(B\), it means that any algorithm that solves problem \(B\) can also be used as a subroutine to solve problem \(A\).</p>
+                <p>Formally, in complexity theory, we use <b>Polynomial-time Reduction</b> (denoted as \(A \le_p B\)). This states that there exists a polynomial-time computable function \(f\) such that for every input instance \(x\):</p>
+                <div class="formula-box">\(x \in A \iff f(x) \in B\)</div>
+                <p><b>Implications of Reducibility:</b></p>
+                <ul>
+                    <li>It establishes a relative difficulty: If \(A \le_p B\), then \(B\) is at least as hard as \(A\).</li>
+                    <li>If we have an efficient (polynomial time) algorithm to solve \(B\), we automatically obtain an efficient algorithm to solve \(A\).</li>
+                    <li>It is the primary tool used to prove NP-Completeness (by reducing a known NP-Complete problem like 3-SAT to a target problem).</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-25">
+            <h4 class="qa-question">26. Write the recurrence relation for the code and find the time complexity: int fun2(int n) { if (n<=1) return n; return fun2(n-1) + fun2(n-1); }</h4>
+            <div class="answer">
+                <p>The code is: <code>int fun2(int n) { if (n<=1) return n; return fun2(n-1) + fun2(n-1); }</code></p>
+                <p><b>Step 1: Formulate the Recurrence Relation</b></p>
+                <ul>
+                    <li>For the base case where \(n \le 1\), the code runs in constant time. So, \(T(1) = \Theta(1)\).</li>
+                    <li>For \(n > 1\), the function makes two independent recursive calls of size \(n - 1\), plus a constant time addition and return step.</li>
+                </ul>
+                <div class="formula-box">Recurrence Relation: \(T(n) = 2T(n-1) + c\) (where \(c\) is a constant)</div>
+                <p><b>Step 2: Solve the Recurrence Relation (Expansion Method)</b></p>
+                <ul>
+                    <li>\(T(n) = 2T(n-1) + c\)</li>
+                    <li>\(T(n) = 2 [2T(n-2) + c] + c = 2^2 T(n-2) + 2c + c\)</li>
+                    <li>\(T(n) = 2^2 [2T(n-3) + c] + 3c = 2^3 T(n-3) + 4c + 2c + c\)</li>
+                    <li>Generalizing this after \(k\) steps:
+                        \[T(n) = 2^k T(n-k) + c \sum_{i=0}^{k-1} 2^i\]
+                        \[T(n) = 2^k T(n-k) + c(2^k - 1)\]
+                    </li>
+                    <li>The base case is reached when \(n-k = 1 \implies k = n-1\):
+                        \[T(n) = 2^{n-1} T(1) + c(2^{n-1} - 1)\]
+                    </li>
+                </ul>
+                <div class="formula-box">Time Complexity: \(\Theta(2^n)\) (Exponential Time Complexity)</div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-26">
+            <h4 class="qa-question">27. Solve the following recurrent relation using substitution method T(n) = 2T(n/2) + n if n>1</h4>
+            <div class="answer">
+                <p>The recurrence relation is \(T(n) = 2T(n/2) + n\), with base case \(T(1) = c\).</p>
+                <p>We solve this using the <b>Substitution (Expansion) Method</b>:</p>
+                <ol>
+                    <li>Write the general form:
+                        \[T(n) = 2T(n/2) + n \quad \text{--- (Eq 1)}\]
+                    </li>
+                    <li>Substitute \(T(n/2)\) by applying Eq 1 to \(n/2\):
+                        \[T(n/2) = 2T(n/4) + n/2\]
+                        Substitute this back into Eq 1:
+                        \[T(n) = 2 \left[ 2T(n/4) + n/2 \right] + n = 2^2 T(n/2^2) + 2n \quad \text{--- (Eq 2)}\]
+                    </li>
+                    <li>Substitute \(T(n/4)\):
+                        \[T(n/4) = 2T(n/8) + n/4\]
+                        Substitute into Eq 2:
+                        \[T(n) = 2^2 \left[ 2T(n/8) + n/4 \right] + 2n = 2^3 T(n/2^3) + 3n \quad \text{--- (Eq 3)}\]
+                    </li>
+                    <li>Generalizing this to \(k\) steps:
+                        \[T(n) = 2^k T(n/2^k) + k \cdot n\]
+                    </li>
+                    <li>The base case is reached when the subproblem size is 1:
+                        \[n/2^k = 1 \implies n = 2^k \implies k = \log_2 n\]
+                    </li>
+                    <li>Substitute \(k = \log_2 n\) and \(2^k = n\) back into our generalized equation:
+                        \[T(n) = n T(1) + (\log_2 n) \cdot n\]
+                        \[T(n) = c \cdot n + n \log_2 n\]
+                    </li>
+                </ol>
+                <div class="formula-box">Time Complexity: \(\Theta(n \log n)\)</div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-27">
+            <h4 class="qa-question">28. Write the algorithm to solve Fractional Knapsack problem.</h4>
+            <div class="answer">
+                <p>The <b>Fractional Knapsack Algorithm</b> uses a greedy approach. Items can be broken down to fit the capacity, so we greedily select items with the highest value-to-weight ratio first.</p>
+                <pre><code>Fractional-Knapsack(Weights[], Profits[], Capacity, n):
+    1. Create an array of structures or indices: Item_Ratios[]
+    
+    2. For i = 0 to n-1:
+       Item_Ratios[i].index = i
+       Item_Ratios[i].ratio = Profits[i] / Weights[i]
+       
+    3. Sort Item_Ratios[] in descending order of ratio values.
+    
+    4. Initialize:
+       total_profit = 0.0
+       current_capacity = Capacity
+       
+    5. For i = 0 to n-1:
+       item_idx = Item_Ratios[i].index
+       
+       If Weights[item_idx] <= current_capacity:
+          // Take the entire item
+          current_capacity = current_capacity - Weights[item_idx]
+          total_profit = total_profit + Profits[item_idx]
+       Else:
+          // Take a fraction of the item to fill the remaining capacity
+          fraction = current_capacity / Weights[item_idx]
+          total_profit = total_profit + (Profits[item_idx] * fraction)
+          current_capacity = 0
+          Break // Knapsack is full
+          
+    6. Return total_profit</code></pre>
+                <p><b>Complexity:</b> Sorting takes \(O(n \log n)\), and the selection loop takes \(O(n)\). Total time complexity is <b>\(O(n \log n)\)</b>.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-28">
+            <h4 class="qa-question">29. Define N-queen and 15 puzzle problem.</h4>
+            <div class="answer">
+                <p><b>N-Queens Problem:</b> The problem of placing \(N\) non-attacking queens on an \(N \times N\) chessboard, such that no two queens share the same row, column, or diagonal. It is solved using <b>Backtracking</b> by placing queens row by row and backtracking whenever a placement conflict is detected.</p>
+                <p><b>15-Puzzle Problem:</b> A sliding puzzle consisting of a grid of numbered square tiles in random order with one tile missing. The grid size is \(4 \times 4\) (15 tiles, 1 empty space). The goal is to rearrange the tiles from an initial configuration to a target sorted configuration by sliding tiles into the empty space. It is solved using <b>Branch and Bound</b> (using heuristics like Manhattan distance in a Best-First search).</p>
+                <p><b>Comparison Table:</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>N-Queens Problem</th>
+                            <th>15-Puzzle Problem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>Algorithmic Paradigm</b></td>
+                            <td>Backtracking (Constraint satisfaction)</td>
+                            <td>Branch and Bound (State space optimization)</td>
+                        </tr>
+                        <tr>
+                            <td><b>Search Space Traversal</b></td>
+                            <td>Depth-First Search (DFS)</td>
+                            <td>Best-First Search (using heuristics like A*) or BFS</td>
+                        </tr>
+                        <tr>
+                            <td><b>Goal Requirement</b></td>
+                            <td>Find *any* or *all* valid static configurations.</td>
+                            <td>Find the *shortest path* (sequence of moves) to the goal.</td>
+                        </tr>
+                        <tr>
+                            <td><b>Pruning Condition</b></td>
+                            <td>Violating placement rules (same row, col, or diagonal).</td>
+                            <td>Lower-bound cost estimate \(f(x) = g(x) + h(x)\) exceeds current minimum path cost.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-29">
+            <h4 class="qa-question">30. Find an optimal solution to the 0/1 knapsack instance n=4, capacity m=15, profits (11,7,5,10), weight (3,5,3,4).</h4>
+            <div class="answer">
+                <p>Given weights \(W = \{3, 5, 3, 4\}\), profits \(P = \{11, 7, 5, 10\}\), and capacity \(M = 15\) kg.</p>
+                <p><b>Step 1: Check the total weight of all items</b></p>
+                <p>\[\text{Total Weight} = W_1 + W_2 + W_3 + W_4 = 3 + 5 + 3 + 4 = 15 \text{ kg}\]</p>
+                <p><b>Step 2: Compare with Capacity</b></p>
+                <p>The total weight of all available items is exactly equal to the knapsack capacity (\(15 \le 15\)). Therefore, we do not need to leave any item behind. We can select all four items to achieve the maximum possible profit.</p>
+                <p><b>Step 3: Calculate Total Profit</b></p>
+                <p>\[\text{Total Profit} = P_1 + P_2 + P_3 + P_4 = 11 + 7 + 5 + 10 = 33\]</p>
+                <div class="formula-box">
+                    Optimal Subset Selected: <b>{1, 2, 3, 4}</b> (All items taken)<br>
+                    Maximum Profit: <b>33</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-30">
+            <h4 class="qa-question">31. Shortest path on graph with negative weight cycle: i) Can valid shortest path be determined? ii) Which algorithm can detect?</h4>
+            <div class="answer">
+                <p>i) <b>No, a valid shortest path cannot be determined.</b> If a graph contains a negative weight cycle (a cycle whose sum of edge weights is less than 0) that is reachable from the source and can reach the destination, we can loop through this cycle indefinitely. Each loop decreases the total path cost. As a result, the distance between the source and destination approaches negative infinity (\(-\infty\)), making the concept of a "shortest" path mathematically undefined.</p>
+                <p>ii) The <b>Bellman-Ford Algorithm</b> can detect the presence of negative weight cycles. It does this by running an extra relaxation step. After relaxing all edges \(|V| - 1\) times, the algorithm attempts to relax all edges one more time (the \(|V|\)-th iteration). If any distance value updates (decreases) during this step, it indicates that a negative weight cycle exists in the graph.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-31">
+            <h4 class="qa-question">32. Proof that Clique Decision problem is NP-Complete.</h4>
+            <div class="answer">
+                <p>To prove that the <b>Clique Decision Problem</b> is NP-Complete, we must complete two steps:</p>
+                <p><b>Step 1: Prove Clique is in NP</b></p>
+                <ul>
+                    <li>A problem is in NP if a candidate solution (certificate) can be verified by a deterministic machine in polynomial time.</li>
+                    <li><b>Certificate:</b> A subset of vertices \(V' \subseteq V\) of size \(k\).</li>
+                    <li><b>Verification Algorithm:</b> For every pair of vertices \(u, v \in V'\), check if there is an edge \((u, v) \in E\).</li>
+                    <li><b>Complexity:</b> There are \(\binom{k}{2} \approx k^2\) pairs to check. Since \(k \le V\), this takes \(O(V^2)\) time, which is polynomial. Thus, Clique is in NP.</li>
+                </ul>
+                
+                <p><b>Step 2: Prove Clique is NP-Hard (Reduction from 3-SAT)</b></p>
+                <ul>
+                    <li>We reduce the 3-SAT problem (which is known to be NP-complete) to Clique in polynomial time.</li>
+                    <li>Given a 3-SAT formula with \(k\) clauses, e.g., \(\phi = C_1 \land C_2 \land \dots \land C_k\), where each clause \(C_i\) has three literals.</li>
+                    <li><b>Graph Construction:</b>
+                        <ul>
+                            <li>For each clause \(C_i\), create three vertices in graph \(G\), one for each literal in the clause.</li>
+                            <li>Draw an edge between two vertices \(u\) and \(v\) if and only if:
+                                <br>1. They belong to different clauses.
+                                <br>2. They are not negations of each other (i.e., we don't connect \(x\) and \(\neg x\)).
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>Equivalence Proof:</b>
+                        <ul>
+                            <li>If \(\phi\) is satisfiable, there is a truth assignment that makes at least one literal in each clause TRUE. Selecting one TRUE literal from each of the \(k\) clauses yields a set of \(k\) vertices in \(G\). Since they are in different clauses and do not contradict each other, they are all connected by edges, forming a \(k\)-clique.</li>
+                            <li>Conversely, if \(G\) has a \(k\)-clique, the \(k\) vertices must belong to different clauses and cannot contain negations. We can assign truth values to make these literals TRUE, satisfying the 3-SAT formula.</li>
+                        </ul>
+                    </li>
+                    <li>The graph construction takes polynomial time, completing the proof that Clique is NP-Complete.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-32">
+            <h4 class="qa-question">33. Using Dynamic Programming, solve the 0/1 Knapsack Problem: Capacity=5. Items(W,P) = (2,12), (1,10), (3,20), (2,15).</h4>
+            <div class="answer">
+                <p>Given capacity \(M = 5\) kg and 4 items with weights \(W = \{2, 1, 3, 2\}\) and profits \(P = \{12, 10, 20, 15\}\).</p>
+                <p>The DP relation is: \(K[i][w] = \max(K[i-1][w], P[i] + K[i-1][w - W[i]])\) if \(W[i] \le w\), else \(K[i-1][w]\).</p>
+                <p><b>Step 1: Construct the DP Table</b></p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item (W, P)</th>
+                            <th>w = 0</th>
+                            <th>w = 1</th>
+                            <th>w = 2</th>
+                            <th>w = 3</th>
+                            <th>w = 4</th>
+                            <th>w = 5</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><b>0 (None)</b></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
+                        <tr>
+                            <td><b>1 (2, 12)</b></td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>12</td>
+                            <td>12</td>
+                            <td>12</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td><b>2 (1, 10)</b></td>
+                            <td>0</td>
+                            <td>10</td>
+                            <td>12</td>
+                            <td>22</td>
+                            <td>22</td>
+                            <td>22</td>
+                        </tr>
+                        <tr>
+                            <td><b>3 (3, 20)</b></td>
+                            <td>0</td>
+                            <td>10</td>
+                            <td>12</td>
+                            <td>22</td>
+                            <td>30</td>
+                            <td>32</td>
+                        </tr>
+                        <tr>
+                            <td><b>4 (2, 15)</b></td>
+                            <td>0</td>
+                            <td>10</td>
+                            <td>15</td>
+                            <td>25</td>
+                            <td>30</td>
+                            <td><b>37</b></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <p><b>Step 2: Trace Back to Find Selected Items</b></p>
+                <ul>
+                    <li>\(K[4][5] = 37 \ne K[3][5] (32) \implies\) <b>Select Item 4</b> (Weight 2, Profit 15). Remaining Capacity = \(5 - 2 = 3\) kg.</li>
+                    <li>\(K[3][3] = 22 = K[2][3] (22) \implies\) Do NOT select Item 3. Remaining Capacity = 3 kg.</li>
+                    <li>\(K[2][3] = 22 \ne K[1][3] (12) \implies\) <b>Select Item 2</b> (Weight 1, Profit 10). Remaining Capacity = \(3 - 1 = 2\) kg.</li>
+                    <li>\(K[1][2] = 12 \ne K[0][2] (0) \implies\) <b>Select Item 1</b> (Weight 2, Profit 12). Remaining Capacity = \(2 - 2 = 0\) kg.</li>
+                </ul>
+                <div class="formula-box">
+                    Maximum Profit: <b>37</b><br>
+                    Selected Items: <b>Item 1, Item 2, and Item 4</b> (Total weight = 5 kg)
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-33">
+            <h4 class="qa-question">34. There are four matrices A1 to A4. A1(2x3), A2(3x4), A3(4x5), A4(5x2). Find out the order which gives the minimum no of multiplication using dynamic algorithm.</h4>
+            <div class="answer">
+                <p>Given matrices \(A_1(2 \times 3), A_2(3 \times 4), A_3(4 \times 5), A_4(5 \times 2)\). The dimensions array is \(P = [2, 3, 4, 5, 2]\) with \(n = 4\) matrices. Recurrence: \(m[i, j] = \min \{m[i, k] + m[k+1, j] + P[i-1] \cdot P[k] \cdot P[j]\}\).</p>
+                <p><b>Step-by-Step DP Calculations:</b></p>
+                <ol>
+                    <li><b>Chain Length 1 (Base Case):</b> \(m[i, i] = 0\) for all \(i\).</li>
+                    <li><b>Chain Length 2:</b>
+                        <ul>
+                            <li>\(m[1, 2] = 2 \times 3 \times 4 = 24\) (Split at \(k = 1\))</li>
+                            <li>\(m[2, 3] = 3 \times 4 \times 5 = 60\) (Split at \(k = 2\))</li>
+                            <li>\(m[3, 4] = 4 \times 5 \times 2 = 40\) (Split at \(k = 3\))</li>
+                        </ul>
+                    </li>
+                    <li><b>Chain Length 3:</b>
+                        <ul>
+                            <li><b>\(m[1, 3]\) (Multiplying \(A_1 A_2 A_3\)):</b>
+                                <br>- Split at \(k = 1\): \(m[1, 1] + m[2, 3] + 2 \times 3 \times 5 = 0 + 60 + 30 = 90\)
+                                <br>- Split at \(k = 2\): \(m[1, 2] + m[3, 3] + 2 \times 4 \times 5 = 24 + 0 + 40 = 64\)
+                                <br>Minimum is <b>64</b> at \(k = 2\). Split record: \(s[1, 3] = 2\).
+                            </li>
+                            <li><b>\(m[2, 4]\) (Multiplying \(A_2 A_3 A_4\)):</b>
+                                <br>- Split at \(k = 2\): \(m[2, 2] + m[3, 4] + 3 \times 4 \times 2 = 0 + 40 + 24 = 64\)
+                                <br>- Split at \(k = 3\): \(m[2, 3] + m[4, 4] + 3 \times 5 \times 2 = 60 + 0 + 30 = 90\)
+                                <br>Minimum is <b>64</b> at \(k = 2\). Split record: \(s[2, 4] = 2\).
+                            </li>
+                        </ul>
+                    </li>
+                    <li><b>Chain Length 4 (\(m[1, 4]\) - Multiplying \(A_1 A_2 A_3 A_4\)):</b>
+                        <ul>
+                            <li>Split at \(k = 1\): \(m[1, 1] + m[2, 4] + P[0] \cdot P[1] \cdot P[4] = 0 + 64 + 2 \times 3 \times 2 = 76\)</li>
+                            <li>Split at \(k = 2\): \(m[1, 2] + m[3, 4] + P[0] \cdot P[2] \cdot P[4] = 24 + 40 + 2 \times 4 \times 2 = 80\)</li>
+                            <li>Split at \(k = 3\): \(m[1, 3] + m[4, 4] + P[0] \cdot P[3] \cdot P[4] = 64 + 0 + 2 \times 5 \times 2 = 84\)</li>
+                        </ul>
+                        Minimum is <b>76</b> at split \(k = 1\). Split record: \(s[1, 4] = 1\).
+                    </li>
+                </ol>
+                <div class="formula-box">
+                    Minimum Scalar Multiplications: <b>76</b><br>
+                    Optimal Parenthesization: <b>\(A_1 \times ((A_2 \times A_3) \times A_4)\)</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-34">
+            <h4 class="qa-question">35. Write the algorithm for the matrix chain multiplication.</h4>
+            <div class="answer">
+                <p>The <b>Matrix Chain Order</b> algorithm computes the minimum multiplication costs and stores the split points in an auxiliary table \(s\) to construct the optimal parenthesization.</p>
+                <pre><code>Matrix-Chain-Order(p):
+    1. n = length(p) - 1
+    2. Create tables m[1..n, 1..n] and s[1..n-1, 2..n]
+    
+    3. For i = 1 to n:
+       m[i, i] = 0 // Base case: cost is 0 for single matrix
+       
+    4. For L = 2 to n: // L is the chain length
+       For i = 1 to n - L + 1:
+          j = i + L - 1
+          m[i, j] = Infinity
+          For k = i to j - 1:
+             q = m[i, k] + m[k+1, j] + p[i-1]*p[k]*p[j]
+             If q < m[i, j]:
+                m[i, j] = q
+                s[i, j] = k // Store split index
+                
+    5. Return m and s</code></pre>
+                <p><b>Complexity Analysis:</b> The three nested loops run in \(O(n^3)\) time complexity. The space complexity is \(O(n^2)\) to store the \(m\) and \(s\) matrices.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-35">
+            <h4 class="qa-question">36. Describe Circuit Satisfiability problem and prove that Circuit SAT is in NP.</h4>
+            <div class="answer">
+                <p><b>Circuit Satisfiability (Circuit-SAT) Problem:</b> Given a combinatorial boolean circuit containing input wires, logic gates (AND, OR, NOT), and a single output wire, the problem is to determine if there exists an assignment of truth values to the inputs that makes the final output wire TRUE (1).</p>
+                
+                <p><b>Proof that Circuit-SAT is in NP:</b></p>
+                <ol>
+                    <li>A problem is in NP if a candidate solution (certificate) can be verified by a deterministic machine in polynomial time.</li>
+                    <li><b>Certificate:</b> The certificate is a specific assignment of truth values (0 or 1) to each of the \(n\) input wires of the circuit.</li>
+                    <li><b>Verification Algorithm:</b>
+                        <ul>
+                            <li>Given the input values, evaluate the output of each logic gate layer-by-layer.</li>
+                            <li>The gates are evaluated in topological order from inputs to outputs.</li>
+                            <li>At each step, we compute the boolean output of a gate based on its inputs (which is a constant time operation).</li>
+                        </ul>
+                    </li>
+                    <li><b>Complexity:</b> If the circuit contains \(G\) gates and \(W\) wires, the evaluation takes \(O(G + W)\) time. Since the size of the circuit description is \(O(G + W)\), the verification runs in linear (polynomial) time with respect to the input size.</li>
+                    <li>Therefore, Circuit-SAT is in <b>NP</b>.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-36">
+            <h4 class="qa-question">37. Draw the state space tree for the 4-Queens problem using the backtracking approach.</h4>
+            <div class="answer">
+                <p>The state-space tree shows the step-by-step placement of queens in rows 1, 2, 3, and 4. Backtracking prunes paths immediately when a conflict occurs. Below is the detailed tree, where \(Q(r, c)\) represents a queen placed at row \(r\), column \(c\), and <b>(X)</b> denotes pruning due to conflicts.</p>
+                <pre><code>
+                               Root (Start)
+          /                     |                     \                   \
+      Q(1,1)                  Q(1,2)                 Q(1,3)              Q(1,4)
+      /    \                 /      \                /    \              /     \
+   Q(2,3)  Q(2,4)         Q(2,4)   Q(2,1)-(X)     Q(2,1)  Q(2,2)-(X)  Q(2,1)  Q(2,2)-(X)
+   /   \     /           /    \                   /    \              /    \
+Q(3,X) Q(3,2)          Q(3,1) Q(3,3)-(X)       Q(3,4) Q(3,2)-(X)   Q(3,3) Q(3,X)
+(X)      /              /                        /                   /
+      Q(4,X)         Q(4,3)                   Q(4,2)              Q(4,X)
+       (X)     [SOLUTION 1: 2-4-1-3]    [SOLUTION 2: 3-1-4-2]      (X)
+                Col placements:          Col placements:
+                Row 1 -> Col 2           Row 1 -> Col 3
+                Row 2 -> Col 4           Row 2 -> Col 1
+                Row 3 -> Col 1           Row 3 -> Col 4
+                Row 4 -> Col 3           Row 4 -> Col 2
+                </code></pre>
+                <p>This state-space tree visualizes how backtracking searches depth-first and prunes subtrees to arrive at the two valid solutions for the 4-Queens problem.</p>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-37">
+            <h4 class="qa-question">38. A set of 6 activities with their start times and finish times are given below. Find the maximum number of activities that can be executed. Act1(1,3), Act2(2,4), Act3(0,5), Act4(6,7), Act5(8,9), Act6(6,10)</h4>
+            <div class="answer">
+                <p>We solve this using the Greedy Activity Selection method.</p>
+                <p><b>Step 1: Sort activities by finish times (ascending order)</b></p>
+                <ol>
+                    <li>Act1: Start = 1, Finish = 3</li>
+                    <li>Act2: Start = 2, Finish = 4</li>
+                    <li>Act3: Start = 0, Finish = 5</li>
+                    <li>Act4: Start = 6, Finish = 7</li>
+                    <li>Act5: Start = 8, Finish = 9</li>
+                    <li>Act6: Start = 6, Finish = 10</li>
+                </ol>
+                <p><i>The input activities are already sorted by finish times.</i></p>
+                
+                <p><b>Step 2: Greedily pick compatible activities</b></p>
+                <ul>
+                    <li><b>Pick Act1 (1, 3):</b> First activity, always selected. Current finish time boundary = <b>3</b>.</li>
+                    <li><b>Evaluate Act2 (2, 4):</b> Start time (2) is less than boundary (3). <i>Reject (overlaps)</i>.</li>
+                    <li><b>Evaluate Act3 (0, 5):</b> Start time (0) is less than boundary (3). <i>Reject (overlaps)</i>.</li>
+                    <li><b>Evaluate Act4 (6, 7):</b> Start time (6) \(\ge\) boundary (3). <b>Select Act4</b>. Update finish boundary = <b>7</b>.</li>
+                    <li><b>Evaluate Act5 (8, 9):</b> Start time (8) \(\ge\) boundary (7). <b>Select Act5</b>. Update finish boundary = <b>9</b>.</li>
+                    <li><b>Evaluate Act6 (6, 10):</b> Start time (6) is less than boundary (9). <i>Reject (overlaps)</i>.</li>
+                </ul>
+                <div class="formula-box">
+                    Maximum Activities Executed: <b>3</b><br>
+                    Selected Activities List: <b>{Act1, Act4, Act5}</b>
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card" id="sub-38">
+            <h4 class="qa-question">39. Find the shortest path between every pair of vertices of the following graph (Nodes 0,1,2,3. Edges: 0->1(-5), 1->2(4), 2->3(1), 3->0(3), 0->2(2), 3->1(2))</h4>
+            <div class="answer">
+                <p>We solve the All-Pairs Shortest Path problem using the <b>Floyd-Warshall Algorithm</b>.</p>
+                <p><b>Step 1: Construct Initial Distance Matrix \(D^{(0)}\)</b></p>
+                <p>\[D^{(0)} = \begin{pmatrix} 0 & -5 & 2 & \infty \\ \infty & 0 & 4 & \infty \\ \infty & \infty & 0 & 1 \\ 3 & 2 & \infty & 0 \end{pmatrix}\]</p>
+                
+                <p><b>Step 2: Compute \(D^{(1)}\) (Intermediate vertex \(k = 0\))</b></p>
+                <p>We check if we can shorten paths using node 0: \(D^{(1)}[i][j] = \min(D^{(0)}[i][j], D^{(0)}[i][0] + D^{(0)}[0][j])\).</p>
+                <ul>
+                    <li>\(D^{(1)}[3][1] = \min(2, D^{(0)}[3][0] + D^{(0)}[0][1]) = \min(2, 3 + (-5)) = -2\)</li>
+                    <li>\(D^{(1)}[3][2] = \min(\infty, D^{(0)}[3][0] + D^{(0)}[0][2]) = \min(\infty, 3 + 2) = 5\)</li>
+                </ul>
+                <p>\[D^{(1)} = \begin{pmatrix} 0 & -5 & 2 & \infty \\ \infty & 0 & 4 & \infty \\ \infty & \infty & 0 & 1 \\ 3 & -2 & 5 & 0 \end{pmatrix}\]</p>
+                
+                <p><b>Step 3: Compute \(D^{(2)}\) (Intermediate vertex \(k = 1\))</b></p>
+                <p>Check paths via node 1: \(D^{(2)}[i][j] = \min(D^{(1)}[i][j], D^{(1)}[i][1] + D^{(1)}[1][j])\).</p>
+                <ul>
+                    <li>\(D^{(2)}[0][2] = \min(2, D^{(1)}[0][1] + D^{(1)}[1][2]) = \min(2, -5 + 4) = -1\)</li>
+                    <li>\(D^{(2)}[3][2] = \min(5, D^{(1)}[3][1] + D^{(1)}[1][2]) = \min(5, -2 + 4) = 2\)</li>
+                </ul>
+                <p>\[D^{(2)} = \begin{pmatrix} 0 & -5 & -1 & \infty \\ \infty & 0 & 4 & \infty \\ \infty & \infty & 0 & 1 \\ 3 & -2 & 2 & 0 \end{pmatrix}\]</p>
+                
+                <p><b>Step 4: Compute \(D^{(3)}\) (Intermediate vertex \(k = 2\))</b></p>
+                <p>Check paths via node 2: \(D^{(3)}[i][j] = \min(D^{(2)}[i][j], D^{(2)}[i][2] + D^{(2)}[2][j])\).</p>
+                <ul>
+                    <li>\(D^{(3)}[0][3] = \min(\infty, D^{(2)}[0][2] + D^{(2)}[2][3]) = \min(\infty, -1 + 1) = 0\)</li>
+                    <li>\(D^{(3)}[1][3] = \min(\infty, D^{(2)}[1][2] + D^{(2)}[2][3]) = \min(\infty, 4 + 1) = 5\)</li>
+                </ul>
+                <p>\[D^{(3)} = \begin{pmatrix} 0 & -5 & -1 & 0 \\ \infty & 0 & 4 & 5 \\ \infty & \infty & 0 & 1 \\ 3 & -2 & 2 & 0 \end{pmatrix}\]</p>
+                
+                <p><b>Step 5: Compute \(D^{(4)}\) (Intermediate vertex \(k = 3\))</b></p>
+                <p>Check paths via node 3: \(D^{(4)}[i][j] = \min(D^{(3)}[i][j], D^{(3)}[i][3] + D^{(3)}[3][j])\).</p>
+                <ul>
+                    <li>\(D^{(4)}[1][0] = \min(\infty, D^{(3)}[1][3] + D^{(3)}[3][0]) = \min(\infty, 5 + 3) = 8\)</li>
+                    <li>\(D^{(4)}[2][0] = \min(\infty, D^{(3)}[2][3] + D^{(3)}[3][0]) = \min(\infty, 1 + 3) = 4\)</li>
+                    <li>\(D^{(4)}[2][1] = \min(\infty, D^{(3)}[2][3] + D^{(3)}[3][1]) = \min(\infty, 1 + (-2)) = -1\)</li>
+                </ul>
+                <p>\[D^{(4)} = \begin{pmatrix} 0 & -5 & -1 & 0 \\ 8 & 0 & 4 & 5 \\ 4 & -1 & 0 & 1 \\ 3 & -2 & 2 & 0 \end{pmatrix}\]</p>
+                <p>All values on the main diagonal are 0, verifying that there are no negative weight cycles. This is the final shortest paths matrix.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

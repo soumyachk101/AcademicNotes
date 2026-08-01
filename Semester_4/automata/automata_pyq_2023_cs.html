@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLAT 2023 (PCC-CS) PYQ Solutions</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Link to Shared Notes Stylesheet -->
+    <link rel="stylesheet" href="notes.css">
+
+    <!-- Page Specific Variable Colors -->
+    <style>
+        :root {
+            --primary-color: #3b82f6;
+            --primary-light: rgba(59, 130, 246, 0.05);
+            --border-color: rgba(59, 130, 246, 0.15);
+        }
+        .transition-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+        }
+        .transition-table th, .transition-table td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .transition-table th {
+            background-color: var(--primary-light);
+            font-weight: 600;
+        }
+        .code-block {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 1rem;
+            font-family: monospace;
+            overflow-x: auto;
+            margin-top: 0.5rem;
+            margin-bottom: 1rem;
+        }
+    
+        .diagram-container {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+            border: 1px solid #cbd5e1 !important;
+            border-radius: 14px !important;
+            padding: 1.8rem !important;
+            margin: 2.2rem 0 !important;
+            text-align: center !important;
+            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+        }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+        }
+        .diagram-caption {
+            font-size: 0.88rem !important;
+            color: #475569 !important;
+            margin-top: 1.1rem !important;
+            font-style: italic !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.02em !important;
+        }
+
+    </style>
+</head>
+<body>
+
+<nav class="top-nav">
+    <a href="automata_index.html">← FLAT Menu</a>
+    <span class="nav-title">2023 FLAT Solutions</span>
+    <div style="display:flex;gap:0.5rem;">
+        <span style="opacity: 0.3; cursor: not-allowed; padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">← Prev</span>
+        <a href="#">Next →</a>
+    </div>
+</nav>
+
+<div class="container">
+    <header>
+        <h1>FLAT Previous Year Questions</h1>
+        <p class="subtitle">Complete Detailed Solutions · 2023 (PCC-CS 403)</p>
+        <div class="book-divider">
+            <span class="line"></span>
+            <span class="ornament">❖</span>
+            <span class="line"></span>
+        </div>
+    </header>
+    
+    <div class="section">
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem;">Group A — Very Short Answer Type Question</h2>
+        
+        <div class="qa-card">
+            <h4 class="qa-question">1. Answer any ten of the following: [1 × 10 = 10]</h4>
+            <div class="answer">
+                <p><b>(i) NFA, in its name has 'non-deterministic' because of ________</b></p>
+                <p><span class="highlight">Answer: Multiple possible transitions for a single input symbol from a given state (and/or epsilon transitions).</span><br>
+                <i>Explanation:</i> In an NFA, for a specific state and input symbol, the automaton can transition to zero, one, or multiple next states, making its path non-deterministic.</p>
+
+                <p><b>(ii) The non-Kleene Star operation accepts the following string of finite length over set A = {0,1} | where string s contains even number of 0 and 1</b></p>
+                <p><span class="highlight">Answer: Positive Closure (+)</span><br>
+                <i>Explanation:</i> The Kleene Star (*) includes the empty string (&epsilon;). The Positive Closure (+) operation generates all possible strings of finite length strictly excluding the empty string (unless explicitly added). It acts as the "non-empty" counterpart to the Kleene Star.</p>
+
+                <p><b>(iii) Language of finite automata is of which type?</b></p>
+                <p><span class="highlight">Answer: Type-3 (Regular Language)</span><br>
+                <i>Explanation:</i> According to the Chomsky Hierarchy, finite automata recognize Regular Languages, which are designated as Type-3 languages.</p>
+
+                <p><b>(iv) The concept of FSA is much used in ___________ part of the compiler</b></p>
+                <p><span class="highlight">Answer: Lexical Analysis</span><br>
+                <i>Explanation:</i> Finite State Automata (FSA) and Regular Expressions are used by lexical analyzers (like Lex) to scan source code and group characters into meaningful tokens.</p>
+
+                <p><b>(v) FSM can recognize ___________</b></p>
+                <p><span class="highlight">Answer: Regular Languages</span></p>
+
+                <p><b>(vi) Consider the following language, L = {a<sup>n</sup>b<sup>n</sup> | n &ge; 1}. L is ________</b></p>
+                <p><span class="highlight">Answer: Context-Free Language (CFL) / Non-Regular Language</span><br>
+                <i>Explanation:</i> Finite automata cannot count arbitrarily large values, so L cannot be regular. It requires a stack to match the count of 'a's with 'b's, making it a Context-Free Language recognized by a Pushdown Automaton.</p>
+
+                <p><b>(vii) Set of regular languages over a given alphabet set is closed under ________</b></p>
+                <p><span class="highlight">Answer: Union, Intersection, Complementation, Concatenation, and Kleene Star.</span></p>
+
+                <p><b>(viii) Consider the grammar: S &rarr; ABcc | Abc, BA &rarr; AB, Bb &rarr; bb, Ab &rarr; ab, Aa &rarr; aa. Write the sentences can be derived by this grammar?</b></p>
+                <p><span class="highlight">Answer: "abc"</span><br>
+                <i>Explanation:</i> Using the production S &rarr; Abc, we can apply Ab &rarr; ab to get "abc". If we attempt S &rarr; ABcc, we get stuck because the grammar has no rules to reduce 'Bc' or 'B' when followed by 'c' without a leading terminal. This grammar structurally resembles context-sensitive rules but is missing necessary productions for longer terminal strings.</p>
+
+                <p><b>(ix) Consider the following grammar: S &rarr; Ax | By, A &rarr; By | Cw, B &rarr; x | Bw, C &rarr; y. Write the regular expressions describing the same set of strings as the grammar.</b></p>
+                <p><span class="highlight">Answer: xw*yx + ywx + xw*y</span><br>
+                <i>Explanation:</i> Using Arden's Theorem (R = Q + RP &rArr; R = QP*):<br>
+                C = y<br>
+                B = x + Bw &rArr; B = xw*<br>
+                A = By + Cw = By + yw<br>
+                S = Ax + By = (By + yw)x + By = Byx + ywx + By<br>
+                Substitute B = xw*:<br>
+                S = (xw*)yx + ywx + (xw*)y = xw*yx + ywx + xw*y
+                </p>
+
+                <p><b>(x) Let S = {a, b, c, d, e}. The number of strings is _________ in S* of length 4 such that no symbol is used more than once in a string</b></p>
+                <p><span class="highlight">Answer: 120</span><br>
+                <i>Explanation:</i> We are forming permutations of 4 distinct symbols chosen from a set of 5. This is P(5,4) = 5 &times; 4 &times; 3 &times; 2 = 120.</p>
+
+                <p><b>(xi) Given a grammar G, a production of G with a dot at some position of the right side is called _______</b></p>
+                <p><span class="highlight">Answer: LR(0) Item (or simply Item)</span><br>
+                <i>Explanation:</i> An item represents how much of a production has been seen so far during bottom-up parsing.</p>
+
+                <p><b>(xii) Number of states of the FSM required to simulate behaviour of a computer with a memory capable of storing "m" words, each of length 'n' is _______</b></p>
+                <p><span class="highlight">Answer: 2<sup>mn</sup></span><br>
+                <i>Explanation:</i> The memory has a total capacity of m &times; n bits. Since each bit can exist in 2 states (0 or 1), the total number of possible combinations (states) is 2<sup>mn</sup>.</p>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- GROUP B -->
+        <!-- ============================================================ -->
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1.5rem;">Group B — Short Answer Type Question</h2>
+
+        <div class="qa-card">
+            <h4 class="qa-question">2. Design a DFA where every string either starts with 01 or ends with 01 over the alphabet set {0,1}. [5]</h4>
+            <div class="answer">
+                <p>To design this DFA efficiently, we recognize two parallel conditions. We can build a unified minimal DFA with 6 states.<br>
+                <b>States Definition:</b>
+                <ul>
+                    <li><b>q0 (Start):</b> Initial state.</li>
+                    <li><b>q1:</b> Saw '0' at the very beginning.</li>
+                    <li><b>q2 (Final):</b> Saw '01' at the very beginning. It traps everything and accepts since the prefix condition is met.</li>
+                    <li><b>q_wait:</b> Failed the "starts with 01" condition, currently tracking for "ends with 01".</li>
+                    <li><b>q_wait0:</b> Tracking for "ends with 01" and just saw a '0'.</li>
+                    <li><b>q_wait01 (Final):</b> Failed prefix condition, but just completed the suffix '01'.</li>
+                </ul>
+                </p>
+                <p><b>Transition Table:</b></p>
+                <table class="transition-table">
+                    <tr>
+                        <th>State</th>
+                        <th>Input: 0</th>
+                        <th>Input: 1</th>
+                    </tr>
+                    <tr>
+                        <td><b>&rarr; q0</b> (Start)</td>
+                        <td>q1</td>
+                        <td>q_wait</td>
+                    </tr>
+                    <tr>
+                        <td><b>q1</b></td>
+                        <td>q_wait0</td>
+                        <td>*q2 (Accepts immediately)</td>
+                    </tr>
+                    <tr>
+                        <td><b>*q2</b> (Accept - Started with 01)</td>
+                        <td>q2</td>
+                        <td>q2</td>
+                    </tr>
+                    <tr>
+                        <td><b>q_wait</b></td>
+                        <td>q_wait0</td>
+                        <td>q_wait</td>
+                    </tr>
+                    <tr>
+                        <td><b>q_wait0</b></td>
+                        <td>q_wait0</td>
+                        <td>*q_wait01 (Accepts suffix)</td>
+                    </tr>
+                    <tr>
+                        <td><b>*q_wait01</b> (Accept - Ended with 01)</td>
+                        <td>q_wait0</td>
+                        <td>q_wait</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">3. Write the regular expression for the language L={a<sup>n</sup> | n > 0}. [5]</h4>
+            <div class="answer">
+                <p><b>Regular Expression:</b></p>
+                <p><span class="highlight">a<sup>+</sup> &nbsp; <i>or</i> &nbsp; aa<sup>*</sup></span></p>
+                <p><i>Explanation:</i> The language requires at least one occurrence of the symbol 'a' since n > 0. The Kleene Plus operator (+) specifies 1 or more occurrences. Alternatively, it can be written as a single 'a' concatenated with a Kleene Star (0 or more occurrences of 'a').</p>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">4. Construct an NFA for the regular expression (0 + 1)* 00 (0 + 1)* [5]</h4>
+            <div class="answer">
+                <p>The language consists of all strings over {0,1} that contain the substring "00".<br>
+                <b>States:</b>
+                <ul>
+                    <li><b>q0 (Start):</b> Loops on {0,1} non-deterministically, waits for the first '0' of the substring.</li>
+                    <li><b>q1:</b> Has seen the first '0', expects the second '0'.</li>
+                    <li><b>q2 (Final):</b> Has seen the "00" substring, accepts and loops on {0,1} forever.</li>
+                </ul>
+                </p>
+                <p><b>Transition Table for NFA:</b></p>
+                <table class="transition-table">
+                    <tr>
+                        <th>State</th>
+                        <th>Input: 0</th>
+                        <th>Input: 1</th>
+                    </tr>
+                    <tr>
+                        <td><b>&rarr; q0</b></td>
+                        <td>{q0, q1}</td>
+                        <td>{q0}</td>
+                    </tr>
+                    <tr>
+                        <td><b>q1</b></td>
+                        <td>{q2}</td>
+                        <td>&phi; (Empty)</td>
+                    </tr>
+                    <tr>
+                        <td><b>*q2</b></td>
+                        <td>{q2}</td>
+                        <td>{q2}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">5. Design a PDA for the language L = {WcW<sup>R</sup> | w &isin; (a,b)*}. [5]</h4>
+            <div class="answer">
+                <p>This language represents palindromes with a designated center marker 'c'. W<sup>R</sup> is the reverse of W.<br>
+                The PDA works by pushing the first half (W) onto the stack. Upon seeing the center marker 'c', it switches states and begins popping characters from the stack, ensuring they match the input characters of the second half (W<sup>R</sup>).</p>
+                
+                <p><b>PDA Formal Definition:</b> M = (Q, &Sigma;, &Gamma;, &delta;, q0, Z0, F)<br>
+                Q = {q0, q1, qf}, &Sigma; = {a, b, c}, &Gamma; = {a, b, Z0}, F = {qf}</p>
+
+                <p><b>Transition Functions (&delta;):</b></p>
+                <div class="code-block">
+// Phase 1: Push W onto the stack
+&delta;(q0, a, Z0) = {(q0, aZ0)}
+&delta;(q0, b, Z0) = {(q0, bZ0)}
+&delta;(q0, a, a) = {(q0, aa)}
+&delta;(q0, b, a) = {(q0, ba)}
+&delta;(q0, a, b) = {(q0, ab)}
+&delta;(q0, b, b) = {(q0, bb)}
+
+// Phase 2: Encounter center marker 'c', switch to state q1 without modifying stack
+&delta;(q0, c, a) = {(q1, a)}
+&delta;(q0, c, b) = {(q1, b)}
+&delta;(q0, c, Z0) = {(q1, Z0)}
+
+// Phase 3: Match and pop W^R against the stack
+&delta;(q1, a, a) = {(q1, &epsilon;)}
+&delta;(q1, b, b) = {(q1, &epsilon;)}
+
+// Phase 4: Accept by empty stack / final state when stack hits bottom marker
+&delta;(q1, &epsilon;, Z0) = {(qf, Z0)}
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">6. Convert the following NFA to DFA. [5]</h4>
+            <div class="answer">
+                <p><b>Given NFA:</b><br>
+                &rarr; q0 &rarr;(&epsilon;)&rarr; q1, &nbsp; q0 &rarr;(a)&rarr; q2<br>
+                q1 &rarr;(a,b)&rarr; q2<br>
+                q2 &rarr;(b)&rarr; q2<br>
+                Final State: *q1</p>
+
+                <p><b>Step 1: Compute &epsilon;-closures for all states:</b><br>
+                &epsilon;-closure(q0) = {q0, q1} (since q0 transitions to q1 on &epsilon;)<br>
+                &epsilon;-closure(q1) = {q1}<br>
+                &epsilon;-closure(q2) = {q2}</p>
+
+                <p><b>Step 2: Construct DFA States and Transitions:</b><br>
+                Start State <b>A</b> = &epsilon;-closure(q0) = {q0, q1}. Since q1 is a final state in the NFA, <b>A</b> is a Final State.<br>
+                <br>
+                <b>Transitions from A {q0, q1}:</b><br>
+                - On 'a': &epsilon;-closure( &delta;(q0,a) &cup; &delta;(q1,a) ) = &epsilon;-closure({q2} &cup; {q2}) = {q2}. Let this be state <b>B</b>.<br>
+                - On 'b': &epsilon;-closure( &delta;(q0,b) &cup; &delta;(q1,b) ) = &epsilon;-closure(&phi; &cup; {q2}) = {q2} = state <b>B</b>.<br>
+                <br>
+                <b>Transitions from B {q2}:</b><br>
+                - On 'a': &epsilon;-closure( &delta;(q2,a) ) = &epsilon;-closure(&phi;) = &phi;. Let this be dead state <b>C</b>.<br>
+                - On 'b': &epsilon;-closure( &delta;(q2,b) ) = &epsilon;-closure({q2}) = {q2} = state <b>B</b>.<br>
+                <br>
+                <b>Transitions from C (&phi;):</b><br>
+                - On 'a', 'b': Goes to C.</p>
+
+                <p><b>Resulting DFA Transition Table:</b></p>
+                <table class="transition-table">
+                    <tr>
+                        <th>DFA State</th>
+                        <th>NFA Subset</th>
+                        <th>Input: a</th>
+                        <th>Input: b</th>
+                    </tr>
+                    <tr>
+                        <td><b>&rarr;*A</b> (Start & Final)</td>
+                        <td>{q0, q1}</td>
+                        <td>B</td>
+                        <td>B</td>
+                    </tr>
+                    <tr>
+                        <td><b>B</b></td>
+                        <td>{q2}</td>
+                        <td>C</td>
+                        <td>B</td>
+                    </tr>
+                    <tr>
+                        <td><b>C</b> (Dead)</td>
+                        <td>&phi;</td>
+                        <td>C</td>
+                        <td>C</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- GROUP C -->
+        <!-- ============================================================ -->
+        <h2 style="font-family: 'Cormorant Garamond', serif; font-size: 2rem; border-bottom: 2px solid var(--border-color); padding-bottom: 0.5rem; margin-top: 2rem; margin-bottom: 1.5rem;">Group C — Long Answer Type Question</h2>
+
+        <div class="qa-card">
+            <h4 class="qa-question">7. (a) Design a DFA where each and every string end with '001' over the alphabet set {0,1}. (5)</h4>
+            <div class="answer">
+                <p><b>States:</b>
+                <ul>
+                    <li><b>q0 (Start):</b> Initial state, hasn't seen any relevant prefix of "001".</li>
+                    <li><b>q1:</b> Has seen "0".</li>
+                    <li><b>q2:</b> Has seen "00".</li>
+                    <li><b>q3 (Final):</b> Has seen the complete suffix "001".</li>
+                </ul>
+                </p>
+                <table class="transition-table">
+                    <tr>
+                        <th>State</th>
+                        <th>Input: 0</th>
+                        <th>Input: 1</th>
+                    </tr>
+                    <tr>
+                        <td><b>&rarr; q0</b></td>
+                        <td>q1</td>
+                        <td>q0</td>
+                    </tr>
+                    <tr>
+                        <td><b>q1</b> (seen 0)</td>
+                        <td>q2</td>
+                        <td>q0</td>
+                    </tr>
+                    <tr>
+                        <td><b>q2</b> (seen 00)</td>
+                        <td>q2 (maintains 00)</td>
+                        <td>*q3</td>
+                    </tr>
+                    <tr>
+                        <td><b>*q3</b> (seen 001)</td>
+                        <td>q1</td>
+                        <td>q0</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">7. (b) Obtain the regular expression for the given DFA. (5)</h4>
+            <div class="answer">
+                <p><b>Given DFA Transitions:</b><br>
+                Start state is q1. Final state is q2.<br>
+                q1 &rarr;(1)&rarr; q1, &nbsp; q1 &rarr;(0)&rarr; q2<br>
+                q2 &rarr;(0)&rarr; q2, &nbsp; q2 &rarr;(1)&rarr; q3<br>
+                q3 &rarr;(0)&rarr; q3, &nbsp; q3 &rarr;(1)&rarr; q2</p>
+
+                <p><b>Using Arden's Theorem to solve state equations:</b><br>
+                R1 = &epsilon; + R1&middot;1 (q1 has incoming loop 1, and &epsilon; since it is start)<br>
+                R2 = R1&middot;0 + R2&middot;0 + R3&middot;1<br>
+                R3 = R2&middot;1 + R3&middot;0</p>
+
+                <p><b>Solving for R1:</b><br>
+                R1 = &epsilon; + R1&middot;1 &rArr; <b>R1 = 1*</b></p>
+                
+                <p><b>Solving for R3:</b><br>
+                R3 = R2&middot;1 + R3&middot;0 &rArr; R3 = (R2&middot;1)0* &rArr; <b>R3 = R2&middot;10*</b></p>
+
+                <p><b>Substitute R1 and R3 into R2:</b><br>
+                R2 = (1*)&middot;0 + R2&middot;0 + (R2&middot;10*)&middot;1<br>
+                R2 = 1*0 + R2(0 + 10*1)<br>
+                Applying Arden's theorem (R = Q + RP &rArr; R = QP*):<br>
+                <b>R2 = 1*0(0 + 10*1)*</b></p>
+
+                <p>Since q2 is the only final state, the regular expression for the DFA is the expression for R2:<br>
+                <span class="highlight">Regex = 1*0(0 + 10*1)*</span></p>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">7. (c) Compute the e-closure of each state and Convert the e-NFA to DFA. (5)</h4>
+            <div class="answer">
+                <p><b>Given e-NFA Transitions:</b></p>
+                <table class="transition-table" style="width: 50%;">
+                    <tr><th>&delta;</th><th>&epsilon;</th><th>a</th><th>b</th></tr>
+                    <tr><td>&rarr; p</td><td>{r}</td><td>{q}</td><td>{p,r}</td></tr>
+                    <tr><td>q</td><td>&phi;</td><td>{p}</td><td>&phi;</td></tr>
+                    <tr><td>*r</td><td>{p,q}</td><td>{r}</td><td>{p}</td></tr>
+                </table>
+                <br>
+                <p><b>1. Compute &epsilon;-closures:</b><br>
+                - <b>&epsilon;-closure(p):</b> Start at {p}. p&rarr;r (&epsilon;), so add {r}. r&rarr;p,q (&epsilon;), so add {q}. Total = <b>{p, q, r}</b>.<br>
+                - <b>&epsilon;-closure(q):</b> Start at {q}. No &epsilon; transitions from q. Total = <b>{q}</b>.<br>
+                - <b>&epsilon;-closure(r):</b> Start at {r}. r&rarr;p,q (&epsilon;), so add {p, q}. Total = <b>{p, q, r}</b>.</p>
+
+                <p><b>2. Convert to DFA:</b><br>
+                <b>Start State A:</b> &epsilon;-closure(p) = <b>{p, q, r}</b>. Since 'r' is a final state in the NFA, A is a Final State.</p>
+                
+                <p><b>Find transitions from A {p, q, r}:</b><br>
+                - <b>On input 'a':</b><br>
+                &delta;({p,q,r}, a) = &delta;(p,a) &cup; &delta;(q,a) &cup; &delta;(r,a) = {q} &cup; {p} &cup; {r} = {p, q, r}.<br>
+                &epsilon;-closure({p, q, r}) = {p, q, r} = State A.<br>
+                
+                - <b>On input 'b':</b><br>
+                &delta;({p,q,r}, b) = &delta;(p,b) &cup; &delta;(q,b) &cup; &delta;(r,b) = {p,r} &cup; &phi; &cup; {p} = {p, r}.<br>
+                &epsilon;-closure({p, r}) = &epsilon;-closure(p) &cup; &epsilon;-closure(r) = {p, q, r} &cup; {p, q, r} = {p, q, r} = State A.</p>
+
+                <p><b>Resulting DFA:</b><br>
+                The converted DFA has a single state <b>A (Start & Final)</b> with a self-loop for both 'a' and 'b'. <br>
+                Language accepted: <b>(a + b)*</b>.</p>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">8. (a) Define Chomsky normal form and convert the following CFG to CNF: S &rarr; aSb | ab | Aa, A &rarr; aab. (6)</h4>
+            <div class="answer">
+                <p><b>Definition of Chomsky Normal Form (CNF):</b><br>
+                A Context-Free Grammar is in CNF if all its production rules are of the form:<br>
+                1. <b>A &rarr; BC</b> (A non-terminal generates exactly two non-terminals)<br>
+                2. <b>A &rarr; a</b> (A non-terminal generates exactly one terminal)<br>
+                Where A, B, C are non-terminals, and 'a' is a terminal.</p>
+
+                <p><b>Conversion of the given CFG to CNF:</b><br>
+                Original Grammar: S &rarr; aSb | ab | Aa, &nbsp; A &rarr; aab<br>
+                <br>
+                <b>Step 1: Replace terminals with new non-terminals</b><br>
+                Let X<sub>a</sub> &rarr; a, and X<sub>b</sub> &rarr; b.<br>
+                Substitute in original rules:<br>
+                S &rarr; X<sub>a</sub> S X<sub>b</sub> | X<sub>a</sub> X<sub>b</sub> | A X<sub>a</sub><br>
+                A &rarr; X<sub>a</sub> X<sub>a</sub> X<sub>b</sub><br>
+                <br>
+                <b>Step 2: Restrict RHS to exactly two non-terminals</b><br>
+                For S &rarr; X<sub>a</sub> S X<sub>b</sub>, introduce S<sub>1</sub> &rarr; S X<sub>b</sub>. Then S &rarr; X<sub>a</sub> S<sub>1</sub>.<br>
+                For A &rarr; X<sub>a</sub> X<sub>a</sub> X<sub>b</sub>, introduce A<sub>1</sub> &rarr; X<sub>a</sub> X<sub>b</sub>. Then A &rarr; X<sub>a</sub> A<sub>1</sub>.<br>
+                <br>
+                <b>Final CNF Grammar:</b></p>
+                <div class="code-block">
+S &rarr; Xa S1 | Xa Xb | A Xa
+A &rarr; Xa A1
+S1 &rarr; S Xb
+A1 &rarr; Xa Xb
+Xa &rarr; a
+Xb &rarr; b
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">8. (b) What is useless production? Eliminate &epsilon;, unit and useless production from following grammar: (9)</h4>
+            <div class="answer">
+                <p><b>Useless Production:</b> A production is useless if its symbols are unreachable from the start symbol, or if it contains non-terminals that cannot derive any string of terminals (non-generating).</p>
+                
+                <p><b>Given Grammar:</b><br>
+                A &rarr; bA | Bba | aa<br>
+                B &rarr; aba | b | D<br>
+                C &rarr; CA | AC | B<br>
+                D &rarr; a | &epsilon;<br>
+                <i>(Assuming A is the Start Symbol as it is listed first)</i></p>
+
+                <p><b>1. Eliminate &epsilon;-productions:</b><br>
+                - Nullable variables: D &rarr; &epsilon;, so <b>D</b> is nullable. B &rarr; D, so <b>B</b> is nullable. C &rarr; B, so <b>C</b> is nullable.<br>
+                - Add rules simulating the absence of nullable variables:<br>
+                In A &rarr; Bba, B is nullable, add A &rarr; ba.<br>
+                In C &rarr; CA | AC, C is nullable, add C &rarr; A.<br>
+                - Remove D &rarr; &epsilon;.<br>
+                <b>Grammar after &epsilon;-elimination:</b><br>
+                A &rarr; bA | Bba | ba | aa<br>
+                B &rarr; aba | b | D<br>
+                C &rarr; CA | AC | A | B<br>
+                D &rarr; a</p>
+
+                <p><b>2. Eliminate Unit productions:</b><br>
+                - Unit pairs (X &rarr; Y): (B &rarr; D), (C &rarr; B), (C &rarr; D), (C &rarr; A).<br>
+                - Resolve B &rarr; D: Add D's rules to B. B &rarr; a.<br>
+                - Resolve C &rarr; B, C &rarr; A, C &rarr; D: Add B, A, D rules to C.<br>
+                <b>Grammar after Unit-elimination:</b><br>
+                A &rarr; bA | Bba | ba | aa<br>
+                B &rarr; aba | b | a<br>
+                C &rarr; CA | AC | aba | b | a | bA | Bba | ba | aa<br>
+                D &rarr; a</p>
+
+                <p><b>3. Eliminate Useless productions:</b><br>
+                - <b>Check generating symbols:</b> D generates 'a', B generates 'b', A generates 'aa', C generates 'a'. All variables generate terminals.<br>
+                - <b>Check reachable symbols from Start Symbol (A):</b><br>
+                From A, we can reach 'A' (via bA) and 'B' (via Bba).<br>
+                C and D are completely unreachable from A.<br>
+                - Remove unreachable symbols C and D and their productions.<br>
+                <b>Final Reduced Grammar:</b></p>
+                <div class="code-block">
+A &rarr; bA | Bba | ba | aa
+B &rarr; aba | b | a
+                </div>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">9. (a) Define Deterministic PDA and Non-deterministic PDA. (6)</h4>
+            <div class="answer">
+                <p><b>Deterministic Pushdown Automaton (DPDA):</b><br>
+                A PDA is deterministic if for any given state, input symbol (or &epsilon;), and top-of-stack symbol, there is at most one valid transition. Furthermore, if an &epsilon;-transition is defined for a specific state and stack symbol, no input-consuming transition can be defined for that same state and stack symbol. A DPDA parses unambiguously and is used for parsing deterministic context-free languages (like in most programming languages).</p>
+                
+                <p><b>Non-deterministic Pushdown Automaton (NPDA):</b><br>
+                An NPDA allows multiple possible transitions for the same state, input symbol (or &epsilon;), and stack symbol. It can "guess" paths and backtrack. NPDAs are strictly more powerful than DPDAs, meaning there exist context-free languages (like palindromes of even length) that can only be accepted by an NPDA and not by any DPDA.</p>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">9. (b) Construct a PDA for the grammar: S &rarr; aAA, A &rarr; aS | bS | a. (9)</h4>
+            <div class="answer">
+                <p>We can construct a PDA that simulates top-down parsing (acceptance by empty stack) of the given CFG. The PDA starts by pushing the start symbol 'S' onto the stack and continually replaces non-terminals on the stack with their right-hand sides, while popping terminals when they match the input stream.</p>
+                
+                <p><b>States:</b> Q = {q}, &Sigma; = {a, b}, &Gamma; = {S, A, a, b}</p>
+                <p><b>Transitions (&delta;):</b></p>
+                <div class="code-block">
+// 1. Expand Non-Terminals using epsilon transitions
+&delta;(q, &epsilon;, S) = {(q, aAA)}
+&delta;(q, &epsilon;, A) = {(q, aS), (q, bS), (q, a)}
+
+// 2. Match Terminals with input and pop from stack
+&delta;(q, a, a) = {(q, &epsilon;)}
+&delta;(q, b, b) = {(q, &epsilon;)}
+                </div>
+                <p>The PDA accepts if the input string is completely consumed and the stack becomes empty simultaneously.</p>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">10. (a) State the Pumping lemma for the Regular Language (RL). (4)<br>
+            (b) State the Pumping lemma for the Context Free Language (CFL). (4)<br>
+            (c) Prove that the given language is not regular: L = {a<sup>n</sup>b<sup>n</sup> | n &ge; 0}. (7)</h4>
+            <div class="answer">
+                <p><b>(a) Pumping Lemma for Regular Languages:</b><br>
+                If a language L is regular, then there exists a pumping length 'p' > 0 such that any string 'w' &isin; L with length |w| &ge; p can be divided into three parts, w = xyz, satisfying the following conditions:<br>
+                1. |xy| &le; p<br>
+                2. |y| > 0  (y is not empty)<br>
+                3. For all i &ge; 0, the string xy<sup>i</sup>z &isin; L.</p>
+
+                <p><b>(b) Pumping Lemma for Context-Free Languages:</b><br>
+                If a language L is context-free, then there exists a pumping length 'p' > 0 such that any string 'w' &isin; L with length |w| &ge; p can be divided into five parts, w = uvxyz, satisfying the following conditions:<br>
+                1. |vxy| &le; p<br>
+                2. |vy| > 0 (v and y cannot both be empty)<br>
+                3. For all i &ge; 0, the string uv<sup>i</sup>xy<sup>i</sup>z &isin; L.</p>
+
+                <p><b>(c) Proof that L = {a<sup>n</sup>b<sup>n</sup> | n &ge; 0} is not regular:</b><br>
+                Assume, for the sake of contradiction, that L is regular.<br>
+                1. Let 'p' be the pumping length given by the Pumping Lemma.<br>
+                2. Choose a specific string w = a<sup>p</sup>b<sup>p</sup>. Clearly, w &isin; L and |w| = 2p &ge; p.<br>
+                3. According to the Lemma, w can be divided into w = xyz such that |xy| &le; p and |y| > 0.<br>
+                4. Since the first 'p' characters of w are all 'a's, and |xy| &le; p, the substring 'y' must consist entirely of 'a's. Let y = a<sup>k</sup> where k > 0.<br>
+                5. The Lemma states that for any i &ge; 0, xy<sup>i</sup>z must be in L. Let us pump the string by choosing i = 2.<br>
+                6. The pumped string is xy<sup>2</sup>z = a<sup>p+k</sup>b<sup>p</sup>.<br>
+                7. Because k > 0, the number of 'a's (p+k) is strictly greater than the number of 'b's (p). This pumped string does not belong to L.<br>
+                8. This contradicts the Pumping Lemma. Therefore, our assumption is false, and L is not regular.</p>
+            </div>
+        </div>
+
+        <div class="qa-card">
+            <h4 class="qa-question">11. Transform the CFG into GNF, given G = ({A1, A2, A3}, {a,b}, P, A1) and production P as: A1 &rarr; A2A3, A2 &rarr; A3A1 | b, A3 &rarr; A1A2 | a. [15]</h4>
+            <div class="answer">
+                <p>Greibach Normal Form (GNF) requires all productions to start with exactly one terminal, followed by any number of non-terminals (A &rarr; a&alpha;).</p>
+
+                <p><b>Step 1: Check for Left Recursion (Aim: A<sub>i</sub> &rarr; A<sub>j</sub>&alpha; where i < j)</b><br>
+                - A1 &rarr; A2 A3 (Valid: 1 < 2)<br>
+                - A2 &rarr; A3 A1 | b (Valid: 2 < 3)<br>
+                - A3 &rarr; A1 A2 | a (Invalid: 3 &nless; 1)</p>
+                
+                <p><b>Step 2: Eliminate invalid sequences through backward substitution into A3</b><br>
+                Substitute A1 in A3:<br>
+                A3 &rarr; (A2 A3) A2 | a<br>
+                A3 &rarr; A2 A3 A2 | a (Still invalid: 3 &nless; 2)<br>
+                <br>
+                Substitute A2 in A3:<br>
+                A3 &rarr; (A3 A1 | b) A3 A2 | a<br>
+                A3 &rarr; A3 A1 A3 A2 | b A3 A2 | a<br>
+                Now A3 has immediate left recursion (A3 &rarr; A3&alpha; | &beta;).</p>
+
+                <p><b>Step 3: Eliminate Immediate Left Recursion on A3</b><br>
+                Let &alpha; = A1 A3 A2 and &beta; = b A3 A2 | a.<br>
+                Introduce a new non-terminal Z:<br>
+                A3 &rarr; b A3 A2 | a | b A3 A2 Z | a Z<br>
+                Z &rarr; A1 A3 A2 | A1 A3 A2 Z<br>
+                <i>(Note: All A3 productions now correctly start with terminals!)</i></p>
+
+                <p><b>Step 4: Substitute A3 back into A2 to obtain GNF for A2</b><br>
+                A2 &rarr; (b A3 A2 | a | b A3 A2 Z | a Z) A1 | b<br>
+                A2 &rarr; b A3 A2 A1 | a A1 | b A3 A2 Z A1 | a Z A1 | b<br>
+                <i>(Note: All A2 productions now correctly start with terminals!)</i></p>
+
+                <p><b>Step 5: Substitute A2 back into A1 to obtain GNF for A1</b><br>
+                A1 &rarr; (b A3 A2 A1 | a A1 | b A3 A2 Z A1 | a Z A1 | b) A3<br>
+                A1 &rarr; b A3 A2 A1 A3 | a A1 A3 | b A3 A2 Z A1 A3 | a Z A1 A3 | b A3<br>
+                <i>(Note: All A1 productions now correctly start with terminals!)</i></p>
+
+                <p><b>Step 6: Ensure Z is in GNF by substituting A1</b><br>
+                Since Z &rarr; A1 A3 A2 | A1 A3 A2 Z, and all A1 productions start with a terminal, we replace A1 with its 5 right-hand sides in both terms.<br>
+                This yields 10 productions for Z, all starting with 'a' or 'b'. For brevity, we substitute A1 into Z:<br>
+                Z &rarr; (RHS of A1) A3 A2 | (RHS of A1) A3 A2 Z</p>
+
+                <p><b>Final Grammar in GNF:</b></p>
+                <div class="code-block">
+A1 &rarr; b A3 A2 A1 A3 | a A1 A3 | b A3 A2 Z A1 A3 | a Z A1 A3 | b A3
+A2 &rarr; b A3 A2 A1 | a A1 | b A3 A2 Z A1 | a Z A1 | b
+A3 &rarr; b A3 A2 | a | b A3 A2 Z | a Z
+Z &rarr; b A3 A2 A1 A3 A3 A2 | a A1 A3 A3 A2 | ... (10 terminal-starting productions)
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
