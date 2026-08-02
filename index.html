@@ -379,6 +379,15 @@
             transform: translateX(2px);
         }
 
+        /* Page-turn exit transition */
+        .folio-page {
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .folio-page.turn-exit {
+            opacity: 0;
+            transform: rotateY(-8deg) scale(0.98);
+        }
+
         /* FOOTER / COLOPHON */
         footer {
             text-align: center;
@@ -643,53 +652,12 @@
         <p class="colophon-text">
             Compounded and published by <a href="#">Soumya Chakraborty</a>. Hand-crafted notes to crush exam preparation.
         </p>
+    </footer>
 </main>
 
-<!-- Interactive Script for Progress Tracking -->
+<!-- Page-turn transition on card navigation -->
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // 2. Dynamic Progress Bars on Cards
-    const modules = [
-        { id: 'module-1', key: 'pipelining.html', total: 39 },
-        { id: 'module-2', key: 'memory.html', total: 23 },
-        { id: 'module-3', key: 'ilp.html', total: 22 },
-        { id: 'module-4', key: 'vector.html', total: 19 },
-        { id: 'module-5', key: 'multiprocessor.html', total: 26 }
-    ];
-    
-    modules.forEach(mod => {
-        const card = document.getElementById(mod.id);
-        if (card) {
-            const progress = JSON.parse(localStorage.getItem(`progress_${mod.key}`) || '{}');
-            const completed = Object.keys(progress).length;
-            const percent = Math.round((completed / mod.total) * 100);
-            
-            const progContainer = document.createElement('div');
-            progContainer.className = 'card-progress-container';
-            
-            const progBar = document.createElement('div');
-            progBar.className = 'card-progress-bar';
-            
-            const progFill = document.createElement('div');
-            progFill.className = 'card-progress-fill';
-            progFill.style.width = `${percent}%`;
-            
-            const progText = document.createElement('span');
-            progText.className = 'card-progress-text';
-            progText.textContent = `${percent}%`;
-            
-            progBar.appendChild(progFill);
-            progContainer.appendChild(progBar);
-            progContainer.appendChild(progText);
-            
-            const content = card.querySelector('.card-content');
-            if (content) {
-                content.appendChild(progContainer);
-            }
-        }
-    });
-
-    // 3. Page Turn Transition on card navigation
     const folioPage = document.querySelector('.folio-page');
     const links = document.querySelectorAll('.chapters-grid a');
     links.forEach(link => {
