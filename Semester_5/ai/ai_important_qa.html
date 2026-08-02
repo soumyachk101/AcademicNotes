@@ -398,13 +398,16 @@
                 <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain PEAS Model with Automated Taxi and Medical Diagnosis examples.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain PEAS Model with Automated Taxi and Medical Diagnosis examples.</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
-<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
-<ul>
-    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
-    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
-    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
-</ul>
+<p><b>1. Core Definition:</b> <b>PEAS</b> stands for <b>Performance measure, Environment, Actuators, and Sensors</b>—the formal specification framework used to define an intelligent agent's task domain.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/peas_agent.png" alt="Figure: PEAS Agent Framework & Environment Architecture" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: PEAS Agent Framework & Environment Architecture</div>
+</div>
+<p><b>2. PEAS Specification Table:</b></p>
+<table>
+    <tr><th>Agent Type</th><th>Performance Measure</th><th>Environment</th><th>Actuators</th><th>Sensors</th></tr>
+    <tr><td><b>Automated Taxi</b></td><td>Safety, Speed, Legal driving, Comfort, Profit</td><td>Roads, Traffic, Pedestrians, Weather</td><td>Steering, Accelerator, Brake, Horn</td><td>Cameras, LiDAR, Radar, GPS, Speedometer</td></tr>
+    <tr><td><b>Medical Diagnosis</b></td><td>Healthy patient, Minimized cost, Accurate diagnosis</td><td>Patient, Hospital, Lab results</td><td>Display tests, Prescriptions, Medical reports</td><td>Keyboard input, Medical scanners, Touchscreen</td></tr>
+</table>
                 </div>
             </div>
             <div class="qa-card" id="gb-2">
@@ -441,11 +444,14 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                     <p><b>Detailed 5-Mark Solution:</b></p>
 <p><b>1. Core Definition & Evaluation Function:</b> <b>A* Search</b> is an informed heuristic search algorithm evaluating nodes using:
 <br><span class="math">f(n) = g(n) + h(n)</span>
-<br>where <span class="math">g(n)</span> is exact cost from start node to <span class="math">n</span>, and <span class="math">h(n)</span> is estimated cost from <span class="math">n</span> to goal.</p>
+<br>where <span class="math">g(n)</span> is exact cost from start node to <span class="math">n</span>, and <span class="math">h(n)</span> is estimated cost from <span class="math">n</span> to goal.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/a_star_search.png" alt="Figure: A* Search Graph Expansion & Heuristic Evaluation" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: A* Search Graph Expansion & Heuristic Evaluation</div>
+</div>
 <p><b>2. Conditions for Optimality:</b></p>
 <ul>
-    <li><b>Admissibility:</b> <span class="math">h(n) &le; h*(n)</span> (heuristic never overestimates actual minimal cost to goal). Guarantees optimality in tree search.</li>
-    <li><b>Consistency (Monotonicity):</b> <span class="math">h(n) &le; c(n, a, n') + h(n')</span>. Guarantees optimality in graph search without re-opening nodes.</li>
+    <li><b>Admissibility:</b> <span class="math">h(n) &le; h*(n)</span> (heuristic never overestimates actual minimal cost to goal).</li>
+    <li><b>Consistency:</b> <span class="math">h(n) &le; c(n, a, n') + h(n')</span> (monotonic heuristic constraint).</li>
 </ul>
                 </div>
             </div>
@@ -453,13 +459,12 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                 <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain Admissibility and Consistency conditions for Heuristics.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition & Evaluation Function:</b> <b>A* Search</b> is an informed heuristic search algorithm evaluating nodes using:
-<br><span class="math">f(n) = g(n) + h(n)</span>
-<br>where <span class="math">g(n)</span> is exact cost from start node to <span class="math">n</span>, and <span class="math">h(n)</span> is estimated cost from <span class="math">n</span> to goal.</p>
-<p><b>2. Conditions for Optimality:</b></p>
+<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain Admissibility and Consistency conditions for Heuristics.</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
+<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
 <ul>
-    <li><b>Admissibility:</b> <span class="math">h(n) &le; h*(n)</span> (heuristic never overestimates actual minimal cost to goal). Guarantees optimality in tree search.</li>
-    <li><b>Consistency (Monotonicity):</b> <span class="math">h(n) &le; c(n, a, n') + h(n')</span>. Guarantees optimality in graph search without re-opening nodes.</li>
+    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
+    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
+    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
 </ul>
                 </div>
             </div>
@@ -532,12 +537,15 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                 <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain Alpha-Beta Pruning rules with an example game tree.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain Alpha-Beta Pruning rules with an example game tree.</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
-<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
+<p><b>1. Core Definition & Mechanism:</b> <b>Alpha-Beta Pruning</b> is an optimization technique for the minimax game tree algorithm that prunes subtrees when <span class="math">&alpha; &ge; &beta;</span>.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/alpha_beta_pruning.png" alt="Figure: Alpha-Beta Pruning Minimax Game Tree Execution" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: Alpha-Beta Pruning Minimax Game Tree Execution</div>
+</div>
+<p><b>2. Pruning Conditions:</b></p>
 <ul>
-    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
-    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
-    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
+    <li><b>Alpha (&alpha;):</b> The highest-value choice found so far at any choice point along the path for MAX.</li>
+    <li><b>Beta (&beta;):</b> The lowest-value choice found so far at any choice point along the path for MIN.</li>
+    <li><b>Cut-off Rule:</b> Stop searching below any MIN node if its beta value becomes less than or equal to the alpha value of any MAX ancestor (<span class="math">&alpha; &ge; &beta;</span>).</li>
 </ul>
                 </div>
             </div>
@@ -545,13 +553,20 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                 <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain Propositional Logic syntax, connectives, and truth tables.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain Propositional Logic syntax, connectives, and truth tables.</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
-<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
-<ul>
-    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
-    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
-    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
-</ul>
+<p><b>1. Core Architecture:</b> The <b>ISO/OSI Reference Model</b> partitions network communication into 7 distinct functional layers.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/osi_7_layer.png" alt="Figure: ISO/OSI 7-Layer Network Architecture Stack & Data Flow" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: ISO/OSI 7-Layer Network Architecture Stack & Data Flow</div>
+</div>
+<p><b>2. Layer Summary:</b></p>
+<ol>
+    <li><b>Physical Layer:</b> Transmission of raw bitstreams over physical medium (Cable, Hub, Repeater).</li>
+    <li><b>Data Link Layer:</b> Framing, MAC addressing, Error Detection (CRC), Flow Control (Switch, Bridge).</li>
+    <li><b>Network Layer:</b> Logical IP addressing, Packet Routing, Forwarding (Router).</li>
+    <li><b>Transport Layer:</b> End-to-end reliability, Port addressing, TCP/UDP Segmenting.</li>
+    <li><b>Session Layer:</b> Dialog control, Session checkpointing and recovery.</li>
+    <li><b>Presentation Layer:</b> Data format conversion, Encryption, Compression (SSL/TLS).</li>
+    <li><b>Application Layer:</b> Network services interface for user applications (HTTP, DNS, SMTP).</li>
+</ol>
                 </div>
             </div>
             <div class="qa-card" id="gb-13">
@@ -597,13 +612,20 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                 <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain Resolution Refutation Principle in Propositional Logic.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain Resolution Refutation Principle in Propositional Logic.</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
-<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
-<ul>
-    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
-    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
-    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
-</ul>
+<p><b>1. Core Architecture:</b> The <b>ISO/OSI Reference Model</b> partitions network communication into 7 distinct functional layers.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/osi_7_layer.png" alt="Figure: ISO/OSI 7-Layer Network Architecture Stack & Data Flow" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: ISO/OSI 7-Layer Network Architecture Stack & Data Flow</div>
+</div>
+<p><b>2. Layer Summary:</b></p>
+<ol>
+    <li><b>Physical Layer:</b> Transmission of raw bitstreams over physical medium (Cable, Hub, Repeater).</li>
+    <li><b>Data Link Layer:</b> Framing, MAC addressing, Error Detection (CRC), Flow Control (Switch, Bridge).</li>
+    <li><b>Network Layer:</b> Logical IP addressing, Packet Routing, Forwarding (Router).</li>
+    <li><b>Transport Layer:</b> End-to-end reliability, Port addressing, TCP/UDP Segmenting.</li>
+    <li><b>Session Layer:</b> Dialog control, Session checkpointing and recovery.</li>
+    <li><b>Presentation Layer:</b> Data format conversion, Encryption, Compression (SSL/TLS).</li>
+    <li><b>Application Layer:</b> Network services interface for user applications (HTTP, DNS, SMTP).</li>
+</ol>
                 </div>
             </div>
             <div class="qa-card" id="gb-17">
@@ -711,12 +733,15 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                 <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain Fuzzy Sets vs Crisp Sets and Fuzzy Membership Functions.</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain Fuzzy Sets vs Crisp Sets and Fuzzy Membership Functions.</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
-<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
+<p><b>1. Core Definition:</b> <b>Fuzzy Logic Architecture</b> models reasoning with imprecision and partial truth values between 0 and 1.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/fuzzy_logic.png" alt="Figure: Fuzzy Logic Control System Architecture" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: Fuzzy Logic Control System Architecture</div>
+</div>
+<p><b>2. Core Components:</b></p>
 <ul>
-    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
-    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
-    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
+    <li><b>Fuzzifier:</b> Converts crisp numerical inputs into fuzzy set membership degrees.</li>
+    <li><b>Inference Engine:</b> Evaluates IF-THEN fuzzy rules using max-min composition.</li>
+    <li><b>Defuzzifier:</b> Converts fuzzy output back to crisp value using Centroid / Center of Gravity method.</li>
 </ul>
                 </div>
             </div>
@@ -724,12 +749,15 @@ Dynamic.</b> forms a fundamental component of AI. It establishes structural boun
                 <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Fuzzy Inference Systems (Mamdani Model).</span></div>
                 <div class="a-text">
                     <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Conceptual Foundation & Core Architecture:</b> <b>Explain Fuzzy Inference Systems (Mamdani Model).</b> forms a fundamental component of AI. It establishes structural boundaries, operational invariants, and formal constraints within software systems.</p>
-<p><b>2. Mechanism & Step-by-Step Workflow:</b></p>
+<p><b>1. Core Definition:</b> <b>Fuzzy Logic Architecture</b> models reasoning with imprecision and partial truth values between 0 and 1.</p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/fuzzy_logic.png" alt="Figure: Fuzzy Logic Control System Architecture" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: Fuzzy Logic Control System Architecture</div>
+</div>
+<p><b>2. Core Components:</b></p>
 <ul>
-    <li><b>Core Rules:</b> Mathematical definitions, state transformation triggers, and algorithmic parameters.</li>
-    <li><b>Execution Steps:</b> Sequential input processing, intermediate data validation, and output generation.</li>
-    <li><b>Trade-offs & Performance:</b> Space-time complexity evaluation, failure modes, and real-world system engineering optimizations.</li>
+    <li><b>Fuzzifier:</b> Converts crisp numerical inputs into fuzzy set membership degrees.</li>
+    <li><b>Inference Engine:</b> Evaluates IF-THEN fuzzy rules using max-min composition.</li>
+    <li><b>Defuzzifier:</b> Converts fuzzy output back to crisp value using Centroid / Center of Gravity method.</li>
 </ul>
                 </div>
             </div>
@@ -974,13 +1002,16 @@ Show alpha and beta values at each node and identify pruned branches.
 b) Explain Minimax Algorithm properties (Completeness, Optimality, Time/Space Complexity).</span></div>
                 <div class="a-text">
                     <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Formal Problem Formulation & Theoretical Derivation:</b></p>
-<p>Comprehensive step-by-step mathematical model, architectural specification, and state transition equations for <b>a) Perform Alpha-Beta Pruning on the given Game Tree (3 levels depth, 8 leaf node values: 3, 5, 6, 9, 1, 2,
-0, -1).
-Show alpha and beta values at each node and identify pruned branches.
-b) Explain Minimax Algorithm properties (Completeness, Optimality, Time/Space Complexity).</b> in AI.</p>
-<p><b>Part (b) Algorithmic Implementation & Trace:</b></p>
-<p>Complete algorithmic breakdown, implementation pseudocode, state transformation tables, and computational complexity analysis for MAKAUT examination standards.</p>
+<p><b>Part (a) Alpha-Beta Pruning Execution Trace:</b></p><div class="diagram-container" style="background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important; border: 1px solid #cbd5e1 !important; border-radius: 16px !important; padding: 1.5rem !important; margin: 2.2rem 0 !important; text-align: center !important; box-shadow: 0 12px 32px -4px rgba(15, 23, 42, 0.1) !important;">
+    <img src="../assets/alpha_beta_pruning.png" alt="Figure: Alpha-Beta Pruning Minimax Game Tree Execution" style="max-width: 100%; height: auto; border-radius: 12px; border: 1px solid #e2e8f0; box-shadow: 0 4px 12px rgba(0,0,0,0.06);">
+    <div class="diagram-caption" style="font-size: 0.9rem !important; color: #334155 !important; margin-top: 1.2rem !important; font-style: italic !important; font-weight: 700 !important; letter-spacing: 0.01em !important;">Figure: Alpha-Beta Pruning Minimax Game Tree Execution</div>
+</div>
+<p>Given Game Tree depth 3 with 8 leaf values: <span class="math">[3, 5, 6, 9, 1, 2, 0, -1]</span>.</p>
+<ul>
+    <li><b>Level 3 (Leafs):</b> Pairs evaluate to min values.</li>
+    <li><b>Level 2 (MIN nodes):</b> Left subtree evaluates to <span class="math">\min(3, 5) = 3</span> and <span class="math">\min(6, 9) = 6</span>.</li>
+    <li><b>Level 1 (MAX node):</b> Sets <span class="math">lpha = 3</span>. Evaluates right subtree: <span class="math">\min(1, 2) = 1</span>. Since <span class="math">1 \le 3</span>, pruning is triggered for remaining leaf nodes <span class="math">[0, -1]</span>!</li>
+</ul>
                 </div>
             </div>
             <div class="qa-card" id="gc-3">
