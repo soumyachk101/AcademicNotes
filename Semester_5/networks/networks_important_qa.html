@@ -54,9 +54,11 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { display: flex; justify-content: center; margin-bottom: 1rem; }
+        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
+        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
+    <link rel="stylesheet" href="../../premium.css">
 </head>
 <body>
     <nav class="top-nav">
@@ -1109,10 +1111,10 @@
 <div class="mermaid">
 sequenceDiagram
     participant Client
-    participant Server
-    Client->>Server: 1. SYN (seq=x)
-    Server->>Client: 2. SYN + ACK (seq=y, ack=x+1)
-    Client->>Server: 3. ACK (ack=y+1)
+      participant Server
+      Client->>Server: 1. SYN (seq=x)
+      Server->>Client: 2. SYN + ACK (seq=y, ack=x+1)
+      Client->>Server: 3. ACK (ack=y+1)
 </div>
 </div>
 <ol>
@@ -1132,12 +1134,12 @@ sequenceDiagram
 <div class="mermaid">
 sequenceDiagram
     participant Client
-    participant Server
-    Client->>Server: 1. FIN
-    Server->>Client: 2. ACK
-    Note over Server: Server finishes sending remaining data
-    Server->>Client: 3. FIN
-    Client->>Server: 4. ACK
+      participant Server
+      Client->>Server: 1. FIN
+      Server->>Client: 2. ACK
+      Note over Server: Server finishes sending remaining data
+      Server->>Client: 3. FIN
+      Client->>Server: 4. ACK
 </div>
 </div>
 <ol>
@@ -1842,13 +1844,13 @@ b) Explain TCP Connection Management State Transition Diagram (LISTEN, SYN_SENT,
 <div class="mermaid">
 stateDiagram-v2
     [*] --> CLOSED
-    CLOSED --> LISTEN : Server starts passive open
-    CLOSED --> SYN_SENT : Client sends SYN (Active open)
-    LISTEN --> SYN_RCVD : Server receives SYN, sends SYN-ACK
-    SYN_SENT --> ESTABLISHED : Client receives SYN-ACK, sends ACK
-    SYN_RCVD --> ESTABLISHED : Server receives ACK
-    ESTABLISHED --> FIN_WAIT_1 : Active close (sends FIN)
-    ESTABLISHED --> CLOSE_WAIT : Passive close (receives FIN, sends ACK)
+      CLOSED --> LISTEN : Server starts passive open
+      CLOSED --> SYN_SENT : Client sends SYN (Active open)
+      LISTEN --> SYN_RCVD : Server receives SYN, sends SYN-ACK
+      SYN_SENT --> ESTABLISHED : Client receives SYN-ACK, sends ACK
+      SYN_RCVD --> ESTABLISHED : Server receives ACK
+      ESTABLISHED --> FIN_WAIT_1 : Active close (sends FIN)
+      ESTABLISHED --> CLOSE_WAIT : Passive close (receives FIN, sends ACK)
 </div>
 </div>
 

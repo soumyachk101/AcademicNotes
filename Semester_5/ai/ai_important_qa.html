@@ -54,9 +54,11 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { display: flex; justify-content: center; margin-bottom: 1rem; }
+        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
+        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
+    <link rel="stylesheet" href="../../premium.css">
 </head>
 <body>
     <nav class="top-nav">
@@ -699,11 +701,15 @@
                 <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain PEAS Model with Automated Taxi and Medical Diagnosis examples.</span></div>
                 <div class="a-text">
                     <h3>Understanding the PEAS Model</h3><p>The <strong>PEAS (Performance, Environment, Actuators, Sensors)</strong> model is a formal specification used to design and define an intelligent agent's task environment before constructing the agent itself. A clearly defined task environment ensures that the agent can make rational decisions to maximize its performance measure.</p><ul>  <li><strong>Performance Measure (P):</strong> The objective criterion used to evaluate the agent's success or behavior.</li>  <li><strong>Environment (E):</strong> The external conditions and entities the agent interacts with and operates within.</li>  <li><strong>Actuators (A):</strong> The mechanisms or effectors the agent uses to perform actions and alter the environment.</li>  <li><strong>Sensors (S):</strong> The devices or inputs through which the agent perceives the state of the environment.</li></ul><div class="diagram-container"><div class="mermaid">
-    graph LR
-    Environment -- Percepts --> Sensors
-    Sensors --> Agent
-    Agent --> Actuators
-    Actuators -- Actions --> Environment
+graph LR
+    P["PERFORMANCE<br/>MEASURE (P)"] -. "evaluates" .-> E
+    E["ENVIRONMENT (E)"] -- "Percepts" --> S
+    subgraph AGENT["Intelligent Agent"]
+        S["SENSORS (S)"] --> F["Agent<br/>Program"]
+        F --> A["ACTUATORS (A)"]
+    end
+    A -- "Actions" --> E
+    style AGENT fill:#ffffff,stroke:#94a3b8,stroke-dasharray: 5 5
 </div><div class="diagram-caption">Figure: General Architecture of an Intelligent Agent interacting with its Environment</div></div><h3>Examples of PEAS Specifications</h3><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <thead>    <tr style="background-color: #f3e8ff;">      <th>Agent Type</th>      <th>Performance Measure (P)</th>      <th>Environment (E)</th>      <th>Actuators (A)</th>      <th>Sensors (S)</th>    </tr>  </thead>  <tbody>    <tr>      <td><strong>Automated Taxi Driver</strong></td>      <td>Safety, destination reach, time, comfort, traffic violations, profit.</td>      <td>Roads, traffic lights, pedestrians, other vehicles, weather conditions.</td>      <td>Steering wheel, accelerator, brake, signal indicators, horn, display.</td>      <td>Cameras, LiDAR, radar, GPS, speedometer, accelerometer, engine sensors.</td>    </tr>    <tr>      <td><strong>Medical Diagnosis System</strong></td>      <td>Accurate disease classification, minimized cost, patient survival rate.</td>      <td>Patient symptoms, medical history, hospital staff, laboratory results.</td>      <td>Screen display (questions, tests, diagnoses), printer for prescriptions.</td>      <td>Keyboard input of symptoms, direct medical scanners, database feeds.</td>    </tr>  </tbody></table>
                 </div>
             </div>
@@ -724,10 +730,10 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain A* Search Algorithm and g(n) + h(n) evaluation function.</span></div>
                 <div class="a-text">
                     <h3>A* Search Algorithm</h3><p><strong>A* Search</strong> is the most widely known form of Best-First Search. It is an informed (heuristic) search algorithm that efficiently finds the optimal path from the start node to a goal node by combining the actual cost reached so far with the estimated cost to the goal.</p><p>The core of A* is its <strong>Evaluation Function \(f(n)\)</strong>:</p>\[ f(n) = g(n) + h(n) \]<ul>  <li><strong>\(g(n)\):</strong> The exact path cost from the start node to the current node \(n\).</li>  <li><strong>\(h(n)\):</strong> The heuristic function; the estimated cheapest cost from node \(n\) to the goal.</li>  <li><strong>\(f(n)\):</strong> The estimated total cost of the cheapest solution path that passes through node \(n\).</li></ul><div class="diagram-container"><div class="mermaid">
-    graph LR
+graph LR
     S((Start Node)) -- "g(n) = Exact Cost" --> N((Node n))
-    N -. "h(n) = Estimated Cost" .-> G((Goal Node))
-    N -->|f(n) = g(n) + h(n)| N
+      N -. "h(n) = Estimated Cost" .-> G((Goal Node))
+      N -->|f(n) = g(n) + h(n)| N
 </div><div class="diagram-caption">Figure: Components of the A* Evaluation Function</div></div><p><strong>Mechanism & Optimality:</strong> A* maintains an Open List (priority queue sorted by \(f(n)\)) and a Closed List. It always expands the node with the lowest \(f(n)\) value. A* is guaranteed to be <strong>Complete</strong> (will find a goal if one exists) and <strong>Optimal</strong> (will find the shortest/cheapest path) provided that the heuristic function \(h(n)\) is <em>admissible</em> (never overestimates the cost) and <em>consistent</em>.</p>
                 </div>
             </div>
@@ -741,15 +747,12 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Hill Climbing Search and its Pitfalls (Local Maxima, Ridge, Plateau).</span></div>
                 <div class="a-text">
                     <h3>Hill Climbing Search and Its Pitfalls</h3><p><strong>Hill Climbing</strong> is a local, informed search algorithm that continuously moves in the direction of increasing value (or decreasing cost). It is a greedy approach that only looks at the immediate neighbors of the current state and selects the one that improves the objective function the most. It does not maintain a search tree, making it highly memory efficient, but it can easily get stuck.</p><p>Because it only makes local improvements, Hill Climbing frequently fails to find the global optimum due to the following landscape topologies (pitfalls):</p><ul>  <li><strong>Local Maxima (or Minima):</strong> A state that is better than all of its immediate neighbors, but is strictly worse than the global maximum. The algorithm gets stuck here because every valid move leads to a worse state.</li>  <li><strong>Plateau (Flat Local Maximum):</strong> A flat area of the state-space landscape where a set of neighboring states have exactly the same objective value. The algorithm loses its gradient and performs a random walk, often failing to make progress.</li>  <li><strong>Ridge:</strong> A sequence of local maxima that are connected, forming a sharp elevation. Single-axis moves (typical in hill climbing) cause the algorithm to zig-zag inefficiently back and forth across the ridge without moving along its crest.</li></ul><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     subgraph Hill Climbing Pitfalls
-    
-    LM[Local Maxima: Peak lower than Global Max]
-    
-    P[Plateau: Flat region with no slope]
-    
-    R[Ridge: Sharp peak requiring multi-directional movement]
-    end
+       LM[Local Maxima: Peak lower than Global Max]
+       P[Plateau: Flat region with no slope]
+       R[Ridge: Sharp peak requiring multi-directional movement]
+      end
 </div></div><p><em>Solutions:</em> Random-restart hill climbing, Stochastic hill climbing, or Simulated Annealing can help escape these pitfalls.</p>
                 </div>
             </div>
@@ -775,13 +778,13 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Game Playing and Minimax Search Algorithm.</span></div>
                 <div class="a-text">
                     <h3>Game Playing and the Minimax Algorithm</h3><p>In AI, game playing is typically modeled as a deterministic, fully observable, zero-sum environment where two agents compete (adversarial search). Examples include Chess, Tic-Tac-Toe, and Checkers. The two players are traditionally called <strong>MAX</strong> and <strong>MIN</strong>. MAX attempts to maximize the game score, while MIN attempts to minimize it.</p><h4>The Minimax Algorithm</h4><p>The <strong>Minimax Algorithm</strong> computes the optimal move for MAX by exploring the entire game tree down to the leaf/terminal nodes, assuming MIN plays optimally to oppose MAX.</p><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     MAX((MAX)) -->|Choose Max| MIN1[MIN]
-    MAX -->|Choose Max| MIN2[MIN]
-    MIN1 -->|Choose Min| T1((+1))
-    MIN1 -->|Choose Min| T2((-1))
-    MIN2 -->|Choose Min| T3((0))
-    MIN2 -->|Choose Min| T4((-1))
+      MAX -->|Choose Max| MIN2[MIN]
+      MIN1 -->|Choose Min| T1((+1))
+      MIN1 -->|Choose Min| T2((-1))
+      MIN2 -->|Choose Min| T3((0))
+      MIN2 -->|Choose Min| T4((-1))
 </div><div class="diagram-caption">Figure: Minimax Execution where MAX chooses the path maximizing the score after MIN minimizes it.</div></div><p><strong>Steps of Minimax:</strong></p><ol>  <li><strong>Generate Tree:</strong> Expand the game tree from the current state down to the terminal states (or a depth limit).</li>  <li><strong>Evaluate Leaves:</strong> Apply a utility function (or heuristic evaluation function) to the terminal nodes to get their scores.</li>  <li><strong>Back-propagate Values:</strong>      <br/>• If the parent node is a <strong>MIN node</strong>, it selects the <em>minimum</em> utility value of its children.      <br/>• If the parent node is a <strong>MAX node</strong>, it selects the <em>maximum</em> utility value of its children.  </li>  <li><strong>Decision:</strong> The root node (MAX's current turn) makes the move associated with the maximum backed-up value.</li></ol><p>While Minimax is optimal, its time complexity is \(O(b^m)\), which is impractical for complex games without depth limiting and Alpha-Beta pruning.</p>
                 </div>
             </div>
@@ -789,13 +792,13 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain Alpha-Beta Pruning rules with an example game tree.</span></div>
                 <div class="a-text">
                     <h3>Alpha-Beta Pruning in Game Trees</h3><p><strong>Alpha-Beta Pruning</strong> is an optimization for the Minimax algorithm. It dramatically reduces the number of nodes evaluated in the search tree, allowing search to go much deeper within the same time limit.</p><h4>The Pruning Rules</h4><ul>  <li><strong>Alpha (\(\alpha\)):</strong> The best (highest-value) choice found so far at any choice point along the path for MAX. Initialized to \(-\infty\).</li>  <li><strong>Beta (\(\beta\)):</strong> The best (lowest-value) choice found so far at any choice point along the path for MIN. Initialized to \(+\infty\).</li>  <li><strong>Pruning Condition:</strong> Search is pruned (stopped) at a MIN node if its value \(\le \alpha\). Search is pruned at a MAX node if its value \(\ge \beta\). Simply put, prune when \(\alpha \ge \beta\).</li></ul><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     MAX((MAX)) --> MIN1((MIN: 3))
-    MAX --> MIN2((MIN: 2))
-    MIN1 --> L1((3))
-    MIN1 --> L2((5))
-    MIN2 --> L3((2))
-    MIN2 -.-> L4((Pruned))
+      MAX --> MIN2((MIN: 2))
+      MIN1 --> L1((3))
+      MIN1 --> L2((5))
+      MIN2 --> L3((2))
+      MIN2 -.-> L4((Pruned))
 </div><div class="diagram-caption">Figure: Alpha-Beta Pruning. Right branch is pruned because MIN2 finds a 2, and MAX already has guaranteed at least a 3 from the left branch.</div></div>
                 </div>
             </div>
@@ -839,11 +842,11 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q18</span><span>Explain Knowledge Representation using Semantic Networks.</span></div>
                 <div class="a-text">
                     <h3>Semantic Networks</h3><p>A <strong>Semantic Network</strong> is a graphical knowledge representation technique where knowledge is represented as a directed graph.</p><ul>  <li><strong>Nodes:</strong> Represent concepts, objects, or classes (e.g., "Bird", "Penguin", "Wings").</li>  <li><strong>Edges (Arcs):</strong> Represent the semantic relationships between the nodes.</li></ul><h4>Key Relationships</h4><ul>  <li><strong>IS-A (Inheritance):</strong> Represents class hierarchies. E.g., <em>Penguin \(\xrightarrow{\text{IS-A}}\) Bird</em>.</li>  <li><strong>HAS-A (Possession):</strong> E.g., <em>Bird \(\xrightarrow{\text{HAS-A}}\) Wings</em>.</li>  <li><strong>Action/Property:</strong> E.g., <em>Bird \(\xrightarrow{\text{CAN}}\) Fly</em>.</li></ul><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     Tweety((Tweety)) -- IS-A --> Canary((Canary))
-    Canary -- IS-A --> Bird((Bird))
-    Bird -- HAS-A --> Wings((Wings))
-    Bird -- CAN --> Fly((Fly))
+      Canary -- IS-A --> Bird((Bird))
+      Bird -- HAS-A --> Wings((Wings))
+      Bird -- CAN --> Fly((Fly))
 </div><div class="diagram-caption">Figure: A Simple Semantic Network displaying inheritance. Tweety inherently gets "Wings" and "Fly".</div></div><p>Semantic networks are highly intuitive for humans but lack formal logical semantics, making automated reasoning tricky without strict rules.</p>
                 </div>
             </div>
@@ -892,13 +895,13 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Fuzzy Inference Systems (Mamdani Model).</span></div>
                 <div class="a-text">
                     <h3>Fuzzy Inference Systems (Mamdani Model)</h3><p>A <strong>Fuzzy Inference System (FIS)</strong> maps crisp inputs to crisp outputs using fuzzy logic. The most widely used architecture is the <strong>Mamdani Model</strong>, which follows a four-step pipeline:</p><div class="diagram-container"><div class="mermaid">
-    graph LR
+graph LR
     Input[Crisp Inputs] --> F[1. Fuzzification]
-    F --> R[2. Rule Evaluation]
-    R --> A[3. Aggregation]
-    A --> D[4. Defuzzification]
-    D --> Output[Crisp Output]
-    KB[(Fuzzy Rule Base)] -.-> R
+      F --> R[2. Rule Evaluation]
+      R --> A[3. Aggregation]
+      A --> D[4. Defuzzification]
+      D --> Output[Crisp Output]
+      KB[(Fuzzy Rule Base)] -.-> R
 </div><div class="diagram-caption">Figure: Mamdani Fuzzy Inference Pipeline</div></div><ol>  <li><strong>Fuzzification:</strong> Crisp input values (e.g., Temperature = 32°C) are mapped to degrees of membership in fuzzy sets (e.g., "Hot" = 0.7, "Warm" = 0.2) using membership functions.</li>  <li><strong>Rule Evaluation (Inference):</strong> Fuzzy IF-THEN rules are evaluated. Fuzzy AND/OR operators are applied (usually MIN for AND, MAX for OR) to calculate the firing strength of the rule. The THEN part is truncated (clipped) by this firing strength.</li>  <li><strong>Aggregation:</strong> The truncated output fuzzy sets from all triggered rules are combined (usually via a MAX operation) into a single, unified output fuzzy set.</li>  <li><strong>Defuzzification:</strong> The aggregated output fuzzy set is converted back into a single crisp, numerical value. The most common method is the <strong>Centroid (Center of Gravity)</strong> method.</li></ol>
                 </div>
             </div>
@@ -930,11 +933,11 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Expert System Architecture (Knowledge Base, Inference Engine).</span></div>
                 <div class="a-text">
                     <h3>Expert System Architecture</h3><p>An <strong>Expert System</strong> is an AI application designed to emulate the decision-making ability of a human expert in a specific, narrow domain (e.g., MYCIN for medicine). It structurally separates domain knowledge from the reasoning logic.</p><h4>Core Components</h4><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     User((User)) <--> UI[User Interface]
-    UI <--> IE[Inference Engine]
-    IE <--> KB[(Knowledge Base)]
-    Exp((Domain Expert)) --> KA[Knowledge Acquisition Facility] --> KB
+      UI <--> IE[Inference Engine]
+      IE <--> KB[(Knowledge Base)]
+      Exp((Domain Expert)) --> KA[Knowledge Acquisition Facility] --> KB
 </div><div class="diagram-caption">Figure: Core Architecture of an Expert System</div></div><ul>  <li><strong>Knowledge Base (KB):</strong> The heart of the system. It contains the high-quality, domain-specific facts and heuristic rules (often encoded as IF-THEN rules) extracted from human experts.</li>  <li><strong>Inference Engine:</strong> The software "brain" that processes the Knowledge Base. It applies reasoning strategies (like <em>Forward Chaining</em> or <em>Backward Chaining</em>) to deduce new information, solve problems, or provide diagnoses.</li>  <li><strong>User Interface (UI):</strong> The mechanism through which the end-user queries the system, answers questions, and receives the final expert advice.</li>  <li><strong>Knowledge Acquisition Facility:</strong> Tools used by Knowledge Engineers to extract and encode rules from human experts into the KB.</li></ul>
                 </div>
             </div>
@@ -948,12 +951,12 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain Perceptron Artificial Neuron Model and Activation Functions.</span></div>
                 <div class="a-text">
                     <h3>The Perceptron Model</h3><p>The <strong>Perceptron</strong> is the simplest mathematical model of a biological neuron, forming the foundation of Artificial Neural Networks. It acts as a linear binary classifier.</p><h4>Mathematical Model</h4><p>Given input signals \(x_1, x_2, \dots, x_n\), the perceptron computes a weighted sum and adds a bias \(b\):</p>\[ z = \sum_{i=1}^n (w_i \cdot x_i) + b \]<p>This sum \(z\) is then passed through an <strong>Activation Function \(f(z)\)</strong> to determine the final output (whether the neuron "fires" or not).</p><div class="diagram-container"><div class="mermaid">
-    graph LR
-    x1((x1)) -- w1 --> Sum((Sum &Sigma;))
-    x2((x2)) -- w2 --> Sum
-    Bias((Bias)) --> Sum
-    Sum --> Act[Activation f(z)]
-    Act --> Output((Output))
+graph LR
+    x1((x1)) -- w1 --> Sum((Sum Σ))
+      x2((x2)) -- w2 --> Sum
+      Bias((Bias)) --> Sum
+      Sum --> Act[Activation f(z)]
+      Act --> Output((Output))
 </div><div class="diagram-caption">Figure: Single Artificial Neuron (Perceptron) Architecture</div></div><h4>Activation Functions</h4><p>Activation functions introduce non-linearity, allowing networks to learn complex patterns.</p><ul>  <li><strong>Step Function:</strong> Outputs 1 if \(z \ge 0\), else 0. Used in classical perceptrons.</li>  <li><strong>Sigmoid:</strong> \(\sigma(z) = \frac{1}{1 + e^{-z}}\). Smoothly maps values to a (0, 1) range.</li>  <li><strong>ReLU (Rectified Linear Unit):</strong> \(f(z) = \max(0, z)\). Extremely fast and solves the vanishing gradient problem in deep networks.</li></ul>
                 </div>
             </div>
@@ -1030,17 +1033,17 @@ Show alpha and beta values at each node and identify pruned branches.
 b) Explain Minimax Algorithm properties (Completeness, Optimality, Time/Space Complexity).</span></div>
                 <div class="a-text">
                     <h3>Alpha-Beta Pruning and Minimax Properties</h3><p><b>Part (a) Alpha-Beta Pruning Execution Trace:</b></p><p>Given leaf nodes (L to R): 3, 5, 6, 9, 1, 2, 0, -1.</p><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     MAX((MAX)) --> MIN1((MIN))
-    MAX --> MIN2((MIN))
-    MIN1 --> MAXL1((MAX))
-    MIN1 --> MAXL2((MAX))
-    MIN2 --> MAXR1((MAX))
-    MIN2 --> MAXR2((MAX))
-    MAXL1 --> 3((3)) & 5((5))
-    MAXL2 --> 6((6)) & 9((9))
-    MAXR1 --> 1((1)) & 2((2))
-    MAXR2 -.-> 0((0)) & -1((-1))
+      MAX --> MIN2((MIN))
+      MIN1 --> MAXL1((MAX))
+      MIN1 --> MAXL2((MAX))
+      MIN2 --> MAXR1((MAX))
+      MIN2 --> MAXR2((MAX))
+      MAXL1 --> 3((3)) & 5((5))
+      MAXL2 --> 6((6)) & 9((9))
+      MAXR1 --> 1((1)) & 2((2))
+      MAXR2 -.-> 0((0)) & -1((-1))
 </div><div class="diagram-caption">Figure: 3-Level Game Tree. The entire MAXR2 branch (0, -1) is pruned!</div></div><ul>  <li><b>Bottom-Up Evaluation:</b>      <br/>- MAXL1 evaluates to \(\max(3, 5) = 5\).      <br/>- MAXL2 evaluates to \(\max(6, 9) = 9\).      <br/>- MIN1 receives 5 and 9. It evaluates to \(\min(5, 9) = 5\).      <br/>- Root MAX receives 5 from the left branch. It updates its \(\alpha = 5\).      <br/>- MAXR1 evaluates to \(\max(1, 2) = 2\).      <br/>- MIN2 evaluates its first child (MAXR1) and gets 2. MIN2's provisional value is now \(\le 2\). Thus, MIN2's \(\beta = 2\).  </li>  <li><b>Pruning Trigger:</b> At MIN2, \(\alpha = 5\) (from Root) and \(\beta = 2\). Since \(\alpha \ge \beta\) (\(5 \ge 2\)), the remaining children of MIN2 (the MAXR2 branch) are completely pruned. Root MAX ultimately chooses the left branch with a value of 5.</li></ul><p><b>Part (b) Minimax Algorithm Properties:</b></p><ul>  <li><b>Completeness:</b> Yes, it is complete if the game tree is finite (e.g., maximum depth \(m\) is bounded).</li>  <li><b>Optimality:</b> Yes, it is optimal against an optimal opponent. If the opponent plays sub-optimally, Minimax still guarantees at least the computed score.</li>  <li><b>Time Complexity:</b> \(O(b^m)\), where \(b\) is the legal moves (branching factor) and \(m\) is the maximum depth.</li>  <li><b>Space Complexity:</b> \(O(bm)\) if generating all successors at once, or \(O(m)\) if generating them one at a time (like DFS).</li></ul>
                 </div>
             </div>
@@ -1176,13 +1179,13 @@ b) Calculate Belief and Plausibility measures for hypothesis set.</span></div>
 b) Construct Script representation for 'Restaurant Dining Experience'.</span></div>
                 <div class="a-text">
                     <h3>Semantic Networks and Frames Representation</h3><p><b>Part (a) Scenario:</b> "Tweety is a Canary. Canaries are birds. Birds have wings. Birds can fly. Sylvester is a Cat. Cats eat birds."</p><p><b>Part (b) Semantic Network Construction:</b></p><div class="diagram-container"><div class="mermaid">
-    graph TD
+graph TD
     Tweety((Tweety)) -- IS-A --> Canary((Canary))
-    Canary -- IS-A --> Bird((Bird))
-    Bird -- HAS-PART --> Wings((Wings))
-    Bird -- CAN --> Fly((Fly))
-    Sylvester((Sylvester)) -- IS-A --> Cat((Cat))
-    Cat -- EATS --> Bird
+      Canary -- IS-A --> Bird((Bird))
+      Bird -- HAS-PART --> Wings((Wings))
+      Bird -- CAN --> Fly((Fly))
+      Sylvester((Sylvester)) -- IS-A --> Cat((Cat))
+      Cat -- EATS --> Bird
 </div></div><p><b>Part (c) Equivalent Frame Representation:</b></p><pre><code>Frame: Bird
   IS-A: Animal
   Has-Part: Wings

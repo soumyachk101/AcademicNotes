@@ -1,0 +1,752 @@
+/* ============================================================
+   premium.css — UI redesign layer
+   Loaded AFTER each page's own <style>, so it wins on ties.
+
+   Hard rules:
+   - Palette is frozen. Every hue comes from the page's own custom
+     properties. Only neutral black/white alphas are introduced.
+   - No copy, no diagrams, no DOM changes. Structure, scale,
+     surfaces, depth and motion only.
+   ============================================================ */
+
+:root {
+    /* One accent, resolved from whatever the host page already defines */
+    --p-accent: var(--primary, var(--primary-color, #3b82f6));
+
+    /* Motion */
+    --p-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --p-fast: 160ms;
+    --p-mid: 280ms;
+    --p-slow: 520ms;
+
+    /* Radius */
+    --p-r-sm: 10px;
+    --p-r-md: 16px;
+    --p-r-lg: 24px;
+    --p-r-xl: 32px;
+
+    /* Layered depth — overrides the flat tokens the pages define */
+    --shadow-sm:
+        0 1px 1px rgba(15, 23, 42, 0.04),
+        0 2px 6px -2px rgba(15, 23, 42, 0.06);
+    --shadow-md:
+        0 1px 1px rgba(15, 23, 42, 0.03),
+        0 6px 14px -6px rgba(15, 23, 42, 0.08),
+        0 22px 44px -22px rgba(15, 23, 42, 0.16);
+    --shadow-lg:
+        0 1px 1px rgba(15, 23, 42, 0.03),
+        0 12px 28px -10px rgba(15, 23, 42, 0.10),
+        0 44px 80px -36px rgba(15, 23, 42, 0.22);
+
+    --p-hairline: rgba(15, 23, 42, 0.08);
+    --p-hairline-soft: rgba(15, 23, 42, 0.05);
+    --p-wash: rgba(15, 23, 42, 0.035);
+    --p-wash-strong: rgba(15, 23, 42, 0.06);
+}
+
+/* ============================================================
+   1. Foundations
+   ============================================================ */
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
+    font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+h1, h2, h3, h4,
+.book-title, .book-subtitle, .title, .nav-title,
+.section-title, .chapter-title, .q-text, .qa-question, .hard-title {
+    text-wrap: balance;
+}
+
+p, li, .chapter-desc, .subtitle, .card p { text-wrap: pretty; }
+
+table, td, th, .q-badge, .badge-count, .stat-val, .toc-idx,
+.card-progress-text, .progress-text, .flash-count,
+.textbook-page-num, code, pre, .code-block, .formula-box {
+    font-variant-numeric: tabular-nums;
+}
+
+img, svg, canvas, video { max-width: 100%; height: auto; }
+
+:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+.toc-box, .drawer-list, .sidebar, pre, .code-block { scrollbar-width: thin; }
+
+[id] { scroll-margin-top: 7.5rem; }
+
+/* ---- Reading progress rail, scroll-driven, no JS ---- */
+html::before {
+    content: "";
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 3px;
+    background: var(--p-accent);
+    transform-origin: 0 50%;
+    scale: 0 1;
+    z-index: 9999;
+    pointer-events: none;
+    animation: p-scroll-progress linear both;
+    animation-timeline: scroll(root);
+}
+
+@keyframes p-scroll-progress { to { scale: 1 1; } }
+
+/* ---- Scroll reveal. Uses `translate`, not `transform`, so hover
+        transforms below stay free of conflict. ---- */
+@keyframes p-rise {
+    from { opacity: 0; translate: 0 22px; }
+    to   { opacity: 1; translate: 0 0; }
+}
+
+.qa-card,
+.card,
+.chapter-card,
+.diagram-container,
+.formula-box,
+.section-title {
+    animation: p-rise linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 34%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    html::before { display: none; }
+    *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ============================================================
+   2. Folio archetype — .folio-page / .chapter-card
+   ============================================================ */
+
+body:has(> .folio-page) { padding-block: 3.5rem; }
+
+.folio-page {
+    max-width: 1240px;
+    border-radius: var(--p-r-xl);
+    padding: 5.5rem 4.5rem 4rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.folio-page::before {
+    inset: 22px;
+    border-radius: var(--p-r-lg);
+}
+
+.title-page { margin-bottom: 4.5rem; }
+
+.book-badge {
+    font-size: 0.7rem;
+    letter-spacing: 0.34em;
+    margin-bottom: 1.75rem;
+}
+
+.book-title {
+    font-size: clamp(2.75rem, 6vw, 5rem);
+    line-height: 1.02;
+    letter-spacing: -0.028em;
+}
+
+.book-subtitle {
+    font-size: 1.4rem;
+    line-height: 1.6;
+    max-width: 46ch;
+}
+
+.book-stats {
+    gap: 2.75rem;
+    padding: 1.15rem 3rem;
+    border-radius: 999px;
+    border: 1px solid var(--p-hairline);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-val { font-size: 1.4rem; letter-spacing: -0.015em; }
+.stat-lbl { letter-spacing: 0.18em; }
+
+.chapters-grid { gap: 2rem; }
+
+.chapter-card {
+    border-radius: var(--p-r-lg);
+    padding: 2.6rem 2.2rem 2rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+        transform var(--p-slow) var(--p-ease),
+        box-shadow var(--p-slow) var(--p-ease),
+        border-color var(--p-slow) var(--p-ease);
+}
+
+/* The spine becomes a full-bleed top rail — reads as a bound section,
+   not a stray stripe */
+.chapter-card::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: auto;
+    width: auto;
+    height: 5px;
+    border-radius: var(--p-r-lg) var(--p-r-lg) 0 0;
+    transition: height var(--p-mid) var(--p-ease);
+}
+
+.chapter-card:hover::before { width: auto; height: 8px; }
+
+.chapter-card::after { display: none; }
+
+/* Restraint: a calm lift reads more expensive than a tilt */
+.chapter-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+
+.chapter-card:active { transform: translateY(-2px); }
+
+.chapter-num {
+    font-family: inherit;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    margin-bottom: 0.7rem;
+}
+
+.chapter-title { font-size: 1.75rem; line-height: 1.15; }
+
+.chapter-desc { font-size: 0.9rem; line-height: 1.6; }
+
+.mini-toc {
+    margin-top: 1.6rem;
+    padding-top: 1.4rem;
+    border-top: 1px solid var(--p-hairline-soft);
+    gap: 0.2rem;
+}
+
+.toc-item {
+    border-radius: 8px;
+    padding: 0.45rem 0.6rem;
+}
+.toc-item:hover { background-color: var(--p-wash); }
+
+.card-footer {
+    margin-top: 1.75rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--p-hairline-soft);
+}
+
+.badge-count {
+    border-radius: 999px;
+    padding: 0.4rem 0.85rem;
+    letter-spacing: 0.1em;
+}
+
+.section-divider-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    letter-spacing: -0.02em;
+    border-bottom-style: solid;
+    border-bottom-color: var(--p-hairline);
+    padding-bottom: 0.9rem;
+    margin: 4.5rem 0 2rem;
+}
+
+.section-divider-title .sem-badge {
+    padding: 0.35rem 0.95rem;
+    letter-spacing: 0.02em;
+    box-shadow: var(--shadow-sm);
+}
+
+/* ============================================================
+   3. Container / card-grid archetype — semester & subject indexes
+   ============================================================ */
+
+.container {
+    max-width: 1180px;
+    border-radius: var(--p-r-xl);
+    padding: 4.5rem;
+    box-shadow: var(--shadow-lg);
+}
+
+.header {
+    padding-bottom: 2.75rem;
+    margin-bottom: 3.25rem;
+    border-bottom-style: solid;
+    border-bottom-color: var(--p-hairline);
+}
+
+.title {
+    font-size: clamp(2.5rem, 5.5vw, 4.25rem);
+    line-height: 1.04;
+    letter-spacing: -0.028em;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 58ch;
+    margin-inline: auto;
+    margin-top: 1rem;
+}
+
+.card-grid { gap: 2rem; }
+
+.card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--p-r-lg);
+    padding: 2.5rem 2.2rem 2rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+        transform var(--p-slow) var(--p-ease),
+        box-shadow var(--p-slow) var(--p-ease),
+        border-color var(--p-slow) var(--p-ease);
+}
+
+/* Accent rail, drawn from the card's own badge colour context */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 4px;
+    background: var(--p-accent);
+    opacity: 0.85;
+    transition: height var(--p-mid) var(--p-ease);
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+}
+.card:hover::before { height: 7px; }
+.card:active { transform: translateY(-2px); }
+
+.card h3 {
+    font-size: 1.85rem;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    margin-bottom: 0.65rem;
+}
+
+.card p { font-size: 0.95rem; line-height: 1.65; }
+
+.card-footer {
+    border-top-color: var(--p-hairline-soft);
+    padding-top: 1.1rem;
+    /* Two labels on one line collide in a 3-up grid */
+    flex-wrap: wrap;
+    gap: 0.35rem 1rem;
+}
+
+.badge {
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+    letter-spacing: 0.06em;
+    line-height: 1.5;
+}
+
+.back-link {
+    padding: 0.45rem 0.95rem 0.45rem 0.75rem;
+    border-radius: 999px;
+    background: var(--p-wash);
+    transition: background var(--p-fast) var(--p-ease), transform var(--p-fast) var(--p-ease);
+}
+.back-link:hover { background: var(--p-wash-strong); transform: translateX(-3px); }
+
+/* ============================================================
+   4. Q&A bank archetype — .layout / .content / .qa-card
+   ============================================================ */
+
+.top-nav {
+    padding: 1.15rem 2.5rem;
+    border-bottom: 1px solid var(--p-hairline);
+    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.02), 0 10px 30px -22px rgba(15, 23, 42, 0.5);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+}
+
+.nav-title { font-size: 1.05rem; line-height: 1.35; letter-spacing: -0.01em; }
+
+.top-nav a {
+    padding: 0.4rem 0.85rem;
+    border-radius: 999px;
+    transition: background var(--p-fast) var(--p-ease), color var(--p-fast) var(--p-ease);
+}
+.top-nav a:hover { background: var(--p-wash); }
+
+.layout {
+    max-width: 1440px;
+    gap: 4rem;
+    margin-block: 3.5rem 5rem;
+}
+
+/* ---- Sidebar becomes a quiet rail instead of a floating box ---- */
+.sidebar { width: 268px; top: 7.5rem; }
+
+.toc-box {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 0 0 1.4rem;
+    border-left: 1px solid var(--p-hairline);
+    border-radius: 0;
+    max-height: calc(100vh - 11rem);
+}
+.toc-box:hover { transform: none; box-shadow: none; }
+
+.toc-box h3 {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 1.4rem;
+    opacity: 0.65;
+}
+
+.toc-box ul { margin-top: 0; }
+.toc-box li { margin-bottom: 0.15rem; }
+
+.toc-box a {
+    padding: 0.55rem 0.75rem;
+    margin-left: -0.75rem;
+    border-radius: 8px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+    transition: background var(--p-fast) var(--p-ease), color var(--p-fast) var(--p-ease);
+}
+.toc-box a:hover { background: var(--p-wash); transform: none; }
+
+/* ---- Content column ---- */
+.content {
+    border-radius: var(--p-r-xl);
+    padding: 4.5rem 5rem 5rem;
+    box-shadow: var(--shadow-md);
+    font-size: 1.03rem;
+}
+.content:hover { transform: none; box-shadow: var(--shadow-md); }
+
+/* Prose measure only — tables, diagrams and code keep full width */
+.a-text > p,
+.a-text > ul,
+.a-text > ol,
+.answer > p,
+.answer > ul,
+.answer > ol { max-width: 74ch; }
+
+/* ---- Group headings pin to the top while you read the group ---- */
+.section-title {
+    position: sticky;
+    top: 4.6rem;
+    z-index: 20;
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 4.5rem -5rem 3rem;
+    padding: 1rem 5rem;
+    border-bottom: 1px solid var(--p-hairline);
+    background: inherit;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+}
+.section-title:first-child { margin-top: -1.5rem; }
+
+/* ---- Each question becomes a real card. Scoped to .content so the
+        notebook-paper pages keep their own ruled-page treatment. ---- */
+.content .qa-card {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding: 2.1rem 2.3rem;
+    border: 1px solid var(--p-hairline-soft);
+    border-bottom: 1px solid var(--p-hairline-soft);
+    border-radius: var(--p-r-md);
+    background: var(--p-wash);
+    scroll-margin-top: 9rem;
+    transition:
+        box-shadow var(--p-mid) var(--p-ease),
+        border-color var(--p-mid) var(--p-ease),
+        background var(--p-mid) var(--p-ease);
+}
+
+.content .qa-card:hover {
+    border-color: var(--p-hairline);
+    box-shadow: var(--shadow-md);
+}
+
+/* The anchored question announces itself */
+.content .qa-card:target {
+    border-color: var(--p-accent);
+    box-shadow: var(--shadow-md);
+}
+
+/* Notebook pages: keep the page flat, just give the block room to breathe */
+.section .qa-card { padding-bottom: 1.5rem; }
+
+.q-text {
+    align-items: center;
+    gap: 0.9rem;
+    font-size: 1.18rem;
+    line-height: 1.45;
+    margin-bottom: 1.2rem;
+}
+
+/* Q1 / Q10 / Q100 all occupy the same optical slot */
+.q-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 3rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    letter-spacing: 0.02em;
+    align-self: flex-start;
+    margin-top: 0.1rem;
+}
+
+.a-text {
+    padding-left: 0;
+    border-left: none;
+    font-size: 1rem;
+}
+.a-text:hover { border-left-color: transparent; }
+
+.note-skeleton {
+    border-radius: var(--p-r-sm);
+    padding: 1.4rem 1.6rem;
+    margin-top: 0;
+}
+
+/* ============================================================
+   5. notes.css archetype — accordions, formulas, study chrome
+   ============================================================ */
+
+details {
+    border-radius: var(--p-r-md);
+    transition: box-shadow var(--p-mid) var(--p-ease), border-color var(--p-mid) var(--p-ease);
+}
+details[open] { box-shadow: var(--shadow-sm); }
+
+summary {
+    border-radius: var(--p-r-md);
+    line-height: 1.45;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.section h2 { letter-spacing: -0.018em; }
+
+.qa-question { font-size: 1.2rem; line-height: 1.4; letter-spacing: -0.01em; }
+
+.answer { line-height: 1.8; }
+
+/* The list dash strands on its own line whenever the item opens with a
+   block-level .highlight heading. Float it into the gutter. */
+.answer ul li::before { float: left; }
+
+.formula-box {
+    border-radius: var(--p-r-sm);
+    box-shadow: var(--shadow-sm);
+    padding: 1.15rem 1.4rem;
+}
+
+.search-input {
+    border-radius: 999px;
+    padding-block: 0.7rem;
+    transition: box-shadow var(--p-fast) var(--p-ease), border-color var(--p-fast) var(--p-ease);
+}
+.search-input:focus { box-shadow: var(--shadow-sm); }
+
+.drawer-toggle,
+.flash-btn,
+.bookmark-btn {
+    border-radius: 999px;
+    transition: transform var(--p-fast) var(--p-ease), box-shadow var(--p-fast) var(--p-ease);
+}
+.drawer-toggle { box-shadow: var(--shadow-md); }
+.drawer-toggle:hover,
+.flash-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+.drawer-toggle:active,
+.flash-btn:active:not(:disabled) { transform: translateY(0); }
+
+.jump-drawer { box-shadow: var(--shadow-lg); border-radius: var(--p-r-lg) 0 0 var(--p-r-lg); }
+.drawer-item { border-radius: var(--p-r-sm); }
+
+.progress-bar-container,
+.card-progress-bar { border-radius: 999px; overflow: hidden; }
+
+.progress-bar-fill,
+.card-progress-fill { border-radius: 999px; transition: width var(--p-slow) var(--p-ease); }
+
+/* ============================================================
+   6. Tables & code
+   ============================================================ */
+
+table {
+    border-radius: var(--p-r-sm);
+    box-shadow: var(--shadow-sm);
+    font-size: 0.95rem;
+}
+
+th {
+    letter-spacing: 0.005em;
+    line-height: 1.4;
+    padding-block: 0.9rem;
+}
+
+td, th { vertical-align: top; }
+
+pre,
+.code-block {
+    border-radius: var(--p-r-sm);
+    padding: 1.5rem 1.6rem;
+    box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+code { border-radius: 5px; }
+
+/* ============================================================
+   7. Responsive
+   ============================================================ */
+
+@media (max-width: 1024px) {
+    /* The layout turns column here, but keeps align-items:flex-start, which
+       sizes .content to its max-content width and overflows the viewport. */
+    .layout { gap: 2.5rem; margin-block: 2rem 3rem; align-items: stretch; }
+    .sidebar { top: auto; }
+    .toc-box {
+        border-left: none;
+        border-top: 1px solid var(--p-hairline);
+        padding: 1.25rem 0 0;
+        max-height: none;
+    }
+    .content { padding: 2.75rem 2.25rem 3rem; }
+    .section-title { margin-inline: -2.25rem; padding-inline: 2.25rem; }
+    .folio-page { padding: 3.5rem 2.5rem 3rem; }
+    .container { padding: 3rem 2.25rem; }
+}
+
+@media (max-width: 768px) {
+    :root { --p-r-xl: 20px; --p-r-lg: 16px; --p-r-md: 12px; }
+
+    [id] { scroll-margin-top: 5.5rem; }
+
+    /* `clip`, not `hidden` — `hidden` would break position:sticky */
+    html, body { overflow-x: clip; }
+
+    .layout { padding-inline: 1rem; gap: 1.5rem; }
+    .sidebar { width: auto; }
+    .top-nav { flex-wrap: wrap; row-gap: 0.35rem; }
+
+    body:has(> .folio-page) { padding-block: 1rem; }
+
+    .folio-page { padding: 2.5rem 1.35rem 2rem; }
+    .folio-page::before { inset: 12px; }
+
+    .container { padding: 2rem 1.25rem; }
+
+    .top-nav { padding: 0.85rem 1rem; gap: 0.6rem; }
+    .nav-title { font-size: 0.9rem; }
+
+    .content { padding: 1.75rem 1.25rem 2.25rem; }
+    .section-title {
+        top: 3.6rem;
+        margin-inline: -1.25rem;
+        padding: 0.8rem 1.25rem;
+    }
+
+    .qa-card { padding: 1.4rem 1.25rem; }
+    .q-text { font-size: 1.05rem; gap: 0.7rem; }
+
+    .book-stats { flex-wrap: wrap; gap: 1.25rem; padding: 0.9rem 1.5rem; border-radius: var(--p-r-lg); }
+
+    .card, .chapter-card { padding: 1.75rem 1.4rem 1.5rem; }
+    .card h3 { font-size: 1.5rem; }
+    .card-footer { flex-wrap: wrap; gap: 0.4rem 1rem; }
+
+    /* Wide tables scroll themselves instead of the page */
+    table { display: block; width: 100%; overflow-x: auto; }
+
+    /* Touch has no hover — drop the lift so taps do not stick */
+    .card:hover, .chapter-card:hover { transform: none; }
+}
+
+/* ============================================================
+   8. Print — these are study notes; they get printed
+   ============================================================ */
+
+@media print {
+    html::before,
+    .top-nav,
+    .sidebar,
+    .back-link,
+    .drawer-toggle,
+    .jump-drawer,
+    .search-wrapper,
+    .flashcard-controls,
+    .bookmark-btn,
+    .progress-wrapper { display: none !important; }
+
+    body { background: #fff !important; }
+
+    .layout { display: block; margin: 0; padding: 0; max-width: none; }
+
+    .content,
+    .container,
+    .folio-page,
+    .qa-card,
+    table,
+    pre,
+    .code-block,
+    .formula-box,
+    details {
+        box-shadow: none !important;
+        border-radius: 0;
+        max-width: none;
+    }
+
+    .content, .container, .folio-page { padding: 0; }
+
+    .section-title {
+        position: static;
+        margin-inline: 0;
+        padding-inline: 0;
+        backdrop-filter: none;
+    }
+
+    .qa-card { background: none; border: none; padding: 0; margin-bottom: 1.5rem; }
+
+    .qa-card,
+    table,
+    pre,
+    .code-block,
+    .formula-box,
+    .diagram-container,
+    .mermaid { break-inside: avoid; }
+
+    h1, h2, h3, .section-title, .q-text, .qa-question { break-after: avoid; }
+
+    a { text-decoration: none; }
+}
+
+/* Fix for Mermaid diagrams rendering tiny */
+.mermaid svg {
+    min-width: 100% !important;
+    min-height: 300px !important;
+    height: auto !important;
+    max-width: 100% !important;
+}

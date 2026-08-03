@@ -54,9 +54,11 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { display: flex; justify-content: center; margin-bottom: 1rem; }
+        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
+        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
+    <link rel="stylesheet" href="../../premium.css">
 </head>
 <body>
     <nav class="top-nav">
@@ -704,14 +706,14 @@
 <div class="mermaid">
 graph TD
     A[Requirements] --> B[Design]
-    B --> C[Implementation]
-    C --> D[Testing]
-    D --> E[Deployment]
-    E --> F[Maintenance]
-    style A fill:#e0f2fe,stroke:#0284c7
-    style B fill:#e0f2fe,stroke:#0284c7
-    style C fill:#e0f2fe,stroke:#0284c7
-    style D fill:#e0f2fe,stroke:#0284c7
+      B --> C[Implementation]
+      C --> D[Testing]
+      D --> E[Deployment]
+      E --> F[Maintenance]
+      style A fill:#e0f2fe,stroke:#0284c7
+      style B fill:#e0f2fe,stroke:#0284c7
+      style C fill:#e0f2fe,stroke:#0284c7
+      style D fill:#e0f2fe,stroke:#0284c7
 </div>
 </div>
 <ul>
@@ -1498,10 +1500,10 @@ b) Draw UML Class Diagram and Sequence Diagram for User Login and Exam Submissio
 <div class="mermaid">
 graph LR
     S((Student)) -- Login Credentials --> O[Online Exam System]
-    S -- Exam Answers --> O
-    O -- Exam Results --> S
-    A((Admin)) -- Questions/Keys --> O
-    O -- Usage Reports --> A
+      S -- Exam Answers --> O
+      O -- Exam Results --> S
+      A((Admin)) -- Questions/Keys --> O
+      O -- Usage Reports --> A
 </div>
 </div>
 <p><strong>Level 1 DFD:</strong></p>
@@ -1519,21 +1521,21 @@ graph LR
 <div class="mermaid">
 classDiagram
     class User {
-        +String username
-        +String password
-        +login()
-    }
-    class Student {
-        +int studentId
-        +takeExam()
-    }
-    class Exam {
-        +int examId
-        +List questions
-        +submitAnswers()
-    }
-    User <|-- Student
-    Student "1" -- "*" Exam : Takes
+      +String username
+      +String password
+      +login()
+      }
+      class Student {
+      +int studentId
+      +takeExam()
+      }
+      class Exam {
+      +int examId
+      +List questions
+      +submitAnswers()
+      }
+      User <|-- Student
+      Student "1" -- "*" Exam : Takes
 </div>
 </div>
 
@@ -1622,12 +1624,12 @@ c) Compare Agile vs Traditional Waterfall on 6 dimensions.</span></div>
 <div class="mermaid">
 graph LR
     PB[(Product Backlog)] --> SP[Sprint Planning]
-    SP --> SB[(Sprint Backlog)]
-    SB --> DS((Daily Scrum))
-    DS --> DEV[Development]
-    DEV --> SR[Sprint Review]
-    SR --> SRET[Sprint Retrospective]
-    SRET --> PB
+      SP --> SB[(Sprint Backlog)]
+      SB --> DS((Daily Scrum))
+      DS --> DEV[Development]
+      DEV --> SR[Sprint Review]
+      SR --> SRET[Sprint Retrospective]
+      SRET --> PB
 </div>
 </div>
 <ul>
@@ -1721,9 +1723,9 @@ b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram 
 <div class="mermaid">
 graph LR
     C((Customer)) -- Uses --> W(Withdraw Cash)
-    C -- Uses --> B(Check Balance)
-    B --&lt;&lt;include&gt;&gt;--> A(Authenticate PIN)
-    W --&lt;&lt;include&gt;&gt;--> A
+      C -- Uses --> B(Check Balance)
+      B --"<<include>>"--> A(Authenticate PIN)
+      W --"<<include>>"--> A
 </div>
 </div>
 
@@ -1732,16 +1734,16 @@ graph LR
 <div class="mermaid">
 stateDiagram-v2
     [*] --> InsertCard
-    InsertCard --> EnterPIN
-    EnterPIN --> ValidatePIN
-    ValidatePIN --> InvalidPIN : Fails
-    InvalidPIN --> [*]
-    ValidatePIN --> SelectWithdrawal : Succeeds
-    SelectWithdrawal --> CheckFunds
-    CheckFunds --> DispenseCash : Sufficient
-    CheckFunds --> Reject : Insufficient
-    DispenseCash --> EjectCard
-    EjectCard --> [*]
+      InsertCard --> EnterPIN
+      EnterPIN --> ValidatePIN
+      ValidatePIN --> InvalidPIN : Fails
+      InvalidPIN --> [*]
+      ValidatePIN --> SelectWithdrawal : Succeeds
+      SelectWithdrawal --> CheckFunds
+      CheckFunds --> DispenseCash : Sufficient
+      CheckFunds --> Reject : Insufficient
+      DispenseCash --> EjectCard
+      EjectCard --> [*]
 </div>
 </div>
 
@@ -1872,11 +1874,11 @@ b) Detail Software Re-engineering lifecycle model including Reverse Engineering,
 <div class="mermaid">
 graph LR
     L[Legacy Code] --> RE[Reverse Engineering]
-    RE --> D[Recovered Design]
-    D --> RS[Restructuring]
-    RS --> ND[New Architecture Design]
-    ND --> FE[Forward Engineering]
-    FE --> M[Modern System]
+      RE --> D[Recovered Design]
+      D --> RS[Restructuring]
+      RS --> ND[New Architecture Design]
+      ND --> FE[Forward Engineering]
+      FE --> M[Modern System]
 </div>
 </div>
 <ul>
@@ -2138,11 +2140,11 @@ b) Provide SRS outline, Level 1 DFD, Architecture diagram, and Test Strategy.</s
 <div class="mermaid">
 graph LR
     U((Customer)) -- Order Details --> P1(1.0 Process Order)
-    P1 -- Validation --> D1[(User DB)]
-    P1 -- Push Notification --> R((Restaurant))
-    R -- Accept/Reject --> P2(2.0 Payment/Status)
-    P2 -- Charge Card --> B((Bank Gateway))
-    P2 -- Status Update --> U
+      P1 -- Validation --> D1[(User DB)]
+      P1 -- Push Notification --> R((Restaurant))
+      R -- Accept/Reject --> P2(2.0 Payment/Status)
+      P2 -- Charge Card --> B((Bank Gateway))
+      P2 -- Status Update --> U
 </div>
 </div>
 <p><strong>3. Architecture (Microservices):</strong> User Auth Service, Restaurant Catalog Service, Order Matching Service, Live Tracking Service, Payment Service.</p>
@@ -2286,12 +2288,12 @@ b) Design User Interface layout and state transition diagram for an E-Learning P
 <div class="mermaid">
 stateDiagram-v2
     [*] --> LoggedOutHome
-    LoggedOutHome --> LoginModal : Click Login
-    LoginModal --> StudentDashboard : Valid Credentials
-    StudentDashboard --> CoursePlayer : Click 'Resume Course'
-    CoursePlayer --> QuizModal : Video Ends
-    QuizModal --> StudentDashboard : Submit Quiz
-    StudentDashboard --> LoggedOutHome : Click Logout
+      LoggedOutHome --> LoginModal : Click Login
+      LoginModal --> StudentDashboard : Valid Credentials
+      StudentDashboard --> CoursePlayer : Click 'Resume Course'
+      CoursePlayer --> QuizModal : Video Ends
+      QuizModal --> StudentDashboard : Submit Quiz
+      StudentDashboard --> LoggedOutHome : Click Logout
 </div>
 </div>
 
@@ -2315,10 +2317,10 @@ b) Detail Continuous Integration (CI), Continuous Testing (CT), and Continuous D
 <div class="mermaid">
 graph LR
     Code[Git Push] --> CI[Continuous Integration]
-    CI --> Build[Build & Compile]
-    Build --> CT[Continuous Testing]
-    CT --> CD[Continuous Deployment]
-    CD --> Prod[Production Server]
+      CI --> Build[Build & Compile]
+      Build --> CT[Continuous Testing]
+      CT --> CD[Continuous Deployment]
+      CD --> Prod[Production Server]
 </div>
 </div>
 <ul>
@@ -2346,11 +2348,11 @@ b) Construct Fault Tree for a Medical Device Software safety failure.</span></di
 <div class="mermaid">
 graph TD
     TE[Top Event: Fatal Shock] --> OR_GATE{OR Gate}
-    OR_GATE --> A[Software calculates wrong voltage]
-    OR_GATE --> B[Hardware relay fails closed]
-    A --> AND_GATE{AND Gate}
-    AND_GATE --> C[Sensor reads wrong heart rate]
-    AND_GATE --> D[Failsafe logic does not trigger]
+      OR_GATE --> A[Software calculates wrong voltage]
+      OR_GATE --> B[Hardware relay fails closed]
+      A --> AND_GATE{AND Gate}
+      AND_GATE --> C[Sensor reads wrong heart rate]
+      AND_GATE --> D[Failsafe logic does not trigger]
 </div>
 </div>
 <p>In this Fault Tree, the catastrophic event can happen if EITHER the software miscalculates OR the hardware relay breaks. For the software to miscalculate fatally, the sensor must read wrong AND the failsafe logic must simultaneously fail.</p>

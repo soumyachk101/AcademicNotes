@@ -54,9 +54,11 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { display: flex; justify-content: center; margin-bottom: 1rem; }
+        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
+        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
+    <link rel="stylesheet" href="../../premium.css">
 </head>
 <body>
     <nav class="top-nav">
@@ -710,21 +712,21 @@
 <div class="mermaid">
 graph TD
     A[Source Code] --> L[Lexical Analyzer]
-    L -- Stream of Tokens --> S[Syntax Analyzer / Parser]
-    S -- Syntax Tree --> Sem[Semantic Analyzer]
-    Sem -- Annotated Tree --> ICG[Intermediate Code Generator]
-    ICG -- Intermediate Code --> CO[Code Optimizer]
-    CO -- Optimized Code --> CG[Target Code Generator]
-    CG --> Output[Machine Code]
-    ST[(Symbol Table)] -.-> L
-    ST -.-> S
-    ST -.-> Sem
-    ST -.-> ICG
-    ST -.-> CO
-    ST -.-> CG
-    EH[Error Handler] -.-> L
-    EH -.-> S
-    EH -.-> Sem
+      L -- Stream of Tokens --> S[Syntax Analyzer / Parser]
+      S -- Syntax Tree --> Sem[Semantic Analyzer]
+      Sem -- Annotated Tree --> ICG[Intermediate Code Generator]
+      ICG -- Intermediate Code --> CO[Code Optimizer]
+      CO -- Optimized Code --> CG[Target Code Generator]
+      CG --> Output[Machine Code]
+      ST[(Symbol Table)] -.-> L
+      ST -.-> S
+      ST -.-> Sem
+      ST -.-> ICG
+      ST -.-> CO
+      ST -.-> CG
+      EH[Error Handler] -.-> L
+      EH -.-> S
+      EH -.-> Sem
 </div>
 </div>
 <ul>
@@ -747,12 +749,12 @@ graph TD
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S1((1)) -- &epsilon; --> S2((2))
-    S1 -- &epsilon; --> S4((4))
-    S2 -- a --> S3((3))
-    S4 -- b --> S5((5))
-    S3 -- &epsilon; --> S6((6))
-    S5 -- &epsilon; --> S6((6))
+    S1((1)) -- "ε" --> S2((2))
+      S1 -- "ε" --> S4((4))
+      S2 -- a --> S3((3))
+      S4 -- b --> S5((5))
+      S3 -- "ε" --> S6((6))
+      S5 -- "ε" --> S6((6))
 </div>
 </div>
 <p><strong>Step 2: Construct NFA for (a | b)* (Kleene Star)</strong></p>
@@ -760,16 +762,16 @@ graph LR
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S0((0)) -- &epsilon; --> S1((1))
-    S0 -- &epsilon; --> S7((7))
-    S1 -- &epsilon; --> S2((2))
-    S1 -- &epsilon; --> S4((4))
-    S2 -- a --> S3((3))
-    S4 -- b --> S5((5))
-    S3 -- &epsilon; --> S6((6))
-    S5 -- &epsilon; --> S6((6))
-    S6 -- &epsilon; --> S1((1))
-    S6 -- &epsilon; --> S7((7))
+    S0((0)) -- "ε" --> S1((1))
+      S0 -- "ε" --> S7((7))
+      S1 -- "ε" --> S2((2))
+      S1 -- "ε" --> S4((4))
+      S2 -- a --> S3((3))
+      S4 -- b --> S5((5))
+      S3 -- "ε" --> S6((6))
+      S5 -- "ε" --> S6((6))
+      S6 -- "ε" --> S1((1))
+      S6 -- "ε" --> S7((7))
 </div>
 </div>
 <p><strong>Step 3: Construct Final NFA for (a | b)*a (Concatenation)</strong></p>
@@ -777,17 +779,17 @@ graph LR
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S0((0)) -- &epsilon; --> S1((1))
-    S0 -- &epsilon; --> S7((7))
-    S1 -- &epsilon; --> S2((2))
-    S1 -- &epsilon; --> S4((4))
-    S2 -- a --> S3((3))
-    S4 -- b --> S5((5))
-    S3 -- &epsilon; --> S6((6))
-    S5 -- &epsilon; --> S6((6))
-    S6 -- &epsilon; --> S1((1))
-    S6 -- &epsilon; --> S7((7))
-    S7 -- a --> S8(((8)))
+    S0((0)) -- "ε" --> S1((1))
+      S0 -- "ε" --> S7((7))
+      S1 -- "ε" --> S2((2))
+      S1 -- "ε" --> S4((4))
+      S2 -- a --> S3((3))
+      S4 -- b --> S5((5))
+      S3 -- "ε" --> S6((6))
+      S5 -- "ε" --> S6((6))
+      S6 -- "ε" --> S1((1))
+      S6 -- "ε" --> S7((7))
+      S7 -- a --> S8(((8)))
 </div>
 </div>
 
@@ -1768,11 +1770,11 @@ L_END: ...
 <div class="mermaid">
 graph TD
     B1["B1: while(a < b)"] -- True --> B2["B2: if(c < d)"]
-    B1 -- False --> END((END))
-    B2 -- True --> B3["B3: x = y + z"]
-    B2 -- False --> B4["B4: x = y - z"]
-    B3 --> B1
-    B4 --> B1
+      B1 -- False --> END((END))
+      B2 -- True --> B3["B3: x = y + z"]
+      B2 -- False --> B4["B4: x = y - z"]
+      B3 --> B1
+      B4 --> B1
 </div>
 </div>
 
@@ -1896,33 +1898,29 @@ b) Derive optimized 3AC code from constructed DAG.
 <div class="mermaid">
 graph TD
     N1((4))
-    N2((i))
-    N3(("* [t1, t3]"))
-    N1 --> N3
-    N2 --> N3
-    
-    Na((a))
-    Nb((b))
-    N4(("[] [t2]"))
-    N5(("[] [t4]"))
-    Na --> N4
-    N3 --> N4
-    Nb --> N5
-    N3 --> N5
-    
-    N6(("+ [t5]"))
-    N4 --> N6
-    N5 --> N6
-    
-    Np((prod))
-    N7(("+ [t6, prod]"))
-    Np --> N7
-    N6 --> N7
-    
-    N1b((1))
-    N8(("+ [t7, i]"))
-    N2 --> N8
-    N1b --> N8
+      N2((i))
+      N3(("* [t1, t3]"))
+      N1 --> N3
+      N2 --> N3
+       Na((a))
+      Nb((b))
+      N4(("[] [t2]"))
+      N5(("[] [t4]"))
+      Na --> N4
+      N3 --> N4
+      Nb --> N5
+      N3 --> N5
+       N6(("+ [t5]"))
+      N4 --> N6
+      N5 --> N6
+       Np((prod))
+      N7(("+ [t6, prod]"))
+      Np --> N7
+      N6 --> N7
+       N1b((1))
+      N8(("+ [t7, i]"))
+      N2 --> N8
+      N1b --> N8
 </div>
 </div>
 
@@ -1961,14 +1959,14 @@ c) Explain register spilling mechanism.</span></div>
 <div class="mermaid">
 graph TD
     A --- B
-    A --- C
-    A --- D
-    B --- C
-    C --- D
-    style A fill:#f9a8d4
-    style B fill:#86efac
-    style C fill:#93c5fd
-    style D fill:#86efac
+      A --- C
+      A --- D
+      B --- C
+      C --- D
+      style A fill:#f9a8d4
+      style B fill:#86efac
+      style C fill:#93c5fd
+      style D fill:#86efac
 </div>
 <div class="diagram-caption">Interference Graph colored with K=3 registers.</div>
 </div>
@@ -2331,15 +2329,14 @@ b) Draw scope tree structure and explain symbol lookup in nested classes and met
 <div class="mermaid">
 graph TD
     Global[Global Scope: Class A, Class B]
-    ClassA[Class A Scope: int x, method1()]
-    ClassB[Class B Scope: float y, method2()]
-    Method1[method1() Scope: int a, int b]
-    Block1[if-block Scope: int c]
-    
-    Block1 -- Parent Pointer --> Method1
-    Method1 -- Parent Pointer --> ClassA
-    ClassA -- Parent/Inheritance Pointer --> Global
-    ClassB -- Parent Pointer --> Global
+      ClassA[Class A Scope: int x, method1()]
+      ClassB[Class B Scope: float y, method2()]
+      Method1[method1() Scope: int a, int b]
+      Block1[if-block Scope: int c]
+       Block1 -- Parent Pointer --> Method1
+      Method1 -- Parent Pointer --> ClassA
+      ClassA -- Parent/Inheritance Pointer --> Global
+      ClassB -- Parent Pointer --> Global
 </div>
 </div>
 <p><strong>Symbol Lookup Mechanism:</strong></p>

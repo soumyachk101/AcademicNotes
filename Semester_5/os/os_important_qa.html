@@ -54,9 +54,11 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { display: flex; justify-content: center; margin-bottom: 1rem; }
+        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
+        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
+    <link rel="stylesheet" href="../../premium.css">
 </head>
 <body>
     <nav class="top-nav">
@@ -730,14 +732,14 @@ stateDiagram-v2
 <div class="mermaid">
 stateDiagram-v2
     direction LR
-    [*] --> New
-    New --> Ready: Admitted
-    Ready --> Running: Scheduler Dispatch
-    Running --> Ready: Interrupt
-    Running --> Waiting: I/O or Event Wait
-    Waiting --> Ready: I/O or Event Completion
-    Running --> Terminated: Exit
-    Terminated --> [*]
+      [*] --> New
+      New --> Ready: Admitted
+      Ready --> Running: Scheduler Dispatch
+      Running --> Ready: Interrupt
+      Running --> Waiting: I/O or Event Wait
+      Waiting --> Ready: I/O or Event Completion
+      Running --> Terminated: Exit
+      Terminated --> [*]
 </div>
 <div class="diagram-caption">Figure: 5-State Process Lifecycle Transition Diagram</div>
 </div>
@@ -772,13 +774,13 @@ stateDiagram-v2
 <div class="mermaid">
 gantt
     title FCFS Execution Timeline
-    dateFormat  s
-    axisFormat %S
-    section CPU
-    P1 :a1, 0, 6s
-    P2 :a2, after a1, 8s
-    P3 :a3, after a2, 7s
-    P4 :a4, after a3, 3s
+      dateFormat  s
+      axisFormat %S
+      section CPU
+      P1 :a1, 0, 6s
+      P2 :a2, after a1, 8s
+      P3 :a3, after a2, 7s
+      P4 :a4, after a3, 3s
 </div>
 </div>
 <h4>Calculations Table</h4>
@@ -1050,11 +1052,11 @@ do {
 <div class="mermaid">
 graph LR
     P1((P1)) -- Requests --> R1[R1: 1 Instance]
-    R1 -- Allocated to --> P2((P2))
-    P2 -- Requests --> R2[R2: 1 Instance]
-    R2 -- Allocated to --> P1
-    classDef red fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
-    class P1,R1,P2,R2 red
+      R1 -- Allocated to --> P2((P2))
+      P2 -- Requests --> R2[R2: 1 Instance]
+      R2 -- Allocated to --> P1
+      classDef red fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
+      class P1,R1,P2,R2 red
 </div>
 <div class="diagram-caption">Figure: RAG with a Cycle (Deadlock)</div>
 </div>
@@ -1142,10 +1144,10 @@ graph LR
 <div class="mermaid">
 graph LR
     CPU((CPU)) -- "Logical Address (p, d)" --> Split{Split}
-    Split -- "Page # (p)" --> PT[Page Table]
-    Split -- "Offset (d)" --> Combine
-    PT -- "Frame # (f)" --> Combine{Combine (f, d)}
-    Combine -- "Physical Address" --> RAM[(Physical Memory)]
+      Split -- "Page # (p)" --> PT[Page Table]
+      Split -- "Offset (d)" --> Combine
+      PT -- "Frame # (f)" --> Combine{Combine (f, d)}
+      Combine -- "Physical Address" --> RAM[(Physical Memory)]
 </div>
 <div class="diagram-caption">Figure: Paging Address Translation Hardware</div>
 </div>
@@ -1167,10 +1169,10 @@ graph LR
 <div class="mermaid">
 graph TD
     CPU((CPU)) -- "Logical Address (s, d)" --> Comp
-    Comp[Is d < Limit?] -- Yes --> Add[Base + d]
-    Comp -- No --> Error(Trap: Addressing Error)
-    ST[Segment Table<br/>Lookup 's' to find Base & Limit] --> Comp
-    Add -- "Physical Address" --> RAM[(Physical Memory)]
+      Comp[Is d < Limit?] -- Yes --> Add[Base + d]
+      Comp -- No --> Error(Trap: Addressing Error)
+      ST[Segment Table<br/>Lookup 's' to find Base & Limit] --> Comp
+      Add -- "Physical Address" --> RAM[(Physical Memory)]
 </div>
 <div class="diagram-caption">Figure: Segmentation Hardware Translation</div>
 </div>
@@ -1404,8 +1406,8 @@ graph TD
 <div class="mermaid">
 graph LR
     I[Inode] -->|12 Direct| Data1[Data Blocks]
-    I -->|1 Single Indirect| S[Index Block] --> Data2[Data Blocks]
-    I -->|1 Double Indirect| D[Index Block] --> S2[Index Blocks] --> Data3[Data Blocks]
+      I -->|1 Single Indirect| S[Index Block] --> Data2[Data Blocks]
+      I -->|1 Double Indirect| D[Index Block] --> S2[Index Blocks] --> Data3[Data Blocks]
 </div>
 </div>
 
@@ -1461,13 +1463,13 @@ graph LR
 <div class="mermaid">
 sequenceDiagram
     participant P as Parent Process
-    participant C as Child Process
-    P->>C: fork()
-    P->>P: wait() (Blocks)
-    C->>C: exec() (Loads new program)
-    Note over C: Executes new code
-    C->>P: exit()
-    Note over P: Wakes up and continues
+      participant C as Child Process
+      P->>C: fork()
+      P->>P: wait() (Blocks)
+      C->>C: exec() (Loads new program)
+      Note over C: Executes new code
+      C->>P: exit()
+      Note over P: Wakes up and continues
 </div>
 </div>
 
@@ -2027,12 +2029,12 @@ b) Calculate EAT given TLB hit ratio 80%, TLB search 20ns, memory access 100ns, 
 <div class="mermaid">
 graph TD
     CPU --> TLB
-    TLB -- Hit --> RAM[Physical RAM]
-    TLB -- Miss --> PT[Page Table in RAM]
-    PT -- Valid --> RAM
-    PT -- Invalid (Page Fault) --> OS[OS Trap]
-    OS --> Disk[(Disk Swap Space)]
-    Disk -- Loads Page --> RAM
+      TLB -- Hit --> RAM[Physical RAM]
+      TLB -- Miss --> PT[Page Table in RAM]
+      PT -- Valid --> RAM
+      PT -- Invalid (Page Fault) --> OS[OS Trap]
+      OS --> Disk[(Disk Swap Space)]
+      Disk -- Loads Page --> RAM
 </div>
 </div>
 
@@ -2110,8 +2112,8 @@ b) Show address translation pipeline from Logical Address ➔ Segment Table ➔ 
 <div class="mermaid">
 graph LR
     CPU((CPU)) -- "Logical (s, d)" --> ST[Segment Table]
-    ST -- "Validates Limit.<br/>Yields Page Table Base" --> PT[Page Table for Seg 's']
-    PT -- "Translates p to f" --> RAM[(Physical Memory: f + d')]
+      ST -- "Validates Limit.<br/>Yields Page Table Base" --> PT[Page Table for Seg 's']
+      PT -- "Translates p to f" --> RAM[(Physical Memory: f + d')]
 </div>
 <div class="diagram-caption">Figure: Pipeline of Segmentation combined with Paging</div>
 </div>
@@ -2508,14 +2510,14 @@ b) Draw Gantt charts and calculate average WT and TAT.</span></div>
 <div class="mermaid">
 gantt
     title SJF Gantt Chart
-    dateFormat  s
-    axisFormat %S
-    section CPU
-    P1 :0, 8s
-    P4 :8, 1s
-    P3 :9, 2s
-    P5 :11, 3s
-    P2 :14, 4s
+      dateFormat  s
+      axisFormat %S
+      section CPU
+      P1 :0, 8s
+      P4 :8, 1s
+      P3 :9, 2s
+      P5 :11, 3s
+      P2 :14, 4s
 </div>
 </div>
 <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
@@ -2545,16 +2547,16 @@ gantt
 <div class="mermaid">
 gantt
     title SRTF Gantt Chart
-    dateFormat  s
-    axisFormat %S
-    section CPU
-    P1 :0, 1s
-    P2 :1, 1s
-    P3 :2, 2s
-    P4 :4, 1s
-    P2 :5, 3s
-    P5 :8, 3s
-    P1 :11, 7s
+      dateFormat  s
+      axisFormat %S
+      section CPU
+      P1 :0, 1s
+      P2 :1, 1s
+      P3 :2, 2s
+      P4 :4, 1s
+      P2 :5, 3s
+      P5 :8, 3s
+      P1 :11, 7s
 </div>
 </div>
 <table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
