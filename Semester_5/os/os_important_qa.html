@@ -711,275 +711,532 @@ stateDiagram-v2
             <div class="qa-card" id="gb-1">
                 <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain Process State Transition Diagram with 5 states.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Process State Transition Diagram with 5 states..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>5-State Process Transition Diagram</h3>
+<p>A process in an operating system transitions through different states during its lifecycle, managed by the OS Process Manager.</p>
+<ul>
+  <li><strong>New:</strong> The process is being created and its Process Control Block (PCB) is initialized.</li>
+  <li><strong>Ready:</strong> The process is loaded in main memory and is waiting to be assigned to a processor by the short-term scheduler.</li>
+  <li><strong>Running:</strong> Instructions are being executed by the CPU. A single CPU can only have one running process at a time.</li>
+  <li><strong>Waiting (Blocked):</strong> The process cannot execute further until some event occurs (e.g., I/O completion, waiting for a signal).</li>
+  <li><strong>Terminated:</strong> The process has finished execution and the OS reclaims its allocated resources.</li>
+</ul>
+<div class="diagram-container">
+<div class="mermaid">
+stateDiagram-v2
+    direction LR
+    [*] --> New
+    New --> Ready: Admitted
+    Ready --> Running: Scheduler Dispatch
+    Running --> Ready: Interrupt
+    Running --> Waiting: I/O or Event Wait
+    Waiting --> Ready: I/O or Event Completion
+    Running --> Terminated: Exit
+    Terminated --> [*]
 </div>
+<div class="diagram-caption">Figure: 5-State Process Lifecycle Transition Diagram</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-2">
                 <div class="q-text"><span class="q-badge b5">Q2</span><span>Explain CPU Scheduling criteria: Throughput, Turnaround Time, Waiting Time, Response Time.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain CPU Scheduling criteria: Throughput, Turnaround Time, Waiting Time, Response Time..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>CPU Scheduling Criteria</h3>
+<p>Different CPU scheduling algorithms have different properties. To evaluate them, we use standard performance metrics:</p>
+<ul>
+  <li><strong>CPU Utilization:</strong> The percentage of time that the CPU is busy executing processes rather than being idle. We want this as close to 100% as possible.</li>
+  <li><strong>Throughput:</strong> The number of processes that complete their execution per time unit. A measure of overall system productivity.</li>
+  <li><strong>Turnaround Time (TAT):</strong> The total time taken from the submission of a process until its completion. 
+      <br/>Formula: \(TAT = \text{Completion Time (CT)} - \text{Arrival Time (AT)}\)</li>
+  <li><strong>Waiting Time (WT):</strong> The total time a process spends waiting in the Ready queue. 
+      <br/>Formula: \(WT = TAT - \text{Burst Time (BT)}\)</li>
+  <li><strong>Response Time (RT):</strong> The time taken from the submission of a request until the first response is produced (i.e., when the process gets the CPU for the very first time).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-3">
                 <div class="q-text"><span class="q-badge b5">Q3</span><span>Solve FCFS scheduling for processes P1(6ms), P2(8ms), P3(7ms), P4(3ms) with arrival time 0.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Solve FCFS scheduling for processes P1(6ms), P2(8ms), P3(7ms), P4(3ms) with arrival time 0..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>FCFS Scheduling Numerical</h3>
+<p><strong>First-Come, First-Served (FCFS)</strong> is a non-preemptive algorithm where the process that requests the CPU first is allocated the CPU first.</p>
+<p>Given: All processes arrive at \(T=0\). Burst Times: \(P1=6, P2=8, P3=7, P4=3\).</p>
+<h4>Gantt Chart</h4>
+<div class="diagram-container">
+<div class="mermaid">
+gantt
+    title FCFS Execution Timeline
+    dateFormat  s
+    axisFormat %S
+    section CPU
+    P1 :a1, 0, 6s
+    P2 :a2, after a1, 8s
+    P3 :a3, after a2, 7s
+    P4 :a4, after a3, 3s
 </div>
+</div>
+<h4>Calculations Table</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Process</th><th>AT</th><th>BT</th><th>Completion Time (CT)</th><th>Turnaround Time (TAT)</th><th>Waiting Time (WT)</th>
+  </tr>
+  <tr><td>P1</td><td>0</td><td>6</td><td>6</td><td>\(6-0 = 6\)</td><td>\(6-6 = 0\)</td></tr>
+  <tr><td>P2</td><td>0</td><td>8</td><td>14</td><td>\(14-0 = 14\)</td><td>\(14-8 = 6\)</td></tr>
+  <tr><td>P3</td><td>0</td><td>7</td><td>21</td><td>\(21-0 = 21\)</td><td>\(21-7 = 14\)</td></tr>
+  <tr><td>P4</td><td>0</td><td>3</td><td>24</td><td>\(24-0 = 24\)</td><td>\(24-3 = 21\)</td></tr>
+</table>
+<ul>
+  <li><strong>Average Turnaround Time:</strong> \((6 + 14 + 21 + 24) / 4 = 16.25 \text{ ms}\)</li>
+  <li><strong>Average Waiting Time:</strong> \((0 + 6 + 14 + 21) / 4 = 10.25 \text{ ms}\)</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-4">
                 <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain Shortest Job First (SJF) vs Shortest Remaining Time First (SRTF).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Shortest Job First (SJF) vs Shortest Remaining Time First (SRTF)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>SJF vs SRTF Scheduling</h3>
+<p><strong>Shortest Job First (SJF)</strong> scheduling allocates the CPU to the process with the smallest next CPU burst. It yields the minimum average waiting time for a given set of processes. SJF can be implemented in two modes:</p>
+<h4>1. Non-Preemptive SJF</h4>
+<ul>
+  <li>Once the CPU is assigned to a process, it cannot be preempted until that process completes its burst.</li>
+  <li>If a new process arrives with a shorter burst time than the currently running process, the CPU will <em>not</em> switch until the current process finishes.</li>
+</ul>
+<h4>2. Preemptive SJF (Shortest Remaining Time First - SRTF)</h4>
+<ul>
+  <li>If a new process arrives in the Ready queue with a CPU burst length shorter than the <em>remaining</em> time of the currently executing process, the CPU is preempted.</li>
+  <li>The current process is paused and placed back in the Ready queue, and the newly arrived shorter process begins execution immediately.</li>
+  <li><strong>Advantage:</strong> SRTF generally results in a lower average waiting time compared to non-preemptive SJF.</li>
+  <li><strong>Disadvantage:</strong> Higher context-switching overhead and risk of starvation for long processes.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-5">
                 <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain Round Robin Scheduling with Time Quantum impact.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Round Robin Scheduling with Time Quantum impact..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Round Robin Scheduling & Time Quantum</h3>
+<p><strong>Round Robin (RR)</strong> is a preemptive CPU scheduling algorithm designed specifically for time-sharing systems. The Ready queue is treated as a circular queue.</p>
+<ul>
+  <li><strong>Mechanism:</strong> The CPU scheduler goes around the Ready queue allocating the CPU to each process for a time interval of up to 1 <strong>Time Quantum (TQ)</strong> (or time slice).</li>
+  <li>If a process's burst time is less than 1 TQ, it releases the CPU voluntarily.</li>
+  <li>If the burst time is longer than 1 TQ, the OS timer interrupts the process after the quantum expires, context switches it to the back of the Ready queue, and dispatches the next process.</li>
+</ul>
+<h4>Impact of Time Quantum Size</h4>
+<ul>
+  <li><strong>If TQ is too small:</strong> The algorithm causes too many context switches. The overhead of saving/loading registers degrades system performance significantly.</li>
+  <li><strong>If TQ is too large:</strong> The overhead decreases, but RR degenerates into First-Come-First-Served (FCFS) scheduling, resulting in poor response times for short interactive processes.</li>
+  <li><strong>Rule of Thumb:</strong> 80% of CPU bursts should be shorter than the time quantum.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-6">
                 <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Critical Section Problem requirements: Mutual Exclusion, Progress, Bounded Waiting.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Critical Section Problem requirements: Mutual Exclusion, Progress, Bounded Waiting..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>The Critical Section Problem</h3>
+<p>A <strong>Critical Section</strong> is a segment of code where a process accesses and modifies shared resources (like common variables, files, or tables). To prevent data inconsistency and race conditions, a system must ensure that when one process is executing in its critical section, no other process is allowed to execute in its critical section.</p>
+<p>Any solution to the Critical Section problem must satisfy three strict requirements:</p>
+<ol>
+  <li><strong>Mutual Exclusion:</strong> The core requirement. If process \(P_i\) is executing in its critical section, then no other processes can be executing in their critical sections.</li>
+  <li><strong>Progress:</strong> If no process is executing in its critical section and some processes wish to enter theirs, then only those processes that are not executing in their remainder sections can participate in deciding which will enter its critical section next. This selection cannot be postponed indefinitely (no deadlock).</li>
+  <li><strong>Bounded Waiting:</strong> There exists a bound, or limit, on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted (no starvation).</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-7">
                 <div class="q-text"><span class="q-badge b5">Q7</span><span>Explain Peterson's Solution for 2-process synchronization.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Peterson's Solution for 2-process synchronization..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Peterson's Solution</h3>
+<p><strong>Peterson's Solution</strong> is a classic software-based algorithmic solution to the critical section problem specifically designed for two processes (\(P_0\) and \(P_1\)) that alternate execution.</p>
+<h4>Data Structures</h4>
+<ul>
+  <li><code>int turn;</code> // Indicates whose turn it is to enter the CS.</li>
+  <li><code>boolean flag[2];</code> // flag[i] = true indicates that \(P_i\) is ready to enter its CS.</li>
+</ul>
+<h4>Code for Process i (where j is the other process)</h4>
+<div class="code-block">
+do {
+    flag[i] = true;         // Process i declares intent to enter
+    turn = j;               // But graciously gives priority to process j
+    
+    // Wait loop (Spinlock): Wait if j wants to enter AND it's j's turn
+    while (flag[j] && turn == j); 
+    
+    /* CRITICAL SECTION */
+    
+    flag[i] = false;        // Process i leaves and lowers its flag
+    
+    /* REMAINDER SECTION */
+} while (true);
 </div>
+<p><strong>Proof of correctness:</strong> Mutual exclusion is preserved because both processes can be stuck in the while loop only if <code>turn == 0</code> and <code>turn == 1</code> simultaneously, which is impossible. Progress is met because a process only gets stuck if the other process intends to enter and has the turn.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-8">
                 <div class="q-text"><span class="q-badge b5">Q8</span><span>Explain Semaphores and atomic operations wait() and signal().</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Semaphores and atomic operations wait() and signal()..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Semaphores in OS</h3>
+<p>A <strong>Semaphore (S)</strong> is an integer variable used for process synchronization and controlling access to common resources in a concurrent system. Unlike pure software locks like Peterson's, Semaphores are managed by the OS and avoid busy waiting.</p>
+<p>Semaphores can only be accessed via two indivisible (atomic) standard operations:</p>
+<h4>1. wait(S) or P(S) or down(S)</h4>
+<p>Used to acquire a resource. It decrements the semaphore value. If the value becomes negative, the process is blocked and placed in the semaphore's waiting queue.</p>
+<div class="code-block">
+wait(S) {
+    S.value--;
+    if (S.value < 0) {
+        add this process to S.list;
+        block(); // OS suspends the process
+    }
+}
 </div>
+<h4>2. signal(S) or V(S) or up(S)</h4>
+<p>Used to release a resource. It increments the semaphore value. If there are processes waiting in the queue (value \(\le 0\)), one of them is awakened.</p>
+<div class="code-block">
+signal(S) {
+    S.value++;
+    if (S.value <= 0) {
+        remove a process P from S.list;
+        wakeup(P); // OS moves P to Ready Queue
+    }
+}
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-9">
                 <div class="q-text"><span class="q-badge b5">Q9</span><span>Explain Producer-Consumer Problem using Semaphores.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Producer-Consumer Problem using Semaphores..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Producer-Consumer Problem</h3>
+<p>The <strong>Producer-Consumer (Bounded Buffer) problem</strong> involves a Producer process that generates data and puts it into a fixed-size buffer, and a Consumer process that takes data out of the buffer. They must be synchronized so the producer doesn't insert into a full buffer, and the consumer doesn't remove from an empty buffer.</p>
+<h4>Semaphore Initialization</h4>
+<ul>
+  <li><code>mutex = 1;</code> (Binary semaphore for mutual exclusion on the buffer)</li>
+  <li><code>empty = N;</code> (Counting semaphore counting empty slots, initially N)</li>
+  <li><code>full = 0;</code> (Counting semaphore counting filled slots, initially 0)</li>
+</ul>
+<h4>Producer Code</h4>
+<div class="code-block">
+do {
+    // Produce an item
+    wait(empty);   // Wait if no empty slots exist
+    wait(mutex);   // Lock the buffer
+    
+    // Add item to buffer
+    
+    signal(mutex); // Unlock the buffer
+    signal(full);  // Increment filled slot count
+} while (true);
 </div>
+<h4>Consumer Code</h4>
+<div class="code-block">
+do {
+    wait(full);    // Wait if no filled slots exist (buffer empty)
+    wait(mutex);   // Lock the buffer
+    
+    // Remove item from buffer
+    
+    signal(mutex); // Unlock the buffer
+    signal(empty); // Increment empty slot count
+    // Consume the item
+} while (true);
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-10">
                 <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Readers-Writers Problem using Semaphores.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Readers-Writers Problem using Semaphores..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Readers-Writers Problem</h3>
+<p>The <strong>Readers-Writers problem</strong> deals with situations where a database is shared among several concurrent processes. Some processes only want to read (Readers), while others want to update (Writers). We must ensure that:</p>
+<ol>
+  <li>Multiple readers can read simultaneously.</li>
+  <li>If a writer is writing, no other reader or writer can access the database (Exclusive access).</li>
+</ol>
+<h4>Semaphore Initialization</h4>
+<ul>
+  <li><code>mutex = 1;</code> (Ensures mutual exclusion when updating the <code>read_count</code> variable)</li>
+  <li><code>rw_mutex = 1;</code> (Ensures mutual exclusion for the actual database writers)</li>
+  <li><code>int read_count = 0;</code> (Tracks how many readers are currently reading)</li>
+</ul>
+<h4>Writer Code</h4>
+<div class="code-block">
+do {
+    wait(rw_mutex); // Request exclusive access
+    // Write to database
+    signal(rw_mutex); // Release access
+} while (true);
 </div>
+<h4>Reader Code</h4>
+<div class="code-block">
+do {
+    wait(mutex); // Lock read_count
+    read_count++;
+    if (read_count == 1) // If I am the FIRST reader
+        wait(rw_mutex);  // Lock out the writers
+    signal(mutex); // Unlock read_count
+    
+    // Read from database
+    
+    wait(mutex); // Lock read_count
+    read_count--;
+    if (read_count == 0) // If I am the LAST reader
+        signal(rw_mutex); // Let the writers in
+    signal(mutex); // Unlock read_count
+} while (true);
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-11">
                 <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain Dining Philosophers Problem and deadlock avoidance.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition:</b> <b>Banker's Algorithm</b> avoids deadlock by testing resource requests against maximum claimed demand matrix.</p>
-<p><b>2. Data Structures & Safety Check:</b></p>
-<ul>
-    <li>\(Available[m]\): Free instances of resource \(j\).</li>
-    <li>\(Max[n][m]\): Maximum demand of process \(i\) for resource \(j\).</li>
-    <li>\(Allocation[n][m]\): Resources currently allocated to process \(i\).</li>
-    <li>\(Need[n][m] = Max[n][m] - Allocation[n][m]\).</li>
-    <li><b>Safety Check:</b> Find process \(P_i\) where \(Need_i \le Work\), update \(Work = Work + Allocation_i\), and mark finished. If all processes finish, state is safe.</li>
-</ul>
+                    <h3>Dining Philosophers Problem</h3>
+<p>The <strong>Dining Philosophers Problem</strong> is a classic synchronization problem. Five philosophers sit around a circular table. Each has a plate of spaghetti. Between each pair of plates is one chopstick (total 5). To eat, a philosopher needs <em>both</em> the left and right chopsticks.</p>
+<h4>The Problem (Deadlock)</h4>
+<p>If all 5 philosophers simultaneously pick up their left chopstick, all 5 chopsticks are taken. When they reach for their right chopstick, it is held by their neighbor. Everyone waits indefinitely, causing a <strong>Deadlock</strong>.</p>
+<h4>Deadlock Avoidance Solutions</h4>
+<ol>
+  <li><strong>Resource Hierarchy (Asymmetric Solution):</strong> Number the chopsticks 1 to 5. Philosophers must always pick up the lower-numbered chopstick first. This breaks the circular wait condition.</li>
+  <li><strong>Capacity Limitation:</strong> Allow at most 4 philosophers to sit at the table with 5 chopsticks. This guarantees at least one philosopher can get two chopsticks.</li>
+  <li><strong>Both-or-Nothing (Monitor):</strong> A philosopher only picks up chopsticks if <em>both</em> are available simultaneously in a critical section.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-12">
                 <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain 4 necessary conditions for Deadlock occurrence.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition:</b> <b>Banker's Algorithm</b> avoids deadlock by testing resource requests against maximum claimed demand matrix.</p>
-<p><b>2. Data Structures & Safety Check:</b></p>
-<ul>
-    <li>\(Available[m]\): Free instances of resource \(j\).</li>
-    <li>\(Max[n][m]\): Maximum demand of process \(i\) for resource \(j\).</li>
-    <li>\(Allocation[n][m]\): Resources currently allocated to process \(i\).</li>
-    <li>\(Need[n][m] = Max[n][m] - Allocation[n][m]\).</li>
-    <li><b>Safety Check:</b> Find process \(P_i\) where \(Need_i \le Work\), update \(Work = Work + Allocation_i\), and mark finished. If all processes finish, state is safe.</li>
-</ul>
+                    <h3>4 Necessary Conditions for Deadlock</h3>
+<p>A deadlock situation can arise if and only if the following four conditions hold simultaneously in a system (known as Coffman conditions):</p>
+<ol>
+  <li><strong>Mutual Exclusion:</strong> At least one resource must be held in a non-sharable mode. If another process requests that resource, the requesting process must be delayed until the resource has been released.</li>
+  <li><strong>Hold and Wait:</strong> A process must be holding at least one resource and waiting to acquire additional resources that are currently being held by other processes.</li>
+  <li><strong>No Preemption:</strong> Resources cannot be preempted; that is, a resource can be released only voluntarily by the process holding it, after that process has completed its task.</li>
+  <li><strong>Circular Wait:</strong> There must exist a set \(\{P_0, P_1, \dots, P_n\}\) of waiting processes such that \(P_0\) is waiting for a resource held by \(P_1\), \(P_1\) is waiting for a resource held by \(P_2\), \(\dots\), and \(P_n\) is waiting for a resource held by \(P_0\).</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-13">
                 <div class="q-text"><span class="q-badge b5">Q13</span><span>Explain Resource Allocation Graph (RAG) and cycle detection.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Resource Allocation Graph (RAG) and cycle detection..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Resource Allocation Graph (RAG)</h3>
+<p>A <strong>Resource Allocation Graph (RAG)</strong> is a directed graph used to visually model the state of an OS, showing which processes hold which resources and which processes are requesting resources. It helps in deadlock detection.</p>
+<ul>
+  <li><strong>Vertices (V):</strong> Two types: Processes (\(P = \{P_1, P_2, \dots\}\) represented as circles) and Resources (\(R = \{R_1, R_2, \dots\}\) represented as rectangles with dots indicating instances).</li>
+  <li><strong>Edges (E):</strong> 
+      <br/>• <em>Request Edge</em> (\(P_i \rightarrow R_j\)): Process \(P_i\) requests an instance of \(R_j\).
+      <br/>• <em>Assignment Edge</em> (\(R_j \rightarrow P_i\)): An instance of \(R_j\) is allocated to \(P_i\).
+  </li>
+</ul>
+<h4>Cycle Detection and Deadlock</h4>
+<ul>
+  <li>If the RAG contains <strong>no cycles</strong>, then no process is deadlocked.</li>
+  <li>If the RAG contains a <strong>cycle</strong>:
+      <br/>1. If each resource type has exactly <em>one instance</em>, a cycle implies a <strong>Deadlock</strong> has definitely occurred.
+      <br/>2. If each resource type has <em>multiple instances</em>, a cycle does not necessarily imply a deadlock (it is a necessary but not sufficient condition).
+  </li>
+</ul>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    P1((P1)) -- Requests --> R1[R1: 1 Instance]
+    R1 -- Allocated to --> P2((P2))
+    P2 -- Requests --> R2[R2: 1 Instance]
+    R2 -- Allocated to --> P1
+    classDef red fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
+    class P1,R1,P2,R2 red
 </div>
+<div class="diagram-caption">Figure: RAG with a Cycle (Deadlock)</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-14">
                 <div class="q-text"><span class="q-badge b5">Q14</span><span>Differentiate Deadlock Prevention and Deadlock Avoidance.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition:</b> <b>Banker's Algorithm</b> avoids deadlock by testing resource requests against maximum claimed demand matrix.</p>
-<p><b>2. Data Structures & Safety Check:</b></p>
-<ul>
-    <li>\(Available[m]\): Free instances of resource \(j\).</li>
-    <li>\(Max[n][m]\): Maximum demand of process \(i\) for resource \(j\).</li>
-    <li>\(Allocation[n][m]\): Resources currently allocated to process \(i\).</li>
-    <li>\(Need[n][m] = Max[n][m] - Allocation[n][m]\).</li>
-    <li><b>Safety Check:</b> Find process \(P_i\) where \(Need_i \le Work\), update \(Work = Work + Allocation_i\), and mark finished. If all processes finish, state is safe.</li>
-</ul>
+                    <h3>Deadlock Prevention vs Deadlock Avoidance</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Deadlock Prevention</th>
+    <th>Deadlock Avoidance</th>
+  </tr>
+  <tr>
+    <td><strong>Definition</strong></td>
+    <td>Ensures that at least one of the 4 necessary conditions (Mutual Exclusion, Hold & Wait, No Preemption, Circular Wait) cannot occur.</td>
+    <td>Requires the OS to have additional <em>a priori</em> information (e.g. max resources needed) to decide if an allocation is safe.</td>
+  </tr>
+  <tr>
+    <td><strong>Mechanism</strong></td>
+    <td>Imposes strict rules on resource requests (e.g. request all at once, preemption allowed, ordering resources).</td>
+    <td>Uses an algorithm (like Banker's Algorithm) to dynamically check the resource-allocation state before granting requests.</td>
+  </tr>
+  <tr>
+    <td><strong>Resource Utilization</strong></td>
+    <td>Poor. Often leads to low device utilization and reduced system throughput due to overly strict constraints.</td>
+    <td>Better. It grants requests if the system remains in a safe state, allowing higher concurrency.</td>
+  </tr>
+  <tr>
+    <td><strong>Overhead</strong></td>
+    <td>Low runtime overhead, as rules are enforced structurally.</td>
+    <td>High runtime overhead, as the safety algorithm must run on every request.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-15">
                 <div class="q-text"><span class="q-badge b5">Q15</span><span>Explain Banker's Safety Algorithm step-by-step.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition:</b> <b>Banker's Algorithm</b> avoids deadlock by testing resource requests against maximum claimed demand matrix.</p>
-<p><b>2. Data Structures & Safety Check:</b></p>
-<ul>
-    <li>\(Available[m]\): Free instances of resource \(j\).</li>
-    <li>\(Max[n][m]\): Maximum demand of process \(i\) for resource \(j\).</li>
-    <li>\(Allocation[n][m]\): Resources currently allocated to process \(i\).</li>
-    <li>\(Need[n][m] = Max[n][m] - Allocation[n][m]\).</li>
-    <li><b>Safety Check:</b> Find process \(P_i\) where \(Need_i \le Work\), update \(Work = Work + Allocation_i\), and mark finished. If all processes finish, state is safe.</li>
-</ul>
+                    <h3>Banker's Safety Algorithm</h3>
+<p>The <strong>Safety Algorithm</strong> (part of Banker's Algorithm) determines if a system is in a "safe state" where all processes can finish without deadlocking. It uses three matrices: <code>Allocation</code>, <code>Max</code>, and <code>Need</code> (where \(Need = Max - Allocation\)), and a vector <code>Available</code>.</p>
+<h4>Algorithm Steps:</h4>
+<ol>
+  <li><strong>Initialization:</strong>
+      <br/>Let <code>Work</code> and <code>Finish</code> be vectors of length \(m\) (resources) and \(n\) (processes).
+      <br/>Initialize: <code>Work = Available</code>
+      <br/>Initialize: <code>Finish[i] = false</code> for \(i = 0, 1, \dots, n-1\).
+  </li>
+  <li><strong>Find a candidate process:</strong>
+      <br/>Find an index \(i\) such that both:
+      <br/>a) <code>Finish[i] == false</code> (Process has not finished)
+      <br/>b) <code>Need[i] &le; Work</code> (System can satisfy its needs)
+      <br/>If no such \(i\) exists, go to Step 4.
+  </li>
+  <li><strong>Simulate execution:</strong>
+      <br/>The system temporarily grants resources to \(P_i\). When \(P_i\) finishes, it returns all its held resources to the system.
+      <br/><code>Work = Work + Allocation[i]</code>
+      <br/><code>Finish[i] = true</code>
+      <br/>Go back to Step 2.
+  </li>
+  <li><strong>Check Status:</strong>
+      <br/>If <code>Finish[i] == true</code> for all \(i\), then the system is in a <strong>Safe State</strong>. The order in which processes finished is the <em>Safe Sequence</em>.
+      <br/>If any <code>Finish[i] == false</code>, the system is in an <em>Unsafe State</em> (deadlock possible).
+  </li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-16">
                 <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain Paging Architecture with Address Translation diagram.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Concept:</b> <b>Paging</b> is a non-contiguous memory allocation scheme that eliminates external fragmentation by dividing physical memory into fixed-size frames and logical memory into equal-sized pages.</p><div class="diagram-container">
-    <div class="mermaid">
-graph LR
-    CPU -->|p, d| LA[Logical Address]
-    LA -- p --> PT[Page Table]
-    PT -- f --> PA[Physical Address]
-    LA -- d --> PA
-    PA --> RAM[(Physical Memory)]
-    </div>
-    <div class="diagram-caption">Figure: Paging Hardware & Logical to Physical Address Translation</div>
-</div>
-<p><b>2. Address Translation Mechanism:</b></p>
+                    <h3>Paging Architecture</h3>
+<p><strong>Paging</strong> is a memory management scheme that eliminates the need for contiguous allocation of physical memory. It avoids external fragmentation by breaking memory into fixed-sized blocks.</p>
 <ul>
-    <li><b>Logical Address:</b> Consists of Page Number \(p\) and Offset \(d\).</li>
-    <li><b>Page Table Lookup:</b> \(p\) indexes into the Page Table to retrieve Frame Number \(f\).</li>
-    <li><b>Physical Address:</b> Formed by concatenating Frame Number \(f\) with Offset \(d\): \(\text{Physical Address} = (f \times \text{Page Size}) + d\).</li>
+  <li><strong>Logical Address Space</strong> is divided into blocks of the same size called <strong>Pages</strong>.</li>
+  <li><strong>Physical Memory</strong> is divided into fixed-sized blocks called <strong>Frames</strong> (where Page Size == Frame Size).</li>
 </ul>
+<h4>Address Translation</h4>
+<p>The CPU generates a Logical Address divided into two parts: Page Number (\(p\)) and Page Offset (\(d\)). The OS uses a <strong>Page Table</strong> to map \(p\) to a Physical Frame Number (\(f\)). The physical address is \(f\) concatenated with \(d\).</p>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    CPU((CPU)) -- "Logical Address (p, d)" --> Split{Split}
+    Split -- "Page # (p)" --> PT[Page Table]
+    Split -- "Offset (d)" --> Combine
+    PT -- "Frame # (f)" --> Combine{Combine (f, d)}
+    Combine -- "Physical Address" --> RAM[(Physical Memory)]
+</div>
+<div class="diagram-caption">Figure: Paging Address Translation Hardware</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-17">
                 <div class="q-text"><span class="q-badge b5">Q17</span><span>Explain Segmentation Architecture with Segment Table diagram.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Segmentation Architecture with Segment Table diagram..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Segmentation Architecture</h3>
+<p><strong>Segmentation</strong> is a memory management scheme that supports the user's view of memory. A logical address space is a collection of variable-sized segments (e.g., main program, functions, stack, symbol table). Unlike paging where all pages are the same size, segments have variable lengths based on logical program units.</p>
+<h4>Address Translation</h4>
+<p>The logical address consists of two parts: Segment Number (\(s\)) and Offset (\(d\)). Address translation is done using a <strong>Segment Table</strong>. Each entry in the segment table has:</p>
+<ul>
+  <li><strong>Base:</strong> Contains the starting physical address where the segment resides in memory.</li>
+  <li><strong>Limit:</strong> Specifies the length of the segment.</li>
+</ul>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    CPU((CPU)) -- "Logical Address (s, d)" --> Comp
+    Comp[Is d < Limit?] -- Yes --> Add[Base + d]
+    Comp -- No --> Error(Trap: Addressing Error)
+    ST[Segment Table<br/>Lookup 's' to find Base & Limit] --> Comp
+    Add -- "Physical Address" --> RAM[(Physical Memory)]
 </div>
+<div class="diagram-caption">Figure: Segmentation Hardware Translation</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-18">
                 <div class="q-text"><span class="q-badge b5">Q18</span><span>Compare Internal Fragmentation vs External Fragmentation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Compare Internal Fragmentation vs External Fragmentation..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Internal vs External Fragmentation</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Internal Fragmentation</th>
+    <th>External Fragmentation</th>
+  </tr>
+  <tr>
+    <td><strong>Definition</strong></td>
+    <td>Memory block assigned to process is larger than requested. The unused space <em>inside</em> the allocated block is wasted.</td>
+    <td>Total free memory space is enough to satisfy a request, but it is not <em>contiguous</em>, so it cannot be used.</td>
+  </tr>
+  <tr>
+    <td><strong>Occurrence</strong></td>
+    <td>Occurs when memory is divided into fixed-sized blocks (e.g., Paging).</td>
+    <td>Occurs when memory is allocated dynamically in variable-sized blocks (e.g., Segmentation, Contiguous Allocation).</td>
+  </tr>
+  <tr>
+    <td><strong>Example</strong></td>
+    <td>Page size is 4KB. Process needs 3KB. 1KB is wasted inside the page.</td>
+    <td>Process needs 50KB. There are two free holes of 30KB each, but they are not adjacent.</td>
+  </tr>
+  <tr>
+    <td><strong>Solution</strong></td>
+    <td>Cannot be completely eliminated. Can be reduced by decreasing the page/block size.</td>
+    <td>Can be resolved using <strong>Compaction</strong> (shuffling memory to group free space) or by using Paging.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-19">
                 <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Translation Lookaside Buffer (TLB) and Effective Access Time (EAT).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Translation Lookaside Buffer (TLB) and Effective Access Time (EAT)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Translation Lookaside Buffer (TLB)</h3>
+<p>Because the Page Table is stored in main memory, every data access requires <em>two</em> memory accesses: one for the page table, one for the actual data. This slows down the system by a factor of 2. To solve this, OS uses a <strong>Translation Lookaside Buffer (TLB)</strong>.</p>
+<p>The TLB is a small, fast hardware associative cache built directly into the MMU. It stores the most recently used Page-to-Frame translations.</p>
+<ul>
+  <li><strong>TLB Hit:</strong> Page number is found in TLB. Physical address is generated immediately.</li>
+  <li><strong>TLB Miss:</strong> Page number not in TLB. Must look up in main memory Page Table, then load it into TLB for future use.</li>
+</ul>
+<h4>Effective Access Time (EAT)</h4>
+<p>EAT calculates the average time to access memory given the hit ratio (\(\alpha\)), TLB lookup time (\(\epsilon\)), and memory access time (\(m\)).</p>
+\[ EAT = \alpha \times (\epsilon + m) + (1 - \alpha) \times (\epsilon + 2m) \]
+<p>Where \((\epsilon + 2m)\) is the penalty for a TLB miss (one memory access for page table, one for data).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-20">
                 <div class="q-text"><span class="q-badge b5">Q20</span><span>Explain Demand Paging and Page Fault Handling process.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Concept:</b> <b>Paging</b> is a non-contiguous memory allocation scheme that eliminates external fragmentation by dividing physical memory into fixed-size frames and logical memory into equal-sized pages.</p><div class="diagram-container">
-    <div class="mermaid">
-graph LR
-    CPU -->|p, d| LA[Logical Address]
-    LA -- p --> PT[Page Table]
-    PT -- f --> PA[Physical Address]
-    LA -- d --> PA
-    PA --> RAM[(Physical Memory)]
-    </div>
-    <div class="diagram-caption">Figure: Paging Hardware & Logical to Physical Address Translation</div>
-</div>
-<p><b>2. Address Translation Mechanism:</b></p>
-<ul>
-    <li><b>Logical Address:</b> Consists of Page Number \(p\) and Offset \(d\).</li>
-    <li><b>Page Table Lookup:</b> \(p\) indexes into the Page Table to retrieve Frame Number \(f\).</li>
-    <li><b>Physical Address:</b> Formed by concatenating Frame Number \(f\) with Offset \(d\): \(\text{Physical Address} = (f \times \text{Page Size}) + d\).</li>
-</ul>
+                    <h3>Demand Paging and Page Fault Handling</h3>
+<p><strong>Demand Paging</strong> is a virtual memory technique where pages are loaded from the disk into main memory only when they are explicitly demanded (i.e., referenced) during program execution, rather than loading the entire program at once.</p>
+<h4>Page Fault Handling Process</h4>
+<p>If a process tries to access a page that was not brought into memory (invalid bit in page table), it causes a <strong>Page Fault</strong> trap to the OS.</p>
+<ol>
+  <li>The OS intercepts the trap and checks an internal table to see if the memory reference was valid (but page is on disk) or invalid (segmentation fault).</li>
+  <li>If valid, the OS finds a free frame in physical memory. (If no free frame exists, a Page Replacement Algorithm like LRU runs).</li>
+  <li>The OS schedules a disk I/O operation to read the required page into the newly allocated free frame.</li>
+  <li>Once the disk read completes, the OS updates the Page Table, marking the page as valid and mapping it to the new frame.</li>
+  <li>The OS restarts the instruction that was interrupted by the trap, allowing the process to access the page seamlessly.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-21">
@@ -990,264 +1247,469 @@ graph LR
 
 --- Page 3 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain FIFO Page Replacement algorithm and Belady's Anomaly.
+                    <h3>FIFO Page Replacement & Belady's Anomaly</h3>
+<p><strong>First-In, First-Out (FIFO)</strong> is the simplest page replacement algorithm. It maintains a queue of all pages in memory. When a page fault occurs and a page must be replaced, the oldest page (the one at the front of the queue) is chosen for replacement.</p>
+<ul>
+  <li><strong>Pros:</strong> Very easy to understand and implement using a standard FIFO queue.</li>
+  <li><strong>Cons:</strong> Its performance is generally poor because it replaces the oldest page, which might still be heavily used by the program.</li>
+</ul>
+<h4>Belady's Anomaly</h4>
+<p>Generally, one expects that increasing the number of physical frames in memory will result in fewer page faults. However, <strong>Belady's Anomaly</strong> is a phenomenon where increasing the number of page frames <em>increases</em> the number of page faults for certain page reference strings when using the FIFO algorithm.</p>
+<p>This happens because FIFO does not possess the <em>stack property</em> (unlike LRU or Optimal), meaning the set of pages in memory with \(N\) frames is not necessarily a subset of the pages in memory with \(N+1\) frames.</p>
 
-
-
-
---- Page 3 ---.</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-22">
                 <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain LRU Page Replacement algorithm implementation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain LRU Page Replacement algorithm implementation..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>LRU Page Replacement Algorithm</h3>
+<p><strong>Least Recently Used (LRU)</strong> page replacement replaces the page that has not been used for the longest period of time. It relies on the heuristic that pages heavily used in the recent past will likely be used again in the near future.</p>
+<p>LRU is considered an excellent algorithm because it does not suffer from Belady's Anomaly, but it requires significant hardware support to implement efficiently. Two common implementations are:</p>
+<h4>1. Counters (Time-of-Use)</h4>
+<ul>
+  <li>Every page table entry has a "time-of-use" register.</li>
+  <li>The CPU is equipped with a logical clock or counter that increments on every memory reference.</li>
+  <li>Whenever a page is referenced, the clock value is copied into the page's register.</li>
+  <li>On a page fault, the OS searches the page table for the page with the smallest time value and replaces it. (Requires searching the whole table).</li>
+</ul>
+<h4>2. Stack Implementation</h4>
+<ul>
+  <li>Maintain a stack (typically a doubly linked list) of page numbers.</li>
+  <li>Whenever a page is referenced, it is removed from its current position and pushed to the top of the stack.</li>
+  <li>On a page fault, the page at the <em>bottom</em> of the stack is chosen for replacement. (Requires updating pointers on every memory access).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-23">
                 <div class="q-text"><span class="q-badge b5">Q23</span><span>Explain Optimal Page Replacement algorithm.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Optimal Page Replacement algorithm..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Optimal Page Replacement (OPT)</h3>
+<p>The <strong>Optimal Page Replacement Algorithm</strong> has the lowest possible page fault rate of all algorithms and does not suffer from Belady's Anomaly.</p>
+<p><strong>The Strategy:</strong> Replace the page that will not be used for the longest period of time in the <em>future</em>.</p>
+<ul>
+  <li>If the OS knows the exact sequence of upcoming page references, it can look ahead in the string.</li>
+  <li>It selects the page currently in memory whose next reference is furthest away in the future sequence.</li>
+</ul>
+<h4>Why is it used?</h4>
+<p>In practice, OPT is <strong>impossible to implement</strong> because the OS cannot predict the future memory references of a program. It is solely used as a benchmark to evaluate the performance of other algorithms (like LRU and FIFO). If LRU performs within a few percent of OPT, it is considered highly efficient.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-24">
                 <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain Thrashing and Working Set Model.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Thrashing and Working Set Model..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Thrashing & Working Set Model</h3>
+<h4>Thrashing</h4>
+<p><strong>Thrashing</strong> occurs when a system spends more time paging (swapping pages in and out of the disk) than executing actual instructions. It happens when a process does not have "enough" physical frames to hold its actively used pages. The CPU utilization plummets because processes are constantly blocked waiting for page faults.</p>
+<h4>The Working Set Model</h4>
+<p>The OS uses the <strong>Working Set Model</strong> to prevent thrashing. It is based on the concept of <em>locality of reference</em>.</p>
+<ul>
+  <li><strong>Working Set Window (\(\Delta\)):</strong> A fixed number of most recent page references.</li>
+  <li><strong>Working Set (\(WS\)):</strong> The set of distinct pages actually referenced in the most recent \(\Delta\) accesses. This represents the pages the process is currently actively using.</li>
+  <li><strong>Working Set Size (\(WSS_i\)):</strong> The total number of pages in the working set for process \(i\).</li>
+</ul>
+<p><strong>Prevention:</strong> The OS calculates the total demand \(D = \sum WSS_i\). If the total demand \(D\) exceeds the total available physical memory frames (\(m\)), thrashing will occur. In this case, the OS suspends one or more processes to free up frames and stabilize the system.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-25">
                 <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain File Allocation Methods: Contiguous, Linked, Indexed.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain File Allocation Methods: Contiguous, Linked, Indexed..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>File Allocation Methods</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Method</th>
+    <th>Description</th>
+    <th>Advantages</th>
+    <th>Disadvantages</th>
+  </tr>
+  <tr>
+    <td><strong>Contiguous Allocation</strong></td>
+    <td>Each file occupies a set of contiguous blocks on the disk. Directory entry specifies start block and length.</td>
+    <td>Extremely fast for both sequential and direct access. Minimal disk head movement.</td>
+    <td>Suffers from External Fragmentation. Hard to grow a file later.</td>
+  </tr>
+  <tr>
+    <td><strong>Linked Allocation</strong></td>
+    <td>Each file is a linked list of disk blocks. Directory contains pointer to first and last blocks. Blocks can be scattered.</td>
+    <td>No external fragmentation. Easy to append data to files.</td>
+    <td>Poor direct access performance (must traverse list). Pointer overhead in every block. Reliability issues (if a pointer breaks).</td>
+  </tr>
+  <tr>
+    <td><strong>Indexed Allocation</strong></td>
+    <td>Brings all pointers together into one specific <em>Index Block</em> for each file. Directory points to the Index Block.</td>
+    <td>Supports direct access efficiently. No external fragmentation.</td>
+    <td>Index block overhead (even small files need a whole index block). If a file is too large, it needs multi-level index blocks.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-26">
                 <div class="q-text"><span class="q-badge b5">Q26</span><span>Explain Directory Structures: Single-level, Two-level, Tree-structured.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Directory Structures: Single-level, Two-level, Tree-structured..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Directory Structures</h3>
+<ul>
+  <li><strong>Single-Level Directory:</strong> The simplest structure. All files from all users are contained in the same single directory.
+      <br/>• <em>Pros:</em> Easy to support and understand.
+      <br/>• <em>Cons:</em> Naming collisions (no two files can have the same name system-wide) and poor grouping for multiple users.</li>
+  <li><strong>Two-Level Directory:</strong> Each user has their own separate User File Directory (UFD). A Master File Directory (MFD) points to all UFDs.
+      <br/>• <em>Pros:</em> Solves name collision between different users. Supports user isolation.
+      <br/>• <em>Cons:</em> Users cannot easily share files or group files into logical sub-categories.</li>
+  <li><strong>Tree-Structured Directory:</strong> Generalizes the two-level directory into an arbitrary tree. Users can create subdirectories within subdirectories.
+      <br/>• <em>Pros:</em> Excellent for logical grouping and organization. Absolute and relative path naming. Currently used by Windows, Linux, macOS.
+      <br/>• <em>Cons:</em> Does not allow sharing of files (a file cannot exist in two different directories simultaneously unless linked).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-27">
                 <div class="q-text"><span class="q-badge b5">Q27</span><span>Explain Disk Scheduling: FCFS, SSTF, SCAN, C-SCAN.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Algorithm Overview:</b> The <b>SCAN Disk Scheduling Algorithm</b> (Elevator Algorithm) moves the disk arm back and forth across the platter, servicing requests in one direction until it hits the end, then reverses direction.</p><div class="diagram-container">
-    <div class="mermaid">
-graph LR
-    Start[Head Starts] --> Dir[Moves in One Direction]
-    Dir --> End[Reaches End of Disk]
-    End --> Rev[Reverses Direction]
-    Rev --> Serv[Services Remaining Requests]
-    </div>
-    <div class="diagram-caption">Figure: SCAN Disk Scheduling Algorithm Head Traversal Curve</div>
-</div>
-<p><b>2. Characteristics:</b> Provides lower variance in response time compared to FCFS/SSTF and eliminates starvation for middle cylinders.</p>
+                    <h3>Disk Scheduling Algorithms</h3>
+<p>Disk scheduling optimizes the movement of the read/write head (seek time) to serve pending I/O requests.</p>
+<ul>
+  <li><strong>FCFS (First-Come, First-Served):</strong> Processes requests strictly in the order they arrive. 
+      <br/><em>Pros:</em> Fair. <em>Cons:</em> Extremely inefficient, causes wild head swings across the disk.</li>
+  <li><strong>SSTF (Shortest Seek Time First):</strong> Selects the request closest to the current head position.
+      <br/><em>Pros:</em> Minimizes seek time significantly. <em>Cons:</em> Can cause starvation for requests far from the current head position.</li>
+  <li><strong>SCAN (Elevator Algorithm):</strong> The head starts from one end, moves towards the other end servicing requests, and when it hits the end, it reverses direction.
+      <br/><em>Pros:</em> Solves starvation. <em>Cons:</em> Unequal wait times (requests near the edge wait longer when the head reverses).</li>
+  <li><strong>C-SCAN (Circular SCAN):</strong> Like SCAN, but when the head reaches one end, it immediately returns to the beginning <em>without</em> servicing requests on the return trip.
+      <br/><em>Pros:</em> Provides a much more uniform waiting time for all cylinders.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-28">
                 <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain UNIX Inode structure and block pointers.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Inode Architecture:</b> The <b>UNIX Inode (Index Node)</b> is a data structure storing file metadata and pointers to disk blocks allocated to the file.</p><div class="diagram-container">
-    <div class="mermaid">
+                    <h3>UNIX Inode Structure</h3>
+<p>In UNIX file systems, every file is represented by an <strong>Inode (Index Node)</strong>. An inode contains metadata about the file (permissions, owner, size, timestamps) and, most importantly, pointers to the data blocks on the disk.</p>
+<p>To support files of vastly different sizes while keeping the inode small, UNIX uses a multi-level index pointer structure:</p>
+<ol>
+  <li><strong>Direct Pointers (Usually 12 or 15):</strong> Point directly to disk blocks containing the file's data. Sufficient for small files.</li>
+  <li><strong>Single Indirect Pointer:</strong> Points to a disk block that contains an array of direct pointers. Used when the file grows beyond the direct pointers.</li>
+  <li><strong>Double Indirect Pointer:</strong> Points to a block containing pointers to single-indirect blocks. Allows for very large files.</li>
+  <li><strong>Triple Indirect Pointer:</strong> Points to a block containing pointers to double-indirect blocks. Allows for enormous files (terabytes in size).</li>
+</ol>
+<div class="diagram-container">
+<div class="mermaid">
 graph LR
-    Inode[Inode Metadata]
-    Inode --> DP[12 Direct Pointers]
-    Inode --> SIP[Single Indirect Pointer]
-    Inode --> DIP[Double Indirect Pointer]
-    DP --> DB1[(Data Blocks)]
-    SIP --> IB1[Index Block] --> DB2[(Data Blocks)]
-    </div>
-    <div class="diagram-caption">Figure: UNIX Inode Block Structure & Pointer Mapping</div>
+    I[Inode] -->|12 Direct| Data1[Data Blocks]
+    I -->|1 Single Indirect| S[Index Block] --> Data2[Data Blocks]
+    I -->|1 Double Indirect| D[Index Block] --> S2[Index Blocks] --> Data3[Data Blocks]
 </div>
-<p><b>2. Pointer Structure:</b></p>
-<ul>
-    <li><b>Direct Pointers (12):</b> Point directly to data blocks storing file contents.</li>
-    <li><b>Single Indirect Pointer:</b> Points to a block containing pointers to data blocks.</li>
-    <li><b>Double Indirect Pointer:</b> Points to a block of single indirect block pointers.</li>
-    <li><b>Triple Indirect Pointer:</b> Enables support for multi-gigabyte files.</li>
-</ul>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-29">
                 <div class="q-text"><span class="q-badge b5">Q29</span><span>Explain User-Level Threads vs Kernel-Level Threads.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain User-Level Threads vs Kernel-Level Threads..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>User-Level vs Kernel-Level Threads</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>User-Level Threads (ULT)</th>
+    <th>Kernel-Level Threads (KLT)</th>
+  </tr>
+  <tr>
+    <td><strong>Management</strong></td>
+    <td>Managed entirely by a user-space thread library. The OS kernel is unaware of their existence.</td>
+    <td>Managed directly by the OS Kernel.</td>
+  </tr>
+  <tr>
+    <td><strong>Context Switch Overhead</strong></td>
+    <td>Very fast. Switching does not require hardware mode switches or kernel intervention.</td>
+    <td>Slower. Requires trapping into the kernel to save state and schedule the next thread.</td>
+  </tr>
+  <tr>
+    <td><strong>Blocking System Calls</strong></td>
+    <td>If one ULT makes a blocking system call (e.g., I/O), the kernel blocks the <em>entire process</em>, halting all other ULTs inside it.</td>
+    <td>If one KLT blocks, the kernel can simply schedule another thread from the same process to run.</td>
+  </tr>
+  <tr>
+    <td><strong>Multiprocessing</strong></td>
+    <td>Cannot take advantage of multi-core processors. The kernel sees 1 process, scheduling it on 1 core.</td>
+    <td>Can run simultaneously on multiple CPU cores.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-30">
                 <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Process Control System Calls in UNIX: fork(), exec(), wait(), exit().</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Process Control System Calls in UNIX: fork(), exec(), wait(), exit()..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>UNIX Process Control System Calls</h3>
+<ul>
+  <li><strong><code>fork()</code>:</strong> Creates a new process (the child). The child is an exact clone of the parent's memory space. 
+      <br/>• Returns <code>0</code> to the child process.
+      <br/>• Returns the child's PID to the parent process.</li>
+  <li><strong><code>exec()</code>:</strong> Replaces the entire memory space (code, data, heap, stack) of the calling process with a brand new program loaded from disk. It never returns unless there's an error. Typically called by the child after a <code>fork()</code>.</li>
+  <li><strong><code>wait()</code>:</strong> Called by the parent process to pause its execution until one of its child processes terminates. It also retrieves the exit status of the child and prevents the child from becoming a zombie.</li>
+  <li><strong><code>exit()</code>:</strong> Terminates the calling process gracefully. It flushes I/O buffers, closes files, and deallocates memory, passing an exit status back to the parent (via <code>wait()</code>).</li>
+</ul>
+<div class="diagram-container">
+<div class="mermaid">
+sequenceDiagram
+    participant P as Parent Process
+    participant C as Child Process
+    P->>C: fork()
+    P->>P: wait() (Blocks)
+    C->>C: exec() (Loads new program)
+    Note over C: Executes new code
+    C->>P: exit()
+    Note over P: Wakes up and continues
 </div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-31">
                 <div class="q-text"><span class="q-badge b5">Q31</span><span>Explain Free Space Management techniques: Bit Vector, Linked List.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Free Space Management techniques: Bit Vector, Linked List..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Free Space Management</h3>
+<p>The OS must keep track of available (free) blocks on the disk to allocate space to new files.</p>
+<h4>1. Bit Vector (Bit Map)</h4>
+<p>The free space list is implemented as a bitmap. Each block on the disk is represented by 1 bit. If the block is free, the bit is 1. If the block is allocated, the bit is 0.</p>
+<ul>
+  <li><strong>Advantage:</strong> Very simple and extremely fast for finding contiguous free blocks (the OS searches for sequences of 1s using bitwise CPU instructions).</li>
+  <li><strong>Disadvantage:</strong> Requires extra memory to store the bitmap. For a 1TB disk with 4KB blocks, the bitmap requires 32MB of main memory to be kept resident for good performance.</li>
+</ul>
+<h4>2. Linked List</h4>
+<p>The OS links all free disk blocks together, keeping a pointer to the first free block in a special location on disk. The first block contains a pointer to the next free block, and so on.</p>
+<ul>
+  <li><strong>Advantage:</strong> No waste of space. The pointers are stored directly inside the free blocks themselves.</li>
+  <li><strong>Disadvantage:</strong> Extremely inefficient to traverse. Finding a large number of free blocks requires reading multiple disk sectors sequentially, which is very slow.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-32">
                 <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain Memory Allocation Strategies: First-Fit, Best-Fit, Worst-Fit.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Memory Allocation Strategies: First-Fit, Best-Fit, Worst-Fit..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Memory Allocation Strategies</h3>
+<p>When a process requests memory in a contiguous allocation system, the OS must choose a free "hole" from the list of available memory blocks.</p>
+<ul>
+  <li><strong>First-Fit:</strong> Allocates the <em>first</em> hole that is big enough. 
+      <br/>• <em>Pros:</em> Fastest algorithm, minimal search time. 
+      <br/>• <em>Cons:</em> Can leave many small fragments near the beginning of memory.</li>
+  <li><strong>Best-Fit:</strong> Allocates the <em>smallest</em> hole that is big enough. Requires searching the entire list (unless sorted by size).
+      <br/>• <em>Pros:</em> Minimizes the size of the leftover fragment.
+      <br/>• <em>Cons:</em> Slowest. Tends to create tiny, useless holes (external fragmentation) that cannot satisfy any future requests.</li>
+  <li><strong>Worst-Fit:</strong> Allocates the <em>largest</em> hole available. Requires searching the entire list.
+      <br/>• <em>Pros:</em> Leaves a large leftover hole, which might be useful for a subsequent large process.
+      <br/>• <em>Cons:</em> Generally performs worse than First-Fit and Best-Fit in terms of storage utilization.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-33">
                 <div class="q-text"><span class="q-badge b5">Q33</span><span>Explain Inverted Page Table architecture.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Inverted Page Table architecture..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Inverted Page Table</h3>
+<p>In traditional paging, each process has its own page table, which maps logical pages to physical frames. For systems with large 64-bit address spaces, traditional page tables become gigabytes in size per process, which is unmanageable.</p>
+<p>An <strong>Inverted Page Table</strong> solves this by having exactly <em>one</em> page table for the entire system, containing one entry for every physical frame of memory.</p>
+<h4>Architecture</h4>
+<ul>
+  <li>Each entry in the table represents a physical frame and contains the pair: <code>[Process ID (PID), Page Number (p)]</code>.</li>
+  <li>When a process references logical page \(p\), the CPU searches the inverted table for a match on <code>[Current PID, p]</code>.</li>
+  <li>If found at index \(i\), the physical frame number is \(i\).</li>
+</ul>
+<p><strong>Pros:</strong> Dramatically reduces the memory needed to store the page table (size is proportional to physical memory, not logical space).</p>
+<p><strong>Cons:</strong> Lookup is slower because the table is sorted by physical frame, not logical page. Finding a match requires searching the entire table, so a hash table is typically used to speed up the search.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-34">
                 <div class="q-text"><span class="q-badge b5">Q34</span><span>Explain Shared Memory vs Message Passing IPC.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Shared Memory vs Message Passing IPC..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Inter-Process Communication (IPC)</h3>
+<p>IPC mechanisms allow cooperating processes to exchange data and synchronize their actions.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Shared Memory</th>
+    <th>Message Passing</th>
+  </tr>
+  <tr>
+    <td><strong>Concept</strong></td>
+    <td>A region of memory is established which is shared by multiple processes. Processes read/write to this memory directly.</td>
+    <td>Processes communicate by sending and receiving messages over a communication link (like a pipe or socket).</td>
+  </tr>
+  <tr>
+    <td><strong>Speed</strong></td>
+    <td><strong>Very Fast:</strong> Once established, it operates at memory speeds without kernel intervention.</td>
+    <td><strong>Slower:</strong> Requires context switching and system calls (traps to the kernel) for every message sent/received.</td>
+  </tr>
+  <tr>
+    <td><strong>Synchronization</strong></td>
+    <td>OS provides the shared memory, but <em>processes</em> must explicitly handle synchronization (using Semaphores/Mutexes) to prevent race conditions.</td>
+    <td>Synchronization is implicit. The OS handles message buffering and synchronization (e.g. blocking <code>receive()</code>).</td>
+  </tr>
+  <tr>
+    <td><strong>Best Use Case</strong></td>
+    <td>Exchanging large amounts of data between processes on the same machine.</td>
+    <td>Exchanging smaller amounts of data, or communicating across a network (Distributed Systems).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-35">
                 <div class="q-text"><span class="q-badge b5">Q35</span><span>Explain Hardware Synchronization: TestAndSet and Swap instructions.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Hardware Synchronization: TestAndSet and Swap instructions..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>Hardware Synchronization Instructions</h3>
+<p>To implement software synchronization tools like Mutexes efficiently, OS designers rely on special hardware instructions provided by modern CPUs. These instructions execute <strong>atomically</strong> (as one uninterrupted unit).</p>
+<h4>1. TestAndSet (TAS)</h4>
+<p>The <code>TestAndSet</code> instruction reads a boolean variable and sets it to true in a single, indivisible hardware cycle.</p>
+<div class="code-block">
+boolean TestAndSet(boolean *target) {
+    boolean rv = *target;
+    *target = true;
+    return rv;
+}
+// Usage for Mutex:
+while (TestAndSet(&lock)) {
+    // Spin-wait (do nothing)
+}
+// Critical Section
+lock = false;
 </div>
+<h4>2. Swap (Compare-And-Swap)</h4>
+<p>The <code>Swap</code> instruction atomically swaps the contents of two memory variables.</p>
+<div class="code-block">
+void Swap(boolean *a, boolean *b) {
+    boolean temp = *a;
+    *a = *b;
+    *b = temp;
+}
+// Usage for Mutex:
+key = true;
+while (key == true) {
+    Swap(&lock, &key);
+}
+// Critical Section
+lock = false;
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-36">
                 <div class="q-text"><span class="q-badge b5">Q36</span><span>Explain Access Control Matrix and Access Control Lists (ACL).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Access Control Matrix and Access Control Lists (ACL)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Access Control Matrix & ACLs</h3>
+<p>Security in an OS is managed by tracking which <em>Subjects</em> (Users/Processes) have which access rights (Read, Write, Execute) to which <em>Objects</em> (Files, Devices, Memory).</p>
+<h4>Access Control Matrix</h4>
+<p>This is a conceptual table where rows represent domains (subjects) and columns represent objects. Each cell contains the access rights.</p>
+<ul>
+  <li>If the matrix is large, it becomes very sparse (most cells are empty), wasting a huge amount of space if stored directly as a 2D array.</li>
+</ul>
+<h4>Access Control List (ACL)</h4>
+<p>Instead of storing the empty matrix, the OS implements it column-by-column. An <strong>Access Control List</strong> is attached to each <em>Object</em>.</p>
+<ul>
+  <li>For a specific file, the ACL lists all the users and their specific permissions.</li>
+  <li>Example ACL for <code>file1.txt</code>: <code>(UserA: RW), (UserB: R), (GroupX: RX)</code></li>
+  <li><strong>Advantage:</strong> Easy to see who has access to a specific file. Easy to revoke access to an object. (This is how Windows NTFS and Linux permissions work).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-37">
                 <div class="q-text"><span class="q-badge b5">Q37</span><span>Explain RAID Levels: RAID 0, RAID 1, RAID 5.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain RAID Levels: RAID 0, RAID 1, RAID 5..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>RAID (Redundant Array of Independent Disks)</h3>
+<p>RAID is a technology that combines multiple physical disk drives into a single logical unit to improve performance, data redundancy, or both.</p>
+<ul>
+  <li><strong>RAID 0 (Striping):</strong> Data is split into blocks and distributed across all disks in the array simultaneously. 
+      <br/>• <em>Performance:</em> Excellent (read/write speeds are multiplied by the number of disks).
+      <br/>• <em>Reliability:</em> Zero. If one disk fails, all data is completely lost.</li>
+  <li><strong>RAID 1 (Mirroring):</strong> Data is written identically to two (or more) disks. 
+      <br/>• <em>Performance:</em> Good read speeds, normal write speeds.
+      <br/>• <em>Reliability:</em> High. If one disk fails, the other acts as an exact backup. Costly (50% storage efficiency).</li>
+  <li><strong>RAID 5 (Striping with Parity):</strong> Data is striped across disks, and "Parity" blocks are distributed across all disks. 
+      <br/>• <em>Performance:</em> Good read speeds, slight penalty on writes (parity calculation).
+      <br/>• <em>Reliability:</em> Can survive exactly 1 disk failure. If a disk dies, missing data is mathematically reconstructed using the parity blocks on the surviving disks.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-38">
                 <div class="q-text"><span class="q-badge b5">Q38</span><span>Explain Monolithic Kernel vs Microkernel Architecture.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Monolithic Kernel vs Microkernel Architecture..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Monolithic Kernel vs Microkernel</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Monolithic Kernel</th>
+    <th>Microkernel</th>
+  </tr>
+  <tr>
+    <td><strong>Architecture</strong></td>
+    <td>All OS services (VFS, IPC, Device Drivers, File System, Memory Management) run in the same large kernel space.</td>
+    <td>Only the bare minimum (Memory management, CPU scheduling, IPC) runs in kernel space. Drivers and file systems run as normal user-space processes.</td>
+  </tr>
+  <tr>
+    <td><strong>Performance</strong></td>
+    <td><strong>High.</strong> System calls are fast because everything is tightly integrated in the same address space.</td>
+    <td><strong>Lower.</strong> Communicating between a user-space driver and the kernel requires heavy IPC and context switching.</td>
+  </tr>
+  <tr>
+    <td><strong>Reliability / Security</strong></td>
+    <td>If a single device driver crashes, the entire operating system crashes (Kernel Panic/BSOD).</td>
+    <td>Highly reliable. If a driver or file system crashes, only that user-space service dies; the OS kernel survives.</td>
+  </tr>
+  <tr>
+    <td><strong>Examples</strong></td>
+    <td>Linux, MS-DOS, older Windows.</td>
+    <td>QNX, Minix, Mach. (macOS and Windows NT use a Hybrid approach).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-39">
                 <div class="q-text"><span class="q-badge b5">Q39</span><span>Explain Type 1 vs Type 2 Hypervisors.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Type 1 vs Type 2 Hypervisors..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Type 1 vs Type 2 Hypervisors (Virtualization)</h3>
+<p>A <strong>Hypervisor</strong> (or Virtual Machine Monitor - VMM) is software that creates and runs virtual machines (VMs), allowing multiple operating systems to share a single hardware host.</p>
+<h4>Type 1 Hypervisor (Bare-Metal)</h4>
+<ul>
+  <li><strong>Placement:</strong> Installs directly on the physical hardware of the host machine, bypassing the need for a host operating system. The hypervisor <em>is</em> the OS.</li>
+  <li><strong>Performance:</strong> Extremely high performance and low latency, as VMs have direct access to hardware resources.</li>
+  <li><strong>Use Case:</strong> Enterprise data centers and cloud computing servers.</li>
+  <li><strong>Examples:</strong> VMware ESXi, Microsoft Hyper-V, Xen.</li>
+</ul>
+<h4>Type 2 Hypervisor (Hosted)</h4>
+<ul>
+  <li><strong>Placement:</strong> Installs as a standard software application <em>on top</em> of an existing host operating system (like Windows or macOS).</li>
+  <li><strong>Performance:</strong> Slower. Hardware requests from the guest OS must pass through the hypervisor, then through the host OS, before reaching the CPU.</li>
+  <li><strong>Use Case:</strong> Desktop virtualization, software testing, running Linux on a Windows laptop.</li>
+  <li><strong>Examples:</strong> Oracle VirtualBox, VMware Workstation, Parallels Desktop.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-40">
                 <div class="q-text"><span class="q-badge b5">Q40</span><span>Explain Real-Time CPU Scheduling: Rate Monotonic vs EDF.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Real-Time CPU Scheduling: Rate Monotonic vs EDF..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Real-Time CPU Scheduling</h3>
+<p>Real-Time Systems (like autopilot avionics or medical pacemakers) have strict deadlines. The scheduler must guarantee that critical tasks complete before their deadline expires.</p>
+<h4>1. Rate-Monotonic Scheduling (RMS)</h4>
+<ul>
+  <li><strong>Type:</strong> Static priority, preemptive algorithm.</li>
+  <li><strong>Rule:</strong> Priorities are assigned based on the period of the task. The shorter the period (the more frequently the task occurs), the higher its priority.</li>
+  <li><strong>Properties:</strong> Very stable and predictable. If the system is overloaded, it is guaranteed that the lowest priority tasks will miss their deadlines first. However, it cannot guarantee utilization up to 100% (the upper bound for schedulability is approx 69% for many tasks).</li>
+</ul>
+<h4>2. Earliest Deadline First (EDF)</h4>
+<ul>
+  <li><strong>Type:</strong> Dynamic priority, preemptive algorithm.</li>
+  <li><strong>Rule:</strong> Priorities are assigned dynamically according to deadlines. The task with the earliest (closest) deadline gets the highest priority.</li>
+  <li><strong>Properties:</strong> More efficient than RMS. It can theoretically achieve 100% CPU utilization while meeting all deadlines. However, if the system becomes overloaded, it behaves unpredictably, and multiple tasks might miss their deadlines simultaneously (a domino effect).</li>
+</ul>
+
                 </div>
             </div>
             <h1 class="section-title" id="group-c">Group C — Long / Numerical Questions (15 Marks Each)</h1>
@@ -1261,27 +1723,78 @@ P2(9,0,2), P3(2,2,2), P4(4,3,3). Available: (3,3,2).
 3. Is request from P1 for (1,0,2) granted immediately?
 b) Explain Deadlock Recovery techniques.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Banker's Safety Algorithm Complete Calculation:</b></p>
-<p>Given 5 processes \(P_0 \dots P_4\) and 3 resource types \(A(10), B(5), C(7)\).</p>
+                    <h3>Banker's Algorithm & Deadlock Recovery</h3>
+<h4>Part (a): Solving Banker's Algorithm</h4>
+<p><strong>Given Matrices:</strong></p>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Process</th><th>Allocation (A B C)</th><th>Max (A B C)</th><th>Available (A B C)</th>
+  </tr>
+  <tr><td>P0</td><td>0, 1, 0</td><td>7, 5, 3</td><td rowspan="5">3, 3, 2</td></tr>
+  <tr><td>P1</td><td>2, 0, 0</td><td>3, 2, 2</td></tr>
+  <tr><td>P2</td><td>3, 0, 2</td><td>9, 0, 2</td></tr>
+  <tr><td>P3</td><td>2, 1, 1</td><td>2, 2, 2</td></tr>
+  <tr><td>P4</td><td>0, 0, 2</td><td>4, 3, 3</td></tr>
+</table>
+
+<p><strong>1. Calculate Need Matrix (\(Need = Max - Allocation\)):</strong></p>
 <ul>
-    <li><b>1. Need Matrix Calculation (\(Need = Max - Allocation\)):</b>
-        <br>\(P_0\) Need = [7,4,3] - [0,1,0] = [7,3,3]
-        <br>\(P_1\) Need = [3,2,2] - [2,0,0] = [1,2,2]
-        <br>\(P_2\) Need = [9,0,2] - [3,0,2] = [6,0,0]
-        <br>\(P_3\) Need = [2,2,2] - [2,1,1] = [0,1,1]
-        <br>\(P_4\) Need = [4,3,3] - [0,0,2] = [4,3,1]
-    </li>
-    <li><b>2. Safety Sequence Execution Trace:</b> Available = [3,3,2]
-        <br>\(\bullet\) \(P_1\): Need [1,2,2] \(\le\) Available [3,3,2] \(\rightarrow\) Executes! Available = [3,3,2] + [2,0,0] = [5,3,2]
-        <br>\(\bullet\) \(P_3\): Need [0,1,1] \(\le\) Available [5,3,2] \(\rightarrow\) Executes! Available = [5,3,2] + [2,1,1] = [7,4,3]
-        <br>\(\bullet\) \(P_4\): Need [4,3,1] \(\le\) Available [7,4,3] \(\rightarrow\) Executes! Available = [7,4,3] + [0,0,2] = [7,4,5]
-        <br>\(\bullet\) \(P_0\): Need [7,3,3] \(\le\) Available [7,4,5] \(\rightarrow\) Executes! Available = [7,4,5] + [0,1,0] = [7,5,5]
-        <br>\(\bullet\) \(P_2\): Need [6,0,0] \(\le\) Available [7,5,5] \(\rightarrow\) Executes! Available = [7,5,5] + [3,0,2] = [10,5,7]
-    </li>
-    <li><b>Result:</b> System is in a <b>SAFE STATE</b> with Safe Sequence \(\langle P_1, P_3, P_4, P_0, P_2 \rangle\).</li>
+  <li>P0: (7-0, 5-1, 3-0) = <strong>7, 4, 3</strong></li>
+  <li>P1: (3-2, 2-0, 2-0) = <strong>1, 2, 2</strong></li>
+  <li>P2: (9-3, 0-0, 2-2) = <strong>6, 0, 0</strong></li>
+  <li>P3: (2-2, 2-1, 2-1) = <strong>0, 1, 1</strong></li>
+  <li>P4: (4-0, 3-0, 3-2) = <strong>4, 3, 1</strong></li>
 </ul>
-<p><b>Part (b) Resource Request Algorithm Trace:</b> If \(P_1\) requests [1,0,2], since Request \(\le\) Need and Request \(\le\) Available, temporary allocation is done and safety check passes.</p>
+
+<p><strong>2. Find Safe Sequence:</strong></p>
+<ul>
+  <li><strong>Initial Work = (3, 3, 2)</strong></li>
+  <li>Check P0: Need (7, 4, 3) &le; Work (3, 3, 2)? <strong>False.</strong></li>
+  <li>Check P1: Need (1, 2, 2) &le; Work (3, 3, 2)? <strong>True.</strong> 
+      <br/>Execute P1. New Work = (3, 3, 2) + Allocation(2, 0, 0) = <strong>(5, 3, 2)</strong></li>
+  <li>Check P2: Need (6, 0, 0) &le; Work (5, 3, 2)? <strong>False.</strong></li>
+  <li>Check P3: Need (0, 1, 1) &le; Work (5, 3, 2)? <strong>True.</strong> 
+      <br/>Execute P3. New Work = (5, 3, 2) + Allocation(2, 1, 1) = <strong>(7, 4, 3)</strong></li>
+  <li>Check P4: Need (4, 3, 1) &le; Work (7, 4, 3)? <strong>True.</strong> 
+      <br/>Execute P4. New Work = (7, 4, 3) + Allocation(0, 0, 2) = <strong>(7, 4, 5)</strong></li>
+  <li>Check P0: Need (7, 4, 3) &le; Work (7, 4, 5)? <strong>True.</strong> 
+      <br/>Execute P0. New Work = (7, 4, 5) + Allocation(0, 1, 0) = <strong>(7, 5, 5)</strong></li>
+  <li>Check P2: Need (6, 0, 0) &le; Work (7, 5, 5)? <strong>True.</strong> 
+      <br/>Execute P2. New Work = (7, 5, 5) + Allocation(3, 0, 2) = <strong>(10, 5, 7)</strong></li>
+</ul>
+<p><strong>Safe Sequence:</strong> &lt;P1, P3, P4, P0, P2&gt;</p>
+
+<p><strong>3. Request from P1 for (1,0,2):</strong></p>
+<ul>
+  <li>Check Request &le; Need: (1, 0, 2) &le; (1, 2, 2)? <strong>True.</strong></li>
+  <li>Check Request &le; Available: (1, 0, 2) &le; (3, 3, 2)? <strong>True.</strong></li>
+  <li>Simulate allocation:
+      <br/>New Available = (3, 3, 2) - (1, 0, 2) = <strong>(2, 3, 0)</strong>
+      <br/>New Allocation P1 = (2, 0, 0) + (1, 0, 2) = <strong>(3, 0, 2)</strong>
+      <br/>New Need P1 = (1, 2, 2) - (1, 0, 2) = <strong>(0, 2, 0)</strong></li>
+  <li>Run Safety Algorithm with new Available (2, 3, 0).
+      <br/>- P3's need (0,1,1) &le; (2,3,0)? <strong>False.</strong>
+      <br/>- P1's need (0,2,0) &le; (2,3,0)? <strong>True.</strong> Run P1. Work = (2,3,0) + (3,0,2) = <strong>(5,3,2)</strong>.
+      <br/>- P3's need (0,1,1) &le; (5,3,2)? <strong>True.</strong> Run P3. Work = (5,3,2) + (2,1,1) = <strong>(7,4,3)</strong>.
+      <br/>- P4's need (4,3,1) &le; (7,4,3)? <strong>True.</strong> Run P4. Work = (7,4,3) + (0,0,2) = <strong>(7,4,5)</strong>.
+      <br/>- P0's need (7,4,3) &le; (7,4,5)? <strong>True.</strong> Run P0. Work = (7,4,5) + (0,1,0) = <strong>(7,5,5)</strong>.
+      <br/>- P2's need (6,0,0) &le; (7,5,5)? <strong>True.</strong>
+  </li>
+  <li>The new state is safe. <strong>Request granted immediately.</strong></li>
+</ul>
+
+<h4>Part (b): Deadlock Recovery Techniques</h4>
+<p>If a system allows deadlocks to occur, it must detect them and recover. Recovery methods include:</p>
+<ol>
+  <li><strong>Process Termination:</strong>
+      <br/>• <em>Abort all deadlocked processes:</em> Fast but loses all partial computations.
+      <br/>• <em>Abort one process at a time:</em> Abort one, re-run deadlock detection, repeat until cycle breaks. Overhead is high.</li>
+  <li><strong>Resource Preemption:</strong>
+      <br/>• <em>Selecting a Victim:</em> Choose a process to preempt resources from based on cost (e.g., lower priority, has consumed less CPU time).
+      <br/>• <em>Rollback:</em> Return the victim process to a previous safe state (checkpoint) and restart it from there.
+      <br/>• <em>Starvation Check:</em> Ensure the same process isn't always chosen as the victim.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-2">
@@ -1289,15 +1802,49 @@ b) Explain Deadlock Recovery techniques.</span></div>
 Calculate page faults for FIFO, LRU, and OPT.
 b) Prove Belady's Anomaly for FIFO with an example.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Page Reference String: 1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7. Frame size = 3.
-Calculate page faults for FIFO, LRU, and OPT.
-b) Prove Belady's Anomaly for FIFO with an example..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Page Replacement Algorithms</h3>
+<h4>Part (a): Calculate Page Faults</h4>
+<p><strong>Reference String:</strong> 1, 2, 3, 4, 2, 1, 5, 6, 2, 1, 2, 3, 7. <strong>Frames = 3.</strong></p>
+
+<strong>1. FIFO (First-In, First-Out)</strong>
+<table border="1" style="border-collapse: collapse; text-align: center;">
+  <tr><th>String</th><td>1</td><td>2</td><td>3</td><td>4</td><td>2</td><td>1</td><td>5</td><td>6</td><td>2</td><td>1</td><td>2</td><td>3</td><td>7</td></tr>
+  <tr><th>F1</th><td>1</td><td>1</td><td>1</td><td>4</td><td>4</td><td>4</td><td>5</td><td>5</td><td>5</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+  <tr><th>F2</th><td></td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>6</td><td>6</td><td>6</td><td>2</td><td>2</td><td>2</td></tr>
+  <tr><th>F3</th><td></td><td></td><td>3</td><td>3</td><td>3</td><td>1</td><td>1</td><td>1</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+  <tr><th>Fault?</th><td>F</td><td>F</td><td>F</td><td>F</td><td>-</td><td>F</td><td>F</td><td>F</td><td>F</td><td>F</td><td>-</td><td>F</td><td>F</td></tr>
+</table>
+<p><strong>Total FIFO Faults = 11</strong></p>
+
+<strong>2. LRU (Least Recently Used)</strong>
+<table border="1" style="border-collapse: collapse; text-align: center;">
+  <tr><th>String</th><td>1</td><td>2</td><td>3</td><td>4</td><td>2</td><td>1</td><td>5</td><td>6</td><td>2</td><td>1</td><td>2</td><td>3</td><td>7</td></tr>
+  <tr><th>F1</th><td>1</td><td>1</td><td>1</td><td>4</td><td>4</td><td>4</td><td>5</td><td>5</td><td>5</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+  <tr><th>F2</th><td></td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>6</td><td>2</td><td>2</td><td>2</td><td>3</td><td>3</td></tr>
+  <tr><th>F3</th><td></td><td></td><td>3</td><td>3</td><td>3</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><th>Fault?</th><td>F</td><td>F</td><td>F</td><td>F</td><td>-</td><td>F</td><td>F</td><td>F</td><td>F</td><td>-</td><td>-</td><td>F</td><td>F</td></tr>
+</table>
+<p><strong>Total LRU Faults = 10</strong></p>
+
+<strong>3. OPT (Optimal)</strong>
+<table border="1" style="border-collapse: collapse; text-align: center;">
+  <tr><th>String</th><td>1</td><td>2</td><td>3</td><td>4</td><td>2</td><td>1</td><td>5</td><td>6</td><td>2</td><td>1</td><td>2</td><td>3</td><td>7</td></tr>
+  <tr><th>F1</th><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>7</td></tr>
+  <tr><th>F2</th><td></td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td><td>2</td></tr>
+  <tr><th>F3</th><td></td><td></td><td>3</td><td>4</td><td>4</td><td>4</td><td>5</td><td>6</td><td>6</td><td>6</td><td>6</td><td>3</td><td>3</td></tr>
+  <tr><th>Fault?</th><td>F</td><td>F</td><td>F</td><td>F</td><td>-</td><td>-</td><td>F</td><td>F</td><td>-</td><td>-</td><td>-</td><td>F</td><td>F</td></tr>
+</table>
+<p><strong>Total OPT Faults = 8</strong></p>
+
+<h4>Part (b): Belady's Anomaly Example</h4>
+<p>Belady's Anomaly states that for certain reference strings, increasing the number of physical frames can <em>increase</em> the number of page faults when using the FIFO algorithm.</p>
+<p><strong>Reference String:</strong> <code>0, 1, 2, 3, 0, 1, 4, 0, 1, 2, 3, 4</code></p>
+<ul>
+  <li><strong>With 3 Frames (FIFO):</strong> The string generates <strong>9 page faults</strong>.</li>
+  <li><strong>With 4 Frames (FIFO):</strong> The same string generates <strong>10 page faults</strong>.</li>
+</ul>
+<p>This contradicts intuition. It happens because FIFO lacks the <em>stack property</em> (the set of pages in memory with N frames is not always a subset of the pages with N+1 frames).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-3">
@@ -1305,15 +1852,39 @@ b) Prove Belady's Anomaly for FIFO with an example..</li>
 Calculate total head movement for SSTF, SCAN (towards 199), and C-SCAN (towards 199).
 b) Compare SSTF vs SCAN performance.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Disk Queue: 98, 183, 37, 122, 14, 124, 65, 67. Head = 53.
-Calculate total head movement for SSTF, SCAN (towards 199), and C-SCAN (towards 199).
-b) Compare SSTF vs SCAN performance..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Disk Scheduling Algorithms</h3>
+<h4>Part (a): Head Movement Calculation</h4>
+<p><strong>Queue:</strong> 98, 183, 37, 122, 14, 124, 65, 67. <strong>Current Head = 53.</strong> Cylinders: 0 to 199.</p>
+
+<strong>1. SSTF (Shortest Seek Time First)</strong>
+<ul>
+  <li>Sequence: 53 &rarr; 65 &rarr; 67 &rarr; 37 &rarr; 14 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; 183</li>
+  <li>Calculations: |53-65| + |65-67| + |67-37| + |37-14| + |14-98| + |98-122| + |122-124| + |124-183|</li>
+  <li>= 12 + 2 + 30 + 23 + 84 + 24 + 2 + 59 = <strong>236 cylinders</strong></li>
+</ul>
+
+<strong>2. SCAN (Elevator towards 199)</strong>
+<ul>
+  <li>Head moves from 53 towards 199, servicing requests in path, hits the end (199), and reverses.</li>
+  <li>Sequence: 53 &rarr; 65 &rarr; 67 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; 183 &rarr; <strong>199 (End)</strong> &rarr; 37 &rarr; 14</li>
+  <li>Calculations: (199 - 53) + (199 - 14)</li>
+  <li>= 146 + 185 = <strong>331 cylinders</strong></li>
+</ul>
+
+<strong>3. C-SCAN (Circular SCAN towards 199)</strong>
+<ul>
+  <li>Head moves to 199, immediately jumps to 0 without servicing, then services remaining.</li>
+  <li>Sequence: 53 &rarr; 65 &rarr; 67 &rarr; 98 &rarr; 122 &rarr; 124 &rarr; 183 &rarr; <strong>199 (End)</strong> &rarr; <strong>0 (Jump)</strong> &rarr; 14 &rarr; 37</li>
+  <li>Calculations: (199 - 53) + (199 - 0) + (37 - 0)</li>
+  <li>= 146 + 199 + 37 = <strong>382 cylinders</strong></li>
+</ul>
+
+<h4>Part (b): SSTF vs SCAN Performance</h4>
+<ul>
+  <li><strong>SSTF</strong> minimizes average seek time by always choosing the closest request. However, it can cause <em>starvation</em> for requests at the edges of the disk if a heavy stream of requests arrives near the current head position.</li>
+  <li><strong>SCAN</strong> provides a more bounded waiting time and prevents starvation by systematically sweeping the disk. Its total head movement is slightly higher than SSTF, but its variance in response time is much lower, making it fairer under heavy loads.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-4">
@@ -1322,44 +1893,156 @@ P5(A=4,B=4).
 Calculate average WT and TAT.
 b) Compare RR with Preemptive Priority Scheduling.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Solve Round Robin (Quantum = 2) for P1(A=0,B=5), P2(A=1,B=3), P3(A=2,B=1), P4(A=3,B=2),
-P5(A=4,B=4).
-Calculate average WT and TAT.
-b) Compare RR with Preemptive Priority Scheduling..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Round Robin Scheduling</h3>
+<h4>Part (a): Solving Round Robin (Quantum = 2)</h4>
+<p><strong>Given:</strong> P1(0,5), P2(1,3), P3(2,1), P4(3,2), P5(4,4). (Format: Arrival, Burst)</p>
+
+<strong>Execution Trace (Ready Queue dynamics):</strong>
+<ul>
+  <li>T=0: P1 arrives. RQ = [P1]. Execute P1 for 2ms. (Remaining: P1=3).</li>
+  <li>T=1: P2 arrives. RQ = [P2].</li>
+  <li>T=2: P3 arrives. P1 quantum expires. RQ = [P2, P3, P1]. Execute P2 for 2ms. (Remaining: P2=1).</li>
+  <li>T=3: P4 arrives. RQ = [P3, P1, P4].</li>
+  <li>T=4: P5 arrives. P2 quantum expires. RQ = [P3, P1, P4, P5, P2]. Execute P3 for 1ms.</li>
+  <li>T=5: P3 finishes. RQ = [P1, P4, P5, P2]. Execute P1 for 2ms. (Remaining: P1=1).</li>
+  <li>T=7: P1 quantum expires. RQ = [P4, P5, P2, P1]. Execute P4 for 2ms.</li>
+  <li>T=9: P4 finishes. RQ = [P5, P2, P1]. Execute P5 for 2ms. (Remaining: P5=2).</li>
+  <li>T=11: P5 quantum expires. RQ = [P2, P1, P5]. Execute P2 for 1ms.</li>
+  <li>T=12: P2 finishes. RQ = [P1, P5]. Execute P1 for 1ms.</li>
+  <li>T=13: P1 finishes. RQ = [P5]. Execute P5 for 2ms.</li>
+  <li>T=15: P5 finishes. All done.</li>
+</ul>
+
+<strong>Calculations Table:</strong>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Process</th><th>AT</th><th>BT</th><th>CT</th><th>TAT (CT-AT)</th><th>WT (TAT-BT)</th>
+  </tr>
+  <tr><td>P1</td><td>0</td><td>5</td><td>13</td><td>13</td><td>8</td></tr>
+  <tr><td>P2</td><td>1</td><td>3</td><td>12</td><td>11</td><td>8</td></tr>
+  <tr><td>P3</td><td>2</td><td>1</td><td>5</td><td>3</td><td>2</td></tr>
+  <tr><td>P4</td><td>3</td><td>2</td><td>9</td><td>6</td><td>4</td></tr>
+  <tr><td>P5</td><td>4</td><td>4</td><td>15</td><td>11</td><td>7</td></tr>
+</table>
+<ul>
+  <li><strong>Average Turnaround Time (TAT):</strong> (13 + 11 + 3 + 6 + 11) / 5 = 44 / 5 = <strong>8.8 ms</strong></li>
+  <li><strong>Average Waiting Time (WT):</strong> (8 + 8 + 2 + 4 + 7) / 5 = 29 / 5 = <strong>5.8 ms</strong></li>
+</ul>
+
+<h4>Part (b): Round Robin vs Preemptive Priority</h4>
+<ul>
+  <li><strong>Round Robin:</strong> Treats all processes equally. It is designed for fairness and fast response times in interactive time-sharing systems. Time slices are distributed evenly regardless of process importance.</li>
+  <li><strong>Preemptive Priority:</strong> Processes are assigned priority levels. The CPU is always given to the highest-priority process. If a low-priority process is running and a high-priority process arrives, the CPU is preempted. It can lead to starvation of low-priority processes (solved via aging).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-5">
                 <div class="q-text"><span class="q-badge c15">Q5</span><span>a) Explain Hardware Synchronization using Test-And-Set and Swap.
 b) Write complete C solution for Readers-Writers problem using Semaphores.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Hardware Synchronization using Test-And-Set and Swap.
-b) Write complete C solution for Readers-Writers problem using Semaphores..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Hardware Synchronization & Readers-Writers</h3>
+<h4>Part (a): Hardware Synchronization (Test-And-Set & Swap)</h4>
+<p>Modern processors provide atomic (indivisible) hardware instructions to implement mutual exclusion effectively without software traps.</p>
+<ul>
+  <li><strong>Test-And-Set:</strong> Atomically reads the original value of a boolean variable and sets it to true. 
+<div class="code-block">
+boolean TestAndSet(boolean *target) {
+    boolean rv = *target;
+    *target = true;
+    return rv;
+}
 </div>
+    To implement a mutex lock: a process loops <code>while(TestAndSet(&lock))</code>. The first process sees <code>false</code>, sets it to <code>true</code>, and enters. Others see <code>true</code> and keep spinning.</li>
+  <li><strong>Swap:</strong> Atomically swaps two boolean variables.
+<div class="code-block">
+void Swap(boolean *a, boolean *b) {
+    boolean temp = *a;
+    *a = *b;
+    *b = temp;
+}
+</div>
+    To implement a lock: a process sets <code>key = true</code>, and loops <code>while(key == true) Swap(&lock, &key)</code>. When <code>lock</code> is false, the swap makes <code>key</code> false and <code>lock</code> true, allowing entry.</li>
+</ul>
+
+<h4>Part (b): Readers-Writers Problem in C (using Semaphores)</h4>
+<p>This code ensures multiple readers can read concurrently, but writers have exclusive access.</p>
+<div class="code-block">
+#include &lt;semaphore.h&gt;
+#include &lt;pthread.h&gt;
+
+sem_t rw_mutex; // Controls access for writers
+sem_t mutex;    // Controls access to read_count
+int read_count = 0;
+
+void* writer(void* arg) {
+    while(1) {
+        sem_wait(&rw_mutex); // Lock database
+        // ... Write Data ...
+        sem_post(&rw_mutex); // Unlock database
+    }
+}
+
+void* reader(void* arg) {
+    while(1) {
+        sem_wait(&mutex); // Lock read_count
+        read_count++;
+        if (read_count == 1) {
+            sem_wait(&rw_mutex); // First reader locks out writers
+        }
+        sem_post(&mutex); // Unlock read_count
+        
+        // ... Read Data ...
+        
+        sem_wait(&mutex); // Lock read_count
+        read_count--;
+        if (read_count == 0) {
+            sem_post(&rw_mutex); // Last reader lets writers in
+        }
+        sem_post(&mutex); // Unlock read_count
+    }
+}
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-6">
                 <div class="q-text"><span class="q-badge c15">Q6</span><span>a) Explain Virtual Memory System Architecture with Paging, Page Fault Handling, and TLB.
 b) Calculate EAT given TLB hit ratio 80%, TLB search 20ns, memory access 100ns, page fault service 10ms.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Virtual Memory System Architecture with Paging, Page Fault Handling, and TLB.
-b) Calculate EAT given TLB hit ratio 80%, TLB search 20ns, memory access 100ns, page fault service 10ms..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Virtual Memory Architecture & EAT</h3>
+<h4>Part (a): Virtual Memory, Paging, and TLB</h4>
+<p><strong>Virtual Memory</strong> creates an illusion for processes that they have a massive, contiguous block of memory, even if physical RAM is small and fragmented. It is implemented primarily via <strong>Demand Paging</strong>.</p>
+<ul>
+  <li><strong>Paging & TLB:</strong> Logical addresses are split into a Page Number and Offset. The CPU first checks the <strong>TLB (Translation Lookaside Buffer)</strong>, a high-speed hardware cache. If the page mapping is there (TLB Hit), physical address generation is immediate. If not (TLB Miss), it consults the Page Table in main memory.</li>
+  <li><strong>Page Fault Handling:</strong> If the Page Table indicates the page is <em>invalid</em> (not in RAM), a <strong>Page Fault</strong> occurs. The OS traps the fault, pauses the process, finds a free physical frame (using a replacement algorithm like LRU if needed), issues a disk I/O to fetch the page, updates the Page Table, and restarts the instruction.</li>
+</ul>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    CPU --> TLB
+    TLB -- Hit --> RAM[Physical RAM]
+    TLB -- Miss --> PT[Page Table in RAM]
+    PT -- Valid --> RAM
+    PT -- Invalid (Page Fault) --> OS[OS Trap]
+    OS --> Disk[(Disk Swap Space)]
+    Disk -- Loads Page --> RAM
 </div>
+</div>
+
+<h4>Part (b): Effective Access Time (EAT) Calculation</h4>
+<p><strong>Given Parameters:</strong></p>
+<ul>
+  <li>TLB Hit Ratio (\(h\)) = 80% = 0.80</li>
+  <li>TLB Search Time (\(\epsilon\)) = 20 ns</li>
+  <li>Memory Access Time (\(m\)) = 100 ns</li>
+  <li>Page Fault Rate (\(p\)) = Assume 0 for baseline TLB calculation, but wait, the question implies EAT <em>with</em> page faults. If page fault rate \(p\) is not given, we assume \(p = 0\) for the memory access phase, or the question implies a separate calculation. Assuming standard TLB EAT without page faults:</li>
+</ul>
+<p><strong>Formula:</strong> \(EAT = h \times (\epsilon + m) + (1-h) \times (\epsilon + 2m)\)</p>
+<p>\(EAT = 0.80 \times (20 + 100) + 0.20 \times (20 + 200)\)</p>
+<p>\(EAT = 0.80 \times 120 + 0.20 \times 220 = 96 + 44 = \mathbf{140 \text{ ns}}\)</p>
+<p><em>(Note: The 10ms page fault service time is irrelevant unless a specific page fault rate 'p' is provided. If \(p\) was provided, the formula expands to: \((1-p) \times 140\text{ns} + p \times 10\text{ms}\)).</em></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-7">
@@ -1372,48 +2055,83 @@ b) Calculate max file size supported by Inode with 12 direct, 1 single indirect,
 --- Page 4 ---
 (Block=4KB, Pointer=4 bytes).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain UNIX Inode Structure and file system disk organization.
-b) Calculate max file size supported by Inode with 12 direct, 1 single indirect, 1 double indirect, 1 triple indirect pointers
+                    <h3>UNIX Inode Structure</h3>
+<h4>Part (a): Inode Structure and Disk Organization</h4>
+<p>In UNIX, directories do not contain file data or metadata directly. A directory simply maps a human-readable filename to an <strong>Inode Number</strong>. The Inode (Index Node) is a data structure on the disk that stores all metadata (owner, permissions, timestamps, size) and the locations of the data blocks.</p>
+<p>To balance the need for fast access to small files and support for massive files, the Inode uses a hierarchical pointer structure containing direct, single-indirect, double-indirect, and triple-indirect pointers.</p>
 
+<h4>Part (b): Calculate Max File Size</h4>
+<p><strong>Given:</strong></p>
+<ul>
+  <li>Block Size = 4 KB = 4096 bytes</li>
+  <li>Pointer Size = 4 bytes</li>
+  <li>Number of pointers per block = \(\frac{4096}{4} = 1024\) pointers.</li>
+</ul>
 
+<p><strong>Calculations:</strong></p>
+<ol>
+  <li><strong>12 Direct Pointers:</strong> 
+      <br/>Capacity = \(12 \times 4 \text{ KB} = 48 \text{ KB}\)</li>
+  <li><strong>1 Single Indirect Pointer:</strong> Points to 1 block containing 1024 direct pointers.
+      <br/>Capacity = \(1024 \times 4 \text{ KB} = 4096 \text{ KB} = 4 \text{ MB}\)</li>
+  <li><strong>1 Double Indirect Pointer:</strong> Points to 1 block containing 1024 single indirect pointers.
+      <br/>Capacity = \(1024 \times 1024 \times 4 \text{ KB} = 1,048,576 \times 4 \text{ KB} = 4 \text{ GB}\)</li>
+  <li><strong>1 Triple Indirect Pointer:</strong> Points to 1 block containing 1024 double indirect pointers.
+      <br/>Capacity = \(1024 \times 1024 \times 1024 \times 4 \text{ KB} = 1,073,741,824 \times 4 \text{ KB} = 4 \text{ TB}\)</li>
+</ol>
+<p><strong>Maximum File Size</strong> = 48 KB + 4 MB + 4 GB + 4 TB &asymp; <strong>4.004 Terabytes (TB)</strong></p>
 
-
---- Page 4 ---
-(Block=4KB, Pointer=4 bytes)..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
                 </div>
             </div>
             <div class="qa-card" id="gc-8">
                 <div class="q-text"><span class="q-badge c15">Q8</span><span>a) Explain Segmentation with Paging (MULTICS / x86 Architecture).
 b) Show address translation pipeline from Logical Address ➔ Segment Table ➔ Page Table ➔ Physical Address.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Segmentation with Paging (MULTICS / x86 Architecture).
-b) Show address translation pipeline from Logical Address ➔ Segment Table ➔ Page Table ➔ Physical Address..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Segmentation with Paging</h3>
+<h4>Part (a): Architecture overview</h4>
+<p>Both Segmentation and Paging have advantages: Segmentation aligns with the user's logical view of memory (functions, arrays, stack), while Paging eliminates external fragmentation and simplifies physical memory management. Modern systems (like x86 architecture and MULTICS) combine them by <strong>paging the segments</strong>.</p>
+<p>Instead of storing an entire variable-length segment contiguously in physical memory, the OS divides each segment into standard-sized pages. The physical memory remains divided into frames.</p>
+
+<h4>Part (b): Address Translation Pipeline</h4>
+<p>The CPU generates a <strong>Logical Address</strong> formatted as: <code>[Segment Number (s), Offset (d)]</code>.</p>
+<ol>
+  <li><strong>Segment Table Lookup:</strong> The CPU uses <code>s</code> to index into the Segment Table. Instead of yielding a physical base address, the Segment Table entry provides the base address of a <em>Page Table</em> specifically created for segment <code>s</code>. It also checks if <code>d</code> is less than the segment limit.</li>
+  <li><strong>Offset Splitting:</strong> The offset <code>d</code> is further split into a Page Number <code>p</code> and a Page Offset <code>d'</code>.</li>
+  <li><strong>Page Table Lookup:</strong> The CPU uses <code>p</code> to index into the specific Page Table for segment <code>s</code>. This yields the Physical Frame Number <code>f</code>.</li>
+  <li><strong>Physical Address Generation:</strong> The physical address is generated by appending the Page Offset <code>d'</code> to the Frame Number <code>f</code>.</li>
+</ol>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    CPU((CPU)) -- "Logical (s, d)" --> ST[Segment Table]
+    ST -- "Validates Limit.<br/>Yields Page Table Base" --> PT[Page Table for Seg 's']
+    PT -- "Translates p to f" --> RAM[(Physical Memory: f + d')]
 </div>
+<div class="diagram-caption">Figure: Pipeline of Segmentation combined with Paging</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-9">
                 <div class="q-text"><span class="q-badge c15">Q9</span><span>a) Explain Process Synchronization in Linux / Windows Kernels.
 b) Detail Atomic Operations, Spinlocks, Mutexes, and Reader-Writer Locks.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Process Synchronization in Linux / Windows Kernels.
-b) Detail Atomic Operations, Spinlocks, Mutexes, and Reader-Writer Locks..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Process Synchronization in Kernels</h3>
+<h4>Part (a): Sync in Linux / Windows Kernels</h4>
+<p>Operating System kernels are heavily multithreaded and handle asynchronous interrupts. If two CPUs access kernel data structures (like the process queue) simultaneously, data corruption occurs. Hence, kernels employ strict internal synchronization primitives.</p>
+
+<h4>Part (b): Primitives Explained</h4>
+<ul>
+  <li><strong>Atomic Operations:</strong> The simplest primitive. Mathematical operations (like <code>atomic_inc(&counter)</code>) execute in a single, uninterruptible hardware clock cycle. Used for simple counters without the overhead of locking.</li>
+  <li><strong>Spinlocks:</strong> A lock where the thread simply waits in a <code>while</code> loop ("spins") repeatedly checking if the lock is available.
+      <br/>• <em>Pros:</em> No context-switching overhead.
+      <br/>• <em>Cons:</em> Wastes CPU cycles. Only used in Multiprocessor kernels for very short critical sections (e.g., inside interrupt handlers where context switching is forbidden).</li>
+  <li><strong>Mutexes (Mutual Exclusion):</strong> A sleeping lock. If the lock is held, the requesting thread is put to sleep (blocked) and placed in a wait queue until the lock is freed.
+      <br/>• <em>Pros:</em> Frees the CPU to do other work.
+      <br/>• <em>Cons:</em> Context-switch overhead. Used for long critical sections.</li>
+  <li><strong>Reader-Writer Locks:</strong> A specialized lock that allows multiple threads to hold the lock simultaneously for <em>reading</em>, but demands exclusive access for <em>writing</em>. Improves concurrency for data structures that are read frequently but modified rarely.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-10">
@@ -1421,29 +2139,95 @@ b) Detail Atomic Operations, Spinlocks, Mutexes, and Reader-Writer Locks..</li>
 vectors.
 b) Solve detection example and identify deadlocked processes.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Deadlock Detection Algorithm for Multiple Resources using Available, Allocation, Request
-vectors.
-b) Solve detection example and identify deadlocked processes..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Deadlock Detection Algorithm</h3>
+<h4>Part (a): The Algorithm for Multiple Resources</h4>
+<p>If a system does not employ Deadlock Prevention or Avoidance, it must periodically run a Detection algorithm to see if a circular wait has formed. The algorithm uses <code>Available</code>, <code>Allocation</code>, and <code>Request</code> matrices.</p>
+<ol>
+  <li>Initialize <code>Work = Available</code>.</li>
+  <li>Initialize <code>Finish[i] = false</code> if <code>Allocation[i] &ne; 0</code>; otherwise <code>Finish[i] = true</code>.</li>
+  <li>Find an index \(i\) such that both:
+      <br/>a) <code>Finish[i] == false</code>
+      <br/>b) <code>Request[i] &le; Work</code>
+      <br/>If no such \(i\) exists, go to Step 5.
+  </li>
+  <li>Simulate release of resources:
+      <br/><code>Work = Work + Allocation[i]</code>
+      <br/><code>Finish[i] = true</code>
+      <br/>Go back to Step 3.
+  </li>
+  <li>If <code>Finish[i] == false</code> for <em>any</em> \(i\), then the system is in a Deadlock state, and process \(P_i\) is deadlocked.</li>
+</ol>
+
+<h4>Part (b): Example Execution</h4>
+<p>Suppose 3 processes and 3 resources (A,B,C). Available = (0,0,0).</p>
+<table border="1" style="border-collapse: collapse; text-align: center; width:100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Process</th><th>Allocation</th><th>Request</th>
+  </tr>
+  <tr><td>P1</td><td>0,1,0</td><td>0,0,0</td></tr>
+  <tr><td>P2</td><td>2,0,0</td><td>2,0,2</td></tr>
+  <tr><td>P3</td><td>3,0,3</td><td>0,0,0</td></tr>
+  <tr><td>P4</td><td>2,1,1</td><td>1,0,0</td></tr>
+</table>
+<ul>
+  <li><code>Work = (0,0,0)</code>. <code>Finish = [F, F, F, F]</code></li>
+  <li>P1's Request (0,0,0) &le; Work (0,0,0). <strong>True</strong>. Run P1. Work = (0,0,0)+(0,1,0) = <strong>(0,1,0)</strong>. <code>Finish[P1]=T</code>.</li>
+  <li>P3's Request (0,0,0) &le; Work (0,1,0). <strong>True</strong>. Run P3. Work = (0,1,0)+(3,0,3) = <strong>(3,1,3)</strong>. <code>Finish[P3]=T</code>.</li>
+  <li>P4's Request (1,0,0) &le; Work (3,1,3). <strong>True</strong>. Run P4. Work = (3,1,3)+(2,1,1) = <strong>(5,2,4)</strong>. <code>Finish[P4]=T</code>.</li>
+  <li>P2's Request (2,0,2) &le; Work (5,2,4). <strong>True</strong>. Run P2. Work = (5,2,4)+(2,0,0) = <strong>(7,2,4)</strong>. <code>Finish[P2]=T</code>.</li>
+</ul>
+<p>All processes finished (<code>Finish == True</code>). <strong>No Deadlock exists.</strong></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-11">
                 <div class="q-text"><span class="q-badge c15">Q11</span><span>a) Explain Shared Memory and Message Passing IPC mechanisms.
 b) Write C programs illustrating IPC using POSIX shared memory (`shm_open`, `mmap`).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Shared Memory and Message Passing IPC mechanisms.
-b) Write C programs illustrating IPC using POSIX shared memory (`shm_open`, `mmap`)..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Shared Memory vs Message Passing IPC</h3>
+<h4>Part (a): Comparison of IPC Mechanisms</h4>
+<p>Inter-Process Communication (IPC) is required for independent processes to share data.</p>
+<ul>
+  <li><strong>Shared Memory:</strong> The OS creates a shared region of memory that both processes can map into their logical address space. Once established, all data exchange is treated as routine memory access without OS assistance. 
+      <br/><em>Advantages:</em> Extremely fast. Ideal for large amounts of data.
+      <br/><em>Disadvantages:</em> Requires processes to manage synchronization (using semaphores) to avoid race conditions.</li>
+  <li><strong>Message Passing:</strong> Processes communicate by exchanging discrete messages via OS system calls (e.g., <code>send()</code> and <code>receive()</code>).
+      <br/><em>Advantages:</em> Easier to set up for small data. Built-in synchronization (receivers block until a message arrives). Scales well across networks (distributed systems).
+      <br/><em>Disadvantages:</em> Slower, as every message requires a context switch into the kernel.</li>
+</ul>
+
+<h4>Part (b): POSIX Shared Memory in C</h4>
+<p>Below is a simplified example of creating and writing to shared memory.</p>
+<div class="code-block">
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;sys/mman.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    const int SIZE = 4096;
+    const char *name = "/my_shared_memory";
+    const char *message = "Hello from Writer Process!";
+
+    // 1. Create the shared memory object
+    int shm_fd = shm_open(name, O_CREAT | O_RDWR, 0666);
+    
+    // 2. Configure the size of the shared memory object
+    ftruncate(shm_fd, SIZE);
+    
+    // 3. Map the shared memory object into the address space
+    void *ptr = mmap(0, SIZE, PROT_WRITE, MAP_SHARED, shm_fd, 0);
+    
+    // 4. Write to the shared memory
+    sprintf(ptr, "%s", message);
+    printf("Writer wrote to shared memory.\n");
+    
+    return 0;
+}
 </div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-12">
@@ -1451,138 +2235,224 @@ b) Write C programs illustrating IPC using POSIX shared memory (`shm_open`, `mma
 implementation.
 b) Compare FAT-32 vs ext4 file systems.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain File System Implementation: Directory Entry, File Allocation Table (FAT), and Inode
-implementation.
-b) Compare FAT-32 vs ext4 file systems..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>File System Implementation</h3>
+<h4>Part (a): Directory Entry, FAT, and Inode</h4>
+<ul>
+  <li><strong>Directory Entry:</strong> A directory is a file that contains a list of directory entries. Each entry maps a human-readable file name to a unique file identifier (like an inode number) or directly to the starting disk block.</li>
+  <li><strong>File Allocation Table (FAT):</strong> Used by older OSs (MS-DOS). The start of the disk partition contains a table with one entry for every disk block. The directory points to the first block of the file. The FAT entry for the first block contains the block number of the next block, forming a linked list.</li>
+  <li><strong>Inode Implementation:</strong> Used by UNIX/Linux. Each file is represented by an Inode data structure stored on disk. The inode contains file attributes and an array of direct and indirect pointers to the data blocks. Directories only map names to Inode numbers.</li>
+</ul>
+
+<h4>Part (b): FAT-32 vs ext4</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th><th>FAT-32 (Microsoft)</th><th>ext4 (Linux)</th>
+  </tr>
+  <tr>
+    <td><strong>File Size Limit</strong></td><td>4 GB (major limitation today).</td><td>16 TB (using 4KB blocks).</td>
+  </tr>
+  <tr>
+    <td><strong>Architecture</strong></td><td>Linked-list based (using the FAT table).</td><td>Inode and Extent-based.</td>
+  </tr>
+  <tr>
+    <td><strong>Journaling</strong></td><td>No journaling. Prone to corruption on sudden power loss.</td><td>Journaling file system. Highly resilient to crashes.</td>
+  </tr>
+  <tr>
+    <td><strong>Permissions</strong></td><td>No built-in security/permissions.</td><td>Full POSIX ACL permissions (owner, group, others).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-13">
                 <div class="q-text"><span class="q-badge c15">Q13</span><span>a) Explain Memory Protection techniques: Base & Limit registers, Page Tables Protection Bits.
 b) Explain Page Table Structures: Hierarchical, Hashed, and Inverted.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Memory Protection techniques: Base & Limit registers, Page Tables Protection Bits.
-b) Explain Page Table Structures: Hierarchical, Hashed, and Inverted..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Memory Protection & Page Tables</h3>
+<h4>Part (a): Memory Protection Techniques</h4>
+<p>Memory protection ensures a process cannot access memory outside its allocated space.</p>
+<ul>
+  <li><strong>Base & Limit Registers:</strong> Used in contiguous allocation and segmentation. The <em>Base</em> register holds the smallest legal physical address. The <em>Limit</em> register holds the size of the range. The CPU hardware checks every generated address against these registers and traps to the OS on violation.</li>
+  <li><strong>Page Table Protection Bits:</strong> Used in paging. Each page table entry has a <em>Valid/Invalid bit</em> (valid means the page is in RAM and belongs to the process). It also has permission bits like <em>Read, Write, and Execute (R/W/X)</em>. If a process tries to write to a read-only page, a hardware trap occurs.</li>
+</ul>
+
+<h4>Part (b): Page Table Structures</h4>
+<ul>
+  <li><strong>Hierarchical (Multi-level) Page Tables:</strong> For 32-bit or 64-bit systems, a single continuous page table is too large. The page table itself is broken into pages. The logical address is split into multiple page numbers (e.g., outer page table, inner page table, offset). </li>
+  <li><strong>Hashed Page Tables:</strong> Used for address spaces > 32 bits. The logical page number is hashed. The hash table entry contains a linked list of elements (handling collisions). The CPU traverses the list to match the logical page number and fetch the physical frame.</li>
+  <li><strong>Inverted Page Tables:</strong> Instead of one page table per process, there is exactly one page table for the entire system, indexed by the Physical Frame number. It reduces memory usage drastically but requires a hash map to speed up the translation from logical page to physical frame.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-14">
                 <div class="q-text"><span class="q-badge c15">Q14</span><span>a) Explain Distributed Systems OS Concepts: Network OS vs Distributed OS.
 b) Explain Logical Clocks and Lamport's Timestamps for event ordering.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Distributed Systems OS Concepts: Network OS vs Distributed OS.
-b) Explain Logical Clocks and Lamport's Timestamps for event ordering..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Distributed Systems & Logical Clocks</h3>
+<h4>Part (a): Network OS vs Distributed OS</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th><th>Network OS (NOS)</th><th>Distributed OS (DOS)</th>
+  </tr>
+  <tr>
+    <td><strong>User View</strong></td><td>Users are aware of multiple distinct computers. They must explicitly log in to remote machines or transfer files.</td><td>Users see the entire network as a single, powerful, virtual computer.</td>
+  </tr>
+  <tr>
+    <td><strong>Resource Management</strong></td><td>Each node manages its own local resources autonomously.</td><td>The OS manages resources globally. It can automatically move processes or data across machines.</td>
+  </tr>
+  <tr>
+    <td><strong>Example</strong></td><td>Standard Windows/Linux machines connected via a LAN.</td><td>Amoeba, LOCUS, Plan 9.</td>
+  </tr>
+</table>
+
+<h4>Part (b): Logical Clocks and Lamport's Timestamps</h4>
+<p>In distributed systems, there is no shared global memory and no perfect global physical clock. Therefore, determining the exact order of events across different machines is difficult.</p>
+<p><strong>Lamport's Logical Clocks</strong> provide a way to establish a partial ordering of events based on the <em>"happens-before"</em> relation (\(\rightarrow\)).</p>
+<ol>
+  <li>Each process \(P_i\) maintains a local counter, \(L_i\), initialized to 0.</li>
+  <li>Before executing any event (internal, send, or receive), \(P_i\) increments its counter: \(L_i = L_i + 1\).</li>
+  <li>When \(P_i\) sends a message \(m\), it attaches its current clock value: \((m, L_i)\).</li>
+  <li>When process \(P_j\) receives \((m, L_i)\), it updates its own clock to be strictly greater than the sender's clock and its own previous clock: \(L_j = \max(L_j, L_i) + 1\).</li>
+</ol>
+<p>If Event A happens before Event B (\(A \rightarrow B\)), then the Lamport timestamp of A is strictly less than B: \(L(A) < L(B)\).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-15">
                 <div class="q-text"><span class="q-badge c15">Q15</span><span>a) Explain CPU Scheduling in Real-Time Systems: Rate Monotonic (RMS) vs Earliest Deadline First (EDF).
 b) Solve EDF scheduling for 2 periodic tasks.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Computing FIRST and FOLLOW Sets & LL(1) Parsing Table:</b></p>
-<p>Given Grammar: \(E \rightarrow T E', E' \rightarrow + T E' \mid \epsilon, T \rightarrow F T', T' \rightarrow * F T' \mid \epsilon, F \rightarrow ( E ) \mid \text{id}\)</p>
+                    <h3>Real-Time CPU Scheduling</h3>
+<h4>Part (a): Rate Monotonic vs Earliest Deadline First</h4>
 <ul>
-    <li><b>1. FIRST Sets:</b>
-        <br>\(FIRST(F) = \{(, \text{id}\}\)
-        <br>\(FIRST(T') = \{*, \epsilon\}\)
-        <br>\(FIRST(T) = \{(, \text{id}\}\)
-        <br>\(FIRST(E') = \{+, \epsilon\}\)
-        <br>\(FIRST(E) = \{(, \text{id}\}\)
-    </li>
-    <li><b>2. FOLLOW Sets:</b>
-        <br>\(FOLLOW(E) = \{\$, )\}\)
-        <br>\(FOLLOW(E') = FOLLOW(E) = \{\$, )\}\)
-        <br>\(FOLLOW(T) = FIRST(E') \setminus \{\epsilon\} \cup FOLLOW(E) = \{+, \$, )\}\)
-        <br>\(FOLLOW(T') = FOLLOW(T) = \{+, \$, )\}\)
-        <br>\(FOLLOW(F) = FIRST(T') \setminus \{\epsilon\} \cup FOLLOW(T) = \{*, +, \$, )\}\)
-    </li>
+  <li><strong>Rate Monotonic Scheduling (RMS):</strong> A static-priority algorithm. The priority of a periodic task is inversely proportional to its period. (Shorter period = Higher priority). It is easy to implement but cannot always guarantee scheduling if CPU utilization exceeds ~69%.</li>
+  <li><strong>Earliest Deadline First (EDF):</strong> A dynamic-priority algorithm. The priority of a task changes based on how close its absolute deadline is. The task whose deadline is closest gets the highest priority. It can achieve 100% CPU utilization.</li>
 </ul>
-<p><b>LL(1) Parsing Table:</b> All entries are uniquely defined without multiple entries, proving the grammar is <b>LL(1)</b>!</p>
+
+<h4>Part (b): Solving EDF Scheduling for 2 Periodic Tasks</h4>
+<p><strong>Given 2 Tasks:</strong></p>
+<ul>
+  <li>Task 1 (T1): Execution Time (\(E_1\)) = 1, Period (\(P_1\)) = 4</li>
+  <li>Task 2 (T2): Execution Time (\(E_2\)) = 2, Period (\(P_2\)) = 5</li>
+</ul>
+<p><em>Check Schedulability (Utilization):</em> \(U = (1/4) + (2/5) = 0.25 + 0.40 = 0.65\). Since \(0.65 \le 1.0\), it is fully schedulable by EDF.</p>
+<p><strong>EDF Trace (Hyperperiod = LCM(4,5) = 20):</strong></p>
+<ul>
+  <li><strong>T=0:</strong> Both arrive. T1 deadline=4, T2 deadline=5. T1 has earlier deadline. Run T1 (0 to 1).</li>
+  <li><strong>T=1:</strong> T1 done. Run T2 (1 to 3). T2 done.</li>
+  <li><strong>T=3:</strong> Idle.</li>
+  <li><strong>T=4:</strong> T1 arrives. Deadline=8. Run T1 (4 to 5).</li>
+  <li><strong>T=5:</strong> T2 arrives. Deadline=10. Run T2 (5 to 7).</li>
+  <li><strong>T=7:</strong> Idle.</li>
+  <li><strong>T=8:</strong> T1 arrives. Deadline=12. Run T1 (8 to 9).</li>
+  <li><strong>T=9:</strong> Idle.</li>
+  <li><strong>T=10:</strong> T2 arrives. Deadline=15. Run T2 (10 to 12).</li>
+  <li><strong>T=12:</strong> T1 arrives. Deadline=16. Run T1 (12 to 13).</li>
+</ul>
+<p>The scheduler dynamically re-evaluates the absolute deadlines at each period boundary.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-16">
                 <div class="q-text"><span class="q-badge c15">Q16</span><span>a) Explain Threading Models: Many-to-One, One-to-One, Many-to-Many.
 b) Compare POSIX Threads (pthreads) API implementation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Threading Models: Many-to-One, One-to-One, Many-to-Many.
-b) Compare POSIX Threads (pthreads) API implementation..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Threading Models & POSIX Threads</h3>
+<h4>Part (a): Threading Models</h4>
+<p>Modern OSs map user-level threads (created by libraries) to kernel-level threads (managed by the OS) using different models:</p>
+<ol>
+  <li><strong>Many-to-One:</strong> Many user-level threads map to a single kernel thread. Thread management is fast (done in user space), but if one thread makes a blocking system call, the entire process blocks. Cannot run in parallel on multicore systems.</li>
+  <li><strong>One-to-One:</strong> Each user-level thread maps directly to one kernel thread (used by Windows, Linux). Allows true parallelism on multicores. Drawback: creating a user thread requires creating a kernel thread, which has overhead.</li>
+  <li><strong>Many-to-Many:</strong> Multiplexes many user-level threads to a smaller or equal number of kernel threads. Combines the best of both worlds, but is extremely complex to implement.</li>
+</ol>
+
+<h4>Part (b): POSIX Threads (pthreads) API</h4>
+<p>The <code>pthreads</code> API is a POSIX standard for thread creation and synchronization used heavily in UNIX/Linux systems.</p>
+<ul>
+  <li><code>pthread_create()</code>: Creates a new thread and passes it a function to execute.</li>
+  <li><code>pthread_join()</code>: Suspends the calling thread (usually the main thread) until the specified target thread terminates.</li>
+  <li><code>pthread_exit()</code>: Terminates the calling thread.</li>
+  <li><code>pthread_mutex_lock()</code> / <code>unlock()</code>: Used to protect critical sections and prevent race conditions between threads.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-17">
                 <div class="q-text"><span class="q-badge c15">Q17</span><span>a) Explain I/O System Architecture: Programmed I/O, Interrupt-Driven I/O, DMA (Direct Memory Access).
 b) Detail DMA controller working cycle.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain I/O System Architecture: Programmed I/O, Interrupt-Driven I/O, DMA (Direct Memory Access).
-b) Detail DMA controller working cycle..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>I/O System Architecture & DMA</h3>
+<h4>Part (a): I/O Transfer Mechanisms</h4>
+<ul>
+  <li><strong>Programmed I/O (Polling):</strong> The CPU repeatedly checks a status register on the I/O device to see if it is ready. This wastes an enormous amount of CPU cycles (busy-waiting).</li>
+  <li><strong>Interrupt-Driven I/O:</strong> The CPU starts the I/O transfer and goes to do other work. When the device is ready or finished, it sends an interrupt signal to the CPU over the system bus. The CPU halts, runs the ISR, and resumes.</li>
+  <li><strong>Direct Memory Access (DMA):</strong> For bulk data transfers (like disk reads). A specialized DMA Controller takes over the system bus to transfer data directly between the I/O device and Main Memory, bypassing the CPU entirely.</li>
+</ul>
+
+<h4>Part (b): DMA Controller Working Cycle</h4>
+<ol>
+  <li>The CPU writes a command block to the DMA Controller containing: source address, destination address in memory, read/write instruction, and byte count.</li>
+  <li>The CPU issues a "start" command to the DMA and resumes other process execution.</li>
+  <li>The DMA Controller requests control of the system bus. Through a technique called <em>cycle stealing</em>, it grabs the bus for one memory cycle to transfer a block of data directly to RAM.</li>
+  <li>The DMA decrements the byte count. It repeats step 3 until the count reaches zero.</li>
+  <li>Once the entire transfer is complete, the DMA Controller sends a single interrupt to the CPU to signal completion.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-18">
                 <div class="q-text"><span class="q-badge c15">Q18</span><span>a) Explain Security and Protection Mechanisms: Authentication, Access Control, Buffer Overflow Attacks.
 b) Detail Buffer Overflow exploit and stack protection (Canaries, ASLR).</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Intermediate Code Generation for \(a = b * -c + b * -c\):</b></p>
-<p><b>1. Three-Address Code (TAC):</b></p>
-<div class="code-block">
-t1 = -c
-t2 = b * t1
-t3 = -c
-t4 = b * t3
-t5 = t2 + t4
-a = t5
-</div>
-<p><b>2. Quadruples Representation:</b></p>
-<table>
-    <tr><th>Index</th><th>Op</th><th>Arg1</th><th>Arg2</th><th>Result</th></tr>
-    <tr><td>(0)</td><td>uminus</td><td>c</td><td>-</td><td>t1</td></tr>
-    <tr><td>(1)</td><td>*</td><td>b</td><td>t1</td><td>t2</td></tr>
-    <tr><td>(2)</td><td>uminus</td><td>c</td><td>-</td><td>t3</td></tr>
-    <tr><td>(3)</td><td>*</td><td>b</td><td>t3</td><td>t4</td></tr>
-    <tr><td>(4)</td><td>+</td><td>t2</td><td>t4</td><td>t5</td></tr>
-    <tr><td>(5)</td><td>=</td><td>t5</td><td>-</td><td>a</td></tr>
-</table>
+                    <h3>Security, Protection & Buffer Overflows</h3>
+<h4>Part (a): Security and Protection Mechanisms</h4>
+<ul>
+  <li><strong>Authentication:</strong> Verifying the identity of a user or system (e.g., passwords, biometrics, 2FA, RSA keys).</li>
+  <li><strong>Access Control:</strong> Enforcing policies on what authenticated users can do (e.g., Access Control Matrix, ACLs, Role-Based Access Control).</li>
+  <li><strong>Protection:</strong> Internal OS mechanisms ensuring processes cannot interfere with each other (e.g., Memory protection using Base/Limit registers, Dual Mode operation: User vs Kernel mode).</li>
+</ul>
+
+<h4>Part (b): Buffer Overflow exploit and protection</h4>
+<p><strong>The Exploit:</strong> A Buffer Overflow occurs when a program writes more data to a fixed-length memory block (buffer) than it was allocated for, usually on the call stack. By overflowing a local array variable, an attacker can overwrite the adjacent <em>Return Address</em> of the function. When the function finishes, instead of returning to the caller, the CPU jumps to the overwritten address, executing malicious shellcode injected by the attacker.</p>
+
+<p><strong>Stack Protection Mechanisms:</strong></p>
+<ul>
+  <li><strong>Stack Canaries:</strong> The compiler injects a random secret integer (canary) onto the stack between local variables and the return address. Before the function returns, it checks if the canary was altered. If it changed, a buffer overflow occurred, and the OS terminates the program immediately.</li>
+  <li><strong>ASLR (Address Space Layout Randomization):</strong> Randomizes the memory locations of the stack, heap, and libraries every time the program runs, making it nearly impossible for the attacker to guess the exact memory address to jump to.</li>
+  <li><strong>NX Bit (No-eXecute):</strong> Hardware feature marking stack memory as non-executable. Even if the attacker injects shellcode on the stack, the CPU refuses to run it.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-19">
                 <div class="q-text"><span class="q-badge c15">Q19</span><span>a) Explain Free Space Management techniques on disk: Bit Vector, Linked List, Grouping, Counting.
 b) Calculate bit vector size for 1TB disk with 4KB blocks.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Free Space Management techniques on disk: Bit Vector, Linked List, Grouping, Counting.
-b) Calculate bit vector size for 1TB disk with 4KB blocks..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Free Space Management on Disk</h3>
+<h4>Part (a): Free Space Management Techniques</h4>
+<ul>
+  <li><strong>Bit Vector:</strong> 1 bit per disk block (1 = free, 0 = allocated). Fast for finding contiguous blocks using bit-manipulation, but takes up RAM.</li>
+  <li><strong>Linked List:</strong> Link free blocks together. No extra space overhead, but traversing the list to find multiple blocks is horribly slow (requires disk seeks).</li>
+  <li><strong>Grouping:</strong> Store the addresses of \(N\) free blocks in the first free block. The first \(N-1\) addresses point to actual free data blocks, and the \(N\)-th address points to another block that contains the addresses of the next \(N\) free blocks. Faster than linked list.</li>
+  <li><strong>Counting (Extents):</strong> Because space is often allocated in contiguous runs, the OS keeps a list of entries formatted as: <code>[Start Block Address, Count of contiguous free blocks]</code>. Excellent for Contiguous Allocation systems.</li>
+</ul>
+
+<h4>Part (b): Calculate Bit Vector Size</h4>
+<p><strong>Given:</strong> Disk Size = 1 TB, Block Size = 4 KB.</p>
+<ol>
+  <li>Calculate total number of blocks on disk:
+      <br/>Total Blocks = \(\frac{1 \text{ TB}}{4 \text{ KB}} = \frac{1024 \text{ GB}}{4 \text{ KB}} = \frac{1024 \times 1024 \text{ MB}}{4 \text{ KB}} = \frac{1024 \times 1024 \times 1024 \text{ KB}}{4 \text{ KB}}\)
+      <br/>Total Blocks = \(1024 \times 1024 \times 256 = 268,435,456\) blocks.</li>
+  <li>Since each block requires 1 bit in the Bit Vector:
+      <br/>Bit Vector Size = 268,435,456 bits.</li>
+  <li>Convert to Bytes:
+      <br/>Size in Bytes = \(\frac{268,435,456}{8} = 33,554,432\) bytes.</li>
+  <li>Convert to Megabytes:
+      <br/>Size in MB = \(\frac{33,554,432}{1024 \times 1024} = 32 \text{ MB}\).</li>
+</ol>
+<p><strong>The Bit Vector requires 32 MB of memory.</strong></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-20">
@@ -1590,15 +2460,19 @@ b) Calculate bit vector size for 1TB disk with 4KB blocks..</li>
 writing to console.
 b) Detail user-to-kernel mode switch, system calls, interrupt service routines, buffer cache, and driver interactions.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Complete OS Case Study: Trace execution of user program opening file `test.txt`, reading data, and
-writing to console.
-b) Detail user-to-kernel mode switch, system calls, interrupt service routines, buffer cache, and driver interactions..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Complete OS Case Study: File I/O</h3>
+<h4>Part (a) & (b): Tracing a User Program Reading a File</h4>
+<p>Let's trace what happens when a user program calls <code>open("test.txt")</code>, <code>read()</code>, and <code>printf()</code>.</p>
+<ol>
+  <li><strong>System Call & Mode Switch:</strong> The C library translates <code>open()</code> into a software trap (interrupt). The CPU switches from <strong>User Mode</strong> (unprivileged) to <strong>Kernel Mode</strong> (privileged) and jumps to the System Call Handler in the OS kernel.</li>
+  <li><strong>VFS and File System:</strong> The OS Virtual File System layer receives the request, parses the path, and asks the specific file system driver (e.g., ext4) to locate the file's Inode on disk.</li>
+  <li><strong>Buffer Cache & Disk I/O:</strong> When <code>read()</code> is called, the OS first checks the <em>Buffer Cache</em> in RAM. If the file data isn't there (Cache Miss), the OS instructs the Disk Device Driver to fetch it.</li>
+  <li><strong>Interrupt & Context Switch:</strong> Disk I/O is slow. The OS puts the user process to sleep (Blocked state) and context-switches to another Ready process to keep the CPU busy.</li>
+  <li><strong>DMA and ISR:</strong> The Disk Controller uses DMA to transfer the file data directly into kernel RAM. Once done, it fires a hardware interrupt. The CPU halts its current work and runs the Interrupt Service Routine (ISR).</li>
+  <li><strong>Wakeup & Return:</strong> The ISR marks the waiting process as Ready. The OS copies the data from kernel buffer to the user program's buffer and switches the CPU back to User Mode.</li>
+  <li><strong>Console Output:</strong> <code>printf()</code> translates to a <code>write()</code> system call to the terminal device file, triggering the graphics/terminal driver to render the characters on the screen.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-21">
@@ -1606,93 +2480,241 @@ b) Detail user-to-kernel mode switch, system calls, interrupt service routines, 
 P4(A=3,B=1), P5(A=4,B=3).
 b) Draw Gantt charts and calculate average WT and TAT.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Mathematical CPU Scheduling Trace (Non-Preemptive SJF vs Preemptive SRTF):</b></p>
-<p>Given Processes: \(P_1(AT=0, BT=8), P_2(AT=1, BT=4), P_3(AT=2, BT=2), P_4(AT=3, BT=5)\).</p>
-<p><b>1. Preemptive SRTF Execution Trace:</b></p>
+                    <h3>SJF and SRTF Scheduling</h3>
+<h4>Part (a) & (b): Non-Preemptive SJF vs Preemptive SRTF</h4>
+<p><strong>Given:</strong> P1(0,8), P2(1,4), P3(2,2), P4(3,1), P5(4,3). (Format: Arrival, Burst)</p>
+
+<strong>1. Non-Preemptive SJF</strong>
+<p>Once a process gets the CPU, it cannot be interrupted until it finishes. If multiple processes are in the Ready Queue, the one with the shortest burst time is selected.</p>
 <ul>
-    <li>Gantt Chart timeline: \(P_1[0-1], P_2[1-2], P_3[2-4], P_2[4-7], P_1[7-14], P_4[14-19]\)</li>
-    <li>Completion Times (CT): \(P_1=14, P_2=7, P_3=4, P_4=19\)</li>
-    <li>Turnaround Time (\(TAT = CT - AT\)): \(P_1=14, P_2=6, P_3=2, P_4=16\) \(\rightarrow\) <b>Average TAT = 9.50 ms</b></li>
-    <li>Waiting Time (\(WT = TAT - BT\)): \(P_1=6, P_2=2, P_3=0, P_4=11\) \(\rightarrow\) <b>Average WT = 4.75 ms</b></li>
+  <li>T=0: P1 arrives. Runs for 8ms.</li>
+  <li>T=1 to 4: P2, P3, P4, P5 arrive and wait.</li>
+  <li>T=8: P1 finishes. Queue: [P2(4), P3(2), P4(1), P5(3)]. Shortest is P4.</li>
+  <li>T=8: P4 runs for 1ms.</li>
+  <li>T=9: P4 finishes. Queue: [P2(4), P3(2), P5(3)]. Shortest is P3.</li>
+  <li>T=9: P3 runs for 2ms.</li>
+  <li>T=11: P3 finishes. Queue: [P2(4), P5(3)]. Shortest is P5.</li>
+  <li>T=11: P5 runs for 3ms.</li>
+  <li>T=14: P5 finishes. Queue: [P2(4)].</li>
+  <li>T=14: P2 runs for 4ms. Finishes at 18.</li>
 </ul>
-<p><b>2. Non-Preemptive SJF Execution Trace:</b></p>
+<div class="diagram-container">
+<div class="mermaid">
+gantt
+    title SJF Gantt Chart
+    dateFormat  s
+    axisFormat %S
+    section CPU
+    P1 :0, 8s
+    P4 :8, 1s
+    P3 :9, 2s
+    P5 :11, 3s
+    P2 :14, 4s
+</div>
+</div>
+<table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+  <tr><th>Process</th><th>AT</th><th>BT</th><th>CT</th><th>TAT (CT-AT)</th><th>WT (TAT-BT)</th></tr>
+  <tr><td>P1</td><td>0</td><td>8</td><td>8</td><td>8</td><td>0</td></tr>
+  <tr><td>P2</td><td>1</td><td>4</td><td>18</td><td>17</td><td>13</td></tr>
+  <tr><td>P3</td><td>2</td><td>2</td><td>11</td><td>9</td><td>7</td></tr>
+  <tr><td>P4</td><td>3</td><td>1</td><td>9</td><td>6</td><td>5</td></tr>
+  <tr><td>P5</td><td>4</td><td>3</td><td>14</td><td>10</td><td>7</td></tr>
+</table>
+<p><strong>Average WT (SJF) = (0+13+7+5+7)/5 = 32/5 = 6.4 ms</strong></p>
+
+<strong>2. Preemptive SRTF (Shortest Remaining Time First)</strong>
+<p>If a new process arrives with a burst shorter than the remaining time of the running process, preempt.</p>
 <ul>
-    <li>Gantt Chart timeline: \(P_1[0-8], P_3[8-10], P_2[10-14], P_4[14-19]\)</li>
-    <li>Completion Times (CT): \(P_1=8, P_2=14, P_3=10, P_4=19\)</li>
-    <li>Turnaround Time (\(TAT\)): \(P_1=8, P_2=13, P_3=8, P_4=16\) \(\rightarrow\) <b>Average TAT = 11.25 ms</b></li>
-    <li>Waiting Time (\(WT\)): \(P_1=0, P_2=9, P_3=6, P_4=11\) \(\rightarrow\) <b>Average WT = 6.50 ms</b></li>
+  <li>T=0: P1 runs. Remaining: P1(8).</li>
+  <li>T=1: P2 arrives (4). P1 remaining is 7. 4 < 7. Preempt P1! P2 runs.</li>
+  <li>T=2: P3 arrives (2). P2 remaining is 3. 2 < 3. Preempt P2! P3 runs.</li>
+  <li>T=3: P4 arrives (1). P3 remaining is 1. Tie. Let P3 continue (or P4, assume P3). P3 runs.</li>
+  <li>T=4: P3 finishes. P5 arrives (3). Queue: [P1(7), P2(3), P4(1), P5(3)]. Shortest is P4. P4 runs.</li>
+  <li>T=5: P4 finishes. Queue: [P1(7), P2(3), P5(3)]. Tie P2 and P5. Run P2.</li>
+  <li>T=8: P2 finishes. Queue: [P1(7), P5(3)]. Run P5.</li>
+  <li>T=11: P5 finishes. Run P1.</li>
+  <li>T=18: P1 finishes.</li>
 </ul>
+<div class="diagram-container">
+<div class="mermaid">
+gantt
+    title SRTF Gantt Chart
+    dateFormat  s
+    axisFormat %S
+    section CPU
+    P1 :0, 1s
+    P2 :1, 1s
+    P3 :2, 2s
+    P4 :4, 1s
+    P2 :5, 3s
+    P5 :8, 3s
+    P1 :11, 7s
+</div>
+</div>
+<table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+  <tr><th>Process</th><th>AT</th><th>BT</th><th>CT</th><th>TAT (CT-AT)</th><th>WT (TAT-BT)</th></tr>
+  <tr><td>P1</td><td>0</td><td>8</td><td>18</td><td>18</td><td>10</td></tr>
+  <tr><td>P2</td><td>1</td><td>4</td><td>8</td><td>7</td><td>3</td></tr>
+  <tr><td>P3</td><td>2</td><td>2</td><td>4</td><td>2</td><td>0</td></tr>
+  <tr><td>P4</td><td>3</td><td>1</td><td>5</td><td>2</td><td>1</td></tr>
+  <tr><td>P5</td><td>4</td><td>3</td><td>11</td><td>7</td><td>4</td></tr>
+</table>
+<p><strong>Average WT (SRTF) = (10+3+0+1+4)/5 = 18/5 = 3.6 ms</strong></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-22">
                 <div class="q-text"><span class="q-badge c15">Q22</span><span>a) Explain Dining Philosophers solution using Monitor data structure.
 b) Write complete Monitor code preventing deadlocks.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Dining Philosophers solution using Monitor data structure.
-b) Write complete Monitor code preventing deadlocks..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Dining Philosophers using Monitors</h3>
+<h4>Part (a): Solution Design</h4>
+<p>A <strong>Monitor</strong> is a high-level synchronization construct provided by programming languages (like Java) that encapsulates shared variables and the procedures that operate on them. Only one process can be active inside a monitor at a time.</p>
+<p>To avoid deadlock in the Dining Philosophers problem using a monitor, a philosopher can only pick up chopsticks if <em>both</em> the left and right chopsticks are available. This is tracked using a <code>state</code> array (THINKING, HUNGRY, EATING) for each philosopher.</p>
+
+<h4>Part (b): Monitor Code</h4>
+<div class="code-block">
+monitor DiningPhilosophers {
+    enum { THINKING, HUNGRY, EATING } state[5];
+    condition self[5]; // Condition variables to delay philosophers
+
+    void pickup(int i) {
+        state[i] = HUNGRY;
+        test(i); // Check if neighbors are eating
+        if (state[i] != EATING) {
+            self[i].wait(); // Block if couldn't get both chopsticks
+        }
+    }
+
+    void putdown(int i) {
+        state[i] = THINKING;
+        // Check if neighbors are hungry and can now eat
+        test((i + 4) % 5); // Left neighbor
+        test((i + 1) % 5); // Right neighbor
+    }
+
+    void test(int i) {
+        // If I am hungry, and left is not eating, and right is not eating
+        if (state[(i + 4) % 5] != EATING && 
+            state[i] == HUNGRY && 
+            state[(i + 1) % 5] != EATING) {
+            
+            state[i] = EATING;
+            self[i].signal(); // Wake up the philosopher if they were waiting
+        }
+    }
+
+    initialization_code() {
+        for (int i = 0; i < 5; i++)
+            state[i] = THINKING;
+    }
+}
 </div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-23">
                 <div class="q-text"><span class="q-badge c15">Q23</span><span>a) Explain Two-Phase Locking (2PL) protocol for transaction synchronization.
 b) Differentiate Strict 2PL vs Rigorous 2PL.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Two-Phase Locking (2PL) protocol for transaction synchronization.
-b) Differentiate Strict 2PL vs Rigorous 2PL..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Two-Phase Locking (2PL) Protocol</h3>
+<h4>Part (a): Two-Phase Locking (2PL)</h4>
+<p>In database and OS transaction systems, 2PL ensures <strong>Serializability</strong> (the concurrent execution of transactions leaves the database in the same state as if they were executed sequentially).</p>
+<p>A transaction under 2PL must acquire and release locks in two distinct phases:</p>
+<ol>
+  <li><strong>Growing Phase:</strong> The transaction can acquire locks (Shared or Exclusive) but cannot release any locks.</li>
+  <li><strong>Shrinking Phase:</strong> Once the transaction releases its first lock, it enters this phase. It can release locks but cannot acquire any new ones.</li>
+</ol>
+<p><em>Note:</em> While 2PL guarantees serializability, it does <em>not</em> prevent Deadlocks.</p>
+
+<h4>Part (b): Strict 2PL vs Rigorous 2PL</h4>
+<ul>
+  <li><strong>Strict 2PL:</strong> A transaction obeys 2PL, but additionally, it holds all its <em>Exclusive (Write) locks</em> until the transaction commits or aborts. 
+      <br/>• <em>Benefit:</em> Prevents "Cascading Rollbacks" (where aborting one transaction forces others to abort because they read uncommitted data).</li>
+  <li><strong>Rigorous 2PL:</strong> A transaction holds <em>ALL locks</em> (both Shared/Read and Exclusive/Write) until it commits or aborts.
+      <br/>• <em>Benefit:</em> Even easier to implement and recover from crashes than Strict 2PL, though it restricts concurrency slightly more.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-24">
                 <div class="q-text"><span class="q-badge c15">Q24</span><span>a) Explain Swap Space Management on Linux/UNIX systems.
 b) Detail swap raw partition vs swap file implementation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Swap Space Management on Linux/UNIX systems.
-b) Detail swap raw partition vs swap file implementation..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Swap Space Management</h3>
+<h4>Part (a): Swap Space in Linux/UNIX</h4>
+<p>Swap space is a dedicated area on a hard disk used as an extension of main memory (Virtual Memory). When physical RAM becomes full, the OS moves inactive pages out of RAM and stores them in the swap space (Swapping/Paging out) to free up memory for active processes.</p>
+<p>Because disk I/O is vastly slower than RAM access, the management of swap space heavily impacts system performance. The OS attempts to optimize swap space for speed rather than storage efficiency (e.g., allocating swap blocks contiguously to minimize seek times).</p>
+
+<h4>Part (b): Swap Partition vs Swap File</h4>
+<ul>
+  <li><strong>Swap Partition:</strong> A dedicated raw partition on the hard drive.
+      <br/>• <em>Pros:</em> Maximum performance. The OS bypasses the file system entirely and uses raw block I/O, eliminating file system overhead (like updating inodes or fragmentation checks).
+      <br/>• <em>Cons:</em> Inflexible. Resizing a raw partition is difficult and dangerous.</li>
+  <li><strong>Swap File:</strong> A large, pre-allocated file within the standard file system (e.g., <code>pagefile.sys</code> in Windows or a <code>.swap</code> file in Linux).
+      <br/>• <em>Pros:</em> Highly flexible. Can be created, resized, or deleted easily without repartitioning the drive.
+      <br/>• <em>Cons:</em> Slightly slower due to file system overhead, although modern OS optimizations make the performance difference negligible on SSDs.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-25">
                 <div class="q-text"><span class="q-badge c15">Q25</span><span>a) Explain Memory Fragmentation and Compaction algorithms.
 b) Show compaction execution on a fragmented main memory layout.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Memory Fragmentation and Compaction algorithms.
-b) Show compaction execution on a fragmented main memory layout..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Memory Fragmentation & Compaction</h3>
+<h4>Part (a): Fragmentation Algorithms</h4>
+<ul>
+  <li><strong>External Fragmentation:</strong> Exists when there is enough total free memory to satisfy a process request, but the memory is not contiguous (split into small, unusable holes). Happens in variable-partition contiguous allocation.</li>
+  <li><strong>Internal Fragmentation:</strong> Exists when a process is allocated a fixed-size block (page) that is slightly larger than what it requested. The leftover space inside the block is wasted.</li>
+  <li><strong>Compaction:</strong> The algorithmic solution to External Fragmentation. The OS pauses all user processes and physically copies all allocated memory segments to one end of the RAM, consolidating all the small free holes into one massive, contiguous free block at the other end.</li>
+</ul>
+
+<h4>Part (b): Execution Trace of Compaction</h4>
+<p>Assume physical memory is 100MB. Current layout:</p>
+<ul>
+  <li>[0-20MB]: OS (Fixed)</li>
+  <li>[20-40MB]: Process A</li>
+  <li>[40-50MB]: <strong>Free Hole (10MB)</strong></li>
+  <li>[50-80MB]: Process B</li>
+  <li>[80-100MB]: <strong>Free Hole (20MB)</strong></li>
+</ul>
+<p><em>Total Free = 30MB. Request: Process C needs 25MB. Fails due to external fragmentation.</em></p>
+<p><strong>Compaction Execution:</strong></p>
+<ol>
+  <li>The OS identifies Process B (30MB size) is sitting after a 10MB hole.</li>
+  <li>The OS calculates Process B's new Base Address: 40MB.</li>
+  <li>The OS copies the 30MB chunk of data from address 50MB to address 40MB.</li>
+  <li>The OS updates Process B's Relocation Register (Base register) to 40MB.</li>
+  <li>The free holes are merged: Memory from 70MB to 100MB is now a single 30MB contiguous free block.</li>
+  <li>Process C (25MB) is allocated at 70MB.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-26">
                 <div class="q-text"><span class="q-badge c15">Q26</span><span>a) Explain System Call implementation mechanism via Interrupt Vectors and Software Traps.
 b) Detail parameter passing methods for system calls.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain System Call implementation mechanism via Interrupt Vectors and Software Traps.
-b) Detail parameter passing methods for system calls..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>System Call Implementation</h3>
+<h4>Part (a): Interrupt Vectors and Software Traps</h4>
+<p>A System Call provides an interface for user programs to request privileged services from the OS kernel (like file I/O or process creation).</p>
+<ol>
+  <li>The user program calls a wrapper function in the C Library (e.g., <code>read()</code>).</li>
+  <li>The C Library loads a specific integer representing the system call number into a CPU register (e.g., <code>EAX</code>).</li>
+  <li>The library executes a special hardware instruction known as a <strong>Software Trap</strong> or <strong>Software Interrupt</strong> (e.g., <code>int 0x80</code> on older Linux or <code>syscall</code> on modern x86_64).</li>
+  <li>This instruction flips the CPU into <strong>Kernel Mode</strong> and looks up an <strong>Interrupt Vector Table</strong> to find the memory address of the OS's System Call Handler.</li>
+  <li>The Handler uses the integer in the register to index into a table of kernel functions, executes the privileged code, and then returns control to User Mode via an <code>iret</code> instruction.</li>
+</ol>
+
+<h4>Part (b): Parameter Passing Methods</h4>
+<p>Because the kernel runs in a different protected memory space than the user program, passing parameters isn't as simple as standard function calls.</p>
+<ol>
+  <li><strong>Registers:</strong> The simplest method. Parameters are placed into CPU registers before the trap. Fast, but limited by the number of hardware registers (usually max 6 parameters).</li>
+  <li><strong>Block/Table in Memory:</strong> If there are many parameters, they are stored in a contiguous block in user memory. The <em>address</em> of this block is passed to the kernel in a single register. The kernel then reads the block.</li>
+  <li><strong>Stack:</strong> Parameters are pushed onto the user program's stack. The kernel, knowing the stack pointer, pops the parameters off the stack to read them.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-27">
@@ -1704,61 +2726,150 @@ b) Write code using `fcntl()` for file locking.
 
 --- Page 5 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain File Locking mechanisms: Shared vs Exclusive locks, Mandatory vs Advisory locking.
-b) Write code using `fcntl()` for file locking.
+                    <h3>File Locking Mechanisms</h3>
+<h4>Part (a): Types of File Locks</h4>
+<p>File locking ensures data integrity when multiple processes access the same file concurrently.</p>
+<ul>
+  <li><strong>Shared Lock (Reader Lock):</strong> Multiple processes can acquire a shared lock on a file simultaneously. Prevents any process from acquiring an exclusive lock.</li>
+  <li><strong>Exclusive Lock (Writer Lock):</strong> Only one process can acquire this lock. Prevents any other process from reading or writing to the file until released.</li>
+  <li><strong>Advisory Locking:</strong> The OS provides the locking mechanism, but <em>does not enforce it</em>. Processes must willingly check for the lock and respect it. If a rogue process ignores the lock, it can still corrupt the file. (Default in UNIX/Linux).</li>
+  <li><strong>Mandatory Locking:</strong> The OS strictly enforces the lock at the kernel level. Even if a process ignores the lock, the OS will block its <code>read()</code> or <code>write()</code> system calls. (Default in Windows).</li>
+</ul>
 
+<h4>Part (b): fcntl() File Locking Code (C)</h4>
+<div class="code-block">
+#include &lt;stdio.h&gt;
+#include &lt;fcntl.h&gt;
+#include &lt;unistd.h&gt;
 
+int main() {
+    int fd = open("database.txt", O_RDWR);
+    
+    struct flock fl;
+    fl.l_type   = F_WRLCK;  // Exclusive Write Lock
+    fl.l_whence = SEEK_SET; // Start of file
+    fl.l_start  = 0;        // Offset 0
+    fl.l_len    = 0;        // Lock entire file
 
-
---- Page 5 ---.</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+    printf("Requesting lock...\n");
+    // F_SETLKW: Set lock, and Wait (block) if already locked
+    if (fcntl(fd, F_SETLKW, &fl) == -1) {
+        perror("fcntl lock failed");
+        return 1;
+    }
+    
+    printf("Lock acquired! Writing to file...\n");
+    write(fd, "Data", 4);
+    sleep(5); // Simulate work
+    
+    fl.l_type = F_UNLCK; // Unlock
+    fcntl(fd, F_SETLK, &fl);
+    printf("Lock released.\n");
+    
+    close(fd);
+    return 0;
+}
 </div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-28">
                 <div class="q-text"><span class="q-badge c15">Q28</span><span>a) Explain Distributed Mutual Exclusion algorithms: Ricart-Agrawala vs Token Ring.
 b) Compare message complexity per critical section entry.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Distributed Mutual Exclusion algorithms: Ricart-Agrawala vs Token Ring.
-b) Compare message complexity per critical section entry..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Distributed Mutual Exclusion</h3>
+<h4>Part (a): Ricart-Agrawala vs Token Ring</h4>
+<p>In distributed systems without shared memory, algorithms are required to coordinate critical section (CS) access across network nodes.</p>
+<ul>
+  <li><strong>Ricart-Agrawala Algorithm (Permission-Based):</strong> When a node wants to enter the CS, it broadcasts a <em>Request</em> message (with a timestamp) to all other \(N-1\) nodes. It can only enter the CS when it receives an <em>OK</em> reply from all \(N-1\) nodes. If two nodes request simultaneously, the one with the older timestamp wins.</li>
+  <li><strong>Token Ring Algorithm (Token-Based):</strong> Nodes are logically organized in a ring topology. A special message called a <em>Token</em> circulates around the ring. A node can only enter the CS if it possesses the Token. Once finished, it passes the Token to its neighbor.</li>
+</ul>
+
+<h4>Part (b): Message Complexity Comparison</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Metric (Per CS entry)</th>
+    <th>Ricart-Agrawala</th>
+    <th>Token Ring</th>
+  </tr>
+  <tr>
+    <td><strong>Message Overhead</strong></td>
+    <td>High. Requires \(2(N-1)\) messages: \((N-1)\) Requests + \((N-1)\) Replies.</td>
+    <td>Low/Variable. If the node already has the token, 0 messages. Otherwise, up to \(N\) messages to wait for the token to arrive.</td>
+  </tr>
+  <tr>
+    <td><strong>Delay to Enter CS</strong></td>
+    <td>Moderate. Must wait for the slowest node to reply.</td>
+    <td>Variable. Fast if the token is nearby, slow if the token is circulating an idle ring of \(N\) nodes.</td>
+  </tr>
+  <tr>
+    <td><strong>Fault Tolerance</strong></td>
+    <td>Poor. If any single node crashes and fails to reply, the entire system deadlocks waiting for it.</td>
+    <td>Poor. If the token is lost due to a crash, complex token regeneration algorithms must be initiated.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-29">
                 <div class="q-text"><span class="q-badge c15">Q29</span><span>a) Explain Android / iOS Mobile Operating System Architectures.
 b) Detail mobile OS power management and background process suspension.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Android / iOS Mobile Operating System Architectures.
-b) Detail mobile OS power management and background process suspension..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Mobile Operating System Architectures</h3>
+<h4>Part (a): Android vs iOS Architectures</h4>
+<ul>
+  <li><strong>Android Architecture:</strong> Built on a modified Linux kernel. 
+      <br/>• <em>Hardware Abstraction Layer (HAL):</em> Provides standard interfaces for hardware vendors.
+      <br/>• <em>Android Runtime (ART):</em> Compiles Java/Kotlin bytecode into native machine code for execution.
+      <br/>• <em>Application Framework:</em> Provides APIs for UI, telephony, and location.</li>
+  <li><strong>iOS Architecture:</strong> Built on the XNU kernel (Darwin/Unix), shared with macOS.
+      <br/>• <em>Core OS / Core Services:</em> Low-level APIs, SQLite, networking.
+      <br/>• <em>Media Layer:</em> Audio, video, and Core Graphics engines.
+      <br/>• <em>Cocoa Touch:</em> The UI framework used to build iOS apps (Swift/Objective-C).</li>
+</ul>
+
+<h4>Part (b): Power Management & Background Suspension</h4>
+<p>Unlike desktop OSs which allow processes to run in the background indefinitely, Mobile OSs aggressively suspend processes to save battery life.</p>
+<ul>
+  <li><strong>App Suspension (Tombstoning):</strong> When a user switches away from an app, the OS freezes its threads entirely. It consumes RAM but zero CPU/Battery.</li>
+  <li><strong>Wake-Locks (Android):</strong> If an app must continue running (e.g., playing music, downloading), it must explicitly request a "Wake-Lock" from the OS, preventing the CPU from entering deep sleep.</li>
+  <li><strong>Background Fetch (iOS):</strong> Instead of letting apps run continuously, the OS wakes suspended apps periodically for a few seconds to fetch new data, then immediately suspends them again.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-30">
                 <div class="q-text"><span class="q-badge c15">Q30</span><span>a) Explain Kernel Memory Allocation: Buddy System vs Slab Allocator.
 b) Trace Buddy System allocation for memory requests 100KB, 240KB, 60KB in 1MB total block.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Kernel Memory Allocation: Buddy System vs Slab Allocator.
-b) Trace Buddy System allocation for memory requests 100KB, 240KB, 60KB in 1MB total block..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Kernel Memory Allocation</h3>
+<h4>Part (a): Buddy System vs Slab Allocator</h4>
+<ul>
+  <li><strong>Buddy System:</strong> Allocates memory from a fixed-size segment consisting of physically contiguous pages. Memory is allocated in power-of-2 sizes. If a request is smaller, a large block is repeatedly split in half (buddies) until a tight fit is found. It suffers from internal fragmentation but coalescing free blocks is extremely fast.</li>
+  <li><strong>Slab Allocator:</strong> Built on top of the buddy system. A cache consists of one or more slabs. A slab is a contiguous page of memory carved into fixed-size chunks tailored for specific kernel data structures (e.g., a cache purely for Inodes, another purely for PCBs). It eliminates internal fragmentation entirely and caches initialized objects for ultra-fast allocation.</li>
+</ul>
+
+<h4>Part (b): Buddy System Trace (1MB Total)</h4>
+<p><strong>Initial State:</strong> 1MB block available.</p>
+<ol>
+  <li><strong>Request 100KB:</strong> 
+      <br/>• Next power of 2 is 128KB.
+      <br/>• Split 1024KB &rarr; 512KB + 512KB.
+      <br/>• Split 512KB &rarr; 256KB + 256KB.
+      <br/>• Split 256KB &rarr; 128KB + 128KB.
+      <br/>• Allocate one 128KB block.
+      <br/><em>Free blocks remaining:</em> 128KB, 256KB, 512KB.</li>
+  <li><strong>Request 240KB:</strong>
+      <br/>• Next power of 2 is 256KB.
+      <br/>• An exact 256KB block is already available. Allocate it.
+      <br/><em>Free blocks remaining:</em> 128KB, 512KB.</li>
+  <li><strong>Request 60KB:</strong>
+      <br/>• Next power of 2 is 64KB.
+      <br/>• Split the available 128KB block &rarr; 64KB + 64KB.
+      <br/>• Allocate one 64KB block.
+      <br/><em>Free blocks remaining:</em> 64KB, 512KB.</li>
+</ol>
+
                 </div>
             </div>
 </main>

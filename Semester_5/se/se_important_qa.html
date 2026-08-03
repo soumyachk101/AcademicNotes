@@ -692,271 +692,373 @@
             <div class="qa-card" id="gb-1">
                 <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain Classical Waterfall Model phases, advantages, and limitations.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition & Overview:</b> The <b>Classical Waterfall Model</b> is a linear-sequential Software Development Life Cycle (SDLC) model where progress flows downwards like a waterfall through distinct phases: Requirements Analysis \(\rightarrow\) System Design \(\rightarrow\) Implementation \(\rightarrow\) Testing \(\rightarrow\) Deployment \(\rightarrow\) Maintenance.</p><div class="diagram-container">
-    <div class="mermaid">
+                    <h3>Classical Waterfall Model</h3>
+<p>The Classical Waterfall Model is the oldest and simplest Software Development Life Cycle (SDLC) model. It is a linear-sequential model where progress flows strictly downwards through distinct phases.</p>
+<div class="diagram-container">
+<div class="mermaid">
 graph TD
-    A[Requirements] --> B[System Design]
+    A[Requirements] --> B[Design]
     B --> C[Implementation]
     C --> D[Testing]
-    D --> E[Maintenance]
+    D --> E[Deployment]
+    E --> F[Maintenance]
     style A fill:#e0f2fe,stroke:#0284c7
     style B fill:#e0f2fe,stroke:#0284c7
     style C fill:#e0f2fe,stroke:#0284c7
     style D fill:#e0f2fe,stroke:#0284c7
-    style E fill:#bae6fd,stroke:#0284c7
-    </div>
-    <div class="diagram-caption">Figure: Classical Waterfall Model SDLC Execution Flow</div>
 </div>
-<p><b>2. Key Principles & Workflow:</b></p>
+</div>
 <ul>
-    <li><b>Requirements Analysis:</b> SRS document formulation and baseline verification.</li>
-    <li><b>System Design:</b> Architectural design, module design, and database schema definition.</li>
-    <li><b>Implementation & Testing:</b> Coding in targeted programming language followed by unit, integration, and system testing.</li>
-    <li><b>Phase Gate Rule:</b> Each phase must be frozen and signed off before the next phase begins.</li>
+  <li><strong>Advantages:</strong> Simple to understand. Easy to manage because each phase has specific deliverables and a review process. Phases are completed one at a time without overlap.</li>
+  <li><strong>Limitations:</strong> Highly inflexible. Once a phase is finished, you cannot go back (no feedback loops). High risk of failure if initial requirements are misunderstood. No working software is produced until late in the lifecycle.</li>
+  <li><strong>Suitability:</strong> Best for small projects with crystal clear, frozen requirements (like a simple payroll system).</li>
 </ul>
-<p><b>3. Limitations:</b> Inflexible to changing requirements, high risk due to late working prototype delivery, and costly rework if errors are detected in testing.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-2">
                 <div class="q-text"><span class="q-badge b5">Q2</span><span>Explain Spiral Model quadrants and risk-driven approach.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition & Overview:</b> The <b>Spiral Model</b> (Barry Boehm) is a risk-driven software development process model combining iterative prototyping with systematic waterfall control.</p><div class="diagram-container">
-    <div class="mermaid">
-graph TD
-    A((Start)) --> B[Determine Objectives]
-    B --> C[Identify & Resolve Risks]
-    C --> D[Development & Testing]
-    D --> E[Plan Next Phase]
-    E --> B
-    </div>
-    <div class="diagram-caption">Figure: Spiral Model SDLC Quadrants & Risk Analysis Flow</div>
-</div>
-<p><b>2. Four Spiral Quadrants:</b></p>
-<ul>
-    <li><b>Determine Objectives:</b> Identify specific goals, alternatives, and constraints.</li>
-    <li><b>Identify & Resolve Risks:</b> Detailed risk analysis, benchmarking, and prototyping.</li>
-    <li><b>Development & Testing:</b> Code construction and system testing.</li>
-    <li><b>Plan Next Phase:</b> Review customer feedback and plan next iteration spiral.</li>
-</ul>
+                    <h3>Spiral Model</h3>
+<p>The Spiral Model (proposed by Barry Boehm) is a <strong>risk-driven</strong> iterative software development process. It combines the systematic aspects of the Waterfall model with the iterative nature of the Prototyping model.</p>
+<p>The project is developed in continuous loops (spirals). Each loop represents a phase of the process and consists of 4 quadrants:</p>
+<ol>
+  <li><strong>Determine Objectives:</strong> Identify specific goals, alternatives, and constraints for the current iteration.</li>
+  <li><strong>Identify & Resolve Risks:</strong> Evaluate alternatives relative to objectives and constraints. The core of this quadrant is building <strong>prototypes</strong> to mitigate technical and market risks.</li>
+  <li><strong>Development & Testing:</strong> Develop the next version of the product (similar to the standard waterfall phases for that iteration).</li>
+  <li><strong>Plan Next Phase:</strong> Review the iteration's output with the customer and plan the next spiral based on feedback.</li>
+</ol>
+<p><strong>Suitability:</strong> Ideal for large, expensive, and complex projects (e.g., aerospace software) where risk mitigation is paramount.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-3">
                 <div class="q-text"><span class="q-badge b5">Q3</span><span>Explain Prototyping Model workflow and suitability.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Prototyping Model workflow and suitability..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Prototyping Model</h3>
+<p>The Prototyping Model involves building a working, simplified version (a prototype) of the software before developing the actual final product. This prototype is used to understand requirements better.</p>
+<h4>Workflow</h4>
+<ol>
+  <li><strong>Initial Requirements:</strong> Gather basic requirements from the client.</li>
+  <li><strong>Quick Design & Build:</strong> Rapidly design and develop a prototype focusing on the user interface and core functionality (ignoring performance, security, and maintainability).</li>
+  <li><strong>Customer Evaluation:</strong> The client uses the prototype and provides feedback.</li>
+  <li><strong>Refine Prototype:</strong> The prototype is modified based on feedback until the client is satisfied.</li>
+  <li><strong>Develop Final Product:</strong> Once the prototype is approved, it serves as the definitive specification for building the actual software using a rigorous SDLC (like Waterfall). The initial prototype is usually thrown away (Throwaway Prototyping).</li>
+</ol>
+<p><strong>Suitability:</strong> Highly suitable when the client is unsure about their exact requirements, or for systems with complex User Interfaces.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-4">
                 <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain Agile Scrum Framework roles, events, and artifacts.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Agile Scrum Framework roles, events, and artifacts..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Agile Scrum Framework</h3>
+<p>Scrum is a popular Agile framework that breaks software development into short, time-boxed iterations called <strong>Sprints</strong> (usually 2-4 weeks long).</p>
+<h4>1. Roles</h4>
+<ul>
+  <li><strong>Product Owner:</strong> Represents the customer. Owns the Product Backlog and prioritizes features.</li>
+  <li><strong>Scrum Master:</strong> A servant-leader who ensures the team follows Scrum practices and removes any impediments blocking the team.</li>
+  <li><strong>Development Team:</strong> A self-organizing, cross-functional team of developers, testers, and designers who build the product.</li>
+</ul>
+<h4>2. Artifacts</h4>
+<ul>
+  <li><strong>Product Backlog:</strong> A master list of all desired features, bug fixes, and requirements, prioritized by the Product Owner.</li>
+  <li><strong>Sprint Backlog:</strong> The subset of items from the Product Backlog chosen by the team to be completed in the current Sprint.</li>
+</ul>
+<h4>3. Events</h4>
+<ul>
+  <li><strong>Sprint Planning:</strong> Meeting to define what will be done in the Sprint.</li>
+  <li><strong>Daily Standup:</strong> A 15-minute daily meeting where team members answer: What did I do yesterday? What will I do today? Are there any blockers?</li>
+  <li><strong>Sprint Review:</strong> Meeting at the end of the Sprint to demo the working software to stakeholders.</li>
+  <li><strong>Sprint Retrospective:</strong> Meeting to reflect on the Sprint process and identify improvements for the next one.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-5">
                 <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain SRS Document characteristics (Correct, Complete, Unambiguous, Verifiable).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain SRS Document characteristics (Correct, Complete, Unambiguous, Verifiable)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Characteristics of a Good SRS Document</h3>
+<p>A Software Requirement Specification (SRS) is a formal document detailing what the software must do. To be effective, an SRS must be:</p>
+<ol>
+  <li><strong>Correct:</strong> Every requirement stated must accurately reflect what the customer actually wants. There should be no technical errors in the specifications.</li>
+  <li><strong>Complete:</strong> It must include all significant requirements (functional, non-functional, constraints, interfaces). No feature expected by the client should be missing.</li>
+  <li><strong>Unambiguous:</strong> Every requirement must have one, and only one, interpretation. Language should be precise; vague terms like "fast," "user-friendly," or "good" should be avoided.</li>
+  <li><strong>Verifiable (Testable):</strong> A requirement is verifiable if there exists a finite, cost-effective process to check whether the final software meets that requirement. (e.g., Instead of "system should be fast", use "system must respond within 2 seconds").</li>
+  <li><strong>Consistent:</strong> No two requirements should contradict each other.</li>
+  <li><strong>Traceable:</strong> It should be easy to trace the origin of each requirement and track it through design, code, and testing phases.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-6">
                 <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Requirement Elicitation techniques (Interviews, Questionnaires, Prototyping).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Requirement Elicitation techniques (Interviews, Questionnaires, Prototyping)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Requirement Elicitation Techniques</h3>
+<p>Requirement Elicitation is the process of gathering requirements directly from stakeholders, users, and customers. It is the most critical step in requirement engineering.</p>
+<ul>
+  <li><strong>Interviews:</strong> Direct face-to-face (or virtual) conversations with stakeholders.
+      <br/>• <em>Structured:</em> Following a strict predefined list of questions.
+      <br/>• <em>Unstructured:</em> Open-ended discussions allowing the stakeholder to express their vision freely.</li>
+  <li><strong>Questionnaires / Surveys:</strong> Useful when there is a massive user base (e.g., thousands of employees) spread across different locations. It helps gather quantitative data efficiently, though it lacks deep qualitative insights.</li>
+  <li><strong>Prototyping:</strong> Building a quick, interactive mockup of the proposed system. Users interact with the prototype and provide immediate, concrete feedback on what they like, dislike, or feel is missing. This is highly effective for resolving ambiguous requirements.</li>
+  <li><strong>Brainstorming:</strong> Group sessions where stakeholders and developers freely generate ideas without immediate criticism.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-7">
                 <div class="q-text"><span class="q-badge b5">Q7</span><span>Explain Data Flow Diagrams (DFD) notation rules and leveling.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Data Flow Diagrams (DFD) notation rules and leveling..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Data Flow Diagrams (DFD)</h3>
+<p>A DFD is a graphical representation of the flow of data through an information system. It focuses purely on data movement, ignoring control flow (like loops and if-statements).</p>
+<h4>Notation Rules</h4>
+<ul>
+  <li><strong>Circle/Bubble:</strong> Represents a <em>Process</em> (a function that transforms data).</li>
+  <li><strong>Arrow:</strong> Represents <em>Data Flow</em> (movement of data). Must be labeled.</li>
+  <li><strong>Parallel Lines:</strong> Represents a <em>Data Store</em> (database or file).</li>
+  <li><strong>Rectangle/Square:</strong> Represents an <em>External Entity</em> (source or sink of data, like a User or an External API).</li>
+</ul>
+<h4>Leveling</h4>
+<p>DFDs are constructed hierarchically (Top-Down Approach):</p>
+<ul>
+  <li><strong>Level 0 (Context Diagram):</strong> Shows the entire system as a single process bubble interacting with external entities. Gives a high-level overview.</li>
+  <li><strong>Level 1:</strong> Decomposes the Level 0 process into its major sub-processes, showing internal data stores and data flows between these sub-processes.</li>
+  <li><strong>Level 2+:</strong> Further decomposes complex Level 1 processes into more granular sub-processes.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-8">
                 <div class="q-text"><span class="q-badge b5">Q8</span><span>Explain Use Case Diagrams in UML with `<>` and `<>`.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Use Case Diagrams in UML with `<>` and `<>`..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Use Case Diagrams</h3>
+<p>In UML, a Use Case Diagram models the dynamic behavior of a system by showing the interactions between external <strong>Actors</strong> (stick figures) and the system's <strong>Use Cases</strong> (ovals).</p>
+<h4>Relationships between Use Cases</h4>
+<ul>
+  <li><strong><code>&lt;&lt;include&gt;&gt;</code>:</strong> Used when one use case <em>always</em> requires the functionality of another use case to complete its task. It represents mandatory, reusable behavior.
+      <br/><em>Example:</em> <code>(Withdraw Money) --&lt;&lt;include&gt;&gt;--&gt; (Verify PIN)</code>. You cannot withdraw money without verifying the PIN.</li>
+  <li><strong><code>&lt;&lt;extend&gt;&gt;</code>:</strong> Used when a use case <em>optionally</em> adds functionality to a base use case under specific conditions. It represents optional or exceptional behavior. The arrow points from the extending (optional) use case to the base use case.
+      <br/><em>Example:</em> <code>(Print Receipt) --&lt;&lt;extend&gt;&gt;--&gt; (Withdraw Money)</code>. Printing a receipt only happens if the user specifically requests it during withdrawal.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-9">
                 <div class="q-text"><span class="q-badge b5">Q9</span><span>Explain Cohesion types from Functional (highest) to Coincidental (lowest).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Cohesion types from Functional (highest) to Coincidental (lowest)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Cohesion in Software Design</h3>
+<p><strong>Cohesion</strong> measures the degree to which the elements inside a single module belong together. <strong>High cohesion is desired.</strong></p>
+<p>Types of Cohesion (from Best to Worst):</p>
+<ol>
+  <li><strong>Functional Cohesion (Best):</strong> All elements in the module execute a single, well-defined task (e.g., a function <code>calculateTax()</code>).</li>
+  <li><strong>Sequential Cohesion:</strong> The output of one element acts as the input for the next element within the same module (like an assembly line).</li>
+  <li><strong>Communicational Cohesion:</strong> Elements operate on the same core data structure, but perform different operations.</li>
+  <li><strong>Procedural Cohesion:</strong> Elements are grouped because they always execute in a specific sequence, even if they process different data.</li>
+  <li><strong>Temporal Cohesion:</strong> Elements are grouped solely because they must execute at the same time (e.g., an <code>initializeAll()</code> function that boots up the database, clears the screen, and loads user config).</li>
+  <li><strong>Logical Cohesion:</strong> Elements perform logically similar tasks (like all input routines) but are controlled by a flag passed by the caller.</li>
+  <li><strong>Coincidental Cohesion (Worst):</strong> Elements are grouped completely randomly with no meaningful relationship.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-10">
                 <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Coupling types from Content (highest/worst) to Data (lowest/best).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Coupling types from Content (highest/worst) to Data (lowest/best)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Coupling in Software Design</h3>
+<p><strong>Coupling</strong> measures the degree of interdependence between two different modules. <strong>Low (Loose) coupling is desired.</strong></p>
+<p>Types of Coupling (from Worst to Best):</p>
+<ol>
+  <li><strong>Content Coupling (Worst):</strong> One module directly modifies or accesses the internal local data or code of another module. A nightmare for maintainability.</li>
+  <li><strong>Common Coupling:</strong> Multiple modules share access to the same Global Data (global variables). Changing the global data structure forces changes in all connected modules.</li>
+  <li><strong>Control Coupling:</strong> One module passes a control flag (like a boolean) to another module, dictating its internal execution logic.</li>
+  <li><strong>Stamp Coupling:</strong> Modules pass complex composite data structures (like a massive Struct or Object), but the receiving module only actually needs a few specific fields from it.</li>
+  <li><strong>Data Coupling (Best):</strong> Modules communicate strictly by passing simple, fundamental data types (like an <code>int</code> or <code>string</code>) via parameters. The receiving module uses all the data it is given.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-11">
                 <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain Cyclomatic Complexity calculation methods with flow graph example.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition & Mathematical Formulas:</b> <b>McCabe's Cyclomatic Complexity \(V(G)\)</b> measures the logical complexity of a control flow graph \(G = (V, E)\).</p>
-<ul>
-    <li><b>Formula 1 (Edges & Nodes):</b> \(V(G) = E - N + 2P\) (where \(E\) = edges, \(N\) = nodes, \(P\) = connected components).</li>
-    <li><b>Formula 2 (Decision Nodes):</b> \(V(G) = D + 1\) (where \(D\) = number of predicate / decision nodes).</li>
-    <li><b>Formula 3 (Bounded Regions):</b> \(V(G) = R\) (number of closed regions in planar flow graph + 1 outer region).</li>
-</ul>
-<p><b>2. Significance:</b> Determines the upper bound for the number of test cases required to achieve complete basis path coverage.</p>
+                    <h3>Cyclomatic Complexity Calculation</h3>
+<p><strong>Cyclomatic Complexity V(G)</strong> is a software metric used to indicate the complexity of a program. It directly measures the number of linearly independent paths through a program's source code.</p>
+<h4>Calculation Methods</h4>
+<p>Given a Control Flow Graph (CFG) of the code:</p>
+<ol>
+  <li><strong>Edge/Node Formula:</strong> \(V(G) = E - N + 2P\)
+      <br/>Where \(E\) = Number of edges, \(N\) = Number of nodes, \(P\) = Number of connected components (usually 1 for a single program).</li>
+  <li><strong>Predicate Node Formula:</strong> \(V(G) = D + 1\)
+      <br/>Where \(D\) = Number of predicate (decision) nodes (like <code>if</code>, <code>while</code>, <code>for</code>).</li>
+  <li><strong>Region Formula:</strong> \(V(G) = R\)
+      <br/>Where \(R\) = Number of regions in the planar flow graph (including the 1 infinite outer region).</li>
+</ol>
+<p><strong>Example:</strong> A simple <code>if-else</code> statement has 1 decision node (the <code>if</code> condition). Therefore, \(V(G) = 1 + 1 = 2\). There are exactly 2 independent paths (the true branch and the false branch).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-12">
                 <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain White-Box Testing techniques: Statement, Branch, and Path Coverage.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain White-Box Testing techniques: Statement, Branch, and Path Coverage..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>White-Box Testing Techniques</h3>
+<p>White-Box testing involves testing the internal structures, logic, and code of the software rather than its external functionality. The tester must know programming.</p>
+<ul>
+  <li><strong>Statement Coverage:</strong> Designing test cases so that every single line of code (statement) in the program is executed at least once. It is the weakest metric (e.g., it might miss an empty <code>else</code> branch).</li>
+  <li><strong>Branch Coverage (Decision Coverage):</strong> Designing test cases so that every possible outcome (True and False) of all decision nodes (<code>if</code>, <code>while</code>) is executed at least once. It guarantees statement coverage.</li>
+  <li><strong>Path Coverage:</strong> Designing test cases to execute <em>every possible independent execution path</em> through the code from start to finish. The number of required test cases is exactly equal to the Cyclomatic Complexity \(V(G)\). This is the strongest metric but often impractical for large programs with loops.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-13">
                 <div class="q-text"><span class="q-badge b5">Q13</span><span>Explain Black-Box Testing techniques: Equivalence Partitioning & Boundary Value Analysis.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Black-Box Testing techniques: Equivalence Partitioning & Boundary Value Analysis..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Black-Box Testing Techniques</h3>
+<p>Black-Box testing focuses entirely on the inputs and outputs of the software without looking at the internal code. The goal is to verify the software meets its requirements.</p>
+<ul>
+  <li><strong>Equivalence Partitioning:</strong> Divides the input domain into "classes" (partitions) of equivalent data. The assumption is that if one value in a partition works, all values in that partition will work.
+      <br/><em>Example:</em> An age field accepting 18 to 60. Partitions: Invalid (< 18), Valid (18-60), Invalid (> 60). Test cases: 15, 30, 75.</li>
+  <li><strong>Boundary Value Analysis (BVA):</strong> An extension of Equivalence Partitioning. Since bugs frequently occur at the boundaries of input ranges, BVA specifically tests the exact boundary values and the values just inside and just outside the boundaries.
+      <br/><em>Example:</em> For age 18 to 60. Test cases: 17, 18, 19, 59, 60, 61.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-14">
                 <div class="q-text"><span class="q-badge b5">Q14</span><span>Explain Integration Testing strategies: Top-Down vs Bottom-Up (Stubs & Drivers).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Integration Testing strategies: Top-Down vs Bottom-Up (Stubs & Drivers)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Integration Testing: Top-Down vs Bottom-Up</h3>
+<p>Integration testing verifies that individually tested modules work correctly when combined together.</p>
+<ul>
+  <li><strong>Top-Down Integration:</strong> Testing starts from the main control module and moves downwards to subordinate modules.
+      <br/>• <strong>Stubs:</strong> Since lower-level modules might not be developed yet, "Stubs" are used. A stub is a dummy program that simulates the behavior of the missing lower-level module.
+      <br/>• <em>Pros:</em> Major design flaws at the top are caught early.</li>
+  <li><strong>Bottom-Up Integration:</strong> Testing starts from the lowest-level atomic modules and moves upwards to the main control module.
+      <br/>• <strong>Drivers:</strong> Since the upper-level control modules might not be developed, "Drivers" are used. A driver is a dummy program that passes test cases down to the module being tested.
+      <br/>• <em>Pros:</em> Easy to test utility modules thoroughly. No need for complex stubs.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-15">
                 <div class="q-text"><span class="q-badge b5">Q15</span><span>Explain Basic COCOMO Model effort and development time formulas.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Basic COCOMO Model effort and development time formulas..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Basic COCOMO Model</h3>
+<p>The Constructive Cost Model (COCOMO), developed by Barry Boehm, is an algorithmic model used to estimate the Effort and Time required to develop a software project based on its estimated size in Kilo Lines of Code (KLOC).</p>
+<h4>Formulas</h4>
+<ol>
+  <li><strong>Effort (E):</strong> Measured in Person-Months (PM).
+      <br/>\(E = a \times (KLOC)^b\)</li>
+  <li><strong>Development Time (Tdev):</strong> Measured in Months (M).
+      <br/>\(T_{dev} = c \times (E)^d\)</li>
+</ol>
+<h4>Project Modes (Constants a, b, c, d)</h4>
+<ul>
+  <li><strong>Organic:</strong> Small team, familiar environment. (a=2.4, b=1.05, c=2.5, d=0.38)</li>
+  <li><strong>Semi-Detached:</strong> Medium size, mixed experience. (a=3.0, b=1.12, c=2.5, d=0.35)</li>
+  <li><strong>Embedded:</strong> Complex, hardware constraints, tight regulations. (a=3.6, b=1.20, c=2.5, d=0.32)</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-16">
                 <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain Function Point Analysis components and calculation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Function Point Analysis components and calculation..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Function Point Analysis (FPA)</h3>
+<p>FPA is a method to estimate the size of a software project based on the functionality it provides to the user, rather than counting Lines of Code (LOC), which is language-dependent.</p>
+<h4>Components</h4>
+<p>The system is evaluated based on 5 functional parameters, each rated as Simple, Average, or Complex:</p>
+<ol>
+  <li><strong>External Inputs (EI):</strong> Screens/forms where users input data into the system.</li>
+  <li><strong>External Outputs (EO):</strong> Reports/screens where the system outputs data to the user.</li>
+  <li><strong>External Inquiries (EQ):</strong> Simple queries that retrieve data without updating files.</li>
+  <li><strong>Internal Logical Files (ILF):</strong> Databases/files maintained entirely within the system.</li>
+  <li><strong>External Interface Files (EIF):</strong> Files read by the system but maintained by another external system.</li>
+</ol>
+<p><strong>Calculation:</strong> Calculate the Unadjusted Function Points (UFP) by summing the weighted components. Then multiply UFP by the Value Adjustment Factor (VAF) to get the final FP count.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-17">
                 <div class="q-text"><span class="q-badge b5">Q17</span><span>Explain Software Project Scheduling tools: Gantt Chart vs PERT/CPM.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Project Scheduling tools: Gantt Chart vs PERT/CPM..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Project Scheduling: Gantt Chart vs PERT/CPM</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Gantt Chart</th>
+    <th>PERT / CPM Network Graph</th>
+  </tr>
+  <tr>
+    <td><strong>Format</strong></td>
+    <td>Horizontal bar chart.</td>
+    <td>Directed network graph (nodes and arrows).</td>
+  </tr>
+  <tr>
+    <td><strong>Focus</strong></td>
+    <td>Focuses on the <em>timeline</em> and schedule. Easily shows when tasks start and end.</td>
+    <td>Focuses on <em>dependencies</em> between tasks and identifying the Critical Path.</td>
+  </tr>
+  <tr>
+    <td><strong>Dependencies</strong></td>
+    <td>Can show simple dependencies, but becomes very messy for complex projects.</td>
+    <td>Excellent at showing complex, intertwined task dependencies.</td>
+  </tr>
+  <tr>
+    <td><strong>Audience</strong></td>
+    <td>Best for high-level management and clients for easy visualization of progress.</td>
+    <td>Best for Project Managers to calculate slack time and optimize schedules.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-18">
                 <div class="q-text"><span class="q-badge b5">Q18</span><span>Explain Risk Management steps: Identification, Analysis, Planning, Monitoring.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Risk Management steps: Identification, Analysis, Planning, Monitoring..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Risk Management Process</h3>
+<p>Risk Management is a proactive approach to dealing with uncertain events that could negatively impact the software project.</p>
+<ol>
+  <li><strong>Risk Identification:</strong> Systematically brainstorming potential risks (e.g., technology failures, staff turnover, requirement changes).</li>
+  <li><strong>Risk Analysis (Projection):</strong> Assessing each identified risk based on two metrics:
+      <br/>• <em>Probability:</em> The likelihood of the risk occurring (e.g., 10%).
+      <br/>• <em>Impact:</em> The severity of the damage if it occurs (e.g., 1 to 5 scale).
+      <br/>• Risk Exposure = Probability &times; Impact.</li>
+  <li><strong>Risk Planning (Mitigation):</strong> Developing strategies to reduce the probability or impact of the highest-exposure risks (e.g., training staff, buying backup servers).</li>
+  <li><strong>Risk Monitoring:</strong> Continuously tracking the identified risks throughout the project lifecycle to see if their probability is increasing, and executing contingency plans if they occur.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-19">
                 <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Software Quality Assurance (SQA) activities.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Quality Assurance (SQA) activities..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Quality Assurance (SQA)</h3>
+<p>SQA encompasses the entire software development process, monitoring and improving the process to ensure that the final product meets specified quality standards.</p>
+<h4>Key SQA Activities:</h4>
+<ul>
+  <li><strong>Process Definition & Improvement:</strong> Establishing standard SDLC processes, coding standards, and methodologies (like Agile or CMMI) and continuously improving them.</li>
+  <li><strong>Formal Technical Reviews (FTR):</strong> Conducting structured peer reviews and code walkthroughs to find defects early before formal testing.</li>
+  <li><strong>Auditing:</strong> Checking if the development team is actually following the defined organizational processes and standards.</li>
+  <li><strong>Testing Management:</strong> Overseeing the testing strategy (unit, integration, system testing) to ensure adequate test coverage.</li>
+  <li><strong>Configuration Management:</strong> Ensuring all changes to code and documents are tracked and controlled properly via version control systems.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-20">
                 <div class="q-text"><span class="q-badge b5">Q20</span><span>Explain Capability Maturity Model Integration (CMMI) 5 Maturity Levels.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Capability Maturity Model Integration (CMMI) 5 Maturity Levels..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Capability Maturity Model Integration (CMMI)</h3>
+<p>CMMI is a framework that assesses the maturity and quality of an organization's software development processes across 5 levels:</p>
+<ol>
+  <li><strong>Level 1 (Initial):</strong> Processes are unpredictable, poorly controlled, and reactive. Success depends entirely on individual heroics.</li>
+  <li><strong>Level 2 (Managed):</strong> Processes are planned, documented, and monitored at the <em>project</em> level. Basic project management (requirements, scheduling) is in place.</li>
+  <li><strong>Level 3 (Defined):</strong> Processes are standardized and documented across the <em>entire organization</em>. Projects tailor these standard processes for their specific needs.</li>
+  <li><strong>Level 4 (Quantitatively Managed):</strong> The organization uses statistical and quantitative techniques to measure process performance and control quality precisely.</li>
+  <li><strong>Level 5 (Optimizing):</strong> The organization focuses on continuous process improvement through quantitative feedback and adopting innovative new technologies.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-21">
@@ -967,246 +1069,309 @@ graph TD
 
 --- Page 3 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Maintenance types: Corrective, Adaptive, Perfective, Preventive.
+                    <h3>Types of Software Maintenance</h3>
+<p>Software maintenance is the process of modifying software after delivery to correct faults, improve performance, or adapt it to a changing environment. It consumes the majority of the software lifecycle cost.</p>
+<ul>
+  <li><strong>Corrective Maintenance:</strong> Reactive modification to fix discovered bugs and errors that prevent the software from functioning as specified. (e.g., Fixing a crash when users enter a negative number).</li>
+  <li><strong>Adaptive Maintenance:</strong> Modifying the software to keep it usable in a changing environment, such as a new OS version, updated hardware, or a new database schema. (e.g., Updating an iOS app to work with iOS 18).</li>
+  <li><strong>Perfective Maintenance:</strong> Enhancing the software by adding new features, improving the UI, or increasing performance based on user requests. (e.g., Adding a "Dark Mode" feature).</li>
+  <li><strong>Preventive Maintenance:</strong> Modifying the software to prevent potential future problems. This involves code refactoring, optimizing database queries, and updating deprecated libraries before they break.</li>
+</ul>
 
-
-
-
---- Page 3 ---.</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-22">
                 <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain Software Re-engineering and Reverse Engineering pipeline.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Re-engineering and Reverse Engineering pipeline..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Re-engineering & Reverse Engineering</h3>
+<p>Software Re-engineering is the process of examining, altering, and rebuilding an existing legacy system to reconstitute it in a new form without changing its overall functionality.</p>
+<h4>Re-engineering Pipeline:</h4>
+<ol>
+  <li><strong>Inventory Analysis:</strong> Sorting through legacy applications to decide which ones need re-engineering based on business value and maintenance cost.</li>
+  <li><strong>Document Restructuring:</strong> Updating outdated documentation to match the current state of the system.</li>
+  <li><strong>Reverse Engineering:</strong> Analyzing the legacy <em>source code</em> to extract higher-level design documents (like UML class diagrams and DFDs). It moves <em>backwards</em> through the SDLC (Code &rarr; Design &rarr; Requirements).</li>
+  <li><strong>Code/Data Restructuring:</strong> Refactoring spaghetti code into structured programming and normalizing legacy databases, keeping the same architecture.</li>
+  <li><strong>Forward Engineering:</strong> Using the recovered design documents to build a completely new, modern system (e.g., rewriting a legacy COBOL mainframe app into a modern Java/React microservice).</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-23">
                 <div class="q-text"><span class="q-badge b5">Q23</span><span>Explain Verification vs Validation with concrete examples.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Verification vs Validation with concrete examples..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Verification vs. Validation</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Verification</th>
+    <th>Validation</th>
+  </tr>
+  <tr>
+    <td><em>"Are we building the product RIGHT?"</em></td>
+    <td><em>"Are we building the RIGHT product?"</em></td>
+  </tr>
+  <tr>
+    <td>Checks if the software conforms to its specification (the SRS document).</td>
+    <td>Checks if the software actually meets the customer's true needs and expectations.</td>
+  </tr>
+  <tr>
+    <td>Typically done by developers through static analysis, code reviews, and unit testing.</td>
+    <td>Typically done by testers and users through System Testing and User Acceptance Testing (UAT).</td>
+  </tr>
+  <tr>
+    <td>Catches errors introduced during the translation from design to code.</td>
+    <td>Catches errors where the original requirement itself was misunderstood or flawed.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-24">
                 <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain Formal Technical Reviews (FTR) and Code Walkthroughs.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Formal Technical Reviews (FTR) and Code Walkthroughs..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Formal Technical Reviews (FTR)</h3>
+<p>An FTR is a highly structured group meeting conducted by software engineers to uncover errors in logic, function, or implementation early in the process.</p>
+<h4>Goals of FTR:</h4>
+<ul>
+  <li>Uncover errors early (cheaper to fix).</li>
+  <li>Ensure the software meets predefined standards.</li>
+  <li>Make projects more manageable by creating milestones.</li>
+</ul>
+<h4>Code Walkthroughs:</h4>
+<p>A specific type of FTR where the author of the code leads the review team through a manual simulation of the code execution. The review team acts as a "human compiler," feeding test data into the logic to find edge cases, infinite loops, and logic errors. It is a form of static White-Box testing.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-25">
                 <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Software Architecture styles: Layered, Client-Server, Microservices.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Architecture styles: Layered, Client-Server, Microservices..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Architecture Styles</h3>
+<ul>
+  <li><strong>Layered Architecture:</strong> The system is organized into hierarchical layers (e.g., Presentation Layer &rarr; Business Logic Layer &rarr; Data Access Layer). Each layer only communicates with the layer directly below it. <em>Pros:</em> Excellent separation of concerns.</li>
+  <li><strong>Client-Server Architecture:</strong> The system is divided into two parts: Clients (which request services) and Servers (which provide services over a network). <em>Pros:</em> Centralized data management and security.</li>
+  <li><strong>Microservices Architecture:</strong> A large application is broken down into a suite of small, loosely coupled, independently deployable services that communicate via lightweight APIs (REST/gRPC). <em>Pros:</em> Highly scalable and resilient; different teams can use different tech stacks.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-26">
                 <div class="q-text"><span class="q-badge b5">Q26</span><span>Explain SOLID Principles of Object-Oriented Design.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain SOLID Principles of Object-Oriented Design..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>SOLID Principles of Object-Oriented Design</h3>
+<p>SOLID is an acronym for five design principles intended to make software designs more understandable, flexible, and maintainable.</p>
+<ul>
+  <li><strong>S - Single Responsibility Principle:</strong> A class should have one, and only one, reason to change. (It should only do one specific job).</li>
+  <li><strong>O - Open/Closed Principle:</strong> Software entities should be open for extension (adding new features), but closed for modification (don't change existing working code).</li>
+  <li><strong>L - Liskov Substitution Principle:</strong> Subtypes must be completely substitutable for their base types without altering the correctness of the program.</li>
+  <li><strong>I - Interface Segregation Principle:</strong> Clients should not be forced to depend on interfaces they do not use. (Better to have many small, specific interfaces than one massive, generic one).</li>
+  <li><strong>D - Dependency Inversion Principle:</strong> High-level modules should not depend on low-level modules. Both should depend on abstractions (interfaces).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-27">
                 <div class="q-text"><span class="q-badge b5">Q27</span><span>Explain Creational, Structural, and Behavioral Design Patterns.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Creational, Structural, and Behavioral Design Patterns..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Design Patterns</h3>
+<p>Design patterns are typical, reusable solutions to common problems in software design.</p>
+<ul>
+  <li><strong>Creational Patterns:</strong> Deal with object creation mechanisms, creating objects in a manner suitable to the situation.
+      <br/><em>Example (Singleton):</em> Ensures a class has only one instance and provides a global point of access to it (e.g., a Database Connection pool).</li>
+  <li><strong>Structural Patterns:</strong> Deal with object composition, helping to ensure that if one part of a system changes, the entire structure does not need to do so.
+      <br/><em>Example (Adapter):</em> Allows incompatible interfaces to work together (like a plug adapter).</li>
+  <li><strong>Behavioral Patterns:</strong> Deal with communication and assignment of responsibilities between objects.
+      <br/><em>Example (Observer):</em> A publish-subscribe model where multiple objects listen and react to state changes in a subject.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-28">
                 <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain User Interface (UI) Design Golden Rules.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain User Interface (UI) Design Golden Rules..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Golden Rules of UI Design</h3>
+<p>Theo Mandel proposed three "Golden Rules" for designing effective User Interfaces:</p>
+<ol>
+  <li><strong>Place the User in Control:</strong> Do not force users into rigid sequences. Allow users to undo actions easily. Hide technical internals from the casual user. Provide shortcuts for power users.</li>
+  <li><strong>Reduce the User's Memory Load:</strong> The system should remember things so the user doesn't have to. Use recognizable visual cues (icons) rather than requiring the user to recall commands. Follow the "Rule of 7" (human short-term memory can hold roughly 7 items).</li>
+  <li><strong>Make the Interface Consistent:</strong> Keep layout, colors, typography, and button placements uniform across all screens. Follow established platform standards (e.g., a "Save" icon should always look like a floppy disk; red usually means "Delete" or "Error").</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-29">
                 <div class="q-text"><span class="q-badge b5">Q29</span><span>Explain Software Metrics: Size, Complexity, and Defect Density metrics.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Metrics: Size, Complexity, and Defect Density metrics..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Metrics</h3>
+<p>Software metrics provide a quantitative basis for the development and management of software.</p>
+<ul>
+  <li><strong>Size Metrics:</strong> Measure the physical size of the product. The most common is <strong>LOC</strong> (Lines of Code) or KLOC (Thousands of Lines of Code). Alternatively, <strong>Function Points (FP)</strong> measure the functionality provided to the user.</li>
+  <li><strong>Complexity Metrics:</strong> Measure the logical complexity of the code. The most famous is <strong>McCabe's Cyclomatic Complexity \(V(G)\)</strong>, which counts the number of independent paths through the code. High complexity correlates with high bug rates.</li>
+  <li><strong>Quality (Defect) Metrics:</strong>
+      <br/>• <em>Defect Density:</em> Number of defects found per KLOC (Defects / KLOC). Lower is better.
+      <br/>• <em>Defect Removal Efficiency (DRE):</em> A measure of how effectively the QA team finds bugs before shipping.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-30">
                 <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Software Configuration Management (SCM) and Version Control.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Configuration Management (SCM) and Version Control..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Configuration Management (SCM)</h3>
+<p>SCM is the discipline of managing, organizing, and controlling changes to software assets (code, documents, diagrams) over time.</p>
+<h4>Key SCM Activities:</h4>
+<ul>
+  <li><strong>Version Control (VCS):</strong> Tracking every single change made to source code. Systems like <strong>Git</strong> allow developers to branch off, experiment, and merge code back together without destroying the main project.</li>
+  <li><strong>Change Control:</strong> A formal process to evaluate, approve, and implement change requests from clients.</li>
+  <li><strong>Configuration Audit:</strong> Verifying that the software product matches its baseline requirements.</li>
+  <li><strong>Release Management:</strong> Packaging the software, generating version numbers (e.g., v1.4.2), and distributing it to users.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-31">
                 <div class="q-text"><span class="q-badge b5">Q31</span><span>Explain Fault, Error, and Failure definitions and relationships.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Fault, Error, and Failure definitions and relationships..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Fault, Error, and Failure</h3>
+<p>These terms represent the chronological sequence of a software defect:</p>
+<ol>
+  <li><strong>Error (Mistake):</strong> A human action that produces an incorrect result. (e.g., A programmer misunderstands a requirement or makes a typo in the code).</li>
+  <li><strong>Fault (Defect/Bug):</strong> The manifestation of an error in the software code or documentation. A fault is a static defect in the code (e.g., <code>if (x = 5)</code> instead of <code>if (x == 5)</code>). A fault may remain dormant forever if that specific code block is never executed.</li>
+  <li><strong>Failure:</strong> The observable, incorrect behavior of the software when a fault is actually executed by the CPU. The software fails to perform its required function.</li>
+</ol>
+<p><em>Relationship:</em> An <strong>Error</strong> made by a human causes a <strong>Fault</strong> in the code, which, when executed under specific conditions, results in a system <strong>Failure</strong>.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-32">
                 <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain System Testing types: Performance, Stress, Load, Security.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain System Testing types: Performance, Stress, Load, Security..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>System Testing: Non-Functional Types</h3>
+<p>System testing validates the fully integrated software product against its requirements. Non-functional testing focuses on <em>how well</em> the system performs.</p>
+<ul>
+  <li><strong>Performance Testing:</strong> Testing the system's speed, responsiveness, and stability under a <em>normal</em> expected workload. (e.g., Does the page load in under 2 seconds for 100 concurrent users?)</li>
+  <li><strong>Load Testing:</strong> Testing the system's behavior when subjected to the <em>maximum</em> expected concurrent user load. It checks if the system can handle its peak designed capacity.</li>
+  <li><strong>Stress Testing:</strong> Pushing the system <em>beyond</em> its maximum designed capacity until it breaks. The goal is to see how the system fails (does it crash gracefully or corrupt data?) and how it recovers.</li>
+  <li><strong>Security Testing:</strong> Evaluating the system's vulnerability to malicious attacks, unauthorized access, SQL injections, and data breaches.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-33">
                 <div class="q-text"><span class="q-badge b5">Q33</span><span>Explain Cleanroom Software Engineering approach.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Cleanroom Software Engineering approach..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Cleanroom Software Engineering</h3>
+<p>Cleanroom software engineering is a formal, mathematically-based approach focused on defect <em>prevention</em> rather than defect removal.</p>
+<h4>Core Principles:</h4>
+<ol>
+  <li><strong>Formal Specification:</strong> The software requirements are mathematically modeled using state-box, clear-box, and black-box specifications.</li>
+  <li><strong>Incremental Development:</strong> The product is developed in small, verifiable increments.</li>
+  <li><strong>Statistical Testing:</strong> Instead of traditional unit testing, the software undergoes statistical use testing based on usage probability distributions.</li>
+  <li><strong>No Execution by Developers:</strong> Developers write the code and verify it mathematically (using correctness proofs), but they are <em>not allowed to compile or execute it</em>. An independent certification team tests the final integrated code.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-34">
                 <div class="q-text"><span class="q-badge b5">Q34</span><span>Explain Software Reliability Models and MTBF metrics.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Reliability Models and MTBF metrics..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Reliability and MTBF</h3>
+<p><strong>Software Reliability</strong> is the probability that a software system will fulfill its intended function without failure for a specified period of time in a specified environment.</p>
+<h4>Key Metrics:</h4>
+<ul>
+  <li><strong>MTTF (Mean Time To Failure):</strong> Average time the software operates continuously before failing.</li>
+  <li><strong>MTTR (Mean Time To Repair):</strong> Average time taken to fix the fault after a failure occurs.</li>
+  <li><strong>MTBF (Mean Time Between Failures):</strong> \(MTBF = MTTF + MTTR\). It represents the average time between two consecutive failures.</li>
+  <li><strong>Availability:</strong> The probability that the system is operating successfully at any given moment. \(Availability = \frac{MTTF}{MTBF} \times 100\%\).</li>
+</ul>
+<p><strong>Reliability Models:</strong> Models like the Jelinski-Moranda model or the Goel-Okumoto model use statistical formulas to predict future reliability and failure rates based on historical testing data.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-35">
                 <div class="q-text"><span class="q-badge b5">Q35</span><span>Explain Code Refactoring techniques and benefits.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Code Refactoring techniques and benefits..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Code Refactoring</h3>
+<p>Refactoring is the process of restructuring existing computer code—changing the factoring—without changing its external behavior.</p>
+<h4>Common Techniques:</h4>
+<ul>
+  <li><strong>Extract Method:</strong> Taking a long, complex function and breaking it into several smaller, well-named helper functions.</li>
+  <li><strong>Rename Variable:</strong> Giving variables descriptive names instead of vague ones (e.g., changing <code>x</code> to <code>customerAge</code>).</li>
+  <li><strong>Replace Magic Number with Symbolic Constant:</strong> Replacing hardcoded numbers with named constants (e.g., replacing <code>3.14</code> with <code>PI</code>).</li>
+</ul>
+<h4>Benefits:</h4>
+<p>Improves code readability, reduces cyclomatic complexity, makes the code easier to maintain and extend, and helps uncover hidden bugs.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-36">
                 <div class="q-text"><span class="q-badge b5">Q36</span><span>Explain Static Analysis tools and Code LINTing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Static Analysis tools and Code LINTing..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Static Analysis and Code LINTing</h3>
+<p><strong>Static Analysis</strong> is the automated checking of source code without actually compiling or executing it.</p>
+<p><strong>Code LINTing:</strong> A specific type of static analysis. A "linter" (like ESLint for JavaScript or SonarQube) scans the source code to flag:</p>
+<ul>
+  <li><strong>Stylistic Errors:</strong> Deviations from team coding standards (e.g., missing semicolons, wrong indentation).</li>
+  <li><strong>Programming Errors:</strong> Potential bugs like using uninitialized variables, unreachable code, or infinite loops.</li>
+  <li><strong>Security Flaws:</strong> Hardcoded passwords or vulnerable dependencies.</li>
+</ul>
+<p><em>Benefits:</em> Enforces code quality automatically, catches silly mistakes early before they reach code review, and trains junior developers on best practices.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-37">
                 <div class="q-text"><span class="q-badge b5">Q37</span><span>Explain Component-Based Software Engineering (CBSE).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Component-Based Software Engineering (CBSE)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Component-Based Software Engineering (CBSE)</h3>
+<p>CBSE is a paradigm that emphasizes the design and construction of software systems using reusable, independent, off-the-shelf software components.</p>
+<h4>Key Concepts:</h4>
+<ul>
+  <li><strong>Component:</strong> A self-contained, deployable software package that provides a specific functionality through well-defined interfaces (e.g., a pre-built payment processing module).</li>
+  <li><strong>Interface:</strong> Components interact exclusively through standard interfaces, making their internal implementations completely hidden (black-box).</li>
+</ul>
+<p><strong>Benefits:</strong> Drastically reduces development time and cost, improves reliability (since components are already heavily tested), and simplifies maintenance (components can be swapped out easily without affecting the rest of the system).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-38">
                 <div class="q-text"><span class="q-badge b5">Q38</span><span>Explain DevOps principles and CI/CD Pipeline integration.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain DevOps principles and CI/CD Pipeline integration..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>DevOps and CI/CD Pipeline</h3>
+<p><strong>DevOps</strong> is a culture and set of practices that combines Software Development (Dev) and IT Operations (Ops) to shorten the development lifecycle and provide continuous delivery of high-quality software.</p>
+<h4>CI/CD Pipeline:</h4>
+<ul>
+  <li><strong>Continuous Integration (CI):</strong> Developers frequently merge their code changes into a central repository (like GitHub). Automated builds and unit tests run immediately upon every commit to detect integration errors instantly.</li>
+  <li><strong>Continuous Delivery (CD):</strong> The automated process of preparing the tested code for release to production. The software is always in a deployable state.</li>
+  <li><strong>Continuous Deployment:</strong> Taking it one step further, every change that passes the automated tests is automatically deployed directly to the production servers without human intervention.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-39">
                 <div class="q-text"><span class="q-badge b5">Q39</span><span>Explain Software Economics and Cost Estimation trade-offs.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Software Economics and Cost Estimation trade-offs..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Software Economics and Cost Estimation</h3>
+<p>Software Economics deals with making business decisions regarding software development based on cost, schedule, and quality trade-offs.</p>
+<h4>Trade-offs:</h4>
+<ul>
+  <li><strong>Brooks's Law:</strong> "Adding manpower to a late software project makes it later." You cannot infinitely reduce the schedule by adding more developers due to communication overhead.</li>
+  <li><strong>Cost-Quality-Time Triangle:</strong> You can only pick two. If you want high quality fast, it will cost a lot. If you want it cheap and fast, quality will suffer.</li>
+</ul>
+<h4>Cost Estimation Techniques:</h4>
+<p>Methods to estimate the required budget include Algorithmic Models (COCOMO), Expert Judgment (Delphi technique), and Estimation by Analogy (comparing to similar past projects).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-40">
                 <div class="q-text"><span class="q-badge b5">Q40</span><span>Explain CASE Tools classification and environment integration.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain CASE Tools classification and environment integration..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>CASE Tools (Computer-Aided Software Engineering)</h3>
+<p>CASE tools are automated software utilities that assist software engineers throughout the various phases of the SDLC.</p>
+<h4>Classification:</h4>
+<ul>
+  <li><strong>Upper CASE Tools:</strong> Support the early phases of SDLC (Requirements, Analysis, and Design). Examples: Diagramming tools (Visio) and prototyping software (Figma).</li>
+  <li><strong>Lower CASE Tools:</strong> Support the later phases of SDLC (Coding, Testing, and Maintenance). Examples: IDEs (VS Code), Compilers, and Testing frameworks (Selenium).</li>
+  <li><strong>Integrated CASE (I-CASE) Environments:</strong> Comprehensive suites that support the entire SDLC seamlessly from requirements to deployment (e.g., Azure DevOps, Jira).</li>
+</ul>
+
                 </div>
             </div>
             <h1 class="section-title" id="group-c">Group C — Long / Numerical Questions (15 Marks Each)</h1>
@@ -1218,24 +1383,60 @@ List all 5 independent paths.
 b) Design test cases using Basis Path Testing.
 c) Explain Black-Box vs White-Box testing comparison.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Mathematical Cyclomatic Complexity \(V(G)\) Calculation:</b></p>
-<p>Given Control Flow Graph parameters: \(E = 14\) edges, \(N = 10\) nodes, \(P = 1\) connected component.</p>
-<ul>
-    <li><b>Method 1 (Edges & Nodes Formula):</b><br>\(V(G) = E - N + 2P = 14 - 10 + 2(1) = 6\)</li>
-    <li><b>Method 2 (Predicate Decision Nodes Formula):</b><br>With decision nodes \(D = 5\): \(V(G) = D + 1 = 5 + 1 = 6\)</li>
-    <li><b>Method 3 (Bounded Regions):</b><br>Counting closed planar regions \(R_1, R_2, R_3, R_4, R_5\) plus 1 infinite outer region \(R_6\) yields \(V(G) = 6\).</li>
-</ul>
-<p><b>Part (b) Basis Path Set Derivation:</b></p>
-<p>The 6 linearly independent paths forming the basis set are:</p>
+                    <h3>Master Answer: Cyclomatic Complexity & Basis Path Testing</h3>
+<h4>Part (a) Calculate Cyclomatic Complexity V(G)</h4>
+<p>Given: Edges \(E = 14\), Nodes \(N = 10\), Connected Components \(P = 1\).</p>
+<p>Using the Edge-Node formula:</p>
+<p>\[ V(G) = E - N + 2P \]</p>
+<p>\[ V(G) = 14 - 10 + 2(1) = 4 + 2 = 6 \]</p>
+<p>The Cyclomatic Complexity is <strong>6</strong>. This means there are exactly 6 independent paths through the program flow graph.</p>
+<p><strong>Independent Paths (Assumed based on standard loops/branches):</strong></p>
 <ol>
-    <li>\(\text{Path } 1: 1 - 2 - 10\)</li>
-    <li>\(\text{Path } 2: 1 - 2 - 3 - 8 - 9 - 10\)</li>
-    <li>\(\text{Path } 3: 1 - 2 - 3 - 4 - 7 - 8 - 9 - 10\)</li>
-    <li>\(\text{Path } 4: 1 - 2 - 3 - 4 - 5 - 6 - 7 - 8 - 9 - 10\)</li>
-    <li>\(\text{Path } 5: 1 - 2 - 3 - 8 - 2 - \dots - 10\)</li>
-    <li>\(\text{Path } 6: 1 - 2 - 3 - 4 - 7 - 4 - \dots - 10\)</li>
+  <li>Path 1: 1 &rarr; 2 &rarr; 10 (Direct exit)</li>
+  <li>Path 2: 1 &rarr; 2 &rarr; 3 &rarr; 8 &rarr; 9 &rarr; 10</li>
+  <li>Path 3: 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 7 &rarr; 8 &rarr; 9 &rarr; 10</li>
+  <li>Path 4: 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5 &rarr; 6 &rarr; 7 &rarr; 8 &rarr; 9 &rarr; 10</li>
+  <li>Path 5: 1 &rarr; 2 &rarr; 3 &rarr; 8 &rarr; 2 &rarr; ... &rarr; 10 (Loop iteration)</li>
+  <li>Path 6: 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 7 &rarr; 4 &rarr; ... &rarr; 10 (Inner Loop iteration)</li>
 </ol>
+
+<h4>Part (b) Design Test Cases using Basis Path Testing</h4>
+<p>Basis Path testing guarantees that every statement and every branch is executed at least once.</p>
+<ul>
+  <li><strong>Test Case 1 (for Path 1):</strong> Input values that cause the program to hit the very first error/exit condition (e.g., passing a Null pointer).</li>
+  <li><strong>Test Case 2 (for Path 2):</strong> Input values that bypass the inner loops entirely.</li>
+  <li><strong>Test Cases 3-6:</strong> Inputs designed specifically to force the execution to walk through the various loop combinations and internal <code>if/else</code> branches identified in paths 3 through 6.</li>
+</ul>
+
+<h4>Part (c) Black-Box vs White-Box Testing</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Black-Box Testing</th>
+    <th>White-Box Testing</th>
+  </tr>
+  <tr>
+    <td><strong>Focus</strong></td>
+    <td>External behavior and functionality (Inputs/Outputs).</td>
+    <td>Internal logic, code structure, and execution paths.</td>
+  </tr>
+  <tr>
+    <td><strong>Knowledge Required</strong></td>
+    <td>No programming knowledge needed. Based on SRS.</td>
+    <td>Requires deep programming knowledge and access to source code.</td>
+  </tr>
+  <tr>
+    <td><strong>Techniques</strong></td>
+    <td>Equivalence Partitioning, Boundary Value Analysis.</td>
+    <td>Statement Coverage, Branch Coverage, Basis Path Testing.</td>
+  </tr>
+  <tr>
+    <td><strong>Performed By</strong></td>
+    <td>Independent QA Testers, End Users.</td>
+    <td>Software Developers.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-2">
@@ -1245,48 +1446,91 @@ b) Calculate Function Points for a system with 10 External Inputs (Simple), 12 E
 Inquiries (Complex), 4 Internal Logical Files (Average), 6 External Interface Files (Simple). Sum of Complexity Adjustment
 Factors ΣFi = 45.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Basic COCOMO Calculation:</b></p>
-<p>Given software project size = \(32\text{ KLOC}\) in <b>Organic Mode</b> (\(a = 2.4, b = 1.05, c = 2.5, d = 0.38\)).</p>
+                    <h3>Master Answer: Software Estimation (COCOMO & FP)</h3>
+<h4>Part (a) Basic COCOMO Calculation</h4>
+<p>Given: Size = 32 KLOC. Mode = Organic. Constants: \(a = 2.4, b = 1.05, c = 2.5, d = 0.38\).</p>
+<ol>
+  <li><strong>Effort (E):</strong>
+      <br/>\(E = a \times (KLOC)^b\)
+      <br/>\(E = 2.4 \times (32)^{1.05} = 2.4 \times 38.05 = \mathbf{91.32 \text{ Person-Months}}\)</li>
+  <li><strong>Development Time (Tdev):</strong>
+      <br/>\(T_{dev} = c \times (E)^d\)
+      <br/>\(T_{dev} = 2.5 \times (91.32)^{0.38} = 2.5 \times 5.54 = \mathbf{13.87 \text{ Months}}\)</li>
+  <li><strong>Average Staffing (SS):</strong>
+      <br/>\(SS = \frac{E}{T_{dev}} = \frac{91.32}{13.87} = \mathbf{6.58 \text{ Persons (round up to 7)}}\)</li>
+</ol>
+
+<h4>Part (b) Function Point (FP) Calculation</h4>
+<p>Given parameters and their standard weights:</p>
 <ul>
-    <li><b>1. Effort (E):</b><br>\(E = a \times (KLOC)^b = 2.4 \times (32)^{1.05} = 2.4 \times 38.051 = 91.32\text{ Person-Months}\)</li>
-    <li><b>2. Development Time (Tdev):</b><br>\(T_{dev} = c \times (Effort)^d = 2.5 \times (91.32)^{0.38} = 2.5 \times 5.548 = 13.87\text{ Months}\)</li>
-    <li><b>3. Average Staffing (SS):</b><br>\(SS = Effort / T_{dev} = 91.32 / 13.87 = 6.58\text{ Persons (}\approx\text{ 7 Persons)}\)</li>
+  <li>External Inputs (Simple: weight 3): \(10 \times 3 = 30\)</li>
+  <li>External Outputs (Average: weight 5): \(12 \times 5 = 60\)</li>
+  <li>External Inquiries (Complex: weight 6): \(8 \times 6 = 48\)</li>
+  <li>Internal Logical Files (Average: weight 10): \(4 \times 10 = 40\)</li>
+  <li>External Interface Files (Simple: weight 5): \(6 \times 5 = 30\)</li>
 </ul>
-<p><b>Part (b) Function Point (FP) Computation Trace:</b></p>
-<ul>
-    <li>External Inputs (EI): \(10 \times 3\text{ (Simple)} = 30\)</li>
-    <li>External Outputs (EO): \(12 \times 5\text{ (Average)} = 60\)</li>
-    <li>External Inquiries (EQ): \(8 \times 6\text{ (Complex)} = 48\)</li>
-    <li>Internal Logical Files (ILF): \(4 \times 10\text{ (Average)} = 40\)</li>
-    <li>External Interface Files (EIF): \(6 \times 5\text{ (Simple)} = 30\)</li>
-    <li><b>Total Unadjusted Function Points (UFP) = 30 + 60 + 48 + 40 + 30 = 208</b></li>
-    <li><b>VAF (Value Adjustment Factor):</b> \(VAF = 0.65 + (0.01 \times \Sigma F_i) = 0.65 + (0.01 \times 45) = 1.10\)</li>
-    <li><b>Adjusted Function Points (FP):</b> \(FP = UFP \times VAF = 208 \times 1.10 = 228.8\text{ FP}\)</li>
-</ul>
+<p><strong>Step 1: Unadjusted Function Points (UFP)</strong></p>
+<p>\(UFP = 30 + 60 + 48 + 40 + 30 = \mathbf{208}\)</p>
+
+<p><strong>Step 2: Value Adjustment Factor (VAF)</strong></p>
+<p>Given \(\Sigma F_i = 45\).</p>
+<p>\(VAF = 0.65 + (0.01 \times \Sigma F_i) = 0.65 + (0.01 \times 45) = 0.65 + 0.45 = \mathbf{1.10}\)</p>
+
+<p><strong>Step 3: Final Adjusted Function Points (FP)</strong></p>
+<p>\(FP = UFP \times VAF = 208 \times 1.10 = \mathbf{228.8 \text{ FP}}\)</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-3">
                 <div class="q-text"><span class="q-badge c15">Q3</span><span>a) Draw Data Flow Diagram (Level 0 Context Diagram & Level 1 DFD) for an Online Examination System.
 b) Draw UML Class Diagram and Sequence Diagram for User Login and Exam Submission.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Data Flow Diagram (Level 0 Context Diagram & Level 1 DFD):</b></p><div class="diagram-container">
-    <div class="mermaid">
+                    <h3>Master Answer: DFD and UML for Online Examination System</h3>
+<h4>Part (a) Data Flow Diagrams (DFD)</h4>
+<p><strong>Level 0 Context Diagram:</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
 graph LR
-    S((Student)) -- Submit Answers --> O[Online Exam System]
-    O -- View Results --> S
-    A((Admin)) -- Upload Questions --> O
-    </div>
-    <div class="diagram-caption">Figure: Level 0 DFD Context Diagram for Online Exam System</div>
+    S((Student)) -- Login Credentials --> O[Online Exam System]
+    S -- Exam Answers --> O
+    O -- Exam Results --> S
+    A((Admin)) -- Questions/Keys --> O
+    O -- Usage Reports --> A
 </div>
-<p><b>Part (b) Level 1 DFD Functional Decomposition:</b></p>
-<ul>
-    <li><b>Process 1.0 (User Authentication):</b> Validates student registration and login credentials.</li>
-    <li><b>Process 2.0 (Test Delivery Engine):</b> Fetches active question sets from Question Datastore.</li>
-    <li><b>Process 3.0 (Evaluation Engine):</b> Scores submitted objective responses against Answer Key Datastore.</li>
-    <li><b>Process 4.0 (Report Generator):</b> Computes final score metrics and logs into Result Store.</li>
-</ul>
+</div>
+<p><strong>Level 1 DFD:</strong></p>
+<p>Decomposes the main system into:</p>
+<ol>
+  <li><strong>Process 1.0 (Auth):</strong> Validates Student credentials against <em>User DB</em>.</li>
+  <li><strong>Process 2.0 (Exam Engine):</strong> Retrieves questions from <em>Question DB</em> and serves them.</li>
+  <li><strong>Process 3.0 (Evaluation):</strong> Compares submitted answers against <em>Answer Key DB</em>.</li>
+  <li><strong>Process 4.0 (Reporting):</strong> Generates scores and saves to <em>Results DB</em>.</li>
+</ol>
+
+<h4>Part (b) UML Class and Sequence Diagram</h4>
+<p><strong>Class Diagram:</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
+classDiagram
+    class User {
+        +String username
+        +String password
+        +login()
+    }
+    class Student {
+        +int studentId
+        +takeExam()
+    }
+    class Exam {
+        +int examId
+        +List questions
+        +submitAnswers()
+    }
+    User <|-- Student
+    Student "1" -- "*" Exam : Takes
+</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-4">
@@ -1294,15 +1538,70 @@ graph LR
 b) Write detailed Test Cases (Test ID, Description, Input, Expected Output, Pass/Fail) using Equivalence Partitioning and
 Boundary Value Analysis for credit card expiration date input (Month 1-12, Year 2026-2035).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Develop complete Software Test Plan for an E-Commerce Shopping Cart application.
-b) Write detailed Test Cases (Test ID, Description, Input, Expected Output, Pass/Fail) using Equivalence Partitioning and
-Boundary Value Analysis for credit card expiration date input (Month 1-12, Year 2026-2035)..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Software Test Plan and Test Cases</h3>
+<h4>Part (a) Test Plan for E-Commerce Shopping Cart</h4>
+<p>A Software Test Plan outlines the testing strategy, scope, resources, and schedule.</p>
+<ul>
+  <li><strong>Scope:</strong> Adding items to cart, updating quantities, removing items, calculating totals (including tax/shipping), and proceeding to checkout.</li>
+  <li><strong>In-Scope Testing Types:</strong> Functional Testing, UI Testing, Integration Testing (Cart to Payment Gateway), Performance Testing (handling Black Friday loads).</li>
+  <li><strong>Test Environment:</strong> Staging server mirroring production. Browsers: Chrome, Firefox, Safari. Devices: Desktop, iOS, Android.</li>
+  <li><strong>Entry/Exit Criteria:</strong> Entry: Code freeze achieved. Exit: 100% of Critical/High severity bugs resolved, 90% test case pass rate.</li>
+</ul>
+
+<h4>Part (b) Test Cases using Equivalence Partitioning & BVA</h4>
+<p>Scenario: Credit Card Expiration Date (Month: 1-12, Year: 2026-2035)</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Test ID</th>
+    <th>Description (Technique)</th>
+    <th>Input (MM, YYYY)</th>
+    <th>Expected Output</th>
+    <th>Pass/Fail</th>
+  </tr>
+  <tr>
+    <td>TC01</td>
+    <td>Valid Expiration (Eq. Partition)</td>
+    <td>05, 2029</td>
+    <td>Accepted</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TC02</td>
+    <td>Invalid Month Low (BVA)</td>
+    <td>00, 2029</td>
+    <td>Rejected (Error)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TC03</td>
+    <td>Valid Month Min Bound (BVA)</td>
+    <td>01, 2029</td>
+    <td>Accepted</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TC04</td>
+    <td>Valid Month Max Bound (BVA)</td>
+    <td>12, 2030</td>
+    <td>Accepted</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TC05</td>
+    <td>Invalid Month High (BVA)</td>
+    <td>13, 2030</td>
+    <td>Rejected (Error)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>TC06</td>
+    <td>Invalid Year Past (Eq. Partition)</td>
+    <td>06, 2020</td>
+    <td>Rejected (Expired)</td>
+    <td></td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-5">
@@ -1310,15 +1609,44 @@ Boundary Value Analysis for credit card expiration date input (Month 1-12, Year 
 b) Describe Sprint Planning, Daily Standup, Sprint Review, Sprint Retrospective, and Backlog Refinement.
 c) Compare Agile vs Traditional Waterfall on 6 dimensions.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Agile Scrum Framework end-to-end.
-b) Describe Sprint Planning, Daily Standup, Sprint Review, Sprint Retrospective, and Backlog Refinement.
-c) Compare Agile vs Traditional Waterfall on 6 dimensions..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: Agile Scrum Framework</h3>
+<h4>Part (a) & (b) End-to-End Scrum Workflow</h4>
+<p>Scrum is an iterative framework operating in time-boxed <strong>Sprints</strong> (1-4 weeks).</p>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    PB[(Product Backlog)] --> SP[Sprint Planning]
+    SP --> SB[(Sprint Backlog)]
+    SB --> DS((Daily Scrum))
+    DS --> DEV[Development]
+    DEV --> SR[Sprint Review]
+    SR --> SRET[Sprint Retrospective]
+    SRET --> PB
 </div>
+</div>
+<ul>
+  <li><strong>Sprint Planning:</strong> The entire team selects high-priority items from the Product Backlog and moves them to the Sprint Backlog, agreeing on a Sprint Goal.</li>
+  <li><strong>Daily Standup (Daily Scrum):</strong> 15-minute sync-up to discuss progress, daily goals, and blockers.</li>
+  <li><strong>Sprint Review:</strong> At the end of the sprint, the team demonstrates the potentially shippable product increment to stakeholders.</li>
+  <li><strong>Sprint Retrospective:</strong> Internal team meeting to discuss what went well, what failed, and how to improve processes for the next sprint.</li>
+  <li><strong>Backlog Refinement (Grooming):</strong> Ongoing activity where the Product Owner adds detail, estimates, and order to items in the Product Backlog.</li>
+</ul>
+
+<h4>Part (c) Agile vs Traditional Waterfall</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Dimension</th>
+    <th>Agile (Scrum)</th>
+    <th>Traditional Waterfall</th>
+  </tr>
+  <tr><td><strong>Requirements</strong></td><td>Flexible, expected to change.</td><td>Rigid, frozen upfront.</td></tr>
+  <tr><td><strong>Delivery</strong></td><td>Continuous, small increments.</td><td>Single massive delivery at the end.</td></tr>
+  <tr><td><strong>Customer Involvement</strong></td><td>High throughout the project.</td><td>High at the start, very low during dev.</td></tr>
+  <tr><td><strong>Risk</strong></td><td>Low (fast failure and feedback).</td><td>High (issues found late in testing).</td></tr>
+  <tr><td><strong>Team Structure</strong></td><td>Self-organizing, cross-functional.</td><td>Siloed teams (Designers &rarr; Devs &rarr; QA).</td></tr>
+  <tr><td><strong>Documentation</strong></td><td>Minimal, focus on working code.</td><td>Heavy, exhaustive documentation.</td></tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-6">
@@ -1326,15 +1654,45 @@ c) Compare Agile vs Traditional Waterfall on 6 dimensions..</li>
 b) Calculate Earliest Start (ES), Earliest Finish (EF), Latest Start (LS), Latest Finish (LF), and Total Float.
 c) Identify Critical Path and project completion duration.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Calculate PERT/CPM Critical Path for a software project network graph with 8 activities.
-b) Calculate Earliest Start (ES), Earliest Finish (EF), Latest Start (LS), Latest Finish (LF), and Total Float.
-c) Identify Critical Path and project completion duration..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: PERT/CPM and Critical Path Method</h3>
+<h4>Part (a), (b), (c) Calculating Critical Path</h4>
+<p>Imagine a project with the following sequential network:</p>
+<ul>
+  <li>A (Start, 3 days)</li>
+  <li>B (Depends on A, 4 days)</li>
+  <li>C (Depends on A, 2 days)</li>
+  <li>D (Depends on B and C, 5 days)</li>
+</ul>
+<p><strong>Step 1: Forward Pass (Calculate ES & EF)</strong></p>
+<p><em>Formula: \(EF = ES + Duration\)</em></p>
+<ul>
+  <li>A: ES=0, EF=3</li>
+  <li>B: ES=3, EF=7</li>
+  <li>C: ES=3, EF=5</li>
+  <li>D: ES = max(EF of B, EF of C) = max(7, 5) = 7. EF = 7 + 5 = 12.</li>
+</ul>
+<p><strong>Project Completion Duration = 12 days.</strong></p>
+
+<p><strong>Step 2: Backward Pass (Calculate LS & LF)</strong></p>
+<p><em>Formula: \(LS = LF - Duration\)</em></p>
+<ul>
+  <li>D: LF=12, LS=7</li>
+  <li>B: LF=7 (from D), LS=3</li>
+  <li>C: LF=7 (from D), LS=5</li>
+  <li>A: LF = min(LS of B, LS of C) = min(3, 5) = 3. LS=0.</li>
+</ul>
+
+<p><strong>Step 3: Total Float (Slack)</strong></p>
+<p><em>Formula: \(Float = LS - ES\) (or \(LF - EF\))</em></p>
+<ul>
+  <li>A: 0 - 0 = 0</li>
+  <li>B: 3 - 3 = 0</li>
+  <li>C: 5 - 3 = 2 (Task C can be delayed by 2 days without affecting the project)</li>
+  <li>D: 7 - 7 = 0</li>
+</ul>
+
+<p><strong>Critical Path:</strong> The path with ZERO Float. Therefore, the Critical Path is <strong>A &rarr; B &rarr; D</strong>.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-7">
@@ -1347,20 +1705,40 @@ b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram 
 --- Page 4 ---
 (ATM) system.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Object-Oriented Analysis and Design (OOAD) using UML.
-b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram for an Automated Teller Machine
+                    <h3>Master Answer: OOAD and UML for ATM System</h3>
+<h4>Part (a) Object-Oriented Analysis and Design (OOAD)</h4>
+<p>OOAD models a system as a group of interacting objects. Analysis (OOA) focuses on understanding the problem domain and identifying objects (Nouns in requirements). Design (OOD) defines the software architecture, class attributes, methods, and relationships (inheritance, polymorphism, encapsulation).</p>
 
-
-
-
---- Page 4 ---
-(ATM) system..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+<h4>Part (b) UML Diagrams for ATM</h4>
+<p><strong>Use Case Diagram:</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    C((Customer)) -- Uses --> W(Withdraw Cash)
+    C -- Uses --> B(Check Balance)
+    B --&lt;&lt;include&gt;&gt;--> A(Authenticate PIN)
+    W --&lt;&lt;include&gt;&gt;--> A
 </div>
+</div>
+
+<p><strong>Activity Diagram (Withdrawal Flow):</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> InsertCard
+    InsertCard --> EnterPIN
+    EnterPIN --> ValidatePIN
+    ValidatePIN --> InvalidPIN : Fails
+    InvalidPIN --> [*]
+    ValidatePIN --> SelectWithdrawal : Succeeds
+    SelectWithdrawal --> CheckFunds
+    CheckFunds --> DispenseCash : Sufficient
+    CheckFunds --> Reject : Insufficient
+    DispenseCash --> EjectCard
+    EjectCard --> [*]
+</div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-8">
@@ -1368,57 +1746,139 @@ b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram 
 b) Construct Risk Projection Matrix and Risk Mitigation, Monitoring, and Management (RMMM) Plan for a mission-critical
 banking application.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Risk Management in detail.
-b) Construct Risk Projection Matrix and Risk Mitigation, Monitoring, and Management (RMMM) Plan for a mission-critical
-banking application..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Software Risk Management</h3>
+<h4>Part (a) Risk Management Phases</h4>
+<p>Risk Management involves identifying, analyzing, and mitigating threats to a software project's schedule, cost, or quality.</p>
+<ul>
+  <li><strong>Identification:</strong> Creating a checklist of all possible project, technical, and business risks.</li>
+  <li><strong>Projection (Analysis):</strong> Estimating the Probability (\(P\)) and Impact (\(I\)) of each risk. Risk Exposure \(RE = P \times I\).</li>
+  <li><strong>RMMM (Mitigation, Monitoring, and Management):</strong> Creating actionable plans to deal with the prioritized risks.</li>
+</ul>
+
+<h4>Part (b) Risk Projection Matrix & RMMM for a Banking App</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Risk Description</th>
+    <th>Category</th>
+    <th>Probability</th>
+    <th>Impact (1-5)</th>
+    <th>RMMM Strategy</th>
+  </tr>
+  <tr>
+    <td>Database Server Crash</td>
+    <td>Technical</td>
+    <td>15%</td>
+    <td>5 (Catastrophic)</td>
+    <td><strong>Mitigate:</strong> Setup real-time DB replication. <strong>Monitor:</strong> Ping server every 5 seconds. <strong>Manage:</strong> Auto-failover to backup server if ping fails.</td>
+  </tr>
+  <tr>
+    <td>Key Lead Developer Quits</td>
+    <td>Project</td>
+    <td>30%</td>
+    <td>4 (Critical)</td>
+    <td><strong>Mitigate:</strong> Enforce pair programming and thorough documentation. <strong>Manage:</strong> Cross-train team members.</td>
+  </tr>
+  <tr>
+    <td>New RBI API Specs Released</td>
+    <td>Business</td>
+    <td>40%</td>
+    <td>3 (Moderate)</td>
+    <td><strong>Mitigate:</strong> Build system with a highly decoupled adapter layer for external APIs.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-9">
                 <div class="q-text"><span class="q-badge c15">Q9</span><span>a) Explain Capability Maturity Model Integration (CMMI) Framework.
 b) Detail all 5 Process Maturity Levels (Initial, Managed, Defined, Quantitatively Managed, Optimizing) and Process Areas.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Capability Maturity Model Integration (CMMI) Framework.
-b) Detail all 5 Process Maturity Levels (Initial, Managed, Defined, Quantitatively Managed, Optimizing) and Process Areas..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: CMMI Framework</h3>
+<h4>Part (a) What is CMMI?</h4>
+<p>Capability Maturity Model Integration (CMMI) is a process improvement training and appraisal program administered by the CMMI Institute. It guides organizations to streamline processes, encouraging a culture of continuous improvement.</p>
+
+<h4>Part (b) The 5 Maturity Levels</h4>
+<ol>
+  <li><strong>Level 1: Initial</strong>
+      <br/>• <em>Characteristics:</em> Unpredictable, chaotic, reactive. No standard processes. Success depends on individual heroism.
+      <br/>• <em>Process Areas:</em> None.</li>
+  <li><strong>Level 2: Managed</strong>
+      <br/>• <em>Characteristics:</em> Processes are planned and executed at the <em>project</em> level. Basic project management exists.
+      <br/>• <em>Process Areas:</em> Requirements Management, Project Planning, Configuration Management.</li>
+  <li><strong>Level 3: Defined</strong>
+      <br/>• <em>Characteristics:</em> Processes are well characterized and standardized across the <em>entire organization</em>.
+      <br/>• <em>Process Areas:</em> Organizational Training, Risk Management, Decision Analysis.</li>
+  <li><strong>Level 4: Quantitatively Managed</strong>
+      <br/>• <em>Characteristics:</em> The organization uses statistical and quantitative techniques to precisely control process performance.
+      <br/>• <em>Process Areas:</em> Quantitative Project Management, Organizational Process Performance.</li>
+  <li><strong>Level 5: Optimizing</strong>
+      <br/>• <em>Characteristics:</em> Focus is on continuous, proactive process improvement through incremental and innovative technological improvements.
+      <br/>• <em>Process Areas:</em> Causal Analysis and Resolution, Organizational Performance Management.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-10">
                 <div class="q-text"><span class="q-badge c15">Q10</span><span>a) Explain Software Quality Assurance (SQA) plan and Software Quality Metrics.
 b) Calculate Defect Removal Efficiency (DRE) and Defect Density for a software release.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Quality Assurance (SQA) plan and Software Quality Metrics.
-b) Calculate Defect Removal Efficiency (DRE) and Defect Density for a software release..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: SQA and Defect Metrics</h3>
+<h4>Part (a) Software Quality Assurance (SQA)</h4>
+<p>SQA is the umbrella activity ensuring that software processes and products conform to standards (like ISO 9001). The SQA plan defines the audits, code reviews, testing strategies, and configuration management rules.</p>
+<p><strong>Quality Metrics:</strong> Metrics used to measure quality include Defect Density, Mean Time To Failure (MTTF), Cyclomatic Complexity, and Test Coverage percentage.</p>
+
+<h4>Part (b) Calculating Defect Removal Efficiency (DRE) and Defect Density</h4>
+<p><strong>Scenario:</strong> During development and testing (before release), the QA team finds \(E = 85\) defects. After release, end-users report \(D = 15\) defects. The software size is 50 KLOC.</p>
+<ol>
+  <li><strong>Defect Removal Efficiency (DRE):</strong>
+      <p>DRE measures the percentage of bugs caught internally before they reach the customer.</p>
+      <p>\[ DRE = \frac{E}{E + D} = \frac{85}{85 + 15} = \frac{85}{100} = 0.85 \]</p>
+      <p>The DRE is <strong>85%</strong>. (A DRE approaching 1.0 indicates a highly effective QA process).</p>
+  </li>
+  <li><strong>Defect Density:</strong>
+      <p>Defect Density measures the total number of known defects relative to the size of the software.</p>
+      <p>Total Defects = \(E + D = 100\).</p>
+      <p>\[ Defect Density = \frac{\text{Total Defects}}{\text{Size in KLOC}} = \frac{100}{50} = \mathbf{2.0 \text{ defects/KLOC}} \]</p>
+  </li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-11">
                 <div class="q-text"><span class="q-badge c15">Q11</span><span>a) Explain Software Maintenance process model.
 b) Detail Software Re-engineering lifecycle model including Reverse Engineering, Restructuring, and Forward Engineering.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Maintenance process model.
-b) Detail Software Re-engineering lifecycle model including Reverse Engineering, Restructuring, and Forward Engineering..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: Software Maintenance and Re-engineering</h3>
+<h4>Part (a) Software Maintenance Process Model</h4>
+<p>The IEEE maintenance process involves the following steps:</p>
+<ol>
+  <li><strong>Identification & Classification:</strong> A change request (bug report or feature request) is submitted and classified (Corrective, Adaptive, Perfective, Preventive).</li>
+  <li><strong>Analysis:</strong> Evaluating the impact of the change on the existing system, estimating cost, and determining feasibility.</li>
+  <li><strong>Design:</strong> Designing the modifications required in the architecture and modules.</li>
+  <li><strong>Implementation:</strong> Writing the new code or modifying existing code.</li>
+  <li><strong>Regression Testing:</strong> Running extensive tests to ensure the new changes haven't broken any existing, working functionality.</li>
+  <li><strong>Acceptance & Delivery:</strong> Deploying the updated software to users.</li>
+</ol>
+
+<h4>Part (b) Software Re-engineering Lifecycle</h4>
+<p>Re-engineering revamps a legacy system to a modern architecture without changing its core business logic.</p>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    L[Legacy Code] --> RE[Reverse Engineering]
+    RE --> D[Recovered Design]
+    D --> RS[Restructuring]
+    RS --> ND[New Architecture Design]
+    ND --> FE[Forward Engineering]
+    FE --> M[Modern System]
 </div>
+</div>
+<ul>
+  <li><strong>Reverse Engineering:</strong> The process of analyzing the legacy source code to extract high-level design representations (like Class Diagrams or DFDs) since original documentation is often missing or outdated.</li>
+  <li><strong>Restructuring:</strong> Code restructuring involves cleaning up "spaghetti code" into structured programming blocks. Data restructuring involves normalizing old flat files into modern relational database schemas.</li>
+  <li><strong>Forward Engineering:</strong> Using the recovered and restructured design models to generate new source code in a modern language (e.g., migrating from COBOL to Java/Spring Boot).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-12">
@@ -1426,43 +1886,112 @@ b) Detail Software Re-engineering lifecycle model including Reverse Engineering,
 b) Design test strategies and scenarios for Load Testing, Stress Testing, Volume Testing, Security Testing, and Recovery
 Testing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain System Testing for large scale enterprise software.
-b) Design test strategies and scenarios for Load Testing, Stress Testing, Volume Testing, Security Testing, and Recovery
-Testing..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Enterprise System Testing</h3>
+<h4>Part (a) System Testing Overview</h4>
+<p>System Testing evaluates the complete, fully integrated software system to verify compliance with its specified requirements. It is an end-to-end Black-Box testing phase conducted on an environment that closely mirrors production.</p>
+
+<h4>Part (b) Test Strategies and Scenarios</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Testing Type</th>
+    <th>Strategy & Goal</th>
+    <th>Scenario (e-Commerce App)</th>
+  </tr>
+  <tr>
+    <td><strong>Load Testing</strong></td>
+    <td>Test behavior under expected maximum concurrent user load.</td>
+    <td>Simulate 5,000 concurrent users adding items to their carts and checking out simultaneously. Measure if response time stays under 2 seconds.</td>
+  </tr>
+  <tr>
+    <td><strong>Stress Testing</strong></td>
+    <td>Push system beyond maximum capacity to find the breaking point and observe how it fails.</td>
+    <td>Ramp up to 20,000 concurrent users. Observe if the system crashes gracefully or if it loses payment transaction data during the crash.</td>
+  </tr>
+  <tr>
+    <td><strong>Volume Testing</strong></td>
+    <td>Test the system's ability to handle massive amounts of data in the database over time.</td>
+    <td>Insert 10 million dummy product records into the database and check if the search function still returns results within 3 seconds.</td>
+  </tr>
+  <tr>
+    <td><strong>Security Testing</strong></td>
+    <td>Identify vulnerabilities to hacking, unauthorized access, and data breaches.</td>
+    <td>Attempt SQL Injection in the login form (<code>' OR 1=1 --</code>). Attempt Cross-Site Scripting (XSS) in the product review section.</td>
+  </tr>
+  <tr>
+    <td><strong>Recovery Testing</strong></td>
+    <td>Force the system to fail and verify if it recovers properly and data is not lost.</td>
+    <td>While a payment is being processed, physically pull the network cable from the server. Reconnect and verify the transaction rolled back safely.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-13">
                 <div class="q-text"><span class="q-badge c15">Q13</span><span>a) Explain Software Architecture Design and Evaluation Method (SAAM / ATAM).
 b) Detail Layered vs Microservices Architecture for cloud-native applications.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Architecture Design and Evaluation Method (SAAM / ATAM).
-b) Detail Layered vs Microservices Architecture for cloud-native applications..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Software Architecture & Evaluation</h3>
+<h4>Part (a) Architecture Evaluation Method (ATAM)</h4>
+<p>The Architecture Tradeoff Analysis Method (ATAM) evaluates software architectures relative to quality attribute goals (Performance, Security, Modifiability, etc.).</p>
+<ul>
+  <li><strong>Scenarios:</strong> ATAM uses specific scenarios (e.g., "A new payment gateway must be added in 2 weeks") to test the architecture.</li>
+  <li><strong>Sensitivity Points:</strong> Architectural decisions that significantly affect one or more quality attributes (e.g., Using a central database is highly sensitive to scalability).</li>
+  <li><strong>Trade-offs:</strong> Decisions that positively impact one attribute while negatively impacting another (e.g., High encryption improves Security but degrades Performance).</li>
+</ul>
+
+<h4>Part (b) Layered vs Microservices Architecture</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Layered Architecture (Monolith)</th>
+    <th>Microservices Architecture</th>
+  </tr>
+  <tr>
+    <td><strong>Structure</strong></td>
+    <td>Single unified codebase divided into logical layers (Presentation, Business, Data).</td>
+    <td>Suite of small, independent services communicating via APIs (REST/gRPC).</td>
+  </tr>
+  <tr>
+    <td><strong>Deployment</strong></td>
+    <td>Must deploy the entire massive application even for a 1-line code change.</td>
+    <td>Independent deployment. Can update the "Billing Service" without touching the "Search Service".</td>
+  </tr>
+  <tr>
+    <td><strong>Scalability</strong></td>
+    <td>Scale by replicating the entire monolith across multiple servers (Resource heavy).</td>
+    <td>Scale individual services as needed. (e.g., Scale up the Search service during Black Friday).</td>
+  </tr>
+  <tr>
+    <td><strong>Failure Isolation</strong></td>
+    <td>Poor. A memory leak in one module can crash the entire server.</td>
+    <td>Excellent. If the "Recommendation Service" crashes, users can still checkout and pay.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-14">
                 <div class="q-text"><span class="q-badge c15">Q14</span><span>a) Explain Object-Oriented Design Principles (SOLID) in detail with code snippets.
 b) Detail Singleton, Factory, and Observer Design Patterns.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Object-Oriented Design Principles (SOLID) in detail with code snippets.
-b) Detail Singleton, Factory, and Observer Design Patterns..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: OOAD Principles and Patterns</h3>
+<h4>Part (a) SOLID Principles</h4>
+<ul>
+  <li><strong>Single Responsibility:</strong> A class should have only one reason to change. (e.g., An <code>Invoice</code> class should only handle invoice logic, not printing logic).</li>
+  <li><strong>Open/Closed:</strong> Open for extension, closed for modification. (e.g., Use an <code>Interface Shape</code> and implement <code>Circle</code> and <code>Square</code>, instead of modifying an <code>AreaCalculator</code> with <code>if/else</code> statements).</li>
+  <li><strong>Liskov Substitution:</strong> Subclasses should be replaceable for their base classes. (e.g., A <code>Penguin</code> class inheriting from <code>Bird</code> violates LSP if <code>Bird</code> has a <code>fly()</code> method, because penguins can't fly).</li>
+  <li><strong>Interface Segregation:</strong> Many client-specific interfaces are better than one general-purpose interface.</li>
+  <li><strong>Dependency Inversion:</strong> Depend on abstractions, not concretions. (e.g., Depend on <code>IDatabase</code> instead of <code>MySQLDatabase</code>).</li>
+</ul>
+
+<h4>Part (b) Core Design Patterns</h4>
+<ul>
+  <li><strong>Singleton (Creational):</strong> Ensures a class has only one instance globally. 
+      <br/><em>Implementation:</em> Private constructor, static private instance variable, static public <code>getInstance()</code> method. (Used for Database Connection Pools).</li>
+  <li><strong>Factory Method (Creational):</strong> Defines an interface for creating an object, but lets subclasses decide which class to instantiate. (e.g., A <code>VehicleFactory</code> that returns a <code>Car</code> or <code>Truck</code> object based on input).</li>
+  <li><strong>Observer (Behavioral):</strong> Defines a one-to-many dependency so that when one object (Subject) changes state, all its dependents (Observers) are notified automatically. (Used in GUI event listeners or Publish-Subscribe systems).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-15">
@@ -1470,15 +1999,27 @@ b) Detail Singleton, Factory, and Observer Design Patterns..</li>
 b) Calculate Unadjusted Function Points (UFP) and Final Value Adjustment Factor (VAF) for a Hospital Management
 System.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Function Point Analysis (FPA) methodology in detail.
-b) Calculate Unadjusted Function Points (UFP) and Final Value Adjustment Factor (VAF) for a Hospital Management
-System..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Detailed Function Point Analysis</h3>
+<h4>Part (a) FPA Methodology</h4>
+<p>Function Point Analysis measures software size based on external user interactions and internal logical data. It is independent of the programming language used.</p>
+<p>The 5 parameters are EI (External Inputs), EO (External Outputs), EQ (External Inquiries), ILF (Internal Logical Files), and EIF (External Interface Files). Each is weighted (Simple, Average, Complex). UFP is the sum. Then, 14 General System Characteristics (GSCs) are rated from 0 to 5 to calculate the VAF.</p>
+
+<h4>Part (b) Hospital Management System Calculation</h4>
+<p>Assume the following counts and average weights for the Hospital System:</p>
+<ul>
+  <li><strong>EI (Admit Patient Form):</strong> count 15 &times; weight 4 = 60</li>
+  <li><strong>EO (Patient Discharge Bill):</strong> count 10 &times; weight 5 = 50</li>
+  <li><strong>EQ (Search Patient Record):</strong> count 12 &times; weight 4 = 48</li>
+  <li><strong>ILF (Patient DB, Doctor DB):</strong> count 5 &times; weight 10 = 50</li>
+  <li><strong>EIF (Insurance API):</strong> count 2 &times; weight 7 = 14</li>
+</ul>
+<p><strong>Unadjusted Function Points (UFP)</strong> = 60 + 50 + 48 + 50 + 14 = <strong>222</strong></p>
+
+<p>Assume the sum of the 14 GSC ratings (\(\Sigma F_i\)) is 35 (moderate complexity).</p>
+<p><strong>Value Adjustment Factor (VAF):</strong></p>
+<p>\[ VAF = 0.65 + (0.01 \times \Sigma F_i) = 0.65 + (0.01 \times 35) = 0.65 + 0.35 = \mathbf{1.00} \]</p>
+<p><strong>Final FP</strong> = \(UFP \times VAF = 222 \times 1.00 = \mathbf{222 \text{ FP}}\)</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-16">
@@ -1486,43 +2027,59 @@ System..</li>
 b) Detail Repository management, Baselines, Branching/Merging strategies, Change Control Board (CCB), and
 Configuration Audits.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Configuration Management (SCM) process.
-b) Detail Repository management, Baselines, Branching/Merging strategies, Change Control Board (CCB), and
-Configuration Audits..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Software Configuration Management (SCM)</h3>
+<h4>Part (a) SCM Process</h4>
+<p>SCM is the discipline of managing and controlling changes in the software evolution process. It ensures that team members don't overwrite each other's work and that previous stable versions can be restored if needed.</p>
+
+<h4>Part (b) SCM Components</h4>
+<ul>
+  <li><strong>Repository Management:</strong> The central database (like Git/GitHub) where all code, assets, and historical versions are stored.</li>
+  <li><strong>Baselines:</strong> A milestone in the SDLC representing an approved, stable version of a document or codebase. Once baselined, changes require formal approval. (e.g., The final SRS document is Baseline 1).</li>
+  <li><strong>Branching/Merging:</strong> Developers create isolated copies ("branches") of the code to work on new features. Once complete and tested, the branch is "merged" back into the main trunk (master branch).</li>
+  <li><strong>Change Control Board (CCB):</strong> A committee that reviews, evaluates, approves, or rejects proposed changes to baselined configurations based on cost, risk, and impact.</li>
+  <li><strong>Configuration Audits:</strong> Verifying that the software product actually satisfies its baselined requirements and that all approved changes were implemented correctly.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-17">
                 <div class="q-text"><span class="q-badge c15">Q17</span><span>a) Explain Cleanroom Software Engineering methodology.
 b) Detail Formal Specification, Statistical Quality Certification, and Non-Execution Verification.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Cleanroom Software Engineering methodology.
-b) Detail Formal Specification, Statistical Quality Certification, and Non-Execution Verification..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Cleanroom Software Engineering</h3>
+<h4>Part (a) Cleanroom Methodology</h4>
+<p>Cleanroom software engineering is a formal, highly rigorous approach that emphasizes defect prevention rather than traditional compile/test defect removal. It aims to develop software with a certified level of reliability.</p>
+
+<h4>Part (b) Key Pillars</h4>
+<ol>
+  <li><strong>Formal Specification:</strong> Requirements are defined using rigorous mathematical models (State-box, Clear-box). This eliminates ambiguity entirely.</li>
+  <li><strong>Non-Execution Verification:</strong> Programmers write the code but are <em>forbidden from compiling or executing it</em>. Instead, they use mathematical correctness proofs and formal technical reviews to verify the logic. The idea is to write code flawlessly the first time.</li>
+  <li><strong>Statistical Quality Certification:</strong> Once the code is verified mathematically, an independent testing team compiles it and runs statistical usage testing. Test cases are generated based on the probability distribution of actual user behavior. The reliability of the software is then mathematically certified (e.g., 99.99% reliable) based on the test results.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-18">
                 <div class="q-text"><span class="q-badge c15">Q18</span><span>a) Explain Software Reliability Models (Jelinski-Moranda Model, Basic Execution Time Model).
 b) Derive Reliability R(t) and Hazard Rate Z(t) formulas.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Reliability Models (Jelinski-Moranda Model, Basic Execution Time Model).
-b) Derive Reliability R(t) and Hazard Rate Z(t) formulas..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Software Reliability Models</h3>
+<h4>Part (a) Reliability Models Overview</h4>
+<p>Reliability models predict the probability of failure-free operation based on historical fault detection data.</p>
+<ul>
+  <li><strong>Jelinski-Moranda Model:</strong> Assumes that there are \(N\) total initial faults in the software. Every time a fault is discovered and fixed, the overall failure rate drops by a constant step. It assumes all faults contribute equally to the failure rate.</li>
+  <li><strong>Basic Execution Time Model (Musa):</strong> Models reliability based on actual CPU execution time rather than calendar time. As failures occur and are fixed, the intensity of failures decreases exponentially.</li>
+</ul>
+
+<h4>Part (b) Reliability and Hazard Formulas</h4>
+<ul>
+  <li><strong>Hazard Rate \(Z(t)\):</strong> The instantaneous rate of failure at time \(t\), given that the system has survived up to time \(t\). For a constant failure rate \(\lambda\), \(Z(t) = \lambda\).</li>
+  <li><strong>Reliability \(R(t)\):</strong> The probability that the system survives without failure for a duration \(t\).</li>
+  <li><strong>Relationship:</strong> For a constant hazard rate \(\lambda\) (meaning failures occur randomly over time), reliability follows an exponential decay distribution:
+      <br/>\[ R(t) = e^{-\lambda t} \]</li>
+  <li><strong>MTTF:</strong> The Mean Time To Failure is the inverse of the constant hazard rate: \(MTTF = \frac{1}{\lambda}\).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-19">
@@ -1530,15 +2087,23 @@ b) Derive Reliability R(t) and Hazard Rate Z(t) formulas..</li>
 integration.
 b) Detail Component Domain Engineering and Component Composition issues.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Component-Based Software Engineering (CBSE) and Component Off-The-Shelf (COTS)
-integration.
-b) Detail Component Domain Engineering and Component Composition issues..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Component-Based Software Engineering</h3>
+<h4>Part (a) CBSE and COTS</h4>
+<p>CBSE focuses on building systems by integrating pre-existing, reusable software components rather than writing everything from scratch. <strong>COTS (Commercial Off-The-Shelf)</strong> components are pre-built, third-party software packages (like an Oracle Database or a Stripe Payment Gateway SDK) that can be bought and integrated directly.</p>
+
+<h4>Part (b) Domain Engineering vs Composition</h4>
+<ul>
+  <li><strong>Component Domain Engineering:</strong> The process of actually creating the reusable components. This involves identifying common functionalities across multiple applications in a specific domain, designing generalized components, and cataloging them in a repository for future use.</li>
+  <li><strong>Component Composition (Integration):</strong> The process of assembling the system using these components. 
+      <br/><em>Issues include:</em>
+      <ul>
+        <li><strong>Architectural Mismatch:</strong> The COTS component might assume a different architectural style (e.g., event-driven vs procedural) than the main system.</li>
+        <li><strong>Interface Incompatibility:</strong> The component's API might require data formats or parameter types that differ from what the system provides. (Often solved using the Adapter Design Pattern).</li>
+        <li><strong>Vendor Lock-in:</strong> Relying heavily on a proprietary COTS component makes it difficult to switch to a competitor later.</li>
+      </ul>
+  </li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-20">
@@ -1546,23 +2111,37 @@ b) Detail Component Domain Engineering and Component Composition issues..</li>
 Requirements Elicitation to Deployment.
 b) Provide SRS outline, Level 1 DFD, Architecture diagram, and Test Strategy.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Data Flow Diagram (Level 0 Context Diagram & Level 1 DFD):</b></p><div class="diagram-container">
-    <div class="mermaid">
-graph LR
-    S((Student)) -- Submit Answers --> O[Online Exam System]
-    O -- View Results --> S
-    A((Admin)) -- Upload Questions --> O
-    </div>
-    <div class="diagram-caption">Figure: Level 0 DFD Context Diagram for Online Exam System</div>
-</div>
-<p><b>Part (b) Level 1 DFD Functional Decomposition:</b></p>
+                    <h3>Master Answer: Case Study - Food Delivery Mobile App</h3>
+<h4>Part (a) SDLC Trace</h4>
+<ol>
+  <li><strong>Elicitation:</strong> Interviews with restaurant owners and surveys with potential users.</li>
+  <li><strong>Analysis & Design:</strong> Creating UML diagrams, defining microservices, designing UI/UX mockups.</li>
+  <li><strong>Development:</strong> Building the Android/iOS frontend in Flutter and the backend in Node.js.</li>
+  <li><strong>Testing:</strong> Unit testing APIs, Load testing the order matching algorithm, UI testing the app.</li>
+  <li><strong>Deployment:</strong> Releasing to App Store/Play Store and monitoring via CI/CD pipelines.</li>
+</ol>
+
+<h4>Part (b) System Artifacts</h4>
+<p><strong>1. SRS Outline:</strong></p>
 <ul>
-    <li><b>Process 1.0 (User Authentication):</b> Validates student registration and login credentials.</li>
-    <li><b>Process 2.0 (Test Delivery Engine):</b> Fetches active question sets from Question Datastore.</li>
-    <li><b>Process 3.0 (Evaluation Engine):</b> Scores submitted objective responses against Answer Key Datastore.</li>
-    <li><b>Process 4.0 (Report Generator):</b> Computes final score metrics and logs into Result Store.</li>
+  <li><em>Functional:</em> User registration, Restaurant menu browsing, Cart management, Live GPS tracking, Payment gateway integration.</li>
+  <li><em>Non-Functional:</em> 99.9% uptime, API response under 200ms, Secure credit card tokenization.</li>
 </ul>
+<p><strong>2. Level 1 DFD:</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    U((Customer)) -- Order Details --> P1(1.0 Process Order)
+    P1 -- Validation --> D1[(User DB)]
+    P1 -- Push Notification --> R((Restaurant))
+    R -- Accept/Reject --> P2(2.0 Payment/Status)
+    P2 -- Charge Card --> B((Bank Gateway))
+    P2 -- Status Update --> U
+</div>
+</div>
+<p><strong>3. Architecture (Microservices):</strong> User Auth Service, Restaurant Catalog Service, Order Matching Service, Live Tracking Service, Payment Service.</p>
+<p><strong>4. Test Strategy:</strong> Automated unit tests for cart logic. Integration tests for Bank Gateway APIs. Field testing GPS tracking accuracy on physical mobile devices.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-21">
@@ -1570,53 +2149,79 @@ graph LR
 sum to 1.15).
 b) Compare Basic vs Intermediate vs Detailed COCOMO models.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Basic COCOMO Calculation:</b></p>
-<p>Given software project size = \(32\text{ KLOC}\) in <b>Organic Mode</b> (\(a = 2.4, b = 1.05, c = 2.5, d = 0.38\)).</p>
+                    <h3>Master Answer: Intermediate COCOMO Cost Drivers</h3>
+<h4>Part (a) Effort Calculation with Cost Drivers</h4>
+<p>The Intermediate COCOMO model refines the Basic model by introducing 15 Cost Drivers (Cost Multipliers) categorized into Product, Computer, Personnel, and Project attributes. These include things like "Required Reliability" or "Analyst Capability".</p>
+<p><strong>Formula:</strong></p>
+<p>\[ Effort = a_i \times (KLOC)^{b_i} \times EAF \]</p>
+<p>Where \(EAF\) (Effort Adjustment Factor) is the product of all 15 Cost Driver Multipliers. (Note: The problem states they <em>sum</em> to 1.15, but traditionally EAF is a product. Assuming the prompt implies the final calculated \(EAF = 1.15\)).</p>
+<p>Assuming an Organic project (Constants: \(a_i = 3.2, b_i = 1.05\)) and size = 32 KLOC:</p>
+<p>\[ Effort = 3.2 \times (32)^{1.05} \times 1.15 \]</p>
+<p>\[ Effort = 3.2 \times 38.05 \times 1.15 = 121.76 \times 1.15 = \mathbf{140.02 \text{ Person-Months}} \]</p>
+<p>Notice the effort is significantly higher than the Basic model due to the penalty of the cost drivers (\(EAF > 1\)).</p>
+
+<h4>Part (b) Basic vs Intermediate vs Detailed COCOMO</h4>
 <ul>
-    <li><b>1. Effort (E):</b><br>\(E = a \times (KLOC)^b = 2.4 \times (32)^{1.05} = 2.4 \times 38.051 = 91.32\text{ Person-Months}\)</li>
-    <li><b>2. Development Time (Tdev):</b><br>\(T_{dev} = c \times (Effort)^d = 2.5 \times (91.32)^{0.38} = 2.5 \times 5.548 = 13.87\text{ Months}\)</li>
-    <li><b>3. Average Staffing (SS):</b><br>\(SS = Effort / T_{dev} = 91.32 / 13.87 = 6.58\text{ Persons (}\approx\text{ 7 Persons)}\)</li>
+  <li><strong>Basic COCOMO:</strong> Computes software development effort (and cost) as a function of program size expressed in estimated lines of code (KLOC). It is good for quick, rough estimates.</li>
+  <li><strong>Intermediate COCOMO:</strong> Computes effort as a function of program size and a set of 15 "Cost Drivers" that include subjective assessments of product, hardware, personnel, and project attributes.</li>
+  <li><strong>Detailed COCOMO:</strong> Incorporates all characteristics of the intermediate version with an assessment of the cost driver's impact on <em>each specific step</em> of the software engineering process (e.g., Analysis, Design, Coding, Testing).</li>
 </ul>
-<p><b>Part (b) Function Point (FP) Computation Trace:</b></p>
-<ul>
-    <li>External Inputs (EI): \(10 \times 3\text{ (Simple)} = 30\)</li>
-    <li>External Outputs (EO): \(12 \times 5\text{ (Average)} = 60\)</li>
-    <li>External Inquiries (EQ): \(8 \times 6\text{ (Complex)} = 48\)</li>
-    <li>Internal Logical Files (ILF): \(4 \times 10\text{ (Average)} = 40\)</li>
-    <li>External Interface Files (EIF): \(6 \times 5\text{ (Simple)} = 30\)</li>
-    <li><b>Total Unadjusted Function Points (UFP) = 30 + 60 + 48 + 40 + 30 = 208</b></li>
-    <li><b>VAF (Value Adjustment Factor):</b> \(VAF = 0.65 + (0.01 \times \Sigma F_i) = 0.65 + (0.01 \times 45) = 1.10\)</li>
-    <li><b>Adjusted Function Points (FP):</b> \(FP = UFP \times VAF = 208 \times 1.10 = 228.8\text{ FP}\)</li>
-</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-22">
                 <div class="q-text"><span class="q-badge c15">Q22</span><span>a) Explain White-Box Path Testing for nested loops and conditional decisions.
 b) Construct flow graph and derive test cases achieving 100% Branch Coverage and 100% Statement Coverage.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain White-Box Path Testing for nested loops and conditional decisions.
-b) Construct flow graph and derive test cases achieving 100% Branch Coverage and 100% Statement Coverage..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: White-Box Path Testing</h3>
+<h4>Part (a) Path Testing for Nested Loops</h4>
+<p>Path testing nested loops requires generating test cases that test the boundary conditions of the loops. Specifically: bypassing the loop entirely, executing the loop exactly once, executing the loop a typical number of times (\(m\)), executing the loop \(max-1\) times, and executing the loop exactly \(max\) times.</p>
+<p>For nested loops, you hold the outer loop at a minimum value, test all bounds of the inner loop, then hold the inner loop at a typical value and test the bounds of the outer loop.</p>
+
+<h4>Part (b) 100% Branch and Statement Coverage</h4>
+<p>Assume the following code block:</p>
+<div class="code-block">
+1: if (A > 5) {
+2:    B = 10;
+3: } else {
+4:    B = 20;
+5: }
+6: if (C == 0) {
+7:    D = 100;
+8: }
+9: return B + D;
 </div>
+<ul>
+  <li><strong>To achieve 100% Statement Coverage:</strong> We need to execute lines 2, 4, and 7.
+      <br/>Test Case 1: <code>A = 10, C = 0</code> (Executes lines 1, 2, 6, 7, 9)
+      <br/>Test Case 2: <code>A = 1, C = 1</code> (Executes lines 1, 3, 4, 6, 9)
+      <br/><em>Statement Coverage achieved in 2 test cases.</em></li>
+  <li><strong>To achieve 100% Branch Coverage:</strong> We must evaluate (A>5) as True and False, and (C==0) as True and False.
+      <br/>Test Case 1 (T, T): <code>A = 10, C = 0</code>
+      <br/>Test Case 2 (F, F): <code>A = 1, C = 1</code>
+      <br/><em>Branch coverage is also achieved with these same 2 test cases.</em></li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-23">
                 <div class="q-text"><span class="q-badge c15">Q23</span><span>a) Explain Agile User Stories, Story Points, and Velocity metrics.
 b) Detail Planning Poker estimation technique and Burndown Charts.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Agile User Stories, Story Points, and Velocity metrics.
-b) Detail Planning Poker estimation technique and Burndown Charts..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Agile Metrics and Estimation</h3>
+<h4>Part (a) User Stories, Story Points, and Velocity</h4>
+<ul>
+  <li><strong>User Story:</strong> A short, simple description of a feature told from the perspective of the user. Format: <em>"As a [type of user], I want [some goal] so that [some reason]."</em></li>
+  <li><strong>Story Points:</strong> A relative unit of measure (usually Fibonacci numbers: 1, 2, 3, 5, 8, 13) used to estimate the effort required to fully implement a User Story. It accounts for volume, complexity, and uncertainty.</li>
+  <li><strong>Velocity:</strong> A metric that calculates how much work (in total Story Points) a team successfully completes during a single Sprint. It is used to forecast how many sprints it will take to clear the backlog.</li>
+</ul>
+
+<h4>Part (b) Planning Poker and Burndown Charts</h4>
+<ul>
+  <li><strong>Planning Poker:</strong> A consensus-based estimation technique. The Product Owner reads a User Story. Developers privately select a card with a Story Point value. Everyone reveals their cards simultaneously. If estimates vary wildly (e.g., someone plays a 2 and another an 8), they debate their reasoning and re-vote until consensus is reached. This prevents anchoring bias.</li>
+  <li><strong>Burndown Chart:</strong> A visual graph showing the amount of work remaining (Y-axis, usually in Story Points or Hours) versus time (X-axis, days in the sprint). An "Ideal Trend" line is drawn diagonally down to zero. If the actual remaining work line sits above the ideal line, the team is behind schedule.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-24">
@@ -1624,41 +2229,66 @@ b) Detail Planning Poker estimation technique and Burndown Charts..</li>
 notation).
 b) Write Z specification for a simple Stack data structure.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Intermediate Code Generation for \(a = b * -c + b * -c\):</b></p>
-<p><b>1. Three-Address Code (TAC):</b></p>
+                    <h3>Master Answer: Formal Specification & Z Notation</h3>
+<h4>Part (a) Algebraic vs Model-Based Specification</h4>
+<ul>
+  <li><strong>Algebraic Specification:</strong> The system is specified in terms of operations and algebraic equations that define the relationships between those operations (axioms). It is highly abstract and doesn't rely on underlying state variables.</li>
+  <li><strong>Model-Based Specification (Z Notation):</strong> The system is modeled using mathematical entities like sets, sequences, and relations. It explicitly defines a "State Space" (variables) and how specific operations mutate that state.</li>
+</ul>
+
+<h4>Part (b) Z Specification for a Stack</h4>
+<p>In Z Notation, a specification is written in visual boxes called "Schemas".</p>
 <div class="code-block">
-t1 = -c
-t2 = b * t1
-t3 = -c
-t4 = b * t3
-t5 = t2 + t4
-a = t5
+--- State Schema: Stack -----------------
+  items: seq N
+  max_size: N
+-----------------------------------------
+  #items <= max_size
+-----------------------------------------
+
+--- Operation Schema: Push --------------
+  \Delta Stack       (Indicates State changes)
+  x? : N            (Input variable x)
+-----------------------------------------
+  #items < max_size
+  items' = <x?> ^ items   (New state items' is x prepended to old items)
+  max_size' = max_size
+-----------------------------------------
 </div>
-<p><b>2. Quadruples Representation:</b></p>
-<table>
-    <tr><th>Index</th><th>Op</th><th>Arg1</th><th>Arg2</th><th>Result</th></tr>
-    <tr><td>(0)</td><td>uminus</td><td>c</td><td>-</td><td>t1</td></tr>
-    <tr><td>(1)</td><td>*</td><td>b</td><td>t1</td><td>t2</td></tr>
-    <tr><td>(2)</td><td>uminus</td><td>c</td><td>-</td><td>t3</td></tr>
-    <tr><td>(3)</td><td>*</td><td>b</td><td>t3</td><td>t4</td></tr>
-    <tr><td>(4)</td><td>+</td><td>t2</td><td>t4</td><td>t5</td></tr>
-    <tr><td>(5)</td><td>=</td><td>t5</td><td>-</td><td>a</td></tr>
-</table>
+<p><em>(Note: In actual Z notation, mathematical symbols are used. <code>\Delta</code> indicates a state change. <code>?</code> denotes an input. <code>'</code> denotes the state after the operation).</em></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-25">
                 <div class="q-text"><span class="q-badge c15">Q25</span><span>a) Explain UI/UX Engineering principles and Accessibility standards (WCAG).
 b) Design User Interface layout and state transition diagram for an E-Learning Portal.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain UI/UX Engineering principles and Accessibility standards (WCAG).
-b) Design User Interface layout and state transition diagram for an E-Learning Portal..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: UI/UX Engineering and Accessibility</h3>
+<h4>Part (a) Principles and WCAG Standards</h4>
+<p>UI (User Interface) focuses on the visual layout and interactivity. UX (User Experience) focuses on the overall feel, flow, and logical journey of the user.</p>
+<p><strong>WCAG (Web Content Accessibility Guidelines):</strong> Principles to make software accessible to people with disabilities.</p>
+<ul>
+  <li><strong>Perceivable:</strong> Provide text alternatives for images (screen readers). Ensure high color contrast for the visually impaired.</li>
+  <li><strong>Operable:</strong> Make all functionality available from a keyboard (no mouse trap). Do not design content that causes seizures (no fast flashing).</li>
+  <li><strong>Understandable:</strong> Text must be readable. Error messages must explicitly state the problem and how to fix it.</li>
+  <li><strong>Robust:</strong> Content must be compatible with current and future assistive technologies.</li>
+</ul>
+
+<h4>Part (b) E-Learning Portal UI State Transition</h4>
+<p><strong>State Transition Diagram:</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> LoggedOutHome
+    LoggedOutHome --> LoginModal : Click Login
+    LoginModal --> StudentDashboard : Valid Credentials
+    StudentDashboard --> CoursePlayer : Click 'Resume Course'
+    CoursePlayer --> QuizModal : Video Ends
+    QuizModal --> StudentDashboard : Submit Quiz
+    StudentDashboard --> LoggedOutHome : Click Logout
 </div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-26">
@@ -1670,47 +2300,76 @@ b) Detail Continuous Integration (CI), Continuous Testing (CT), and Continuous D
 
 --- Page 5 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain DevOps Culture and Automated Testing Pipeline.
-b) Detail Continuous Integration (CI), Continuous Testing (CT), and Continuous Deployment (CD) tools integration.
+                    <h3>Master Answer: DevOps and Automated Pipelines</h3>
+<h4>Part (a) DevOps Culture</h4>
+<p>DevOps bridges the historical wall between developers (who want to push new features fast) and operations (who want stability and no changes). It relies on heavy automation, continuous monitoring, and a cultural shift towards shared responsibility.</p>
 
-
-
-
---- Page 5 ---.</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+<h4>Part (b) CI, CT, and CD Pipeline</h4>
+<div class="diagram-container">
+<div class="mermaid">
+graph LR
+    Code[Git Push] --> CI[Continuous Integration]
+    CI --> Build[Build & Compile]
+    Build --> CT[Continuous Testing]
+    CT --> CD[Continuous Deployment]
+    CD --> Prod[Production Server]
 </div>
+</div>
+<ul>
+  <li><strong>Continuous Integration (CI):</strong> Developers push code to GitHub. A CI server (like Jenkins or GitHub Actions) detects the push, automatically pulls the code, and builds the application.</li>
+  <li><strong>Continuous Testing (CT):</strong> Immediately after the build, automated Unit, Integration, and Security tests run. If any test fails, the pipeline halts, and the developer is alerted immediately.</li>
+  <li><strong>Continuous Deployment (CD):</strong> If all tests pass, the pipeline automatically packages the application (e.g., into a Docker container) and deploys it to the Production cloud environment (like AWS or Kubernetes) with zero downtime.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-27">
                 <div class="q-text"><span class="q-badge c15">Q27</span><span>a) Explain Software Fault Tree Analysis (FTA) and Failure Modes and Effects Analysis (FMEA).
 b) Construct Fault Tree for a Medical Device Software safety failure.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Fault Tree Analysis (FTA) and Failure Modes and Effects Analysis (FMEA).
-b) Construct Fault Tree for a Medical Device Software safety failure..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: Software Fault Tree Analysis</h3>
+<h4>Part (a) FTA vs FMEA</h4>
+<ul>
+  <li><strong>Fault Tree Analysis (FTA):</strong> A <em>Top-Down</em> deductive analysis. You start with a catastrophic system failure (the "Top Event") and work backward through a logic tree (using AND/OR gates) to identify all the possible root causes that could lead to that failure.</li>
+  <li><strong>Failure Modes and Effects Analysis (FMEA):</strong> A <em>Bottom-Up</em> inductive analysis. You look at individual components at the lowest level, assume they fail (Failure Mode), and analyze what effect that failure will have on the overall system.</li>
+</ul>
+
+<h4>Part (b) Fault Tree for Medical Device Failure</h4>
+<p><strong>Top Event:</strong> Pacemaker Delivers Fatal Shock</p>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    TE[Top Event: Fatal Shock] --> OR_GATE{OR Gate}
+    OR_GATE --> A[Software calculates wrong voltage]
+    OR_GATE --> B[Hardware relay fails closed]
+    A --> AND_GATE{AND Gate}
+    AND_GATE --> C[Sensor reads wrong heart rate]
+    AND_GATE --> D[Failsafe logic does not trigger]
 </div>
+</div>
+<p>In this Fault Tree, the catastrophic event can happen if EITHER the software miscalculates OR the hardware relay breaks. For the software to miscalculate fatally, the sensor must read wrong AND the failsafe logic must simultaneously fail.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-28">
                 <div class="q-text"><span class="q-badge c15">Q28</span><span>a) Explain Static Code Analysis tools, Linters, and Code Review checklists.
 b) Formulate Code Inspection protocol and defect tracking workflow.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Static Code Analysis tools, Linters, and Code Review checklists.
-b) Formulate Code Inspection protocol and defect tracking workflow..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Static Analysis and Code Inspection</h3>
+<h4>Part (a) Static Analysis & Linters</h4>
+<p>Static Analysis evaluates source code without executing it. Linters are automated tools (like SonarQube or ESLint) integrated into the IDE or CI pipeline. They enforce naming conventions, find dead code, detect memory leaks, and flag security vulnerabilities (like hardcoded API keys).</p>
+<p><strong>Code Review Checklists:</strong> Human reviewers use checklists during Pull Requests to check things automation cannot: Is the business logic correct? Is the architecture sound? Are the tests meaningful?</p>
+
+<h4>Part (b) Code Inspection Protocol</h4>
+<p>Formal Code Inspection (Fagan Inspection) involves strict roles:</p>
+<ol>
+  <li><strong>Author:</strong> Wrote the code, listens and answers questions, but does not lead the review.</li>
+  <li><strong>Moderator:</strong> Chairs the meeting, ensures the team stays on track, and logs defects.</li>
+  <li><strong>Reader:</strong> Reads the code aloud line-by-line, explaining what it logically does.</li>
+  <li><strong>Reviewers/Inspectors:</strong> Follow along and flag discrepancies between what the Reader says the code does and what the SRS requires.</li>
+</ol>
+<p><strong>Defect Tracking:</strong> Any identified bug is logged into a tracker (like Jira) with a unique ID, severity level, steps to reproduce, and assigned back to the Author for fixing.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-29">
@@ -1718,29 +2377,61 @@ b) Formulate Code Inspection protocol and defect tracking workflow..</li>
 b) Calculate UCP given Unadjusted Actor Weight (UAW), Unadjusted Use Case Weight (UUCW), Technical Complexity
 Factor (TCF), and Environmental Factor (EF).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Project Estimation using Use Case Points (UCP) method.
-b) Calculate UCP given Unadjusted Actor Weight (UAW), Unadjusted Use Case Weight (UUCW), Technical Complexity
-Factor (TCF), and Environmental Factor (EF)..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Use Case Points (UCP) Estimation</h3>
+<h4>Part (a) UCP Methodology</h4>
+<p>Use Case Points (UCP) is a software estimation technique used early in the SDLC when requirements are captured as UML Use Cases. It calculates size based on the complexity of Actors and Use Cases, modified by technical and environmental factors.</p>
+
+<h4>Part (b) UCP Calculation Formula</h4>
+<ol>
+  <li><strong>Calculate UAW (Unadjusted Actor Weight):</strong> Count the number of Simple (weight 1), Average (weight 2), and Complex (weight 3) Actors in the system. Sum them.</li>
+  <li><strong>Calculate UUCW (Unadjusted Use Case Weight):</strong> Count the Use Cases based on the number of transactions they contain. Simple (weight 5), Average (weight 10), Complex (weight 15). Sum them.</li>
+  <li><strong>UUCP (Unadjusted Use Case Points):</strong>
+      <br/>\(UUCP = UAW + UUCW\)</li>
+  <li><strong>Apply Factors:</strong> Evaluate 13 Technical Factors to get the <strong>TCF</strong>, and 8 Environmental Factors (team experience) to get the <strong>EF</strong>.</li>
+  <li><strong>Final UCP:</strong>
+      <br/>\(UCP = UUCP \times TCF \times EF\)</li>
+  <li><strong>Calculate Effort:</strong> Multiply the final UCP by a productivity factor (e.g., 20 man-hours per UCP) to get the total estimated project hours.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-30">
                 <div class="q-text"><span class="q-badge c15">Q30</span><span>a) Explain Legacy Software System Modernization strategies.
 b) Compare Encapsulation, Re-hosting, Re-architecting, and Complete Replacement.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Legacy Software System Modernization strategies.
-b) Compare Encapsulation, Re-hosting, Re-architecting, and Complete Replacement..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Legacy System Modernization</h3>
+<h4>Part (a) Modernization Strategies</h4>
+<p>Legacy systems are old, brittle, but mission-critical applications. Modernizing them reduces maintenance costs and allows integration with cloud technologies.</p>
+
+<h4>Part (b) Comparison of Strategies</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Strategy</th>
+    <th>Description</th>
+    <th>Risk / Cost</th>
+  </tr>
+  <tr>
+    <td><strong>Encapsulation (Wrapping)</strong></td>
+    <td>Leave the legacy code entirely untouched. Build a modern API wrapper around it so new web apps can communicate with it.</td>
+    <td>Low Risk / Low Cost. (Temporary band-aid, doesn't fix underlying bad code).</td>
+  </tr>
+  <tr>
+    <td><strong>Re-hosting (Lift and Shift)</strong></td>
+    <td>Move the legacy application exactly as-is from an on-premise mainframe to a modern Cloud infrastructure (AWS/Azure) without changing the code.</td>
+    <td>Low Risk / Medium Cost. (Reduces hardware costs).</td>
+  </tr>
+  <tr>
+    <td><strong>Re-architecting</strong></td>
+    <td>Materially alter the application code to shift it to a new architecture (e.g., breaking a monolith into Microservices).</td>
+    <td>High Risk / High Cost. (Best long-term ROI).</td>
+  </tr>
+  <tr>
+    <td><strong>Complete Replacement</strong></td>
+    <td>Throw the entire legacy system away and build a brand new system from scratch based on the old system's business rules.</td>
+    <td>Extreme Risk / Extreme Cost. (Often fails due to forgotten, undocumented business rules in the old code).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
 </main>

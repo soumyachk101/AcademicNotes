@@ -704,275 +704,376 @@
             <div class="qa-card" id="gb-1">
                 <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain OSI 7 Layer Architecture with functions of each layer.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Architecture:</b> The <b>ISO/OSI Reference Model</b> partitions network communication into 7 distinct functional layers.</p><div class="diagram-container">
-    <div class="mermaid">
-graph TD
-    7[Application Layer]
-    6[Presentation Layer]
-    5[Session Layer]
-    4[Transport Layer]
-    3[Network Layer]
-    2[Data Link Layer]
-    1[Physical Layer]
-    7 --- 6 --- 5 --- 4 --- 3 --- 2 --- 1
-    </div>
-    <div class="diagram-caption">Figure: ISO/OSI 7-Layer Network Architecture Stack & Data Flow</div>
-</div>
-<p><b>2. Layer Summary:</b></p>
+                    <h3>OSI 7 Layer Architecture</h3>
+<p>The Open Systems Interconnection (OSI) model is a conceptual framework used to describe the functions of a networking system. It characterizes computing functions into a universal set of rules and requirements to support interoperability.</p>
 <ol>
-    <li><b>Physical Layer:</b> Transmission of raw bitstreams over physical medium (Cable, Hub, Repeater).</li>
-    <li><b>Data Link Layer:</b> Framing, MAC addressing, Error Detection (CRC), Flow Control (Switch, Bridge).</li>
-    <li><b>Network Layer:</b> Logical IP addressing, Packet Routing, Forwarding (Router).</li>
-    <li><b>Transport Layer:</b> End-to-end reliability, Port addressing, TCP/UDP Segmenting.</li>
-    <li><b>Session Layer:</b> Dialog control, Session checkpointing and recovery.</li>
-    <li><b>Presentation Layer:</b> Data format conversion, Encryption, Compression (SSL/TLS).</li>
-    <li><b>Application Layer:</b> Network services interface for user applications (HTTP, DNS, SMTP).</li>
+  <li><strong>Physical Layer:</strong> Transmits raw bit streams (0s and 1s) over a physical medium (cables, radio). Deals with voltages, hubs, and repeaters.</li>
+  <li><strong>Data Link Layer:</strong> Organizes bits into <strong>Frames</strong>. Provides node-to-node data transfer and handles MAC addressing and Error Detection (CSMA/CD, Switches).</li>
+  <li><strong>Network Layer:</strong> Organizes frames into <strong>Packets</strong>. Handles logical IP addressing and Routing to determine the best path (Routers, IPv4/IPv6).</li>
+  <li><strong>Transport Layer:</strong> Organizes packets into <strong>Segments</strong>. Ensures reliable, in-order, end-to-end delivery using Port numbers. Handles Error Correction and Flow Control (TCP, UDP).</li>
+  <li><strong>Session Layer:</strong> Establishes, maintains, and terminates connections (sessions) between local and remote applications.</li>
+  <li><strong>Presentation Layer:</strong> Formats, encrypts, and compresses data so it can be understood by the application layer (SSL/TLS, JPEG, ASCII).</li>
+  <li><strong>Application Layer:</strong> Directly interacts with the software application. Provides network services to end-users (HTTP, FTP, SMTP, DNS).</li>
 </ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-2">
                 <div class="q-text"><span class="q-badge b5">Q2</span><span>Compare OSI Model vs TCP/IP Model.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Architecture:</b> The <b>ISO/OSI Reference Model</b> partitions network communication into 7 distinct functional layers.</p><div class="diagram-container">
-    <div class="mermaid">
-graph TD
-    7[Application Layer]
-    6[Presentation Layer]
-    5[Session Layer]
-    4[Transport Layer]
-    3[Network Layer]
-    2[Data Link Layer]
-    1[Physical Layer]
-    7 --- 6 --- 5 --- 4 --- 3 --- 2 --- 1
-    </div>
-    <div class="diagram-caption">Figure: ISO/OSI 7-Layer Network Architecture Stack & Data Flow</div>
-</div>
-<p><b>2. Layer Summary:</b></p>
-<ol>
-    <li><b>Physical Layer:</b> Transmission of raw bitstreams over physical medium (Cable, Hub, Repeater).</li>
-    <li><b>Data Link Layer:</b> Framing, MAC addressing, Error Detection (CRC), Flow Control (Switch, Bridge).</li>
-    <li><b>Network Layer:</b> Logical IP addressing, Packet Routing, Forwarding (Router).</li>
-    <li><b>Transport Layer:</b> End-to-end reliability, Port addressing, TCP/UDP Segmenting.</li>
-    <li><b>Session Layer:</b> Dialog control, Session checkpointing and recovery.</li>
-    <li><b>Presentation Layer:</b> Data format conversion, Encryption, Compression (SSL/TLS).</li>
-    <li><b>Application Layer:</b> Network services interface for user applications (HTTP, DNS, SMTP).</li>
-</ol>
+                    <h3>OSI Model vs TCP/IP Model</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>OSI Model</th>
+    <th>TCP/IP Model</th>
+  </tr>
+  <tr>
+    <td><strong>Origin & Nature</strong></td>
+    <td>A theoretical reference model developed by ISO.</td>
+    <td>A practical, implementation-first model developed by ARPANET/DoD.</td>
+  </tr>
+  <tr>
+    <td><strong>Number of Layers</strong></td>
+    <td>7 Layers (Physical, Data Link, Network, Transport, Session, Presentation, Application)</td>
+    <td>4 Layers (Network Access, Internet, Transport, Application)</td>
+  </tr>
+  <tr>
+    <td><strong>Session & Presentation</strong></td>
+    <td>Has dedicated Session and Presentation layers.</td>
+    <td>Session and Presentation functions are merged into the Application layer.</td>
+  </tr>
+  <tr>
+    <td><strong>Network Layer Delivery</strong></td>
+    <td>Supports both connectionless and connection-oriented communication.</td>
+    <td>Internet layer exclusively supports connectionless communication (IP).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-3">
                 <div class="q-text"><span class="q-badge b5">Q3</span><span>Explain Transmission Media: Twisted Pair, Coaxial, Fiber Optics.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Transmission Media: Twisted Pair, Coaxial, Fiber Optics..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Transmission Media (Guided)</h3>
+<p>Transmission media are the physical pathways that carry data from a transmitter to a receiver.</p>
+<ul>
+  <li><strong>Twisted Pair Cable:</strong> Consists of two insulated copper wires twisted around each other to cancel out Electromagnetic Interference (EMI) and crosstalk. 
+      <br/>• <em>Unshielded (UTP):</em> Cheap, flexible, used in standard Ethernet (Cat5e/Cat6).
+      <br/>• <em>Shielded (STP):</em> Has metal foil casing for better noise protection.</li>
+  <li><strong>Coaxial Cable:</strong> Has a central copper conductor core, surrounded by an insulating layer, a braided metal shield, and an outer plastic jacket. Carries higher frequency signals than twisted pair. Used heavily for Cable TV and older broadband.</li>
+  <li><strong>Fiber Optics:</strong> Uses total internal reflection to transmit data as pulses of light through a glass or plastic core. 
+      <br/>• <em>Pros:</em> Extremely high bandwidth, completely immune to electromagnetic interference, spans massive distances.
+      <br/>• <em>Cons:</em> Expensive, fragile, and difficult to splice.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-4">
                 <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain Switching Techniques: Circuit Switching vs Packet Switching.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Switching Techniques: Circuit Switching vs Packet Switching..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Switching Techniques</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Circuit Switching</th>
+    <th>Packet Switching</th>
+  </tr>
+  <tr>
+    <td><strong>Connection Path</strong></td>
+    <td>A dedicated, physical path is established between sender and receiver before transmission begins.</td>
+    <td>No dedicated path. Data is broken into packets which travel independently over various routes.</td>
+  </tr>
+  <tr>
+    <td><strong>Bandwidth Usage</strong></td>
+    <td>Bandwidth is reserved and wasted if no data is being sent (inefficient).</td>
+    <td>Bandwidth is dynamically shared among all users (highly efficient).</td>
+  </tr>
+  <tr>
+    <td><strong>Order of Delivery</strong></td>
+    <td>Data always arrives in the exact order it was sent.</td>
+    <td>Packets may arrive out-of-order and must be reassembled at the destination.</td>
+  </tr>
+  <tr>
+    <td><strong>Primary Use Case</strong></td>
+    <td>Traditional telephone networks (Voice calls).</td>
+    <td>The Internet (Data transfer).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-5">
                 <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain Error Detection using Cyclic Redundancy Check (CRC).</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Core Definition & Mechanism:</b> <b>CRC (Cyclic Redundancy Check)</b> operates on polynomial modulo-2 XOR arithmetic.</p><div class="diagram-container">
-    <div class="mermaid">
-graph TD
-    Data[Data Stream] --> Div[Modulo-2 Division by Generator G]
-    Div --> Remainder[Remainder R]
-    Data --> Append[Transmitted Codeword T = Data + R]
-    Remainder --> Append
-    </div>
-    <div class="diagram-caption">Figure: Cyclic Redundancy Check (CRC) Error Detection Pipeline</div>
-</div>
-<p><b>2. Algorithmic Steps:</b></p>
-<ul>
-    <li><b>Step 1:</b> Append \(r\) zero bits to data stream \(M\).</li>
-    <li><b>Step 2:</b> Divide appended string by generator polynomial \(G(x)\) using XOR division.</li>
-    <li><b>Step 3:</b> Append remainder \(R\) to \(M\) to form transmitted codeword \(T\).</li>
-</ul>
+                    <h3>Error Detection: Cyclic Redundancy Check (CRC)</h3>
+<p>CRC is a highly robust error-detecting code used in the Data Link Layer (like Ethernet). It uses polynomial binary division.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Generator Polynomial:</strong> Both sender and receiver agree on a generator polynomial \(G(x)\) (represented as a binary divisor, e.g., 1101). Let the length of \(G\) be \(n\).</li>
+  <li><strong>Appending Zeros:</strong> The sender appends \(n-1\) zero bits to the end of the original Data message \(M\).</li>
+  <li><strong>Modulo-2 Division:</strong> The sender performs binary Modulo-2 division (which is just XORing) of the appended data by \(G\).</li>
+  <li><strong>Remainder (CRC):</strong> The remainder of this division is the CRC checksum.</li>
+  <li><strong>Transmission:</strong> The sender replaces the appended zeros with the CRC checksum and transmits the frame.</li>
+  <li><strong>Verification:</strong> The receiver divides the received frame by \(G\). If the remainder is exactly zero, the frame is accepted as error-free. Otherwise, it is rejected.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-6">
                 <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Error Correction using Hamming Code with an example.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Error Correction using Hamming Code with an example..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Error Correction: Hamming Code</h3>
+<p>Hamming Code is a block code that is capable of detecting up to two simultaneous bit errors and <strong>correcting single-bit errors</strong>.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Redundant Bits Calculation:</strong> Given \(m\) data bits, the number of redundant parity bits \(r\) must satisfy: \(2^r \ge m + r + 1\).</li>
+  <li><strong>Positioning:</strong> Parity bits are placed at positions that are powers of 2 (1, 2, 4, 8...). Data bits fill the remaining positions.</li>
+  <li><strong>Parity Calculation:</strong> Each parity bit calculates Even (or Odd) parity for a specific overlapping set of bit positions. For example, \(P_1\) checks positions 1, 3, 5, 7. \(P_2\) checks 2, 3, 6, 7.</li>
+  <li><strong>Error Correction at Receiver:</strong> The receiver recalculates all parity bits. If there is an error, the parity bits that fail will form a binary number indicating the exact position of the flipped bit. The receiver simply flips that bit back to correct the error.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-7">
                 <div class="q-text"><span class="q-badge b5">Q7</span><span>Explain Stop-and-Wait ARQ protocol and efficiency formula.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Stop-and-Wait ARQ protocol and efficiency formula..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Stop-and-Wait ARQ Protocol</h3>
+<p>Stop-and-Wait ARQ is the simplest flow and error control protocol.</p>
+<ul>
+  <li><strong>Mechanism:</strong> The sender transmits exactly ONE frame and then stops. It waits for an Acknowledgement (ACK) from the receiver before sending the next frame.</li>
+  <li><strong>Error Handling:</strong> If the frame is lost or corrupted (failed CRC), the receiver stays silent (or sends a NAK). The sender's timer expires (Timeout), and it retransmits the same frame.</li>
+  <li><strong>Sequence Numbers:</strong> Frames and ACKs are numbered (0 or 1) to prevent duplicate frames.</li>
+</ul>
+<h4>Efficiency Formula</h4>
+<p>\[ \text{Efficiency } (\eta) = \frac{\text{Transmission Time (Tt)}}{\text{Total Cycle Time}} = \frac{T_t}{T_t + 2 \times T_p} = \frac{1}{1 + 2a} \]</p>
+<p>Where \(a = \frac{T_p}{T_t}\) (Propagation Delay / Transmission Delay). It is highly inefficient for links with high propagation delay (like satellites) because the sender is idle most of the time.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-8">
                 <div class="q-text"><span class="q-badge b5">Q8</span><span>Explain Go-Back-N ARQ protocol and window sizes.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Go-Back-N ARQ protocol and window sizes..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Go-Back-N ARQ Protocol</h3>
+<p>Go-Back-N is a Sliding Window protocol that improves upon Stop-and-Wait by allowing the sender to transmit multiple frames before receiving an ACK.</p>
+<ul>
+  <li><strong>Window Sizes:</strong>
+      <br/>• Sender Window Size \(W_s = N\) (can send up to N unacknowledged frames).
+      <br/>• Receiver Window Size \(W_r = 1\) (can only accept frames strictly in order).</li>
+  <li><strong>Mechanism:</strong> If frame 3 is lost, but the sender continues to send frames 4, 5, and 6, the receiver will discard 4, 5, and 6 because it is strictly waiting for frame 3.</li>
+  <li><strong>Retransmission:</strong> When the sender times out waiting for the ACK for frame 3, it must "Go Back N" frames and retransmit frame 3 <strong>AND all subsequent frames</strong> (4, 5, 6).</li>
+  <li><strong>Efficiency:</strong> Much better than Stop-and-Wait, but wastes bandwidth on noisy channels due to retransmitting correctly received out-of-order frames.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-9">
                 <div class="q-text"><span class="q-badge b5">Q9</span><span>Explain Selective Repeat ARQ protocol and window sizes.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Selective Repeat ARQ protocol and window sizes..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Selective Repeat ARQ Protocol</h3>
+<p>Selective Repeat is the most efficient Sliding Window protocol, designed to overcome the wasted bandwidth of Go-Back-N on noisy channels.</p>
+<ul>
+  <li><strong>Window Sizes:</strong>
+      <br/>• Sender Window Size \(W_s = 2^{m-1}\).
+      <br/>• Receiver Window Size \(W_r = 2^{m-1}\) (where m is sequence number bits). Both windows must be equal and half the maximum sequence number.</li>
+  <li><strong>Mechanism:</strong> The receiver has a window larger than 1, meaning it can accept and buffer <em>out-of-order</em> frames. If frame 3 is lost, but 4, 5, and 6 arrive intact, the receiver buffers 4, 5, and 6 and sends a NAK specifically for frame 3.</li>
+  <li><strong>Retransmission:</strong> The sender only retransmits the specific frame that was lost (frame 3). Once the receiver gets frame 3, it delivers 3, 4, 5, and 6 to the Network layer in order.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-10">
                 <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Pure ALOHA vs Slotted ALOHA throughput analysis.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Pure ALOHA vs Slotted ALOHA throughput analysis..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>ALOHA Protocols: Pure vs Slotted</h3>
+<p>ALOHA is a random-access MAC protocol used for satellite and wireless communications.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Pure ALOHA</th>
+    <th>Slotted ALOHA</th>
+  </tr>
+  <tr>
+    <td><strong>Transmission Rule</strong></td>
+    <td>Any station can transmit data at <em>any time</em> it has a frame ready.</td>
+    <td>Time is divided into discrete slots. Stations can <em>only transmit at the beginning</em> of a time slot.</td>
+  </tr>
+  <tr>
+    <td><strong>Vulnerable Time</strong></td>
+    <td>\(2 \times T_f\) (Twice the frame transmission time).</td>
+    <td>\(T_f\) (Exactly one frame transmission time). Collisions only happen if two stations pick the exact same slot.</td>
+  </tr>
+  <tr>
+    <td><strong>Maximum Throughput</strong></td>
+    <td>\(S = G \times e^{-2G}\)
+        <br/>Max efficiency is <strong>18.4%</strong> (when \(G = 0.5\)).</td>
+    <td>\(S = G \times e^{-G}\)
+        <br/>Max efficiency is <strong>36.8%</strong> (when \(G = 1\)).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-11">
                 <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain CSMA/CD protocol and Binary Exponential Backoff algorithm.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain CSMA/CD protocol and Binary Exponential Backoff algorithm..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</h3>
+<p>CSMA/CD is a MAC protocol used in traditional wired Ethernet LANs.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Sense:</strong> A station listens to the cable. If idle, it transmits. If busy, it waits.</li>
+  <li><strong>Detect:</strong> While transmitting, the station simultaneously listens. If it detects a signal amplitude higher than its own, a Collision has occurred.</li>
+  <li><strong>Abort & Jam:</strong> It immediately stops transmitting the data frame and sends a short "Jam Signal" so all other stations know a collision happened.</li>
+</ol>
+<h4>Binary Exponential Backoff Algorithm</h4>
+<p>To prevent immediate re-collision, colliding stations wait a random amount of time before retrying. After the \(c\)-th collision (where \(c \le 10\)), a station chooses a random number \(K\) between \(0\) and \(2^c - 1\). It waits \(K \times 51.2 \mu s\) before sensing the line again. This exponentially increases the waiting time range, spreading out retries under heavy load.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-12">
                 <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain CSMA/CA protocol and Wireless LAN collision avoidance.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain CSMA/CA protocol and Wireless LAN collision avoidance..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</h3>
+<p>CSMA/CA is used in Wireless LANs (Wi-Fi / 802.11) because wireless nodes cannot transmit and listen at the same time to detect collisions (the "Hidden Terminal Problem").</p>
+<h4>Mechanism (Collision Avoidance):</h4>
+<ol>
+  <li><strong>DIFS:</strong> A station with a frame to send listens to the channel. If idle for a period called DIFS, it proceeds.</li>
+  <li><strong>RTS/CTS Handshake:</strong> To avoid hidden terminals, the sender transmits a short Request To Send (RTS) frame. The Access Point responds with a Clear To Send (CTS) frame broadcasted to everyone, reserving the channel.</li>
+  <li><strong>Data & ACK:</strong> The sender transmits the Data frame. The receiver replies with an ACK. If no ACK is received, a collision is assumed, and the sender uses exponential backoff before retrying.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-13">
                 <div class="q-text"><span class="q-badge b5">Q13</span><span>Explain IPv4 Address Classes (A, B, C, D, E) and ranges.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain IPv4 Address Classes (A, B, C, D, E) and ranges..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>IPv4 Address Classes</h3>
+<p>An IPv4 address is 32 bits long. Classful addressing divided the IP space into 5 distinct classes based on the leading bits of the first octet.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Class</th>
+    <th>Leading Bits</th>
+    <th>First Octet Range</th>
+    <th>Network/Host Split</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td><strong>Class A</strong></td>
+    <td>0</td>
+    <td>1 - 126</td>
+    <td>N.H.H.H (8/24)</td>
+    <td>Massive networks (16M hosts).</td>
+  </tr>
+  <tr>
+    <td><strong>Class B</strong></td>
+    <td>10</td>
+    <td>128 - 191</td>
+    <td>N.N.H.H (16/16)</td>
+    <td>Medium networks (65K hosts).</td>
+  </tr>
+  <tr>
+    <td><strong>Class C</strong></td>
+    <td>110</td>
+    <td>192 - 223</td>
+    <td>N.N.N.H (24/8)</td>
+    <td>Small networks (254 hosts).</td>
+  </tr>
+  <tr>
+    <td><strong>Class D</strong></td>
+    <td>1110</td>
+    <td>224 - 239</td>
+    <td>N/A</td>
+    <td>Multicasting (Sending to groups).</td>
+  </tr>
+  <tr>
+    <td><strong>Class E</strong></td>
+    <td>1111</td>
+    <td>240 - 255</td>
+    <td>N/A</td>
+    <td>Reserved for Future/Experimental use.</td>
+  </tr>
+</table>
+<p><em>(Note: 127.x.x.x is reserved for Loopback testing).</em></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-14">
                 <div class="q-text"><span class="q-badge b5">Q14</span><span>Explain Subnetting and Subnet Mask calculation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Subnetting and Subnet Mask calculation..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Subnetting and Subnet Masks</h3>
+<p><strong>Subnetting</strong> is the process of logically dividing a single large IP network into multiple smaller, manageable sub-networks (subnets). This reduces broadcast traffic and conserves IP addresses.</p>
+<h4>Mechanism</h4>
+<p>It works by "borrowing" bits from the Host portion of the IP address and reassigning them to the Network portion to create Subnet IDs.</p>
+<h4>Subnet Mask</h4>
+<p>A 32-bit number used by routers to distinguish the Network/Subnet ID from the Host ID. It consists of a continuous stream of 1s (representing Network/Subnet bits) followed by a continuous stream of 0s (representing Host bits).</p>
+<p><em>Example:</em> A default Class C mask is <code>255.255.255.0</code>. If we borrow 1 bit for subnetting, the mask becomes <code>255.255.255.128</code> (11111111.11111111.11111111.10000000), yielding 2 subnets of 126 hosts each.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-15">
                 <div class="q-text"><span class="q-badge b5">Q15</span><span>Explain CIDR (Classless Inter-Domain Routing) notation and prefix.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain CIDR (Classless Inter-Domain Routing) notation and prefix..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>CIDR (Classless Inter-Domain Routing)</h3>
+<p>CIDR was introduced to replace the rigid Classful (A, B, C) IP addressing system, which was rapidly depleting the IPv4 address space due to massive waste.</p>
+<h4>CIDR Notation (Slash Notation)</h4>
+<p>Instead of relying on fixed classes, CIDR uses a variable-length subnet mask (VLSM). An IP address is written with a slash followed by the prefix length: <code>IP_Address / Prefix</code>.</p>
+<p>The <strong>Prefix</strong> (e.g., <code>/26</code>) explicitly states exactly how many bits from left to right represent the Network ID. The remaining bits (\(32 - \text{Prefix}\)) represent the Host ID.</p>
+<p><em>Example:</em> <code>192.168.1.0 /26</code>. The network uses 26 bits. Hosts use \(32 - 26 = 6\) bits. Total hosts per subnet = \(2^6 - 2 = 62\) usable hosts.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-16">
                 <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain ARP (Address Resolution Protocol) request/reply workflow.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain ARP (Address Resolution Protocol) request/reply workflow..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Address Resolution Protocol (ARP)</h3>
+<p>ARP is a critical protocol used to map a known logical IP Address to an unknown physical MAC Address on a local network.</p>
+<h4>Workflow:</h4>
+<ol>
+  <li><strong>ARP Request:</strong> A host wants to send data to IP <code>192.168.1.10</code> but doesn't know its MAC address. The host broadcasts an ARP Request frame to the entire local network: <em>"Who has IP 192.168.1.10? Tell me your MAC address."</em> (Destination MAC is <code>FF:FF:FF:FF:FF:FF</code>).</li>
+  <li><strong>ARP Reply:</strong> All devices receive the request, but only the device with IP <code>192.168.1.10</code> processes it. It sends a Unicast ARP Reply back to the original sender containing its MAC address.</li>
+  <li><strong>Caching:</strong> The sender saves this IP-to-MAC mapping in its local ARP Cache table for future use.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-17">
                 <div class="q-text"><span class="q-badge b5">Q17</span><span>Explain RARP, BOOTP, and DHCP protocols.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain RARP, BOOTP, and DHCP protocols..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>RARP, BOOTP, and DHCP</h3>
+<p>These protocols handle assigning IP addresses to devices.</p>
+<ul>
+  <li><strong>RARP (Reverse ARP):</strong> Used by diskless workstations to discover their own IP address when they boot up. The device broadcasts its MAC address asking, "What is my IP?". It was obsolete because it only provided an IP address, no subnet mask or gateway.</li>
+  <li><strong>BOOTP (Bootstrap Protocol):</strong> An improvement over RARP. It provided the IP address, subnet mask, and default gateway. However, mappings were static; an admin had to manually bind MACs to IPs in a server file.</li>
+  <li><strong>DHCP (Dynamic Host Configuration Protocol):</strong> The modern standard. It dynamically leases IP addresses from a pool to devices for a specific duration. It automates entire network configurations (IP, Mask, Gateway, DNS servers) with zero manual admin work. Uses the DORA process (Discover, Offer, Request, Acknowledge).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-18">
                 <div class="q-text"><span class="q-badge b5">Q18</span><span>Explain Distance Vector Routing and Count-to-Infinity problem.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Distance Vector Routing and Count-to-Infinity problem..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Distance Vector Routing</h3>
+<p>A dynamic routing algorithm (like RIP) where every router shares its entire routing table, but <em>only</em> with its immediate neighbors, at regular intervals.</p>
+<h4>Mechanism:</h4>
+<p>Routers calculate the best path using the Bellman-Ford equation. They don't know the full topology of the network; they only know "Route X is in that direction and is Y hops away".</p>
+<h4>Count-to-Infinity Problem:</h4>
+<p>A major flaw in DVR. If a network link goes down, Router A might think it can reach the broken network via Router B, while Router B thinks it can reach it via Router A. They continuously update each other, infinitely increasing the hop count (distance) until it hits infinity. Solutions include Split Horizon and Route Poisoning.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-19">
                 <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Link State Routing and Dijkstra's Algorithm.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Link State Routing and Dijkstra's Algorithm..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Link State Routing</h3>
+<p>A modern dynamic routing algorithm (like OSPF) that solves the Count-to-Infinity problem.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Discovery:</strong> Every router says "hello" to its immediate neighbors to learn their identities and link costs.</li>
+  <li><strong>Flooding (LSA):</strong> Each router creates a Link State Packet (LSP) containing the state/cost of its direct links. It floods this packet to <em>every single router</em> in the entire network.</li>
+  <li><strong>Database Construction:</strong> Every router builds an identical, complete map (Topology Database) of the entire network.</li>
+  <li><strong>Dijkstra's Algorithm:</strong> Every router independently runs Dijkstra's Shortest Path algorithm on this map to compute the optimal routing table to all destinations.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-20">
@@ -983,269 +1084,362 @@ graph TD
 
 --- Page 3 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain ICMP protocol and Ping/Traceroute utility tools.
+                    <h3>Internet Control Message Protocol (ICMP)</h3>
+<p>ICMP is a Network Layer protocol used by routers and hosts to send error messages and operational information. It does not carry user data.</p>
+<h4>Key Utility Tools:</h4>
+<ul>
+  <li><strong>Ping:</strong> Sends an ICMP <em>Echo Request</em> message to a destination IP. If the destination is alive and reachable, it replies with an ICMP <em>Echo Reply</em>. Used to test basic connectivity and measure round-trip time.</li>
+  <li><strong>Traceroute:</strong> Used to map the exact path a packet takes through the internet. It works by sending packets with increasing TTL (Time To Live) values (1, 2, 3...). When a packet reaches a router and TTL hits 0, the router drops it and sends back an ICMP <em>Time Exceeded</em> error, revealing that router's IP address.</li>
+</ul>
 
-
-
-
---- Page 3 ---.</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-21">
                 <div class="q-text"><span class="q-badge b5">Q21</span><span>Explain TCP 3-Way Handshake connection establishment.</span></div>
                 <div class="a-text">
-                    <p><b>Detailed 5-Mark Solution:</b></p>
-<p><b>1. Connection Establishment:</b> TCP uses a <b>3-Way Handshake</b> to synchronize sequence numbers and establish a reliable bi-directional connection.</p><div class="diagram-container">
-    <div class="mermaid">
+                    <h3>TCP 3-Way Handshake</h3>
+<p>TCP is a connection-oriented protocol. Before any data can be transferred, a reliable connection must be established between the client and server using a 3-way handshake.</p>
+<div class="diagram-container">
+<div class="mermaid">
 sequenceDiagram
     participant Client
     participant Server
     Client->>Server: 1. SYN (seq=x)
-    Server->>Client: 2. SYN-ACK (seq=y, ack=x+1)
-    Client->>Server: 3. ACK (seq=x+1, ack=y+1)
-    </div>
-    <div class="diagram-caption">Figure: TCP 3-Way Handshake Connection & Termination Protocol</div>
+    Server->>Client: 2. SYN + ACK (seq=y, ack=x+1)
+    Client->>Server: 3. ACK (ack=y+1)
 </div>
-<p><b>2. Handshake Protocol Sequence:</b></p>
-<ul>
-    <li><b>SYN (Client \(\rightarrow\) Server):</b> Client sends SYN segment with initial sequence number \(ISN = x\).</li>
-    <li><b>SYN-ACK (Server \(\rightarrow\) Client):</b> Server responds with SYN-ACK, acknowledging \(ACK = x + 1\) and setting its own sequence \(ISN = y\).</li>
-    <li><b>ACK (Client \(\rightarrow\) Server):</b> Client sends ACK acknowledging \(ACK = y + 1\). Connection becomes ESTABLISHED.</li>
-</ul>
+</div>
+<ol>
+  <li><strong>SYN:</strong> The client sends a packet with the <code>SYN</code> flag set and a random initial Sequence Number (x) to the server.</li>
+  <li><strong>SYN-ACK:</strong> The server receives the SYN. It replies with a packet that has both <code>SYN</code> and <code>ACK</code> flags set. It acknowledges the client's sequence number (ack = x+1) and provides its own random initial Sequence Number (y).</li>
+  <li><strong>ACK:</strong> The client receives the SYN-ACK. It replies with an <code>ACK</code> acknowledging the server's sequence number (ack = y+1). The connection is now established.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-22">
                 <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain TCP 4-Way Connection Termination.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain TCP 4-Way Connection Termination..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
+                    <h3>TCP 4-Way Connection Termination</h3>
+<p>TCP connections are full-duplex, meaning both directions must be shut down independently. This takes 4 steps.</p>
+<div class="diagram-container">
+<div class="mermaid">
+sequenceDiagram
+    participant Client
+    participant Server
+    Client->>Server: 1. FIN
+    Server->>Client: 2. ACK
+    Note over Server: Server finishes sending remaining data
+    Server->>Client: 3. FIN
+    Client->>Server: 4. ACK
 </div>
+</div>
+<ol>
+  <li><strong>FIN (Client):</strong> The client has no more data to send, so it sends a <code>FIN</code> segment to the server.</li>
+  <li><strong>ACK (Server):</strong> The server acknowledges the <code>FIN</code> with an <code>ACK</code>. The client-to-server connection is now closed. However, the server might still have data to send to the client.</li>
+  <li><strong>FIN (Server):</strong> Once the server finishes sending all its data, it sends its own <code>FIN</code> segment to the client.</li>
+  <li><strong>ACK (Client):</strong> The client acknowledges the server's <code>FIN</code> with a final <code>ACK</code>. The connection is completely closed.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-23">
                 <div class="q-text"><span class="q-badge b5">Q23</span><span>Explain TCP Flow Control (Sliding Window) mechanism.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain TCP Flow Control (Sliding Window) mechanism..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>TCP Flow Control (Sliding Window)</h3>
+<p>Flow control prevents a fast sender from overwhelming a slow receiver. TCP uses a dynamic Sliding Window protocol to achieve this.</p>
+<ul>
+  <li><strong>Receiver Window (rwnd):</strong> Every time the receiver sends an ACK to the sender, it includes a "Window Size" field in the TCP header. This number tells the sender exactly how many bytes of buffer space are currently available at the receiver.</li>
+  <li><strong>Dynamic Adjustment:</strong> If the receiver's application processes data slowly, its buffer fills up, and it advertises a smaller window to the sender. The sender must slow down.</li>
+  <li><strong>Zero Window:</strong> If the receiver's buffer is completely full, it advertises a window size of 0. The sender stops transmitting entirely until it receives a window update greater than 0.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-24">
                 <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain TCP Congestion Control: Slow Start, Congestion Avoidance.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain TCP Congestion Control: Slow Start, Congestion Avoidance..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>TCP Congestion Control</h3>
+<p>While Flow Control protects the receiver, Congestion Control protects the entire <em>network</em> (routers and links) from being overwhelmed.</p>
+<p>TCP maintains a <strong>Congestion Window (cwnd)</strong>. The sender can only transmit up to the minimum of <code>cwnd</code> and <code>rwnd</code>.</p>
+<ol>
+  <li><strong>Slow Start:</strong> The connection starts with a very small <code>cwnd</code> (e.g., 1 MSS). For every ACK received, <code>cwnd</code> doubles. The window grows <em>exponentially</em> until it reaches a threshold (ssthresh).</li>
+  <li><strong>Congestion Avoidance:</strong> Once <code>ssthresh</code> is reached, the growth slows down. <code>cwnd</code> only increases by 1 MSS per RTT (Additive Increase).</li>
+  <li><strong>Congestion Detection:</strong>
+      <br/>• <em>3 Duplicate ACKs (Fast Retransmit):</em> Implies mild congestion. <code>ssthresh</code> is halved, and <code>cwnd</code> is halved.
+      <br/>• <em>Timeout:</em> Implies severe congestion (packet totally lost). <code>ssthresh</code> is halved, and <code>cwnd</code> drops all the way back to 1 MSS (Multiplicative Decrease).</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-25">
                 <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Leaky Bucket Algorithm for traffic shaping.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Leaky Bucket Algorithm for traffic shaping..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Leaky Bucket Algorithm</h3>
+<p>The Leaky Bucket algorithm is a traffic shaping mechanism used to convert bursty, erratic traffic into a smooth, steady stream of packets.</p>
+<h4>Mechanism:</h4>
+<ul>
+  <li>Imagine a bucket with a hole at the bottom. Water (packets) pours into the top in bursts.</li>
+  <li>No matter how fast water pours in, it leaks out of the bottom hole at a <strong>constant, fixed rate</strong>.</li>
+  <li>If water pours in so fast that the bucket fills up entirely, any extra water spills over and is lost (packets are dropped).</li>
+</ul>
+<p><strong>Use Case:</strong> Ideal for applications that require a strict, constant bandwidth without fluctuations, like Voice over IP (VoIP) or Live Video Streaming.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-26">
                 <div class="q-text"><span class="q-badge b5">Q26</span><span>Explain Token Bucket Algorithm for bursty traffic.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Token Bucket Algorithm for bursty traffic..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Token Bucket Algorithm</h3>
+<p>The Token Bucket algorithm is another traffic shaping mechanism, but unlike the Leaky Bucket, it allows for temporary bursts of data.</p>
+<h4>Mechanism:</h4>
+<ul>
+  <li>A bucket holds "Tokens" instead of packets. Tokens are generated and added to the bucket at a constant rate.</li>
+  <li>To transmit a packet, the sender must grab and destroy one token from the bucket.</li>
+  <li>If the bucket is empty, the sender must wait for a new token to be generated.</li>
+  <li>If the sender has been idle, tokens accumulate in the bucket (up to its maximum capacity). When the sender suddenly needs to transmit a massive burst of data, it can use all the accumulated tokens at once to send the burst at maximum line speed.</li>
+</ul>
+<p><strong>Use Case:</strong> Standard internet traffic (web browsing, file downloads) which is naturally bursty.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-27">
                 <div class="q-text"><span class="q-badge b5">Q27</span><span>Explain Domain Name System (DNS) hierarchy and resolution.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Domain Name System (DNS) hierarchy and resolution..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Domain Name System (DNS)</h3>
+<p>DNS is the "phonebook of the Internet". It translates human-readable domain names (like <code>www.google.com</code>) into machine-readable IP addresses (like <code>142.250.190.46</code>).</p>
+<h4>Hierarchy</h4>
+<ul>
+  <li><strong>Root Servers (.):</strong> The top of the tree. They know where all the TLD servers are.</li>
+  <li><strong>TLD Servers (.com, .org):</strong> Top-Level Domain servers know where the Authoritative servers for specific domains are located.</li>
+  <li><strong>Authoritative Servers (google.com):</strong> The final servers that actually hold the exact IP address records for a specific domain.</li>
+</ul>
+<h4>Resolution Process</h4>
+<p>When you type a URL, your browser asks a <em>Recursive Resolver</em> (usually provided by your ISP). If the IP isn't cached, the resolver asks the Root Server &rarr; then the TLD Server &rarr; then the Authoritative Server, finally returning the IP to your browser.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-28">
                 <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain HTTP vs HTTPS protocols (Port 80 vs Port 443).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain HTTP vs HTTPS protocols (Port 80 vs Port 443)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>HTTP vs HTTPS</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>HTTP (Hypertext Transfer Protocol)</th>
+    <th>HTTPS (HTTP Secure)</th>
+  </tr>
+  <tr>
+    <td><strong>Security</strong></td>
+    <td>Data is transmitted in plain text. Anyone intercepting the traffic can read it (passwords, credit cards).</td>
+    <td>Data is heavily encrypted using SSL/TLS before transmission.</td>
+  </tr>
+  <tr>
+    <td><strong>Port Number</strong></td>
+    <td>Uses TCP Port <strong>80</strong>.</td>
+    <td>Uses TCP Port <strong>443</strong>.</td>
+  </tr>
+  <tr>
+    <td><strong>Authentication</strong></td>
+    <td>No authentication. You don't know if the server is really who it claims to be.</td>
+    <td>Uses Digital Certificates issued by a Certificate Authority (CA) to prove the server's identity.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-29">
                 <div class="q-text"><span class="q-badge b5">Q29</span><span>Explain FTP (File Transfer Protocol) dual connection (Data & Control).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain FTP (File Transfer Protocol) dual connection (Data & Control)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>File Transfer Protocol (FTP)</h3>
+<p>FTP is an application layer protocol used to transfer files between a client and a server. Uniquely, FTP requires <strong>two</strong> separate TCP connections to function:</p>
+<ol>
+  <li><strong>Control Connection (Port 21):</strong> This connection is established first and stays open for the entire session. It is used exclusively to send commands (like <code>LIST</code>, <code>RETR</code>, <code>QUIT</code>) and receive server replies. No files are sent over this connection.</li>
+  <li><strong>Data Connection (Port 20):</strong> This connection is opened dynamically <em>only</em> when a file transfer or directory listing is requested. The actual file bytes are transferred here. Once the specific file finishes transferring, this data connection is immediately closed.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-30">
                 <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Email Protocols: SMTP, POP3, IMAP.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Email Protocols: SMTP, POP3, IMAP..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Email Protocols</h3>
+<p>Sending and receiving emails involves distinct protocols:</p>
+<ul>
+  <li><strong>SMTP (Simple Mail Transfer Protocol - Port 25/587):</strong> Used exclusively for <em>sending (pushing)</em> emails. It pushes the email from the sender's client to the sender's mail server, and then from the sender's mail server to the recipient's mail server.</li>
+  <li><strong>POP3 (Post Office Protocol v3 - Port 110):</strong> Used for <em>receiving (pulling)</em> emails. It connects to the mail server, downloads all the emails to the local device, and then usually <strong>deletes</strong> them from the server. Not ideal for multiple devices.</li>
+  <li><strong>IMAP (Internet Message Access Protocol - Port 143):</strong> A modern receiving protocol. It syncs the local client with the mail server. Emails remain stored on the server. If you read or delete an email on your phone, it syncs and shows as read/deleted on your laptop.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-31">
                 <div class="q-text"><span class="q-badge b5">Q31</span><span>Explain Network Devices: Hub, Switch, Router, Bridge, Gateway.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Network Devices: Hub, Switch, Router, Bridge, Gateway..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Network Devices</h3>
+<ul>
+  <li><strong>Hub (Layer 1):</strong> A dumb device that connects multiple computers. When it receives a packet on one port, it blindly broadcasts it to all other ports. High collision rate.</li>
+  <li><strong>Bridge (Layer 2):</strong> Connects two LAN segments. It learns MAC addresses and filters traffic, only forwarding frames across the bridge if the destination MAC is on the other side.</li>
+  <li><strong>Switch (Layer 2):</strong> A multi-port bridge. It maintains a MAC address table. When a frame arrives, the switch intelligently forwards it <em>only</em> to the specific port where the destination MAC lives. Eliminates collisions.</li>
+  <li><strong>Router (Layer 3):</strong> Connects different logical networks (e.g., your home LAN to the ISP's network). Uses IP addresses to determine the best path to forward packets globally.</li>
+  <li><strong>Gateway (All Layers):</strong> A device that translates between entirely different network architectures and protocols (e.g., connecting a TCP/IP network to an old IPX/SPX network).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-32">
                 <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain IPv6 Header format and benefits over IPv4.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain IPv6 Header format and benefits over IPv4..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>IPv6 Header and Benefits over IPv4</h3>
+<p>IPv6 was developed to solve the IPv4 address exhaustion problem by expanding the address space from 32 bits to 128 bits.</p>
+<h4>Benefits of IPv6:</h4>
+<ul>
+  <li><strong>Massive Address Space:</strong> \(2^{128}\) addresses, enough for every grain of sand on Earth to have an IP.</li>
+  <li><strong>Simpler Header:</strong> The IPv6 header has a fixed length of 40 bytes. Several optional IPv4 fields (like Fragmentation and Checksum) were removed or moved to Extension Headers, making routing much faster.</li>
+  <li><strong>No NAT Required:</strong> Because there are so many public IPs, every device can have a globally unique public IP, restoring true end-to-end connectivity without NAT.</li>
+  <li><strong>Built-in Security:</strong> IPSec (which is optional in IPv4) is fully integrated into the IPv6 protocol standard.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-33">
                 <div class="q-text"><span class="q-badge b5">Q33</span><span>Explain Wireless LAN (IEEE 802.11) architecture.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Wireless LAN (IEEE 802.11) architecture..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Wireless LAN (IEEE 802.11) Architecture</h3>
+<p>The IEEE 802.11 standard defines the architecture for Wi-Fi networks.</p>
+<ul>
+  <li><strong>BSS (Basic Service Set):</strong> The fundamental building block. It consists of a group of wireless stations and one central Access Point (AP). All communication goes through the AP.</li>
+  <li><strong>IBSS (Independent BSS / Ad-Hoc):</strong> A network with no AP. Stations communicate directly with each other (peer-to-peer).</li>
+  <li><strong>ESS (Extended Service Set):</strong> Created by connecting multiple BSSs together using a Distribution System (usually a wired Ethernet backbone). This allows users to roam from one AP's coverage area to another without dropping their connection (like Wi-Fi in a large university).</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-34">
                 <div class="q-text"><span class="q-badge b5">Q34</span><span>Explain Bluetooth Architecture: Piconet and Scatternet.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Bluetooth Architecture: Piconet and Scatternet..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Bluetooth Architecture: Piconet & Scatternet</h3>
+<p>Bluetooth (IEEE 802.15.1) is a short-range wireless Personal Area Network (PAN) technology.</p>
+<ul>
+  <li><strong>Piconet:</strong> The basic Bluetooth network. It consists of exactly <strong>one Master</strong> node and up to <strong>7 active Slave</strong> nodes. The Master controls the clock and frequency hopping sequence. Slaves can only communicate with the Master, not directly with each other.</li>
+  <li><strong>Scatternet:</strong> Formed when two or more Piconets overlap. A node can act as a Slave in one Piconet and a Master in another, effectively bridging the two Piconets together.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-35">
                 <div class="q-text"><span class="q-badge b5">Q35</span><span>Explain NAT (Network Address Translation) and PAT.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain NAT (Network Address Translation) and PAT..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Network Address Translation (NAT) & PAT</h3>
+<p>NAT is used by routers to translate Private, non-routable IP addresses (like <code>192.168.1.5</code>) into a single Public, routable IP address (like <code>8.8.8.8</code>) before sending traffic out to the Internet.</p>
+<h4>Types:</h4>
+<ul>
+  <li><strong>Static/Dynamic NAT:</strong> Translates 1 private IP to 1 public IP. Does not conserve addresses, mostly used to hide internal server IPs.</li>
+  <li><strong>PAT (Port Address Translation / NAT Overload):</strong> This is what home routers use. It maps <em>multiple</em> private IP addresses to a <em>single</em> public IP address. It distinguishes different internal devices by assigning them unique TCP/UDP <strong>Port Numbers</strong> in the router's NAT table.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-36">
                 <div class="q-text"><span class="q-badge b5">Q36</span><span>Explain Symmetric vs Asymmetric Cryptography.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Symmetric vs Asymmetric Cryptography..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Symmetric vs Asymmetric Cryptography</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Symmetric (Secret Key)</th>
+    <th>Asymmetric (Public Key)</th>
+  </tr>
+  <tr>
+    <td><strong>Keys Used</strong></td>
+    <td>Uses the <em>exact same key</em> for both encryption and decryption.</td>
+    <td>Uses a <em>pair of keys</em>: a Public Key (to encrypt) and a Private Key (to decrypt).</td>
+  </tr>
+  <tr>
+    <td><strong>Speed</strong></td>
+    <td>Extremely fast. Excellent for bulk data transfer.</td>
+    <td>Very slow (computationally heavy math).</td>
+  </tr>
+  <tr>
+    <td><strong>Key Distribution Problem</strong></td>
+    <td>Major issue. Sender and receiver must securely exchange the secret key beforehand.</td>
+    <td>Solved. The Public Key is shared openly with everyone. Only the Private Key is kept secret.</td>
+  </tr>
+  <tr>
+    <td><strong>Examples</strong></td>
+    <td>AES, DES, 3DES</td>
+    <td>RSA, ECC, Diffie-Hellman</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-37">
                 <div class="q-text"><span class="q-badge b5">Q37</span><span>Explain RSA Public Key Cryptography algorithm.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain RSA Public Key Cryptography algorithm..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>RSA Public Key Algorithm</h3>
+<p>RSA is the most widely used asymmetric encryption algorithm, based on the mathematical difficulty of factoring the product of two massive prime numbers.</p>
+<h4>Key Generation Steps:</h4>
+<ol>
+  <li>Choose two large distinct prime numbers, \(p\) and \(q\).</li>
+  <li>Compute \(n = p \times q\). (\(n\) is the modulus for both keys).</li>
+  <li>Compute Euler's totient function: \(\phi(n) = (p-1) \times (q-1)\).</li>
+  <li>Choose an integer \(e\) such that \(1 < e < \phi(n)\), and \(e\) is coprime with \(\phi(n)\).</li>
+  <li>Compute \(d\) such that \((d \times e) \pmod{\phi(n)} = 1\). (\(d\) is the modular multiplicative inverse of \(e\)).</li>
+</ol>
+<p><strong>Keys:</strong> Public Key is \((e, n)\). Private Key is \((d, n)\).</p>
+<p><strong>Encryption:</strong> \(Cipher = Message^e \pmod{n}\)</p>
+<p><strong>Decryption:</strong> \(Message = Cipher^d \pmod{n}\)</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-38">
                 <div class="q-text"><span class="q-badge b5">Q38</span><span>Explain Firewall types: Packet Filter, Stateful Inspection, Proxy.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Firewall types: Packet Filter, Stateful Inspection, Proxy..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Firewall Types</h3>
+<p>A firewall is a network security device that monitors and filters incoming and outgoing traffic based on security rules.</p>
+<ul>
+  <li><strong>Packet Filter (Stateless):</strong> Operates at Layer 3 (Network). It examines every individual packet in isolation and checks its IP address and Port number against a strict access control list (ACL). Fast, but easily bypassed.</li>
+  <li><strong>Stateful Inspection:</strong> Operates at Layer 4 (Transport). It remembers the "state" of active TCP connections. It knows if an incoming packet is a legitimate response to an outgoing request you just made, blocking unsolicited incoming traffic.</li>
+  <li><strong>Proxy (Application-Level Gateway):</strong> Operates at Layer 7 (Application). It acts as an intermediary. The client connects to the proxy, and the proxy connects to the outside world on behalf of the client. Highly secure, capable of deeply inspecting HTTP/FTP traffic for viruses, but very slow.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-39">
                 <div class="q-text"><span class="q-badge b5">Q39</span><span>Explain Quality of Service (QoS) parameters and techniques.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Quality of Service (QoS) parameters and techniques..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Quality of Service (QoS)</h3>
+<p>QoS refers to any technology that manages data traffic to reduce packet loss, latency, and jitter on a network. It prioritizes specific types of traffic (like VoIP) over less critical traffic (like file downloads).</p>
+<h4>Parameters:</h4>
+<ul>
+  <li><strong>Bandwidth:</strong> The maximum rate of data transfer.</li>
+  <li><strong>Delay (Latency):</strong> The time it takes a packet to travel from source to destination.</li>
+  <li><strong>Jitter:</strong> The variation in packet delay. High jitter causes audio/video to stutter.</li>
+  <li><strong>Packet Loss:</strong> The percentage of packets that fail to reach their destination.</li>
+</ul>
+<h4>Techniques:</h4>
+<p>Traffic Shaping (Leaky Bucket), Scheduling (Priority Queuing where voice traffic goes first), and Resource Reservation.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-40">
                 <div class="q-text"><span class="q-badge b5">Q40</span><span>Explain Socket Programming concepts (IP, Port, Socket API).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Architecture & Principles:</b> Explain the conceptual foundation of Explain Socket Programming concepts (IP, Port, Socket API)..</li>
-        <li><b>Algorithm / Workflow:</b> Detail the step-by-step mechanism.</li>
-        <li><b>Pros & Cons:</b> List the advantages and limitations.</li>
-    </ul>
-</div>
+                    <h3>Socket Programming Concepts</h3>
+<p>Socket programming allows two applications on different computers to communicate across a network.</p>
+<ul>
+  <li><strong>IP Address:</strong> Identifies the specific computer/server on the global network.</li>
+  <li><strong>Port Number:</strong> Identifies the specific application/process running on that computer (e.g., Port 80 for the web server, Port 22 for SSH).</li>
+  <li><strong>Socket:</strong> One endpoint of a two-way communication link. A socket is fundamentally defined by the combination of an IP Address and a Port Number (e.g., <code>192.168.1.5:80</code>).</li>
+  <li><strong>Socket API (Berkeley Sockets):</strong> Provides functions for developers to use:
+      <br/>• <code>socket()</code>: Creates a new socket.
+      <br/>• <code>bind()</code>: Associates the socket with a specific local IP and port.
+      <br/>• <code>listen()</code> & <code>accept()</code>: Server waits for incoming client connections.
+      <br/>• <code>connect()</code>: Client initiates a connection to a server.
+      <br/>• <code>send()</code> & <code>recv()</code>: Transmit data.</li>
+</ul>
+
                 </div>
             </div>
             <h1 class="section-title" id="group-c">Group C — Long / Numerical Questions (15 Marks Each)</h1>
@@ -1255,26 +1449,64 @@ sequenceDiagram
 transmitted frame.
 b) Explain Sliding Window Protocols efficiency: Stop-and-Wait vs Go-Back-N vs Selective Repeat.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Mathematical Step-by-Step CRC Calculation:</b></p><div class="diagram-container">
-    <div class="mermaid">
-graph TD
-    Data[Data Stream] --> Div[Modulo-2 Division by Generator G]
-    Div --> Remainder[Remainder R]
-    Data --> Append[Transmitted Codeword T = Data + R]
-    Remainder --> Append
-    </div>
-    <div class="diagram-caption">Figure: Cyclic Redundancy Check (CRC) Error Detection Pipeline</div>
-</div>
-<p>Given Data bits \(M = 1101011011\) (10 bits) and Generator polynomial \(G(x) = x^4 + x + 1 \rightarrow 10011\) (degree \(r = 4\)).</p>
-<ul>
-    <li><b>Step 1:</b> Append \(r = 4\) zeros to \(M\): \(M' = 11010110110000\).</li>
-    <li><b>Step 2 (Modulo-2 XOR Division):</b> Divide \(11010110110000\) by \(10011\):
-        <br>\(11010 \oplus 10011 = 01001\) \(\rightarrow\) bring down 1 \(\rightarrow\) \(10011 \oplus 10011 = 00000\)
-        <br>Continuing long division yields 4-bit remainder \(R = 1110\).</li>
-    <li><b>Step 3 (Transmitted Codeword):</b> Transmitted frame \(T = M' \oplus R = 11010110111110\).</li>
-    <li><b>Step 4 (Receiver Error Check):</b> Receiver divides received codeword \(11010110111110\) by generator \(10011\). Remainder equals \(0000\), confirming zero error!</li>
-</ul>
+                    <h3>Master Answer: CRC & Sliding Window Protocols</h3>
+<h4>Part (a) CRC Checksum Calculation</h4>
+<p>Given Data \(M = 1101011011\). Generator Polynomial \(G(x) = x^4 + x + 1\), which translates to binary divisor \(G = 10011\).</p>
+<p>Length of G is \(n = 5\). Number of appended zeros = \(n - 1 = 4\).</p>
+<p>Dividend = \(11010110110000\).</p>
+<p>Perform Modulo-2 Division (XOR):</p>
+<pre>
+       1100001011
+      ________________
+10011 )11010110110000
+       10011
+       -----
+        10011
+        10011
+        -----
+         000010110
+             10011
+             -----
+              010100
+               10011
+               -----
+                01110
+</pre>
+<p>The Remainder (CRC Checksum) is <strong>1110</strong>.</p>
+<p><strong>Transmitted Frame:</strong> Data + CRC = <strong>11010110111110</strong>.</p>
+
+<h4>Part (b) Sliding Window Protocols Efficiency</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Protocol</th>
+    <th>Sender Window (Ws)</th>
+    <th>Receiver Window (Wr)</th>
+    <th>Efficiency (\(\eta\))</th>
+    <th>Pros & Cons</th>
+  </tr>
+  <tr>
+    <td><strong>Stop-and-Wait</strong></td>
+    <td>1</td>
+    <td>1</td>
+    <td>\(\frac{1}{1 + 2a}\)</td>
+    <td>Simplest, but terrible efficiency on long-distance links. Sender is mostly idle.</td>
+  </tr>
+  <tr>
+    <td><strong>Go-Back-N</strong></td>
+    <td>\(N\)</td>
+    <td>1</td>
+    <td>\(\frac{N}{1 + 2a}\)</td>
+    <td>Better efficiency. Wastes bandwidth retransmitting successfully received out-of-order packets.</td>
+  </tr>
+  <tr>
+    <td><strong>Selective Repeat</strong></td>
+    <td>\(N\)</td>
+    <td>\(N\)</td>
+    <td>\(\frac{N}{1 + 2a}\)</td>
+    <td>Highest efficiency. Only retransmits lost packets. Requires complex buffering and sorting at the receiver.</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-2">
@@ -1283,22 +1515,34 @@ graph TD
 2. Network address, Broadcast address, Usable Host IP range for each subnet.
 b) Explain Classless Inter-Domain Routing (CIDR) advantages.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) IP Subnetting Numerical Derivation:</b></p>
-<p>Given IP Block: \(192.168.1.0/24\) to be divided into <b>4 equal subnets</b>.</p>
-<ul>
-    <li><b>1. Subnet Bits (s):</b> \(2^s = 4 \rightarrow s = 2\) bits. New Prefix Length = \(24 + 2 = 26\) (\(/26\)).</li>
-    <li><b>2. Subnet Mask:</b> \(255.255.255.192\) (Binary: \(11111111.11111111.11111111.11000000\)).</li>
-    <li><b>3. Block Size:</b> \(256 / 4 = 64\) IP addresses per subnet. Usable hosts per subnet = \(64 - 2 = 62\).</li>
-</ul>
-<table>
-    <tr><th>Subnet #</th><th>Network ID</th><th>Usable Host Range</th><th>Broadcast Address</th></tr>
-    <tr><td>Subnet 0</td><td>\(192.168.1.0/26\)</td><td>\(192.168.1.1 \ndash 192.168.1.62\)</td><td>\(192.168.1.63\)</td></tr>
-    <tr><td>Subnet 1</td><td>\(192.168.1.64/26\)</td><td>\(192.168.1.65 \ndash 192.168.1.126\)</td><td>\(192.168.1.127\)</td></tr>
-    <tr><td>Subnet 2</td><td>\(192.168.1.128/26\)</td><td>\(192.168.1.129 \ndash 192.168.1.190\)</td><td>\(192.168.1.191\)</td></tr>
-    <tr><td>Subnet 3</td><td>\(192.168.1.192/26\)</td><td>\(192.168.1.193 \ndash 192.168.1.254\)</td><td>\(192.168.1.255\)</td></tr>
+                    <h3>Master Answer: Subnetting and CIDR</h3>
+<h4>Part (a) Subnetting Calculation</h4>
+<p>Given IP Block: <code>192.168.1.0/24</code>. We need 4 equal subnets.</p>
+<p>To get 4 subnets, we need to borrow bits from the Host portion: \(2^n = 4 \implies n = 2\) bits borrowed.</p>
+<p>New Prefix = \(24 + 2 = 26\).</p>
+<p><strong>1. Subnet Mask:</strong> <code>/26</code> translates to <code>255.255.255.192</code> (binary: 11111111.11111111.11111111.11000000).</p>
+<p><strong>2. Subnet Details:</strong></p>
+<p>Host bits remaining = \(32 - 26 = 6\). Usable Hosts per subnet = \(2^6 - 2 = 62\). Block size = 64.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Subnet</th>
+    <th>Network Address</th>
+    <th>First Usable IP</th>
+    <th>Last Usable IP</th>
+    <th>Broadcast Address</th>
+  </tr>
+  <tr><td>Subnet 1</td><td>192.168.1.0</td><td>192.168.1.1</td><td>192.168.1.62</td><td>192.168.1.63</td></tr>
+  <tr><td>Subnet 2</td><td>192.168.1.64</td><td>192.168.1.65</td><td>192.168.1.126</td><td>192.168.1.127</td></tr>
+  <tr><td>Subnet 3</td><td>192.168.1.128</td><td>192.168.1.129</td><td>192.168.1.190</td><td>192.168.1.191</td></tr>
+  <tr><td>Subnet 4</td><td>192.168.1.192</td><td>192.168.1.193</td><td>192.168.1.254</td><td>192.168.1.255</td></tr>
 </table>
-<p><b>Part (b) Subnet Router Table Configuration:</b> Interface routing table maps destination IP bitmask matching to forward packets to corresponding subnet gateways.</p>
+
+<h4>Part (b) CIDR Advantages</h4>
+<ul>
+  <li><strong>Eliminates Class Rigidity:</strong> Addresses can be allocated in arbitrary block sizes, drastically reducing wasted IPs compared to Class A/B/C assignments.</li>
+  <li><strong>Route Aggregation (Supernetting):</strong> Multiple contiguous smaller networks can be summarized into a single routing table entry (e.g., combining four <code>/24</code> blocks into one <code>/22</code> block), reducing router memory load and speeding up lookups.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-3">
@@ -1306,15 +1550,32 @@ b) Explain Classless Inter-Domain Routing (CIDR) advantages.</span></div>
 network graph.
 b) Compare Distance Vector Routing vs Link State Routing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Apply Dijkstra's Algorithm to find shortest path from node A to all other nodes in a given 6-node weighted
-network graph.
-b) Compare Distance Vector Routing vs Link State Routing..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Routing Algorithms</h3>
+<h4>Part (a) Dijkstra's Algorithm</h4>
+<p>Dijkstra's Algorithm is used in Link State Routing to find the shortest path from a source node to all other nodes.</p>
+<ol>
+  <li>Initialize distance to Source as 0, and all other nodes as Infinity.</li>
+  <li>Mark all nodes as unvisited. Set the Source node as the current node.</li>
+  <li>For the current node, consider all its unvisited neighbors. Calculate their tentative distances through the current node.</li>
+  <li>Compare the newly calculated tentative distance to the current assigned value and assign the smaller one.</li>
+  <li>When finished considering all neighbors of the current node, mark the current node as visited. It will never be checked again.</li>
+  <li>Select the unvisited node that is marked with the smallest tentative distance, set it as the new "current node", and go back to step 3.</li>
+</ol>
+
+<h4>Part (b) Distance Vector vs Link State Routing</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Distance Vector (e.g., RIP)</th>
+    <th>Link State (e.g., OSPF)</th>
+  </tr>
+  <tr><td><strong>Knowledge Shared</strong></td><td>Sends the entire routing table.</td><td>Sends only information about direct links.</td></tr>
+  <tr><td><strong>Shared With</strong></td><td>Only immediate neighbors.</td><td>Flooded to all routers in the entire network.</td></tr>
+  <tr><td><strong>Algorithm</strong></td><td>Bellman-Ford algorithm.</td><td>Dijkstra's Shortest Path algorithm.</td></tr>
+  <tr><td><strong>Topology View</strong></td><td>Routers have no overall map of the network.</td><td>Every router builds an identical full map of the network.</td></tr>
+  <tr><td><strong>Issues</strong></td><td>Prone to Count-to-Infinity routing loops.</td><td>Compute and memory-intensive. No routing loops.</td></tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-4">
@@ -1322,57 +1583,114 @@ b) Compare Distance Vector Routing vs Link State Routing..</li>
 Fast Recovery.
 b) Draw Congestion Window Size graph over transmission rounds.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain TCP Congestion Control Algorithms in detail: Slow Start, Congestion Avoidance, Fast Retransmit,
-Fast Recovery.
-b) Draw Congestion Window Size graph over transmission rounds..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: TCP Congestion Control</h3>
+<h4>Part (a) Congestion Control Algorithms</h4>
+<ul>
+  <li><strong>Slow Start:</strong> The Congestion Window (<code>cwnd</code>) starts at 1 MSS. For every ACK received, <code>cwnd</code> increases by 1. Effectively, <code>cwnd</code> doubles every Round Trip Time (RTT). It grows exponentially until it reaches the <code>ssthresh</code> (Slow Start Threshold).</li>
+  <li><strong>Congestion Avoidance:</strong> Once <code>ssthresh</code> is reached, exponential growth is too risky. The algorithm switches to linear growth (Additive Increase). <code>cwnd</code> increases by exactly 1 MSS per <em>entire</em> RTT.</li>
+  <li><strong>Fast Retransmit:</strong> If a sender receives 3 duplicate ACKs for the same packet, it assumes the packet was dropped due to mild congestion. It immediately retransmits the missing packet without waiting for the timeout timer to expire.</li>
+  <li><strong>Fast Recovery:</strong> After Fast Retransmit, instead of dropping <code>cwnd</code> back to 1 (which Slow Start would do), it cuts <code>cwnd</code> and <code>ssthresh</code> in half (Multiplicative Decrease) and immediately resumes Congestion Avoidance linear growth.</li>
+</ul>
+
+<h4>Part (b) Congestion Window Graph</h4>
+<div class="diagram-container">
+<pre>
+cwnd (MSS)
+ 32 |                       /\
+    |                      /  \
+ 16 |          /^\        /    \    (Linear Growth - Congestion Avoidance)
+    |         /   |      /      \
+  8 |        /    |     /        \
+    |       /     |____/          \__ (3 Dup ACKs: Fast Recovery, drops to half)
+  1 |______/      (Timeout: Drops to 1, Slow Start)
+    |__________________________________
+           Transmission Rounds (RTT)
+</pre>
 </div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-5">
                 <div class="q-text"><span class="q-badge c15">Q5</span><span>a) Explain RSA Asymmetric Encryption Algorithm with a numerical example (p=61, q=53, e=17).
 b) Explain Digital Signatures and SSL/TLS Handshake Protocol.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain RSA Asymmetric Encryption Algorithm with a numerical example (p=61, q=53, e=17).
-b) Explain Digital Signatures and SSL/TLS Handshake Protocol..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: RSA and Security</h3>
+<h4>Part (a) RSA Numerical Example</h4>
+<p>Given: \(p = 61, q = 53, e = 17\)</p>
+<ol>
+  <li><strong>Calculate Modulus (n):</strong>
+      <br/>\(n = p \times q = 61 \times 53 = 3233\).</li>
+  <li><strong>Calculate Totient \(\phi(n)\):</strong>
+      <br/>\(\phi(n) = (p-1)(q-1) = 60 \times 52 = 3120\).</li>
+  <li><strong>Calculate Private Key (d):</strong>
+      <br/>We need \(d\) such that \((17 \times d) \pmod{3120} = 1\).
+      <br/>Using the Extended Euclidean Algorithm, we find \(d = 2753\).</li>
+</ol>
+<p><strong>Keys:</strong> Public Key is \((17, 3233)\). Private Key is \((2753, 3233)\).</p>
+<p>To encrypt a message \(M=65\): \(Cipher = 65^{17} \pmod{3233} = 2790\).</p>
+
+<h4>Part (b) Digital Signatures and SSL/TLS</h4>
+<ul>
+  <li><strong>Digital Signatures:</strong> Uses Asymmetric cryptography in reverse. The sender hashes the document and <em>encrypts the hash using their Private Key</em>. Anyone can decrypt it using the sender's Public Key. If it decrypts successfully and matches the document's hash, it proves Authenticity (only the sender has the private key) and Integrity (the document wasn't altered).</li>
+  <li><strong>SSL/TLS Handshake:</strong>
+      <ol>
+        <li><strong>Client Hello:</strong> Client sends supported cipher suites.</li>
+        <li><strong>Server Hello & Certificate:</strong> Server chooses a cipher and sends its Digital Certificate (containing its Public Key).</li>
+        <li><strong>Key Exchange:</strong> Client verifies the certificate. The client generates a symmetric "Session Key", encrypts it with the server's Public Key, and sends it to the server.</li>
+        <li><strong>Secure Communication:</strong> Both parties now use the fast symmetric Session Key to encrypt all HTTP data.</li>
+      </ol>
+  </li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-6">
                 <div class="q-text"><span class="q-badge c15">Q6</span><span>a) Construct 7-bit Hamming Code for 4-bit data 1011.
 b) Show error detection and correction if 3rd bit is flipped during transmission.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Construct 7-bit Hamming Code for 4-bit data 1011.
-b) Show error detection and correction if 3rd bit is flipped during transmission..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Hamming Code</h3>
+<h4>Part (a) Constructing 7-bit Hamming Code for 1011</h4>
+<p>Data bits \(m = 4\) (1011). Required parity bits \(r = 3\) (since \(2^3 \ge 4+3+1\)). Total length = 7 bits.</p>
+<p>Positions (Powers of 2 are parity): \(P_1, P_2, D_3, P_4, D_5, D_6, D_7\)</p>
+<p>Insert data (1011): \(P_1, P_2, 1, P_4, 0, 1, 1\)</p>
+<p>Calculate Even Parity:</p>
+<ul>
+  <li>\(P_1\) checks positions 1, 3, 5, 7 \(\rightarrow\) ?, 1, 0, 1 \(\rightarrow\) To make even, \(P_1 = 0\).</li>
+  <li>\(P_2\) checks positions 2, 3, 6, 7 \(\rightarrow\) ?, 1, 1, 1 \(\rightarrow\) To make even, \(P_2 = 1\).</li>
+  <li>\(P_4\) checks positions 4, 5, 6, 7 \(\rightarrow\) ?, 0, 1, 1 \(\rightarrow\) To make even, \(P_4 = 0\).</li>
+</ul>
+<p><strong>Transmitted Code:</strong> <code>0 1 1 0 0 1 1</code></p>
+
+<h4>Part (b) Error Detection and Correction</h4>
+<p>Suppose the 3rd bit flips during transmission. Received code: <code>0 1 0 0 0 1 1</code> (Data is now 0011).</p>
+<p>Receiver calculates parity checks (C bits):</p>
+<ul>
+  <li>\(C_1\) checks 1, 3, 5, 7 (0, 0, 0, 1) \(\rightarrow\) Parity is Odd (1), meaning ERROR. So, \(C_1 = 1\).</li>
+  <li>\(C_2\) checks 2, 3, 6, 7 (1, 0, 1, 1) \(\rightarrow\) Parity is Odd (1), meaning ERROR. So, \(C_2 = 1\).</li>
+  <li>\(C_4\) checks 4, 5, 6, 7 (0, 0, 1, 1) \(\rightarrow\) Parity is Even (0), meaning OK. So, \(C_4 = 0\).</li>
+</ul>
+<p>Read the C bits in reverse (\(C_4 C_2 C_1\)): <strong>011</strong> (which is decimal 3). The receiver knows exactly that the 3rd bit is flipped and changes it from 0 back to 1, restoring the original data.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-7">
                 <div class="q-text"><span class="q-badge c15">Q7</span><span>a) Explain CSMA/CD protocol timing constraint formula `T_frame >= 2 * T_prop`.
 b) Derive minimum frame size requirement for 1Gbps Ethernet over 1km link.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain CSMA/CD protocol timing constraint formula `T_frame >= 2 * T_prop`.
-b) Derive minimum frame size requirement for 1Gbps Ethernet over 1km link..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: CSMA/CD Timing Constraint</h3>
+<h4>Part (a) The Formula \(T_{frame} \ge 2 \times T_{prop}\)</h4>
+<p>In CSMA/CD, for a sender to detect a collision, it must still be transmitting its frame when the collision signal reaches back to it.</p>
+<p>Worst-case scenario: Station A and Station B are at opposite ends of the cable. A transmits. Just before A's signal reaches B (taking \(T_{prop}\) time), B also transmits, causing a collision at B's end. The collision noise must travel all the way back to A (taking another \(T_{prop}\) time).</p>
+<p>Therefore, A must keep transmitting for at least \(2 \times T_{prop}\) (the Round Trip Time) to guarantee it hears the collision. If A transmits a very short frame and stops before \(2 \times T_{prop}\), it will hear the collision but wrongly assume it was someone else's collision, thinking its own frame succeeded.</p>
+<p>Thus: <strong>Transmission Time (\(T_{frame}\)) \(\ge\) Round Trip Time (\(2 \times T_{prop}\))</strong>.</p>
+
+<h4>Part (b) Minimum Frame Size Calculation</h4>
+<p>Given: Bandwidth = 1 Gbps (\(10^9\) bps). Distance = 1 km (\(1000\) m). Signal speed = \(2 \times 10^8\) m/s.</p>
+<p>\(T_{prop} = \frac{\text{Distance}}{\text{Speed}} = \frac{1000}{2 \times 10^8} = 5 \times 10^{-6} \text{ seconds} (5 \mu s)\)</p>
+<p>\(T_{frame} \ge 2 \times T_{prop} = 2 \times 5 \mu s = 10 \mu s\)</p>
+<p>Since \(T_{frame} = \frac{\text{Frame Size (Bits)}}{\text{Bandwidth}}\):</p>
+<p>\(\text{Frame Size} = T_{frame} \times \text{Bandwidth} = (10 \times 10^{-6}) \times 10^9 = 10,000 \text{ bits} = \mathbf{1250 \text{ bytes}}\).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-8">
@@ -1384,50 +1702,80 @@ b) Aggregate 4 class C networks 200.10.0.0/24, 200.10.1.0/24, 200.10.2.0/24, 200
 
 --- Page 4 ---</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) IP Subnetting Numerical Derivation:</b></p>
-<p>Given IP Block: \(192.168.1.0/24\) to be divided into <b>4 equal subnets</b>.</p>
+                    <h3>Master Answer: Subnetting and Supernetting</h3>
+<h4>Part (a) Concepts</h4>
 <ul>
-    <li><b>1. Subnet Bits (s):</b> \(2^s = 4 \rightarrow s = 2\) bits. New Prefix Length = \(24 + 2 = 26\) (\(/26\)).</li>
-    <li><b>2. Subnet Mask:</b> \(255.255.255.192\) (Binary: \(11111111.11111111.11111111.11000000\)).</li>
-    <li><b>3. Block Size:</b> \(256 / 4 = 64\) IP addresses per subnet. Usable hosts per subnet = \(64 - 2 = 62\).</li>
+  <li><strong>Subnetting:</strong> Borrowing bits from the Host portion to create more networks. (e.g., Splitting one <code>/24</code> into four <code>/26</code> networks). Used to reduce broadcast domains.</li>
+  <li><strong>Supernetting (Route Aggregation):</strong> Borrowing bits from the Network portion to combine multiple small networks into one large network. (e.g., Combining four <code>/24</code> networks into one <code>/22</code> network). Used to shrink the size of routing tables.</li>
 </ul>
-<table>
-    <tr><th>Subnet #</th><th>Network ID</th><th>Usable Host Range</th><th>Broadcast Address</th></tr>
-    <tr><td>Subnet 0</td><td>\(192.168.1.0/26\)</td><td>\(192.168.1.1 \ndash 192.168.1.62\)</td><td>\(192.168.1.63\)</td></tr>
-    <tr><td>Subnet 1</td><td>\(192.168.1.64/26\)</td><td>\(192.168.1.65 \ndash 192.168.1.126\)</td><td>\(192.168.1.127\)</td></tr>
-    <tr><td>Subnet 2</td><td>\(192.168.1.128/26\)</td><td>\(192.168.1.129 \ndash 192.168.1.190\)</td><td>\(192.168.1.191\)</td></tr>
-    <tr><td>Subnet 3</td><td>\(192.168.1.192/26\)</td><td>\(192.168.1.193 \ndash 192.168.1.254\)</td><td>\(192.168.1.255\)</td></tr>
-</table>
-<p><b>Part (b) Subnet Router Table Configuration:</b> Interface routing table maps destination IP bitmask matching to forward packets to corresponding subnet gateways.</p>
+
+<h4>Part (b) Aggregating 4 Class C Networks</h4>
+<p>Given networks:</p>
+<ul>
+  <li>200.10.0.0 (Binary: 200.10.<strong>00000000</strong>.0)</li>
+  <li>200.10.1.0 (Binary: 200.10.<strong>00000001</strong>.0)</li>
+  <li>200.10.2.0 (Binary: 200.10.<strong>00000010</strong>.0)</li>
+  <li>200.10.3.0 (Binary: 200.10.<strong>00000011</strong>.0)</li>
+</ul>
+<p>Looking at the 3rd octet, the first 22 bits (from the left) are identical across all 4 IP addresses (<code>200.10.000000xx</code>). We can summarize these 4 blocks by making the network mask 22 bits instead of 24.</p>
+<p><strong>Aggregated CIDR Block:</strong> <code>200.10.0.0 /22</code></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-9">
                 <div class="q-text"><span class="q-badge c15">Q9</span><span>a) Explain Distance Vector Routing Bellman-Ford algorithm.
 b) Illustrate Count-to-Infinity problem and solutions: Split Horizon and Poison Reverse.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Distance Vector Routing Bellman-Ford algorithm.
-b) Illustrate Count-to-Infinity problem and solutions: Split Horizon and Poison Reverse..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Distance Vector Routing Issues</h3>
+<h4>Part (a) Bellman-Ford Algorithm</h4>
+<p>In Distance Vector Routing, each router periodically sends its entire routing table (vectors of distances to all known destinations) to its immediate neighbors. When a router receives an update from a neighbor, it updates its own table using the Bellman-Ford equation:</p>
+<p><code>Dx(y) = min { c(x,v) + Dv(y) } for each neighbor v</code></p>
+<p>Essentially: The cost from me to destination Y is the minimum of (cost from me to my neighbor V) + (neighbor V's advertised cost to destination Y).</p>
+
+<h4>Part (b) Count-to-Infinity & Solutions</h4>
+<p>If the link between Router A and Network N goes down, A updates its distance to N to Infinity. However, if neighbor Router B recently advertised "I can reach N in 2 hops" (which was actually bouncing through A), Router A will wrongly think "Oh, B has an alternate route! I will route through B, cost = 3". A advertises this to B. B updates its cost to 4. They bounce updates back and forth, counting to infinity.</p>
+<p><strong>Solutions:</strong></p>
+<ul>
+  <li><strong>Split Horizon:</strong> A router never advertises a route back out the same interface it learned it from. (If B learned the route to N from A, B will not advertise that route back to A).</li>
+  <li><strong>Poison Reverse:</strong> Instead of not advertising, B actively advertises the route back to A with a metric of Infinity. This immediately kills any chance of A trying to use B for that route.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-10">
                 <div class="q-text"><span class="q-badge c15">Q10</span><span>a) Explain Border Gateway Protocol (BGP) Path Vector routing.
 b) Differentiate Interior Gateway Protocols (RIP, OSPF) vs Exterior Gateway Protocols (BGP).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Border Gateway Protocol (BGP) Path Vector routing.
-b) Differentiate Interior Gateway Protocols (RIP, OSPF) vs Exterior Gateway Protocols (BGP)..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: BGP and Gateway Protocols</h3>
+<h4>Part (a) BGP Path Vector Routing</h4>
+<p>Border Gateway Protocol (BGP) is the protocol that makes the internet work. Instead of Distance Vector or Link State, it uses <strong>Path Vector Routing</strong>.</p>
+<p>Instead of just advertising a distance metric (like "cost 5"), BGP advertises the entire path of Autonomous Systems (AS) a packet must traverse (e.g., "Path to Network X: AS100 &rarr; AS300 &rarr; AS500").</p>
+<p><strong>Why Path Vector?</strong> It inherently prevents routing loops. If a router in AS100 receives a BGP advertisement and sees "AS100" already in the path string, it immediately rejects the route because accepting it would create a loop.</p>
+
+<h4>Part (b) IGP vs EGP</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Interior Gateway Protocol (IGP)</th>
+    <th>Exterior Gateway Protocol (EGP)</th>
+  </tr>
+  <tr>
+    <td><strong>Scope</strong></td>
+    <td>Operates <em>inside</em> a single Autonomous System (e.g., inside an ISP's or university's internal network).</td>
+    <td>Operates <em>between</em> different Autonomous Systems (connecting ISPs together).</td>
+  </tr>
+  <tr>
+    <td><strong>Goal</strong></td>
+    <td>Optimized for speed, shortest path, and fast convergence (efficiency).</td>
+    <td>Optimized for security, policy enforcement, and scalability. (e.g., "Don't route traffic through Country X").</td>
+  </tr>
+  <tr>
+    <td><strong>Examples</strong></td>
+    <td>RIP, OSPF, EIGRP</td>
+    <td>BGP (The only major EGP in use today).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-11">
@@ -1435,29 +1783,69 @@ b) Differentiate Interior Gateway Protocols (RIP, OSPF) vs Exterior Gateway Prot
 b) Explain IPv4 Packet Fragmentation and Reassembly parameters (Identification, Flags, Fragment Offset) with an
 example.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain IPv4 Header fields in detail.
-b) Explain IPv4 Packet Fragmentation and Reassembly parameters (Identification, Flags, Fragment Offset) with an
-example..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: IPv4 Header and Fragmentation</h3>
+<h4>Part (a) IPv4 Header Fields</h4>
+<p>The IPv4 header is typically 20 bytes long.</p>
+<ul>
+  <li><strong>Version (4 bits):</strong> Indicates IPv4.</li>
+  <li><strong>IHL (Internet Header Length, 4 bits):</strong> Length of the header in 32-bit words (usually 5, meaning 20 bytes).</li>
+  <li><strong>TOS (Type of Service, 8 bits):</strong> Used for QoS to prioritize packets.</li>
+  <li><strong>Total Length (16 bits):</strong> Total length of the packet (header + data) in bytes. Max is 65,535.</li>
+  <li><strong>Identification (16 bits):</strong> Unique ID assigned to a packet, used heavily in fragmentation.</li>
+  <li><strong>Flags (3 bits):</strong> <em>Bit 0:</em> Reserved. <em>Bit 1 (DF):</em> Don't Fragment. <em>Bit 2 (MF):</em> More Fragments coming.</li>
+  <li><strong>Fragment Offset (13 bits):</strong> Specifies where in the original original unfragmented packet this fragment belongs.</li>
+  <li><strong>TTL (Time to Live, 8 bits):</strong> Decremented by 1 at every router. If it hits 0, the packet is discarded (prevents infinite routing loops).</li>
+  <li><strong>Protocol (8 bits):</strong> Identifies the next-level protocol (e.g., 6 for TCP, 17 for UDP, 1 for ICMP).</li>
+  <li><strong>Header Checksum (16 bits):</strong> Error-checking for the header only.</li>
+  <li><strong>Source & Destination IP Addresses (32 bits each).</strong></li>
+</ul>
+
+<h4>Part (b) Fragmentation and Reassembly</h4>
+<p>If a router receives a 4000-byte packet but the next link's MTU (Maximum Transmission Unit) is 1500 bytes, the router must fragment the packet.</p>
+<p><strong>Example:</strong> 4000-byte packet (20 bytes header + 3980 bytes data). MTU = 1500.</p>
+<ul>
+  <li><strong>Fragment 1:</strong> Data = 1480 bytes. ID = 777. MF = 1 (More Fragments). Offset = 0.</li>
+  <li><strong>Fragment 2:</strong> Data = 1480 bytes. ID = 777. MF = 1. Offset = 185 (1480 / 8 = 185).</li>
+  <li><strong>Fragment 3:</strong> Data = 1020 bytes. ID = 777. MF = 0 (Last Fragment). Offset = 370 (2960 / 8 = 370).</li>
+</ul>
+<p>The destination host uses the matching <strong>Identification</strong> numbers to group them, checks the <strong>MF</strong> flag to know when it has the last piece, and uses the <strong>Offset</strong> to order them correctly during Reassembly.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-12">
                 <div class="q-text"><span class="q-badge c15">Q12</span><span>a) Explain TCP Header format fields in detail.
 b) Explain TCP Connection Management State Transition Diagram (LISTEN, SYN_SENT, ESTABLISHED, FIN_WAIT).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain TCP Header format fields in detail.
-b) Explain TCP Connection Management State Transition Diagram (LISTEN, SYN_SENT, ESTABLISHED, FIN_WAIT)..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: TCP Header and Connections</h3>
+<h4>Part (a) TCP Header Fields</h4>
+<p>The TCP header is typically 20 bytes long.</p>
+<ul>
+  <li><strong>Source & Destination Port (16 bits each):</strong> Identifies the sending and receiving applications.</li>
+  <li><strong>Sequence Number (32 bits):</strong> Identifies the byte in the stream of data from the sender to receiver.</li>
+  <li><strong>Acknowledgment Number (32 bits):</strong> The <em>next</em> Sequence Number the receiver is expecting.</li>
+  <li><strong>Data Offset / Header Length (4 bits):</strong> Size of the TCP header in 32-bit words.</li>
+  <li><strong>Control Flags (6 bits):</strong> URG (Urgent), ACK, PSH (Push), RST (Reset connection), SYN (Synchronize), FIN (Finish connection).</li>
+  <li><strong>Window Size (16 bits):</strong> Used for Flow Control. The number of bytes the receiver is currently willing to accept.</li>
+  <li><strong>Checksum (16 bits):</strong> Error-checking for the header AND the data.</li>
+  <li><strong>Urgent Pointer (16 bits):</strong> Points to urgent data if the URG flag is set.</li>
+</ul>
+
+<h4>Part (b) Connection State Transition Diagram</h4>
+<p>Key states during connection setup and teardown:</p>
+<div class="diagram-container">
+<div class="mermaid">
+stateDiagram-v2
+    [*] --> CLOSED
+    CLOSED --> LISTEN : Server starts passive open
+    CLOSED --> SYN_SENT : Client sends SYN (Active open)
+    LISTEN --> SYN_RCVD : Server receives SYN, sends SYN-ACK
+    SYN_SENT --> ESTABLISHED : Client receives SYN-ACK, sends ACK
+    SYN_RCVD --> ESTABLISHED : Server receives ACK
+    ESTABLISHED --> FIN_WAIT_1 : Active close (sends FIN)
+    ESTABLISHED --> CLOSE_WAIT : Passive close (receives FIN, sends ACK)
 </div>
+</div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-13">
@@ -1465,113 +1853,184 @@ b) Explain TCP Connection Management State Transition Diagram (LISTEN, SYN_SENT,
 b) Calculate maximum burst duration for Token Bucket with capacity 1MB, token arrival rate 2MB/s, transmission rate
 10MB/s.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Traffic Shaping: Leaky Bucket vs Token Bucket.
-b) Calculate maximum burst duration for Token Bucket with capacity 1MB, token arrival rate 2MB/s, transmission rate
-10MB/s..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Traffic Shaping</h3>
+<h4>Part (a) Leaky Bucket vs Token Bucket</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Leaky Bucket</th>
+    <th>Token Bucket</th>
+  </tr>
+  <tr><td><strong>Concept</strong></td><td>Packets enter at any rate, but leak out at a strictly constant rate.</td><td>Tokens arrive at a constant rate. Packets transmit by consuming tokens.</td></tr>
+  <tr><td><strong>Burstiness</strong></td><td>Does <strong>not</strong> allow bursts. Completely smooths out traffic.</td><td><strong>Allows</strong> bursts up to the maximum bucket capacity.</td></tr>
+  <tr><td><strong>Packet Drop</strong></td><td>Drops packets if the bucket overflows.</td><td>Never drops packets (it drops tokens if the bucket is full). Packets just wait for tokens.</td></tr>
+</table>
+
+<h4>Part (b) Token Bucket Burst Duration Calculation</h4>
+<p>Given:</p>
+<ul>
+  <li>Bucket Capacity \(C = 1 \text{ MB}\)</li>
+  <li>Token Arrival Rate \(R = 2 \text{ MB/s}\)</li>
+  <li>Max Transmission Rate \(M = 10 \text{ MB/s}\)</li>
+</ul>
+<p>Let \(S\) be the maximum burst duration in seconds. During this time \(S\), the total data transmitted at max rate \(M\) must equal the data initially in the bucket \(C\) plus the new tokens generated during that time \((R \times S)\).</p>
+<p>\[ M \times S = C + (R \times S) \]</p>
+<p>\[ (M - R) \times S = C \]</p>
+<p>\[ S = \frac{C}{M - R} = \frac{1}{10 - 2} = \frac{1}{8} = \mathbf{0.125 \text{ seconds}} \]</p>
+<p>The system can transmit at the maximum 10 MB/s speed for 0.125 seconds before it runs out of tokens and is forced to slow down to the 2 MB/s token arrival rate.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-14">
                 <div class="q-text"><span class="q-badge c15">Q14</span><span>a) Explain Domain Name System (DNS) Iterative vs Recursive resolution.
 b) Detail DNS Resource Records (A, AAAA, CNAME, MX, NS, PTR).</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) First-Order Logic (FOL) Conversion & Resolution Proof:</b></p>
-<p>Statements converted to Clause Normal Form (CNF):</p>
-<ol>
-    <li>\(\text{Man(Marcus)}\)</li>
-    <li>\(\text{Pompeian(Marcus)}\)</li>
-    <li>\(\neg \text{Pompeian}(x) \lor \text{Roman}(x)\)</li>
-    <li>\(\text{Ruler(Caesar)}\)</li>
-    <li>\(\neg \text{Roman}(y) \lor \text{LoyalTo}(y, \text{Caesar}) \lor \text{Hate}(y, \text{Caesar})\)</li>
-    <li>\(\neg \text{Man}(z) \lor \neg \text{Ruler}(w) \lor \neg \text{TryAssassinate}(z, w) \lor \neg \text{LoyalTo}(z, w)\)</li>
-    <li>\(\text{TryAssassinate(Marcus, Caesar)}\)</li>
-</ol>
-<p><b>Negated Goal:</b> \(\neg \text{Hate(Marcus, Caesar)}\)</p>
-<p><b>Resolution Step-by-Step Refutation Tree:</b></p>
+                    <h3>Master Answer: Domain Name System (DNS)</h3>
+<h4>Part (a) Iterative vs Recursive Resolution</h4>
 <ul>
-    <li>Resolve (2) & (3) with \(\theta = \{x/\text{Marcus}\}\) \(\rightarrow\) Clause 8: \(\text{Roman(Marcus)}\)</li>
-    <li>Resolve (8) & (5) with \(\theta = \{y/\text{Marcus}\}\) \(\rightarrow\) Clause 9: \(\text{LoyalTo(Marcus, Caesar)} \lor \text{Hate(Marcus, Caesar)}\)</li>
-    <li>Resolve (9) & Negated Goal \(\rightarrow\) Clause 10: \(\text{LoyalTo(Marcus, Caesar)}\)</li>
-    <li>Resolve (1), (4), (7) & (6) with \(\theta = \{z/\text{Marcus}, w/\text{Caesar}\}\) \(\rightarrow\) Clause 11: \(\neg \text{LoyalTo(Marcus, Caesar)}\)</li>
-    <li>Resolve Clause 10 & Clause 11 \(\rightarrow\) <b>NIL / Empty Clause (\(\emptyset\))</b></li>
+  <li><strong>Recursive:</strong> The client asks the Local DNS Server. The Local server takes full responsibility. It asks the Root, gets referred to the TLD, asks the TLD, gets referred to the Authoritative, asks the Authoritative, gets the IP, and finally hands the fully resolved IP back to the client. The client does no work.</li>
+  <li><strong>Iterative:</strong> The Local DNS Server asks the Root. The Root replies, "I don't know, but here is the IP of the TLD." The Local Server then asks the TLD. The TLD replies, "I don't know, but here is the IP of the Authoritative." The Local server does all the back-and-forth legwork.</li>
 </ul>
-<p>Since an empty clause is derived, the theorem <b>'Marcus hates Caesar'</b> is proven by Resolution Refutation!</p>
+
+<h4>Part (b) DNS Resource Records (RR)</h4>
+<p>A Resource Record has the format <code>(Name, Value, Type, TTL)</code>.</p>
+<ul>
+  <li><strong>Type A (Address):</strong> Maps a hostname (<code>www.google.com</code>) to an IPv4 address.</li>
+  <li><strong>Type AAAA (Quad-A):</strong> Maps a hostname to an IPv6 address.</li>
+  <li><strong>Type CNAME (Canonical Name):</strong> Maps an alias hostname (<code>www.ibm.com</code>) to its true, canonical name (<code>server-east.ibm.com</code>).</li>
+  <li><strong>Type MX (Mail Exchange):</strong> Identifies the mail server responsible for accepting email messages on behalf of a domain.</li>
+  <li><strong>Type NS (Name Server):</strong> Identifies the Authoritative DNS server for a domain.</li>
+  <li><strong>Type PTR (Pointer):</strong> Used for Reverse DNS lookup. Maps an IP address back to a hostname.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-15">
                 <div class="q-text"><span class="q-badge c15">Q15</span><span>a) Explain HTTP 1.0 vs HTTP 1.1 vs HTTP 2.0 vs HTTP 3.0 protocols.
 b) Detail Persistent Connections, Pipelining, Multiplexing, and QUIC protocol.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain HTTP 1.0 vs HTTP 1.1 vs HTTP 2.0 vs HTTP 3.0 protocols.
-b) Detail Persistent Connections, Pipelining, Multiplexing, and QUIC protocol..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Evolution of HTTP</h3>
+<h4>Part (a) HTTP 1.0 vs 1.1 vs 2.0 vs 3.0</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Version</th>
+    <th>Key Innovation</th>
+    <th>Transport Protocol</th>
+  </tr>
+  <tr><td>HTTP 1.0</td><td>Non-persistent connections (A new TCP connection is required for every single image/CSS file). Very slow.</td><td>TCP</td></tr>
+  <tr><td>HTTP 1.1</td><td>Introduced <strong>Persistent Connections</strong> (Keep-Alive) and <strong>Pipelining</strong>. One TCP connection can fetch multiple files sequentially.</td><td>TCP</td></tr>
+  <tr><td>HTTP 2.0</td><td>Introduced <strong>Multiplexing</strong> over a single TCP connection. Files are fetched concurrently, solving the Head-of-Line blocking problem. Uses binary framing.</td><td>TCP</td></tr>
+  <tr><td>HTTP 3.0</td><td>Replaces TCP entirely with <strong>QUIC</strong> to eliminate TCP handshake latency and TCP Head-of-Line blocking.</td><td>UDP</td></tr>
+</table>
+
+<h4>Part (b) Advanced Concepts</h4>
+<ul>
+  <li><strong>Persistent Connections (Keep-Alive):</strong> Keeps the underlying TCP socket open after a request is completed, saving the massive overhead of performing a 3-way handshake for every asset on a web page.</li>
+  <li><strong>Pipelining:</strong> Sending multiple HTTP requests on a persistent connection without waiting for the corresponding responses. (Mostly abandoned in favor of Multiplexing).</li>
+  <li><strong>Multiplexing:</strong> HTTP/2 breaks requests and responses into small interleaved frames. If a massive image is downloading, a tiny CSS file can be downloaded simultaneously over the exact same TCP connection without waiting.</li>
+  <li><strong>QUIC Protocol:</strong> Developed by Google. It provides the reliability of TCP but runs on top of UDP. It combines the cryptographic handshake (TLS) with the transport handshake, resulting in 0-RTT connection setups.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-16">
                 <div class="q-text"><span class="q-badge c15">Q16</span><span>a) Explain Cryptographic Hash Functions (MD5, SHA-256) and Digital Certificates.
 b) Detail Public Key Infrastructure (PKI) and Certificate Authority (CA) verification.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Cryptographic Hash Functions (MD5, SHA-256) and Digital Certificates.
-b) Detail Public Key Infrastructure (PKI) and Certificate Authority (CA) verification..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Cryptography, Hashing, and PKI</h3>
+<h4>Part (a) Hash Functions and Certificates</h4>
+<ul>
+  <li><strong>Cryptographic Hash Functions (MD5, SHA-256):</strong> A mathematical algorithm that takes input data of any size and produces a fixed-size string of characters (a hash). 
+      <br/><em>Properties:</em> It is a one-way function (cannot be reversed). Changing even one comma in a 500-page document completely changes the resulting hash (Avalanche Effect). Used to verify Data Integrity.</li>
+  <li><strong>Digital Certificates:</strong> An electronic document used to prove the ownership of a Public Key. It acts like a digital passport. It contains the owner's identity (website name), their Public Key, and the Digital Signature of the Certificate Authority that issued it.</li>
+</ul>
+
+<h4>Part (b) Public Key Infrastructure (PKI) & CA Verification</h4>
+<p>PKI is the entire ecosystem of roles, policies, and hardware needed to manage digital certificates.</p>
+<p><strong>How your browser verifies a CA:</strong></p>
+<ol>
+  <li>You visit <code>https://bank.com</code>. The server sends its Digital Certificate.</li>
+  <li>Your browser checks who issued the certificate (e.g., DigiCert CA).</li>
+  <li>The browser looks in its internal, pre-installed "Trusted Root Store" to find DigiCert's Public Key.</li>
+  <li>The browser uses DigiCert's Public Key to decrypt the Digital Signature on the bank's certificate.</li>
+  <li>If the decrypted signature matches the certificate's hash, the browser knows the certificate is genuine and hasn't been tampered with. It now trusts the bank's Public Key.</li>
+</ol>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-17">
                 <div class="q-text"><span class="q-badge c15">Q17</span><span>a) Explain IPsec Protocol Suite Architecture (AH, ESP, IKE).
 b) Differentiate IPsec Transport Mode vs Tunnel Mode.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain IPsec Protocol Suite Architecture (AH, ESP, IKE).
-b) Differentiate IPsec Transport Mode vs Tunnel Mode..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: IPsec Architecture</h3>
+<h4>Part (a) IPsec Protocol Suite</h4>
+<p>IPsec (Internet Protocol Security) secures IP communications by authenticating and encrypting each IP packet of a communication session. It operates at Layer 3 (Network).</p>
+<ul>
+  <li><strong>AH (Authentication Header):</strong> Provides data origin authentication, data integrity, and anti-replay protection. It signs the entire packet, <em>including the IP header</em>. It does <strong>not</strong> provide encryption (data is still in plain text).</li>
+  <li><strong>ESP (Encapsulating Security Payload):</strong> Provides confidentiality (encryption) in addition to authentication and integrity. It encrypts the payload so sniffers cannot read the data.</li>
+  <li><strong>IKE (Internet Key Exchange):</strong> The protocol used to set up the Security Associations (SA). It securely exchanges the cryptographic keys (using Diffie-Hellman) before AH or ESP can start transmitting data.</li>
+</ul>
+
+<h4>Part (b) Transport Mode vs Tunnel Mode</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Transport Mode</th>
+    <th>Tunnel Mode</th>
+  </tr>
+  <tr>
+    <td><strong>What is Encrypted?</strong></td>
+    <td>Only the Payload (TCP/UDP segment and data).</td>
+    <td>The <em>entire</em> original IP packet (Payload + Original IP Header).</td>
+  </tr>
+  <tr>
+    <td><strong>IP Header</strong></td>
+    <td>The original IP header is kept intact and used for routing.</td>
+    <td>A brand new "Outer IP Header" is created and prepended. The original header is hidden inside the encrypted payload.</td>
+  </tr>
+  <tr>
+    <td><strong>Primary Use Case</strong></td>
+    <td>Host-to-Host communication (End-to-End).</td>
+    <td>Gateway-to-Gateway communication (Site-to-Site VPNs between corporate routers).</td>
+  </tr>
+</table>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-18">
                 <div class="q-text"><span class="q-badge c15">Q18</span><span>a) Explain IEEE 802.11 Wireless LAN MAC layer CSMA/CA protocol.
 b) Detail RTS/CTS handshake solving Hidden Terminal and Exposed Terminal problems.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain IEEE 802.11 Wireless LAN MAC layer CSMA/CA protocol.
-b) Detail RTS/CTS handshake solving Hidden Terminal and Exposed Terminal problems..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Wireless LAN MAC (802.11)</h3>
+<h4>Part (a) CSMA/CA Overview</h4>
+<p>Carrier Sense Multiple Access with Collision Avoidance (CSMA/CA) is required in Wi-Fi because wireless radios cannot transmit and receive simultaneously to detect collisions like Ethernet can.</p>
+
+<h4>Part (b) Hidden/Exposed Terminal Problems & RTS/CTS</h4>
+<ul>
+  <li><strong>The Hidden Terminal Problem:</strong> Station A and Station C can both see Access Point B, but A and C cannot see each other (they are hidden by distance/walls). If A and C both transmit to B simultaneously, they won't detect each other's carrier, causing a massive collision at B.</li>
+  <li><strong>The Exposed Terminal Problem:</strong> Station B wants to transmit to A. Station C wants to transmit to D. B transmits to A. C hears B transmitting and wrongly assumes the channel is busy, so C waits. But C's transmission to D would NOT have interfered with B's transmission to A. C is unnecessarily blocked.</li>
+</ul>
+<p><strong>Solution: RTS/CTS Handshake:</strong></p>
+<p>Before sending data, A sends a short Request-To-Send (RTS) to B. B replies with a Clear-To-Send (CTS) broadcast. Station C hears B's CTS and knows to stay quiet. The Hidden Terminal is solved because C heard the receiver (B) grant permission, even if C couldn't hear the sender (A).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-19">
                 <div class="q-text"><span class="q-badge c15">Q19</span><span>a) Explain Software Defined Networking (SDN) Architecture.
 b) Detail Separation of Control Plane and Data Plane, OpenFlow protocol, and SDN Controller.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Software Defined Networking (SDN) Architecture.
-b) Detail Separation of Control Plane and Data Plane, OpenFlow protocol, and SDN Controller..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Software Defined Networking (SDN)</h3>
+<h4>Part (a) SDN Architecture</h4>
+<p>Traditional routers combine both decision-making (Routing protocols like OSPF) and data-forwarding (moving packets from input port to output port) in the exact same hardware box. SDN completely separates these two functions.</p>
+
+<h4>Part (b) Planes and Protocols</h4>
+<ul>
+  <li><strong>Data Plane (Forwarding Plane):</strong> Dumb, fast hardware switches. Their only job is to look at an incoming packet, check a local Flow Table, and forward the packet out the correct port at lightning speed. They make no routing decisions.</li>
+  <li><strong>Control Plane:</strong> The "Brains" of the network. This is moved out of the routers and into a centralized software application called the <strong>SDN Controller</strong>. The controller computes the optimal routing paths for the entire network globally.</li>
+  <li><strong>OpenFlow Protocol:</strong> The standard communication protocol used between the centralized SDN Controller and the dumb Data Plane switches. The Controller uses OpenFlow to push down the computed Flow Tables to the switches.</li>
+</ul>
+<p><strong>Benefit:</strong> A network admin can program and change the behavior of the entire network globally from a single software dashboard, rather than logging into 500 individual routers to change OSPF configurations.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-20">
@@ -1579,98 +2038,152 @@ b) Detail Separation of Control Plane and Data Plane, OpenFlow protocol, and SDN
 `https://www.google.com` in web browser.
 b) Detail DNS query, ARP resolution, TCP 3-way handshake, TLS handshake, HTTP GET, IP routing, and Ethernet framing.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) First-Order Logic (FOL) Conversion & Resolution Proof:</b></p>
-<p>Statements converted to Clause Normal Form (CNF):</p>
+                    <h3>Master Answer: Case Study - Web Browsing Lifecycle</h3>
+<h4>Part (a) & (b) Tracing a packet to google.com</h4>
+<p>When a user types <code>https://www.google.com</code>, a massive chain of protocols executes in milliseconds:</p>
 <ol>
-    <li>\(\text{Man(Marcus)}\)</li>
-    <li>\(\text{Pompeian(Marcus)}\)</li>
-    <li>\(\neg \text{Pompeian}(x) \lor \text{Roman}(x)\)</li>
-    <li>\(\text{Ruler(Caesar)}\)</li>
-    <li>\(\neg \text{Roman}(y) \lor \text{LoyalTo}(y, \text{Caesar}) \lor \text{Hate}(y, \text{Caesar})\)</li>
-    <li>\(\neg \text{Man}(z) \lor \neg \text{Ruler}(w) \lor \neg \text{TryAssassinate}(z, w) \lor \neg \text{LoyalTo}(z, w)\)</li>
-    <li>\(\text{TryAssassinate(Marcus, Caesar)}\)</li>
+  <li><strong>DNS Query:</strong> The browser doesn't know Google's IP. It checks its cache. If missing, it sends a UDP DNS request (Port 53) to the local DNS resolver to get the IP address (e.g., <code>142.250.190.46</code>).</li>
+  <li><strong>ARP Resolution:</strong> The PC needs to send the packet to its Default Gateway (Home Router). It broadcasts an ARP Request: "Who has the router's IP?". The router replies with its MAC address.</li>
+  <li><strong>Ethernet Framing:</strong> The PC encapsulates the packet in an Ethernet Frame with the Router's MAC as the destination.</li>
+  <li><strong>TCP 3-Way Handshake:</strong> The browser initiates a TCP connection to Google's IP on Port 443 (HTTPS). It sends a SYN, Google sends SYN-ACK, PC sends ACK.</li>
+  <li><strong>TLS Handshake:</strong> Because it's HTTPS, the client and server negotiate encryption algorithms. Google sends its Digital Certificate. They establish a secure symmetric session key.</li>
+  <li><strong>HTTP GET Request:</strong> The browser finally encrypts an <code>HTTP GET /</code> request using the TLS key and sends it.</li>
+  <li><strong>IP Routing:</strong> The packet travels through dozens of ISP routers using OSPF and BGP to find the optimal path to Google's data center.</li>
+  <li><strong>Response:</strong> Google's server processes the request, sends back a <code>200 OK</code> with the encrypted HTML payload. The browser decrypts and renders the page.</li>
 </ol>
-<p><b>Negated Goal:</b> \(\neg \text{Hate(Marcus, Caesar)}\)</p>
-<p><b>Resolution Step-by-Step Refutation Tree:</b></p>
-<ul>
-    <li>Resolve (2) & (3) with \(\theta = \{x/\text{Marcus}\}\) \(\rightarrow\) Clause 8: \(\text{Roman(Marcus)}\)</li>
-    <li>Resolve (8) & (5) with \(\theta = \{y/\text{Marcus}\}\) \(\rightarrow\) Clause 9: \(\text{LoyalTo(Marcus, Caesar)} \lor \text{Hate(Marcus, Caesar)}\)</li>
-    <li>Resolve (9) & Negated Goal \(\rightarrow\) Clause 10: \(\text{LoyalTo(Marcus, Caesar)}\)</li>
-    <li>Resolve (1), (4), (7) & (6) with \(\theta = \{z/\text{Marcus}, w/\text{Caesar}\}\) \(\rightarrow\) Clause 11: \(\neg \text{LoyalTo(Marcus, Caesar)}\)</li>
-    <li>Resolve Clause 10 & Clause 11 \(\rightarrow\) <b>NIL / Empty Clause (\(\emptyset\))</b></li>
-</ul>
-<p>Since an empty clause is derived, the theorem <b>'Marcus hates Caesar'</b> is proven by Resolution Refutation!</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-21">
                 <div class="q-text"><span class="q-badge c15">Q21</span><span>a) Calculate maximum throughput for Pure ALOHA and Slotted ALOHA mathematically.
 b) Plot throughput S vs offered load G.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Calculate maximum throughput for Pure ALOHA and Slotted ALOHA mathematically.
-b) Plot throughput S vs offered load G..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
+                    <h3>Master Answer: ALOHA Throughput Analysis</h3>
+<h4>Part (a) Mathematical Calculation</h4>
+<p>Let \(G\) be the offered load (total number of frames generated by all stations in one frame transmission time \(T_f\)). Let \(S\) be the throughput (successful transmissions).</p>
+<p><strong>Pure ALOHA:</strong></p>
+<p>Vulnerable time is \(2 \times T_f\). A frame is successful only if no other frame is generated during this \(2T_f\) window. Using Poisson distribution, the probability of 0 frames generated in \(2T_f\) is \(e^{-2G}\).</p>
+<p>\[ S_{pure} = G \times e^{-2G} \]</p>
+<p>To find the maximum, set the derivative \(dS/dG = 0\). This occurs at \(G = 0.5\).</p>
+<p>\[ S_{max} = 0.5 \times e^{-1} \approx 0.184 \text{ (18.4% efficiency)} \]</p>
+
+<p><strong>Slotted ALOHA:</strong></p>
+<p>Vulnerable time is reduced to exactly \(1 \times T_f\) because transmissions can only start at slot boundaries. The probability of 0 frames generated in \(T_f\) is \(e^{-G}\).</p>
+<p>\[ S_{slotted} = G \times e^{-G} \]</p>
+<p>Maximum occurs at \(G = 1\).</p>
+<p>\[ S_{max} = 1 \times e^{-1} \approx 0.368 \text{ (36.8% efficiency)} \]</p>
+
+<h4>Part (b) Throughput vs Load Graph</h4>
+<div class="diagram-container">
+<pre>
+   Throughput (S)
+      |
+ 0.368|             *  (Slotted ALOHA Max)
+      |           *   *
+ 0.184|     *   *       * (Pure ALOHA Max)
+      |   *   *           *
+      | *   *               *
+      |*__*___________________*_______
+      0  0.5       1.0              Offered Load (G)
+</pre>
 </div>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-22">
                 <div class="q-text"><span class="q-badge c15">Q22</span><span>a) Explain Optical Fiber communication principles (Total Internal Reflection, Single-mode vs Multi-mode).
 b) Calculate attenuation and dispersion limitations on fiber links.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Optical Fiber communication principles (Total Internal Reflection, Single-mode vs Multi-mode).
-b) Calculate attenuation and dispersion limitations on fiber links..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Optical Fiber Communication</h3>
+<h4>Part (a) Principles of Optical Fiber</h4>
+<ul>
+  <li><strong>Total Internal Reflection (TIR):</strong> The core principle. Light traveling through a denser medium (glass core) hits the boundary of a less dense medium (cladding) at an angle greater than the "critical angle". Instead of passing through, the light perfectly reflects back into the core, bouncing down the cable with zero loss through the walls.</li>
+  <li><strong>Multi-mode Fiber:</strong> Has a thick core. Light rays bounce at multiple different angles (modes). This causes Modal Dispersion (pulses spread out and blur together over long distances). Used for short-distance LANs.</li>
+  <li><strong>Single-mode Fiber:</strong> Has a microscopic core. Light can only travel straight down the middle in one single mode. Eliminates modal dispersion. Used for long-haul transoceanic cables.</li>
+</ul>
+
+<h4>Part (b) Limitations</h4>
+<ul>
+  <li><strong>Attenuation (Signal Loss):</strong> Measured in Decibels per kilometer (dB/km). Caused by impurities in the glass scattering or absorbing the light. Formula: \(\text{Loss} = 10 \log_{10}(\frac{P_{in}}{P_{out}})\). If a 100km link has 0.2 dB/km attenuation, total loss is 20 dB, meaning 99% of the signal power is lost and requires an optical amplifier.</li>
+  <li><strong>Dispersion (Signal Smearing):</strong> As light pulses travel, they spread out in time. If they spread too much, adjacent pulses overlap (Inter-Symbol Interference), and the receiver cannot distinguish a 1 from a 0. Limits the maximum bandwidth and distance.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-23">
                 <div class="q-text"><span class="q-badge c15">Q23</span><span>a) Explain Data Link Layer Framing methods: Byte Count, Byte Stuffing, Bit Stuffing.
 b) Perform bit stuffing on frame `011111101111110`.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Data Link Layer Framing methods: Byte Count, Byte Stuffing, Bit Stuffing.
-b) Perform bit stuffing on frame `011111101111110`..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Data Link Layer Framing</h3>
+<h4>Part (a) Framing Methods</h4>
+<p>Framing breaks a continuous bit stream into manageable blocks (frames) so the receiver knows where data starts and ends.</p>
+<ul>
+  <li><strong>Byte Count:</strong> The frame header specifies the exact number of bytes in the frame. (Flaw: If the count gets corrupted, the receiver loses sync entirely).</li>
+  <li><strong>Byte Stuffing (Character Stuffing):</strong> Special FLAG bytes denote the start/end of a frame. If the FLAG byte accidentally appears inside the data, an ESC (Escape) byte is stuffed before it to tell the receiver "this is data, not the end of the frame".</li>
+  <li><strong>Bit Stuffing:</strong> The FLAG is a specific 8-bit pattern: <code>01111110</code> (Six 1s). To ensure this pattern never appears in the data, the sender artificially stuffs a <code>0</code> after every five consecutive <code>1</code>s in the payload.</li>
+</ul>
+
+<h4>Part (b) Bit Stuffing Example</h4>
+<p><strong>Original Payload:</strong> <code>011111101111110</code></p>
+<p>Rule: After exactly five 1s, stuff a 0.</p>
+<ul>
+  <li>First block: <code>011111</code> &rarr; Stuff a 0 &rarr; <code>011111(0)</code></li>
+  <li>Next bit is <code>1</code> &rarr; <code>011111(0)1</code></li>
+  <li>Next bit is <code>0</code> &rarr; <code>011111(0)10</code></li>
+  <li>Next block: <code>11111</code> &rarr; Stuff a 0 &rarr; <code>011111(0)1011111(0)</code></li>
+  <li>Next bit is <code>1</code> &rarr; <code>011111(0)1011111(0)1</code></li>
+  <li>Next bit is <code>0</code> &rarr; <code>011111(0)1011111(0)10</code></li>
+</ul>
+<p><strong>Stuffed Payload:</strong> <code>01111101011111010</code></p>
+<p><strong>Final Transmitted Frame:</strong> <code>[FLAG] 01111101011111010 [FLAG]</code></p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-24">
                 <div class="q-text"><span class="q-badge c15">Q24</span><span>a) Explain Network Management Protocol SNMP (v1, v2, v3) Architecture.
 b) Detail Management Information Base (MIB) and SMI structure.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Network Management Protocol SNMP (v1, v2, v3) Architecture.
-b) Detail Management Information Base (MIB) and SMI structure..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: SNMP Architecture</h3>
+<h4>Part (a) SNMP v1, v2, v3</h4>
+<p>Simple Network Management Protocol (SNMP) is used to monitor and configure network devices (routers, servers, printers).</p>
+<ul>
+  <li><strong>SNMPv1:</strong> Original standard. Unencrypted (plaintext community strings).</li>
+  <li><strong>SNMPv2c:</strong> Added Bulk GET requests for efficiency, but security was still weak plaintext.</li>
+  <li><strong>SNMPv3:</strong> Introduced massive security upgrades: Authentication (passwords), Privacy (Data Encryption via AES), and Access Control (who can view what).</li>
+</ul>
+
+<h4>Part (b) MIB and SMI</h4>
+<ul>
+  <li><strong>SMI (Structure of Management Information):</strong> The rules defining how management data is structured, named, and formatted. It ensures all devices speak the same structural language.</li>
+  <li><strong>MIB (Management Information Base):</strong> A hierarchical, tree-structured database of all the variables (objects) that can be monitored or changed on a device. 
+      <br/><em>Example:</em> An Object Identifier (OID) like <code>1.3.6.1.2.1.2.2.1.10.1</code> specifically points to the "bytes received on interface 1". The SNMP manager queries this OID to draw a traffic graph.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-25">
                 <div class="q-text"><span class="q-badge c15">Q25</span><span>a) Explain Mobile IP Architecture.
 b) Detail Home Agent, Foreign Agent, Care-of Address, and Tunneling mechanism.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Mobile IP Architecture.
-b) Detail Home Agent, Foreign Agent, Care-of Address, and Tunneling mechanism..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Mobile IP Architecture</h3>
+<h4>Part (a) Overview</h4>
+<p>Standard IP assumes a device's IP address dictates its physical location. If a laptop moves to a new Wi-Fi network, its IP must change, breaking all active TCP connections. Mobile IP solves this, allowing a device to roam across different networks while keeping the exact same IP address.</p>
+
+<h4>Part (b) Core Components</h4>
+<ul>
+  <li><strong>Home Agent (HA):</strong> A router on the Mobile Node's permanent home network. It intercepts packets destined for the node when it is away.</li>
+  <li><strong>Foreign Agent (FA):</strong> A router on the new, visited network that the Mobile Node has roamed into.</li>
+  <li><strong>Care-of Address (CoA):</strong> A temporary IP address assigned to the Mobile Node by the Foreign network. It reflects the node's actual current physical location.</li>
+  <li><strong>Tunneling Mechanism:</strong> 
+      <ol>
+        <li>The Mobile Node moves and registers its new CoA with its Home Agent.</li>
+        <li>A sender sends a packet to the node's permanent Home IP.</li>
+        <li>The Home Agent intercepts the packet, encapsulates it inside a <em>new</em> IP packet destined for the Care-of Address (IP-in-IP Tunneling), and sends it.</li>
+        <li>The Foreign Agent receives the tunneled packet, strips the outer header, and delivers the original packet to the Mobile Node.</li>
+      </ol>
+  </li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-26">
@@ -1678,55 +2191,52 @@ b) Detail Home Agent, Foreign Agent, Care-of Address, and Tunneling mechanism..<
 (MitM), SQL Injection.
 b) Detail SYN Flood attack and SYN Cookies defense.</span></div>
                 <div class="a-text">
-                    <p><b>15-Mark Master Exam Solution:</b></p>
-<p><b>Part (a) Intermediate Code Generation for \(a = b * -c + b * -c\):</b></p>
-<p><b>1. Three-Address Code (TAC):</b></p>
-<div class="code-block">
-t1 = -c
-t2 = b * t1
-t3 = -c
-t4 = b * t3
-t5 = t2 + t4
-a = t5
-</div>
-<p><b>2. Quadruples Representation:</b></p>
-<table>
-    <tr><th>Index</th><th>Op</th><th>Arg1</th><th>Arg2</th><th>Result</th></tr>
-    <tr><td>(0)</td><td>uminus</td><td>c</td><td>-</td><td>t1</td></tr>
-    <tr><td>(1)</td><td>*</td><td>b</td><td>t1</td><td>t2</td></tr>
-    <tr><td>(2)</td><td>uminus</td><td>c</td><td>-</td><td>t3</td></tr>
-    <tr><td>(3)</td><td>*</td><td>b</td><td>t3</td><td>t4</td></tr>
-    <tr><td>(4)</td><td>+</td><td>t2</td><td>t4</td><td>t5</td></tr>
-    <tr><td>(5)</td><td>=</td><td>t5</td><td>-</td><td>a</td></tr>
-</table>
+                    <h3>Master Answer: Network Security Threats</h3>
+<h4>Part (a) Common Threats</h4>
+<ul>
+  <li><strong>DoS (Denial of Service):</strong> Flooding a server with fake requests so legitimate users cannot access it.</li>
+  <li><strong>DDoS (Distributed DoS):</strong> Using a massive botnet of thousands of compromised IoT devices to launch a DoS attack. Extremely hard to block because the traffic comes from everywhere.</li>
+  <li><strong>Man-in-the-Middle (MitM):</strong> An attacker secretly intercepts and relays communications between two parties who believe they are talking directly (e.g., using a fake open Wi-Fi hotspot).</li>
+  <li><strong>SQL Injection:</strong> Inserting malicious SQL commands into a website's input form to manipulate the backend database (e.g., stealing passwords or deleting tables).</li>
+</ul>
+
+<h4>Part (b) SYN Flood Attack & SYN Cookies</h4>
+<p><strong>SYN Flood (DoS):</strong> An attacker sends millions of TCP <code>SYN</code> requests with spoofed IPs but never completes the 3-way handshake (never sends the final <code>ACK</code>). The server allocates memory for all these "half-open" connections until its RAM fills up, causing it to crash.</p>
+<p><strong>SYN Cookies Defense:</strong> The server stops allocating memory for half-open connections. Instead, when it receives a <code>SYN</code>, it cryptographically hashes the client's IP, Port, and a secret key to generate a unique "Cookie". It sends this Cookie as the <code>SYN-ACK</code> Sequence Number and forgets about the client. If the client is legitimate, it replies with an <code>ACK</code> containing (Cookie + 1). The server recalculates the hash to verify it, and <em>only then</em> allocates memory to establish the connection.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-27">
                 <div class="q-text"><span class="q-badge c15">Q27</span><span>a) Explain Peer-to-Peer (P2P) Architecture vs Client-Server Architecture.
 b) Detail BitTorrent protocol, DHT (Distributed Hash Table), and Choking algorithm.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Peer-to-Peer (P2P) Architecture vs Client-Server Architecture.
-b) Detail BitTorrent protocol, DHT (Distributed Hash Table), and Choking algorithm..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: P2P and BitTorrent</h3>
+<h4>Part (a) P2P vs Client-Server</h4>
+<p>In Client-Server, all clients download files from a single, centralized server. As more users join, the server becomes a bottleneck and crashes. In Peer-to-Peer (P2P), every node is both a client and a server. As more users join, the total upload capacity of the network actually <em>increases</em>.</p>
+
+<h4>Part (b) BitTorrent Protocol Details</h4>
+<ul>
+  <li><strong>BitTorrent:</strong> A file is broken into hundreds of small chunks. A user downloads chunk A from Peer 1, chunk B from Peer 2, and simultaneously uploads chunk A to Peer 3.</li>
+  <li><strong>DHT (Distributed Hash Table):</strong> A decentralized way for peers to find each other without needing a central "Tracker" server. Every peer acts as a mini-directory, maintaining a small routing table mapping file hashes to peer IPs.</li>
+  <li><strong>Choking Algorithm (Tit-for-Tat):</strong> A defense against "Leechers" (people who download but refuse to upload). A peer monitors who is uploading to it the fastest. It "unchokes" (allows uploads to) the top 4 fastest peers, and "chokes" (blocks) the rest. If you want fast downloads, you are mathematically forced to upload fast in return.</li>
+</ul>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-28">
                 <div class="q-text"><span class="q-badge c15">Q28</span><span>a) Explain Virtual Local Area Networks (VLAN) IEEE 802.1Q tagging.
 b) Detail VLAN configuration and Inter-VLAN routing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Virtual Local Area Networks (VLAN) IEEE 802.1Q tagging.
-b) Detail VLAN configuration and Inter-VLAN routing..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: VLAN Architecture</h3>
+<h4>Part (a) VLAN and 802.1Q Tagging</h4>
+<p>A VLAN (Virtual LAN) logically divides a single physical network switch into multiple isolated broadcast domains. For example, Ports 1-10 are the "HR VLAN", and Ports 11-20 are the "Engineering VLAN". A broadcast sent by HR will never reach Engineering, even though they are plugged into the same switch.</p>
+<p><strong>IEEE 802.1Q Tagging:</strong> When a frame needs to travel between two different switches via a "Trunk Link", the switches need to know which VLAN the frame belongs to. 802.1Q inserts a 4-byte Tag into the Ethernet header containing the 12-bit VLAN ID (allowing up to 4094 VLANs).</p>
+
+<h4>Part (b) Configuration and Routing</h4>
+<p>VLANs provide strict Layer 2 isolation. Computers in VLAN 10 literally cannot ping computers in VLAN 20, even on the same subnet.</p>
+<p><strong>Inter-VLAN Routing:</strong> To allow controlled communication between VLANs, a Layer 3 Router (or Layer 3 Switch) is required. 
+<br/><em>Router-on-a-Stick:</em> A single physical cable connects the switch to the router. The router interface is divided into multiple virtual "sub-interfaces", one for each VLAN. The router acts as the default gateway for each VLAN, routing packets securely between them based on ACLs.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gc-29">
@@ -1738,33 +2248,40 @@ b) Detail Anycast routing and Edge Caching strategies.
 
 --- Page 5 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Overlay Networks and Content Delivery Networks (CDN).
-b) Detail Anycast routing and Edge Caching strategies.
+                    <h3>Master Answer: Overlay Networks & CDN</h3>
+<h4>Part (a) Overlay Networks & CDNs</h4>
+<ul>
+  <li><strong>Overlay Network:</strong> A virtual, logical network built on top of an existing physical network. (e.g., A VPN is an overlay network built on top of the physical internet. P2P is an overlay network).</li>
+  <li><strong>CDN (Content Delivery Network):</strong> A globally distributed network of proxy servers (like Cloudflare or Akamai). Its goal is to serve content (images, videos, HTML) to end-users with high availability and high performance by caching the content geographically closer to the user.</li>
+</ul>
 
+<h4>Part (b) Edge Caching and Anycast</h4>
+<ul>
+  <li><strong>Edge Caching:</strong> Instead of a user in India downloading a video from a server in New York (high latency), the CDN caches a copy of the video on an "Edge Server" located in Mumbai. The Indian user downloads from Mumbai, dropping latency from 250ms to 20ms.</li>
+  <li><strong>Anycast Routing:</strong> A network routing methodology where multiple servers in different geographic locations all share the <em>exact same IP address</em>. When a user queries that IP, the BGP routing protocol automatically routes the request to the topologically <em>closest</em> server.</li>
+</ul>
 
-
-
---- Page 5 ---.</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
                 </div>
             </div>
             <div class="qa-card" id="gc-30">
                 <div class="q-text"><span class="q-badge c15">Q30</span><span>a) Explain Real-time Audio/Video Streaming protocols: RTP, RTCP, RTSP, HLS.
 b) Detail Jitter buffering and Packet Loss concealment techniques.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Mathematical Model / Formulation:</b> Provide the underlying theory or formulas for a) Explain Real-time Audio/Video Streaming protocols: RTP, RTCP, RTSP, HLS.
-b) Detail Jitter buffering and Packet Loss concealment techniques..</li>
-        <li><b>Algorithm / Execution Trace:</b> Show step-by-step resolution.</li>
-        <li><b>Final Conclusion:</b> Summarize findings or final metric.</li>
-    </ul>
-</div>
+                    <h3>Master Answer: Real-time Streaming</h3>
+<h4>Part (a) Streaming Protocols</h4>
+<ul>
+  <li><strong>RTP (Real-time Transport Protocol):</strong> Runs over UDP. Provides sequence numbers and timestamps to the raw audio/video packets so the receiver can play them back in order and in sync.</li>
+  <li><strong>RTCP (RTP Control Protocol):</strong> Operates alongside RTP. It sends periodic statistics (packet loss, delay) back to the sender so the sender can dynamically adjust the video quality.</li>
+  <li><strong>RTSP (Real-Time Streaming Protocol):</strong> The "Remote Control" protocol. Used to establish the session and send Play, Pause, and Fast-Forward commands to the media server.</li>
+  <li><strong>HLS (HTTP Live Streaming):</strong> Apple's protocol. It breaks a video into 10-second chunks and streams them over standard HTTP/TCP. It seamlessly adjusts video resolution based on current internet speed (Adaptive Bitrate Streaming).</li>
+</ul>
+
+<h4>Part (b) Overcoming Network Flaws</h4>
+<ul>
+  <li><strong>Jitter Buffering:</strong> Packets arrive over the internet with varying delays (Jitter). The receiver intentionally delays playing the video by a few seconds, storing incoming packets in a buffer. It then reads out of the buffer at a perfectly smooth, constant rate to prevent stuttering.</li>
+  <li><strong>Packet Loss Concealment (PLC):</strong> If a UDP audio packet is completely lost, retransmitting it is too slow for a live call. The receiver uses PLC algorithms to "guess" and synthesize the missing 20 milliseconds of audio by interpolating the sound before and after the lost packet, masking the drop from the human ear.</li>
+</ul>
+
                 </div>
             </div>
 </main>
