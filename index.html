@@ -3,678 +3,412 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Study Notes</title>
-    <meta name="description" content="A comprehensive curriculum library containing simple answers, key points, and PYQ solutions for various subjects including Computer Architecture and Chemistry.">
-    
-    <!-- Google Fonts -->
+    <title>Academic Study Notes — MAKAUT B.Tech CSE Solved Question Banks</title>
+    <meta name="description" content="Solved question banks for MAKAUT B.Tech Computer Science. Group A, B and C questions answered in full, with diagrams and worked numericals.">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* CSS Reset & Variables */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            /* Palette for book spine accents */
-            --color-u1: #3b82f6; /* Blue/Indigo for Pipelining */
-            --color-u2: #8b5cf6; /* Royal Purple for Memory */
-            --color-u3: #f97316; /* Terracotta Orange for ILP */
-            --color-u4: #0ea5e9; /* Ocean Sky for Vector */
-            --color-u5: #10b981; /* Forest Green for Multiprocessor */
-            
-            --bg-desk: #eae6db; /* Desk/Surface ambient tone */
-            --bg-paper: #fefdfb; /* Fine book paper background */
-            --text-main: #1e293b; /* Charcoal ink */
-            --text-muted: #57687e; /* Muted ink */
-            --border-light: rgba(44, 62, 80, 0.1);
+            /* Palette unchanged — desk, paper, ink, and the per-subject accents */
+            --bg-desk: #eae6db;
+            --bg-paper: #fefdfb;
+            --ink: #1e293b;
+            --ink-strong: #0f172a;
+            --ink-muted: #57687e;
+            --rule: rgba(15, 23, 42, 0.12);
+            --rule-soft: rgba(15, 23, 42, 0.07);
+
+            --os: #2563eb;
+            --ai: #8b5cf6;
+            --cn: #047857;
+            --cd: #c2410c;
+            --se: #0369a1;
+
+            --display: 'Plus Jakarta Sans', system-ui, sans-serif;
+            --body: 'Inter', system-ui, sans-serif;
+            /* The utility face. Course codes and marks are printed data on a real
+               paper, so they get a machine face rather than the body face. */
+            --util: 'JetBrains Mono', ui-monospace, monospace;
         }
 
         body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-family: var(--body);
             background-color: var(--bg-desk);
-            /* Soft paper/desk texture overlay */
-            background-image: 
-                radial-gradient(rgba(30, 41, 59, 0.03) 1px, transparent 1px), 
-                radial-gradient(rgba(30, 41, 59, 0.03) 1px, var(--bg-desk) 1px);
-            background-size: 24px 24px;
-            background-position: 0 0, 12px 12px;
-            color: var(--text-main);
+            color: var(--ink);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .sheet {
+            max-width: 1180px;
+            margin: 0 auto;
             min-height: 100vh;
-            padding: 2rem 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--bg-paper);
+            border-inline: 1px solid var(--rule-soft);
+            padding: clamp(2.5rem, 6vw, 5.5rem) clamp(1.25rem, 5vw, 4.5rem) 5rem;
         }
 
-        /* FOLIO PAGE WRAPPER (Visual book simulator page) */
-        .folio-page {
-            max-width: 1100px;
-            width: 100%;
-            background-color: var(--bg-paper);
-            border: 1px solid rgba(44, 62, 80, 0.15);
-            border-radius: 4px;
-            padding: 4.5rem 3.5rem;
-            position: relative;
-            box-shadow: 
-                0 1px 2px rgba(0, 0, 0, 0.05),
-                0 8px 32px -4px rgba(0, 0, 0, 0.08),
-                0 24px 64px -12px rgba(0, 0, 0, 0.12),
-                inset 0 0 100px rgba(253, 252, 251, 0.8);
-        }
+        /* ---------- Masthead: a MAKAUT paper header, kept in that structure ---------- */
 
-        /* Inset Folio Border Line */
-        .folio-page::before {
-            content: '';
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            right: 15px;
-            bottom: 15px;
-            border: 1px dashed rgba(44, 62, 80, 0.08);
-            pointer-events: none;
-            border-radius: 2px;
-        }
+        .masthead { padding-bottom: 2.5rem; border-bottom: 2px solid var(--ink-strong); }
 
-        /* TITLE PAGE HEADER */
-        .title-page {
-            text-align: center;
-            position: relative;
-            z-index: 2;
-            max-width: 760px;
-            margin: 0 auto 3.5rem;
-        }
-
-        .book-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--text-muted);
-            letter-spacing: 0.25em;
+        .eyebrow {
+            font-family: var(--util);
+            font-size: 0.74rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
-            margin-bottom: 1.25rem;
+            color: var(--ink-muted);
         }
 
-        .book-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 3.6rem;
-            font-weight: 700;
-            line-height: 1.1;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
-            letter-spacing: -0.02em;
+        h1 {
+            font-family: var(--display);
+            font-size: clamp(2.5rem, 7vw, 4.75rem);
+            font-weight: 800;
+            line-height: 1.02;
+            letter-spacing: -0.035em;
+            color: var(--ink-strong);
+            margin: 1.5rem 0 1rem;
+            text-wrap: balance;
         }
 
-        /* Book divider style with ornament */
-        .book-divider {
+        .standfirst {
+            font-size: clamp(1.02rem, 1.5vw, 1.2rem);
+            color: var(--ink-muted);
+            max-width: 54ch;
+            text-wrap: pretty;
+        }
+
+        /* The paper's own metadata line — Full Marks / Time, restated as scope */
+        .paper-meta {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.35rem 2.5rem;
+            margin-top: 2.5rem;
+            font-family: var(--util);
+            font-size: 0.82rem;
+            color: var(--ink-muted);
+        }
+        .paper-meta b { color: var(--ink-strong); font-weight: 700; }
+
+        /* ---------- Section bands ---------- */
+
+        .band {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
             gap: 1.5rem;
-            margin: 1.5rem 0 1.75rem;
+            margin: 4.5rem 0 1.75rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid var(--rule);
         }
 
-        .book-divider .line {
-            height: 1px;
-            width: 90px;
-            background: linear-gradient(to right, rgba(44, 62, 80, 0.25), transparent);
+        .band h2 {
+            font-family: var(--display);
+            font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--ink-strong);
         }
 
-        .book-divider .line:first-child {
-            background: linear-gradient(to left, rgba(44, 62, 80, 0.25), transparent);
+        .band-note {
+            font-family: var(--util);
+            font-size: 0.76rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-muted);
+            white-space: nowrap;
         }
 
-        .book-divider .ornament {
-            font-size: 1.2rem;
-            color: rgba(44, 62, 80, 0.45);
-            user-select: none;
-            line-height: 1;
+        /* ---------- Subject cards ---------- */
+
+        .subjects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.25rem;
         }
 
-        .book-subtitle {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1.3rem;
-            line-height: 1.5;
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            max-width: 620px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .book-stats {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 2rem;
-            border-top: 1px solid rgba(44, 62, 80, 0.08);
-            border-bottom: 1px solid rgba(44, 62, 80, 0.08);
-            padding: 0.75rem 2.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .stat-item {
-            text-align: center;
+        .subject {
+            --accent: var(--ink-strong);
+            position: relative;
             display: flex;
             flex-direction: column;
-            gap: 0.15rem;
-        }
-
-        .stat-val {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #0f172a;
-        }
-
-        .stat-lbl {
-            font-size: 0.65rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-        }
-
-        .stat-divider {
-            width: 1px;
-            height: 24px;
-            background-color: rgba(44, 62, 80, 0.08);
-        }
-
-        /* CHAPTERS GRID */
-        .chapters-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            position: relative;
-            z-index: 2;
-            margin-bottom: 1.5rem;
-        }
-
-        /* CHAPTER CARDS (Individual dividers) */
-        .chapter-card {
-            background-color: #ffffff;
-            border: 1px solid rgba(44, 62, 80, 0.1);
-            border-radius: 8px;
-            padding: 2.2rem 1.8rem;
+            padding: 1.75rem 1.6rem 1.4rem;
+            background: var(--bg-paper);
+            border: 1px solid var(--rule-soft);
+            border-radius: 14px;
             text-decoration: none;
             color: inherit;
+            overflow: hidden;
+            transition: border-color 220ms cubic-bezier(.16,1,.3,1),
+                        box-shadow 220ms cubic-bezier(.16,1,.3,1),
+                        transform 220ms cubic-bezier(.16,1,.3,1);
+        }
+
+        .subject::before {
+            content: "";
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 3px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transform-origin: 0 50%;
+            transition: transform 320ms cubic-bezier(.16,1,.3,1);
+        }
+
+        .subject:hover, .subject:focus-visible {
+            transform: translateY(-3px);
+            border-color: var(--rule);
+            box-shadow: 0 1px 1px rgba(15,23,42,.03), 0 14px 30px -18px rgba(15,23,42,.35);
+        }
+        .subject:hover::before, .subject:focus-visible::before { transform: scaleX(1); }
+        .subject:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+        .code {
+            font-family: var(--util);
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            color: var(--accent);
+        }
+
+        .subject h3 {
+            font-family: var(--display);
+            font-size: 1.32rem;
+            font-weight: 700;
+            line-height: 1.22;
+            letter-spacing: -0.017em;
+            color: var(--ink-strong);
+            margin: 0.55rem 0 0.5rem;
+        }
+
+        .topics {
+            font-size: 0.88rem;
+            line-height: 1.55;
+            color: var(--ink-muted);
+            margin-bottom: 1.4rem;
+            text-wrap: pretty;
+        }
+
+        /* THE SIGNATURE — the marks rail, set like the margin of a printed paper */
+        .rail {
+            margin-top: auto;
+            padding-top: 0.9rem;
+            border-top: 1px solid var(--rule-soft);
+            font-family: var(--util);
+            font-size: 0.75rem;
+            font-variant-numeric: tabular-nums;
+            color: var(--ink-muted);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            min-height: 390px;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: transform, box-shadow;
-            box-shadow: 
-                0 2px 4px rgba(0, 0, 0, 0.02),
-                0 4px 12px -2px rgba(0, 0, 0, 0.03);
+            gap: 0.28rem;
         }
 
-        /* Colored Spine Bindings */
-        .chapter-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            width: 6px;
-            background-color: var(--chapter-color);
-            transition: width 0.3s ease;
-        }
-
-        /* Visual sheet shadow to mimic a thick paper page edge */
-        .chapter-card::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to right, rgba(0,0,0,0.01), rgba(0,0,0,0.04));
-            pointer-events: none;
-        }
-
-        .chapter-card:hover {
-            transform: translateY(-8px) rotate(-1deg);
-            border-color: rgba(44, 62, 80, 0.18);
-            box-shadow: 
-                0 16px 28px -8px rgba(30, 41, 59, 0.08),
-                0 6px 12px -2px rgba(30, 41, 59, 0.04);
-        }
-
-        .chapter-card:hover::before {
-            width: 10px;
-        }
-
-        /* Chapter Card Content details */
-        .chapter-header {
-            margin-bottom: 1.25rem;
-        }
-
-        .chapter-num {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 0.85rem;
+        .rail-row { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+        .rail-row span:first-child { letter-spacing: 0.04em; min-width: 0; }
+        /* The value is the point of the rail — never let it break across lines */
+        .rail-row b { color: var(--ink); font-weight: 500; white-space: nowrap; }
+        .rail-total {
+            margin-top: 0.3rem;
+            padding-top: 0.45rem;
+            border-top: 1px solid var(--rule-soft);
+            color: var(--ink-strong);
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--chapter-color);
-            margin-bottom: 0.4rem;
         }
 
-        .chapter-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.35rem;
-            font-weight: 700;
-            line-height: 1.25;
-            color: #0f172a;
-            margin-bottom: 0.5rem;
-        }
+        /* ---------- Colophon ---------- */
 
-        .chapter-desc {
-            font-size: 0.8rem;
-            line-height: 1.45;
-            color: var(--text-muted);
-        }
-
-        /* MINI TABLE OF CONTENTS (Leader Dots index) */
-        .mini-toc {
-            margin-top: 1.25rem;
-            border-top: 1px dashed rgba(44, 62, 80, 0.06);
-            padding-top: 1.25rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
-        }
-
-        .toc-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--text-main);
-            padding: 0.35rem 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.2s ease, transform 0.2s ease;
-            cursor: pointer;
-        }
-        
-        .toc-item:hover {
-            background-color: rgba(44, 62, 80, 0.05);
-            transform: translateX(2px);
-        }
-
-        .toc-lbl {
-            flex-shrink: 0;
-            font-weight: 500;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 75%;
-        }
-
-        .toc-dots {
-            flex-grow: 1;
-            border-bottom: 1px dotted rgba(44, 62, 80, 0.2);
-            margin: 0 0.4rem;
-            position: relative;
-            top: -3px;
-        }
-
-        .toc-idx {
-            flex-shrink: 0;
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        /* CARD FOOTER */
-        .card-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-top: 1.5rem;
-            border-top: 1px solid rgba(44, 62, 80, 0.05);
-            padding-top: 1rem;
-        }
-
-        .badge-count {
-            background-color: rgba(44, 62, 80, 0.05);
-            color: var(--text-main);
-            font-size: 0.7rem;
-            font-weight: 700;
-            padding: 0.35rem 0.75rem;
-            border-radius: 4px;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .read-action {
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--chapter-color);
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            transition: gap 0.2s ease;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .read-action .arrow {
-            font-size: 1.1rem;
-            line-height: 1;
-            transition: transform 0.2s ease;
-        }
-
-        .chapter-card:hover .read-action {
-            gap: 0.4rem;
-        }
-
-        .chapter-card:hover .read-action .arrow {
-            transform: translateX(2px);
-        }
-
-        /* Page-turn exit transition */
-        .folio-page {
-            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .folio-page.turn-exit {
-            opacity: 0;
-            transform: rotateY(-8deg) scale(0.98);
-        }
-
-        /* FOOTER / COLOPHON */
         footer {
-            text-align: center;
-            margin-top: 4.5rem;
-            border-top: 1px solid rgba(44, 62, 80, 0.06);
+            margin-top: 5rem;
             padding-top: 1.75rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .colophon-ornament {
-            font-size: 0.8rem;
-            color: rgba(44, 62, 80, 0.25);
-            margin-bottom: 0.75rem;
-        }
-
-        .colophon-text {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--text-muted);
-        }
-
-        .colophon-text a {
-            color: var(--text-main);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(30, 41, 59, 0.2);
-            transition: border-color 0.2s ease;
-        }
-
-        .colophon-text a:hover {
-            border-bottom-color: var(--text-main);
-        }
-
-        /* Dynamic Progress Bar */
-        .card-progress-container {
+            border-top: 1px solid var(--rule);
+            font-size: 0.86rem;
+            color: var(--ink-muted);
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            border-top: 1px solid rgba(44, 62, 80, 0.05);
-            padding-top: 1.25rem;
-        }
-        
-        .card-progress-bar {
-            flex-grow: 1;
-            height: 4px;
-            background-color: rgba(44, 62, 80, 0.1);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-        
-        .card-progress-fill {
-            height: 100%;
-            background-color: var(--chapter-color, #1e293b);
-            border-radius: 2px;
-            transition: width 0.4s ease;
-        }
-        
-        .card-progress-text {
-            font-size: 0.95rem;
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 700;
-            color: var(--text-main);
-            min-width: 32px;
-            text-align: right;
-        }
-
-        .section-divider-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            color: #0f172a;
-            margin: 3.5rem 0 1.5rem;
-            border-bottom: 2px dashed rgba(44, 62, 80, 0.15);
-            padding-bottom: 0.6rem;
-            display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.5rem;
             justify-content: space-between;
         }
+        footer a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--rule); }
+        footer a:hover { border-bottom-color: var(--ink); }
+        .colophon-note { font-family: var(--util); font-size: 0.76rem; }
 
-        .section-divider-title .sem-badge {
-            font-size: 0.85rem;
-            font-family: 'Inter', sans-serif;
-            background: #2563eb;
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-weight: 600;
+        @media (max-width: 640px) {
+            .subjects { grid-template-columns: 1fr; }
+            .band { margin-top: 3rem; }
         }
 
-        /* RESPONSIVE LAYOUT adjustments */
-        @media (max-width: 768px) {
-            body {
-                padding: 1rem 0.5rem;
-            }
-            .folio-page {
-                padding: 3rem 1.75rem;
-            }
-            .book-title {
-                font-size: 2.5rem;
-            }
-            .book-stats {
-                gap: 1rem;
-                padding: 0.6rem 1.25rem;
-            }
-            .stat-val {
-                font-size: 1.05rem;
-            }
-            .stat-lbl {
-                font-size: 0.55rem;
-            }
-            .chapters-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            .chapter-card {
-                min-height: auto;
-            }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition-duration: 0.01ms !important; }
         }
-    
-        .diagram-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-            border: 1px solid #cbd5e1 !important;
-            border-radius: 14px !important;
-            padding: 1.8rem !important;
-            margin: 2.2rem 0 !important;
-            text-align: center !important;
-            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
-        }
-        .diagram-container svg {
-            max-width: 100%;
-            height: auto;
-            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
-        }
-        .diagram-caption {
-            font-size: 0.88rem !important;
-            color: #475569 !important;
-            margin-top: 1.1rem !important;
-            font-style: italic !important;
-            font-weight: 600 !important;
-            letter-spacing: 0.02em !important;
-        }
-
     </style>
-    <link rel="stylesheet" href="premium.css">
 </head>
 <body>
 
-<main class="folio-page">
-    <!-- TITLE PAGE HEADER -->
-    <header class="title-page">
-        <div class="book-badge">Academic Solved Notes</div>
-        <h1 class="book-title">Academic Study Notes</h1>
-        
-        <div class="book-divider">
-            <span class="line"></span>
-            <span class="ornament">❖</span>
-            <span class="line"></span>
-        </div>
-        
-        <p class="book-subtitle">
-            A comprehensive curriculum library containing simple, point-wise question-and-answer solutions designed to simplify exam preparation.
+<main class="sheet">
+
+    <header class="masthead">
+        <p class="eyebrow">MAKAUT &middot; B.Tech &middot; Computer Science &amp; Engineering</p>
+        <h1>Solved question banks</h1>
+        <p class="standfirst">
+            Previous-year questions worked through in full &mdash; every Group A definition,
+            every Group B explanation, every Group C numerical solved step by step.
         </p>
-        
-        <div class="book-stats">
-            <div class="stat-item">
-                <span class="stat-val">10</span>
-                <span class="stat-lbl">Subjects</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-val">4th & 5th Sem</span>
-                <span class="stat-lbl">Curriculum</span>
-            </div>
-            <div class="stat-divider"></div>
-            <div class="stat-item">
-                <span class="stat-val">900+ Qs</span>
-                <span class="stat-lbl">Detailed Solutions</span>
-            </div>
-        </div>
+        <p class="paper-meta">
+            <span>Semesters <b>1 &ndash; 5</b></span>
+            <span>Subjects <b>12</b></span>
+            <span>Groups <b>A / B / C</b></span>
+        </p>
     </header>
 
-    <!-- MAIN SEMESTER FOLDERS SECTION -->
-    <div class="section-divider-title">
-        <span>Semester Folders</span>
-        <span class="sem-badge" style="background: #2563eb;">Curriculum Folders</span>
+    <div class="band">
+        <h2>Semester 5</h2>
+        <span class="band-note">613 solved questions</span>
     </div>
 
-    <section class="chapters-grid">
-        
-        <!-- 4TH SEMESTER FOLDER CARD -->
-        <a href="Semester_4/index.html" class="chapter-card" style="--chapter-color: #2563eb;" id="folder-sem4">
-            <div class="card-content">
-                <div class="chapter-header">
-                    <div class="chapter-num">Semester 4</div>
-                    <h2 class="chapter-title">4th Semester Folder</h2>
-                    <p class="chapter-desc">Dedicated folder for all 4th Semester subjects: Algorithms, Computer Architecture, Automata, Environment & Biology.</p>
-                </div>
-                
-                <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/algorithms/algorithms_index.html';">
-                        <span class="toc-lbl">Design & Analysis of Algorithms</span><span class="toc-dots"></span><span class="toc-idx">DAA</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/architecture/architecture_index.html';">
-                        <span class="toc-lbl">Computer Architecture</span><span class="toc-dots"></span><span class="toc-idx">COA</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/automata/automata_index.html';">
-                        <span class="toc-lbl">Formal Language & Automata</span><span class="toc-dots"></span><span class="toc-idx">FLAT</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/environment/Environmental_Sciences.html';">
-                        <span class="toc-lbl">Environmental Sciences</span><span class="toc-dots"></span><span class="toc-idx">ENV</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_4/biology/Biology.html';">
-                        <span class="toc-lbl">Biology</span><span class="toc-dots"></span><span class="toc-idx">BIO</span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer">
-                <span class="badge-count">5 Subjects</span>
-                <span class="read-action">Open 4th Sem Folder <span class="arrow">→</span></span>
+    <section class="subjects">
+
+        <a class="subject" href="Semester_5/os/os_index.html" style="--accent: var(--os)">
+            <span class="code">PCC-CS502</span>
+            <h3>Operating Systems</h3>
+            <p class="topics">Process scheduling, synchronisation, deadlocks, paging and virtual memory, disk scheduling, UNIX inodes.</p>
+            <div class="rail">
+                <span class="rail-row"><span>Group A</span><b>53 &times; 1</b></span>
+                <span class="rail-row"><span>Group B</span><b>40 &times; 5</b></span>
+                <span class="rail-row"><span>Group C</span><b>30 &times; 15</b></span>
+                <span class="rail-row rail-total"><span>Total</span><b>123 questions</b></span>
             </div>
         </a>
 
-        <!-- 5TH SEMESTER FOLDER CARD -->
-        <a href="Semester_5/index.html" class="chapter-card" style="--chapter-color: #8b5cf6;" id="folder-sem5">
-            <div class="card-content">
-                <div class="chapter-header">
-                    <div class="chapter-num">Semester 5</div>
-                    <h2 class="chapter-title">5th Semester Folder</h2>
-                    <p class="chapter-desc">Dedicated folder for all 5th Semester subjects: Operating Systems, AI, Computer Networks, Compiler Design & Software Eng.</p>
-                </div>
-                
-                <div class="mini-toc">
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/os/os_important_qa.html';">
-                        <span class="toc-lbl">Operating Systems</span><span class="toc-dots"></span><span class="toc-idx">OS</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/ai/ai_important_qa.html';">
-                        <span class="toc-lbl">Artificial Intelligence</span><span class="toc-dots"></span><span class="toc-idx">AI</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/networks/networks_important_qa.html';">
-                        <span class="toc-lbl">Computer Networks</span><span class="toc-dots"></span><span class="toc-idx">CN</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/compiler/compiler_important_qa.html';">
-                        <span class="toc-lbl">Compiler Design</span><span class="toc-dots"></span><span class="toc-idx">CD</span>
-                    </div>
-                    <div class="toc-item" onclick="event.preventDefault(); event.stopPropagation(); window.location.href='Semester_5/se/se_important_qa.html';">
-                        <span class="toc-lbl">Software Engineering</span><span class="toc-dots"></span><span class="toc-idx">SE</span>
-                    </div>
-                </div>
+        <a class="subject" href="Semester_5/ai/ai_index.html" style="--accent: var(--ai)">
+            <span class="code">PEC-CS501B</span>
+            <h3>Artificial Intelligence</h3>
+            <p class="topics">PEAS agents, A* and heuristic search, hill climbing, minimax with alpha-beta pruning, FOL resolution, fuzzy logic.</p>
+            <div class="rail">
+                <span class="rail-row"><span>Group A</span><b>53 &times; 1</b></span>
+                <span class="rail-row"><span>Group B</span><b>40 &times; 5</b></span>
+                <span class="rail-row"><span>Group C</span><b>30 &times; 15</b></span>
+                <span class="rail-row rail-total"><span>Total</span><b>123 questions</b></span>
             </div>
-            <div class="card-footer">
-                <span class="badge-count">5 Subjects</span>
-                <span class="read-action">Open 5th Sem Folder <span class="arrow">→</span></span>
+        </a>
+
+        <a class="subject" href="Semester_5/networks/networks_index.html" style="--accent: var(--cn)">
+            <span class="code">PCC-CS504</span>
+            <h3>Computer Networks</h3>
+            <p class="topics">OSI and TCP/IP layering, CRC, sliding-window protocols, subnetting and CIDR, TCP congestion control, routing.</p>
+            <div class="rail">
+                <span class="rail-row"><span>Group A</span><b>53 &times; 1</b></span>
+                <span class="rail-row"><span>Group B</span><b>40 &times; 5</b></span>
+                <span class="rail-row"><span>Group C</span><b>30 &times; 15</b></span>
+                <span class="rail-row rail-total"><span>Total</span><b>123 questions</b></span>
+            </div>
+        </a>
+
+        <a class="subject" href="Semester_5/compiler/compiler_index.html" style="--accent: var(--cd)">
+            <span class="code">PCC-CS501</span>
+            <h3>Compiler Design</h3>
+            <p class="topics">Lexical analysis, Thompson construction, LL(1) parsing, FIRST and FOLLOW, SLR/LALR/CLR tables, three-address code.</p>
+            <div class="rail">
+                <span class="rail-row"><span>Group A</span><b>52 &times; 1</b></span>
+                <span class="rail-row"><span>Group B</span><b>40 &times; 5</b></span>
+                <span class="rail-row"><span>Group C</span><b>30 &times; 15</b></span>
+                <span class="rail-row rail-total"><span>Total</span><b>122 questions</b></span>
+            </div>
+        </a>
+
+        <a class="subject" href="Semester_5/se/se_index.html" style="--accent: var(--se)">
+            <span class="code">ESC501</span>
+            <h3>Software Engineering</h3>
+            <p class="topics">Waterfall and Agile Scrum, SRS, DFD levels, cohesion and coupling, COCOMO, function points, McCabe complexity.</p>
+            <div class="rail">
+                <span class="rail-row"><span>Group A</span><b>52 &times; 1</b></span>
+                <span class="rail-row"><span>Group B</span><b>40 &times; 5</b></span>
+                <span class="rail-row"><span>Group C</span><b>30 &times; 15</b></span>
+                <span class="rail-row rail-total"><span>Total</span><b>122 questions</b></span>
             </div>
         </a>
 
     </section>
 
-    <!-- FOOTER / COLOPHON -->
-    <footer>
-        <div class="colophon-ornament">❦</div>
-        <p class="colophon-text">
-            Compounded and published by <a href="#">Soumya Chakraborty</a>. Hand-crafted notes to crush exam preparation.
-        </p>
-    </footer>
-</main>
+    <div class="band">
+        <h2>Semester 4</h2>
+        <span class="band-note">Papers &amp; module notes</span>
+    </div>
 
-<!-- Page-turn transition on card navigation -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const folioPage = document.querySelector('.folio-page');
-    const links = document.querySelectorAll('.chapters-grid a');
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            const href = link.getAttribute('href');
-            if (href && href.endsWith('.html') && folioPage) {
-                e.preventDefault();
-                folioPage.classList.add('turn-exit');
-                setTimeout(() => {
-                    window.location.href = href;
-                }, 500);
-            }
-        });
-    });
-});
-</script>
+    <section class="subjects">
+
+        <a class="subject" href="Semester_4/algorithms/algorithms_index.html" style="--accent: var(--os)">
+            <span class="code">DAA</span>
+            <h3>Design &amp; Analysis of Algorithms</h3>
+            <p class="topics">Asymptotic analysis, divide and conquer, greedy methods, dynamic programming, graph algorithms, NP-completeness.</p>
+            <div class="rail"><span class="rail-row"><span>Previous years &amp; exam prep</span><b>7 papers</b></span></div>
+        </a>
+
+        <a class="subject" href="Semester_4/architecture/architecture_index.html" style="--accent: var(--ai)">
+            <span class="code">COA</span>
+            <h3>Computer Architecture</h3>
+            <p class="topics">Performance and Amdahl's law, pipelining and hazards, memory hierarchy, instruction-level parallelism, vector and multiprocessor systems.</p>
+            <div class="rail"><span class="rail-row"><span>Modules &amp; previous years</span><b>12 papers</b></span></div>
+        </a>
+
+        <a class="subject" href="Semester_4/automata/automata_index.html" style="--accent: var(--cd)">
+            <span class="code">FLAT</span>
+            <h3>Formal Language &amp; Automata</h3>
+            <p class="topics">Finite automata, regular expressions, context-free grammars, pushdown automata, Turing machines, decidability.</p>
+            <div class="rail"><span class="rail-row"><span>Previous years &amp; exam prep</span><b>5 papers</b></span></div>
+        </a>
+
+        <a class="subject" href="Semester_4/environment/Environmental_Sciences.html" style="--accent: var(--cn)">
+            <span class="code">ENV</span>
+            <h3>Environmental Sciences</h3>
+            <p class="topics">Ecosystems and biodiversity, pollution control, environmental impact assessment, sustainable development.</p>
+            <div class="rail"><span class="rail-row"><span>Previous years &amp; suggestions</span><b>7 papers</b></span></div>
+        </a>
+
+        <a class="subject" href="Semester_4/biology/Biology.html" style="--accent: var(--se)">
+            <span class="code">BIO</span>
+            <h3>Biology</h3>
+            <p class="topics">Cell structure and biomolecules, genetics and heredity, enzymes and metabolism, applications in engineering.</p>
+            <div class="rail"><span class="rail-row"><span>Previous years &amp; suggestions</span><b>6 papers</b></span></div>
+        </a>
+
+    </section>
+
+    <div class="band">
+        <h2>First year</h2>
+        <span class="band-note">Foundation papers</span>
+    </div>
+
+    <section class="subjects">
+
+        <a class="subject" href="chemistry/chemistry_pyq.html" style="--accent: var(--cn)">
+            <span class="code">CHEM</span>
+            <h3>Chemistry</h3>
+            <p class="topics">Chemical bonding and molecular orbitals, thermodynamics, electrochemistry, polymers, spectroscopy.</p>
+            <div class="rail"><span class="rail-row"><span>Previous years 2019 &ndash; 2025</span><b>6 papers</b></span></div>
+        </a>
+
+        <a class="subject" href="PPS/pps_index.html" style="--accent: var(--cd)">
+            <span class="code">PPS</span>
+            <h3>Programming for Problem Solving</h3>
+            <p class="topics">C fundamentals, control flow, arrays and strings, pointers, functions and recursion, structures, file handling.</p>
+            <div class="rail"><span class="rail-row"><span>Previous years &amp; important questions</span><b>5 papers</b></span></div>
+        </a>
+
+    </section>
+
+    <footer>
+        <span>Compiled by <a href="#">Soumya Chakraborty</a></span>
+        <span class="colophon-note">Answers follow the MAKAUT paper structure &mdash; Group A / B / C</span>
+    </footer>
+
+</main>
 
 </body>
 </html>
