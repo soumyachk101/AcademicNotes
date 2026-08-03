@@ -204,13 +204,13 @@
             <div class="qa-card" id="ga-21">
                 <div class="q-text"><span class="q-badge">Q21</span><span>Define Cyclomatic Complexity.</span></div>
                 <div class="a-text">
-                    <p><b>Ans:</b> <b>Cyclomatic Complexity V(G)</b> is a quantitative software metric measuring the number of linearly independent paths through a program's control flow graph. Formula: \(V(G) = E - N + 2P\) (Edges \(E\), Nodes \(N\), Connected Components \(P\)) or \(V(G) = D + 1\) where \(D\) is decision points.</p>
+                    <p><b>Ans:</b> <b>Cyclomatic Complexity</b>, proposed by McCabe, is a quantitative measure of the logical complexity of a program, defined as the number of linearly independent paths through its control flow graph. It gives the upper bound on the number of test cases needed for basis-path testing and the lower bound on the number of paths that must be executed for branch coverage; a module with \( V(G) > 10 \) is regarded as too complex and a candidate for redesign.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-22">
                 <div class="q-text"><span class="q-badge">Q22</span><span>What is McCabe's Cyclomatic Complexity formula?</span></div>
                 <div class="a-text">
-                    <p><b>Ans:</b> <b>Cyclomatic Complexity V(G)</b> is a quantitative software metric measuring the number of linearly independent paths through a program's control flow graph. Formula: \(V(G) = E - N + 2P\) (Edges \(E\), Nodes \(N\), Connected Components \(P\)) or \(V(G) = D + 1\) where \(D\) is decision points.</p>
+                    <p><b>Ans:</b> For a control flow graph \( G \), <b>McCabe&rsquo;s formula</b> is \( V(G) = E - N + 2P \), where \( E \) = number of edges, \( N \) = number of nodes and \( P \) = number of connected components (\( P = 1 \) for a single program, giving \( V(G) = E - N + 2 \)). Two equivalent forms are \( V(G) = D + 1 \), where \( D \) is the number of decision (predicate) nodes, and \( V(G) = R \), the total number of regions into which the planar flow graph divides the plane, i.e. the bounded regions plus the one outer unbounded region.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-23">
@@ -280,11 +280,7 @@
                 </div>
             </div>
             <div class="qa-card" id="ga-34">
-                <div class="q-text"><span class="q-badge">Q34</span><span>What is Smoke Testing?
-
-
-
---- Page 2 ---</span></div>
+                <div class="q-text"><span class="q-badge">Q34</span><span>What is Smoke Testing?</span></div>
                 <div class="a-text">
                     <p><b>Ans:</b> <b>Smoke Testing</b> is a shallow-and-wide &ldquo;build verification&rdquo; test that exercises only the critical end-to-end functionality of a newly integrated build, in order to decide whether the build is stable enough to be accepted for detailed testing. If the smoke test fails the build is rejected outright and returned to development.</p>
                 </div>
@@ -304,7 +300,12 @@
             <div class="qa-card" id="ga-37">
                 <div class="q-text"><span class="q-badge">Q37</span><span>What is COCOMO Model?</span></div>
                 <div class="a-text">
-                    <p><b>Ans:</b> <b>COCOMO (Constructive Cost Model)</b> is an algorithmic software cost estimation model developed by Barry Boehm. Basic Effort equation: \(E = a \times (KLOC)^b\) person-months.</p>
+                    <p><b>Ans:</b> <b>COCOMO (Constructive Cost Model)</b>, developed by Barry Boehm, is an algorithmic cost-estimation model that predicts effort and schedule from the estimated size of the product in KLOC (thousands of delivered lines of code). Basic COCOMO gives effort \( E = a\,(KLOC)^{b} \) person-months and development time \( D = c\,(E)^{d} \) months, so average staff size \( = E/D \) persons. The coefficients depend on the project <b>mode</b>, chosen by team and product size and by the rigidity of the constraints:</p>
+                    <ul>
+                        <li><b>Organic</b> &mdash; small (&lt; 50 KLOC), familiar in-house project, small experienced team, flexible requirements: \( a = 2.4,\ b = 1.05,\ c = 2.5,\ d = 0.38 \).</li>
+                        <li><b>Semi-detached</b> &mdash; medium (50&ndash;300 KLOC), mixed-experience team, medium constraints: \( a = 3.0,\ b = 1.12,\ c = 2.5,\ d = 0.35 \).</li>
+                        <li><b>Embedded</b> &mdash; large (&gt; 300 KLOC), tight hardware, software and regulatory constraints (e.g. real-time/avionics): \( a = 3.6,\ b = 1.20,\ c = 2.5,\ d = 0.32 \).</li>
+                    </ul>
                 </div>
             </div>
             <div class="qa-card" id="ga-38">
@@ -772,12 +773,7 @@ graph TD
                 </div>
             </div>
             <div class="qa-card" id="gb-21">
-                <div class="q-text"><span class="q-badge b5">Q21</span><span>Explain Software Maintenance types: Corrective, Adaptive, Perfective, Preventive.
-
-
-
-
---- Page 3 ---</span></div>
+                <div class="q-text"><span class="q-badge b5">Q21</span><span>Explain Software Maintenance types: Corrective, Adaptive, Perfective, Preventive.</span></div>
                 <div class="a-text">
                     <h3>Types of Software Maintenance</h3>
 <p>Software maintenance is the process of modifying software after delivery to correct faults, improve performance, or adapt it to a changing environment. It consumes the majority of the software lifecycle cost.</p>
@@ -1410,9 +1406,6 @@ c) Identify Critical Path and project completion duration.</span></div>
 b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram for an Automated Teller Machine
 
 
-
-
---- Page 4 ---
 (ATM) system.</span></div>
                 <div class="a-text">
                     <h3>Master Answer: OOAD and UML for ATM System</h3>
@@ -2003,12 +1996,7 @@ stateDiagram-v2
             </div>
             <div class="qa-card" id="gc-26">
                 <div class="q-text"><span class="q-badge c15">Q26</span><span>a) Explain DevOps Culture and Automated Testing Pipeline.
-b) Detail Continuous Integration (CI), Continuous Testing (CT), and Continuous Deployment (CD) tools integration.
-
-
-
-
---- Page 5 ---</span></div>
+b) Detail Continuous Integration (CI), Continuous Testing (CT), and Continuous Deployment (CD) tools integration.</span></div>
                 <div class="a-text">
                     <h3>Master Answer: DevOps and Automated Pipelines</h3>
 <h4>Part (a) DevOps Culture</h4>

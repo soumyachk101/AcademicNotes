@@ -280,11 +280,7 @@
                 </div>
             </div>
             <div class="qa-card" id="ga-34">
-                <div class="q-text"><span class="q-badge">Q34</span><span>What is Knowledge Representation?
-
-
-
---- Page 2 ---</span></div>
+                <div class="q-text"><span class="q-badge">Q34</span><span>What is Knowledge Representation?</span></div>
                 <div class="a-text">
                     <p><b>Ans:</b> <b>Knowledge Representation</b> is the sub-field of AI concerned with encoding facts about the world in a formal symbolic form that a machine can store in a knowledge base and reason over by <b>inference</b>. A good scheme must have representational and inferential adequacy plus inferential and acquisitional efficiency; the main schemes are logic, production rules, semantic networks and frames.</p>
                 </div>
@@ -559,12 +555,7 @@ graph TD
                 </div>
             </div>
             <div class="qa-card" id="gb-19">
-                <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Knowledge Representation using Frames and Inheritance.
-
-
-
-
---- Page 3 ---</span></div>
+                <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Knowledge Representation using Frames and Inheritance.</span></div>
                 <div class="a-text">
                     <h3>Frames and Inheritance</h3><p>A <strong>Frame</strong> is a highly structured, object-oriented approach to knowledge representation introduced by Marvin Minsky. A frame represents a stereotyped concept, object, or situation (similar to a 'class' in OOP).</p><h4>Structure of a Frame</h4><p>A frame consists of a collection of attributes called <strong>Slots</strong>. Each slot can have:</p><ul>  <li><strong>Values:</strong> Data assigned to the slot (e.g., <code>Color: Red</code>).</li>  <li><strong>Facets:</strong> Metadata about the slot, such as constraints, default values, or attached procedures (e.g., <em>if-needed</em>, <em>if-added</em> demons).</li></ul><h4>Inheritance in Frames</h4><p>Frames are organized into hierarchical taxonomies. A sub-frame inherits slots and default values from its parent frame. For example, a <code>Mammal</code> frame might have a slot <code>Legs: 4</code>. A child frame <code>Dog</code> inherits this slot automatically. However, inheritance can be overridden if a specific child violates the default (e.g., overriding a default inherited property).</p>
                 </div>
@@ -769,9 +760,6 @@ MaryCalls.
 Calculate joint probability P(Burglary ∧ ¬Earthquake ∧ Alarm ∧ JohnCalls ∧ ¬MaryCalls) using CPTs.
 
 
-
-
---- Page 4 ---
 b) Explain Naive Bayes Classifier algorithm for text classification.</span></div>
                 <div class="a-text">
                     <h3>Bayesian Networks and Naive Bayes</h3><p><b>Part (a) Bayesian Network Joint Probability:</b></p><p>Given a Burglar Alarm network with variables: Burglary (\(B\)), Earthquake (\(E\)), Alarm (\(A\)), JohnCalls (\(J\)), MaryCalls (\(M\)).</p><p>Network topology: \(B\) and \(E\) are independent root nodes pointing to \(A\). \(A\) points to both \(J\) and \(M\).</p><p>Goal: Calculate the joint probability \(P(B \land \neg E \land A \land J \land \neg M)\).</p><p>Using the chain rule parameterized by the BBN topology, the joint probability factors as:</p>\[ P(B, \neg E, A, J, \neg M) = P(B) \cdot P(\neg E) \cdot P(A | B, \neg E) \cdot P(J | A) \cdot P(\neg M | A) \]<p>Assuming standard Pearl's network CPT values:</p><ul>  <li>\(P(B) = 0.001\)</li>  <li>\(P(\neg E) = 1 - P(E) = 1 - 0.002 = 0.998\)</li>  <li>\(P(A | B, \neg E) = 0.94\)</li>  <li>\(P(J | A) = 0.90\)</li>  <li>\(P(\neg M | A) = 1 - P(M | A) = 1 - 0.70 = 0.30\)</li></ul><p><b>Calculation:</b> \(0.001 \times 0.998 \times 0.94 \times 0.90 \times 0.30 = 0.0002532924 \approx 0.000253\)</p><p><b>Part (b) Naive Bayes Classifier for Text Classification:</b></p><p>The Naive Bayes Classifier is based on applying Bayes' theorem with a strong (naive) assumption of conditional independence between the features (words) given the class label (e.g., Spam or Ham).</p>\[ P(\text{Class} | \text{Words}) \propto P(\text{Class}) \prod_{i=1}^{n} P(\text{Word}_i | \text{Class}) \]<ul>  <li>It calculates the prior probability of each class \(P(\text{Class})\) from the training data frequency.</li>  <li>It calculates the likelihood of each word occurring in that class \(P(\text{Word}_i | \text{Class})\). Laplace Smoothing is often used to prevent zero probabilities for unseen words.</li>  <li>To classify a new email, it multiplies these probabilities together and selects the class with the highest posterior probability (Maximum A Posteriori - MAP).</li></ul>
@@ -939,12 +927,7 @@ uncertainty.</span></div>
             </div>
             <div class="qa-card" id="gc-21">
                 <div class="q-text"><span class="q-badge c15">Q21</span><span>a) Solve N-Queens Problem (4-Queens) using Backtracking Search.
-b) Draw complete search tree showing pruned invalid configurations.
-
-
-
-
---- Page 5 ---</span></div>
+b) Draw complete search tree showing pruned invalid configurations.</span></div>
                 <div class="a-text">
                     <h3>Block World and Sussman Anomaly</h3><p><b>Part (a) Block World Formulation:</b></p><p>The Block World is a domain where a robotic arm can move uniform blocks on a table.</p><ul>  <li><b>Predicates:</b> \(\text{ON}(A, B)\), \(\text{ON}(A, \text{Table})\), \(\text{CLEAR}(A)\), \(\text{HOLDING}(A)\), \(\text{ARMEMPTY}\).</li>  <li><b>Actions (STRIPS):</b>      <br/>- <b>Unstack(A, B):</b> Pre: \(\text{ON}(A, B), \text{CLEAR}(A), \text{ARMEMPTY}\). Add: \(\text{HOLDING}(A), \text{CLEAR}(B)\). Delete: \(\text{ON}(A, B), \text{ARMEMPTY}\).      <br/>- <b>Stack(A, B):</b> Pre: \(\text{HOLDING}(A), \text{CLEAR}(B)\). Add: \(\text{ON}(A, B), \text{ARMEMPTY}\). Delete: \(\text{HOLDING}(A), \text{CLEAR}(B)\).  </li></ul><p><b>Part (b) Sussman Anomaly in Goal Stack Planning:</b></p><p>Suppose Initial State: \(C\) is on \(A\). \(A\) and \(B\) are on the Table. Goal State: \(A\) on \(B\), and \(B\) on \(C\) (\(\text{ON}(A, B) \land \text{ON}(B, C)\)).</p><ul>  <li>Goal Stack Planning attempts to solve sub-goals linearly.</li>  <li>If it tries to achieve \(\text{ON}(A, B)\) first: It clears \(A\) by unstacking \(C\) and putting it on the table. Then it puts \(A\) on \(B\). Now it tries to achieve \(\text{ON}(B, C)\). But to move \(B\), it must unstack \(A\) again! It destroyed its previous progress.</li>  <li>If it tries to achieve \(\text{ON}(B, C)\) first: It places \(B\) on \(C\). Then it tries to achieve \(\text{ON}(A, B)\). But \(A\) is trapped under \(C\) (which is under \(B\)). It must undo everything.</li></ul><p><b>Resolution:</b> Non-linear planning (like Plan-Space Planning) is required to interleave the steps: Clear \(A\) (put \(C\) on table), then put \(B\) on \(C\), then put \(A\) on \(B\).</p>
                 </div>

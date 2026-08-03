@@ -174,13 +174,13 @@
             <div class="qa-card" id="ga-16">
                 <div class="q-text"><span class="q-badge">Q16</span><span>Define FIRST set in top-down parsing.</span></div>
                 <div class="a-text">
-                    <p><b>Ans:</b> <b>FIRST(\(\alpha\))</b> is the set of terminal symbols that appear as the first symbol of string derived from \(\alpha\). <b>FOLLOW(A)</b> is the set of terminals that can appear immediately to the right of non-terminal \(A\) in any sentential form.</p>
+                    <p><b>Ans:</b> For a grammar symbol string \( \alpha \), <b>\( FIRST(\alpha) \)</b> is the set of <i>terminals</i> that can begin some string derived from \( \alpha \), and it also contains \( \epsilon \) if \( \alpha \Rightarrow^{*} \epsilon \). A predictive parser uses it to choose a production: for \( A \to \alpha \), the entry \( M[A,\ a] \) is filled for every \( a \in FIRST(\alpha) \) — so \( FIRST \) looks at what a production can <i>start</i> with, unlike \( FOLLOW \).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-17">
                 <div class="q-text"><span class="q-badge">Q17</span><span>Define FOLLOW set in top-down parsing.</span></div>
                 <div class="a-text">
-                    <p><b>Ans:</b> <b>FIRST(\(\alpha\))</b> is the set of terminal symbols that appear as the first symbol of string derived from \(\alpha\). <b>FOLLOW(A)</b> is the set of terminals that can appear immediately to the right of non-terminal \(A\) in any sentential form.</p>
+                    <p><b>Ans:</b> For a non-terminal \( A \), <b>\( FOLLOW(A) \)</b> is the set of terminals that can appear immediately to the <i>right</i> of \( A \) in some sentential form, i.e. all \( a \) with \( S \Rightarrow^{*} \alpha A a \beta \); the endmarker \( \$ \) is always in \( FOLLOW(S) \) for the start symbol \( S \). It is what decides when to apply an \( \epsilon \)-production: if \( A \to \alpha \) and \( \epsilon \in FIRST(\alpha) \), the entry \( M[A,\ b] \) is filled for every \( b \in FOLLOW(A) \).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-18">
@@ -286,11 +286,7 @@
                 </div>
             </div>
             <div class="qa-card" id="ga-35">
-                <div class="q-text"><span class="q-badge">Q35</span><span>Define Activation Record.
-
-
-
---- Page 2 ---</span></div>
+                <div class="q-text"><span class="q-badge">Q35</span><span>Define Activation Record.</span></div>
                 <div class="a-text">
                     <p><b>Ans:</b> An <b>activation record</b> (stack frame) is the block of memory pushed on the control stack for one activation of a procedure. It typically holds, from top down: the returned value, the actual parameters, an optional control link (to the caller's record) and access/static link (for non-local data), saved machine status including the return address and registers, local data, and temporaries.</p>
                 </div>
@@ -986,12 +982,7 @@ int yywrap() {
                 </div>
             </div>
             <div class="qa-card" id="gb-22">
-                <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain SDT rules for Boolean Expressions evaluation.
-
-
-
-
---- Page 3 ---</span></div>
+                <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain SDT rules for Boolean Expressions evaluation.</span></div>
                 <div class="a-text">
                     <h3>SDT for Boolean Expressions</h3>
 <p>Boolean expressions (like <code>A < B or C > D</code>) are primarily used to alter the flow of control (e.g., in <code>if-else</code> or <code>while</code> loops). Their SDT relies on generating conditional jump instructions.</p>
@@ -1569,12 +1560,7 @@ t6 = prod + t5
 prod = t6
 t7 = i + 1
 i = t7
-b) Derive optimized 3AC code from constructed DAG.
-
-
-
-
---- Page 4 ---</span></div>
+b) Derive optimized 3AC code from constructed DAG.</span></div>
                 <div class="a-text">
                     <h3>DAG for Basic Blocks & Optimization</h3>
 <h4>Part (a): Constructing the DAG</h4>
@@ -2404,12 +2390,7 @@ b) Detail Object layout, Virtual Method Tables (VTable), and dynamic dispatch re
             </div>
             <div class="qa-card" id="gc-25">
                 <div class="q-text"><span class="q-badge c15">Q25</span><span>a) Explain Code Generation for Risk Architectures (RISC vs CISC).
-b) Detail Instruction Selection using Tree-Rewriting rules.
-
-
-
-
---- Page 5 ---</span></div>
+b) Detail Instruction Selection using Tree-Rewriting rules.</span></div>
                 <div class="a-text">
                     <h3>Code Generation for Target Architectures</h3>
 <h4>Part (a): RISC vs CISC</h4>
