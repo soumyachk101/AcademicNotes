@@ -6,7 +6,7 @@
     <title>Artificial Intelligence (PEC-CS501B) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -846,7 +846,7 @@ graph TD
     Tweety((Tweety)) -- IS-A --> Canary((Canary))
       Canary -- IS-A --> Bird((Bird))
       Bird -- HAS-A --> Wings((Wings))
-      Bird -- CAN --> Fly((Fly))
+      Bird -->|"CAN"| Fly((Fly))
 </div><div class="diagram-caption">Figure: A Simple Semantic Network displaying inheritance. Tweety inherently gets "Wings" and "Fly".</div></div><p>Semantic networks are highly intuitive for humans but lack formal logical semantics, making automated reasoning tricky without strict rules.</p>
                 </div>
             </div>
@@ -952,8 +952,8 @@ graph TD
                 <div class="a-text">
                     <h3>The Perceptron Model</h3><p>The <strong>Perceptron</strong> is the simplest mathematical model of a biological neuron, forming the foundation of Artificial Neural Networks. It acts as a linear binary classifier.</p><h4>Mathematical Model</h4><p>Given input signals \(x_1, x_2, \dots, x_n\), the perceptron computes a weighted sum and adds a bias \(b\):</p>\[ z = \sum_{i=1}^n (w_i \cdot x_i) + b \]<p>This sum \(z\) is then passed through an <strong>Activation Function \(f(z)\)</strong> to determine the final output (whether the neuron "fires" or not).</p><div class="diagram-container"><div class="mermaid">
 graph LR
-    x1((x1)) -- w1 --> Sum(("Sum Σ"))
-    x2((x2)) -- w2 --> Sum
+    x1((x1)) -->|"w1"| Sum(("Sum Σ"))
+    x2((x2)) -->|"w2"| Sum
     Bias((Bias)) --> Sum
     Sum --> Act["Activation f(z)"]
     Act --> Output((Output))
@@ -1183,9 +1183,9 @@ graph TD
     Tweety((Tweety)) -- IS-A --> Canary((Canary))
       Canary -- IS-A --> Bird((Bird))
       Bird -- HAS-PART --> Wings((Wings))
-      Bird -- CAN --> Fly((Fly))
+      Bird -->|"CAN"| Fly((Fly))
       Sylvester((Sylvester)) -- IS-A --> Cat((Cat))
-      Cat -- EATS --> Bird
+      Cat -->|"EATS"| Bird
 </div></div><p><b>Part (c) Equivalent Frame Representation:</b></p><pre><code>Frame: Bird
   IS-A: Animal
   Has-Part: Wings

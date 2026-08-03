@@ -6,7 +6,7 @@
     <title>Software Engineering (ESC501) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -1499,11 +1499,11 @@ b) Draw UML Class Diagram and Sequence Diagram for User Login and Exam Submissio
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S((Student)) -- Login Credentials --> O[Online Exam System]
-      S -- Exam Answers --> O
-      O -- Exam Results --> S
-      A((Admin)) -- Questions/Keys --> O
-      O -- Usage Reports --> A
+    S((Student)) -->|"Login Credentials"| O[Online Exam System]
+      S -->|"Exam Answers"| O
+      O -->|"Exam Results"| S
+      A((Admin)) -->|"Questions/Keys"| O
+      O -->|"Usage Reports"| A
 </div>
 </div>
 <p><strong>Level 1 DFD:</strong></p>
@@ -1722,10 +1722,10 @@ b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram 
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    C((Customer)) -- Uses --> W(Withdraw Cash)
-      C -- Uses --> B(Check Balance)
-      B -->|"#lt;#lt;include#gt;#gt;"| A(Authenticate PIN)
-      W -->|"#lt;#lt;include#gt;#gt;"| A
+    C((Customer)) -->|"Uses"| W(Withdraw Cash)
+      C -->|"Uses"| B(Check Balance)
+      B -->|"&lt;&lt;include&gt;&gt;"| A(Authenticate PIN)
+      W -->|"&lt;&lt;include&gt;&gt;"| A
 </div>
 </div>
 
@@ -2139,12 +2139,12 @@ b) Provide SRS outline, Level 1 DFD, Architecture diagram, and Test Strategy.</s
 <div class="diagram-container">
 <div class="mermaid">
 graph TD
-    U((Customer)) -- Order Details --> P1(1.0 Process Order)
-      P1 -- Validation --> D1[(User DB)]
-      P1 -- Push Notification --> R((Restaurant))
-      R -- Accept/Reject --> P2(2.0 Payment/Status)
-      P2 -- Charge Card --> B((Bank Gateway))
-      P2 -- Status Update --> U
+    U((Customer)) -->|"Order Details"| P1(1.0 Process Order)
+      P1 -->|"Validation"| D1[(User DB)]
+      P1 -->|"Push Notification"| R((Restaurant))
+      R -->|"Accept/Reject"| P2(2.0 Payment/Status)
+      P2 -->|"Charge Card"| B((Bank Gateway))
+      P2 -->|"Status Update"| U
 </div>
 </div>
 <p><strong>3. Architecture (Microservices):</strong> User Auth Service, Restaurant Catalog Service, Order Matching Service, Live Tracking Service, Payment Service.</p>

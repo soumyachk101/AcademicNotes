@@ -753,8 +753,9 @@ code { border-radius: 5px; }
    column. Do not override that cap: forcing `min-width:100%` upscaled a 158px
    diagram to 2452px tall, and forcing `max-width:100%` re-broke it the other
    way. Only the height rule is needed, so the aspect ratio is preserved. */
+/* No `overflow-x: auto` here: per spec a non-visible value on one axis forces
+   the other axis to `auto` as well, so it silently clipped tall diagrams. */
 .mermaid {
-    overflow-x: auto;
     max-width: 100%;
 }
 
@@ -765,3 +766,23 @@ code { border-radius: 5px; }
     overflow: visible !important;
 }
 
+
+/* Extra Mermaid Padding */
+.diagram-container { padding: 20px; }
+
+/* Responsive Native-Sized Mermaid Container */
+.diagram-container {
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding-bottom: 60px;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.mermaid {
+    display: inline-block;
+}
+.mermaid svg {
+    /* Allow native dimensions from Mermaid, no forced widths */
+    height: auto !important;
+}

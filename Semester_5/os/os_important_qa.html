@@ -6,7 +6,7 @@
     <title>Operating Systems (PCC-CS502) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -143,7 +143,7 @@ stateDiagram-v2
     Waiting --> Ready : I/O or Event Completion
     Running --> Terminated : Exit
     Terminated --> [*]
-    </div>
+</div>
     <div class="diagram-caption">Figure: 5-State Process Transition Diagram</div>
 </div>
                 </div>
@@ -1051,10 +1051,10 @@ do {
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    P1((P1)) -- Requests --> R1[R1: 1 Instance]
-      R1 -- Allocated to --> P2((P2))
-      P2 -- Requests --> R2[R2: 1 Instance]
-      R2 -- Allocated to --> P1
+    P1((P1)) -->|"Requests"| R1[R1: 1 Instance]
+      R1 -->|"Allocated to"| P2((P2))
+      P2 -->|"Requests"| R2[R2: 1 Instance]
+      R2 -->|"Allocated to"| P1
       classDef red fill:#ffcccc,stroke:#ff0000,stroke-width:2px;
       class P1,R1,P2,R2 red
 </div>
@@ -1169,8 +1169,8 @@ graph TD
 <div class="mermaid">
 graph TD
     CPU((CPU)) -->|"Logical Address (s, d)"| Comp
-      Comp[Is d < Limit?] -- Yes --> Add[Base + d]
-      Comp -- No --> Error(Trap: Addressing Error)
+      Comp[Is d < Limit?] -->|"Yes"| Add[Base + d]
+      Comp -->|"No"| Error(Trap: Addressing Error)
       ST[Segment Table<br/>Lookup 's' to find Base & Limit] --> Comp
       Add -->|"Physical Address"| RAM[(Physical Memory)]
 </div>
@@ -2029,12 +2029,12 @@ b) Calculate EAT given TLB hit ratio 80%, TLB search 20ns, memory access 100ns, 
 <div class="mermaid">
 graph TD
     CPU --> TLB
-      TLB -- Hit --> RAM[Physical RAM]
-      TLB -- Miss --> PT[Page Table in RAM]
-      PT -- Valid --> RAM
-      PT -- Invalid (Page Fault) --> OS[OS Trap]
+      TLB -->|"Hit"| RAM[Physical RAM]
+      TLB -->|"Miss"| PT[Page Table in RAM]
+      PT -->|"Valid"| RAM
+      PT -->|"Invalid (Page Fault)"| OS[OS Trap]
       OS --> Disk[(Disk Swap Space)]
-      Disk -- Loads Page --> RAM
+      Disk -->|"Loads Page"| RAM
 </div>
 </div>
 

@@ -6,7 +6,7 @@
     <title>Compiler Design (PCC-CS501) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -712,11 +712,11 @@
 <div class="mermaid">
 graph TD
     A[Source Code] --> L[Lexical Analyzer]
-      L -- Stream of Tokens --> S[Syntax Analyzer / Parser]
-      S -- Syntax Tree --> Sem[Semantic Analyzer]
-      Sem -- Annotated Tree --> ICG[Intermediate Code Generator]
-      ICG -- Intermediate Code --> CO[Code Optimizer]
-      CO -- Optimized Code --> CG[Target Code Generator]
+      L -->|"Stream of Tokens"| S[Syntax Analyzer / Parser]
+      S -->|"Syntax Tree"| Sem[Semantic Analyzer]
+      Sem -->|"Annotated Tree"| ICG[Intermediate Code Generator]
+      ICG -->|"Intermediate Code"| CO[Code Optimizer]
+      CO -->|"Optimized Code"| CG[Target Code Generator]
       CG --> Output[Machine Code]
       ST[(Symbol Table)] -.-> L
       ST -.-> S
@@ -751,8 +751,8 @@ graph TD
 graph LR
     S1((1)) -->|"ε"| S2((2))
       S1 -->|"ε"| S4((4))
-      S2 -- a --> S3((3))
-      S4 -- b --> S5((5))
+      S2 -->|"a"| S3((3))
+      S4 -->|"b"| S5((5))
       S3 -->|"ε"| S6((6))
       S5 -->|"ε"| S6((6))
 </div>
@@ -766,8 +766,8 @@ graph LR
       S0 -->|"ε"| S7((7))
       S1 -->|"ε"| S2((2))
       S1 -->|"ε"| S4((4))
-      S2 -- a --> S3((3))
-      S4 -- b --> S5((5))
+      S2 -->|"a"| S3((3))
+      S4 -->|"b"| S5((5))
       S3 -->|"ε"| S6((6))
       S5 -->|"ε"| S6((6))
       S6 -->|"ε"| S1((1))
@@ -783,13 +783,13 @@ graph LR
       S0 -->|"ε"| S7((7))
       S1 -->|"ε"| S2((2))
       S1 -->|"ε"| S4((4))
-      S2 -- a --> S3((3))
-      S4 -- b --> S5((5))
+      S2 -->|"a"| S3((3))
+      S4 -->|"b"| S5((5))
       S3 -->|"ε"| S6((6))
       S5 -->|"ε"| S6((6))
       S6 -->|"ε"| S1((1))
       S6 -->|"ε"| S7((7))
-      S7 -- a --> S8(((8)))
+      S7 -->|"a"| S8(((8)))
 </div>
 </div>
 
@@ -1769,10 +1769,10 @@ L_END: ...
 <div class="diagram-container">
 <div class="mermaid">
 graph TD
-    B1["B1: while(a < b)"] -- True --> B2["B2: if(c < d)"]
-      B1 -- False --> END((END))
-      B2 -- True --> B3["B3: x = y + z"]
-      B2 -- False --> B4["B4: x = y - z"]
+    B1["B1: while(a < b)"] -->|"True"| B2["B2: if(c < d)"]
+      B1 -->|"False"| END((END))
+      B2 -->|"True"| B3["B3: x = y + z"]
+      B2 -->|"False"| B4["B4: x = y - z"]
       B3 --> B1
       B4 --> B1
 </div>
@@ -2333,10 +2333,10 @@ graph TD
       ClassB["Class B Scope: float y, method2()"]
       Method1["method1() Scope: int a, int b"]
       Block1["if-block Scope: int c"]
-       Block1 -- Parent Pointer --> Method1
-      Method1 -- Parent Pointer --> ClassA
-      ClassA -- Parent/Inheritance Pointer --> Global
-      ClassB -- Parent Pointer --> Global
+       Block1 -->|"Parent Pointer"| Method1
+      Method1 -->|"Parent Pointer"| ClassA
+      ClassA -->|"Parent/Inheritance Pointer"| Global
+      ClassB -->|"Parent Pointer"| Global
 </div>
 </div>
 <p><strong>Symbol Lookup Mechanism:</strong></p>
