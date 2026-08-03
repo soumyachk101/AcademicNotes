@@ -84,181 +84,91 @@
             <div class="qa-card" id="ga-1">
                 <div class="q-text"><span class="q-badge">Q1</span><span>Define a Lexeme with an example.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define a Lexeme with an example..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>lexeme</b> is the actual sequence of characters in the source program that matches the pattern for a token; it is the concrete text the scanner consumed. In <code>int count;</code> the lexemes are <code>int</code>, <code>count</code> and <code>;</code> — here <code>count</code> is the lexeme matching the identifier pattern, for which the lexical analyser emits the token \( \langle id,\ ptr \rangle \).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-2">
                 <div class="q-text"><span class="q-badge">Q2</span><span>What is a Token in compiler design?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is a Token in compiler design?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>token</b> is the pair \( \langle \text{token-name},\ \text{attribute-value} \rangle \) produced by the lexical analyser, where the token-name is an abstract symbol that the parser treats as a terminal and the (optional) attribute points to further information such as a symbol-table entry. For the lexeme <code>count</code> the token is \( \langle id,\ ptr \rangle \); tokens like <code>;</code> or <code>while</code> need no attribute.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-3">
                 <div class="q-text"><span class="q-badge">Q3</span><span>Define Pattern in lexical analysis.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Pattern in lexical analysis..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>pattern</b> is the rule — normally a regular expression — that describes the form all lexemes of a given token may take. For the token <i>id</i> the pattern is \( letter\,(letter \mid digit)^{*} \); <code>count</code> is one lexeme matching that pattern, and \( \langle id,\ ptr \rangle \) is the token produced. So the pattern is the <i>description</i>, the lexeme is the <i>matched text</i>, and the token is the <i>parser's symbol</i>.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-4">
                 <div class="q-text"><span class="q-badge">Q4</span><span>What is a Cross Compiler?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is a Cross Compiler?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>cross compiler</b> is a compiler that runs on one machine (the host) but generates target code for a <i>different</i> machine, i.e. host \( \ne \) target. It is essential for building software for embedded systems or a new architecture that cannot yet host a compiler — e.g. <code>gcc</code> executing on an x86 workstation and emitting ARM object code.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-5">
                 <div class="q-text"><span class="q-badge">Q5</span><span>Define Bootstrapping in compilers.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Bootstrapping in compilers..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Bootstrapping</b> is the technique of writing a compiler for a language in that same language: a small compiler for a subset \( S_0 \) is first written in an existing language (or machine code), and that compiler is then used to compile a fuller compiler written in \( S_0 \), the process repeating until the full language is supported. It is described using T-diagrams and is how compilers for C, Pascal and Go were built.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-6">
                 <div class="q-text"><span class="q-badge">Q6</span><span>What is a Symbol Table?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is a Symbol Table?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>symbol table</b> is the compiler's data structure that records every identifier of the source program together with its attributes — type, scope/nesting level, storage class, size, and memory offset. It is created and filled during lexical and syntax analysis and consulted by semantic analysis, code generation and error reporting; it is usually a hash table supporting fast <code>insert</code> and <code>lookup</code>.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-7">
                 <div class="q-text"><span class="q-badge">Q7</span><span>Name the two parts of a compiler (Analysis and Synthesis).</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Name the two parts of a compiler (Analysis and Synthesis)..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A compiler is split into an <b>analysis part (front end)</b> — lexical, syntax and semantic analysis plus intermediate-code generation, which breaks the source into pieces, builds the intermediate representation and symbol table and reports errors — and a <b>synthesis part (back end)</b> — code optimisation and target-code generation, which builds the target program from that intermediate representation. The split is what allows one front end to serve many machines.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-8">
                 <div class="q-text"><span class="q-badge">Q8</span><span>What is Left Recursion in context-free grammar?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Left Recursion in context-free grammar?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A grammar is <b>left recursive</b> if some non-terminal \( A \) admits a derivation \( A \Rightarrow^{+} A\alpha \); the immediate case is \( A \to A\alpha \mid \beta \). It makes a top-down (recursive-descent / LL) parser recurse for ever without consuming input, so it must be eliminated by rewriting as \( A \to \beta A' \), \( A' \to \alpha A' \mid \epsilon \). Bottom-up LR parsers, in contrast, handle left recursion happily.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-9">
                 <div class="q-text"><span class="q-badge">Q9</span><span>Define Left Factoring.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Left Factoring..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Left factoring</b> is the grammar transformation that postpones a parsing decision when two or more alternatives share a common prefix: \( A \to \alpha\beta_1 \mid \alpha\beta_2 \) is rewritten as \( A \to \alpha A' \), \( A' \to \beta_1 \mid \beta_2 \). It removes the <i>non-determinism of choice</i> so that one lookahead token suffices for LL(1) — whereas removing left recursion cures <i>infinite recursion</i>; the two transformations fix different defects and both may be needed.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-10">
                 <div class="q-text"><span class="q-badge">Q10</span><span>What is an Ambiguous Grammar?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is an Ambiguous Grammar?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A grammar is <b>ambiguous</b> if it produces more than one parse tree — equivalently more than one leftmost (or rightmost) derivation — for some sentence of its language. For \( E \to E+E \mid E*E \mid id \), the string <code>id+id*id</code> has two distinct parse trees. An ambiguous grammar is neither LL(1) nor LR(k) for any \( k \), and is disambiguated by precedence/associativity rules or by rewriting.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-11">
                 <div class="q-text"><span class="q-badge">Q11</span><span>Define Parse Tree.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Parse Tree..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>parse tree</b> (concrete syntax tree) is a tree depicting a derivation: its root is the start symbol, each interior node is a non-terminal whose children are the symbols of the right side of the production applied, and the leaves read left to right give the input string (the yield). It records <i>every</i> grammar symbol, including punctuation and single-child chains, unlike a syntax tree.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-12">
                 <div class="q-text"><span class="q-badge">Q12</span><span>What is an Abstract Syntax Tree (AST)?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is an Abstract Syntax Tree (AST)?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>abstract syntax tree</b> is a condensed parse tree in which operators (or language constructs) label the interior nodes and their operands are the children, while symbols needed only for parsing — parentheses, commas, chains of single productions — are dropped. For <code>a = b + c</code> the AST is <code>=</code> with children <code>a</code> and the subtree <code>+(b, c)</code>; a DAG goes one step further by sharing identical subtrees.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-13">
                 <div class="q-text"><span class="q-badge">Q13</span><span>Define Shift-Reduce Conflict in LR parsing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Shift-Reduce Conflict in LR parsing..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>shift-reduce conflict</b> occurs when, in some LR state with a given lookahead, the parsing table allows <i>both</i> shifting the next input symbol and reducing by a completed production, so the action is not unique. The standard example is the dangling-else grammar \( S \to \textbf{if } E \textbf{ then } S \mid \textbf{if } E \textbf{ then } S \textbf{ else } S \) on lookahead <code>else</code>; Yacc resolves such conflicts in favour of shift.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-14">
                 <div class="q-text"><span class="q-badge">Q14</span><span>Define Reduce-Reduce Conflict in LR parsing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Reduce-Reduce Conflict in LR parsing..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>reduce-reduce conflict</b> occurs when two or more different productions are simultaneously complete in an LR state and both are legal reductions on the same lookahead, so the parser cannot tell which production to reduce by. Unlike a shift-reduce conflict it almost always signals a genuinely badly designed or ambiguous grammar; LALR(1) can introduce reduce-reduce conflicts by merging CLR(1) states with the same core.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-15">
                 <div class="q-text"><span class="q-badge">Q15</span><span>What is LL(1) parsing?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is LL(1) parsing?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>LL(1) parsing</b> is table-driven predictive top-down parsing: the first <i>L</i> means the input is scanned <b>L</b>eft to right, the second <i>L</i> means a <b>L</b>eftmost derivation is produced, and the <i>1</i> means one lookahead token is used, with no backtracking. A grammar is LL(1) iff for every pair \( A \to \alpha \mid \beta \), \( FIRST(\alpha) \cap FIRST(\beta) = \emptyset \) and, if \( \beta \Rightarrow^{*} \epsilon \), \( FIRST(\alpha) \cap FOLLOW(A) = \emptyset \) — so it must be free of left recursion and left factored. Because it must commit to a production before seeing the right side, every LL(1) grammar is LR(1) but not conversely.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-16">
@@ -276,205 +186,103 @@
             <div class="qa-card" id="ga-18">
                 <div class="q-text"><span class="q-badge">Q18</span><span>What is $ symbol in parsing tables?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is $ symbol in parsing tables?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>\( \$ \)</b> is the <b>endmarker</b>, an artificial symbol appended to the right end of the input to mark end-of-file; it is also pushed at the bottom of the parser stack initially. It is used as a lookahead column in the LL(1)/LR parsing table and always belongs to \( FOLLOW(S) \) for the start symbol \( S \); the parser <i>accepts</i> when the input has reduced to \( S \) with \( \$ \) as lookahead.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-19">
                 <div class="q-text"><span class="q-badge">Q19</span><span>What is ε-production in grammar?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is ε-production in grammar?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>\( \epsilon \)-production</b> is a production of the form \( A \to \epsilon \), which derives the empty string and makes \( A \) <i>nullable</i>. It lets a non-terminal be matched by no input at all; in LL(1) table construction, when \( \epsilon \in FIRST(\alpha) \) for \( A \to \alpha \), the entry \( M[A, b] \) is filled for every \( b \in FOLLOW(A) \) (including \( \$ \)).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-20">
                 <div class="q-text"><span class="q-badge">Q20</span><span>Define Handle in bottom-up parsing.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Handle in bottom-up parsing..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>handle</b> of a right-sentential form \( \gamma \) is a substring \( \beta \) together with a production \( A \to \beta \) such that replacing \( \beta \) by \( A \) yields the previous right-sentential form of a rightmost derivation, i.e. \( S \Rightarrow_{rm}^{*} \alpha A w \Rightarrow_{rm} \alpha\beta w \) with \( w \) a string of terminals. Bottom-up parsing is exactly repeated <i>handle pruning</i>, and the handle always appears on top of the stack, which is why a stack suffices.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-21">
                 <div class="q-text"><span class="q-badge">Q21</span><span>What is Shift action in LR parsing?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Shift action in LR parsing?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Shift</b> is the LR action that pushes the next input symbol (together with the new state number from the ACTION table) onto the parser stack and advances the input pointer. It is chosen when the symbols on the stack do not yet form a complete handle, so more input is needed before a reduction can be made.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-22">
                 <div class="q-text"><span class="q-badge">Q22</span><span>What is Reduce action in LR parsing?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Reduce action in LR parsing?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Reduce</b> is the LR action taken when the right side \( \beta \) of a production \( A \to \beta \) — the handle — sits on top of the stack: the parser pops \( 2|\beta| \) entries (\( |\beta| \) symbols with their states), pushes \( A \), and moves to state \( GOTO[s, A] \) where \( s \) is the exposed state. Each reduction is one step of the rightmost derivation traced in reverse.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-23">
                 <div class="q-text"><span class="q-badge">Q23</span><span>What is Accept action in parser?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Accept action in parser?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Accept</b> is the action that announces a successful parse and halts the parser. In an LR parser built for the augmented grammar it is taken in the state containing the item \( S' \to S\ \cdot \) when the lookahead is \( \$ \) — that is, the whole input has been reduced to the start symbol with nothing left to read.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-24">
                 <div class="q-text"><span class="q-badge">Q24</span><span>Define Yacc tool.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Yacc tool..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Yacc</b> (<i>Yet Another Compiler-Compiler</i>) is the UNIX parser generator: from a <code>.y</code> specification — declarations, translation rules (a context-free grammar with embedded C semantic actions), and support routines, separated by <code>%%</code> — it produces <code>y.tab.c</code> containing the driver <code>yyparse()</code>. The parser it builds is <b>LALR(1)</b>, and it calls <code>yylex()</code>, normally generated by Lex, for tokens.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-25">
                 <div class="q-text"><span class="q-badge">Q25</span><span>Define Lex/Flex tool.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Lex/Flex tool..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Lex</b> (GNU version <b>Flex</b>) is a lexical-analyser generator: from a <code>.l</code> specification of regular-expression patterns with C actions it produces <code>lex.yy.c</code> containing <code>yylex()</code>, a DFA obtained internally by Thompson's construction followed by subset construction. Ties are resolved by the <i>longest-match</i> rule and, for equal lengths, by the rule listed first.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-26">
                 <div class="q-text"><span class="q-badge">Q26</span><span>What is Synthesized Attribute?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Synthesized Attribute?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>synthesized attribute</b> of a node \( N \) is one whose value is computed only from the attributes of \( N \)'s children (and of \( N \) itself), so information flows <i>up</i> the parse tree — e.g. \( E \to E_1 + T\ \{\ E.val := E_1.val + T.val\ \} \). Terminals can carry only synthesized attributes, supplied by the lexical analyser, and such attributes can always be evaluated in a bottom-up pass.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-27">
                 <div class="q-text"><span class="q-badge">Q27</span><span>What is Inherited Attribute?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Inherited Attribute?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>inherited attribute</b> of a node \( N \) is one whose value is computed from attributes of \( N \)'s <i>parent</i> and/or its <i>siblings</i>, so information flows down and across the tree — e.g. \( D \to T\ L\ \{\ L.type := T.type\ \} \), which passes a declared type to a list of identifiers. It is evaluated in a depth-first, left-to-right traversal rather than purely bottom-up.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-28">
                 <div class="q-text"><span class="q-badge">Q28</span><span>Define S-Attributed SDT.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define S-Attributed SDT..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>S-attributed</b> syntax-directed definition is one that uses <i>only synthesized</i> attributes. Every semantic action can therefore be placed at the right end of its production and evaluated bottom-up as the parser reduces, which is why S-attributed definitions can be implemented directly on an LR parser in a single pass with no explicit tree.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-29">
                 <div class="q-text"><span class="q-badge">Q29</span><span>Define L-Attributed SDT.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define L-Attributed SDT..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>L-attributed</b> syntax-directed definition allows synthesized attributes plus inherited attributes restricted so that, in a production \( A \to X_1 X_2 \ldots X_n \), an inherited attribute of \( X_j \) depends only on inherited attributes of \( A \) and on attributes of \( X_1, \ldots, X_{j-1} \) — i.e. only on symbols to its <i>left</i>. Such definitions are evaluable in one depth-first left-to-right pass, so they suit predictive/LL translation; every S-attributed SDD is L-attributed, but not conversely.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-30">
                 <div class="q-text"><span class="q-badge">Q30</span><span>What is Three-Address Code (3AC)?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Three-Address Code (3AC)?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Three-address code</b> is a linearised intermediate representation in which every instruction has at most one operator on the right-hand side and at most three addresses, in the general form \( x := y\ op\ z \). Nested expressions are broken up using compiler-generated temporaries: \( a := b + c * d \) becomes \( t_1 := c * d;\ t_2 := b + t_1;\ a := t_2 \).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-31">
                 <div class="q-text"><span class="q-badge">Q31</span><span>Define Quadruple representation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Quadruple representation..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>quadruple</b> represents one three-address instruction as a record of four fields — <i>op, arg1, arg2, result</i>; e.g. \( t_1 := b * c \) is <code>(*, b, c, t1)</code>. Because the result temporary is named explicitly, instructions may be moved or reordered freely during optimisation, at the cost of storing all those temporary names.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-32">
                 <div class="q-text"><span class="q-badge">Q32</span><span>Define Triple representation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Triple representation..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>triple</b> represents an instruction with only three fields — <i>op, arg1, arg2</i> — the result is <i>not</i> named; instead the instruction is referred to by its position (index) in the triple array. This saves the space of temporary names, but since operands are encoded as triple positions, moving or reordering an instruction invalidates those references, making optimisation awkward.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-33">
                 <div class="q-text"><span class="q-badge">Q33</span><span>Define Indirect Triple representation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Indirect Triple representation..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>indirect triple</b> representation keeps the triples in one array plus a separate <i>list of pointers</i> to them giving the execution order. Optimisation reorders or deletes entries in the pointer list only, leaving the triples and their indices untouched — thus retaining the space economy of triples while regaining the reorderability of quadruples.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-34">
                 <div class="q-text"><span class="q-badge">Q34</span><span>What is Backpatching?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Backpatching?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Backpatching</b> is the technique that lets jump code be generated in a single pass when a jump's target address is not yet known: the instruction is emitted with the target left blank and its index is kept on a list built by \( makelist() \) and \( merge() \); when the label's address becomes known, \( backpatch(list,\ addr) \) fills that address into every instruction on the list. It is used for boolean expressions and control flow (<code>if</code>, <code>while</code>, short-circuit <code>&amp;&amp;</code>/<code>||</code>).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-35">
@@ -484,221 +292,109 @@
 
 --- Page 2 ---</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Activation Record.
-
-
-
---- Page 2 ---.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> An <b>activation record</b> (stack frame) is the block of memory pushed on the control stack for one activation of a procedure. It typically holds, from top down: the returned value, the actual parameters, an optional control link (to the caller's record) and access/static link (for non-local data), saved machine status including the return address and registers, local data, and temporaries.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-36">
                 <div class="q-text"><span class="q-badge">Q36</span><span>What is Display in run-time stack management?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Display in run-time stack management?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>display</b> is an array \( d \) in which \( d[i] \) points to the most recent activation record of the procedure at nesting depth \( i \). It gives <i>constant-time</i> access to non-local variables — the variable is found at a fixed offset in \( d[i] \) — whereas the static-link chain requires walking \( n_{use} - n_{decl} \) links; the cost is saving and restoring display entries on call and return.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-37">
                 <div class="q-text"><span class="q-badge">Q37</span><span>What is a Basic Block?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is a Basic Block?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>basic block</b> is a maximal sequence of consecutive three-address instructions with a <i>single entry</i> (its first instruction, the leader) and a <i>single exit</i> (its last instruction): control can enter only at the beginning and, apart from the last instruction, no instruction is a jump or a jump target. Hence if the first instruction executes, all of them execute in order.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-38">
                 <div class="q-text"><span class="q-badge">Q38</span><span>What is a Control Flow Graph (CFG)?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is a Control Flow Graph (CFG)?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>control flow graph</b> (flow graph) is a directed graph whose nodes are the basic blocks of a procedure, with an edge \( B_1 \to B_2 \) whenever control may pass from the last instruction of \( B_1 \) to the first of \( B_2 \) — either by a jump to \( B_2 \)'s leader or by falling through. Distinguished ENTRY and EXIT nodes are added; the flow graph is the substrate for global data-flow analysis and loop detection.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-39">
                 <div class="q-text"><span class="q-badge">Q39</span><span>Define Leader in basic block identification.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Leader in basic block identification..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>leader</b> is the first instruction of a basic block. The leaders are found by three rules: (i) the first instruction of the intermediate code is a leader; (ii) any instruction that is the target of a conditional or unconditional jump is a leader; (iii) any instruction immediately <i>following</i> a jump is a leader. Each basic block then consists of a leader and all instructions up to, but not including, the next leader.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-40">
                 <div class="q-text"><span class="q-badge">Q40</span><span>What is Directed Acyclic Graph (DAG) in optimization?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Directed Acyclic Graph (DAG) in optimization?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>DAG</b> is a directed acyclic graph built for a basic block in which leaves are the initial values of identifiers/constants, interior nodes are operators, and every node carries the identifiers whose value it holds. Identical subexpressions are represented by a <i>single shared node</i> rather than duplicated as in a syntax tree, which directly exposes common subexpressions, dead code and reordering opportunities for local optimisation.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-41">
                 <div class="q-text"><span class="q-badge">Q41</span><span>What is Common Subexpression Elimination?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Common Subexpression Elimination?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Common subexpression elimination</b> replaces a recomputation of an expression \( E \) by a reference to its previously computed value, provided \( E \) was already evaluated on every path to this point and none of its operands has been modified since (i.e. \( E \) is <i>available</i>). Thus \( t_1 := b*c; \ldots; t_2 := b*c \) becomes \( t_2 := t_1 \); it is done locally with a DAG/value numbering and globally with available-expressions data-flow analysis.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-42">
                 <div class="q-text"><span class="q-badge">Q42</span><span>What is Dead Code Elimination?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Dead Code Elimination?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Dead code elimination</b> removes instructions whose computed value is never subsequently used — the assigned variable is <i>dead</i> at that point — as well as code that is unreachable. For instance \( x := y + z \) is deleted if \( x \) is never live afterwards, and the body of <code>if (false) { ... }</code> is unreachable. Liveness is established by live-variable (backward) data-flow analysis.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-43">
                 <div class="q-text"><span class="q-badge">Q43</span><span>What is Constant Folding?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Constant Folding?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Constant folding</b> is the compile-time evaluation of expressions whose operands are all known constants, replacing the expression by its computed value — \( x := 3 * 4 + 2 \) becomes \( x := 14 \). It saves run-time work and code space, and is usually enabled and re-triggered by constant propagation.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-44">
                 <div class="q-text"><span class="q-badge">Q44</span><span>What is Copy Propagation?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Copy Propagation?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Copy propagation</b> replaces later uses of \( x \) by \( y \) after a copy statement \( x := y \), provided that copy is the only definition of \( x \) reaching that use and neither \( x \) nor \( y \) is redefined in between. It does not by itself make the code faster; its value is that it renders \( x \) dead, so dead-code elimination can then delete the copy statement altogether.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-45">
                 <div class="q-text"><span class="q-badge">Q45</span><span>What is Loop Invariant Code Motion?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Loop Invariant Code Motion?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Loop invariant code motion</b> hoists a computation whose operands do not change anywhere inside the loop out of the loop body and into its <i>pre-header</i>, so it is evaluated once instead of once per iteration. The move is legal only if the instruction's block dominates all loop exits (or the variable is dead on exit) and the target is not assigned elsewhere in the loop.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-46">
                 <div class="q-text"><span class="q-badge">Q46</span><span>What is Strength Reduction?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Strength Reduction?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Strength reduction</b> replaces an expensive operation with an equivalent cheaper one — classically a multiplication by a repeated addition on an induction variable, so that \( t := i * 4 \) inside a loop becomes \( t := t + 4 \) per iteration. Machine-level instances include \( x * 2 \to x + x \) or \( x \ll 1 \), and \( x / 2 \to x \gg 1 \).</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-47">
                 <div class="q-text"><span class="q-badge">Q47</span><span>What is Peephole Optimization?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Peephole Optimization?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Peephole optimisation</b> is a simple, local improvement technique that slides a small window — the <i>peephole</i> — of a few consecutive target or intermediate instructions and replaces the sequence in it by a shorter or faster equivalent, repeating passes until no more improvements occur. Typical transformations are removing redundant load/store pairs and unreachable code, flow-of-control optimisation (jump to a jump), algebraic simplification (\( x := x + 0 \)), strength reduction and use of machine idioms.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-48">
                 <div class="q-text"><span class="q-badge">Q48</span><span>Define Register Allocation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Register Allocation..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Register allocation</b> is the phase that decides <i>which</i> program values are held in the machine's limited set of registers at each point in the program, while register <i>assignment</i> chooses the specific physical register for each. The goal is to minimise memory loads and stores; it is normally solved as graph colouring of the interference graph, and the general problem is NP-complete.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-49">
                 <div class="q-text"><span class="q-badge">Q49</span><span>What is Register Interference Graph?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is Register Interference Graph?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> A <b>register interference graph</b> is an undirected graph with one node per live range (variable/temporary) and an edge between two nodes whose live ranges <i>overlap</i>, meaning both are simultaneously live and therefore cannot share a register. Finding a legal allocation is then \( k \)-colouring this graph, where \( k \) is the number of available registers; nodes that cannot be coloured are spilled to memory.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-50">
                 <div class="q-text"><span class="q-badge">Q50</span><span>Define Spooling/Spilling in register allocation.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Spooling/Spilling in register allocation..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Spilling</b> is what a register allocator does when registers run short: the value in a register is <i>stored</i> to a location in the activation record and <i>reloaded</i> just before its next use, freeing that register in between. In graph-colouring allocation, a node that cannot be given one of the \( k \) colours is chosen for spilling by a cost heuristic (spill cost / degree), and the graph is rebuilt and recoloured.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-51">
                 <div class="q-text"><span class="q-badge">Q51</span><span>What is a Static Single Assignment (SSA) form?</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for What is a Static Single Assignment (SSA) form?.</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> <b>Static Single Assignment form</b> is an intermediate representation in which every variable is assigned exactly once: each assignment creates a new subscripted name (\( x_1, x_2, \ldots \)), and at control-flow join points a \( \phi \)-function such as \( x_3 := \phi(x_1, x_2) \) selects the value that arrived along the executed path. Because every use has a unique definition, def-use information is explicit, which greatly simplifies constant propagation, dead-code elimination and register allocation.</p>
                 </div>
             </div>
             <div class="qa-card" id="ga-52">
                 <div class="q-text"><span class="q-badge">Q52</span><span>Define Dominator in control flow analysis.</span></div>
                 <div class="a-text">
-                    <div class="note-skeleton">
-    <ul>
-        <li><b>Definition:</b> Provide the formal definition for Define Dominator in control flow analysis..</li>
-        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
-        <li><b>Application/Example:</b> Give a relevant example in COMPILER.</li>
-    </ul>
-</div>
+                    <p><b>Ans:</b> In a flow graph, a node \( d \) <b>dominates</b> node \( n \) (written \( d\ dom\ n \)) if <i>every</i> path from the ENTRY node to \( n \) passes through \( d \); every node dominates itself, and the closest strict dominator of \( n \) is its immediate dominator \( idom(n) \). Dominators identify natural loops: a back edge \( n \to d \) is one whose head \( d \) dominates its tail \( n \).</p>
                 </div>
             </div>
             <h1 class="section-title" id="group-b">Group B — Medium / Descriptive Questions (5 Marks Each)</h1>

@@ -344,9 +344,18 @@ body:has(> .folio-page) { padding-block: 3.5rem; }
 
 .card p { font-size: 0.95rem; line-height: 1.65; }
 
+/* Subject index pages never defined .card-footer, so it needs the full rule
+   here, not just an override. */
 .card-footer {
-    border-top-color: var(--p-hairline-soft);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1.4rem;
     padding-top: 1.1rem;
+    border-top: 1px solid var(--p-hairline-soft);
+    font-size: 0.84rem;
+    font-weight: 600;
+    color: var(--p-accent);
     /* Two labels on one line collide in a 3-up grid */
     flex-wrap: wrap;
     gap: 0.35rem 1rem;
@@ -431,6 +440,37 @@ body:has(> .folio-page) { padding-block: 3.5rem; }
     transition: background var(--p-fast) var(--p-ease), color var(--p-fast) var(--p-ease);
 }
 .toc-box a:hover { background: var(--p-wash); transform: none; }
+
+/* ---- Group switcher in the sidebar (Group A / B / C pages) ---- */
+.toc-box .toc-meta {
+    display: block;
+    margin-top: 0.15rem;
+    font-size: 0.76rem;
+    font-weight: 500;
+    opacity: 0.6;
+    letter-spacing: 0.01em;
+}
+
+/* Current group reads as selected, using the page's own accent */
+.toc-box a.active {
+    background: var(--p-wash-strong);
+    color: var(--p-accent);
+    box-shadow: inset 2px 0 0 var(--p-accent);
+}
+.toc-box a.active .toc-meta { opacity: 0.75; }
+
+.toc-box .toc-foot {
+    margin: 1.25rem 0 0;
+    padding-top: 1rem;
+    border-top: 1px solid var(--p-hairline);
+    font-size: 0.82rem;
+}
+.toc-box .toc-foot a {
+    padding: 0;
+    margin-left: 0;
+    opacity: 0.75;
+}
+.toc-box .toc-foot a:hover { background: none; opacity: 1; }
 
 /* ---- Content column ---- */
 .content {

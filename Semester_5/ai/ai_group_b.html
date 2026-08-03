@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence (PEC-CS501B) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #8b5cf6; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #8b5cf644; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="ai_index.html">← Back to Artificial Intelligence Index</a>
+        <span class="nav-title">Artificial Intelligence (PEC-CS501B) — Group B</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="ai_group_a.html" class=""><b>Group A</b><br><span class="toc-meta">53 questions</span></a></li><li><a href="ai_group_b.html" class="active"><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="ai_group_c.html" class=""><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="ai_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-b">Group B — Medium / Descriptive Questions (5 Marks Each)</h1>
+
+            <div class="qa-card" id="gb-1">
+                <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain PEAS Model with Automated Taxi and Medical Diagnosis examples.</span></div>
+                <div class="a-text">
+                    <h3>Understanding the PEAS Model</h3><p>The <strong>PEAS (Performance, Environment, Actuators, Sensors)</strong> model is a formal specification used to design and define an intelligent agent's task environment before constructing the agent itself. A clearly defined task environment ensures that the agent can make rational decisions to maximize its performance measure.</p><ul>  <li><strong>Performance Measure (P):</strong> The objective criterion used to evaluate the agent's success or behavior.</li>  <li><strong>Environment (E):</strong> The external conditions and entities the agent interacts with and operates within.</li>  <li><strong>Actuators (A):</strong> The mechanisms or effectors the agent uses to perform actions and alter the environment.</li>  <li><strong>Sensors (S):</strong> The devices or inputs through which the agent perceives the state of the environment.</li></ul><div class="diagram-container"><div class="mermaid">
+graph TD
+    P["PERFORMANCE<br/>MEASURE (P)"] -.->|"evaluates"| E
+    E["ENVIRONMENT (E)"] -->|"Percepts"| S
+    subgraph AGENT["Intelligent Agent"]
+        S["SENSORS (S)"] --> F["Agent<br/>Program"]
+        F --> A["ACTUATORS (A)"]
+    end
+    A -->|"Actions"| E
+    style AGENT fill:#ffffff,stroke:#94a3b8,stroke-dasharray: 5 5
+</div><div class="diagram-caption">Figure: General Architecture of an Intelligent Agent interacting with its Environment</div></div><h3>Examples of PEAS Specifications</h3><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <thead>    <tr style="background-color: #f3e8ff;">      <th>Agent Type</th>      <th>Performance Measure (P)</th>      <th>Environment (E)</th>      <th>Actuators (A)</th>      <th>Sensors (S)</th>    </tr>  </thead>  <tbody>    <tr>      <td><strong>Automated Taxi Driver</strong></td>      <td>Safety, destination reach, time, comfort, traffic violations, profit.</td>      <td>Roads, traffic lights, pedestrians, other vehicles, weather conditions.</td>      <td>Steering wheel, accelerator, brake, signal indicators, horn, display.</td>      <td>Cameras, LiDAR, radar, GPS, speedometer, accelerometer, engine sensors.</td>    </tr>    <tr>      <td><strong>Medical Diagnosis System</strong></td>      <td>Accurate disease classification, minimized cost, patient survival rate.</td>      <td>Patient symptoms, medical history, hospital staff, laboratory results.</td>      <td>Screen display (questions, tests, diagnoses), printer for prescriptions.</td>      <td>Keyboard input of symptoms, direct medical scanners, database feeds.</td>    </tr>  </tbody></table>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-2">
+                <div class="q-text"><span class="q-badge b5">Q2</span><span>Explain Agent Environment Types: Fully vs Partially Observable, Deterministic vs Stochastic, Static vs
+Dynamic.</span></div>
+                <div class="a-text">
+                    <h3>Classification of Agent Task Environments</h3><p>An intelligent agent's design is heavily influenced by the properties of the environment it operates in. These properties dictate the complexity of the algorithms required for perception, reasoning, and action.</p><ul>  <li><strong>Fully Observable vs. Partially Observable:</strong>      <br/>• <em>Fully Observable:</em> The agent's sensors give it access to the complete state of the environment at each point in time (e.g., Chess, Checkers). The agent doesn't need internal state to keep track of the world.      <br/>• <em>Partially Observable:</em> The agent cannot sense the complete state of the environment due to noisy/inaccurate sensors or parts of the state being hidden (e.g., Poker, Automated Taxi).  </li>  <li><strong>Deterministic vs. Stochastic:</strong>      <br/>• <em>Deterministic:</em> The next state of the environment is completely determined by the current state and the exact action executed by the agent (e.g., Sudoku, Chess).      <br/>• <em>Stochastic:</em> The next state involves randomness or uncertainty, meaning an action doesn't guarantee a single specific outcome (e.g., Ludo (due to dice), Automated Taxi (due to unpredictable traffic)).  </li>  <li><strong>Static vs. Dynamic:</strong>      <br/>• <em>Static:</em> The environment does not change while the agent is deliberating or computing its next action (e.g., Crossword puzzle, Medical Diagnosis).      <br/>• <em>Dynamic:</em> The environment changes continuously even while the agent is thinking. The agent must make decisions in real-time (e.g., Automated Taxi, Multiplayer Action Games).      <br/>• <em>Semi-Dynamic:</em> The environment itself doesn't change, but the agent's performance score decreases over time (e.g., Timed Chess).  </li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-3">
+                <div class="q-text"><span class="q-badge b5">Q3</span><span>Explain Uninformed Search Algorithms: BFS, DFS, Depth-Limited, IDDFS.</span></div>
+                <div class="a-text">
+                    <h3>Uninformed Search Algorithms</h3><p><strong>Uninformed Search (Blind Search)</strong> algorithms have no domain-specific knowledge about how far a state is from the goal. They solely use the problem definition (initial state, actions, transition model, and goal test) to systematically explore the state space.</p><ul>  <li><strong>Breadth-First Search (BFS):</strong>      <br/>• <em>Mechanism:</em> Expands the shallowest unexpanded node first. Implemented using a FIFO queue.      <br/>• <em>Properties:</em> Complete (always finds a solution if one exists) and Optimal (finds the shallowest goal if step costs are uniform).      <br/>• <em>Complexity:</em> Time \(O(b^d)\), Space \(O(b^d)\) — where \(b\) is branching factor, \(d\) is depth. Huge memory requirement is its main drawback.  </li>  <li><strong>Depth-First Search (DFS):</strong>      <br/>• <em>Mechanism:</em> Expands the deepest unexpanded node first along the current path. Implemented using a LIFO stack (or recursion).      <br/>• <em>Properties:</em> Not complete (can get stuck in infinite loops) and Not optimal (might find a deeper solution first).      <br/>• <em>Complexity:</em> Time \(O(b^m)\), Space \(O(bm)\) — where \(m\) is max depth. Very memory efficient compared to BFS.  </li>  <li><strong>Depth-Limited Search (DLS):</strong>      <br/>• <em>Mechanism:</em> A variant of DFS where a predetermined depth limit \(l\) is imposed to prevent the algorithm from traversing infinite paths.      <br/>• <em>Properties:</em> Complete only if the goal depth \(d \le l\). Not optimal.  </li>  <li><strong>Iterative Deepening DFS (IDDFS):</strong>      <br/>• <em>Mechanism:</em> Repeatedly applies Depth-Limited Search, incrementing the depth limit \(l\) (\(l = 0, 1, 2, \dots\)) until a goal is found.      <br/>• <em>Properties:</em> Combines the benefits of BFS and DFS. It is Complete and Optimal (like BFS) but has the low memory footprint of DFS (\(O(bd)\)).  </li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-4">
+                <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain A* Search Algorithm and g(n) + h(n) evaluation function.</span></div>
+                <div class="a-text">
+                    <h3>A* Search Algorithm</h3><p><strong>A* Search</strong> is the most widely known form of Best-First Search. It is an informed (heuristic) search algorithm that efficiently finds the optimal path from the start node to a goal node by combining the actual cost reached so far with the estimated cost to the goal.</p><p>The core of A* is its <strong>Evaluation Function \(f(n)\)</strong>:</p>\[ f(n) = g(n) + h(n) \]<ul>  <li><strong>\(g(n)\):</strong> The exact path cost from the start node to the current node \(n\).</li>  <li><strong>\(h(n)\):</strong> The heuristic function; the estimated cheapest cost from node \(n\) to the goal.</li>  <li><strong>\(f(n)\):</strong> The estimated total cost of the cheapest solution path that passes through node \(n\).</li></ul><div class="diagram-container"><div class="mermaid">
+graph TD
+    S((Start Node)) -->|"g(n) = Exact Cost"| N((Node n))
+    N -.->|"h(n) = Estimated Cost"| G((Goal Node))
+    N -->|"f(n) = g(n) + h(n)"| N
+</div><div class="diagram-caption">Figure: Components of the A* Evaluation Function</div></div><p><strong>Mechanism & Optimality:</strong> A* maintains an Open List (priority queue sorted by \(f(n)\)) and a Closed List. It always expands the node with the lowest \(f(n)\) value. A* is guaranteed to be <strong>Complete</strong> (will find a goal if one exists) and <strong>Optimal</strong> (will find the shortest/cheapest path) provided that the heuristic function \(h(n)\) is <em>admissible</em> (never overestimates the cost) and <em>consistent</em>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-5">
+                <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain Admissibility and Consistency conditions for Heuristics.</span></div>
+                <div class="a-text">
+                    <h3>Heuristic Conditions: Admissibility and Consistency</h3><p>For heuristic search algorithms like A* to guarantee finding the optimal (cheapest) path, the heuristic function \(h(n)\) must satisfy specific mathematical properties.</p><h4>1. Admissibility</h4><p>A heuristic \(h(n)\) is <strong>admissible</strong> if it <em>never overestimates</em> the actual minimal cost to reach the goal state from node \(n\). Formally, if \(h^*(n)\) is the true optimal cost from \(n\) to the goal, then:</p>\[ 0 \le h(n) \le h^*(n) \quad \text{for all nodes } n \]<p>Admissible heuristics are inherently optimistic because they assume the cost of solving the problem is less than or equal to the actual cost. If \(h(n)\) is admissible, A* search is optimal for tree search.</p><h4>2. Consistency (Monotonicity)</h4><p>A heuristic \(h(n)\) is <strong>consistent</strong> (or monotonic) if, for every node \(n\) and every successor \(n'\) generated by an action \(a\), the estimated cost of reaching the goal from \(n\) is no greater than the step cost of getting to \(n'\) plus the estimated cost from \(n'\) to the goal. Formally, obeying the triangle inequality:</p>\[ h(n) \le c(n, a, n') + h(n') \]<p>Where \(c(n, a, n')\) is the actual cost of the action. Furthermore, the heuristic value of the goal node must be zero (\(h(Goal) = 0\)).</p><p><strong>Relationship:</strong> Every consistent heuristic is strictly also admissible. If a heuristic is consistent, the \(f(n)\) values along any path are non-decreasing, making A* optimal even when using graph search (with a closed list) without needing to reopen closed nodes.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-6">
+                <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Hill Climbing Search and its Pitfalls (Local Maxima, Ridge, Plateau).</span></div>
+                <div class="a-text">
+                    <h3>Hill Climbing Search and Its Pitfalls</h3><p><strong>Hill Climbing</strong> is a local, informed search algorithm that continuously moves in the direction of increasing value (or decreasing cost). It is a greedy approach that only looks at the immediate neighbors of the current state and selects the one that improves the objective function the most. It does not maintain a search tree, making it highly memory efficient, but it can easily get stuck.</p><p>Because it only makes local improvements, Hill Climbing frequently fails to find the global optimum due to the following landscape topologies (pitfalls):</p><ul>  <li><strong>Local Maxima (or Minima):</strong> A state that is better than all of its immediate neighbors, but is strictly worse than the global maximum. The algorithm gets stuck here because every valid move leads to a worse state.</li>  <li><strong>Plateau (Flat Local Maximum):</strong> A flat area of the state-space landscape where a set of neighboring states have exactly the same objective value. The algorithm loses its gradient and performs a random walk, often failing to make progress.</li>  <li><strong>Ridge:</strong> A sequence of local maxima that are connected, forming a sharp elevation. Single-axis moves (typical in hill climbing) cause the algorithm to zig-zag inefficiently back and forth across the ridge without moving along its crest.</li></ul><div class="diagram-container"><div class="mermaid">
+graph TD
+    subgraph Hill Climbing Pitfalls
+       LM[Local Maxima: Peak lower than Global Max]
+       P[Plateau: Flat region with no slope]
+       R[Ridge: Sharp peak requiring multi-directional movement]
+      end
+</div></div><p><em>Solutions:</em> Random-restart hill climbing, Stochastic hill climbing, or Simulated Annealing can help escape these pitfalls.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-7">
+                <div class="q-text"><span class="q-badge b5">Q7</span><span>Explain Simulated Annealing Search Algorithm and temperature schedule.</span></div>
+                <div class="a-text">
+                    <h3>Simulated Annealing Search</h3><p><strong>Simulated Annealing</strong> is a probabilistic local search algorithm used to find the global optimum in a large search space while avoiding getting trapped in local maxima. It draws an analogy from metallurgy, where a material is heated to a high temperature and slowly cooled to minimize its thermodynamic free energy (creating a strong crystalline structure).</p><p>Unlike standard hill climbing which strictly only accepts moves that improve the state, Simulated Annealing sometimes <strong>accepts worse moves</strong> to escape local maxima. The probability of accepting a bad move depends on two factors:</p><ol>  <li><strong>The magnitude of the bad move (\(\Delta E\)):</strong> How much worse the new state is compared to the current state.</li>  <li><strong>The current Temperature (\(T\)):</strong> A control parameter that decreases over time.</li></ol><p>If the new state improves the objective (\(\Delta E > 0\)), it is always accepted. If it is worse (\(\Delta E < 0\)), it is accepted with a probability defined by the Boltzmann distribution:</p>\[ P(\text{accept}) = e^{\frac{\Delta E}{T}} \]<h4>The Temperature Schedule</h4><p>The <strong>cooling schedule</strong> dictates how the temperature \(T\) decreases over time. Initially, \(T\) is high, meaning \(P(\text{accept})\) is close to 1, allowing the algorithm to freely explore the state space (like a random walk) and jump out of local maxima. As time progresses, \(T\) drops towards zero. When \(T\) is very low, the algorithm behaves exactly like strict hill climbing, converging onto the nearest peak.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-8">
+                <div class="q-text"><span class="q-badge b5">Q8</span><span>Explain Constraint Satisfaction Problems (CSP) with N-Queens example.</span></div>
+                <div class="a-text">
+                    <h3>Constraint Satisfaction Problems (CSP)</h3><p>A <strong>Constraint Satisfaction Problem (CSP)</strong> is a mathematical problem defined by a set of variables whose states must satisfy a number of constraints or rules. A CSP is formally defined by three components: \((X, D, C)\).</p><ul>  <li><strong>\(X\):</strong> A set of variables \(\{X_1, X_2, \dots, X_n\}\).</li>  <li><strong>\(D\):</strong> A set of domains \(\{D_1, D_2, \dots, D_n\}\), where \(D_i\) contains the permissible values for variable \(X_i\).</li>  <li><strong>\(C\):</strong> A set of constraints that specify allowable combinations of values for subsets of variables.</li></ul><p>A solution to a CSP is a complete, consistent assignment of values to all variables such that no constraint is violated.</p><h4>N-Queens Problem as a CSP</h4><p>The objective of the N-Queens problem is to place \(N\) queens on an \(N \times N\) chessboard such that no two queens attack each other (horizontally, vertically, or diagonally).</p><ul>  <li><strong>Variables (\(X\)):</strong> Let \(Q_1, Q_2, \dots, Q_N\) represent the \(N\) queens, where \(Q_i\) is the queen in the \(i\)-th column.</li>  <li><strong>Domain (\(D\)):</strong> The row index where the queen can be placed. \(D_i = \{1, 2, \dots, N\}\).</li>  <li><strong>Constraints (\(C\)):</strong> For any two queens \(Q_i\) and \(Q_j\) (where \(i \neq j\)):      <br/>1. \(Q_i \neq Q_j\) (No two queens in the same row).      <br/>2. \(|Q_i - Q_j| \neq |i - j|\) (No two queens on the same diagonal).  </li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-9">
+                <div class="q-text"><span class="q-badge b5">Q9</span><span>Explain CSP Backtracking Search and Arc Consistency (AC-3).</span></div>
+                <div class="a-text">
+                    <h3>CSP Backtracking Search and Arc Consistency (AC-3)</h3><h4>1. Backtracking Search</h4><p><strong>Backtracking Search</strong> is a specialized Depth-First Search (DFS) algorithm used for solving CSPs. Instead of generating complete states, it assigns values to variables one at a time. After assigning a value to variable \(X_i\), it checks the constraints. If the assignment violates any constraint with previously assigned variables, it abandons the path (backtracks) and tries the next value in \(X_i\)'s domain. This early pruning significantly reduces the search space compared to brute-force generate-and-test methods.</p><h4>2. Arc Consistency (AC-3 Algorithm)</h4><p>Constraint propagation techniques are used to reduce the domain of variables before or during search. The most common form is <strong>Arc Consistency</strong>.</p><p>A variable \(X_i\) is arc-consistent with respect to variable \(X_j\) if, for every value \(x\) in the domain of \(X_i\), there exists at least one value \(y\) in the domain of \(X_j\) that satisfies the binary constraint between \(X_i\) and \(X_j\).</p><p>The <strong>AC-3 Algorithm</strong> enforces arc consistency across the entire CSP network:</p><ol>  <li>Initialize a queue with all directed arcs \((X_i, X_j)\) in the CSP graph.</li>  <li>Pop an arc \((X_i, X_j)\) from the queue and make \(X_i\) arc-consistent with \(X_j\) by removing unsupported values from the domain of \(X_i\).</li>  <li>If the domain of \(X_i\) is modified, add all arcs \((X_k, X_i)\) (where \(X_k\) is a neighbor of \(X_i\)) back into the queue because the reduced domain of \(X_i\) might now invalidate previous consistencies.</li>  <li>Repeat until the queue is empty. If any domain becomes empty, the CSP has no solution.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-10">
+                <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Game Playing and Minimax Search Algorithm.</span></div>
+                <div class="a-text">
+                    <h3>Game Playing and the Minimax Algorithm</h3><p>In AI, game playing is typically modeled as a deterministic, fully observable, zero-sum environment where two agents compete (adversarial search). Examples include Chess, Tic-Tac-Toe, and Checkers. The two players are traditionally called <strong>MAX</strong> and <strong>MIN</strong>. MAX attempts to maximize the game score, while MIN attempts to minimize it.</p><h4>The Minimax Algorithm</h4><p>The <strong>Minimax Algorithm</strong> computes the optimal move for MAX by exploring the entire game tree down to the leaf/terminal nodes, assuming MIN plays optimally to oppose MAX.</p><div class="diagram-container"><div class="mermaid">
+graph TD
+    MAX((MAX)) -->|Choose Max| MIN1[MIN]
+    MAX -->|Choose Max| MIN2[MIN]
+    MIN1 -->|Choose Min| T1(("+1"))
+    MIN1 -->|Choose Min| T2(("-1"))
+    MIN2 -->|Choose Min| T3(("0"))
+    MIN2 -->|Choose Min| T4(("-1"))
+</div><div class="diagram-caption">Figure: Minimax Execution where MAX chooses the path maximizing the score after MIN minimizes it.</div></div><p><strong>Steps of Minimax:</strong></p><ol>  <li><strong>Generate Tree:</strong> Expand the game tree from the current state down to the terminal states (or a depth limit).</li>  <li><strong>Evaluate Leaves:</strong> Apply a utility function (or heuristic evaluation function) to the terminal nodes to get their scores.</li>  <li><strong>Back-propagate Values:</strong>      <br/>• If the parent node is a <strong>MIN node</strong>, it selects the <em>minimum</em> utility value of its children.      <br/>• If the parent node is a <strong>MAX node</strong>, it selects the <em>maximum</em> utility value of its children.  </li>  <li><strong>Decision:</strong> The root node (MAX's current turn) makes the move associated with the maximum backed-up value.</li></ol><p>While Minimax is optimal, its time complexity is \(O(b^m)\), which is impractical for complex games without depth limiting and Alpha-Beta pruning.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-11">
+                <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain Alpha-Beta Pruning rules with an example game tree.</span></div>
+                <div class="a-text">
+                    <h3>Alpha-Beta Pruning in Game Trees</h3><p><strong>Alpha-Beta Pruning</strong> is an optimization for the Minimax algorithm. It dramatically reduces the number of nodes evaluated in the search tree, allowing search to go much deeper within the same time limit.</p><h4>The Pruning Rules</h4><ul>  <li><strong>Alpha (\(\alpha\)):</strong> The best (highest-value) choice found so far at any choice point along the path for MAX. Initialized to \(-\infty\).</li>  <li><strong>Beta (\(\beta\)):</strong> The best (lowest-value) choice found so far at any choice point along the path for MIN. Initialized to \(+\infty\).</li>  <li><strong>Pruning Condition:</strong> Search is pruned (stopped) at a MIN node if its value \(\le \alpha\). Search is pruned at a MAX node if its value \(\ge \beta\). Simply put, prune when \(\alpha \ge \beta\).</li></ul><div class="diagram-container"><div class="mermaid">
+graph TD
+    MAX((MAX)) --> MIN1((MIN: 3))
+      MAX --> MIN2((MIN: 2))
+      MIN1 --> L1((3))
+      MIN1 --> L2((5))
+      MIN2 --> L3((2))
+      MIN2 -.-> L4((Pruned))
+</div><div class="diagram-caption">Figure: Alpha-Beta Pruning. Right branch is pruned because MIN2 finds a 2, and MAX already has guaranteed at least a 3 from the left branch.</div></div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-12">
+                <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain Propositional Logic syntax, connectives, and truth tables.</span></div>
+                <div class="a-text">
+                    <h3>Propositional Logic</h3><p><strong>Propositional Logic</strong> (Boolean Logic) is the simplest logic system. It deals with propositions—declarative sentences that are either true (T) or false (F).</p><h4>Syntax and Logical Connectives</h4><p>Sentences are built using atomic propositions (e.g., \(P\), \(Q\)) and logical connectives:</p><ul>  <li><strong>Negation (\(\neg P\)):</strong> "Not P". True if \(P\) is false.</li>  <li><strong>Conjunction (\(P \land Q\)):</strong> "P and Q". True only if both \(P\) and \(Q\) are true.</li>  <li><strong>Disjunction (\(P \lor Q\)):</strong> "P or Q". True if at least one of \(P\) or \(Q\) is true.</li>  <li><strong>Implication (\(P \implies Q\)):</strong> "If P then Q". False <em>only</em> when \(P\) is true and \(Q\) is false.</li>  <li><strong>Biconditional (\(P \iff Q\)):</strong> "P if and only if Q". True if \(P\) and \(Q\) have the same truth value.</li></ul><h4>Truth Table Example</h4><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <tr style="background-color: #f3e8ff;"><th>P</th><th>Q</th><th>\(\neg P\)</th><th>\(P \land Q\)</th><th>\(P \lor Q\)</th><th>\(P \implies Q\)</th><th>\(P \iff Q\)</th></tr>  <tr><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>T</td><td>T</td></tr>  <tr><td>T</td><td>F</td><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td></tr>  <tr><td>F</td><td>T</td><td>T</td><td>F</td><td>T</td><td>T</td><td>F</td></tr>  <tr><td>F</td><td>F</td><td>T</td><td>F</td><td>F</td><td>T</td><td>T</td></tr></table>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-13">
+                <div class="q-text"><span class="q-badge b5">Q13</span><span>Explain First-Order Predicate Logic (FOL) syntax and quantifiers.</span></div>
+                <div class="a-text">
+                    <h3>First-Order Logic (FOL)</h3><p>Unlike Propositional Logic which only sees facts as whole truths, <strong>First-Order Logic (FOL)</strong> breaks facts down into objects and their relations, making it far more expressive.</p><h4>Syntax Components</h4><ul>  <li><strong>Constants:</strong> Specific objects (e.g., <em>John</em>, <em>Apple</em>).</li>  <li><strong>Variables:</strong> Placeholders for objects (e.g., \(x\), \(y\)).</li>  <li><strong>Predicates:</strong> Relations or properties returning true/false (e.g., \(\text{Loves}(John, Mary)\), \(\text{IsRed}(Apple)\)).</li>  <li><strong>Functions:</strong> Returns an object rather than a truth value (e.g., \(\text{FatherOf}(John)\)).</li></ul><h4>Quantifiers</h4><p>FOL introduces two quantifiers to express properties over collections of objects:</p><ol>  <li><strong>Universal Quantifier (\(\forall\)):</strong> "For all". Used to state that a property holds for every object in the universe.      <br/><em>Example:</em> "All humans are mortal" \(\implies \forall x (\text{Human}(x) \implies \text{Mortal}(x))\).  </li>  <li><strong>Existential Quantifier (\(\exists\)):</strong> "There exists". Used to state that a property holds for at least one object.      <br/><em>Example:</em> "Someone loves Mary" \(\implies \exists x (\text{Loves}(x, Mary))\).  </li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-14">
+                <div class="q-text"><span class="q-badge b5">Q14</span><span>Explain Conversion of FOL Statements to Conjunctive Normal Form (CNF).</span></div>
+                <div class="a-text">
+                    <h3>Conversion to Conjunctive Normal Form (CNF)</h3><p>To use automated inference rules like Resolution, FOL sentences must be standardized into <strong>Conjunctive Normal Form (CNF)</strong>, where a sentence is an AND of ORs (a conjunction of clauses).</p><h4>9-Step Conversion Process</h4><ol>  <li><strong>Eliminate Implications:</strong> Replace \(A \implies B\) with \(\neg A \lor B\).</li>  <li><strong>Move Negations Inwards:</strong> Apply De Morgan's laws so negations only apply to atomic predicates (e.g., \(\neg \forall x P(x) \rightarrow \exists x \neg P(x)\)).</li>  <li><strong>Standardize Variables:</strong> Rename variables so each quantifier uses a unique variable name.</li>  <li><strong>Skolemization:</strong> Eliminate existential quantifiers (\(\exists\)). Replace the existential variable with a Skolem constant or a Skolem function (if it depends on a universal quantifier).</li>  <li><strong>Drop Universal Quantifiers (\(\forall\)):</strong> Since all remaining variables are universally quantified, simply drop the \(\forall\) symbols.</li>  <li><strong>Distribute \(\lor\) over \(\land\):</strong> Convert into a conjunction of disjunctions.</li>  <li><strong>Flatten Nested Connectives:</strong> \((A \land B) \land C \rightarrow A \land B \land C\).</li>  <li><strong>Separate Clauses:</strong> Break the conjunctions into separate independent clauses.</li>  <li><strong>Standardize Variables in Clauses:</strong> Rename variables in different clauses to ensure they do not share variables.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-15">
+                <div class="q-text"><span class="q-badge b5">Q15</span><span>Explain Unification Algorithm in FOL with MGU examples.</span></div>
+                <div class="a-text">
+                    <h3>Unification in First-Order Logic</h3><p><strong>Unification</strong> is a core algorithmic process in FOL used to find a substitution that makes two different logical expressions structurally identical. It is essential for applying inference rules like Resolution.</p><p>A substitution \(\theta\) is called a unifier if \(Expression1\theta = Expression2\theta\). We always seek the <strong>Most General Unifier (MGU)</strong>, which imposes the fewest possible restrictions (substitutions) on the variables.</p><h4>Examples of Unification</h4><ul>  <li><strong>Example 1 (Constants and Variables):</strong>      <br/>Unify \(\text{Knows}(John, x)\) and \(\text{Knows}(y, Mary)\).      <br/>Substitution \(\theta = \{x / Mary, y / John\}\). Result: \(\text{Knows}(John, Mary)\).  </li>  <li><strong>Example 2 (Functions):</strong>      <br/>Unify \(\text{Loves}(x, \text{FatherOf}(x))\) and \(\text{Loves}(John, y)\).      <br/>Substitution \(\theta = \{x / John, y / \text{FatherOf}(John)\}\). Result: \(\text{Loves}(John, \text{FatherOf}(John))\).  </li>  <li><strong>Example 3 (Failure):</strong>      <br/>Unify \(\text{Knows}(John, x)\) and \(\text{Knows}(x, Mary)\).      <br/>Fails because \(x\) cannot simultaneously be \(John\) and \(Mary\).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-16">
+                <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain Resolution Refutation Principle in Propositional Logic.</span></div>
+                <div class="a-text">
+                    <h3>Resolution Refutation Principle</h3><p><strong>Resolution</strong> is a sound and complete inference rule used in automated theorem proving. The <strong>Resolution Refutation</strong> principle proves a theorem by contradiction.</p><h4>The Refutation Workflow</h4><ol>  <li><strong>Formulate Knowledge Base (KB):</strong> Convert all given facts and axioms into Conjunctive Normal Form (CNF) clauses.</li>  <li><strong>Negate the Goal:</strong> Take the theorem/goal you want to prove, negate it (\(\neg Goal\)), and convert it to CNF.</li>  <li><strong>Add to KB:</strong> Add the negated goal to the set of clauses.</li>  <li><strong>Resolve:</strong> Repeatedly apply the Resolution Rule: if two clauses contain complementary literals (e.g., \(P\) in one and \(\neg P\) in another), resolve them to create a new resolvent clause (combining the rest of the literals).</li>  <li><strong>Contradiction (Empty Clause):</strong> If the resolution process eventually derives the empty clause (\(\emptyset\) or NIL), it means a contradiction has been found. Therefore, the negated goal is false, proving that the original goal must be <strong>True</strong>.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-17">
+                <div class="q-text"><span class="q-badge b5">Q17</span><span>Explain Forward Chaining vs Backward Chaining in KB systems.</span></div>
+                <div class="a-text">
+                    <h3>Forward vs Backward Chaining</h3><p>Inference engines in Knowledge-Based (KB) Expert Systems primarily use two reasoning strategies to deduce conclusions from rules (IF-THEN clauses):</p><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <tr style="background-color: #f3e8ff;"><th>Feature</th><th>Forward Chaining</th><th>Backward Chaining</th></tr>  <tr><td><strong>Direction</strong></td><td>Data-driven (Bottom-up).</td><td>Goal-driven (Top-down).</td></tr>  <tr><td><strong>Mechanism</strong></td><td>Starts from known facts, triggers rules where the IF condition is met, and adds new facts (THEN) until the goal is reached.</td><td>Starts with the goal/hypothesis, looks for rules whose THEN part matches the goal, and makes the IF part sub-goals to prove.</td></tr>  <tr><td><strong>Use Case</strong></td><td>Used when new data arrives and we want to see what conclusions can be drawn (e.g., Monitoring systems, Event-driven systems).</td><td>Used when trying to prove a specific hypothesis or diagnose a specific issue (e.g., Medical diagnosis, MYCIN).</td></tr>  <tr><td><strong>Efficiency</strong></td><td>Can generate many irrelevant facts before hitting the goal.</td><td>More efficient for targeted queries; only explores relevant paths.</td></tr></table>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-18">
+                <div class="q-text"><span class="q-badge b5">Q18</span><span>Explain Knowledge Representation using Semantic Networks.</span></div>
+                <div class="a-text">
+                    <h3>Semantic Networks</h3><p>A <strong>Semantic Network</strong> is a graphical knowledge representation technique where knowledge is represented as a directed graph.</p><ul>  <li><strong>Nodes:</strong> Represent concepts, objects, or classes (e.g., "Bird", "Penguin", "Wings").</li>  <li><strong>Edges (Arcs):</strong> Represent the semantic relationships between the nodes.</li></ul><h4>Key Relationships</h4><ul>  <li><strong>IS-A (Inheritance):</strong> Represents class hierarchies. E.g., <em>Penguin \(\xrightarrow{\text{IS-A}}\) Bird</em>.</li>  <li><strong>HAS-A (Possession):</strong> E.g., <em>Bird \(\xrightarrow{\text{HAS-A}}\) Wings</em>.</li>  <li><strong>Action/Property:</strong> E.g., <em>Bird \(\xrightarrow{\text{CAN}}\) Fly</em>.</li></ul><div class="diagram-container"><div class="mermaid">
+graph TD
+    Tweety((Tweety)) -- IS-A --> Canary((Canary))
+      Canary -- IS-A --> Bird((Bird))
+      Bird -- HAS-A --> Wings((Wings))
+      Bird -->|"CAN"| Fly((Fly))
+</div><div class="diagram-caption">Figure: A Simple Semantic Network displaying inheritance. Tweety inherently gets "Wings" and "Fly".</div></div><p>Semantic networks are highly intuitive for humans but lack formal logical semantics, making automated reasoning tricky without strict rules.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-19">
+                <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Knowledge Representation using Frames and Inheritance.
+
+
+
+
+--- Page 3 ---</span></div>
+                <div class="a-text">
+                    <h3>Frames and Inheritance</h3><p>A <strong>Frame</strong> is a highly structured, object-oriented approach to knowledge representation introduced by Marvin Minsky. A frame represents a stereotyped concept, object, or situation (similar to a 'class' in OOP).</p><h4>Structure of a Frame</h4><p>A frame consists of a collection of attributes called <strong>Slots</strong>. Each slot can have:</p><ul>  <li><strong>Values:</strong> Data assigned to the slot (e.g., <code>Color: Red</code>).</li>  <li><strong>Facets:</strong> Metadata about the slot, such as constraints, default values, or attached procedures (e.g., <em>if-needed</em>, <em>if-added</em> demons).</li></ul><h4>Inheritance in Frames</h4><p>Frames are organized into hierarchical taxonomies. A sub-frame inherits slots and default values from its parent frame. For example, a <code>Mammal</code> frame might have a slot <code>Legs: 4</code>. A child frame <code>Dog</code> inherits this slot automatically. However, inheritance can be overridden if a specific child violates the default (e.g., overriding a default inherited property).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-20">
+                <div class="q-text"><span class="q-badge b5">Q20</span><span>Explain Conceptual Dependency (CD) Theory primitive actions.</span></div>
+                <div class="a-text">
+                    <h3>Conceptual Dependency (CD) Theory</h3><p><strong>Conceptual Dependency (CD)</strong>, developed by Roger Schank, is a theory of Natural Language Processing that represents the underlying semantic meaning of sentences independently of the specific words or syntax used. Two sentences with the same meaning map to the exact same CD structure.</p><h4>Primitive Actions (ACTs)</h4><p>CD breaks down all human actions into a small set of foundational primitive actions. Some key ACTs include:</p><ul>  <li><strong>ATRANS:</strong> Transfer of abstract relationship (e.g., give, buy, take).</li>  <li><strong>PTRANS:</strong> Transfer of physical location of an object (e.g., go, fly).</li>  <li><strong>PROPEL:</strong> Application of physical force to an object (e.g., push, pull).</li>  <li><strong>MTRANS:</strong> Transfer of mental information (e.g., tell, hear, read).</li>  <li><strong>MBUILD:</strong> Construction of new information from old (e.g., decide, conclude).</li>  <li><strong>INGEST / EXPEL:</strong> Organism taking in or expelling something (e.g., eat / sweat).</li>  <li><strong>GRASP:</strong> Grasping an object physically.</li></ul><p>By mapping sentences to these primitives, the system can draw deep inferences (e.g., if John ATRANS a book to Mary, Mary now possesses the book).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-21">
+                <div class="q-text"><span class="q-badge b5">Q21</span><span>Explain Handling Uncertainty using Bayes' Theorem.</span></div>
+                <div class="a-text">
+                    <h3>Handling Uncertainty using Bayes' Theorem</h3><p>In real-world AI, agents rarely have complete and certain knowledge. To handle uncertainty systematically, AI employs probability theory, with <strong>Bayes' Theorem</strong> at its core. It provides a mathematical framework for updating our belief in a hypothesis given new evidence.</p><h4>The Mathematical Formula</h4>\[ P(H | E) = \frac{P(E | H) \cdot P(H)}{P(E)} \]<ul>  <li><strong>\(P(H)\): Prior Probability.</strong> The initial degree of belief in hypothesis \(H\) before observing any evidence.</li>  <li><strong>\(P(E | H)\): Likelihood.</strong> The probability of observing evidence \(E\) assuming the hypothesis \(H\) is true.</li>  <li><strong>\(P(E)\): Marginal Probability.</strong> The total probability of observing the evidence under all possible hypotheses. Often calculated using the Law of Total Probability: \(P(E) = P(E | H)P(H) + P(E | \neg H)P(\neg H)\).</li>  <li><strong>\(P(H | E)\): Posterior Probability.</strong> The updated probability of the hypothesis \(H\) after the evidence \(E\) has been observed.</li></ul><p><em>Example:</em> In medical diagnosis, \(H\) is a disease (e.g., Cancer) and \(E\) is a test result. Bayes' theorem allows us to calculate the probability a patient actually has cancer given a positive test result, considering the baseline cancer rate and the test's false-positive rate.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-22">
+                <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain Bayesian Belief Networks (BBN) and CPT tables.</span></div>
+                <div class="a-text">
+                    <h3>Bayesian Belief Networks (BBN)</h3><p>A <strong>Bayesian Belief Network</strong> (or Bayesian Network) is a probabilistic graphical model that represents a set of variables and their conditional dependencies via a Directed Acyclic Graph (DAG).</p><ul>  <li><strong>Nodes:</strong> Represent random variables (discrete or continuous).</li>  <li><strong>Directed Edges:</strong> Represent direct causal influence from parent to child node (e.g., \(A \rightarrow B\) means A directly affects B).</li></ul><h4>Conditional Probability Tables (CPTs)</h4><p>Every node in a BBN has an associated <strong>Conditional Probability Table (CPT)</strong>. The CPT quantifies the effect of the parents on that node.</p><ul>  <li>If a node has no parents (a root node), its CPT simply lists its <em>prior probabilities</em> (e.g., \(P(\text{Burglary})\)).</li>  <li>If a node has parents, its CPT lists the probability of the node taking on each possible value given every possible combination of values of its parent nodes (e.g., \(P(\text{Alarm} | \text{Burglary}, \text{Earthquake})\)).</li></ul><p><strong>Joint Probability:</strong> BBNs simplify complex probability distributions. The full joint probability of the network is just the product of the individual CPT entries:</p>\[ P(X_1, X_2, \dots, X_n) = \prod_{i=1}^n P(X_i | \text{Parents}(X_i)) \]
+                </div>
+            </div>
+            <div class="qa-card" id="gb-23">
+                <div class="q-text"><span class="q-badge b5">Q23</span><span>Explain Dempster-Shafer Theory of Evidence (Belief & Plausibility).</span></div>
+                <div class="a-text">
+                    <h3>Dempster-Shafer Theory of Evidence</h3><p>The <strong>Dempster-Shafer (D-S) Theory</strong> is a mathematical theory of evidence that provides an alternative to traditional probability for handling uncertainty, ignorance, and the fusion of evidence from multiple sources.</p><h4>Core Concepts</h4><ul>  <li><strong>Frame of Discernment (\(\Theta\)):</strong> The set of all possible mutually exclusive hypotheses. E.g., \(\Theta = \{A, B, C\}\).</li>  <li><strong>Basic Probability Assignment (\(m\)):</strong> A mass function that assigns a probability mass to every subset of \(\Theta\). Unlike standard probability, we can assign mass to combinations of hypotheses (e.g., \(m(\{A, B\}) = 0.4\)), representing ignorance between A and B.</li></ul><h4>Belief and Plausibility</h4><p>D-S theory bounds the true probability of a hypothesis \(H\) within an interval \([\text{Bel}(H), \text{Pl}(H)]\).</p><ol>  <li><strong>Belief (Bel):</strong> The lower bound. The sum of the masses of all subsets that are strictly entirely contained within \(H\). It represents the minimum guaranteed support for \(H\).</li>  <li><strong>Plausibility (Pl):</strong> The upper bound. The sum of the masses of all subsets that intersect with \(H\). It represents the maximum possible support for \(H\).</li></ol><p><em>Example:</em> If \([\text{Bel}(H), \text{Pl}(H)] = [0.2, 0.8]\), it means there is 20% direct evidence for \(H\), but up to 80% could be true if the unknown evidence aligns with \(H\).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-24">
+                <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain Fuzzy Sets vs Crisp Sets and Fuzzy Membership Functions.</span></div>
+                <div class="a-text">
+                    <h3>Fuzzy Sets vs Crisp Sets</h3><p>Standard set theory and logic operate on strict binary boundaries. <strong>Fuzzy logic</strong> introduces degrees of truth.</p><ul>  <li><strong>Crisp Sets (Classical Logic):</strong> An element either entirely belongs to a set or it does not. The membership function \(\mu(x)\) is strictly 0 or 1. (e.g., "Tall" means \(\ge 6\) ft. 5.99 ft is completely NOT tall).</li>  <li><strong>Fuzzy Sets:</strong> An element can partially belong to a set. The membership function \(\mu(x)\) returns a continuous value between 0.0 and 1.0. (e.g., 5.9 ft might have a "Tall" membership degree of 0.8).</li></ul><h4>Fuzzy Membership Functions</h4><p>A <strong>Membership Function</strong> mathematically defines how input values are mapped to a degree of membership between 0 and 1. Common shapes include:</p><ol>  <li><strong>Triangular:</strong> Peaks at 1.0 and linearly slopes down to 0 on both sides.</li>  <li><strong>Trapezoidal:</strong> Has a flat top where membership is 1.0, then slopes down to 0.</li>  <li><strong>Gaussian (Bell Curve):</strong> A smooth curve used for continuous, smooth transitions without sharp edges.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-25">
+                <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Fuzzy Inference Systems (Mamdani Model).</span></div>
+                <div class="a-text">
+                    <h3>Fuzzy Inference Systems (Mamdani Model)</h3><p>A <strong>Fuzzy Inference System (FIS)</strong> maps crisp inputs to crisp outputs using fuzzy logic. The most widely used architecture is the <strong>Mamdani Model</strong>, which follows a four-step pipeline:</p><div class="diagram-container"><div class="mermaid">
+graph TD
+    Input[Crisp Inputs] --> F[1. Fuzzification]
+    F --> R[2. Rule Evaluation]
+    R --> A[3. Aggregation]
+    A --> D[4. Defuzzification]
+    D --> Output[Crisp Output]
+    KB[(Fuzzy Rule Base)] -.-> R
+</div><div class="diagram-caption">Figure: Mamdani Fuzzy Inference Pipeline</div></div><ol>  <li><strong>Fuzzification:</strong> Crisp input values (e.g., Temperature = 32°C) are mapped to degrees of membership in fuzzy sets (e.g., "Hot" = 0.7, "Warm" = 0.2) using membership functions.</li>  <li><strong>Rule Evaluation (Inference):</strong> Fuzzy IF-THEN rules are evaluated. Fuzzy AND/OR operators are applied (usually MIN for AND, MAX for OR) to calculate the firing strength of the rule. The THEN part is truncated (clipped) by this firing strength.</li>  <li><strong>Aggregation:</strong> The truncated output fuzzy sets from all triggered rules are combined (usually via a MAX operation) into a single, unified output fuzzy set.</li>  <li><strong>Defuzzification:</strong> The aggregated output fuzzy set is converted back into a single crisp, numerical value. The most common method is the <strong>Centroid (Center of Gravity)</strong> method.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-26">
+                <div class="q-text"><span class="q-badge b5">Q26</span><span>Explain Inductive Learning and Decision Trees (ID3 Algorithm).</span></div>
+                <div class="a-text">
+                    <h3>Inductive Learning and ID3 Decision Trees</h3><h4>Inductive Learning</h4><p><strong>Inductive Learning</strong> is a supervised machine learning paradigm where an algorithm observes a set of training examples (input-output pairs) and induces a generalized hypothesis or rule that can accurately predict the output for unseen inputs.</p><h4>Decision Trees & ID3</h4><p>A <strong>Decision Tree</strong> is a tree-based classification model where internal nodes represent tests on attributes, branches represent the outcomes of tests, and leaf nodes represent final class labels.</p><p>The <strong>Iterative Dichotomiser 3 (ID3)</strong> algorithm builds decision trees top-down using a greedy approach. It selects the "best" attribute at each node to split the dataset. The best attribute is the one that best separates the data into distinct classes, measured using a metric called <strong>Information Gain</strong>. ID3 stops splitting when all instances in a branch belong to the same class or there are no more attributes to split on.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-27">
+                <div class="q-text"><span class="q-badge b5">Q27</span><span>Explain Information Gain and Entropy formulas in Decision Trees.</span></div>
+                <div class="a-text">
+                    <h3>Entropy and Information Gain</h3><p>In decision trees (like ID3), <strong>Entropy</strong> and <strong>Information Gain</strong> are mathematical metrics used to decide which feature should be the root or internal node.</p><h4>1. Entropy \(H(S)\)</h4><p>Entropy measures the degree of impurity, disorder, or uncertainty in a dataset \(S\). If a dataset is 50/50 split between two classes, entropy is at its maximum (1.0 bits). If all samples belong to one class, entropy is 0.0.</p>\[ H(S) = - \sum_{i=1}^{c} p_i \log_2(p_i) \]<p>Where \(p_i\) is the proportion (probability) of samples belonging to class \(i\).</p><h4>2. Information Gain \(IG(S, A)\)</h4><p>Information Gain measures the expected reduction in entropy (uncertainty) caused by partitioning the dataset \(S\) based on a specific attribute \(A\). We select the attribute that yields the highest Information Gain to split the tree.</p>\[ IG(S, A) = H(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} H(S_v) \]<p>Where \(S_v\) is the subset of \(S\) for which attribute \(A\) has value \(v\). It essentially calculates: <em>Original Entropy - Weighted Average Entropy of subsets after splitting</em>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-28">
+                <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain Natural Language Processing (NLP) 5 phases.</span></div>
+                <div class="a-text">
+                    <h3>5 Phases of Natural Language Processing (NLP)</h3><p>The processing of natural language by AI systems is typically broken down into a pipeline of five distinct phases, moving from raw characters to deep meaning.</p><ol>  <li><strong>Lexical / Morphological Analysis:</strong> Breaks raw text into smaller tokens (words, paragraphs). It involves stemming and identifying prefixes/suffixes to determine the base word structure.</li>  <li><strong>Syntactic Analysis (Parsing):</strong> Analyzes the sequence of words to ensure it obeys the grammatical rules of the language. It generates a hierarchical <strong>Parse Tree</strong> showing relationships between words (e.g., Subject-Verb-Object).</li>  <li><strong>Semantic Analysis:</strong> Determines the exact dictionary meaning of the sentence. It checks for meaningfulness (e.g., rejecting grammatically correct but nonsensical sentences like "The green idea sleeps furiously") and handles word sense disambiguation.</li>  <li><strong>Discourse Integration:</strong> Analyzes the meaning of a sentence in the context of the preceding sentences. It resolves anaphoric references (e.g., determining what the pronoun "He" refers to based on the previous sentence).</li>  <li><strong>Pragmatic Analysis:</strong> Extracts the intended, real-world meaning or intent behind the text, going beyond literal meaning to capture sarcasm, idioms, or contextual implications.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-29">
+                <div class="q-text"><span class="q-badge b5">Q29</span><span>Explain Syntactic Analysis / Parsing in NLP.</span></div>
+                <div class="a-text">
+                    <h3>Syntactic Analysis (Parsing) in NLP</h3><p><strong>Syntactic Analysis</strong>, also known as parsing, is the second phase of NLP. It focuses on analyzing the grammatical structure of a sentence to establish the relationships between constituent words.</p><p>The parser uses a set of formal grammar rules (usually a <strong>Context-Free Grammar (CFG)</strong>) to verify if the sentence is grammatically valid. If valid, the output is a hierarchical <strong>Parse Tree</strong>.</p><h4>Parsing Approaches</h4><ul>  <li><strong>Top-Down Parsing:</strong> Starts at the root symbol (S for Sentence) and expands downward, applying grammar rules to derive the specific words of the input sentence. (Can struggle with left-recursion).</li>  <li><strong>Bottom-Up Parsing:</strong> Starts with the actual input words at the leaves and tries to build the tree upwards by grouping words into phrases (like Noun Phrases and Verb Phrases) until it reaches the root symbol (S).</li></ul><p>Parsing is crucial because determining the grammatical subject and verb is a prerequisite for extracting semantic meaning.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-30">
+                <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Expert System Architecture (Knowledge Base, Inference Engine).</span></div>
+                <div class="a-text">
+                    <h3>Expert System Architecture</h3><p>An <strong>Expert System</strong> is an AI application designed to emulate the decision-making ability of a human expert in a specific, narrow domain (e.g., MYCIN for medicine). It structurally separates domain knowledge from the reasoning logic.</p><h4>Core Components</h4><div class="diagram-container"><div class="mermaid">
+graph TD
+    User((User)) <--> UI[User Interface]
+      UI <--> IE[Inference Engine]
+      IE <--> KB[(Knowledge Base)]
+      Exp((Domain Expert)) --> KA[Knowledge Acquisition Facility] --> KB
+</div><div class="diagram-caption">Figure: Core Architecture of an Expert System</div></div><ul>  <li><strong>Knowledge Base (KB):</strong> The heart of the system. It contains the high-quality, domain-specific facts and heuristic rules (often encoded as IF-THEN rules) extracted from human experts.</li>  <li><strong>Inference Engine:</strong> The software "brain" that processes the Knowledge Base. It applies reasoning strategies (like <em>Forward Chaining</em> or <em>Backward Chaining</em>) to deduce new information, solve problems, or provide diagnoses.</li>  <li><strong>User Interface (UI):</strong> The mechanism through which the end-user queries the system, answers questions, and receives the final expert advice.</li>  <li><strong>Knowledge Acquisition Facility:</strong> Tools used by Knowledge Engineers to extract and encode rules from human experts into the KB.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-31">
+                <div class="q-text"><span class="q-badge b5">Q31</span><span>Explain Expert System Shells benefits.</span></div>
+                <div class="a-text">
+                    <h3>Expert System Shells</h3><p>An <strong>Expert System Shell</strong> is a software development environment that contains all the core components of an expert system (inference engine, user interface, explanation facility) <em>except</em> the domain-specific Knowledge Base (KB). It provides a ready-made framework, allowing developers to create an expert system simply by plugging in rules and facts.</p><h4>Primary Benefits</h4><ul>  <li><strong>Rapid Prototyping and Development:</strong> Developers save thousands of hours because they do not have to program the complex inference algorithms (like Rete algorithm) from scratch.</li>  <li><strong>Domain Focus:</strong> Allows Knowledge Engineers to focus entirely on extracting and formatting rules from human experts, rather than debugging software infrastructure.</li>  <li><strong>Built-in Tools:</strong> Shells often come with debugging tools, knowledge acquisition facilities, and conflict-resolution strategies built-in.</li>  <li><strong>Cost-Effective:</strong> Significantly lowers the financial barrier to entry for organizations building specialized AI systems. Examples include CLIPS and JESS.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-32">
+                <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain Perceptron Artificial Neuron Model and Activation Functions.</span></div>
+                <div class="a-text">
+                    <h3>The Perceptron Model</h3><p>The <strong>Perceptron</strong> is the simplest mathematical model of a biological neuron, forming the foundation of Artificial Neural Networks. It acts as a linear binary classifier.</p><h4>Mathematical Model</h4><p>Given input signals \(x_1, x_2, \dots, x_n\), the perceptron computes a weighted sum and adds a bias \(b\):</p>\[ z = \sum_{i=1}^n (w_i \cdot x_i) + b \]<p>This sum \(z\) is then passed through an <strong>Activation Function \(f(z)\)</strong> to determine the final output (whether the neuron "fires" or not).</p><div class="diagram-container"><div class="mermaid">
+graph LR
+    x1((x1)) -->|"w1"| Sum(("Sum Σ"))
+    x2((x2)) -->|"w2"| Sum
+    Bias((Bias)) --> Sum
+    Sum --> Act["Activation f(z)"]
+    Act --> Output((Output))
+</div><div class="diagram-caption">Figure: Single Artificial Neuron (Perceptron) Architecture</div></div><h4>Activation Functions</h4><p>Activation functions introduce non-linearity, allowing networks to learn complex patterns.</p><ul>  <li><strong>Step Function:</strong> Outputs 1 if \(z \ge 0\), else 0. Used in classical perceptrons.</li>  <li><strong>Sigmoid:</strong> \(\sigma(z) = \frac{1}{1 + e^{-z}}\). Smoothly maps values to a (0, 1) range.</li>  <li><strong>ReLU (Rectified Linear Unit):</strong> \(f(z) = \max(0, z)\). Extremely fast and solves the vanishing gradient problem in deep networks.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-33">
+                <div class="q-text"><span class="q-badge b5">Q33</span><span>Explain Backpropagation Algorithm in Neural Networks.</span></div>
+                <div class="a-text">
+                    <h3>Backpropagation Algorithm</h3><p><strong>Backpropagation</strong> (Backward Propagation of Errors) is the fundamental learning algorithm for training Multi-Layer Perceptrons (MLPs). It is an application of the calculus Chain Rule to compute the gradient of the loss function with respect to every weight in the network.</p><h4>The Three-Phase Workflow</h4><ol>  <li><strong>Forward Pass:</strong> Input data is passed through the network, layer by layer, until an output prediction is generated.</li>  <li><strong>Error Computation:</strong> The prediction is compared against the actual true target label using a Loss Function (e.g., Mean Squared Error). The difference represents the network's error.</li>  <li><strong>Backward Pass (Weight Update):</strong>      <br/>• The algorithm calculates the partial derivative (gradient) of the error with respect to the output layer weights.      <br/>• Using the Chain Rule, the error is propagated backward to the hidden layers to calculate their respective gradients.      <br/>• All weights are updated in the opposite direction of the gradient to minimize the error: \(w_{\text{new}} = w_{\text{old}} - \eta \cdot \frac{\partial E}{\partial w}\) (where \(\eta\) is the learning rate).  </li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-34">
+                <div class="q-text"><span class="q-badge b5">Q34</span><span>Explain Genetic Algorithms: Selection, Crossover, Mutation.</span></div>
+                <div class="a-text">
+                    <h3>Genetic Algorithms (GAs)</h3><p><strong>Genetic Algorithms</strong> are heuristic search algorithms inspired by Charles Darwin's theory of natural evolution. They are used to solve optimization and search problems by evolving a population of candidate solutions (chromosomes) over generations.</p><h4>Core Evolutionary Operators</h4><ol>  <li><strong>Selection:</strong> The process of choosing the fittest individuals (parents) from the current population to breed the next generation. Fitter solutions (determined by a Fitness Function) have a higher probability of being selected (e.g., Roulette Wheel Selection).</li>  <li><strong>Crossover (Recombination):</strong> The genetic material (bits) of two parent chromosomes is combined to create one or more offspring. E.g., in Single-Point Crossover, a random point is chosen, and the tails of the two parents are swapped. This exploits existing good genes.</li>  <li><strong>Mutation:</strong> Randomly flipping one or more bits in a child chromosome's sequence with a very low probability. Mutation is crucial because it maintains genetic diversity and prevents the algorithm from converging prematurely on a local maximum.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-35">
+                <div class="q-text"><span class="q-badge b5">Q35</span><span>Explain Reinforcement Learning: Q-Learning algorithm.</span></div>
+                <div class="a-text">
+                    <h3>Reinforcement Learning: Q-Learning</h3><p><strong>Reinforcement Learning (RL)</strong> is a paradigm where an agent learns to behave in an environment by performing actions and observing the resulting rewards/penalties, aiming to maximize cumulative long-term reward.</p><p><strong>Q-Learning</strong> is a model-free, value-based RL algorithm. The agent maintains a "Q-Table" that stores the Quality (Q-value) of taking a specific action \(a\) in a specific state \(s\).</p><h4>The Q-Learning Update Rule (Bellman Equation)</h4>\[ Q(s_t, a_t) \leftarrow Q(s_t, a_t) + \alpha \left[ r_{t+1} + \gamma \max_{a} Q(s_{t+1}, a) - Q(s_t, a_t) \right] \]<ul>  <li><strong>\(Q(s_t, a_t)\):</strong> Current Q-value.</li>  <li><strong>\(\alpha\):</strong> Learning Rate (how much new information overrides old).</li>  <li><strong>\(r_{t+1}\):</strong> Immediate reward received after taking action \(a_t\).</li>  <li><strong>\(\gamma\):</strong> Discount Factor (how much future rewards are valued vs immediate rewards).</li>  <li><strong>\(\max_{a} Q(s_{t+1}, a)\):</strong> Estimate of optimal future value from the next state.</li></ul><p>The agent balances <strong>Exploration</strong> (trying random actions to discover rewards) and <strong>Exploitation</strong> (choosing the action with the highest Q-value) using strategies like \(\epsilon\)-greedy.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-36">
+                <div class="q-text"><span class="q-badge b5">Q36</span><span>Explain Wumpus World Environment and Knowledge Base reasoning.</span></div>
+                <div class="a-text">
+                    <h3>Wumpus World and KB Reasoning</h3><p>The <strong>Wumpus World</strong> is a classic AI grid-based environment used to demonstrate Knowledge-Based (logical) agents. It is a partially observable, deterministic, and static cave represented as a 4x4 grid.</p><h4>The Environment</h4><ul>  <li><strong>Threats:</strong> The Wumpus (a monster that eats the agent) and Bottomless Pits.</li>  <li><strong>Goal:</strong> Find the Gold and climb out of the cave alive.</li>  <li><strong>Sensors (Percepts):</strong>      <br/>• <em>Stench:</em> Felt in squares adjacent to the Wumpus.      <br/>• <em>Breeze:</em> Felt in squares adjacent to a Pit.      <br/>• <em>Glitter:</em> Seen when in the same square as the Gold.  </li></ul><h4>Knowledge Base Reasoning</h4><p>The agent navigates using Propositional Logic. It maintains a Knowledge Base (KB) of rules (e.g., \(B_{1,1} \iff (P_{1,2} \lor P_{2,1})\)). If the agent moves to (1,1) and perceives NO breeze (\(\neg B_{1,1}\)), the inference engine applies Modus Tollens to definitively deduce that there is NO pit in (1,2) or (2,1) (\(\neg P_{1,2} \land \neg P_{2,1}\)), marking them as safe to explore.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-37">
+                <div class="q-text"><span class="q-badge b5">Q37</span><span>Explain STRIPS Planning Operator representation (Preconditions, Add, Delete lists).</span></div>
+                <div class="a-text">
+                    <h3>STRIPS Planning Representation</h3><p><strong>STRIPS (Stanford Research Institute Problem Solver)</strong> is a foundational automated planning system format. It models actions as operators that transition the world from one state to another using sets of logical literals.</p><h4>Operator Components</h4><p>Each action schema consists of three strict lists:</p><ol>  <li><strong>Preconditions:</strong> What must be strictly true in the current state for the action to be legally executed. (e.g., To pick up block A, it must be CLEAR(A) and the robot arm must be EMPTY).</li>  <li><strong>Delete List:</strong> The facts that become false after the action is executed and must be removed from the state description. (e.g., After picking up A, EMPTY is deleted, and ON(A, Table) is deleted).</li>  <li><strong>Add List:</strong> The new facts that become true and are added to the state. (e.g., HOLDING(A) is added).</li></ol><p>The successor state is calculated purely symbolically: \(S_{\text{new}} = (S_{\text{old}} - \text{DeleteList}) \cup \text{AddList}\).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-38">
+                <div class="q-text"><span class="q-badge b5">Q38</span><span>Explain Goal Stack Planning algorithm.</span></div>
+                <div class="a-text">
+                    <h3>Goal Stack Planning</h3><p><strong>Goal Stack Planning</strong> is an early linear planning algorithm that uses a LIFO stack to manage the achievement of complex, compound goals (like those in the Block World domain).</p><h4>How it Works</h4><ol>  <li>The original compound goal (e.g., \(\text{ON}(A, B) \land \text{ON}(B, C)\)) is pushed onto the stack.</li>  <li>The algorithm splits the compound goal into individual sub-goals and pushes them onto the stack individually.</li>  <li>When the top of the stack is a goal that is not true in the current state, the planner pushes the corresponding STRIPS action (that has an ADD list satisfying the goal) onto the stack.</li>  <li>It then immediately pushes the <em>Preconditions</em> of that action onto the stack as new sub-goals.</li>  <li>When an action reaches the top of the stack and its preconditions are met, the action is executed (popped, state updated, added to the final plan).</li></ol><p><em>Limitation (Sussman Anomaly):</em> Because it plans sub-goals linearly and independently, achieving one sub-goal can sometimes undo the progress of a previously achieved sub-goal, leading to suboptimal plans.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-39">
+                <div class="q-text"><span class="q-badge b5">Q39</span><span>Explain Knowledge Acquisition bottleneck in Expert Systems.</span></div>
+                <div class="a-text">
+                    <h3>The Knowledge Acquisition Bottleneck</h3><p>The <strong>Knowledge Acquisition Bottleneck</strong> refers to the most difficult, time-consuming, and expensive phase of building an Expert System: extracting heuristic knowledge from human experts and formalizing it into machine-readable rules.</p><h4>Why it Occurs</h4><ul>  <li><strong>Tacit Knowledge:</strong> Human experts often use intuition or "gut feeling" accumulated over decades. They struggle to articulate these subconscious decisions as explicit IF-THEN rules.</li>  <li><strong>Vocabulary Gap:</strong> Knowledge Engineers (AI developers) and Domain Experts (Doctors, Geologists) speak different technical languages, leading to misinterpretations.</li>  <li><strong>Time Constraints:</strong> Experts are highly paid and busy; their time is expensive.</li>  <li><strong>Contradictions:</strong> Multiple experts might provide conflicting rules for the exact same edge-case scenario.</li></ul><p>This bottleneck historically led to the decline of symbolic Expert Systems in favor of modern Machine Learning, which extracts patterns directly from data rather than relying on human interviews.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-40">
+                <div class="q-text"><span class="q-badge b5">Q40</span><span>Explain Machine Learning classification vs regression paradigms.</span></div>
+                <div class="a-text">
+                    <h3>Classification vs. Regression in Machine Learning</h3><p>Both Classification and Regression belong to the <strong>Supervised Learning</strong> paradigm, meaning they learn from historical datasets where the input data is paired with the correct output labels. The fundamental difference lies in the type of output variable they predict.</p><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <tr style="background-color: #f3e8ff;"><th>Aspect</th><th>Classification</th><th>Regression</th></tr>  <tr><td><strong>Output Data Type</strong></td><td><strong>Categorical / Discrete.</strong> The output is a class label.</td><td><strong>Continuous / Numerical.</strong> The output is a real number.</td></tr>  <tr><td><strong>Objective</strong></td><td>To map input data into predefined distinct categories or buckets.</td><td>To map input data into a continuous numerical scale (finding a relationship trend).</td></tr>  <tr><td><strong>Examples</strong></td><td>Spam vs. Not Spam email; Dog vs. Cat image; Tumor Malignant vs. Benign.</td><td>Predicting house prices; Forecasting stock market values; Estimating temperature.</td></tr>  <tr><td><strong>Common Algorithms</strong></td><td>Decision Trees, Support Vector Machines (SVM), Logistic Regression, Naive Bayes.</td><td>Linear Regression, Polynomial Regression, Support Vector Regression (SVR).</td></tr></table>
+                </div>
+            </div>
+            
+</main>
+</div>
+</body>
+</html>

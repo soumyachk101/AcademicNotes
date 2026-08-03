@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering (ESC501) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #0284c7; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #0284c744; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="se_index.html">← Back to Software Engineering Index</a>
+        <span class="nav-title">Software Engineering (ESC501) — Group A</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="se_group_a.html" class="active"><b>Group A</b><br><span class="toc-meta">52 questions</span></a></li><li><a href="se_group_b.html" class=""><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="se_group_c.html" class=""><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="se_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-a">Group A — Short Answer Questions (1 Mark Each)</h1>
+
+            <div class="qa-card" id="ga-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Define Software Engineering.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Software Engineering..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>What is Software Development Life Cycle (SDLC)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Development Life Cycle (SDLC)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Define Waterfall Model.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Waterfall Model..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>What is Spiral Model?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Spiral Model?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Define Prototyping Model.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Prototyping Model..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>What is Agile Methodology?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Agile Methodology?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Define Scrum Sprint.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Scrum Sprint..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>What is Product Backlog?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Product Backlog?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Define Sprint Backlog.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Sprint Backlog..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>What is Software Requirement Specification (SRS)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Requirement Specification (SRS)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Define Functional Requirement.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Functional Requirement..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Define Non-Functional Requirement.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Non-Functional Requirement..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>What is Requirement Elicitation?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Requirement Elicitation?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>Define Use Case in UML.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Use Case in UML..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>What is Data Flow Diagram (DFD)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Data Flow Diagram (DFD)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Define Cohesion in software design.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Cohesion in software design..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>Define Coupling in software design.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Coupling in software design..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>What is High Cohesion and Low Coupling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is High Cohesion and Low Coupling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Define Modularity.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Modularity..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>What is Software Architecture?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Architecture?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Define Cyclomatic Complexity.</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Cyclomatic Complexity V(G)</b> is a quantitative software metric measuring the number of linearly independent paths through a program's control flow graph. Formula: \(V(G) = E - N + 2P\) (Edges \(E\), Nodes \(N\), Connected Components \(P\)) or \(V(G) = D + 1\) where \(D\) is decision points.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>What is McCabe's Cyclomatic Complexity formula?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Cyclomatic Complexity V(G)</b> is a quantitative software metric measuring the number of linearly independent paths through a program's control flow graph. Formula: \(V(G) = E - N + 2P\) (Edges \(E\), Nodes \(N\), Connected Components \(P\)) or \(V(G) = D + 1\) where \(D\) is decision points.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Define White-Box Testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define White-Box Testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Define Black-Box Testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Black-Box Testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>What is Unit Testing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Unit Testing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>What is Integration Testing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Integration Testing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>Define System Testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define System Testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>What is Acceptance Testing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Acceptance Testing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>Define Alpha Testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Alpha Testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Define Beta Testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Beta Testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>What is Equivalence Partitioning?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Equivalence Partitioning?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>What is Boundary Value Analysis (BVA)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Boundary Value Analysis (BVA)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Define Regression Testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Regression Testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>What is Smoke Testing?
+
+
+
+--- Page 2 ---</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Smoke Testing?
+
+
+
+--- Page 2 ---.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>What is Sanity Testing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Sanity Testing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>Define Stub and Driver in integration testing.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Stub and Driver in integration testing..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>What is COCOMO Model?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>COCOMO (Constructive Cost Model)</b> is an algorithmic software cost estimation model developed by Barry Boehm. Basic Effort equation: \(E = a \times (KLOC)^b\) person-months.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>Define Function Point (FP) analysis.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Function Point (FP) analysis..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>What is Software Reliability?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Reliability?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Define Mean Time Between Failures (MTBF).</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Mean Time Between Failures (MTBF)..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-41">
+                <div class="q-text"><span class="q-badge">Q41</span><span>Define Mean Time To Failure (MTTF).</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Mean Time To Failure (MTTF)..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-42">
+                <div class="q-text"><span class="q-badge">Q42</span><span>Define Mean Time To Repair (MTTR).</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Mean Time To Repair (MTTR)..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-43">
+                <div class="q-text"><span class="q-badge">Q43</span><span>What is Software Quality Assurance (SQA)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Quality Assurance (SQA)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-44">
+                <div class="q-text"><span class="q-badge">Q44</span><span>Define CMMI.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define CMMI..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-45">
+                <div class="q-text"><span class="q-badge">Q45</span><span>What is Software Maintenance?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Maintenance?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-46">
+                <div class="q-text"><span class="q-badge">Q46</span><span>Define Corrective Maintenance.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Corrective Maintenance..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-47">
+                <div class="q-text"><span class="q-badge">Q47</span><span>Define Adaptive Maintenance.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Adaptive Maintenance..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-48">
+                <div class="q-text"><span class="q-badge">Q48</span><span>Define Perfective Maintenance.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Perfective Maintenance..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-49">
+                <div class="q-text"><span class="q-badge">Q49</span><span>Define Preventive Maintenance.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Preventive Maintenance..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-50">
+                <div class="q-text"><span class="q-badge">Q50</span><span>What is Software Re-engineering?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Software Re-engineering?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-51">
+                <div class="q-text"><span class="q-badge">Q51</span><span>Define Reverse Engineering.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Reverse Engineering..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-52">
+                <div class="q-text"><span class="q-badge">Q52</span><span>What is CASE Tool?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is CASE Tool?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in SE.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            
+</main>
+</div>
+</body>
+</html>

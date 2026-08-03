@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks (PCC-CS504) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #059669; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #05966944; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="networks_index.html">← Back to Computer Networks Index</a>
+        <span class="nav-title">Computer Networks (PCC-CS504) — Group B</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="networks_group_a.html" class=""><b>Group A</b><br><span class="toc-meta">53 questions</span></a></li><li><a href="networks_group_b.html" class="active"><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="networks_group_c.html" class=""><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="networks_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-b">Group B — Medium / Descriptive Questions (5 Marks Each)</h1>
+
+            <div class="qa-card" id="gb-1">
+                <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain OSI 7 Layer Architecture with functions of each layer.</span></div>
+                <div class="a-text">
+                    <h3>OSI 7 Layer Architecture</h3>
+<p>The Open Systems Interconnection (OSI) model is a conceptual framework used to describe the functions of a networking system. It characterizes computing functions into a universal set of rules and requirements to support interoperability.</p>
+<ol>
+  <li><strong>Physical Layer:</strong> Transmits raw bit streams (0s and 1s) over a physical medium (cables, radio). Deals with voltages, hubs, and repeaters.</li>
+  <li><strong>Data Link Layer:</strong> Organizes bits into <strong>Frames</strong>. Provides node-to-node data transfer and handles MAC addressing and Error Detection (CSMA/CD, Switches).</li>
+  <li><strong>Network Layer:</strong> Organizes frames into <strong>Packets</strong>. Handles logical IP addressing and Routing to determine the best path (Routers, IPv4/IPv6).</li>
+  <li><strong>Transport Layer:</strong> Organizes packets into <strong>Segments</strong>. Ensures reliable, in-order, end-to-end delivery using Port numbers. Handles Error Correction and Flow Control (TCP, UDP).</li>
+  <li><strong>Session Layer:</strong> Establishes, maintains, and terminates connections (sessions) between local and remote applications.</li>
+  <li><strong>Presentation Layer:</strong> Formats, encrypts, and compresses data so it can be understood by the application layer (SSL/TLS, JPEG, ASCII).</li>
+  <li><strong>Application Layer:</strong> Directly interacts with the software application. Provides network services to end-users (HTTP, FTP, SMTP, DNS).</li>
+</ol>
+<div class="diagram-container"><div class="mermaid">
+graph TD
+    L7["Layer 7 — Application · Data (HTTP, FTP, SMTP, DNS)"]
+    L6["Layer 6 — Presentation · Data (SSL/TLS, JPEG, ASCII)"]
+    L5["Layer 5 — Session · Data (Session setup / teardown)"]
+    L4["Layer 4 — Transport · Segments (TCP, UDP, Ports)"]
+    L3["Layer 3 — Network · Packets (IP, Routers)"]
+    L2["Layer 2 — Data Link · Frames (MAC, Switches)"]
+    L1["Layer 1 — Physical · Bits (Cables, Hubs, Repeaters)"]
+    L7 --> L6 --> L5 --> L4 --> L3 --> L2 --> L1
+</div><div class="diagram-caption">Figure: OSI layer stack from Application (top) down to Physical (bottom), with the PDU handled at each layer.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-2">
+                <div class="q-text"><span class="q-badge b5">Q2</span><span>Compare OSI Model vs TCP/IP Model.</span></div>
+                <div class="a-text">
+                    <h3>OSI Model vs TCP/IP Model</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>OSI Model</th>
+    <th>TCP/IP Model</th>
+  </tr>
+  <tr>
+    <td><strong>Origin & Nature</strong></td>
+    <td>A theoretical reference model developed by ISO.</td>
+    <td>A practical, implementation-first model developed by ARPANET/DoD.</td>
+  </tr>
+  <tr>
+    <td><strong>Number of Layers</strong></td>
+    <td>7 Layers (Physical, Data Link, Network, Transport, Session, Presentation, Application)</td>
+    <td>4 Layers (Network Access, Internet, Transport, Application)</td>
+  </tr>
+  <tr>
+    <td><strong>Session & Presentation</strong></td>
+    <td>Has dedicated Session and Presentation layers.</td>
+    <td>Session and Presentation functions are merged into the Application layer.</td>
+  </tr>
+  <tr>
+    <td><strong>Network Layer Delivery</strong></td>
+    <td>Supports both connectionless and connection-oriented communication.</td>
+    <td>Internet layer exclusively supports connectionless communication (IP).</td>
+  </tr>
+</table>
+<div class="diagram-container"><div class="mermaid">
+graph LR
+    A7["7 · Application"] --> T4["Application"]
+    A6["6 · Presentation"] --> T4
+    A5["5 · Session"] --> T4
+    A4["4 · Transport"] --> T3["Transport"]
+    A3["3 · Network"] --> T2["Internet"]
+    A2["2 · Data Link"] --> T1["Network Access"]
+    A1["1 · Physical"] --> T1
+</div><div class="diagram-caption">Figure: Layer-to-layer mapping — OSI layers 5-7 collapse into the TCP/IP Application layer, and OSI layers 1-2 collapse into Network Access.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-3">
+                <div class="q-text"><span class="q-badge b5">Q3</span><span>Explain Transmission Media: Twisted Pair, Coaxial, Fiber Optics.</span></div>
+                <div class="a-text">
+                    <h3>Transmission Media (Guided)</h3>
+<p>Transmission media are the physical pathways that carry data from a transmitter to a receiver.</p>
+<ul>
+  <li><strong>Twisted Pair Cable:</strong> Consists of two insulated copper wires twisted around each other to cancel out Electromagnetic Interference (EMI) and crosstalk. 
+      <br/>• <em>Unshielded (UTP):</em> Cheap, flexible, used in standard Ethernet (Cat5e/Cat6).
+      <br/>• <em>Shielded (STP):</em> Has metal foil casing for better noise protection.</li>
+  <li><strong>Coaxial Cable:</strong> Has a central copper conductor core, surrounded by an insulating layer, a braided metal shield, and an outer plastic jacket. Carries higher frequency signals than twisted pair. Used heavily for Cable TV and older broadband.</li>
+  <li><strong>Fiber Optics:</strong> Uses total internal reflection to transmit data as pulses of light through a glass or plastic core. 
+      <br/>• <em>Pros:</em> Extremely high bandwidth, completely immune to electromagnetic interference, spans massive distances.
+      <br/>• <em>Cons:</em> Expensive, fragile, and difficult to splice.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-4">
+                <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain Switching Techniques: Circuit Switching vs Packet Switching.</span></div>
+                <div class="a-text">
+                    <h3>Switching Techniques</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Circuit Switching</th>
+    <th>Packet Switching</th>
+  </tr>
+  <tr>
+    <td><strong>Connection Path</strong></td>
+    <td>A dedicated, physical path is established between sender and receiver before transmission begins.</td>
+    <td>No dedicated path. Data is broken into packets which travel independently over various routes.</td>
+  </tr>
+  <tr>
+    <td><strong>Bandwidth Usage</strong></td>
+    <td>Bandwidth is reserved and wasted if no data is being sent (inefficient).</td>
+    <td>Bandwidth is dynamically shared among all users (highly efficient).</td>
+  </tr>
+  <tr>
+    <td><strong>Order of Delivery</strong></td>
+    <td>Data always arrives in the exact order it was sent.</td>
+    <td>Packets may arrive out-of-order and must be reassembled at the destination.</td>
+  </tr>
+  <tr>
+    <td><strong>Primary Use Case</strong></td>
+    <td>Traditional telephone networks (Voice calls).</td>
+    <td>The Internet (Data transfer).</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-5">
+                <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain Error Detection using Cyclic Redundancy Check (CRC).</span></div>
+                <div class="a-text">
+                    <h3>Error Detection: Cyclic Redundancy Check (CRC)</h3>
+<p>CRC is a highly robust error-detecting code used in the Data Link Layer (like Ethernet). It uses polynomial binary division.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Generator Polynomial:</strong> Both sender and receiver agree on a generator polynomial \(G(x)\) (represented as a binary divisor, e.g., 1101). Let the length of \(G\) be \(n\).</li>
+  <li><strong>Appending Zeros:</strong> The sender appends \(n-1\) zero bits to the end of the original Data message \(M\).</li>
+  <li><strong>Modulo-2 Division:</strong> The sender performs binary Modulo-2 division (which is just XORing) of the appended data by \(G\).</li>
+  <li><strong>Remainder (CRC):</strong> The remainder of this division is the CRC checksum.</li>
+  <li><strong>Transmission:</strong> The sender replaces the appended zeros with the CRC checksum and transmits the frame.</li>
+  <li><strong>Verification:</strong> The receiver divides the received frame by \(G\). If the remainder is exactly zero, the frame is accepted as error-free. Otherwise, it is rejected.</li>
+</ol>
+<div class="diagram-container"><div class="mermaid">
+graph TD
+    A["Sender: data M, k bits"] --> B["Append n-1 zeros to M"]
+    B --> C["Modulo-2 divide by generator G, n bits"]
+    C --> D["Remainder = CRC, n-1 bits"]
+    D --> E["Transmit frame = M followed by CRC"]
+    E --> F["Receiver divides whole frame by the same G"]
+    F --> G{"Remainder = 0 ?"}
+    G -->|Yes| H["Accept frame"]
+    G -->|No| I["Reject frame, error detected"]
+</div><div class="diagram-caption">Figure: CRC generation at the sender and verification at the receiver — a zero remainder means no error was detected.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-6">
+                <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Error Correction using Hamming Code with an example.</span></div>
+                <div class="a-text">
+                    <h3>Error Correction: Hamming Code</h3>
+<p>Hamming Code is a block code that is capable of detecting up to two simultaneous bit errors and <strong>correcting single-bit errors</strong>.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Redundant Bits Calculation:</strong> Given \(m\) data bits, the number of redundant parity bits \(r\) must satisfy: \(2^r \ge m + r + 1\).</li>
+  <li><strong>Positioning:</strong> Parity bits are placed at positions that are powers of 2 (1, 2, 4, 8...). Data bits fill the remaining positions.</li>
+  <li><strong>Parity Calculation:</strong> Each parity bit calculates Even (or Odd) parity for a specific overlapping set of bit positions. For example, \(P_1\) checks positions 1, 3, 5, 7. \(P_2\) checks 2, 3, 6, 7.</li>
+  <li><strong>Error Correction at Receiver:</strong> The receiver recalculates all parity bits. If there is an error, the parity bits that fail will form a binary number indicating the exact position of the flipped bit. The receiver simply flips that bit back to correct the error.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-7">
+                <div class="q-text"><span class="q-badge b5">Q7</span><span>Explain Stop-and-Wait ARQ protocol and efficiency formula.</span></div>
+                <div class="a-text">
+                    <h3>Stop-and-Wait ARQ Protocol</h3>
+<p>Stop-and-Wait ARQ is the simplest flow and error control protocol.</p>
+<ul>
+  <li><strong>Mechanism:</strong> The sender transmits exactly ONE frame and then stops. It waits for an Acknowledgement (ACK) from the receiver before sending the next frame.</li>
+  <li><strong>Error Handling:</strong> If the frame is lost or corrupted (failed CRC), the receiver stays silent (or sends a NAK). The sender's timer expires (Timeout), and it retransmits the same frame.</li>
+  <li><strong>Sequence Numbers:</strong> Frames and ACKs are numbered (0 or 1) to prevent duplicate frames.</li>
+</ul>
+<h4>Efficiency Formula</h4>
+<p>\[ \text{Efficiency } (\eta) = \frac{\text{Transmission Time (Tt)}}{\text{Total Cycle Time}} = \frac{T_t}{T_t + 2 \times T_p} = \frac{1}{1 + 2a} \]</p>
+<p>Where \(a = \frac{T_p}{T_t}\) (Propagation Delay / Transmission Delay). It is highly inefficient for links with high propagation delay (like satellites) because the sender is idle most of the time.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-8">
+                <div class="q-text"><span class="q-badge b5">Q8</span><span>Explain Go-Back-N ARQ protocol and window sizes.</span></div>
+                <div class="a-text">
+                    <h3>Go-Back-N ARQ Protocol</h3>
+<p>Go-Back-N is a Sliding Window protocol that improves upon Stop-and-Wait by allowing the sender to transmit multiple frames before receiving an ACK.</p>
+<ul>
+  <li><strong>Window Sizes:</strong>
+      <br/>• Sender Window Size \(W_s = N\) (can send up to N unacknowledged frames).
+      <br/>• Receiver Window Size \(W_r = 1\) (can only accept frames strictly in order).</li>
+  <li><strong>Mechanism:</strong> If frame 3 is lost, but the sender continues to send frames 4, 5, and 6, the receiver will discard 4, 5, and 6 because it is strictly waiting for frame 3.</li>
+  <li><strong>Retransmission:</strong> When the sender times out waiting for the ACK for frame 3, it must "Go Back N" frames and retransmit frame 3 <strong>AND all subsequent frames</strong> (4, 5, 6).</li>
+  <li><strong>Efficiency:</strong> Much better than Stop-and-Wait, but wastes bandwidth on noisy channels due to retransmitting correctly received out-of-order frames.</li>
+</ul>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant S as Sender (Ws = N)
+    participant R as Receiver (Wr = 1)
+    S->>R: Frame 2
+    R-->>S: ACK 2
+    S-xR: Frame 3 (lost)
+    S->>R: Frame 4
+    Note right of R: Discards 4, expects 3
+    S->>R: Frame 5
+    Note right of R: Discards 5, expects 3
+    Note left of S: Timeout for Frame 3
+    S->>R: Frame 3 (resent)
+    S->>R: Frame 4 (resent)
+    S->>R: Frame 5 (resent)
+    R-->>S: ACK 5 (cumulative)
+</div><div class="diagram-caption">Figure: Go-Back-N — losing frame 3 forces the sender to retransmit 3, 4 and 5, because the receiver window is 1 and discards anything out of order.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-9">
+                <div class="q-text"><span class="q-badge b5">Q9</span><span>Explain Selective Repeat ARQ protocol and window sizes.</span></div>
+                <div class="a-text">
+                    <h3>Selective Repeat ARQ Protocol</h3>
+<p>Selective Repeat is the most efficient Sliding Window protocol, designed to overcome the wasted bandwidth of Go-Back-N on noisy channels.</p>
+<ul>
+  <li><strong>Window Sizes:</strong>
+      <br/>• Sender Window Size \(W_s = 2^{m-1}\).
+      <br/>• Receiver Window Size \(W_r = 2^{m-1}\) (where m is sequence number bits). Both windows must be equal and half the maximum sequence number.</li>
+  <li><strong>Mechanism:</strong> The receiver has a window larger than 1, meaning it can accept and buffer <em>out-of-order</em> frames. If frame 3 is lost, but 4, 5, and 6 arrive intact, the receiver buffers 4, 5, and 6 and sends a NAK specifically for frame 3.</li>
+  <li><strong>Retransmission:</strong> The sender only retransmits the specific frame that was lost (frame 3). Once the receiver gets frame 3, it delivers 3, 4, 5, and 6 to the Network layer in order.</li>
+</ul>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant S as Sender (Ws = N)
+    participant R as Receiver (Wr = N)
+    S->>R: Frame 2
+    R-->>S: ACK 2
+    S-xR: Frame 3 (lost)
+    S->>R: Frame 4
+    Note right of R: Buffers 4 (out of order)
+    R-->>S: NAK 3
+    S->>R: Frame 5
+    Note right of R: Buffers 5
+    S->>R: Frame 3 (only 3 resent)
+    Note right of R: Delivers 3, 4, 5 in order
+    R-->>S: ACK 5
+</div><div class="diagram-caption">Figure: Selective Repeat — the receiver buffers out-of-order frames 4 and 5, so only the lost frame 3 is retransmitted.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-10">
+                <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Pure ALOHA vs Slotted ALOHA throughput analysis.</span></div>
+                <div class="a-text">
+                    <h3>ALOHA Protocols: Pure vs Slotted</h3>
+<p>ALOHA is a random-access MAC protocol used for satellite and wireless communications.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Pure ALOHA</th>
+    <th>Slotted ALOHA</th>
+  </tr>
+  <tr>
+    <td><strong>Transmission Rule</strong></td>
+    <td>Any station can transmit data at <em>any time</em> it has a frame ready.</td>
+    <td>Time is divided into discrete slots. Stations can <em>only transmit at the beginning</em> of a time slot.</td>
+  </tr>
+  <tr>
+    <td><strong>Vulnerable Time</strong></td>
+    <td>\(2 \times T_f\) (Twice the frame transmission time).</td>
+    <td>\(T_f\) (Exactly one frame transmission time). Collisions only happen if two stations pick the exact same slot.</td>
+  </tr>
+  <tr>
+    <td><strong>Maximum Throughput</strong></td>
+    <td>\(S = G \times e^{-2G}\)
+        <br/>Max efficiency is <strong>18.4%</strong> (when \(G = 0.5\)).</td>
+    <td>\(S = G \times e^{-G}\)
+        <br/>Max efficiency is <strong>36.8%</strong> (when \(G = 1\)).</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-11">
+                <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain CSMA/CD protocol and Binary Exponential Backoff algorithm.</span></div>
+                <div class="a-text">
+                    <h3>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</h3>
+<p>CSMA/CD is a MAC protocol used in traditional wired Ethernet LANs.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Sense:</strong> A station listens to the cable. If idle, it transmits. If busy, it waits.</li>
+  <li><strong>Detect:</strong> While transmitting, the station simultaneously listens. If it detects a signal amplitude higher than its own, a Collision has occurred.</li>
+  <li><strong>Abort & Jam:</strong> It immediately stops transmitting the data frame and sends a short "Jam Signal" so all other stations know a collision happened.</li>
+</ol>
+<h4>Binary Exponential Backoff Algorithm</h4>
+<p>To prevent immediate re-collision, colliding stations wait a random amount of time before retrying. After the \(c\)-th collision (where \(c \le 10\)), a station chooses a random number \(K\) between \(0\) and \(2^c - 1\). It waits \(K \times 51.2 \mu s\) before sensing the line again. This exponentially increases the waiting time range, spreading out retries under heavy load.</p>
+<div class="diagram-container"><div class="mermaid">
+graph TD
+    A["Frame ready"] --> B{"Channel idle?"}
+    B -->|Busy| W["Defer, keep sensing"]
+    W --> B
+    B -->|Idle| C["Transmit and listen"]
+    C --> D{"Collision?"}
+    D -->|No| E["Frame sent OK"]
+    D -->|Yes| F["Abort, send jam signal"]
+    F --> G{"Attempts c = 16 ?"}
+    G -->|Yes| H["Give up, report error"]
+    G -->|No| I["Wait K x 51.2 us, 0 &lt;= K &lt; 2^c, c capped at 10"]
+    I --> B
+</div><div class="diagram-caption">Figure: CSMA/CD flow — sense, transmit-and-listen, jam on collision, then binary exponential backoff before re-sensing.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-12">
+                <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain CSMA/CA protocol and Wireless LAN collision avoidance.</span></div>
+                <div class="a-text">
+                    <h3>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</h3>
+<p>CSMA/CA is used in Wireless LANs (Wi-Fi / 802.11) because wireless nodes cannot transmit and listen at the same time to detect collisions (the "Hidden Terminal Problem").</p>
+<h4>Mechanism (Collision Avoidance):</h4>
+<ol>
+  <li><strong>DIFS:</strong> A station with a frame to send listens to the channel. If idle for a period called DIFS, it proceeds.</li>
+  <li><strong>RTS/CTS Handshake:</strong> To avoid hidden terminals, the sender transmits a short Request To Send (RTS) frame. The Access Point responds with a Clear To Send (CTS) frame broadcasted to everyone, reserving the channel.</li>
+  <li><strong>Data & ACK:</strong> The sender transmits the Data frame. The receiver replies with an ACK. If no ACK is received, a collision is assumed, and the sender uses exponential backoff before retrying.</li>
+</ol>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant A as Station A
+    participant AP as Access Point
+    participant C as Hidden Node C
+    Note over A: Idle for DIFS
+    A->>AP: RTS (NAV duration)
+    AP->>A: CTS (after SIFS)
+    AP->>C: same CTS, broadcast
+    Note over C: Sets NAV, silent
+    A->>AP: DATA
+    AP-->>A: ACK (after SIFS)
+</div><div class="diagram-caption">Figure: CSMA/CA with RTS/CTS — one broadcast CTS reserves the channel and silences the hidden station C for the NAV duration.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-13">
+                <div class="q-text"><span class="q-badge b5">Q13</span><span>Explain IPv4 Address Classes (A, B, C, D, E) and ranges.</span></div>
+                <div class="a-text">
+                    <h3>IPv4 Address Classes</h3>
+<p>An IPv4 address is 32 bits long. Classful addressing divided the IP space into 5 distinct classes based on the leading bits of the first octet.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Class</th>
+    <th>Leading Bits</th>
+    <th>First Octet Range</th>
+    <th>Network/Host Split</th>
+    <th>Purpose</th>
+  </tr>
+  <tr>
+    <td><strong>Class A</strong></td>
+    <td>0</td>
+    <td>1 - 126</td>
+    <td>N.H.H.H (8/24)</td>
+    <td>Massive networks (16M hosts).</td>
+  </tr>
+  <tr>
+    <td><strong>Class B</strong></td>
+    <td>10</td>
+    <td>128 - 191</td>
+    <td>N.N.H.H (16/16)</td>
+    <td>Medium networks (65K hosts).</td>
+  </tr>
+  <tr>
+    <td><strong>Class C</strong></td>
+    <td>110</td>
+    <td>192 - 223</td>
+    <td>N.N.N.H (24/8)</td>
+    <td>Small networks (254 hosts).</td>
+  </tr>
+  <tr>
+    <td><strong>Class D</strong></td>
+    <td>1110</td>
+    <td>224 - 239</td>
+    <td>N/A</td>
+    <td>Multicasting (Sending to groups).</td>
+  </tr>
+  <tr>
+    <td><strong>Class E</strong></td>
+    <td>1111</td>
+    <td>240 - 255</td>
+    <td>N/A</td>
+    <td>Reserved for Future/Experimental use.</td>
+  </tr>
+</table>
+<p><em>(Note: 127.x.x.x is reserved for Loopback testing).</em></p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-14">
+                <div class="q-text"><span class="q-badge b5">Q14</span><span>Explain Subnetting and Subnet Mask calculation.</span></div>
+                <div class="a-text">
+                    <h3>Subnetting and Subnet Masks</h3>
+<p><strong>Subnetting</strong> is the process of logically dividing a single large IP network into multiple smaller, manageable sub-networks (subnets). This reduces broadcast traffic and conserves IP addresses.</p>
+<h4>Mechanism</h4>
+<p>It works by "borrowing" bits from the Host portion of the IP address and reassigning them to the Network portion to create Subnet IDs.</p>
+<h4>Subnet Mask</h4>
+<p>A 32-bit number used by routers to distinguish the Network/Subnet ID from the Host ID. It consists of a continuous stream of 1s (representing Network/Subnet bits) followed by a continuous stream of 0s (representing Host bits).</p>
+<p><em>Example:</em> A default Class C mask is <code>255.255.255.0</code>. If we borrow 1 bit for subnetting, the mask becomes <code>255.255.255.128</code> (11111111.11111111.11111111.10000000), yielding 2 subnets of 126 hosts each.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-15">
+                <div class="q-text"><span class="q-badge b5">Q15</span><span>Explain CIDR (Classless Inter-Domain Routing) notation and prefix.</span></div>
+                <div class="a-text">
+                    <h3>CIDR (Classless Inter-Domain Routing)</h3>
+<p>CIDR was introduced to replace the rigid Classful (A, B, C) IP addressing system, which was rapidly depleting the IPv4 address space due to massive waste.</p>
+<h4>CIDR Notation (Slash Notation)</h4>
+<p>Instead of relying on fixed classes, CIDR uses a variable-length subnet mask (VLSM). An IP address is written with a slash followed by the prefix length: <code>IP_Address / Prefix</code>.</p>
+<p>The <strong>Prefix</strong> (e.g., <code>/26</code>) explicitly states exactly how many bits from left to right represent the Network ID. The remaining bits (\(32 - \text{Prefix}\)) represent the Host ID.</p>
+<p><em>Example:</em> <code>192.168.1.0 /26</code>. The network uses 26 bits. Hosts use \(32 - 26 = 6\) bits. Total hosts per subnet = \(2^6 - 2 = 62\) usable hosts.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-16">
+                <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain ARP (Address Resolution Protocol) request/reply workflow.</span></div>
+                <div class="a-text">
+                    <h3>Address Resolution Protocol (ARP)</h3>
+<p>ARP is a critical protocol used to map a known logical IP Address to an unknown physical MAC Address on a local network.</p>
+<h4>Workflow:</h4>
+<ol>
+  <li><strong>ARP Request:</strong> A host wants to send data to IP <code>192.168.1.10</code> but doesn't know its MAC address. The host broadcasts an ARP Request frame to the entire local network: <em>"Who has IP 192.168.1.10? Tell me your MAC address."</em> (Destination MAC is <code>FF:FF:FF:FF:FF:FF</code>).</li>
+  <li><strong>ARP Reply:</strong> All devices receive the request, but only the device with IP <code>192.168.1.10</code> processes it. It sends a Unicast ARP Reply back to the original sender containing its MAC address.</li>
+  <li><strong>Caching:</strong> The sender saves this IP-to-MAC mapping in its local ARP Cache table for future use.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-17">
+                <div class="q-text"><span class="q-badge b5">Q17</span><span>Explain RARP, BOOTP, and DHCP protocols.</span></div>
+                <div class="a-text">
+                    <h3>RARP, BOOTP, and DHCP</h3>
+<p>These protocols handle assigning IP addresses to devices.</p>
+<ul>
+  <li><strong>RARP (Reverse ARP):</strong> Used by diskless workstations to discover their own IP address when they boot up. The device broadcasts its MAC address asking, "What is my IP?". It was obsolete because it only provided an IP address, no subnet mask or gateway.</li>
+  <li><strong>BOOTP (Bootstrap Protocol):</strong> An improvement over RARP. It provided the IP address, subnet mask, and default gateway. However, mappings were static; an admin had to manually bind MACs to IPs in a server file.</li>
+  <li><strong>DHCP (Dynamic Host Configuration Protocol):</strong> The modern standard. It dynamically leases IP addresses from a pool to devices for a specific duration. It automates entire network configurations (IP, Mask, Gateway, DNS servers) with zero manual admin work. Uses the DORA process (Discover, Offer, Request, Acknowledge).</li>
+</ul>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant C as Client (no IP)
+    participant S as DHCP Server
+    C->>S: 1. DHCPDISCOVER (broadcast)
+    S->>C: 2. DHCPOFFER (IP, mask, gateway, DNS)
+    C->>S: 3. DHCPREQUEST (broadcast)
+    S->>C: 4. DHCPACK (lease confirmed)
+    Note over C: Configured until lease expires
+</div><div class="diagram-caption">Figure: DHCP DORA exchange — Discover and Request are broadcast because the client has no IP address yet.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-18">
+                <div class="q-text"><span class="q-badge b5">Q18</span><span>Explain Distance Vector Routing and Count-to-Infinity problem.</span></div>
+                <div class="a-text">
+                    <h3>Distance Vector Routing</h3>
+<p>A dynamic routing algorithm (like RIP) where every router shares its entire routing table, but <em>only</em> with its immediate neighbors, at regular intervals.</p>
+<h4>Mechanism:</h4>
+<p>Routers calculate the best path using the Bellman-Ford equation. They don't know the full topology of the network; they only know "Route X is in that direction and is Y hops away".</p>
+<h4>Count-to-Infinity Problem:</h4>
+<p>A major flaw in DVR. If a network link goes down, Router A might think it can reach the broken network via Router B, while Router B thinks it can reach it via Router A. They continuously update each other, infinitely increasing the hop count (distance) until it hits infinity. Solutions include Split Horizon and Route Poisoning.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-19">
+                <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Link State Routing and Dijkstra's Algorithm.</span></div>
+                <div class="a-text">
+                    <h3>Link State Routing</h3>
+<p>A modern dynamic routing algorithm (like OSPF) that solves the Count-to-Infinity problem.</p>
+<h4>Mechanism:</h4>
+<ol>
+  <li><strong>Discovery:</strong> Every router says "hello" to its immediate neighbors to learn their identities and link costs.</li>
+  <li><strong>Flooding (LSA):</strong> Each router creates a Link State Packet (LSP) containing the state/cost of its direct links. It floods this packet to <em>every single router</em> in the entire network.</li>
+  <li><strong>Database Construction:</strong> Every router builds an identical, complete map (Topology Database) of the entire network.</li>
+  <li><strong>Dijkstra's Algorithm:</strong> Every router independently runs Dijkstra's Shortest Path algorithm on this map to compute the optimal routing table to all destinations.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-20">
+                <div class="q-text"><span class="q-badge b5">Q20</span><span>Explain ICMP protocol and Ping/Traceroute utility tools.
+
+
+
+
+--- Page 3 ---</span></div>
+                <div class="a-text">
+                    <h3>Internet Control Message Protocol (ICMP)</h3>
+<p>ICMP is a Network Layer protocol used by routers and hosts to send error messages and operational information. It does not carry user data.</p>
+<h4>Key Utility Tools:</h4>
+<ul>
+  <li><strong>Ping:</strong> Sends an ICMP <em>Echo Request</em> message to a destination IP. If the destination is alive and reachable, it replies with an ICMP <em>Echo Reply</em>. Used to test basic connectivity and measure round-trip time.</li>
+  <li><strong>Traceroute:</strong> Used to map the exact path a packet takes through the internet. It works by sending packets with increasing TTL (Time To Live) values (1, 2, 3...). When a packet reaches a router and TTL hits 0, the router drops it and sends back an ICMP <em>Time Exceeded</em> error, revealing that router's IP address.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-21">
+                <div class="q-text"><span class="q-badge b5">Q21</span><span>Explain TCP 3-Way Handshake connection establishment.</span></div>
+                <div class="a-text">
+                    <h3>TCP 3-Way Handshake</h3>
+<p>TCP is a connection-oriented protocol. Before any data can be transferred, a reliable connection must be established between the client and server using a 3-way handshake.</p>
+<div class="diagram-container">
+<div class="mermaid">
+sequenceDiagram
+    participant Client
+      participant Server
+      Client->>Server: 1. SYN (seq=x)
+      Server->>Client: 2. SYN + ACK (seq=y, ack=x+1)
+      Client->>Server: 3. ACK (ack=y+1)
+</div>
+</div>
+<ol>
+  <li><strong>SYN:</strong> The client sends a packet with the <code>SYN</code> flag set and a random initial Sequence Number (x) to the server.</li>
+  <li><strong>SYN-ACK:</strong> The server receives the SYN. It replies with a packet that has both <code>SYN</code> and <code>ACK</code> flags set. It acknowledges the client's sequence number (ack = x+1) and provides its own random initial Sequence Number (y).</li>
+  <li><strong>ACK:</strong> The client receives the SYN-ACK. It replies with an <code>ACK</code> acknowledging the server's sequence number (ack = y+1). The connection is now established.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-22">
+                <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain TCP 4-Way Connection Termination.</span></div>
+                <div class="a-text">
+                    <h3>TCP 4-Way Connection Termination</h3>
+<p>TCP connections are full-duplex, meaning both directions must be shut down independently. This takes 4 steps.</p>
+<div class="diagram-container">
+<div class="mermaid">
+sequenceDiagram
+    participant Client
+      participant Server
+      Client->>Server: 1. FIN
+      Server->>Client: 2. ACK
+      Note over Server: Server finishes sending remaining data
+      Server->>Client: 3. FIN
+      Client->>Server: 4. ACK
+</div>
+</div>
+<ol>
+  <li><strong>FIN (Client):</strong> The client has no more data to send, so it sends a <code>FIN</code> segment to the server.</li>
+  <li><strong>ACK (Server):</strong> The server acknowledges the <code>FIN</code> with an <code>ACK</code>. The client-to-server connection is now closed. However, the server might still have data to send to the client.</li>
+  <li><strong>FIN (Server):</strong> Once the server finishes sending all its data, it sends its own <code>FIN</code> segment to the client.</li>
+  <li><strong>ACK (Client):</strong> The client acknowledges the server's <code>FIN</code> with a final <code>ACK</code>. The connection is completely closed.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-23">
+                <div class="q-text"><span class="q-badge b5">Q23</span><span>Explain TCP Flow Control (Sliding Window) mechanism.</span></div>
+                <div class="a-text">
+                    <h3>TCP Flow Control (Sliding Window)</h3>
+<p>Flow control prevents a fast sender from overwhelming a slow receiver. TCP uses a dynamic Sliding Window protocol to achieve this.</p>
+<ul>
+  <li><strong>Receiver Window (rwnd):</strong> Every time the receiver sends an ACK to the sender, it includes a "Window Size" field in the TCP header. This number tells the sender exactly how many bytes of buffer space are currently available at the receiver.</li>
+  <li><strong>Dynamic Adjustment:</strong> If the receiver's application processes data slowly, its buffer fills up, and it advertises a smaller window to the sender. The sender must slow down.</li>
+  <li><strong>Zero Window:</strong> If the receiver's buffer is completely full, it advertises a window size of 0. The sender stops transmitting entirely until it receives a window update greater than 0.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-24">
+                <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain TCP Congestion Control: Slow Start, Congestion Avoidance.</span></div>
+                <div class="a-text">
+                    <h3>TCP Congestion Control</h3>
+<p>While Flow Control protects the receiver, Congestion Control protects the entire <em>network</em> (routers and links) from being overwhelmed.</p>
+<p>TCP maintains a <strong>Congestion Window (cwnd)</strong>. The sender can only transmit up to the minimum of <code>cwnd</code> and <code>rwnd</code>.</p>
+<ol>
+  <li><strong>Slow Start:</strong> The connection starts with a very small <code>cwnd</code> (e.g., 1 MSS). For every ACK received, <code>cwnd</code> doubles. The window grows <em>exponentially</em> until it reaches a threshold (ssthresh).</li>
+  <li><strong>Congestion Avoidance:</strong> Once <code>ssthresh</code> is reached, the growth slows down. <code>cwnd</code> only increases by 1 MSS per RTT (Additive Increase).</li>
+  <li><strong>Congestion Detection:</strong>
+      <br/>• <em>3 Duplicate ACKs (Fast Retransmit):</em> Implies mild congestion. <code>ssthresh</code> is halved, and <code>cwnd</code> is halved.
+      <br/>• <em>Timeout:</em> Implies severe congestion (packet totally lost). <code>ssthresh</code> is halved, and <code>cwnd</code> drops all the way back to 1 MSS (Multiplicative Decrease).</li>
+</ol>
+<div class="diagram-container"><div class="mermaid">
+stateDiagram-v2
+    [*] --> SlowStart
+    SlowStart : Slow Start (cwnd doubles per RTT)
+    CongAvoid : Congestion Avoidance (cwnd + 1 MSS per RTT)
+    FastRecovery : Fast Recovery (cwnd = ssthresh)
+    SlowStart --> CongAvoid : cwnd reaches ssthresh
+    SlowStart --> SlowStart : Timeout - ssthresh = cwnd/2, cwnd = 1 MSS
+    CongAvoid --> SlowStart : Timeout - ssthresh = cwnd/2, cwnd = 1 MSS
+    CongAvoid --> FastRecovery : 3 duplicate ACKs - ssthresh = cwnd/2, cwnd = ssthresh
+    FastRecovery --> CongAvoid : New ACK arrives
+    FastRecovery --> SlowStart : Timeout
+</div><div class="diagram-caption">Figure: TCP congestion-control state machine — exponential growth until ssthresh, then linear growth; a timeout resets cwnd to 1 MSS while 3 duplicate ACKs only halve it.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-25">
+                <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Leaky Bucket Algorithm for traffic shaping.</span></div>
+                <div class="a-text">
+                    <h3>Leaky Bucket Algorithm</h3>
+<p>The Leaky Bucket algorithm is a traffic shaping mechanism used to convert bursty, erratic traffic into a smooth, steady stream of packets.</p>
+<h4>Mechanism:</h4>
+<ul>
+  <li>Imagine a bucket with a hole at the bottom. Water (packets) pours into the top in bursts.</li>
+  <li>No matter how fast water pours in, it leaks out of the bottom hole at a <strong>constant, fixed rate</strong>.</li>
+  <li>If water pours in so fast that the bucket fills up entirely, any extra water spills over and is lost (packets are dropped).</li>
+</ul>
+<p><strong>Use Case:</strong> Ideal for applications that require a strict, constant bandwidth without fluctuations, like Voice over IP (VoIP) or Live Video Streaming.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-26">
+                <div class="q-text"><span class="q-badge b5">Q26</span><span>Explain Token Bucket Algorithm for bursty traffic.</span></div>
+                <div class="a-text">
+                    <h3>Token Bucket Algorithm</h3>
+<p>The Token Bucket algorithm is another traffic shaping mechanism, but unlike the Leaky Bucket, it allows for temporary bursts of data.</p>
+<h4>Mechanism:</h4>
+<ul>
+  <li>A bucket holds "Tokens" instead of packets. Tokens are generated and added to the bucket at a constant rate.</li>
+  <li>To transmit a packet, the sender must grab and destroy one token from the bucket.</li>
+  <li>If the bucket is empty, the sender must wait for a new token to be generated.</li>
+  <li>If the sender has been idle, tokens accumulate in the bucket (up to its maximum capacity). When the sender suddenly needs to transmit a massive burst of data, it can use all the accumulated tokens at once to send the burst at maximum line speed.</li>
+</ul>
+<p><strong>Use Case:</strong> Standard internet traffic (web browsing, file downloads) which is naturally bursty.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-27">
+                <div class="q-text"><span class="q-badge b5">Q27</span><span>Explain Domain Name System (DNS) hierarchy and resolution.</span></div>
+                <div class="a-text">
+                    <h3>Domain Name System (DNS)</h3>
+<p>DNS is the "phonebook of the Internet". It translates human-readable domain names (like <code>www.google.com</code>) into machine-readable IP addresses (like <code>142.250.190.46</code>).</p>
+<h4>Hierarchy</h4>
+<ul>
+  <li><strong>Root Servers (.):</strong> The top of the tree. They know where all the TLD servers are.</li>
+  <li><strong>TLD Servers (.com, .org):</strong> Top-Level Domain servers know where the Authoritative servers for specific domains are located.</li>
+  <li><strong>Authoritative Servers (google.com):</strong> The final servers that actually hold the exact IP address records for a specific domain.</li>
+</ul>
+<h4>Resolution Process</h4>
+<p>When you type a URL, your browser asks a <em>Recursive Resolver</em> (usually provided by your ISP). If the IP isn't cached, the resolver asks the Root Server &rarr; then the TLD Server &rarr; then the Authoritative Server, finally returning the IP to your browser.</p>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant R as Resolver
+    participant Ro as Root (.)
+    participant T as TLD (.com)
+    participant A as Auth NS
+    Note over R: Recursive query in
+    R->>Ro: www.google.com ?
+    Ro-->>R: Refer to .com
+    R->>T: www.google.com ?
+    T-->>R: Refer to ns.google.com
+    R->>A: www.google.com ?
+    A-->>R: A record = IP
+    Note over R: Cache, then reply
+</div><div class="diagram-caption">Figure: Recursive query from the browser, then iterative queries from the resolver down the Root &rarr; TLD &rarr; Authoritative hierarchy.</div></div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-28">
+                <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain HTTP vs HTTPS protocols (Port 80 vs Port 443).</span></div>
+                <div class="a-text">
+                    <h3>HTTP vs HTTPS</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>HTTP (Hypertext Transfer Protocol)</th>
+    <th>HTTPS (HTTP Secure)</th>
+  </tr>
+  <tr>
+    <td><strong>Security</strong></td>
+    <td>Data is transmitted in plain text. Anyone intercepting the traffic can read it (passwords, credit cards).</td>
+    <td>Data is heavily encrypted using SSL/TLS before transmission.</td>
+  </tr>
+  <tr>
+    <td><strong>Port Number</strong></td>
+    <td>Uses TCP Port <strong>80</strong>.</td>
+    <td>Uses TCP Port <strong>443</strong>.</td>
+  </tr>
+  <tr>
+    <td><strong>Authentication</strong></td>
+    <td>No authentication. You don't know if the server is really who it claims to be.</td>
+    <td>Uses Digital Certificates issued by a Certificate Authority (CA) to prove the server's identity.</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-29">
+                <div class="q-text"><span class="q-badge b5">Q29</span><span>Explain FTP (File Transfer Protocol) dual connection (Data & Control).</span></div>
+                <div class="a-text">
+                    <h3>File Transfer Protocol (FTP)</h3>
+<p>FTP is an application layer protocol used to transfer files between a client and a server. Uniquely, FTP requires <strong>two</strong> separate TCP connections to function:</p>
+<ol>
+  <li><strong>Control Connection (Port 21):</strong> This connection is established first and stays open for the entire session. It is used exclusively to send commands (like <code>LIST</code>, <code>RETR</code>, <code>QUIT</code>) and receive server replies. No files are sent over this connection.</li>
+  <li><strong>Data Connection (Port 20):</strong> This connection is opened dynamically <em>only</em> when a file transfer or directory listing is requested. The actual file bytes are transferred here. Once the specific file finishes transferring, this data connection is immediately closed.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-30">
+                <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Email Protocols: SMTP, POP3, IMAP.</span></div>
+                <div class="a-text">
+                    <h3>Email Protocols</h3>
+<p>Sending and receiving emails involves distinct protocols:</p>
+<ul>
+  <li><strong>SMTP (Simple Mail Transfer Protocol - Port 25/587):</strong> Used exclusively for <em>sending (pushing)</em> emails. It pushes the email from the sender's client to the sender's mail server, and then from the sender's mail server to the recipient's mail server.</li>
+  <li><strong>POP3 (Post Office Protocol v3 - Port 110):</strong> Used for <em>receiving (pulling)</em> emails. It connects to the mail server, downloads all the emails to the local device, and then usually <strong>deletes</strong> them from the server. Not ideal for multiple devices.</li>
+  <li><strong>IMAP (Internet Message Access Protocol - Port 143):</strong> A modern receiving protocol. It syncs the local client with the mail server. Emails remain stored on the server. If you read or delete an email on your phone, it syncs and shows as read/deleted on your laptop.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-31">
+                <div class="q-text"><span class="q-badge b5">Q31</span><span>Explain Network Devices: Hub, Switch, Router, Bridge, Gateway.</span></div>
+                <div class="a-text">
+                    <h3>Network Devices</h3>
+<ul>
+  <li><strong>Hub (Layer 1):</strong> A dumb device that connects multiple computers. When it receives a packet on one port, it blindly broadcasts it to all other ports. High collision rate.</li>
+  <li><strong>Bridge (Layer 2):</strong> Connects two LAN segments. It learns MAC addresses and filters traffic, only forwarding frames across the bridge if the destination MAC is on the other side.</li>
+  <li><strong>Switch (Layer 2):</strong> A multi-port bridge. It maintains a MAC address table. When a frame arrives, the switch intelligently forwards it <em>only</em> to the specific port where the destination MAC lives. Eliminates collisions.</li>
+  <li><strong>Router (Layer 3):</strong> Connects different logical networks (e.g., your home LAN to the ISP's network). Uses IP addresses to determine the best path to forward packets globally.</li>
+  <li><strong>Gateway (All Layers):</strong> A device that translates between entirely different network architectures and protocols (e.g., connecting a TCP/IP network to an old IPX/SPX network).</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-32">
+                <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain IPv6 Header format and benefits over IPv4.</span></div>
+                <div class="a-text">
+                    <h3>IPv6 Header and Benefits over IPv4</h3>
+<p>IPv6 was developed to solve the IPv4 address exhaustion problem by expanding the address space from 32 bits to 128 bits.</p>
+<h4>Benefits of IPv6:</h4>
+<ul>
+  <li><strong>Massive Address Space:</strong> \(2^{128}\) addresses, enough for every grain of sand on Earth to have an IP.</li>
+  <li><strong>Simpler Header:</strong> The IPv6 header has a fixed length of 40 bytes. Several optional IPv4 fields (like Fragmentation and Checksum) were removed or moved to Extension Headers, making routing much faster.</li>
+  <li><strong>No NAT Required:</strong> Because there are so many public IPs, every device can have a globally unique public IP, restoring true end-to-end connectivity without NAT.</li>
+  <li><strong>Built-in Security:</strong> IPSec (which is optional in IPv4) is fully integrated into the IPv6 protocol standard.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-33">
+                <div class="q-text"><span class="q-badge b5">Q33</span><span>Explain Wireless LAN (IEEE 802.11) architecture.</span></div>
+                <div class="a-text">
+                    <h3>Wireless LAN (IEEE 802.11) Architecture</h3>
+<p>The IEEE 802.11 standard defines the architecture for Wi-Fi networks.</p>
+<ul>
+  <li><strong>BSS (Basic Service Set):</strong> The fundamental building block. It consists of a group of wireless stations and one central Access Point (AP). All communication goes through the AP.</li>
+  <li><strong>IBSS (Independent BSS / Ad-Hoc):</strong> A network with no AP. Stations communicate directly with each other (peer-to-peer).</li>
+  <li><strong>ESS (Extended Service Set):</strong> Created by connecting multiple BSSs together using a Distribution System (usually a wired Ethernet backbone). This allows users to roam from one AP's coverage area to another without dropping their connection (like Wi-Fi in a large university).</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-34">
+                <div class="q-text"><span class="q-badge b5">Q34</span><span>Explain Bluetooth Architecture: Piconet and Scatternet.</span></div>
+                <div class="a-text">
+                    <h3>Bluetooth Architecture: Piconet & Scatternet</h3>
+<p>Bluetooth (IEEE 802.15.1) is a short-range wireless Personal Area Network (PAN) technology.</p>
+<ul>
+  <li><strong>Piconet:</strong> The basic Bluetooth network. It consists of exactly <strong>one Master</strong> node and up to <strong>7 active Slave</strong> nodes. The Master controls the clock and frequency hopping sequence. Slaves can only communicate with the Master, not directly with each other.</li>
+  <li><strong>Scatternet:</strong> Formed when two or more Piconets overlap. A node can act as a Slave in one Piconet and a Master in another, effectively bridging the two Piconets together.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-35">
+                <div class="q-text"><span class="q-badge b5">Q35</span><span>Explain NAT (Network Address Translation) and PAT.</span></div>
+                <div class="a-text">
+                    <h3>Network Address Translation (NAT) & PAT</h3>
+<p>NAT is used by routers to translate Private, non-routable IP addresses (like <code>192.168.1.5</code>) into a single Public, routable IP address (like <code>8.8.8.8</code>) before sending traffic out to the Internet.</p>
+<h4>Types:</h4>
+<ul>
+  <li><strong>Static/Dynamic NAT:</strong> Translates 1 private IP to 1 public IP. Does not conserve addresses, mostly used to hide internal server IPs.</li>
+  <li><strong>PAT (Port Address Translation / NAT Overload):</strong> This is what home routers use. It maps <em>multiple</em> private IP addresses to a <em>single</em> public IP address. It distinguishes different internal devices by assigning them unique TCP/UDP <strong>Port Numbers</strong> in the router's NAT table.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-36">
+                <div class="q-text"><span class="q-badge b5">Q36</span><span>Explain Symmetric vs Asymmetric Cryptography.</span></div>
+                <div class="a-text">
+                    <h3>Symmetric vs Asymmetric Cryptography</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Symmetric (Secret Key)</th>
+    <th>Asymmetric (Public Key)</th>
+  </tr>
+  <tr>
+    <td><strong>Keys Used</strong></td>
+    <td>Uses the <em>exact same key</em> for both encryption and decryption.</td>
+    <td>Uses a <em>pair of keys</em>: a Public Key (to encrypt) and a Private Key (to decrypt).</td>
+  </tr>
+  <tr>
+    <td><strong>Speed</strong></td>
+    <td>Extremely fast. Excellent for bulk data transfer.</td>
+    <td>Very slow (computationally heavy math).</td>
+  </tr>
+  <tr>
+    <td><strong>Key Distribution Problem</strong></td>
+    <td>Major issue. Sender and receiver must securely exchange the secret key beforehand.</td>
+    <td>Solved. The Public Key is shared openly with everyone. Only the Private Key is kept secret.</td>
+  </tr>
+  <tr>
+    <td><strong>Examples</strong></td>
+    <td>AES, DES, 3DES</td>
+    <td>RSA, ECC, Diffie-Hellman</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-37">
+                <div class="q-text"><span class="q-badge b5">Q37</span><span>Explain RSA Public Key Cryptography algorithm.</span></div>
+                <div class="a-text">
+                    <h3>RSA Public Key Algorithm</h3>
+<p>RSA is the most widely used asymmetric encryption algorithm, based on the mathematical difficulty of factoring the product of two massive prime numbers.</p>
+<h4>Key Generation Steps:</h4>
+<ol>
+  <li>Choose two large distinct prime numbers, \(p\) and \(q\).</li>
+  <li>Compute \(n = p \times q\). (\(n\) is the modulus for both keys).</li>
+  <li>Compute Euler's totient function: \(\phi(n) = (p-1) \times (q-1)\).</li>
+  <li>Choose an integer \(e\) such that \(1 < e < \phi(n)\), and \(e\) is coprime with \(\phi(n)\).</li>
+  <li>Compute \(d\) such that \((d \times e) \pmod{\phi(n)} = 1\). (\(d\) is the modular multiplicative inverse of \(e\)).</li>
+</ol>
+<p><strong>Keys:</strong> Public Key is \((e, n)\). Private Key is \((d, n)\).</p>
+<p><strong>Encryption:</strong> \(Cipher = Message^e \pmod{n}\)</p>
+<p><strong>Decryption:</strong> \(Message = Cipher^d \pmod{n}\)</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-38">
+                <div class="q-text"><span class="q-badge b5">Q38</span><span>Explain Firewall types: Packet Filter, Stateful Inspection, Proxy.</span></div>
+                <div class="a-text">
+                    <h3>Firewall Types</h3>
+<p>A firewall is a network security device that monitors and filters incoming and outgoing traffic based on security rules.</p>
+<ul>
+  <li><strong>Packet Filter (Stateless):</strong> Operates at Layer 3 (Network). It examines every individual packet in isolation and checks its IP address and Port number against a strict access control list (ACL). Fast, but easily bypassed.</li>
+  <li><strong>Stateful Inspection:</strong> Operates at Layer 4 (Transport). It remembers the "state" of active TCP connections. It knows if an incoming packet is a legitimate response to an outgoing request you just made, blocking unsolicited incoming traffic.</li>
+  <li><strong>Proxy (Application-Level Gateway):</strong> Operates at Layer 7 (Application). It acts as an intermediary. The client connects to the proxy, and the proxy connects to the outside world on behalf of the client. Highly secure, capable of deeply inspecting HTTP/FTP traffic for viruses, but very slow.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-39">
+                <div class="q-text"><span class="q-badge b5">Q39</span><span>Explain Quality of Service (QoS) parameters and techniques.</span></div>
+                <div class="a-text">
+                    <h3>Quality of Service (QoS)</h3>
+<p>QoS refers to any technology that manages data traffic to reduce packet loss, latency, and jitter on a network. It prioritizes specific types of traffic (like VoIP) over less critical traffic (like file downloads).</p>
+<h4>Parameters:</h4>
+<ul>
+  <li><strong>Bandwidth:</strong> The maximum rate of data transfer.</li>
+  <li><strong>Delay (Latency):</strong> The time it takes a packet to travel from source to destination.</li>
+  <li><strong>Jitter:</strong> The variation in packet delay. High jitter causes audio/video to stutter.</li>
+  <li><strong>Packet Loss:</strong> The percentage of packets that fail to reach their destination.</li>
+</ul>
+<h4>Techniques:</h4>
+<p>Traffic Shaping (Leaky Bucket), Scheduling (Priority Queuing where voice traffic goes first), and Resource Reservation.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-40">
+                <div class="q-text"><span class="q-badge b5">Q40</span><span>Explain Socket Programming concepts (IP, Port, Socket API).</span></div>
+                <div class="a-text">
+                    <h3>Socket Programming Concepts</h3>
+<p>Socket programming allows two applications on different computers to communicate across a network.</p>
+<ul>
+  <li><strong>IP Address:</strong> Identifies the specific computer/server on the global network.</li>
+  <li><strong>Port Number:</strong> Identifies the specific application/process running on that computer (e.g., Port 80 for the web server, Port 22 for SSH).</li>
+  <li><strong>Socket:</strong> One endpoint of a two-way communication link. A socket is fundamentally defined by the combination of an IP Address and a Port Number (e.g., <code>192.168.1.5:80</code>).</li>
+  <li><strong>Socket API (Berkeley Sockets):</strong> Provides functions for developers to use:
+      <br/>• <code>socket()</code>: Creates a new socket.
+      <br/>• <code>bind()</code>: Associates the socket with a specific local IP and port.
+      <br/>• <code>listen()</code> & <code>accept()</code>: Server waits for incoming client connections.
+      <br/>• <code>connect()</code>: Client initiates a connection to a server.
+      <br/>• <code>send()</code> & <code>recv()</code>: Transmit data.</li>
+</ul>
+
+                </div>
+            </div>
+            
+</main>
+</div>
+</body>
+</html>

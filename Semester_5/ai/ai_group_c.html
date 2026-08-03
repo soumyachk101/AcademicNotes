@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence (PEC-CS501B) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #8b5cf6; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #8b5cf644; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="ai_index.html">← Back to Artificial Intelligence Index</a>
+        <span class="nav-title">Artificial Intelligence (PEC-CS501B) — Group C</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="ai_group_a.html" class=""><b>Group A</b><br><span class="toc-meta">53 questions</span></a></li><li><a href="ai_group_b.html" class=""><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="ai_group_c.html" class="active"><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="ai_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-c">Group C — Long / Numerical Questions (15 Marks Each)</h1>
+
+            <div class="qa-card" id="gc-1">
+                <div class="q-text"><span class="q-badge c15">Q1</span><span>a) Convert the following sentences to FOL and prove by Resolution Refutation that 'Marcus is dead':
+1. Marcus was a man.
+2. Marcus was a Pompeian.
+3. All Pompeians were Romans.
+4. Caesar was a ruler.
+5. All Romans were either loyal to Caesar or hated him.
+6. Everyone is loyal to someone.
+7. People only try to assassinate rulers they are not loyal to.
+8. Marcus tried to assassinate Caesar.
+9. All men are mortal.
+b) Explain Unification Algorithm step-by-step.</span></div>
+                <div class="a-text">
+                    <h3>Resolution Refutation: Marcus is Dead</h3><p><b>Part (a) FOL Conversion and Resolution Proof:</b></p><p><b>1. Axioms in First-Order Logic (FOL):</b></p><ol>  <li>Marcus was a man: \(\text{Man(Marcus)}\)</li>  <li>Marcus was a Pompeian: \(\text{Pompeian(Marcus)}\)</li>  <li>All Pompeians were Romans: \(\forall x (\text{Pompeian}(x) \implies \text{Roman}(x))\)</li>  <li>Caesar was a ruler: \(\text{Ruler(Caesar)}\)</li>  <li>All Romans were either loyal to Caesar or hated him: \(\forall x (\text{Roman}(x) \implies (\text{LoyalTo}(x, Caesar) \lor \text{Hate}(x, Caesar)))\)</li>  <li>Everyone is loyal to someone: \(\forall x \exists y (\text{LoyalTo}(x, y))\)</li>  <li>People only try to assassinate rulers they are not loyal to: \(\forall x \forall y ((\text{Person}(x) \land \text{Ruler}(y) \land \text{TryAssassinate}(x, y)) \implies \neg \text{LoyalTo}(x, y))\)</li>  <li>Marcus tried to assassinate Caesar: \(\text{TryAssassinate(Marcus, Caesar)}\)</li>  <li>All men are persons: \(\forall x (\text{Man}(x) \implies \text{Person}(x))\) <em>(Implicit axiom required for chaining)</em></li>  <li>All men are mortal: \(\forall x (\text{Man}(x) \implies \text{Mortal}(x))\) <em>(Given, but 'dead' relies on hate in this specific historical problem variant. We prove 'Marcus hated Caesar' as requested by standard PYQ).</em></li></ol><p><b>2. Conversion to CNF (Clause Form):</b></p><ul>  <li>C1: \(\text{Man(Marcus)}\)</li>  <li>C2: \(\text{Pompeian(Marcus)}\)</li>  <li>C3: \(\neg \text{Pompeian}(x_1) \lor \text{Roman}(x_1)\)</li>  <li>C4: \(\text{Ruler(Caesar)}\)</li>  <li>C5: \(\neg \text{Roman}(x_2) \lor \text{LoyalTo}(x_2, Caesar) \lor \text{Hate}(x_2, Caesar)\)</li>  <li>C6: \(\neg \text{Person}(x_3) \lor \neg \text{Ruler}(y_1) \lor \neg \text{TryAssassinate}(x_3, y_1) \lor \neg \text{LoyalTo}(x_3, y_1)\)</li>  <li>C7: \(\text{TryAssassinate(Marcus, Caesar)}\)</li>  <li>C8: \(\neg \text{Man}(x_4) \lor \text{Person}(x_4)\)</li></ul><p><b>3. Resolution Steps (Proving Marcus hated Caesar):</b></p><ul>  <li><b>Negate Goal:</b> \(\neg \text{Hate(Marcus, Caesar)}\) (Clause 9)</li>  <li>Resolve C2 and C3 \(\{x_1 / Marcus\}\) \(\implies\) \(\text{Roman(Marcus)}\) (Clause 10)</li>  <li>Resolve C10 and C5 \(\{x_2 / Marcus\}\) \(\implies\) \(\text{LoyalTo}(Marcus, Caesar) \lor \text{Hate}(Marcus, Caesar)\) (Clause 11)</li>  <li>Resolve C11 and C9 \(\implies\) \(\text{LoyalTo(Marcus, Caesar)}\) (Clause 12)</li>  <li>Resolve C1 and C8 \(\{x_4 / Marcus\}\) \(\implies\) \(\text{Person(Marcus)}\) (Clause 13)</li>  <li>Resolve C6, C13, C4, and C7 \(\{x_3 / Marcus, y_1 / Caesar\}\) \(\implies\) \(\neg \text{LoyalTo(Marcus, Caesar)}\) (Clause 14)</li>  <li>Resolve C12 and C14 \(\implies\) \(\emptyset\) (Contradiction!)</li></ul><p><b>Part (b) Unification Algorithm:</b></p><p>Unification is a recursive algorithm that takes two literals as input and returns a substitution (Most General Unifier, MGU) that makes them identical, or reports FAILURE.</p><ul>  <li>If they are identical constants/variables, return empty substitution \(\{\}\).</li>  <li>If one is a variable \(x\) and the other is a term \(t\):      <br/>- Check if \(x\) occurs inside \(t\) (Occurs Check). If yes, return FAILURE.      <br/>- Else, return substitution \(\{x/t\}\).</li>  <li>If they are predicates (e.g., \(P(a,b)\) and \(P(x,y)\)), ensure the predicate names match and arity (number of arguments) match. Recursively unify each argument pair, composing the substitutions.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-2">
+                <div class="q-text"><span class="q-badge c15">Q2</span><span>a) Perform Alpha-Beta Pruning on the given Game Tree (3 levels depth, 8 leaf node values: 3, 5, 6, 9, 1, 2,
+0, -1).
+Show alpha and beta values at each node and identify pruned branches.
+b) Explain Minimax Algorithm properties (Completeness, Optimality, Time/Space Complexity).</span></div>
+                <div class="a-text">
+                    <h3>Alpha-Beta Pruning and Minimax Properties</h3><p><b>Part (a) Alpha-Beta Pruning Execution Trace:</b></p><p>Given leaf nodes (L to R): 3, 5, 6, 9, 1, 2, 0, -1.</p><div class="diagram-container"><div class="mermaid">
+graph TD
+    MAX((MAX)) --> MIN1((MIN))
+    MAX --> MIN2((MIN))
+    MIN1 --> MAXL1((MAX))
+    MIN1 --> MAXL2((MAX))
+    MIN2 --> MAXR1((MAX))
+    MIN2 --> MAXR2((MAX))
+    MAXL1 --> L1((3)) & L2((5))
+    MAXL2 --> L3((6)) & L4((9))
+    MAXR1 --> L5((1)) & L6((2))
+    MAXR2 -.-> L7((0)) & L8(("-1"))
+</div><div class="diagram-caption">Figure: 3-Level Game Tree. The entire MAXR2 branch (0, -1) is pruned!</div></div><ul>  <li><b>Bottom-Up Evaluation:</b>      <br/>- MAXL1 evaluates to \(\max(3, 5) = 5\).      <br/>- MAXL2 evaluates to \(\max(6, 9) = 9\).      <br/>- MIN1 receives 5 and 9. It evaluates to \(\min(5, 9) = 5\).      <br/>- Root MAX receives 5 from the left branch. It updates its \(\alpha = 5\).      <br/>- MAXR1 evaluates to \(\max(1, 2) = 2\).      <br/>- MIN2 evaluates its first child (MAXR1) and gets 2. MIN2's provisional value is now \(\le 2\). Thus, MIN2's \(\beta = 2\).  </li>  <li><b>Pruning Trigger:</b> At MIN2, \(\alpha = 5\) (from Root) and \(\beta = 2\). Since \(\alpha \ge \beta\) (\(5 \ge 2\)), the remaining children of MIN2 (the MAXR2 branch) are completely pruned. Root MAX ultimately chooses the left branch with a value of 5.</li></ul><p><b>Part (b) Minimax Algorithm Properties:</b></p><ul>  <li><b>Completeness:</b> Yes, it is complete if the game tree is finite (e.g., maximum depth \(m\) is bounded).</li>  <li><b>Optimality:</b> Yes, it is optimal against an optimal opponent. If the opponent plays sub-optimally, Minimax still guarantees at least the computed score.</li>  <li><b>Time Complexity:</b> \(O(b^m)\), where \(b\) is the legal moves (branching factor) and \(m\) is the maximum depth.</li>  <li><b>Space Complexity:</b> \(O(bm)\) if generating all successors at once, or \(O(m)\) if generating them one at a time (like DFS).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-3">
+                <div class="q-text"><span class="q-badge c15">Q3</span><span>a) Calculate Information Gain and construct Decision Tree for dataset (14 samples: 9 Yes, 5 No) using ID3
+algorithm.
+b) Explain Overfitting and Pruning in Decision Trees.</span></div>
+                <div class="a-text">
+                    <h3>Decision Trees: Information Gain and Pruning</h3><p><b>Part (a) Information Gain Calculation:</b></p><p>Given Dataset \(S\) with 14 total samples: 9 'Yes' and 5 'No'.</p><ol>  <li><b>Calculate Entropy of the Root Dataset \(H(S)\):</b>      <br/>\(H(S) = - \left(\frac{9}{14}\right) \log_2\left(\frac{9}{14}\right) - \left(\frac{5}{14}\right) \log_2\left(\frac{5}{14}\right) = 0.940 \text{ bits}\)  </li>  <li><b>Calculate Expected Entropy after splitting on an Attribute (e.g., 'Wind'):</b>      <br/>Assume 'Wind' splits the data into 8 'Weak' (6 Yes, 2 No) and 6 'Strong' (3 Yes, 3 No).      <br/>\(H(S_{\text{Weak}}) = -\left(\frac{6}{8}\right)\log_2\left(\frac{6}{8}\right) - \left(\frac{2}{8}\right)\log_2\left(\frac{2}{8}\right) = 0.811\)      <br/>\(H(S_{\text{Strong}}) = -\left(\frac{3}{6}\right)\log_2\left(\frac{3}{6}\right) - \left(\frac{3}{6}\right)\log_2\left(\frac{3}{6}\right) = 1.0\)      <br/>\(H(S | \text{Wind}) = \left(\frac{8}{14} \times 0.811\right) + \left(\frac{6}{14} \times 1.0\right) = 0.892\)  </li>  <li><b>Calculate Information Gain:</b>      <br/>\(IG(S, \text{Wind}) = H(S) - H(S | \text{Wind}) = 0.940 - 0.892 = 0.048 \text{ bits}\)  </li></ol><p>The ID3 algorithm calculates the Information Gain for every attribute (Outlook, Temp, Humidity, Wind) and selects the one with the highest IG as the root node. It then recursively applies this process to the child subsets.</p><p><b>Part (b) Overfitting and Pruning:</b></p><ul>  <li><b>Overfitting:</b> Occurs when a decision tree grows too deep and complex, memorizing the noise and outliers in the training data rather than generalizing the underlying pattern. An overfitted tree performs perfectly on training data but poorly on unseen test data.</li>  <li><b>Pruning:</b> The solution to overfitting. It reduces the size of decision trees by removing sections of the tree that provide little power to classify instances.      <br/>• <em>Pre-pruning:</em> Halts tree construction early (e.g., stopping when a node has fewer than \(N\) samples, or when Information Gain falls below a threshold).      <br/>• <em>Post-pruning:</em> Grows the tree to its maximum depth, then works bottom-up, collapsing leaf nodes into their parents if the removal does not decrease classification accuracy on a validation set.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-4">
+                <div class="q-text"><span class="q-badge c15">Q4</span><span>a) Given Bayesian Network for Burglar Alarm system with variables Burglary, Earthquake, Alarm, JohnCalls,
+MaryCalls.
+Calculate joint probability P(Burglary ∧ ¬Earthquake ∧ Alarm ∧ JohnCalls ∧ ¬MaryCalls) using CPTs.
+
+
+
+
+--- Page 4 ---
+b) Explain Naive Bayes Classifier algorithm for text classification.</span></div>
+                <div class="a-text">
+                    <h3>Bayesian Networks and Naive Bayes</h3><p><b>Part (a) Bayesian Network Joint Probability:</b></p><p>Given a Burglar Alarm network with variables: Burglary (\(B\)), Earthquake (\(E\)), Alarm (\(A\)), JohnCalls (\(J\)), MaryCalls (\(M\)).</p><p>Network topology: \(B\) and \(E\) are independent root nodes pointing to \(A\). \(A\) points to both \(J\) and \(M\).</p><p>Goal: Calculate the joint probability \(P(B \land \neg E \land A \land J \land \neg M)\).</p><p>Using the chain rule parameterized by the BBN topology, the joint probability factors as:</p>\[ P(B, \neg E, A, J, \neg M) = P(B) \cdot P(\neg E) \cdot P(A | B, \neg E) \cdot P(J | A) \cdot P(\neg M | A) \]<p>Assuming standard Pearl's network CPT values:</p><ul>  <li>\(P(B) = 0.001\)</li>  <li>\(P(\neg E) = 1 - P(E) = 1 - 0.002 = 0.998\)</li>  <li>\(P(A | B, \neg E) = 0.94\)</li>  <li>\(P(J | A) = 0.90\)</li>  <li>\(P(\neg M | A) = 1 - P(M | A) = 1 - 0.70 = 0.30\)</li></ul><p><b>Calculation:</b> \(0.001 \times 0.998 \times 0.94 \times 0.90 \times 0.30 = 0.0002532924 \approx 0.000253\)</p><p><b>Part (b) Naive Bayes Classifier for Text Classification:</b></p><p>The Naive Bayes Classifier is based on applying Bayes' theorem with a strong (naive) assumption of conditional independence between the features (words) given the class label (e.g., Spam or Ham).</p>\[ P(\text{Class} | \text{Words}) \propto P(\text{Class}) \prod_{i=1}^{n} P(\text{Word}_i | \text{Class}) \]<ul>  <li>It calculates the prior probability of each class \(P(\text{Class})\) from the training data frequency.</li>  <li>It calculates the likelihood of each word occurring in that class \(P(\text{Word}_i | \text{Class})\). Laplace Smoothing is often used to prevent zero probabilities for unseen words.</li>  <li>To classify a new email, it multiplies these probabilities together and selects the class with the highest posterior probability (Maximum A Posteriori - MAP).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-5">
+                <div class="q-text"><span class="q-badge c15">Q5</span><span>a) Trace A* Search algorithm on a given weighted graph from Start node S to Goal node G with given
+heuristic values h(n).
+Show open list, closed list, f(n), g(n), h(n) at each step.
+b) Prove that A* is optimal if heuristic h(n) is admissible.</span></div>
+                <div class="a-text">
+                    <h3>A* Search Trace and Optimality Proof</h3><p><b>Part (a) Tracing A* Search:</b></p><p>A* evaluates nodes using \(f(n) = g(n) + h(n)\).</p><ul>  <li><strong>Initialization:</strong> Open List = \([S (f = 0 + h(S))]\), Closed List = \([]\)</li>  <li><strong>Step 1:</strong> Pop \(S\) from Open. Generate successors. Calculate \(g\), \(h\), and \(f\) for each. Add successors to Open. Add \(S\) to Closed.</li>  <li><strong>Step 2:</strong> Sort Open List by lowest \(f(n)\). Pop the node with the lowest \(f(n)\). If it's a Goal, terminate and retrace path.</li>  <li><strong>Step 3:</strong> If not a goal, generate its successors. If a successor is already in Open or Closed with a higher \(g(n)\) cost, update its parent pointer and lower its \(g(n)\) (and \(f(n)\)). Re-push to Open.</li></ul><p><b>Part (b) Proof of Optimality for A* (Tree Search):</b></p><p><strong>Theorem:</strong> A* search is optimal if the heuristic \(h(n)\) is admissible (i.e., \(h(n) \le h^*(n)\) for all \(n\), where \(h^*(n)\) is the true optimal cost).</p><p><strong>Proof by Contradiction:</strong></p><ol>  <li>Assume A* returns a suboptimal goal node \(G_2\) with path cost \(f(G_2) = g(G_2) > C^*\) (where \(C^*\) is the optimal cost). Since it's a goal, \(h(G_2) = 0\).</li>  <li>Let \(G_1\) be the true optimal goal node, so \(f(G_1) = g(G_1) = C^*\).</li>  <li>Before \(G_2\) was chosen for expansion, there must have been an unexpanded node \(n\) on the Open list that is on the optimal path to \(G_1\).</li>  <li>Because \(h(n)\) is admissible, \(f(n) = g(n) + h(n) \le C^*\).</li>  <li>From step 1, we know \(f(G_2) > C^*\).</li>  <li>Therefore, \(f(n) < f(G_2)\).</li>  <li>Since A* always expands the node with the lowest \(f\)-value, it should have expanded \(n\) before \(G_2\).</li>  <li>This contradicts the assumption that A* selected \(G_2\) while \(n\) was on the Open list. Thus, A* must never return a suboptimal goal. \(\blacksquare\)</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-6">
+                <div class="q-text"><span class="q-badge c15">Q6</span><span>a) Explain CSP Map Coloring problem for 4 regions using 3 colors (Red, Green, Blue).
+b) Trace Constraint Propagation using AC-3 algorithm.</span></div>
+                <div class="a-text">
+                    <h3>CSP Map Coloring and Arc Consistency (AC-3)</h3><p><b>Part (a) CSP Map Coloring Formulation:</b></p><p>Suppose we have 4 adjacent regions: \(A, B, C, D\) (e.g., \(A\) neighbors \(B, C, D\); \(B\) neighbors \(A, C\); \(C\) neighbors \(A, B, D\); \(D\) neighbors \(A, C\)). We must color them using 3 colors: Red, Green, Blue.</p><ul>  <li><b>Variables (\(X\)):</b> \(\{A, B, C, D\}\)</li>  <li><b>Domain (\(D\)):</b> \(\{R, G, B\}\) for all variables.</li>  <li><b>Constraints (\(C\)):</b> Adjacent regions must have different colors. \(\{A \neq B, A \neq C, A \neq D, B \neq C, C \neq D\}\)</li></ul><p><b>Part (b) Tracing AC-3 Algorithm:</b></p><p>AC-3 enforces arc consistency by ensuring that for every directed arc \((X_i, X_j)\), every value in \(D_i\) has a valid corresponding value in \(D_j\).</p><ol>  <li><strong>Initialization:</strong> Insert all arcs into a Queue: \((A,B), (B,A), (A,C), (C,A), (A,D), (D,A), (B,C), (C,B), (C,D), (D,C)\).</li>  <li><strong>Initial Check:</strong> All domains are \(\{R, G, B\}\). For any arc, say \((A,B)\), if \(A=R\), \(B\) can be \(G\) or \(B\). Thus, no values violate the constraints initially. The graph is initially arc-consistent.</li>  <li><strong>Constraint Propagation (During Search):</strong> Assume we assign \(A = Red\).</li>  <li>The domain of \(A\) becomes \(\{R\}\).</li>  <li>Queue contains \((B,A)\). To make \(B\) consistent with \(A\), we must remove \(R\) from \(B\)'s domain. \(D_B\) becomes \(\{G, B\}\).</li>  <li>Queue contains \((C,A)\). Remove \(R\) from \(C\)'s domain. \(D_C\) becomes \(\{G, B\}\).</li>  <li>Queue contains \((D,A)\). Remove \(R\) from \(D\)'s domain. \(D_D\) becomes \(\{G, B\}\).</li>  <li>Because \(D_B, D_C, D_D\) changed, we re-evaluate their arcs. e.g., Arc \((B,C)\). If \(B=G\), \(C\) can be \(B\). If \(B=B\), \(C\) can be \(G\). No further domain reductions occur yet until another assignment is made.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-7">
+                <div class="q-text"><span class="q-badge c15">Q7</span><span>a) Explain Simulated Annealing algorithm in detail.
+b) Calculate acceptance probability P = e^(-ΔE/T) for bad moves at temperatures T=100, T=10, T=1.</span></div>
+                <div class="a-text">
+                    <h3>Simulated Annealing in Detail</h3><p><b>Part (a) Simulated Annealing Algorithm:</b></p><p>Simulated Annealing avoids local maxima by probabilistically accepting worse states. The probability of acceptance decreases as the system "cools" down.</p><div class="code-block">
+function SIMULATED-ANNEALING(problem, schedule) returns a solution state
+    current <- problem.INITIAL-STATE
+    for t = 1 to infinity do
+        T <- schedule(t)  // Decrease temperature
+        if T == 0 then return current
+        next <- a randomly selected successor of current
+        ΔE <- next.VALUE - current.VALUE
+        if ΔE > 0 then
+            current <- next  // Always accept better moves
+        else
+            current <- next with probability e^(ΔE / T)  // Accept worse moves probabilistically
+</div><p><b>Part (b) Calculating Acceptance Probability \(P = e^{\frac{\Delta E}{T}}\):</b></p><p>Assume a "bad move" where the new state is worse by an energy difference of \(\Delta E = -5\).</p><ul>  <li><b>At high temperature (\(T = 100\)):</b>      <br/>\(P = e^{-5 / 100} = e^{-0.05} \approx 0.9512\) (95.12% chance to accept the bad move). The algorithm explores freely.  </li>  <li><b>At medium temperature (\(T = 10\)):</b>      <br/>\(P = e^{-5 / 10} = e^{-0.5} \approx 0.6065\) (60.65% chance to accept). Exploration decreases.  </li>  <li><b>At low temperature (\(T = 1\)):</b>      <br/>\(P = e^{-5 / 1} = e^{-5} \approx 0.0067\) (0.67% chance to accept). The algorithm has essentially converged into a greedy hill-climbing search.  </li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-8">
+                <div class="q-text"><span class="q-badge c15">Q8</span><span>a) Convert sentences to FOL and prove 'John is a criminal':
+1. It is a crime for an American to sell weapons to hostile nations.
+2. Country Nono has some missiles.
+3. All of Nono's missiles were sold to it by John.
+4. Nono is a hostile nation.
+5. John is an American.
+b) Draw Resolution Refutation tree.</span></div>
+                <div class="a-text">
+                    <h3>Resolution Refutation: John is a Criminal</h3><p><b>Part (a) FOL Conversion:</b></p><ol>  <li>It is a crime for an American to sell weapons to hostile nations:      <br/>\(\forall x \forall y \forall z ((\text{American}(x) \land \text{Weapon}(y) \land \text{Sells}(x, y, z) \land \text{Hostile}(z)) \implies \text{Criminal}(x))\)</li>  <li>Country Nono has some missiles:      <br/>\(\exists x (\text{Owns}(Nono, x) \land \text{Missile}(x))\). Skolemized to: \(\text{Owns}(Nono, M_1)\) and \(\text{Missile}(M_1)\).</li>  <li>All of Nono's missiles were sold to it by John:      <br/>\(\forall x ((\text{Missile}(x) \land \text{Owns}(Nono, x)) \implies \text{Sells}(John, x, Nono))\)</li>  <li>Missiles are weapons:      <br/>\(\forall x (\text{Missile}(x) \implies \text{Weapon}(x))\) <em>(Implicit domain knowledge)</em></li>  <li>An enemy of America counts as "hostile":      <br/>\(\forall x (\text{Enemy}(x, America) \implies \text{Hostile}(x))\) <em>(Implicit domain knowledge)</em></li>  <li>Nono is an enemy of America:      <br/>\(\text{Enemy}(Nono, America)\)</li>  <li>John is an American:      <br/>\(\text{American}(John)\)</li></ol><p><b>Part (b) Resolution Tree Derivation:</b></p><ul>  <li><b>Negated Goal:</b> \(\neg \text{Criminal}(John)\)</li>  <li>From (1) and \(\neg \text{Criminal}(John)\) \(\{x/John\}\): We need to prove he is an American, sells a weapon, to a hostile nation.      \(\implies \neg \text{American}(John) \lor \neg \text{Weapon}(y) \lor \neg \text{Sells}(John, y, z) \lor \neg \text{Hostile}(z)\)</li>  <li>Resolve with (7) \(\text{American}(John)\):      \(\implies \neg \text{Weapon}(y) \lor \neg \text{Sells}(John, y, z) \lor \neg \text{Hostile}(z)\)</li>  <li>Resolve with (5) and (6) \(\implies \text{Hostile}(Nono)\) \(\{z/Nono\}\):      \(\implies \neg \text{Weapon}(y) \lor \neg \text{Sells}(John, y, Nono)\)</li>  <li>Resolve with (3) \(\{x/y\}\):      \(\implies \neg \text{Weapon}(y) \lor \neg \text{Missile}(y) \lor \neg \text{Owns}(Nono, y)\)</li>  <li>Resolve with (4):      \(\implies \neg \text{Missile}(y) \lor \neg \text{Owns}(Nono, y)\)</li>  <li>Resolve with (2) \(\{y/M_1\}\):      \(\implies \text{Empty Clause} (\emptyset)\). Contradiction found, John is a Criminal.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-9">
+                <div class="q-text"><span class="q-badge c15">Q9</span><span>a) Explain Fuzzy Logic controller design for an Automatic Washing Machine (Inputs: Dirtiness, Fabric type;
+Output: Wash time).
+b) Write Fuzzy Rules, Fuzzification, Rule Evaluation, and Defuzzification (Centroid method).</span></div>
+                <div class="a-text">
+                    <h3>Fuzzy Logic Controller: Automatic Washing Machine</h3><p><b>Part (a) Controller Design:</b></p><p>The goal is to map two crisp inputs (Dirtiness, Fabric Type) to a single crisp output (Wash Time) using a Mamdani Fuzzy Inference System.</p><ul>  <li><b>Input 1 (Dirtiness %):</b> Fuzzy sets \(\{Low, Medium, High\}\)</li>  <li><b>Input 2 (Fabric Type):</b> Fuzzy sets \(\{Silk (Delicate), Cotton, Jeans (Strong)\}\)</li>  <li><b>Output (Wash Time mins):</b> Fuzzy sets \(\{Short, Normal, Long, Very Long\}\)</li></ul><p><b>Part (b) Execution Pipeline:</b></p><ol>  <li><b>Fuzzification:</b> Assume sensor inputs: Dirtiness = 80%, Fabric = Jeans. By projecting 80% onto the Dirtiness membership functions, we get \(\mu_{High}(Dirt) = 0.8\), \(\mu_{Medium}(Dirt) = 0.2\). For Jeans, \(\mu_{Strong}(Fabric) = 0.9\).</li>  <li><b>Fuzzy Rules Matrix (IF-THEN):</b>      <br/>• IF Dirt is High AND Fabric is Strong THEN Wash Time is Very Long.      <br/>• IF Dirt is Medium AND Fabric is Strong THEN Wash Time is Long.      <br/>• IF Dirt is High AND Fabric is Delicate THEN Wash Time is Normal (to prevent damage).  </li>  <li><b>Rule Evaluation (MIN Operator for AND):</b>      <br/>Rule 1 firing strength: \(\min(0.8, 0.9) = 0.8\). Output fuzzy set 'Very Long' is clipped at height 0.8.      <br/>Rule 2 firing strength: \(\min(0.2, 0.9) = 0.2\). Output fuzzy set 'Long' is clipped at height 0.2.  </li>  <li><b>Aggregation & Defuzzification (Centroid Method):</b>      <br/>The clipped output sets are unioned together (MAX operator) to form an irregular geometric shape on the Wash Time axis. The crisp wash time is computed by finding the geometric Center of Gravity (Centroid) of this shape on the X-axis:      \[ Z = \frac{\sum \mu(z) \cdot z}{\sum \mu(z)} \]      <br/>The result is a precise numerical output (e.g., 55.4 minutes).  </li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-10">
+                <div class="q-text"><span class="q-badge c15">Q10</span><span>a) Explain Backpropagation Learning Algorithm for Multi-Layer Perceptrons (MLP).
+b) Derive weight update equations using Gradient Descent and Chain Rule.</span></div>
+                <div class="a-text">
+                    <h3>Backpropagation Learning Algorithm</h3><p><b>Part (a) Overview of Backpropagation:</b></p><p>Backpropagation trains Multi-Layer Perceptrons (MLPs) by propagating the output error backward through the network to update the weights, minimizing the loss function over time.</p><ol>  <li><b>Forward Pass:</b> Inputs are multiplied by weights, passed through activation functions (e.g., Sigmoid), and generate a predicted output \(\hat{y}\).</li>  <li><b>Error Calculation:</b> The Loss \(E\) is calculated. Using Sum of Squared Errors: \(E = \frac{1}{2} (\text{target} - \hat{y})^2\).</li>  <li><b>Backward Pass:</b> Gradients of the loss with respect to every weight are computed using the Calculus Chain Rule.</li>  <li><b>Weight Update:</b> Weights are adjusted against the gradient: \(w_{ij} = w_{ij} - \eta \frac{\partial E}{\partial w_{ij}}\).</li></ol><p><b>Part (b) Derivation using Gradient Descent and Chain Rule:</b></p><p>Let's find the gradient for a weight \(w_{jk}\) connecting a hidden node \(j\) to an output node \(k\).</p><p>We need \(\frac{\partial E}{\partial w_{jk}}\). Using the Chain Rule, we expand this across the output node's operations:</p>\[ \frac{\partial E}{\partial w_{jk}} = \frac{\partial E}{\partial \text{out}_k} \cdot \frac{\partial \text{out}_k}{\partial \text{net}_k} \cdot \frac{\partial \text{net}_k}{\partial w_{jk}} \]<ul>  <li>1. Derivative of Error w.r.t output: \(\frac{\partial (\frac{1}{2}(t_k - \text{out}_k)^2)}{\partial \text{out}_k} = - (t_k - \text{out}_k)\)</li>  <li>2. Derivative of output w.r.t net sum (Sigmoid derivative): \(\frac{\partial \sigma(\text{net}_k)}{\partial \text{net}_k} = \text{out}_k (1 - \text{out}_k)\)</li>  <li>3. Derivative of net sum w.r.t weight: \(\frac{\partial (\sum w_{jk} \cdot \text{out}_j)}{\partial w_{jk}} = \text{out}_j\) (the input from the previous hidden node)</li></ul><p>Multiplying these together yields the local gradient (often denoted as \(\delta_k\)):</p>\[ \frac{\partial E}{\partial w_{jk}} = - (t_k - \text{out}_k) \cdot \text{out}_k (1 - \text{out}_k) \cdot \text{out}_j \]<p>The weight is updated as: \(w_{jk}^{\text{new}} = w_{jk}^{\text{old}} + \eta \cdot (t_k - \text{out}_k) \cdot \text{out}_k (1 - \text{out}_k) \cdot \text{out}_j\).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-11">
+                <div class="q-text"><span class="q-badge c15">Q11</span><span>a) Explain Genetic Algorithm workflow for Solving 8-Queens Problem.
+b) Detail Chromosome Representation, Fitness Function, Selection, Crossover, Mutation.</span></div>
+                <div class="a-text">
+                    <h3>Genetic Algorithm Trace: Optimizing \(f(x) = x^2\)</h3><p><b>Part (a) GA Execution Example:</b></p><p>Goal: Maximize \(f(x) = x^2\) for \(0 \le x \le 31\). We represent \(x\) as a 5-bit binary string (chromosome).</p><ol>  <li><b>Initialization:</b> Randomly generate 4 chromosomes.      <br/>C1: 01101 (13) \(\implies f(13) = 169\)      <br/>C2: 11000 (24) \(\implies f(24) = 576\)      <br/>C3: 01000 (8) \(\implies f(8) = 64\)      <br/>C4: 10011 (19) \(\implies f(19) = 361\)  </li>  <li><b>Fitness Calculation & Roulette Wheel Selection:</b>      <br/>Total Fitness = \(169 + 576 + 64 + 361 = 1170\).      <br/>Probabilities: \(P(C1)=14\%\), \(P(C2)=49\%\), \(P(C3)=5\%\), \(P(C4)=31\%\).      <br/>Assume the Roulette wheel spins 4 times and selects: C2, C4, C2, C1 (fitter chromosomes are selected more often).  </li>  <li><b>1-Point Crossover:</b>      <br/>Pair 1: C2 (110|00) and C4 (100|11). Crossover point = 3.      <br/>Offspring 1: 11011 (27) \(\implies f = 729\) (Improvement!)      <br/>Offspring 2: 10000 (16) \(\implies f = 256\)      <br/>Pair 2: C2 and C1...  </li>  <li><b>Mutation:</b> Randomly flip a bit with low probability (e.g., 0.01). Suppose Offspring 1 mutates at bit 1: 11011 \(\rightarrow\) 11111 (31) \(\implies f=961\).</li></ol><p>Through successive generations, the population's average and maximum fitness will converge towards the global optimum (31 in this constrained example).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-12">
+                <div class="q-text"><span class="q-badge c15">Q12</span><span>a) Explain Natural Language Processing (NLP) Parsing techniques: Top-Down vs Bottom-Up Chart
+Parsing.
+b) Detail Context-Free Grammar parsing for sentence 'The robot moved the box'.</span></div>
+                <div class="a-text">
+                    <h3>Q-Learning Manual Trace</h3><p><b>Part (a) Environment Setup:</b></p><p>Assume a simple 3x3 grid. The agent starts at (1,1). The Goal is at (3,3) with reward +100. Pits at (2,2) with reward -100. Every regular move has a reward of -1. Discount factor \(\gamma = 0.9\). Learning Rate \(\alpha = 1.0\) (replaces old values entirely).</p><p><b>Part (b) Tracing an Episode:</b></p><ul>  <li>All \(Q(s, a)\) in the Q-table are initialized to 0.</li>  <li><b>Step 1:</b> Agent in (1,1). Moves Right to (2,1). Receives \(r = -1\). Next state is (2,1).      <br/>\(Q((1,1), R) = -1 + 0.9 \times \max_a Q((2,1), a) = -1 + 0 = -1\).  </li>  <li><b>Step 2:</b> Agent in (2,1). Moves Up to (2,2) [PIT!]. Receives \(r = -100\). Episode ends.      <br/>\(Q((2,1), U) = -100 + 0 = -100\).  </li>  <li><b>Next Episode Step 1:</b> Agent in (1,1). Chooses to move Right to (2,1). Receives \(r = -1\).      <br/>\(Q((1,1), R) = -1 + 0.9 \times \max(Q((2,1), R)=0, Q((2,1), U)=-100, \dots)\).      <br/>The max is 0 (moving right from 2,1). So \(Q((1,1), R)\) remains -1. However, the agent has learned to avoid moving Up from (2,1).  </li></ul><p>Over thousands of episodes, the +100 reward from (3,3) propagates backward through the grid, creating a gradient of Q-values that acts as an optimal policy path.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-13">
+                <div class="q-text"><span class="q-badge c15">Q13</span><span>a) Explain Expert System Development for Medical Diagnosis (MYCIN / PROSPECTOR).
+b) Detail Certainty Factors (CF) handling rule chaining.</span></div>
+                <div class="a-text">
+                    <h3>Converting FOL to Conjunctive Normal Form (CNF)</h3><p>Let's trace the conversion of the sentence: "Everyone who loves all animals is loved by someone."</p><p><b>1. Initial FOL:</b> \(\forall x (\forall y (\text{Animal}(y) \implies \text{Loves}(x, y)) \implies \exists z \text{Loves}(z, x))\)</p><p><b>2. Eliminate Implications (\(A \implies B \equiv \neg A \lor B\)):</b></p><p>\(\forall x (\neg (\forall y (\neg \text{Animal}(y) \lor \text{Loves}(x, y))) \lor \exists z \text{Loves}(z, x))\)</p><p><b>3. Move Negations Inwards (De Morgan's):</b></p><p>\(\forall x (\exists y (\neg (\neg \text{Animal}(y) \lor \text{Loves}(x, y))) \lor \exists z \text{Loves}(z, x))\)</p><p>\(\forall x (\exists y (\text{Animal}(y) \land \neg \text{Loves}(x, y)) \lor \exists z \text{Loves}(z, x))\)</p><p><b>4. Standardize Variables:</b> All variables are already distinct (\(x, y, z\)).</p><p><b>5. Skolemize (Eliminate \(\exists\)):</b> \(y\) and \(z\) are existentially quantified inside the scope of \(\forall x\), so they depend on \(x\). Replace them with Skolem functions \(F(x)\) and \(G(x)\).</p><p>\(\forall x ((\text{Animal}(F(x)) \land \neg \text{Loves}(x, F(x))) \lor \text{Loves}(G(x), x))\)</p><p><b>6. Drop Universal Quantifiers:</b></p><p>\((\text{Animal}(F(x)) \land \neg \text{Loves}(x, F(x))) \lor \text{Loves}(G(x), x)\)</p><p><b>7. Distribute \(\lor\) over \(\land\):</b></p><p>\((\text{Animal}(F(x)) \lor \text{Loves}(G(x), x)) \land (\neg \text{Loves}(x, F(x)) \lor \text{Loves}(G(x), x))\)</p><p><b>8. Separate Clauses:</b></p><ul>  <li>C1: \(\text{Animal}(F(x)) \lor \text{Loves}(G(x), x)\)</li>  <li>C2: \(\neg \text{Loves}(x, F(x)) \lor \text{Loves}(G(x), x)\)</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-14">
+                <div class="q-text"><span class="q-badge c15">Q14</span><span>a) Explain STRIPS Planning algorithm for Block World domain.
+b) Trace plan generation for moving blocks from Initial state to Goal state.</span></div>
+                <div class="a-text">
+                    <h3>PEAS and Environment for a Medical Diagnosis Agent</h3><p><b>Part (a) PEAS Description:</b></p><ul>  <li><b>Performance Measure:</b> Accuracy of disease diagnosis, speed of diagnosis, minimizing false positives/negatives, reducing cost of unnecessary tests, improving patient survival rates.</li>  <li><b>Environment:</b> Patient (symptoms, vital signs), medical history database, hospital laboratory (test results), medical staff.</li>  <li><b>Actuators:</b> Screen display (prescribing treatments, outputting diagnosis, requesting further tests), automated email/pager to doctors.</li>  <li><b>Sensors:</b> Keyboard/voice input for symptoms, direct digital feeds from medical equipment (ECG, blood pressure monitor, MRI scanners).</li></ul><p><b>Part (b) Environment Properties:</b></p><ul>  <li><b>Partially Observable:</b> The agent cannot 'see' the internal state of the patient directly; it relies on tests and symptoms which may not reveal everything immediately.</li>  <li><b>Stochastic:</b> Diseases and treatments are probabilistic. Administering a drug does not guarantee a 100% specific outcome.</li>  <li><b>Sequential:</b> Current decisions (ordering a blood test) affect future percepts and decisions.</li>  <li><b>Static:</b> The patient's underlying condition doesn't usually change in the few seconds the agent takes to compute a diagnosis (though it can be dynamic in an ICU setting).</li>  <li><b>Continuous:</b> Time, blood pressure, and drug dosages are continuous variables.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-15">
+                <div class="q-text"><span class="q-badge c15">Q15</span><span>a) Explain Reinforcement Learning Q-Learning algorithm.
+b) Trace Q-table updates for a grid-world pathfinding agent over 3 steps.</span></div>
+                <div class="a-text">
+                    <h3>Iterative Deepening DFS (IDDFS) vs BFS and DFS</h3><p><b>Part (a) Comparison:</b></p><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <tr style="background-color: #f3e8ff;"><th>Algorithm</th><th>Time Comp.</th><th>Space Comp.</th><th>Complete?</th><th>Optimal?</th></tr>  <tr><td><b>BFS</b></td><td>\(O(b^d)\)</td><td>\(O(b^d)\) (Huge)</td><td>Yes</td><td>Yes (if uniform cost)</td></tr>  <tr><td><b>DFS</b></td><td>\(O(b^m)\)</td><td>\(O(bm)\) (Tiny)</td><td>No (Infinite loops)</td><td>No</td></tr>  <tr><td><b>IDDFS</b></td><td>\(O(b^d)\)</td><td>\(O(bd)\) (Tiny)</td><td>Yes</td><td>Yes</td></tr></table><p><b>Part (b) IDDFS Trace:</b></p><p>IDDFS repeatedly executes Depth-Limited Search (DLS), increasing the depth limit each time.</p><ul>  <li><b>Iteration 1 (Limit = 0):</b> Explores only the Root node. If Root != Goal, discard.</li>  <li><b>Iteration 2 (Limit = 1):</b> Explores Root, then all nodes at Depth 1 using DFS memory. Discard.</li>  <li><b>Iteration 3 (Limit = 2):</b> Explores Root, Depth 1, and Depth 2 nodes. Discard.</li></ul><p><b>Why is it not terribly wasteful?</b> Although IDDFS regenerates the top nodes multiple times, in a tree where branching factor \(b > 1\), the vast majority of nodes are at the bottom layer. The overhead of regenerating the top levels is mathematically negligible compared to the memory savings (e.g., for \(b=10\), 90% of nodes are at the deepest level being searched).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-16">
+                <div class="q-text"><span class="q-badge c15">Q16</span><span>a) Explain Dempster-Shafer Theory for sensor fusion.
+b) Calculate Belief and Plausibility measures for hypothesis set.</span></div>
+                <div class="a-text">
+                    <h3>4-Queens Problem as a CSP with Backtracking</h3><p><b>Part (a) CSP Formulation for 4-Queens:</b></p><ul>  <li><b>Variables:</b> \(\{Q_1, Q_2, Q_3, Q_4\}\) representing columns 1 to 4.</li>  <li><b>Domains:</b> \(\{1, 2, 3, 4\}\) representing the row placement.</li>  <li><b>Constraints:</b> No two queens share a row (\(Q_i \neq Q_j\)) or a diagonal (\(|Q_i - Q_j| \neq |i - j|\)).</li></ul><p><b>Part (b) Backtracking Trace:</b></p><ol>  <li><b>Step 1:</b> Assign \(Q_1 = 1\) (Queen 1 at Row 1). Valid.</li>  <li><b>Step 2:</b> Try \(Q_2 = 1\) (Conflict Row). Try \(Q_2 = 2\) (Conflict Diag). Try \(Q_2 = 3\). Valid.</li>  <li><b>Step 3:</b> Try \(Q_3 = 1, 2, 3, 4\). All conflict! (1: Row, 2: Diag with Q2, 3: Row, 4: Diag with Q2).</li>  <li><b>Step 4 (Backtrack!):</b> Un-assign \(Q_3\). Go back to \(Q_2\). Try the next value for \(Q_2\), which is \(Q_2 = 4\). Valid.</li>  <li><b>Step 5:</b> Try \(Q_3 = 1\) (Conflict Diag), \(Q_3 = 2\). Valid.</li>  <li><b>Step 6:</b> Try \(Q_4 = 1, 2, 3, 4\). All conflict!</li>  <li><b>Step 7 (Backtrack!):</b> Un-assign \(Q_4, Q_3, Q_2\). Go back to \(Q_1\). Try \(Q_1 = 2\).</li>  <li><b>Step 8:</b> Continue forward: \(Q_1 = 2 \implies Q_2 = 4 \implies Q_3 = 1 \implies Q_4 = 3\). Solution found!</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-17">
+                <div class="q-text"><span class="q-badge c15">Q17</span><span>a) Explain Knowledge Representation using Conceptual Graphs and Scripts.
+b) Construct Script representation for 'Restaurant Dining Experience'.</span></div>
+                <div class="a-text">
+                    <h3>Semantic Networks and Frames Representation</h3><p><b>Part (a) Scenario:</b> "Tweety is a Canary. Canaries are birds. Birds have wings. Birds can fly. Sylvester is a Cat. Cats eat birds."</p><p><b>Part (b) Semantic Network Construction:</b></p><div class="diagram-container"><div class="mermaid">
+graph TD
+    Tweety((Tweety)) -- IS-A --> Canary((Canary))
+      Canary -- IS-A --> Bird((Bird))
+      Bird -- HAS-PART --> Wings((Wings))
+      Bird -->|"CAN"| Fly((Fly))
+      Sylvester((Sylvester)) -- IS-A --> Cat((Cat))
+      Cat -->|"EATS"| Bird
+</div></div><p><b>Part (c) Equivalent Frame Representation:</b></p><pre><code>Frame: Bird
+  IS-A: Animal
+  Has-Part: Wings
+  Ability: Fly
+
+Frame: Canary
+  IS-A: Bird
+  Color: Yellow
+
+Frame: Tweety
+  IS-A: Canary
+
+Frame: Cat
+  IS-A: Mammal
+  Diet: (Eats Bird)
+
+Frame: Sylvester
+  IS-A: Cat
+</code></pre>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-18">
+                <div class="q-text"><span class="q-badge c15">Q18</span><span>a) Explain Wumpus World Knowledge-Based Agent using Propositional Logic.
+b) Trace inference showing safe cell discovery based on Breeze and Stench perceptions.</span></div>
+                <div class="a-text">
+                    <h3>Conceptual Dependency (CD) Structure</h3><p><b>Part (a) The Sentence:</b> "John gave Mary a book."</p><p><b>Part (b) Conceptual Dependency Analysis:</b></p><p>The verb "gave" implies a transfer of possession. Therefore, the core primitive ACT is <b>ATRANS</b>.</p><ul>  <li><b>ACT:</b> ATRANS (Transfer of abstract relationship/possession)</li>  <li><b>Actor:</b> John (The entity performing the ATRANS)</li>  <li><b>Object:</b> Book (The entity being transferred)</li>  <li><b>Recipient (To):</b> Mary</li>  <li><b>Donor (From):</b> John</li></ul><p><b>Graphical CD Representation:</b></p><p><code>John \(\Leftrightarrow\) ATRANS \(\leftarrow \text{O}\) Book \(\leftarrow \text{R}\) (To: Mary, From: John)</code></p><p><em>(Where \(\Leftrightarrow\) denotes the actor-action relation, \(\leftarrow \text{O}\) denotes the object relation, and \(\leftarrow \text{R}\) denotes the recipient-donor relation).</em></p><p><b>Inference generated:</b> Because of ATRANS, the system can logically deduce that Mary now possesses the book, and John no longer possesses it, without needing explicit rules for the English word "gave".</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-19">
+                <div class="q-text"><span class="q-badge c15">Q19</span><span>a) Explain Machine Learning Paradigms: Supervised, Unsupervised, Semi-supervised, Reinforcement.
+b) Compare K-Means Clustering vs Support Vector Machines (SVM).</span></div>
+                <div class="a-text">
+                    <h3>Resolution Refutation: Clue (Colonel Mustard)</h3><p><b>Part (a) Knowledge Base (Propositional Logic):</b></p><ol>  <li>The murder was committed in the Library or the Conservatory: \(L \lor C\)</li>  <li>If the murder was in the Library, then Colonel Mustard did it: \(L \implies M\) \(\equiv\) \(\neg L \lor M\)</li>  <li>If the murder was in the Conservatory, then Miss Scarlet did it: \(C \implies S\) \(\equiv\) \(\neg C \lor S\)</li>  <li>Miss Scarlet is innocent (she didn't do it): \(\neg S\)</li></ol><p><b>Goal to prove:</b> Colonel Mustard did it (\(M\)).</p><p><b>Part (b) Resolution Proof:</b></p><ul>  <li><b>Step 1:</b> Negate the goal and add to KB. Goal clause: \(\neg M\).</li>  <li><b>Step 2:</b> Resolve \((\neg C \lor S)\) with \(\neg S\).      <br/>Result: \(\neg C\) (The murder was not in the Conservatory).</li>  <li><b>Step 3:</b> Resolve \((\neg L \lor M)\) with \(\neg M\).      <br/>Result: \(\neg L\) (The murder was not in the Library).</li>  <li><b>Step 4:</b> Resolve \((L \lor C)\) with \(\neg C\).      <br/>Result: \(L\) (The murder was in the Library).</li>  <li><b>Step 5:</b> Resolve \(L\) (from Step 4) with \(\neg L\) (from Step 3).      <br/>Result: \(\emptyset\) (Contradiction!).</li></ul><p>Because the negated goal led to a contradiction, the original goal (\(M\)) must be true. Colonel Mustard did it.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-20">
+                <div class="q-text"><span class="q-badge c15">Q20</span><span>a) Complete AI Case Study: Design an Intelligent Autonomous Drone for Search and Rescue.
+b) Detail PEAS specification, Sensor fusion, Path planning (A*), Knowledge representation, and Decision making under
+uncertainty.</span></div>
+                <div class="a-text">
+                    <h3>Bayes' Theorem: Medical Test Calculation</h3><p><b>Part (a) Problem Statement:</b></p><p>A disease affects 1% of the population. A test for the disease is 99% accurate (True Positive Rate = 0.99, True Negative Rate = 0.99). If a person tests positive, what is the probability they actually have the disease?</p><p><b>Part (b) Application of Bayes' Theorem:</b></p><p>Let \(D\) = Patient has Disease, \(\neg D\) = Patient is Healthy.<br/>Let \(+\) = Test is Positive, \(-\) = Test is Negative.</p><ul>  <li><b>Priors:</b> \(P(D) = 0.01\), \(P(\neg D) = 0.99\)</li>  <li><b>Likelihoods:</b> \(P(+ | D) = 0.99\) (True Positive), \(P(+ | \neg D) = 0.01\) (False Positive)</li></ul><p>We need to find \(P(D | +)\):</p>\[ P(D | +) = \frac{P(+ | D) \cdot P(D)}{P(+)} \]<p>First, calculate total probability of a positive test, \(P(+)\):</p>\[ P(+) = P(+ | D)P(D) + P(+ | \neg D)P(\neg D) \]\[ P(+) = (0.99 \times 0.01) + (0.01 \times 0.99) = 0.0099 + 0.0099 = 0.0198 \]<p>Now, calculate posterior:</p>\[ P(D | +) = \frac{0.0099}{0.0198} = 0.50 \text{ or } 50\% \]<p><b>Conclusion:</b> Despite a 99% accurate test, because the disease is so rare (Base Rate Fallacy), a person testing positive only has a 50% chance of actually having the disease. Half of all positive tests are false positives.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-21">
+                <div class="q-text"><span class="q-badge c15">Q21</span><span>a) Solve N-Queens Problem (4-Queens) using Backtracking Search.
+b) Draw complete search tree showing pruned invalid configurations.
+
+
+
+
+--- Page 5 ---</span></div>
+                <div class="a-text">
+                    <h3>Block World and Sussman Anomaly</h3><p><b>Part (a) Block World Formulation:</b></p><p>The Block World is a domain where a robotic arm can move uniform blocks on a table.</p><ul>  <li><b>Predicates:</b> \(\text{ON}(A, B)\), \(\text{ON}(A, \text{Table})\), \(\text{CLEAR}(A)\), \(\text{HOLDING}(A)\), \(\text{ARMEMPTY}\).</li>  <li><b>Actions (STRIPS):</b>      <br/>- <b>Unstack(A, B):</b> Pre: \(\text{ON}(A, B), \text{CLEAR}(A), \text{ARMEMPTY}\). Add: \(\text{HOLDING}(A), \text{CLEAR}(B)\). Delete: \(\text{ON}(A, B), \text{ARMEMPTY}\).      <br/>- <b>Stack(A, B):</b> Pre: \(\text{HOLDING}(A), \text{CLEAR}(B)\). Add: \(\text{ON}(A, B), \text{ARMEMPTY}\). Delete: \(\text{HOLDING}(A), \text{CLEAR}(B)\).  </li></ul><p><b>Part (b) Sussman Anomaly in Goal Stack Planning:</b></p><p>Suppose Initial State: \(C\) is on \(A\). \(A\) and \(B\) are on the Table. Goal State: \(A\) on \(B\), and \(B\) on \(C\) (\(\text{ON}(A, B) \land \text{ON}(B, C)\)).</p><ul>  <li>Goal Stack Planning attempts to solve sub-goals linearly.</li>  <li>If it tries to achieve \(\text{ON}(A, B)\) first: It clears \(A\) by unstacking \(C\) and putting it on the table. Then it puts \(A\) on \(B\). Now it tries to achieve \(\text{ON}(B, C)\). But to move \(B\), it must unstack \(A\) again! It destroyed its previous progress.</li>  <li>If it tries to achieve \(\text{ON}(B, C)\) first: It places \(B\) on \(C\). Then it tries to achieve \(\text{ON}(A, B)\). But \(A\) is trapped under \(C\) (which is under \(B\)). It must undo everything.</li></ul><p><b>Resolution:</b> Non-linear planning (like Plan-Space Planning) is required to interleave the steps: Clear \(A\) (put \(C\) on table), then put \(B\) on \(C\), then put \(A\) on \(B\).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-22">
+                <div class="q-text"><span class="q-badge c15">Q22</span><span>a) Explain Forward Chaining vs Backward Chaining algorithms in detail.
+b) Trace Backward Chaining for Horn clause Knowledge Base.</span></div>
+                <div class="a-text">
+                    <h3>Minimax Algorithm for Tic-Tac-Toe</h3><p><b>Part (a) Game Representation:</b></p><p>Tic-Tac-Toe is a 2-player zero-sum game. Player X (MAX) aims for +1, Player O (MIN) aims for -1. A draw is 0. The state space contains \(3^9\) possible board configurations, but the actual reachable states are far fewer.</p><p><b>Part (b) Minimax Execution:</b></p><ul>  <li><b>Tree Generation:</b> From an empty board, MAX (X) can place a mark in 9 positions (9 branches). For each branch, MIN (O) has 8 responses. This creates the game tree.</li>  <li><b>Leaf Evaluation:</b> The algorithm recursively reaches the end of the game (win, lose, or draw) and assigns a utility score (+1 for X win, -1 for O win, 0 for draw).</li>  <li><b>Value Back-propagation:</b>      <br/>- If it is O's turn (MIN node), it looks at all its child board states and selects the minimum score (aiming for -1).      <br/>- If it is X's turn (MAX node), it looks at its children and selects the maximum score (aiming for +1).</li>  <li>Because Tic-Tac-Toe is perfectly solvable and has a small state space, Minimax can search the entire tree to depth 9. It proves mathematically that optimal play by both sides always results in a Draw (0).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-23">
+                <div class="q-text"><span class="q-badge c15">Q23</span><span>a) Explain Semantic Nets and Frame Systems with Inheritance.
+b) Demonstrate Multiple Inheritance conflicts and Solutions (Nixon Diamond).</span></div>
+                <div class="a-text">
+                    <h3>Components of a Natural Language Processing (NLP) System</h3><p>An NLP system requires several interacting components to map raw text to machine-understandable representations.</p><ol>  <li><b>Lexicon (Dictionary):</b> A database of words, their base forms (lemmas), syntactic categories (Noun, Verb), and semantic meanings.</li>  <li><b>Morphological Analyzer / Tokenizer:</b> Splits text into sentences and words. It uses stemming/lemmatization to reduce words to their root (e.g., "running" \(\rightarrow\) "run").</li>  <li><b>Parser (Syntactic Analyzer):</b> Uses grammar rules (like Context-Free Grammars) to validate sentence structure. Outputs a Parse Tree showing Subject, Verb, Object relationships.</li>  <li><b>Semantic Interpreter:</b> Maps the parse tree to a logical meaning representation (e.g., First-Order Logic or Conceptual Dependency graphs). It handles word sense disambiguation (e.g., "bank" of a river vs financial "bank").</li>  <li><b>Context & Pragmatic Manager:</b> Resolves pronouns across sentences (anaphora resolution) and infers intent based on real-world knowledge (e.g., recognizing that "Can you pass the salt?" is a request, not a yes/no question).</li>  <li><b>Natural Language Generator (NLG):</b> The reverse pipeline. Takes a logical machine concept and translates it back into grammatically correct human text.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-24">
+                <div class="q-text"><span class="q-badge c15">Q24</span><span>a) Explain Naive Bayes Classifier for Spam Email Detection.
+b) Calculate posterior probability P(Spam | Words) for email containing 'Win', 'Free', 'Prize'.</span></div>
+                <div class="a-text">
+                    <h3>Forward vs Backward Chaining Trace</h3><p><b>Part (a) Knowledge Base (KB):</b></p><p>R1: IF \(A \land B\) THEN \(C\)<br/>R2: IF \(C\) THEN \(D\)<br/>R3: IF \(A \land E\) THEN \(F\)<br/>Facts: \(A\), \(B\).</p><p><b>Part (b) Forward Chaining (Data-Driven):</b></p><p>Goal: Find all conclusions.</p><ol>  <li>Iteration 1: Known facts \(\{A, B\}\). Check rules. R1 condition (\(A \land B\)) is satisfied. Fire R1. Add \(C\) to known facts.</li>  <li>Iteration 2: Known facts \(\{A, B, C\}\). R2 condition (\(C\)) is satisfied. Fire R2. Add \(D\) to known facts.</li>  <li>Iteration 3: Known facts \(\{A, B, C, D\}\). No more rules can fire (R3 needs \(E\), which is missing). Terminate.</li></ol><p><b>Part (c) Backward Chaining (Goal-Driven):</b></p><p>Goal: Prove \(D\) is true.</p><ol>  <li>Check if \(D\) is a known fact. (No).</li>  <li>Find a rule that concludes \(D\). R2: IF \(C\) THEN \(D\). New sub-goal: Prove \(C\).</li>  <li>Check if \(C\) is a known fact. (No).</li>  <li>Find a rule that concludes \(C\). R1: IF \(A \land B\) THEN \(C\). New sub-goals: Prove \(A\), Prove \(B\).</li>  <li>Check \(A\). It is a known fact (True). Check \(B\). It is a known fact (True).</li>  <li>Since sub-goals \(A\) and \(B\) are true, \(C\) is true. Since \(C\) is true, \(D\) is true. Proof succeeds!</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-25">
+                <div class="q-text"><span class="q-badge c15">Q25</span><span>a) Explain Artificial Neural Networks Activation Functions: Sigmoid, ReLU, Tanh, Softmax.
+b) Compare vanishing gradient problem in deep networks.</span></div>
+                <div class="a-text">
+                    <h3>Propositional Logic and Truth Tables</h3><p><b>Part (a) Converting English to Logic:</b></p><p>Sentence: "If it rains, the grass is wet. It is raining. Therefore, the grass is wet."</p><ul>  <li>Let \(R\) = "It rains"</li>  <li>Let \(W\) = "The grass is wet"</li>  <li>Premise 1: \(R \implies W\)</li>  <li>Premise 2: \(R\)</li>  <li>Conclusion (Theorem): \(W\)</li></ul><p>We want to prove that the conclusion logically follows from the premises. This means the implication \(((R \implies W) \land R) \implies W\) must be a <b>Tautology</b> (True in all cases).</p><p><b>Part (b) Truth Table Proof:</b></p><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <tr style="background-color: #f3e8ff;"><th>R</th><th>W</th><th>\(R \implies W\)</th><th>\((R \implies W) \land R\)</th><th>\(((R \implies W) \land R) \implies W\)</th></tr>  <tr><td>T</td><td>T</td><td>T</td><td>T</td><td><b>T</b></td></tr>  <tr><td>T</td><td>F</td><td>F</td><td>F</td><td><b>T</b></td></tr>  <tr><td>F</td><td>T</td><td>T</td><td>F</td><td><b>T</b></td></tr>  <tr><td>F</td><td>F</td><td>T</td><td>F</td><td><b>T</b></td></tr></table><p>Because the final column is entirely True, the argument is logically valid (This specific argument form is known as <i>Modus Ponens</i>).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-26">
+                <div class="q-text"><span class="q-badge c15">Q26</span><span>a) Explain Convolutional Neural Networks (CNN) Architecture.
+b) Detail Convolutional, Pooling, and Fully Connected layers.</span></div>
+                <div class="a-text">
+                    <h3>Artificial Neural Networks (ANN): Architectures</h3><p>An ANN is a biologically inspired computational model consisting of interconnected artificial neurons organized in layers: an Input layer, one or more Hidden layers, and an Output layer.</p><h4>1. Feedforward Neural Networks (FNN)</h4><ul>  <li><b>Architecture:</b> Data strictly flows in one direction—from the input layer, through the hidden layers, directly to the output layer. There are no cycles or loops.</li>  <li><b>Memory:</b> They have no internal state or memory. The output for a given input is always the same, regardless of the sequence of previous inputs.</li>  <li><b>Use Cases:</b> Image classification, regression tasks, tabular data (e.g., standard Multi-Layer Perceptrons or Convolutional Neural Networks).</li></ul><h4>2. Recurrent Neural Networks (RNN)</h4><ul>  <li><b>Architecture:</b> RNNs contain directed cycles. The output of a neuron is fed back into itself or previous layers. This recurrent connection allows information to persist.</li>  <li><b>Memory:</b> RNNs maintain a "hidden state" that acts as internal memory, allowing them to process sequences of inputs where temporal context matters.</li>  <li><b>Use Cases:</b> Time-series forecasting, Natural Language Processing, Speech recognition (where the current word depends heavily on the previous words). Advanced variants include LSTMs and GRUs to handle long-term dependencies.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-27">
+                <div class="q-text"><span class="q-badge c15">Q27</span><span>a) Explain Recurrent Neural Networks (RNN) and LSTM / GRU architectures for sequential data.
+b) Detail vanishing gradient solution in LSTM gates.</span></div>
+                <div class="a-text">
+                    <h3>Support Vector Machines (SVM)</h3><p><b>Support Vector Machine (SVM)</b> is a powerful supervised machine learning algorithm used primarily for classification. Its fundamental objective is to find a line (or hyperplane in higher dimensions) that perfectly separates data points of different classes.</p><h4>The Hyperplane and Margin</h4><ul>  <li>In a 2D space, the separator is a line. In 3D, it's a plane. In N-D, it's an \((N-1)\)-dimensional <b>Hyperplane</b>.</li>  <li>There could be infinite lines that separate two clusters of data. SVM doesn't just pick any line; it picks the <b>Optimal Separating Hyperplane</b>.</li>  <li><b>Margin Maximization:</b> The optimal hyperplane is the one that has the maximum distance (margin) from the nearest data points of both classes. A larger margin implies better generalization to unseen data.</li></ul><h4>Support Vectors</h4><p>The <b>Support Vectors</b> are the specific, critical data points that lie closest to the hyperplane (exactly on the edges of the margin). These points "support" the construction of the hyperplane. If you remove all other data points in the dataset, the position of the hyperplane would not change. The algorithm is highly memory efficient because it only depends on these few support vectors.</p><p><i>Note: If data is not linearly separable, SVM uses the 'Kernel Trick' to map data into a higher-dimensional space where a linear hyperplane can separate them.</i></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-28">
+                <div class="q-text"><span class="q-badge c15">Q28</span><span>a) Explain Transformer Architecture and Self-Attention Mechanism.
+b) Detail Encoder-Decoder pipeline in Large Language Models (LLMs).</span></div>
+                <div class="a-text">
+                    <h3>Hidden Markov Models (HMM) in AI</h3><p>A <b>Hidden Markov Model (HMM)</b> is a statistical Markov model where the system being modeled is assumed to be a Markov process with unobserved (hidden) states. It is widely used for sequential data.</p><h4>Core Components</h4><ul>  <li><b>Hidden States (\(S\)):</b> The underlying reality we want to discover, but cannot directly observe (e.g., the actual phonemes or words being spoken).</li>  <li><b>Observations (\(O\)):</b> The tangible data we can measure (e.g., the acoustic sound waves captured by a microphone).</li>  <li><b>Transition Probabilities (\(A\)):</b> The probability of moving from one hidden state to another (e.g., probability that the phoneme /b/ is followed by the phoneme /a/).</li>  <li><b>Emission Probabilities (\(B\)):</b> The probability of generating a specific observation given a specific hidden state (e.g., probability that the acoustic wave looks like <i>this</i> when the person is saying the phoneme /b/).</li></ul><h4>Use in Speech Recognition</h4><p>In speech recognition, the system receives a sequence of acoustic observations. It uses the <b>Viterbi Algorithm</b> (a dynamic programming algorithm) applied to the HMM to calculate the most probable sequence of hidden states (words) that could have generated those observed sounds.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-29">
+                <div class="q-text"><span class="q-badge c15">Q29</span><span>a) Explain Knowledge Graph Construction and Entity Resolution.
+b) Detail RDF Triples (Subject, Predicate, Object) and SPARQL queries.</span></div>
+                <div class="a-text">
+                    <h3>Unsupervised Learning: K-Means Clustering</h3><p><b>Unsupervised Learning</b> deals with unlabeled data. The algorithm must find hidden structure or patterns within the data on its own. The most common technique is clustering.</p><h4>K-Means Algorithm</h4><p>K-Means partitions \(N\) observations into \(K\) distinct, non-overlapping clusters. It minimizes the variance (squared distance) between data points and their cluster's center.</p><p><b>The Algorithm Steps:</b></p><ol>  <li><b>Initialization:</b> The user specifies \(K\) (the number of clusters). The algorithm randomly selects \(K\) data points to act as the initial cluster centers (centroids).</li>  <li><b>Assignment Step:</b> Calculate the Euclidean distance from every data point to all \(K\) centroids. Assign each data point to the cluster of the centroid it is closest to.</li>  <li><b>Update Step:</b> Recalculate the position of each centroid. The new centroid is the mathematical mean (average) of all the data points currently assigned to that cluster.</li>  <li><b>Convergence:</b> Repeat steps 2 and 3 iteratively until the centroids stop moving (or movement is below a tolerance threshold), meaning the assignments are stable.</li></ol><p><i>Drawback:</i> It requires the user to guess the optimal \(K\) beforehand, and is sensitive to the initial random placement of centroids.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-30">
+                <div class="q-text"><span class="q-badge c15">Q30</span><span>a) Explain Ethical, Legal, and Societal implications of AI (Bias, Safety, Alignment, Autonomous Weapons).
+b) Detail AI Governance and Explainable AI (XAI) frameworks.</span></div>
+                <div class="a-text">
+                    <h3>Expert Systems and MYCIN</h3><p><b>Part (a) Expert System Architecture Recap:</b></p><p>Expert systems consist of a Knowledge Base (facts and heuristics extracted from experts), an Inference Engine (the logic processor using forward/backward chaining), and a User Interface.</p><p><b>Part (b) Case Study: MYCIN (1970s)</b></p><p>MYCIN was one of the earliest and most famous expert systems, developed at Stanford University to diagnose severe bacterial infections (like meningitis) and recommend antibiotic dosages.</p><ul>  <li><b>Knowledge Base:</b> Contained around 600 IF-THEN rules representing the heuristic knowledge of expert physicians. (e.g., IF the infection is primary-bacteremia AND the site of culture is a sterile record THEN there is evidence that the organism is bacteroides).</li>  <li><b>Inference Engine:</b> Used <b>Backward Chaining</b>. It started with a hypothesis (the patient has a specific infection) and worked backward, asking the doctor via a text interface for lab results to prove the hypothesis.</li>  <li><b>Certainty Factors:</b> MYCIN pioneered the use of "Certainty Factors" (CF) ranging from -1.0 (definitely false) to +1.0 (definitely true) to handle the inherent uncertainty of medical diagnoses, long before Bayesian networks became standard.</li>  <li><b>Performance:</b> Studies showed MYCIN outperformed junior doctors and was on par with infectious disease experts, though it was never fully deployed in hospitals due to legal and ethical liability issues of the era.</li></ul>
+                </div>
+            </div>
+
+</main>
+</div>
+</body>
+</html>

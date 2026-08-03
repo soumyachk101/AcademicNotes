@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Networks (PCC-CS504) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #059669; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #05966944; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="networks_index.html">← Back to Computer Networks Index</a>
+        <span class="nav-title">Computer Networks (PCC-CS504) — Group A</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="networks_group_a.html" class="active"><b>Group A</b><br><span class="toc-meta">53 questions</span></a></li><li><a href="networks_group_b.html" class=""><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="networks_group_c.html" class=""><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="networks_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-a">Group A — Short Answer Questions (1 Mark Each)</h1>
+
+            <div class="qa-card" id="ga-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Define Computer Network.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Computer Network..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>What is OSI Reference Model?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is OSI Reference Model?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Name all 7 layers of OSI Model in order.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Name all 7 layers of OSI Model in order..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>What is TCP/IP Model?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is TCP/IP Model?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Define Physical Topology.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Physical Topology..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>What is Star Topology?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Star Topology?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>What is Mesh Topology?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Mesh Topology?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>Define Bandwidth.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Bandwidth..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Define Throughput in networking.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Throughput in networking..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Define Propagation Delay.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Propagation Delay..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Define Transmission Delay.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Transmission Delay..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>What is Bandwidth-Delay Product?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Bandwidth-Delay Product?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Define Simplex, Half-Duplex, and Full-Duplex.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Simplex, Half-Duplex, and Full-Duplex..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>What is Guided Transmission Media?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Guided Transmission Media?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>What is Unguided Transmission Media?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Unguided Transmission Media?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Define Optical Fiber communication.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Optical Fiber communication..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>What is Bit Rate and Baud Rate?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Bit Rate and Baud Rate?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>Define Pulse Code Modulation (PCM).</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Pulse Code Modulation (PCM)..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>What is Framing in Data Link Layer?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Framing in Data Link Layer?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>Define Error Detection and Error Correction.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Error Detection and Error Correction..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>What is Parity Check?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Parity Check?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>What is Cyclic Redundancy Check (CRC)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Cyclic Redundancy Check (CRC)</b> is a polynomial-based error-detecting code used in data link networks. The sender appends a checksum \(R(x)\) derived from modulo-2 division of data polynomial \(M(x) \cdot 2^r\) by generator polynomial \(G(x)\).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>What is Hamming Code?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Hamming Code?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Define Hamming Distance.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Hamming Distance..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>What is Flow Control?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Flow Control?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>What is Stop-and-Wait Protocol?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Stop-and-Wait Protocol?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>What is Sliding Window Protocol?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Sliding Window Protocol?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>What is Go-Back-N ARQ?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Go-Back-N ARQ?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>What is Selective Repeat ARQ?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Selective Repeat ARQ?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Define Piggybacking.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Piggybacking..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>What is MAC Address?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is MAC Address?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>Define CSMA/CD.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define CSMA/CD..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Define CSMA/CA.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define CSMA/CA..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>What is Pure ALOHA?
+
+
+
+--- Page 2 ---</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Pure ALOHA?
+
+
+
+--- Page 2 ---.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>What is Slotted ALOHA?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Slotted ALOHA?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>What is IP Address?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is IP Address?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Define IPv4 Address structure.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define IPv4 Address structure..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>Define IPv6 Address structure.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define IPv6 Address structure..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>What is Subnetting?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Subnetting</b> is the process of logically partitioning a single IP network into multiple smaller sub-networks (subnets) using a custom subnet mask, reducing broadcast domain size and optimizing IP allocation.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>What is CIDR?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Subnetting</b> is the process of logically partitioning a single IP network into multiple smaller sub-networks (subnets) using a custom subnet mask, reducing broadcast domain size and optimizing IP allocation.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-41">
+                <div class="q-text"><span class="q-badge">Q41</span><span>What is Network Address Translation (NAT)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Network Address Translation (NAT)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-42">
+                <div class="q-text"><span class="q-badge">Q42</span><span>What is ARP?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is ARP?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-43">
+                <div class="q-text"><span class="q-badge">Q43</span><span>What is RARP?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is RARP?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-44">
+                <div class="q-text"><span class="q-badge">Q44</span><span>What is ICMP?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is ICMP?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-45">
+                <div class="q-text"><span class="q-badge">Q45</span><span>What is DHCP?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is DHCP?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-46">
+                <div class="q-text"><span class="q-badge">Q46</span><span>What is Distance Vector Routing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Distance Vector Routing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-47">
+                <div class="q-text"><span class="q-badge">Q47</span><span>What is Link State Routing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Link State Routing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-48">
+                <div class="q-text"><span class="q-badge">Q48</span><span>Define Congestion Control.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Congestion Control..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-49">
+                <div class="q-text"><span class="q-badge">Q49</span><span>What is Leaky Bucket Algorithm?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Leaky Bucket Algorithm?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-50">
+                <div class="q-text"><span class="q-badge">Q50</span><span>What is Token Bucket Algorithm?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Token Bucket Algorithm?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-51">
+                <div class="q-text"><span class="q-badge">Q51</span><span>What is DNS?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is DNS?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-52">
+                <div class="q-text"><span class="q-badge">Q52</span><span>What is HTTP and HTTPS?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is HTTP and HTTPS?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-53">
+                <div class="q-text"><span class="q-badge">Q53</span><span>What is FTP?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is FTP?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in NETWORKS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            
+</main>
+</div>
+</body>
+</html>

@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating Systems (PCC-CS502) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #2563eb; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #2563eb44; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="os_index.html">← Back to Operating Systems Index</a>
+        <span class="nav-title">Operating Systems (PCC-CS502) — Group A</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="os_group_a.html" class="active"><b>Group A</b><br><span class="toc-meta">53 questions</span></a></li><li><a href="os_group_b.html" class=""><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="os_group_c.html" class=""><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="os_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-a">Group A — Short Answer Questions (1 Mark Each)</h1>
+
+            <div class="qa-card" id="ga-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Define an Operating System.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define an Operating System..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>What is Kernel in Operating System?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Kernel in Operating System?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Define System Call.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define System Call..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>What is Process Control Block (PCB)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Process Control Block (PCB)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Define Process State.</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Process State</b> defines the current stage of process execution (New, Ready, Running, Waiting, Terminated) managed by the OS scheduler.</p><div class="diagram-container">
+    <div class="mermaid">
+stateDiagram-v2
+    [*] --> New
+    New --> Ready : Admitted
+    Ready --> Running : Scheduler Dispatch
+    Running --> Ready : Interrupt
+    Running --> Waiting : I/O or Event Wait
+    Waiting --> Ready : I/O or Event Completion
+    Running --> Terminated : Exit
+    Terminated --> [*]
+</div>
+    <div class="diagram-caption">Figure: 5-State Process Transition Diagram</div>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>What is Context Switching?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Context Switching?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Define Throughput in CPU scheduling.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Throughput in CPU scheduling..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>Define Turnaround Time.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Turnaround Time..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Define Waiting Time.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Waiting Time..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Define Response Time.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Response Time..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>What is FCFS Scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is FCFS Scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>What is Convoy Effect?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Convoy Effect?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>What is Shortest Job First (SJF) scheduling?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Shortest Job First (SJF)</b> selects the process with the smallest CPU burst time. Its preemptive variant is <b>Shortest Remaining Time First (SRTF)</b>, which yields optimal minimal average waiting time.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>What is Shortest Remaining Time First (SRTF)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Shortest Job First (SJF)</b> selects the process with the smallest CPU burst time. Its preemptive variant is <b>Shortest Remaining Time First (SRTF)</b>, which yields optimal minimal average waiting time.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>What is Round Robin (RR) scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Round Robin (RR) scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Define Time Quantum.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Time Quantum..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>What is Priority Scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Priority Scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>What is Starvation in CPU scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Starvation in CPU scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Define Aging technique.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Aging technique..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>What is Multilevel Queue Scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Multilevel Queue Scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Define Critical Section.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Critical Section..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>What is Mutual Exclusion?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Mutual Exclusion?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Define Progress requirement in critical section.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Progress requirement in critical section..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Define Bounded Waiting requirement.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Bounded Waiting requirement..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>What is Semaphore?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Semaphore?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>What is Binary Semaphore / Mutex?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Binary Semaphore / Mutex?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>What is Counting Semaphore?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Counting Semaphore?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Define Busy Waiting / Spinlock.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Busy Waiting / Spinlock..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>What is Deadlock?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Deadlock?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Name 4 necessary conditions for Deadlock.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Name 4 necessary conditions for Deadlock..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>What is Resource Allocation Graph (RAG)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Resource Allocation Graph (RAG)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>What is Deadlock Prevention?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Deadlock Prevention?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>What is Deadlock Avoidance?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Deadlock Avoidance?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>What is Banker's Algorithm?</span></div>
+                <div class="a-text">
+                    <p><b>Ans:</b> <b>Banker's Algorithm</b> (Dijkstra) is a deadlock avoidance algorithm that evaluates if allocating requested resources leaves the system in a safe state where a safe sequence \(\langle P_1, P_2, \dots, P_n \rangle\) exists.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>Define Safe State in deadlock avoidance.
+
+
+
+--- Page 2 ---</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Safe State in deadlock avoidance.
+
+
+
+--- Page 2 ---.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>What is Paging in memory management?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Paging in memory management?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Define Page and Frame.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Page and Frame..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>What is Page Table?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Page Table?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>What is Translation Lookaside Buffer (TLB)?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Translation Lookaside Buffer (TLB)?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Define Internal Fragmentation.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Internal Fragmentation..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-41">
+                <div class="q-text"><span class="q-badge">Q41</span><span>Define External Fragmentation.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define External Fragmentation..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-42">
+                <div class="q-text"><span class="q-badge">Q42</span><span>What is Virtual Memory?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Virtual Memory?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-43">
+                <div class="q-text"><span class="q-badge">Q43</span><span>Define Page Fault.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Page Fault..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-44">
+                <div class="q-text"><span class="q-badge">Q44</span><span>What is Demand Paging?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Demand Paging?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-45">
+                <div class="q-text"><span class="q-badge">Q45</span><span>Define Belady's Anomaly.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Belady's Anomaly..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-46">
+                <div class="q-text"><span class="q-badge">Q46</span><span>What is Thrashing?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Thrashing?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-47">
+                <div class="q-text"><span class="q-badge">Q47</span><span>Define Working Set Model.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Working Set Model..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-48">
+                <div class="q-text"><span class="q-badge">Q48</span><span>What is SSTF Disk Scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is SSTF Disk Scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-49">
+                <div class="q-text"><span class="q-badge">Q49</span><span>What is SCAN Disk Scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is SCAN Disk Scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-50">
+                <div class="q-text"><span class="q-badge">Q50</span><span>What is C-SCAN Disk Scheduling?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is C-SCAN Disk Scheduling?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-51">
+                <div class="q-text"><span class="q-badge">Q51</span><span>Define Inode in UNIX file system.</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for Define Inode in UNIX file system..</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-52">
+                <div class="q-text"><span class="q-badge">Q52</span><span>What is Zombie Process?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Zombie Process?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-53">
+                <div class="q-text"><span class="q-badge">Q53</span><span>What is Orphan Process?</span></div>
+                <div class="a-text">
+                    <div class="note-skeleton">
+    <ul>
+        <li><b>Definition:</b> Provide the formal definition for What is Orphan Process?.</li>
+        <li><b>Key Characteristics:</b> Outline the core principles or properties.</li>
+        <li><b>Application/Example:</b> Give a relevant example in OS.</li>
+    </ul>
+</div>
+                </div>
+            </div>
+            
+</main>
+</div>
+</body>
+</html>

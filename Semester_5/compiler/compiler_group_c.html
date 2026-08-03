@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Design (PCC-CS501) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #ea580c; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #ea580c44; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="compiler_index.html">← Back to Compiler Design Index</a>
+        <span class="nav-title">Compiler Design (PCC-CS501) — Group C</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="compiler_group_a.html" class=""><b>Group A</b><br><span class="toc-meta">52 questions</span></a></li><li><a href="compiler_group_b.html" class=""><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="compiler_group_c.html" class="active"><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="compiler_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-c">Group C — Long / Numerical Questions (15 Marks Each)</h1>
+
+            <div class="qa-card" id="gc-1">
+                <div class="q-text"><span class="q-badge c15">Q1</span><span>a) Construct Canonical LR(1) items and CLR(1) Parsing Table for grammar:
+S ➔ A A
+A ➔ a A | b
+b) Trace the parsing of input string 'aabb$' showing stack, input buffer, and actions.</span></div>
+                <div class="a-text">
+                    <h3>Canonical LR(1) Parsing Table and Trace</h3>
+<h4>Part (a): Constructing CLR(1) Parsing Table</h4>
+<p><strong>Given Grammar:</strong></p>
+<ol>
+  <li>S' &rarr; S</li>
+  <li>S &rarr; AA</li>
+  <li>A &rarr; aA</li>
+  <li>A &rarr; b</li>
+</ol>
+<p><strong>Step 1: Canonical LR(1) Item Sets</strong></p>
+<ul>
+  <li><strong>I0:</strong>
+      <br/>S' &rarr; &bull; S, [$]
+      <br/>S &rarr; &bull; AA, [$]
+      <br/>A &rarr; &bull; aA, [a/b] (Since FIRST(A$) = {a, b})
+      <br/>A &rarr; &bull; b, [a/b]</li>
+  <li><strong>I1 (Goto I0, S):</strong> S' &rarr; S &bull;, [$]</li>
+  <li><strong>I2 (Goto I0, A):</strong>
+      <br/>S &rarr; A &bull; A, [$]
+      <br/>A &rarr; &bull; aA, [$]
+      <br/>A &rarr; &bull; b, [$]</li>
+  <li><strong>I3 (Goto I0, a):</strong>
+      <br/>A &rarr; a &bull; A, [a/b]
+      <br/>A &rarr; &bull; aA, [a/b]
+      <br/>A &rarr; &bull; b, [a/b]</li>
+  <li><strong>I4 (Goto I0, b):</strong> A &rarr; b &bull;, [a/b]</li>
+  <li><strong>I5 (Goto I2, A):</strong> S &rarr; AA &bull;, [$]</li>
+  <li><strong>I6 (Goto I2, a):</strong>
+      <br/>A &rarr; a &bull; A, [$]
+      <br/>A &rarr; &bull; aA, [$]
+      <br/>A &rarr; &bull; b, [$]</li>
+  <li><strong>I7 (Goto I2, b):</strong> A &rarr; b &bull;, [$]</li>
+  <li><strong>I8 (Goto I3, A):</strong> A &rarr; aA &bull;, [a/b]</li>
+  <li><strong>I9 (Goto I6, A):</strong> A &rarr; aA &bull;, [$]</li>
+</ul>
+<p><em>Note: Goto(I3, a) loops to I3. Goto(I3, b) loops to I4. Goto(I6, a) loops to I6. Goto(I6, b) loops to I7.</em></p>
+
+<p><strong>Step 2: CLR(1) Parsing Table</strong></p>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr style="background-color: #f3e8ff;">
+    <th rowspan="2">State</th><th colspan="3">Action</th><th colspan="2">Goto</th>
+  </tr>
+  <tr style="background-color: #f3e8ff;">
+    <th>a</th><th>b</th><th>$</th><th>S</th><th>A</th>
+  </tr>
+  <tr><td><strong>0</strong></td><td>S3</td><td>S4</td><td></td><td>1</td><td>2</td></tr>
+  <tr><td><strong>1</strong></td><td></td><td></td><td>Accept</td><td></td><td></td></tr>
+  <tr><td><strong>2</strong></td><td>S6</td><td>S7</td><td></td><td></td><td>5</td></tr>
+  <tr><td><strong>3</strong></td><td>S3</td><td>S4</td><td></td><td></td><td>8</td></tr>
+  <tr><td><strong>4</strong></td><td>R4</td><td>R4</td><td></td><td></td><td></td></tr>
+  <tr><td><strong>5</strong></td><td></td><td></td><td>R2</td><td></td><td></td></tr>
+  <tr><td><strong>6</strong></td><td>S6</td><td>S7</td><td></td><td></td><td>9</td></tr>
+  <tr><td><strong>7</strong></td><td></td><td></td><td>R4</td><td></td><td></td></tr>
+  <tr><td><strong>8</strong></td><td>R3</td><td>R3</td><td></td><td></td><td></td></tr>
+  <tr><td><strong>9</strong></td><td></td><td></td><td>R3</td><td></td><td></td></tr>
+</table>
+
+<h4>Part (b): Parse Trace for 'aabb$'</h4>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Stack (State & Symbol)</th><th>Input</th><th>Action</th>
+  </tr>
+  <tr><td>0</td><td>aabb$</td><td>Shift 3</td></tr>
+  <tr><td>0 a 3</td><td>abb$</td><td>Shift 3</td></tr>
+  <tr><td>0 a 3 a 3</td><td>bb$</td><td>Shift 4</td></tr>
+  <tr><td>0 a 3 a 3 b 4</td><td>b$</td><td>Reduce A &rarr; b (Pop 1). Goto(3,A)=8.</td></tr>
+  <tr><td>0 a 3 a 3 A 8</td><td>b$</td><td>Reduce A &rarr; aA (Pop 2). Goto(3,A)=8.</td></tr>
+  <tr><td>0 a 3 A 8</td><td>b$</td><td>Reduce A &rarr; aA (Pop 2). Goto(0,A)=2.</td></tr>
+  <tr><td>0 A 2</td><td>b$</td><td>Shift 7</td></tr>
+  <tr><td>0 A 2 b 7</td><td>$</td><td>Reduce A &rarr; b (Pop 1). Goto(2,A)=5.</td></tr>
+  <tr><td>0 A 2 A 5</td><td>$</td><td>Reduce S &rarr; AA (Pop 2). Goto(0,S)=1.</td></tr>
+  <tr><td>0 S 1</td><td>$</td><td><strong>Accept</strong></td></tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-2">
+                <div class="q-text"><span class="q-badge c15">Q2</span><span>a) Generate Three-Address Code, Quadruples, Triples, and Indirect Triples for statement:
+while (a < b) do if (c < d) then x = y + z; else x = y - z;
+b) Draw the Control Flow Graph (CFG) and identify Basic Blocks.</span></div>
+                <div class="a-text">
+                    <h3>Three-Address Code & Control Flow Graphs</h3>
+<h4>Part (a): Generating 3AC</h4>
+<p><strong>Statement:</strong> <code>while (a < b) do if (c < d) then x = y + z; else x = y - z;</code></p>
+<div class="code-block">
+L1: if (a < b) goto L2
+    goto L_END
+L2: if (c < d) goto L3
+    goto L4
+L3: t1 = y + z
+    x = t1
+    goto L1
+L4: t2 = y - z
+    x = t2
+    goto L1
+L_END: ...
+</div>
+
+<p><strong>Quadruples Representation:</strong></p>
+<table border="1" style="border-collapse: collapse; text-align: center; width: 100%;">
+  <tr style="background-color: #f3e8ff;"><th>Loc</th><th>Op</th><th>Arg1</th><th>Arg2</th><th>Result</th></tr>
+  <tr><td>(0)</td><td>&lt;</td><td>a</td><td>b</td><td>t_cond1</td></tr>
+  <tr><td>(1)</td><td>ifFalse</td><td>t_cond1</td><td></td><td>goto (8)</td></tr>
+  <tr><td>(2)</td><td>&lt;</td><td>c</td><td>d</td><td>t_cond2</td></tr>
+  <tr><td>(3)</td><td>ifFalse</td><td>t_cond2</td><td></td><td>goto (6)</td></tr>
+  <tr><td>(4)</td><td>+</td><td>y</td><td>z</td><td>t1</td></tr>
+  <tr><td>(5)</td><td>=</td><td>t1</td><td></td><td>x</td></tr>
+  <tr><td>(6)</td><td>-</td><td>y</td><td>z</td><td>t2</td></tr>
+  <tr><td>(7)</td><td>=</td><td>t2</td><td></td><td>x</td></tr>
+  <tr><td>(8)</td><td>goto</td><td></td><td></td><td>(0)</td></tr>
+</table>
+
+<h4>Part (b): Basic Blocks and CFG</h4>
+<ul>
+  <li><strong>B1:</strong> (0) to (1). Evaluates <code>while</code> condition. Exits to B2 or END.</li>
+  <li><strong>B2:</strong> (2) to (3). Evaluates <code>if</code> condition. Exits to B3 or B4.</li>
+  <li><strong>B3:</strong> (4) to (5). Executes <code>then</code> branch. Jumps back to B1.</li>
+  <li><strong>B4:</strong> (6) to (8). Executes <code>else</code> branch. Jumps back to B1.</li>
+</ul>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    B1["B1: while(a < b)"] -->|"True"| B2["B2: if(c < d)"]
+      B1 -->|"False"| END((END))
+      B2 -->|"True"| B3["B3: x = y + z"]
+      B2 -->|"False"| B4["B4: x = y - z"]
+      B3 --> B1
+      B4 --> B1
+</div>
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-3">
+                <div class="q-text"><span class="q-badge c15">Q3</span><span>a) Compute First and Follow sets for grammar:
+E ➔ T E'
+E' ➔ + T E' | ε
+T ➔ F T'
+T' ➔ * F T' | ε
+F ➔ ( E ) | id
+b) Construct LL(1) Parsing Table and trace parsing of 'id + id * id$'.</span></div>
+                <div class="a-text">
+                    <h3>FIRST/FOLLOW Sets & LL(1) Table</h3>
+<h4>Part (a): Compute FIRST and FOLLOW</h4>
+<p><strong>Grammar:</strong></p>
+<ol>
+  <li>E &rarr; T E'</li>
+  <li>E' &rarr; + T E' | &epsilon;</li>
+  <li>T &rarr; F T'</li>
+  <li>T' &rarr; * F T' | &epsilon;</li>
+  <li>F &rarr; ( E ) | id</li>
+</ol>
+<p><strong>FIRST Sets:</strong></p>
+<ul>
+  <li>FIRST(F) = { (, id }</li>
+  <li>FIRST(T') = { *, &epsilon; }</li>
+  <li>FIRST(T) = FIRST(F) = { (, id }</li>
+  <li>FIRST(E') = { +, &epsilon; }</li>
+  <li>FIRST(E) = FIRST(T) = { (, id }</li>
+</ul>
+<p><strong>FOLLOW Sets:</strong></p>
+<ul>
+  <li>FOLLOW(E) = { $, ) } (Start symbol gets $, and ')' follows E in F &rarr; (E) ).</li>
+  <li>FOLLOW(E') = FOLLOW(E) = { $, ) }</li>
+  <li>FOLLOW(T) = FIRST(E') - {&epsilon;} &cup; FOLLOW(E') = { +, $, ) }</li>
+  <li>FOLLOW(T') = FOLLOW(T) = { +, $, ) }</li>
+  <li>FOLLOW(F) = FIRST(T') - {&epsilon;} &cup; FOLLOW(T') = { *, +, $, ) }</li>
+</ul>
+
+<h4>Part (b): Construct LL(1) Parsing Table</h4>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Non-Terminal</th><th>id</th><th>+</th><th>*</th><th>(</th><th>)</th><th>$</th>
+  </tr>
+  <tr>
+    <td><strong>E</strong></td><td>E &rarr; TE'</td><td></td><td></td><td>E &rarr; TE'</td><td></td><td></td>
+  </tr>
+  <tr>
+    <td><strong>E'</strong></td><td></td><td>E' &rarr; +TE'</td><td></td><td></td><td>E' &rarr; &epsilon;</td><td>E' &rarr; &epsilon;</td>
+  </tr>
+  <tr>
+    <td><strong>T</strong></td><td>T &rarr; FT'</td><td></td><td></td><td>T &rarr; FT'</td><td></td><td></td>
+  </tr>
+  <tr>
+    <td><strong>T'</strong></td><td></td><td>T' &rarr; &epsilon;</td><td>T' &rarr; *FT'</td><td></td><td>T' &rarr; &epsilon;</td><td>T' &rarr; &epsilon;</td>
+  </tr>
+  <tr>
+    <td><strong>F</strong></td><td>F &rarr; id</td><td></td><td></td><td>F &rarr; (E)</td><td></td><td></td>
+  </tr>
+</table>
+
+<p><strong>Trace for <code>id + id * id$</code>:</strong></p>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+  <tr style="background-color: #f3e8ff;"><th>Stack</th><th>Input</th><th>Action</th></tr>
+  <tr><td>$ E</td><td>id + id * id $</td><td>E &rarr; TE'</td></tr>
+  <tr><td>$ E' T</td><td>id + id * id $</td><td>T &rarr; FT'</td></tr>
+  <tr><td>$ E' T' F</td><td>id + id * id $</td><td>F &rarr; id</td></tr>
+  <tr><td>$ E' T' id</td><td>id + id * id $</td><td>Match id</td></tr>
+  <tr><td>$ E' T'</td><td>+ id * id $</td><td>T' &rarr; &epsilon;</td></tr>
+  <tr><td>$ E'</td><td>+ id * id $</td><td>E' &rarr; +TE'</td></tr>
+  <tr><td>$ E' T +</td><td>+ id * id $</td><td>Match +</td></tr>
+  <tr><td>$ E' T</td><td>id * id $</td><td>T &rarr; FT'</td></tr>
+  <tr><td>$ E' T' F</td><td>id * id $</td><td>F &rarr; id</td></tr>
+  <tr><td>$ E' T' id</td><td>id * id $</td><td>Match id</td></tr>
+  <tr><td>$ E' T'</td><td>* id $</td><td>T' &rarr; *FT'</td></tr>
+  <tr><td>$ E' T' F *</td><td>* id $</td><td>Match *</td></tr>
+  <tr><td>$ E' T' F</td><td>id $</td><td>F &rarr; id</td></tr>
+  <tr><td>$ E' T' id</td><td>id $</td><td>Match id</td></tr>
+  <tr><td>$ E' T'</td><td>$</td><td>T' &rarr; &epsilon;</td></tr>
+  <tr><td>$ E'</td><td>$</td><td>E' &rarr; &epsilon;</td></tr>
+  <tr><td>$</td><td>$</td><td><strong>Accept</strong></td></tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-4">
+                <div class="q-text"><span class="q-badge c15">Q4</span><span>a) Construct DAG for the basic block:
+t1 = 4 * i
+t2 = a[t1]
+t3 = 4 * i
+t4 = b[t3]
+t5 = t2 + t4
+t6 = prod + t5
+prod = t6
+t7 = i + 1
+i = t7
+b) Derive optimized 3AC code from constructed DAG.
+
+
+
+
+--- Page 4 ---</span></div>
+                <div class="a-text">
+                    <h3>DAG for Basic Blocks & Optimization</h3>
+<h4>Part (a): Constructing the DAG</h4>
+<p><strong>Original Code:</strong></p>
+<code>1. t1 = 4 * i</code><br/>
+<code>2. t2 = a[t1]</code><br/>
+<code>3. t3 = 4 * i</code> (Identical to t1, CSE applies)<br/>
+<code>4. t4 = b[t3]</code> (Uses t1 instead of t3)<br/>
+<code>5. t5 = t2 + t4</code><br/>
+<code>6. t6 = prod + t5</code><br/>
+<code>7. prod = t6</code><br/>
+<code>8. t7 = i + 1</code><br/>
+<code>9. i = t7</code>
+
+<p><strong>DAG Construction:</strong></p>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    N1((4))
+      N2((i))
+      N3(("* [t1, t3]"))
+      N1 --> N3
+      N2 --> N3
+       Na((a))
+      Nb((b))
+      N4(("[] [t2]"))
+      N5(("[] [t4]"))
+      Na --> N4
+      N3 --> N4
+      Nb --> N5
+      N3 --> N5
+       N6(("+ [t5]"))
+      N4 --> N6
+      N5 --> N6
+       Np((prod))
+      N7(("+ [t6, prod]"))
+      Np --> N7
+      N6 --> N7
+       N1b((1))
+      N8(("+ [t7, i]"))
+      N2 --> N8
+      N1b --> N8
+</div>
+</div>
+
+<h4>Part (b): Derive Optimized 3AC</h4>
+<p>By reading the DAG, we eliminate the redundant calculation of <code>4 * i</code> (Common Subexpression Elimination) and remove redundant variable assignments (Copy Propagation / Dead Code Elimination).</p>
+<p><strong>Optimized 3AC:</strong></p>
+<div class="code-block">
+t1 = 4 * i
+t2 = a[t1]
+t4 = b[t1]
+t5 = t2 + t4
+prod = prod + t5
+i = i + 1
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-5">
+                <div class="q-text"><span class="q-badge c15">Q5</span><span>a) Explain Chaitin's Graph Coloring Algorithm for Register Allocation.
+b) Construct Interference Graph and allocate 3 registers for overlapping variable lifetimes.
+c) Explain register spilling mechanism.</span></div>
+                <div class="a-text">
+                    <h3>Chaitin's Graph Coloring for Register Allocation</h3>
+<h4>Part (a): Explanation of the Algorithm</h4>
+<p>Chaitin's algorithm formulates register allocation as a graph coloring problem. If the CPU has \(K\) physical registers, we attempt to color an <em>Interference Graph</em> using \(K\) colors.</p>
+<ul>
+  <li><strong>Node:</strong> Represents a variable in the program.</li>
+  <li><strong>Edge:</strong> An edge connects two nodes if their live ranges overlap (they cannot share the same register).</li>
+  <li><strong>Simplification Phase:</strong> Repeatedly find a node with degree \(< K\) (fewer than \(K\) edges). Remove it from the graph and push it onto a stack. If all nodes have degree \(\ge K\), a node must be <em>spilled</em> (saved to memory).</li>
+  <li><strong>Coloring Phase:</strong> Pop nodes from the stack one by one, adding them back to the graph and assigning them a color (register) that is not used by any of their currently active neighbors.</li>
+</ul>
+
+<h4>Part (b): Construct Interference Graph</h4>
+<p>Suppose variables <code>a, b, c, d</code> have lifetimes such that: <code>a</code> interferes with <code>b, c, d</code>. <code>b</code> interferes with <code>a, c</code>. <code>c</code> interferes with <code>a, b, d</code>. <code>d</code> interferes with <code>a, c</code>.</p>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    A --- B
+      A --- C
+      A --- D
+      B --- C
+      C --- D
+      style A fill:#f9a8d4
+      style B fill:#86efac
+      style C fill:#93c5fd
+      style D fill:#86efac
+</div>
+<div class="diagram-caption">Interference Graph colored with K=3 registers.</div>
+</div>
+<ul>
+  <li><strong>K = 3 Registers (R1, R2, R3).</strong></li>
+  <li>Assign <code>a = R1</code>.</li>
+  <li><code>b</code> neighbors <code>a</code>. Assign <code>b = R2</code>.</li>
+  <li><code>c</code> neighbors <code>a, b</code>. Assign <code>c = R3</code>.</li>
+  <li><code>d</code> neighbors <code>a, c</code>. Can we reuse <code>R2</code>? Yes, because <code>d</code> does not interfere with <code>b</code>. Assign <code>d = R2</code>.</li>
+  <li>Coloring successful! No spills needed.</li>
+</ul>
+
+<h4>Part (c): Register Spilling Mechanism</h4>
+<p>If the graph cannot be colored with \(K\) colors, the compiler selects a variable to "spill" to main memory. It generates a <code>STORE</code> instruction after every definition of the variable, and a <code>LOAD</code> instruction before every use. This splits the variable's long live range into several tiny, independent live ranges, significantly reducing the degree of the node in the interference graph, making it easier to color on the next iteration.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-6">
+                <div class="q-text"><span class="q-badge c15">Q6</span><span>a) Explain SDT for Type Checking and implicit type conversions.
+b) Write complete SDD rules for generating type-converted arithmetic AST nodes.</span></div>
+                <div class="a-text">
+                    <h3>SDT for Type Checking & Conversions</h3>
+<h4>Part (a): Type Checking Principles</h4>
+<p>During Semantic Analysis, the compiler traverses the AST to ensure operators receive operands of compatible types. If types mismatch but are compatible (e.g., <code>int + float</code>), the compiler applies <strong>Implicit Type Conversion (Coercion)</strong>. It inserts a new AST node (like <code>intToFloat</code>) to convert the <code>int</code> operand into a <code>float</code> before the addition occurs.</p>
+
+<h4>Part (b): SDD Rules for Arithmetic Type Conversion</h4>
+<p>Assume we have an expression grammar <code>E &rarr; E1 + E2</code>, and our basic types are <code>int</code> and <code>float</code>.</p>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Production Rule</th>
+    <th>Semantic Rules (SDD)</th>
+  </tr>
+  <tr>
+    <td><code>E &rarr; E1 + E2</code></td>
+    <td>
+<pre>
+if (E1.type == int and E2.type == int) {
+    E.type = int;
+    E.node = new Node('+', E1.node, E2.node);
+} 
+else if (E1.type == float and E2.type == float) {
+    E.type = float;
+    E.node = new Node('+', E1.node, E2.node);
+} 
+else if (E1.type == int and E2.type == float) {
+    E.type = float;
+    // Coerce E1 to float
+    Node* t1 = new Node('intToFloat', E1.node);
+    E.node = new Node('+', t1, E2.node);
+} 
+else if (E1.type == float and E2.type == int) {
+    E.type = float;
+    // Coerce E2 to float
+    Node* t2 = new Node('intToFloat', E2.node);
+    E.node = new Node('+', E1.node, t2);
+} 
+else {
+    error("Type mismatch");
+}
+</pre>
+    </td>
+  </tr>
+  <tr>
+    <td><code>E &rarr; id</code></td>
+    <td>
+<pre>
+E.type = lookup(id.entry, type);
+E.node = new Leaf(id.entry);
+</pre>
+    </td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-7">
+                <div class="q-text"><span class="q-badge c15">Q7</span><span>a) Explain Lex/Flex tool file structure in detail.
+b) Write complete Lex program to count keywords, identifiers, integers, floats, and line numbers from C source code.</span></div>
+                <div class="a-text">
+                    <h3>Lex/Flex Tool and Program</h3>
+<h4>Part (a): Lex File Structure</h4>
+<p>A Lex specification file (<code>.l</code> extension) generates a C program (<code>lex.yy.c</code>) that acts as a lexical analyzer. It has three sections:</p>
+<ol>
+  <li><strong>Declarations:</strong> <code>%{ ... %}</code> C includes, global variables. Macro definitions for regex patterns.</li>
+  <li><strong>Rules (%%):</strong> Pairs of <code>[Regular Expression] { C Code Action }</code>. When the lexer matches the regex against the input stream, it executes the corresponding C code block.</li>
+  <li><strong>User Subroutines (%%):</strong> C functions like <code>main()</code> to drive the lexer and <code>yywrap()</code> to handle EOF.</li>
+</ol>
+
+<h4>Part (b): Complete Lex Program</h4>
+<p>A Lex program to count keywords, identifiers, integers, floats, and lines.</p>
+<div class="code-block">
+%{
+    #include &lt;stdio.h&gt;
+    int keys=0, ids=0, ints=0, floats=0, lines=1;
+%}
+
+/* Regex Definitions */
+letter      [a-zA-Z]
+digit       [0-9]
+id          {letter}({letter}|{digit})*
+integer     {digit}+
+float       {digit}+\.{digit}+
+
+%%
+"int"|"float"|"if"|"else"|"while"   { keys++; printf("Keyword: %s\n", yytext); }
+{float}                             { floats++; printf("Float: %s\n", yytext); }
+{integer}                           { ints++; printf("Integer: %s\n", yytext); }
+{id}                                { ids++; printf("Identifier: %s\n", yytext); }
+\n                                  { lines++; }
+[ \t\r]+                            { /* Ignore whitespace */ }
+.                                   { /* Ignore other characters like punctuation */ }
+%%
+
+int main() {
+    printf("Enter C code (Ctrl+D to end):\n");
+    yylex();
+    printf("\n--- Summary ---\n");
+    printf("Keywords: %d\n", keys);
+    printf("Identifiers: %d\n", ids);
+    printf("Integers: %d\n", ints);
+    printf("Floats: %d\n", floats);
+    printf("Lines: %d\n", lines);
+    return 0;
+}
+
+int yywrap() {
+    return 1;
+}
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-8">
+                <div class="q-text"><span class="q-badge c15">Q8</span><span>a) Explain Yacc/Bison parser generator structure and precedence rules.
+b) Write complete Yacc specification for an infix Arithmetic Calculator supporting +, -, *, /, and parentheses.</span></div>
+                <div class="a-text">
+                    <h3>Yacc/Bison and Calculator Program</h3>
+<h4>Part (a): Yacc Structure and Precedence</h4>
+<p>Yacc reads a <code>.y</code> file containing a Context-Free Grammar and generates an LALR(1) parser in C (<code>y.tab.c</code>). To resolve shift-reduce conflicts naturally found in expression grammars, Yacc uses precedence declarations:</p>
+<ul>
+  <li><code>%left '+' '-'</code>: Left associative, lower precedence.</li>
+  <li><code>%left '*' '/'</code>: Left associative, higher precedence. (Listed lower in the file means higher precedence).</li>
+</ul>
+
+<h4>Part (b): Complete Yacc Specification for a Calculator</h4>
+<p><strong>Lex File (calc.l)</strong> - Feeds tokens to Yacc</p>
+<div class="code-block">
+%{
+#include "y.tab.h"
+#include <stdlib.h>
+%}
+%%
+[0-9]+      { yylval = atoi(yytext); return NUMBER; }
+[ \t]       { /* ignore whitespace */ }
+\n          { return '\n'; }
+.           { return yytext[0]; }
+%%
+int yywrap() { return 1; }
+</div>
+
+<p><strong>Yacc File (calc.y)</strong></p>
+<div class="code-block">
+%{
+    #include &lt;stdio.h&gt;
+    int yylex();
+    void yyerror(char *s);
+%}
+
+%token NUMBER
+%left '+' '-'
+%left '*' '/'
+
+%%
+lines:  lines expr '\n'  { printf("Result: %d\n", $2); }
+      | lines '\n'
+      | /* empty */
+      ;
+
+expr:   expr '+' expr    { $$ = $1 + $3; }
+      | expr '-' expr    { $$ = $1 - $3; }
+      | expr '*' expr    { $$ = $1 * $3; }
+      | expr '/' expr    { if($3 == 0) yyerror("Divide by zero!"); else $$ = $1 / $3; }
+      | '(' expr ')'     { $$ = $2; }
+      | NUMBER           { $$ = $1; }
+      ;
+%%
+
+int main() {
+    printf("Enter expression:\n");
+    yyparse();
+    return 0;
+}
+void yyerror(char *s) {
+    fprintf(stderr, "Error: %s\n", s);
+}
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-9">
+                <div class="q-text"><span class="q-badge c15">Q9</span><span>a) Explain ICG for 2D Array References `A[i][j]` in Row-Major and Column-Major order.
+b) Derive address calculation formula and generate 3AC for assignment `x = A[i][j]`.</span></div>
+                <div class="a-text">
+                    <h3>ICG for 2D Array References</h3>
+<h4>Part (a): Memory Layout Orders</h4>
+<p>Physical memory is a 1-dimensional array of bytes. A 2D array <code>A[M][N]</code> (where M = rows, N = columns) must be linearized.</p>
+<ul>
+  <li><strong>Row-Major Order:</strong> Used by C/C++. Elements of the first row are stored contiguously in memory, followed by the second row, etc.</li>
+  <li><strong>Column-Major Order:</strong> Used by Fortran/MATLAB. Elements of the first column are stored contiguously, followed by the second column, etc.</li>
+</ul>
+
+<h4>Part (b): Address Calculation & 3AC</h4>
+<p><strong>Given:</strong> Array <code>A[M][N]</code>. Let <code>w</code> be the size of one element in bytes (e.g., 4 bytes for an <code>int</code>). Let <code>Base</code> be the starting memory address of <code>A[0][0]</code>.</p>
+<p><strong>Address Formula (Row-Major):</strong><br/>
+\(\text{Address}(A[i][j]) = \text{Base} + ((i \times N) + j) \times w\)</p>
+
+<p><strong>Generating 3AC for <code>x = A[i][j]</code>:</strong></p>
+<p>Assume the array has <code>N = 10</code> columns and element size <code>w = 4</code> bytes. We must generate low-level intermediate code that explicitly computes the memory offset.</p>
+<div class="code-block">
+// 1. Multiply row index by total columns (N)
+t1 = i * 10
+// 2. Add column index
+t2 = t1 + j
+// 3. Multiply by element width (w)
+t3 = t2 * 4
+// 4. Access the memory location relative to Base(A)
+t4 = A[t3]
+// 5. Assign to x
+x = t4
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-10">
+                <div class="q-text"><span class="q-badge c15">Q10</span><span>a) Explain Next-Use Information calculation and Register Descriptor algorithms.
+b) Trace register descriptors for code segment `x = (a - b) + (a - c) + (a - b)`.</span></div>
+                <div class="a-text">
+                    <h3>Next-Use Information & Register Descriptors</h3>
+<h4>Part (a): Next-Use Calculation</h4>
+<p>Next-use information tells the code generator exactly when the value of a variable will be used next in the basic block. This is critical for <strong>Register Allocation</strong>. If a variable in a register has no "next use" (it is dead), the register can be immediately reused for another variable without saving it to memory.</p>
+<p><strong>Register Descriptor:</strong> Tracks which variables are currently held in each physical register.</p>
+<p><strong>Address Descriptor:</strong> Tracks the current memory locations where the valid value of a variable resides (could be in a register, in RAM, or both).</p>
+
+<h4>Part (b): Trace Register Descriptors</h4>
+<p><strong>Code Segment:</strong> <code>x = (a - b) + (a - c) + (a - b)</code></p>
+<p>Convert to 3AC first:</p>
+<code>1: t1 = a - b</code><br/>
+<code>2: t2 = a - c</code><br/>
+<code>3: t3 = t1 + t2</code><br/>
+<code>4: t4 = t1 + t3</code> (Reusing t1 instead of recomputing a-b via DAG optimization)<br/>
+<code>5: x = t4</code>
+
+<p><strong>Trace Table (Assume 2 Registers R0, R1):</strong></p>
+<table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Instruction</th>
+    <th>Machine Code Generated</th>
+    <th>Reg Desc (R0)</th>
+    <th>Reg Desc (R1)</th>
+  </tr>
+  <tr>
+    <td>1: t1 = a - b</td>
+    <td>MOV R0, a <br/> SUB R0, b</td>
+    <td>Contains <code>t1</code></td>
+    <td>Empty</td>
+  </tr>
+  <tr>
+    <td>2: t2 = a - c</td>
+    <td>MOV R1, a <br/> SUB R1, c</td>
+    <td>Contains <code>t1</code></td>
+    <td>Contains <code>t2</code></td>
+  </tr>
+  <tr>
+    <td>3: t3 = t1 + t2</td>
+    <td>ADD R1, R0 (Result in R1)</td>
+    <td>Contains <code>t1</code></td>
+    <td>Contains <code>t3</code></td>
+  </tr>
+  <tr>
+    <td>4: t4 = t1 + t3</td>
+    <td>ADD R1, R0 (Result in R1)</td>
+    <td>Contains <code>t1</code></td>
+    <td>Contains <code>t4</code> (x)</td>
+  </tr>
+  <tr>
+    <td>5: x = t4</td>
+    <td>MOV x, R1 (Store to memory)</td>
+    <td>Contains <code>t1</code></td>
+    <td>Contains <code>x</code></td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-11">
+                <div class="q-text"><span class="q-badge c15">Q11</span><span>a) Explain Global Data Flow Analysis and Iterative Data Flow Equations.
+b) Derive Reaching Definitions equations (In[B], Out[B], Gen[B], Kill[B]) and solve until convergence.</span></div>
+                <div class="a-text">
+                    <h3>Global Data Flow Analysis: Reaching Definitions</h3>
+<h4>Part (a): Global Data Flow Analysis</h4>
+<p>Global Data Flow Analysis determines how values and properties of variables propagate across the Control Flow Graph (CFG), beyond the boundaries of a single basic block. It uses an iterative algorithm to solve a system of data-flow equations until a fixed point (convergence) is reached.</p>
+
+<h4>Part (b): Reaching Definitions Equations</h4>
+<p>A definition \(d\) of a variable \(x\) <em>reaches</em> a point \(p\) if there is a path from \(d\) to \(p\) such that \(x\) is not killed (overwritten) along the path.</p>
+<ul>
+  <li><strong>GEN[B]:</strong> The set of definitions generated within block B that reach the end of B without being killed locally.</li>
+  <li><strong>KILL[B]:</strong> The set of all definitions in the entire program that define the same variables defined in B.</li>
+</ul>
+<p><strong>Iterative Equations (Forward Flow):</strong></p>
+<p>1. \(\text{IN}[B] = \bigcup_{P \in \text{predecessors}(B)} \text{OUT}[P]\)<br/>
+(A definition reaches the start of B if it reaches the end of <em>any</em> of B's predecessors).</p>
+<p>2. \(\text{OUT}[B] = \text{GEN}[B] \cup (\text{IN}[B] - \text{KILL}[B])\)<br/>
+(A definition reaches the end of B if it was generated in B, OR if it entered B and was not killed in B).</p>
+
+<p><strong>Solving Iteratively:</strong></p>
+<ol>
+  <li>Initialize \(\text{OUT}[B] = \emptyset\) for all blocks.</li>
+  <li>Loop through all blocks, calculating \(\text{IN}\) then \(\text{OUT}\).</li>
+  <li>Repeat the loop until no \(\text{OUT}\) set changes for any block (Convergence).</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-12">
+                <div class="q-text"><span class="q-badge c15">Q12</span><span>a) Explain Live Variable Analysis and Available Expressions Analysis.
+b) Write backward data flow equations and explain applications in optimization.</span></div>
+                <div class="a-text">
+                    <h3>Live Variables & Available Expressions</h3>
+<h4>Part (a): Concepts</h4>
+<ul>
+  <li><strong>Available Expressions:</strong> An expression <code>x + y</code> is available at point \(p\) if every path from the start node to \(p\) evaluates <code>x + y</code>, and neither <code>x</code> nor <code>y</code> is modified between the last evaluation and \(p\). Used for Global Common Subexpression Elimination.</li>
+  <li><strong>Live Variable Analysis:</strong> A variable \(x\) is live at point \(p\) if its value at \(p\) could be read along some path before \(x\) is redefined. Used for Dead Code Elimination and Register Allocation.</li>
+</ul>
+
+<h4>Part (b): Backward Data Flow Equations for Live Variables</h4>
+<p>Because liveness depends on <em>future</em> uses of a variable, information flows <strong>backward</strong> through the CFG.</p>
+<ul>
+  <li><strong>USE[B]:</strong> Variables whose values are read in B prior to being overwritten in B.</li>
+  <li><strong>DEF[B]:</strong> Variables that are definitely overwritten in B.</li>
+</ul>
+<p><strong>Iterative Equations (Backward Flow):</strong></p>
+<p>1. \(\text{OUT}[B] = \bigcup_{S \in \text{successors}(B)} \text{IN}[S]\)<br/>
+(A variable is live at the end of B if it is live at the start of <em>any</em> of B's successors).</p>
+<p>2. \(\text{IN}[B] = \text{USE}[B] \cup (\text{OUT}[B] - \text{DEF}[B])\)<br/>
+(A variable is live at the start of B if it is used in B, OR if it is live at the end of B and not redefined in B).</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-13">
+                <div class="q-text"><span class="q-badge c15">Q13</span><span>a) Explain Symbol Table organization for Object-Oriented nested scopes.
+b) Draw scope tree structure and explain symbol lookup in nested classes and methods.</span></div>
+                <div class="a-text">
+                    <h3>Symbol Tables for Object-Oriented Scopes</h3>
+<h4>Part (a): Organization</h4>
+<p>Object-Oriented Languages (like Java/C++) introduce complex nested scopes: Global &rarr; Namespace &rarr; Class &rarr; Method &rarr; Local Block. The symbol table must support inheritance (resolving variables in a parent class) and shadowing (local variables hiding class fields).</p>
+<p>The compiler creates a hierarchical tree of symbol tables. Each table represents a scope and contains a pointer to its enclosing (parent) scope's table.</p>
+
+<h4>Part (b): Scope Tree Structure and Lookup</h4>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    Global["Global Scope: Class A, Class B"]
+      ClassA["Class A Scope: int x, method1()"]
+      ClassB["Class B Scope: float y, method2()"]
+      Method1["method1() Scope: int a, int b"]
+      Block1["if-block Scope: int c"]
+       Block1 -->|"Parent Pointer"| Method1
+      Method1 -->|"Parent Pointer"| ClassA
+      ClassA -->|"Parent/Inheritance Pointer"| Global
+      ClassB -->|"Parent Pointer"| Global
+</div>
+</div>
+<p><strong>Symbol Lookup Mechanism:</strong></p>
+<p>If <code>x</code> is referenced inside the <code>if-block</code>:</p>
+<ol>
+  <li>Search the <code>if-block</code> table. Not found.</li>
+  <li>Follow pointer to <code>method1()</code> table. Not found.</li>
+  <li>Follow pointer to <code>Class A</code> table. Found <code>int x</code>. Return type and address.</li>
+  <li><em>If not found in Class A, and Class A extends BaseClass, the pointer traces up to BaseClass before checking Global.</em></li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-14">
+                <div class="q-text"><span class="q-badge c15">Q14</span><span>a) Explain Runtime Storage Allocation for procedural languages.
+b) Detail Activation Record creation, parameter passing, return value handling, and control link pointers.</span></div>
+                <div class="a-text">
+                    <h3>Runtime Storage Allocation</h3>
+<h4>Part (a): Storage Regions</h4>
+<p>For procedural languages, OS memory given to a program is divided into:</p>
+<ul>
+  <li><strong>Code/Text Segment:</strong> Read-only, executable machine instructions.</li>
+  <li><strong>Static/Global Data:</strong> Global variables and static variables allocated exactly once at compile-time.</li>
+  <li><strong>Heap:</strong> Dynamically allocated memory (e.g., <code>malloc()</code>). Grows upwards.</li>
+  <li><strong>Stack:</strong> Memory for function calls and local variables. Grows downwards.</li>
+</ul>
+
+<h4>Part (b): Activation Record Creation Trace</h4>
+<p>When <code>caller()</code> invokes <code>callee(int x)</code>:</p>
+<ol>
+  <li><strong>Caller</strong> pushes the actual parameter <code>x</code> onto the stack.</li>
+  <li><strong>Caller</strong> saves its own machine status (specifically the Return Address PC) onto the stack.</li>
+  <li><strong>Caller</strong> executes the jump instruction to <code>callee</code>'s code.</li>
+  <li><strong>Callee</strong> pushes the old Frame Pointer (Control Link) onto the stack to save the caller's stack frame base.</li>
+  <li><strong>Callee</strong> updates the Frame Pointer to the current Stack Pointer (establishing its own Activation Record base).</li>
+  <li><strong>Callee</strong> decrements the Stack Pointer to allocate space for its own local variables and temporaries.</li>
+  <li>When returning, the process reverses: the stack pointer is restored to the control link, and execution jumps back to the saved return address.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-15">
+                <div class="q-text"><span class="q-badge c15">Q15</span><span>a) Explain Garbage Collection algorithms: Mark-and-Sweep, Copying Collector, and Reference Counting.
+b) Detail Generational Garbage Collection hypothesis and performance advantages.</span></div>
+                <div class="a-text">
+                    <h3>Garbage Collection (Generational)</h3>
+<h4>Part (a): Standard Algorithms Overview</h4>
+<ul>
+  <li><strong>Mark-and-Sweep:</strong> Marks live objects, sweeps dead ones. Causes fragmentation.</li>
+  <li><strong>Copying Collector:</strong> Copies live objects to a new memory space. No fragmentation, but wastes 50% RAM.</li>
+  <li><strong>Reference Counting:</strong> Each object tracks how many pointers point to it. If count reaches 0, it is immediately freed. Cannot detect cyclical references (A points to B, B points to A).</li>
+</ul>
+
+<h4>Part (b): Generational Garbage Collection</h4>
+<p><strong>The Generational Hypothesis:</strong> "Most objects die young." (e.g., local variables in functions). Objects that survive a long time (e.g., global caches) will likely continue to survive.</p>
+<p><strong>Mechanism:</strong></p>
+<ol>
+  <li>The heap is divided into generations: <strong>Young Generation</strong> (Nursery) and <strong>Old Generation</strong> (Tenured).</li>
+  <li>All new objects are allocated in the Young Gen.</li>
+  <li>Because most objects die young, the GC runs a <em>Minor GC</em> frequently on the Young Gen using a fast Copying Collector. It reclaims massive amounts of memory quickly.</li>
+  <li>Objects that survive multiple Minor GCs are "promoted" to the Old Gen.</li>
+  <li>The Old Gen fills up very slowly. A <em>Major GC</em> (usually Mark-and-Sweep) runs infrequently on the Old Gen.</li>
+</ol>
+<p><strong>Advantage:</strong> Drastically reduces GC pause times because the collector doesn't have to scan the entire heap every time memory runs low.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-16">
+                <div class="q-text"><span class="q-badge c15">Q16</span><span>a) Explain Error Detection, Reporting, and Recovery across all compiler phases.
+b) Detail Panic Mode vs Phrase-Level recovery mechanisms in LL and LR parsers.</span></div>
+                <div class="a-text">
+                    <h3>Error Detection and Recovery</h3>
+<h4>Part (a): Errors Across Phases</h4>
+<ul>
+  <li><strong>Lexical Errors:</strong> Unrecognized characters (<code>@</code>), unterminated strings.</li>
+  <li><strong>Syntax Errors:</strong> Missing semicolons, unbalanced parentheses, invalid statements.</li>
+  <li><strong>Semantic Errors:</strong> Type mismatches, undeclared variables, parameter count mismatches.</li>
+  <li><strong>Logical Errors:</strong> Not caught by the compiler (e.g., infinite loops).</li>
+</ul>
+
+<h4>Part (b): Panic Mode vs Phrase-Level in Parsers</h4>
+<p><strong>Panic Mode in LL(1) / LR(1):</strong></p>
+<ul>
+  <li>When an unexpected token arrives, the parser is stuck.</li>
+  <li>It enters panic mode, popping states off the stack and discarding input tokens until it finds a "synchronization token" (e.g., <code>}</code> or <code>;</code>).</li>
+  <li>Once synchronized, parsing resumes from a known safe state.</li>
+</ul>
+<p><strong>Phrase-Level Recovery:</strong></p>
+<ul>
+  <li>The parser detects the error and attempts a local patch.</li>
+  <li>If the input is <code>x = y * ;</code>, the parser might artificially insert an identifier token (making it <code>x = y * id;</code>) or delete the <code>*</code>, issue an error message, and continue.</li>
+  <li>This prevents massive chunks of code from being skipped, but requires carefully designed error productions in the grammar (e.g., adding a grammar rule <code>Stmt &rarr; error ;</code> to catch malformed statements).</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-17">
+                <div class="q-text"><span class="q-badge c15">Q17</span><span>a) Explain Peephole Optimization pattern matching and instruction replacement.
+b) Apply peephole transformations to an unoptimized 8086 assembly snippet.</span></div>
+                <div class="a-text">
+                    <h3>Peephole Optimization (x86 Assembly)</h3>
+<h4>Part (a): Pattern Matching</h4>
+<p>The compiler scans the generated target assembly code using a small sliding window (2-4 instructions). If the window matches a known inefficient pattern, it is replaced with an optimized sequence.</p>
+
+<h4>Part (b): Applying Transformations to 8086 Code</h4>
+<p><strong>Unoptimized Snippet:</strong></p>
+<div class="code-block">
+1. MOV AX, [x]
+2. MOV [x], AX    ; Redundant store
+3. ADD AX, 0      ; Algebraic identity
+4. JMP L1         ; Jump to jump
+...
+5. L1: JMP L2
+6. MOV BX, 2
+7. MUL BX         ; Multiply by 2
+</div>
+
+<p><strong>Peephole Applied:</strong></p>
+<div class="code-block">
+1. MOV AX, [x]
+; Line 2 deleted (Redundant store elimination)
+; Line 3 deleted (Algebraic simplification)
+4. JMP L2         ; Flow of control optimization (redirected past L1)
+...
+5. L1: JMP L2
+6. SHL AX, 1      ; Strength reduction (Shift Left 1 is much faster than MUL 2)
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-18">
+                <div class="q-text"><span class="q-badge c15">Q18</span><span>a) Explain Loop Unrolling, Loop Jamming, and Software Pipelining.
+b) Demonstrate loop unrolling on a matrix multiplication loop to increase instruction-level parallelism.</span></div>
+                <div class="a-text">
+                    <h3>Loop Optimizations</h3>
+<h4>Part (a): Concepts</h4>
+<ul>
+  <li><strong>Loop Unrolling:</strong> Duplicating the loop body to reduce the number of iterations and the overhead of evaluating the loop condition/jump.</li>
+  <li><strong>Loop Jamming (Fusion):</strong> Merging two adjacent loops that iterate over the same range into a single loop to reduce loop overhead.</li>
+  <li><strong>Software Pipelining:</strong> Reorganizing loops such that different iterations of the loop are overlapped. E.g., loading data for iteration <code>i+1</code> while computing data for iteration <code>i</code>.</li>
+</ul>
+
+<h4>Part (b): Matrix Multiplication Unrolling</h4>
+<p><strong>Original Loop:</strong></p>
+<div class="code-block">
+for(int i = 0; i < 4; i++) {
+    sum = sum + A[i] * B[i];
+}
+</div>
+<p><strong>Unrolled Loop (Factor of 4):</strong></p>
+<div class="code-block">
+// The loop structure and branching are completely eliminated!
+sum = sum + A[0] * B[0];
+sum = sum + A[1] * B[1];
+sum = sum + A[2] * B[2];
+sum = sum + A[3] * B[3];
+</div>
+<p><strong>Advantages:</strong> Eliminates branch instructions entirely. Modern Superscalar CPUs can execute all 4 multiplication instructions simultaneously (Instruction-Level Parallelism) because there are no data dependencies between them.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-19">
+                <div class="q-text"><span class="q-badge c15">Q19</span><span>a) Explain LLVM Compiler Infrastructure Architecture (Front-End, LLVM IR, Optimizer, Back-End).
+b) Detail LLVM Pass Manager and transformation passes.</span></div>
+                <div class="a-text">
+                    <h3>LLVM Compiler Architecture</h3>
+<h4>Part (a): LLVM Architecture</h4>
+<p>LLVM is a modern, modular compiler framework used by Clang (C/C++), Rust, and Swift.</p>
+<ul>
+  <li><strong>Front-End:</strong> Parses the source language and generates LLVM Intermediate Representation (LLVM IR). Clang is the front-end for C/C++.</li>
+  <li><strong>LLVM IR:</strong> The core of the system. It is a strictly typed, RISC-like, Static Single Assignment (SSA) language. It acts as the universal language for the optimizer.</li>
+  <li><strong>Optimizer (Middle-End):</strong> A collection of modular Passes that read LLVM IR, optimize it, and emit optimized LLVM IR.</li>
+  <li><strong>Back-End:</strong> Reads the optimized LLVM IR and translates it into specific machine code (x86, ARM) via Instruction Selection and Register Allocation.</li>
+</ul>
+
+<h4>Part (b): LLVM Pass Manager</h4>
+<p>The Pass Manager controls the execution of optimization passes.</p>
+<ul>
+  <li><strong>Analysis Passes:</strong> Compute information about the IR without modifying it (e.g., Call Graph analysis, Dominator Tree analysis).</li>
+  <li><strong>Transform Passes:</strong> Mutate the IR to optimize it (e.g., <code>mem2reg</code> promotes memory allocations to SSA registers, <code>loop-unroll</code> unrolls loops).</li>
+  <li>The Pass Manager schedules these passes, ensuring that if a Transform pass invalidates the Dominator Tree, the Analysis pass is automatically re-run before the next pass that requires it.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-20">
+                <div class="q-text"><span class="q-badge c15">Q20</span><span>a) Complete Trace: Trace statement `a = b + c * 60` through ALL 6 phases of a compiler.
+b) Show exact output produced at Lexical, Syntax, Semantic, ICG, Optimization, and Target Code generation phases.</span></div>
+                <div class="a-text">
+                    <h3>Complete Trace Through All 6 Compiler Phases</h3>
+<h4>Part (a) & (b): Tracing <code>a = b + c * 60</code></h4>
+
+<p><strong>1. Lexical Analysis:</strong> Converts character stream to tokens.</p>
+<code>&lt;id, a&gt; &lt;assign, =&gt; &lt;id, b&gt; &lt;op, +&gt; &lt;id, c&gt; &lt;op, *&gt; &lt;num, 60&gt;</code>
+
+<p><strong>2. Syntax Analysis:</strong> Generates Parse Tree (or AST) enforcing precedence.</p>
+<div class="code-block">
+      =
+    /   \
+  id(a)  +
+        / \
+    id(b)  *
+          / \
+      id(c) num(60)
+</div>
+
+<p><strong>3. Semantic Analysis:</strong> Type checking. Assuming <code>a, b, c</code> are floats.</p>
+<div class="code-block">
+      =
+    /   \
+  id(a)  +
+        / \
+    id(b)  *
+          / \
+      id(c) intToFloat
+              |
+            num(60)
+</div>
+
+<p><strong>4. Intermediate Code Generation:</strong> Generates 3AC.</p>
+<div class="code-block">
+t1 = intToFloat(60)
+t2 = c * t1
+t3 = b + t2
+a = t3
+</div>
+
+<p><strong>5. Code Optimization:</strong> Applies Constant Folding at compile time.</p>
+<div class="code-block">
+// 60.0 is folded directly.
+t1 = c * 60.0
+a = b + t1
+</div>
+
+<p><strong>6. Target Code Generation:</strong> Generates assembly (assuming x86-like FPU).</p>
+<div class="code-block">
+LDF R2, c        ; Load float c into R2
+MULF R2, #60.0   ; Multiply R2 by 60.0
+LDF R1, b        ; Load float b into R1
+ADDF R1, R2      ; Add R2 to R1
+STF a, R1        ; Store result into 'a'
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-21">
+                <div class="q-text"><span class="q-badge c15">Q21</span><span>a) Construct SLR(1) Parsing Table for grammar:
+S ➔ L = R | R
+L ➔ * R | id
+R ➔ L
+b) Check if SLR(1) table has S-R or R-R conflicts.</span></div>
+                <div class="a-text">
+                    <h3>SLR(1) Parsing Table Construction</h3>
+<h4>Part (a): Construct SLR(1) Table</h4>
+<p><strong>Grammar:</strong></p>
+<ol>
+  <li>S' &rarr; S</li>
+  <li>S &rarr; L = R</li>
+  <li>S &rarr; R</li>
+  <li>L &rarr; * R</li>
+  <li>L &rarr; id</li>
+  <li>R &rarr; L</li>
+</ol>
+<p><strong>FOLLOW Sets:</strong></p>
+<ul>
+  <li>FOLLOW(S) = { $ }</li>
+  <li>FOLLOW(L) = { =, $ }</li>
+  <li>FOLLOW(R) = { =, $ }</li>
+</ul>
+<p><strong>LR(0) Item Sets (DFA):</strong></p>
+<ul>
+  <li><strong>I0:</strong> S' &rarr; &bull;S, S &rarr; &bull;L=R, S &rarr; &bull;R, L &rarr; &bull;*R, L &rarr; &bull;id, R &rarr; &bull;L</li>
+  <li><strong>I1 (Goto I0, S):</strong> S' &rarr; S&bull;</li>
+  <li><strong>I2 (Goto I0, L):</strong> S &rarr; L&bull;=R, R &rarr; L&bull;</li>
+  <li><strong>I3 (Goto I0, R):</strong> S &rarr; R&bull;</li>
+  <li><strong>I4 (Goto I0, *):</strong> L &rarr; *&bull;R, R &rarr; &bull;L, L &rarr; &bull;*R, L &rarr; &bull;id</li>
+  <li><strong>I5 (Goto I0, id):</strong> L &rarr; id&bull;</li>
+  <li><strong>I6 (Goto I2, =):</strong> S &rarr; L=&bull;R, R &rarr; &bull;L, L &rarr; &bull;*R, L &rarr; &bull;id</li>
+  <li><strong>I7 (Goto I4, R):</strong> L &rarr; *R&bull;</li>
+  <li><strong>I8 (Goto I4, L):</strong> R &rarr; L&bull;</li>
+  <li><strong>I9 (Goto I6, R):</strong> S &rarr; L=R&bull;</li>
+</ul>
+<p><em>(Goto(I4, *) = I4, Goto(I4, id) = I5, Goto(I6, *) = I4, Goto(I6, id) = I5, Goto(I6, L) = I8)</em></p>
+
+<h4>Part (b): Checking for Conflicts</h4>
+<p>An SLR(1) table uses FOLLOW sets to place Reduce actions. Look at State <strong>I2</strong>:</p>
+<ul>
+  <li><code>S &rarr; L&bull;=R</code> dictates a <strong>Shift</strong> action on the symbol <code>=</code> (Goto I6).</li>
+  <li><code>R &rarr; L&bull;</code> dictates a <strong>Reduce</strong> action by rule 6. According to SLR(1) rules, this reduction is placed in the columns for FOLLOW(R).</li>
+  <li>Since FOLLOW(R) contains <code>=</code> and <code>$</code>, we must place Reduce 6 in the column for <code>=</code>.</li>
+</ul>
+<p><strong>Conflict:</strong> In State I2, under column <code>=</code>, we have both a Shift action and a Reduce action. Therefore, <strong>the SLR(1) table has a Shift-Reduce (S-R) conflict</strong>, and this grammar is NOT SLR(1).</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-22">
+                <div class="q-text"><span class="q-badge c15">Q22</span><span>a) Explain SLR(1) vs LALR(1) vs CLR(1) item sets generation.
+b) Show how merging LR(1) items with same core produces LALR(1) states without introducing S-R conflicts.</span></div>
+                <div class="a-text">
+                    <h3>LR Item Sets: SLR vs LALR vs CLR</h3>
+<h4>Part (a): Generation Methods</h4>
+<ul>
+  <li><strong>SLR(1):</strong> Builds the DFA using basic LR(0) items (no lookahead). It blindly places Reduce actions using global <code>FOLLOW()</code> sets. It is small but prone to conflicts.</li>
+  <li><strong>CLR(1):</strong> Builds the DFA using LR(1) items (Item + Lookahead). Lookaheads are precisely tracked through transitions. It places Reduce actions <em>only</em> in the columns specified by the item's lookahead. It is powerful but produces massive state machines because it creates distinct states for identical items that have different lookaheads.</li>
+  <li><strong>LALR(1):</strong> Starts by generating the massive CLR(1) DFA. It then scans the states and <strong>merges</strong> states that have the exact same "Core" (the LR(0) part of the item) but different lookaheads. The resulting DFA has the exact same number of states as SLR(1), but retains precise lookahead information.</li>
+</ul>
+
+<h4>Part (b): Merging CLR to LALR</h4>
+<p>Suppose CLR generates two states:</p>
+<p><strong>State 10:</strong> <code>A &rarr; X &bull; Y, [a]</code><br/>
+<strong>State 15:</strong> <code>A &rarr; X &bull; Y, [b]</code></p>
+<p>Because the core <code>A &rarr; X &bull; Y</code> is identical, LALR merges them into a single state:</p>
+<p><strong>Merged State 10_15:</strong> <code>A &rarr; X &bull; Y, [a/b]</code></p>
+<p><strong>Conflict Resolution:</strong> Merging LR(1) states to form LALR(1) states can <strong>never</strong> introduce a new Shift-Reduce conflict. If a shift-reduce conflict appears in the merged state, it must have already existed in the original CLR(1) states. However, merging <em>can</em> occasionally introduce new Reduce-Reduce conflicts.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-23">
+                <div class="q-text"><span class="q-badge c15">Q23</span><span>a) Explain Backpatching for boolean expressions with control flow jumps.
+b) Generate backpatched 3AC for `if (a < b or c < d) and e < f then x = 1;`</span></div>
+                <div class="a-text">
+                    <h3>Backpatching in Control Flow</h3>
+<h4>Part (a): Explanation</h4>
+<p>Backpatching is used in one-pass compilers. When parsing a boolean expression with short-circuit evaluation, the compiler generates jump instructions but doesn't know the destination addresses yet. It leaves them blank and adds their instruction indexes to a <code>truelist</code> or <code>falselist</code>. When the destination code is finally generated, a <code>backpatch()</code> function fills in the blanks.</p>
+
+<h4>Part (b): Backpatched 3AC for <code>if (a < b or c < d) and e < f then x = 1;</code></h4>
+<p>Assuming instructions start at index 100.</p>
+<div class="code-block">
+// Evaluate (a < b)
+100: if (a < b) goto _      // truelist. Backpatched to 104
+101: goto _                 // falselist. Backpatched to 102
+// Evaluate (c < d) (Start of OR's right child)
+102: if (c < d) goto _      // truelist. Backpatched to 104
+103: goto _                 // falselist. Backpatched to END (107)
+// Evaluate (e < f) (Start of AND's right child)
+104: if (e < f) goto _      // truelist. Backpatched to 106 (Start of THEN block)
+105: goto _                 // falselist. Backpatched to END (107)
+// THEN block
+106: x = 1
+107: ...                    // END
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-24">
+                <div class="q-text"><span class="q-badge c15">Q24</span><span>a) Explain Memory Management for Object-Oriented Languages (C++/Java).
+b) Detail Object layout, Virtual Method Tables (VTable), and dynamic dispatch resolution.</span></div>
+                <div class="a-text">
+                    <h3>Memory Management for OOP (C++/Java)</h3>
+<h4>Part (a): General Memory Management</h4>
+<p>In OOP, objects are typically allocated dynamically on the <strong>Heap</strong> using <code>new</code>. Memory is reclaimed either manually (<code>delete</code> in C++) or automatically via Garbage Collection (Java). Local object references are stored on the <strong>Stack</strong> within activation records.</p>
+
+<h4>Part (b): Object Layout and Virtual Method Tables (VTable)</h4>
+<p><strong>Object Layout in Memory:</strong> An object in memory consists of:</p>
+<ol>
+  <li>A hidden pointer to the class's Virtual Method Table (vptr).</li>
+  <li>The object's instance variables (fields). Fields inherited from parent classes are placed first in the layout to ensure binary compatibility.</li>
+</ol>
+<p><strong>Dynamic Dispatch via VTable:</strong></p>
+<p>To support Polymorphism (Method Overriding), the compiler creates one VTable per <em>class</em> (not per object). The VTable is an array of function pointers pointing to the most derived implementation of virtual methods.</p>
+<p>When a virtual method is called (e.g., <code>obj->draw()</code>):</p>
+<ol>
+  <li>The CPU follows <code>obj</code>'s hidden <code>vptr</code> to find the class's VTable.</li>
+  <li>It looks up the index for <code>draw()</code> (e.g., index 2) in the VTable.</li>
+  <li>It jumps to the function address stored at that index.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-25">
+                <div class="q-text"><span class="q-badge c15">Q25</span><span>a) Explain Code Generation for Risk Architectures (RISC vs CISC).
+b) Detail Instruction Selection using Tree-Rewriting rules.
+
+
+
+
+--- Page 5 ---</span></div>
+                <div class="a-text">
+                    <h3>Code Generation for Target Architectures</h3>
+<h4>Part (a): RISC vs CISC</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>RISC (ARM, MIPS)</th>
+    <th>CISC (x86)</th>
+  </tr>
+  <tr>
+    <td><strong>Instruction Set</strong></td>
+    <td>Small, simple instructions. All execute in 1 clock cycle.</td>
+    <td>Large, complex instructions (e.g., String copy, memory-to-memory math).</td>
+  </tr>
+  <tr>
+    <td><strong>Memory Access</strong></td>
+    <td>Load/Store Architecture. Math operations can only occur on registers.</td>
+    <td>Math operations can occur directly on memory addresses.</td>
+  </tr>
+  <tr>
+    <td><strong>Compiler Burden</strong></td>
+    <td>High. The compiler must break complex statements into many simple instructions and manage registers heavily.</td>
+    <td>Lower. The compiler can select single complex instructions that map directly to high-level language constructs.</td>
+  </tr>
+</table>
+
+<h4>Part (b): Instruction Selection via Tree-Rewriting</h4>
+<p>The compiler represents the Intermediate Code as a forest of trees. The Target Architecture's instruction set is represented as a set of tree templates (patterns).</p>
+<p>Instruction selection is treated as a <strong>Tree Pattern Matching</strong> problem. The compiler "tiles" the IR tree with target instruction templates. If a template matches a subtree, the compiler replaces the subtree with the corresponding assembly instruction. Dynamic programming (like the Sethi-Ullman algorithm) is used to find the optimal tiling that minimizes execution cost.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-26">
+                <div class="q-text"><span class="q-badge c15">Q26</span><span>a) Explain Dominator Trees and Natural Loops in Control Flow Graphs.
+b) Algorithm to identify natural loops and loop pre-headers.</span></div>
+                <div class="a-text">
+                    <h3>Dominator Trees and Natural Loops</h3>
+<h4>Part (a): Concepts</h4>
+<ul>
+  <li><strong>Dominator:</strong> Node A <em>dominates</em> Node B if every path from the CFG entry node to B must pass through A.</li>
+  <li><strong>Dominator Tree:</strong> A tree representing dominance. The parent of a node is its immediate dominator (the closest dominator).</li>
+  <li><strong>Natural Loop:</strong> A loop in the CFG that has a single entry point (the header) and at least one back-edge that returns to the header.</li>
+</ul>
+
+<h4>Part (b): Algorithm to Identify Natural Loops</h4>
+<ol>
+  <li><strong>Compute Dominators:</strong> For all nodes in the CFG.</li>
+  <li><strong>Find Back-Edges:</strong> A CFG edge from node <code>T</code> (Tail) to node <code>H</code> (Header) is a back-edge IF AND ONLY IF <code>H</code> dominates <code>T</code>.</li>
+  <li><strong>Construct Loop Body:</strong> For every back-edge <code>T &rarr; H</code>, the natural loop consists of <code>H</code>, <code>T</code>, and all nodes that can reach <code>T</code> without passing through <code>H</code>.</li>
+  <li><strong>Insert Pre-Header:</strong> The compiler injects a new block (the pre-header) immediately before the loop header. This provides a safe place to move invariant code (Loop Hoisting) out of the loop.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-27">
+                <div class="q-text"><span class="q-badge c15">Q27</span><span>a) Explain Global Value Numbering (GVN) vs Local Value Numbering (LVN).
+b) Apply Value Numbering to optimize basic block statements.</span></div>
+                <div class="a-text">
+                    <h3>Value Numbering</h3>
+<h4>Part (a): LVN vs GVN</h4>
+<p>Value Numbering tracks the mathematical values computed by a program rather than the variable names themselves.</p>
+<ul>
+  <li><strong>Local Value Numbering (LVN):</strong> Operates within a single Basic Block. Assigns unique integer IDs to distinct values. Used for localized Common Subexpression Elimination and Constant Folding.</li>
+  <li><strong>Global Value Numbering (GVN):</strong> Extends this logic across the entire CFG using SSA form. Much more powerful, allowing the compiler to prove that variables in entirely different blocks hold the same underlying value.</li>
+</ul>
+
+<h4>Part (b): Applying LVN</h4>
+<p><strong>Code:</strong></p>
+<code>a = x + y</code><br/>
+<code>b = x + y</code><br/>
+<code>a = 17</code><br/>
+<code>c = x + y</code>
+
+<p><strong>LVN Trace:</strong></p>
+<ol>
+  <li><code>a = x + y</code>: Give <code>x</code> value 1, <code>y</code> value 2. Expression <code>+ (1,2)</code> gets value 3. <code>a</code> maps to 3.</li>
+  <li><code>b = x + y</code>: Expression <code>+ (1,2)</code> already exists and has value 3! Map <code>b</code> to 3. (Optimize: <code>b = a</code>).</li>
+  <li><code>a = 17</code>: Give 17 value 4. Update <code>a</code> to map to 4.</li>
+  <li><code>c = x + y</code>: Expression <code>+ (1,2)</code> still exists as value 3. Map <code>c</code> to 3. (Optimize: <code>c = b</code> because <code>a</code> was overwritten!).</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-28">
+                <div class="q-text"><span class="q-badge c15">Q28</span><span>a) Explain Interprocedural Optimization (IPO) and Inline Expansion.
+b) Tradeoffs of function inlining on code size and instruction cache.</span></div>
+                <div class="a-text">
+                    <h3>Interprocedural Optimization and Inlining</h3>
+<h4>Part (a): Interprocedural Optimization (IPO)</h4>
+<p>Standard optimizations operate within a single function boundary. IPO analyzes the entire program (or multiple files via Link-Time Optimization) to optimize across function calls. Techniques include Dead Function Elimination and Constant Propagation across arguments.</p>
+<p><strong>Inline Expansion:</strong> The most aggressive IPO technique. The compiler replaces a function call with the actual body of the called function.</p>
+
+<h4>Part (b): Tradeoffs of Function Inlining</h4>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Pros of Inlining</th>
+    <th>Cons of Inlining</th>
+  </tr>
+  <tr>
+    <td><strong>Removes Call Overhead:</strong> Eliminates stack frame creation, parameter pushing, and jumping.</td>
+    <td><strong>Code Bloat (Size):</strong> Duplicating the function body multiple times increases the final executable size.</td>
+  </tr>
+  <tr>
+    <td><strong>Enables Further Optimization:</strong> Placing the function body directly in the caller's context often allows aggressive Constant Folding and Dead Code Elimination.</td>
+    <td><strong>Instruction Cache Thrashing:</strong> If the executable size grows too large, it may not fit in the CPU's L1 Instruction Cache, causing massive slowdowns that negate the benefit of inlining.</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-29">
+                <div class="q-text"><span class="q-badge c15">Q29</span><span>a) Explain Target Machine Architecture model for code generation.
+b) Generate assembly code for `x = a + b * c` using 2 registers.</span></div>
+                <div class="a-text">
+                    <h3>Target Machine Architecture & Code Generation</h3>
+<h4>Part (a): Target Machine Model</h4>
+<p>A standard target machine model assumes a byte-addressable memory, \(n\) general-purpose registers (\(R_0\) to \(R_{n-1}\)), and standard instructions (LOAD, STORE, ADD, SUB, MULT, BRANCH). Instruction costs usually correlate with memory access (Register-to-Register = 1 cost, Memory-to-Register = 2 cost).</p>
+
+<h4>Part (b): Generating Assembly using 2 Registers</h4>
+<p><strong>Statement:</strong> <code>x = a + b * c</code></p>
+<p>Assuming we have registers <code>R0</code> and <code>R1</code>. To minimize memory accesses, we should evaluate the most deeply nested subtree first (the multiplication).</p>
+<div class="code-block">
+// Calculate b * c first to minimize register holding
+LD R0, b        ; Load 'b' into R0
+LD R1, c        ; Load 'c' into R1
+MUL R0, R1      ; R0 = R0 * R1 (b * c). R1 is now free.
+
+// Add 'a'
+LD R1, a        ; Load 'a' into R1
+ADD R0, R1      ; R0 = R0 + R1 (b*c + a). R1 is now free.
+
+// Store to x
+ST x, R0        ; Store result to memory 'x'
+</div>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gc-30">
+                <div class="q-text"><span class="q-badge c15">Q30</span><span>a) Explain Static Program Analysis tools and linters.
+b) Detail Abstract Interpretation and Model Checking concepts in compiler verification.</span></div>
+                <div class="a-text">
+                    <h3>Static Program Analysis</h3>
+<h4>Part (a): Tools and Linters</h4>
+<p>Static analysis examines source code without executing it. Modern compilers (like Clang) use static analysis infrastructure to issue warnings (e.g., "variable used uninitialized", "memory leak"). Linters (like ESLint or SonarQube) are standalone static analysis tools enforcing style and catching common bugs.</p>
+
+<h4>Part (b): Abstract Interpretation and Model Checking</h4>
+<ul>
+  <li><strong>Abstract Interpretation:</strong> Mathematically models the execution of a program across all possible inputs. Instead of tracking exact values (e.g., <code>x = 5</code>), it tracks abstract properties (e.g., "x is a positive integer"). It guarantees the absence of certain bugs (e.g., proving no array out-of-bounds errors can ever occur).</li>
+  <li><strong>Model Checking:</strong> Explores the state space of a program to verify properties, typically for concurrent systems. It creates a state-machine of the program and checks if "bad states" (like deadlocks or race conditions) are reachable. If a bad state is found, it provides a counter-example trace to reproduce the bug.</li>
+</ul>
+
+                </div>
+            </div>
+
+</main>
+</div>
+</body>
+</html>

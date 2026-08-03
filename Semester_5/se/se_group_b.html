@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering (ESC501) - Exam-Ready Complete Solved Question Bank</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #0284c7; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .toc-box { background: var(--bg-paper); padding: 2rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); max-height: 80vh; overflow-y: auto; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .toc-box:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); }
+        .toc-box h3 { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 700; margin-top: 0; border-bottom: 2px solid var(--primary); padding-bottom: 0.8rem; color: #1a202c; }
+        .toc-box ul { list-style: none; padding: 0; margin: 0; margin-top: 1.2rem; }
+        .toc-box li { margin-bottom: 0.8rem; }
+        .toc-box a { text-decoration: none; color: var(--text-muted); font-size: 0.92rem; font-weight: 500; transition: color 0.2s ease, transform 0.2s ease; display: block; }
+        .toc-box a:hover { color: var(--primary); transform: translateX(4px); }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(2, 132, 199, 0.1); color: #0284c7; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(2, 132, 199, 0.2); }
+        .q-badge.b5 { background: rgba(56, 189, 248, 0.1); color: #0284c7; border-color: rgba(2, 132, 199, 0.2); }
+        .q-badge.c15 { background: rgba(139, 92, 246, 0.1); color: #7c3aed; border-color: rgba(124, 58, 237, 0.2); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid #0284c744; font-size: 1rem; transition: border-color 0.3s ease; }
+        .a-text:hover { border-left-color: var(--primary); }
+        .a-text p { margin-top: 0; margin-bottom: 1.2rem; line-height: 1.8; }
+        .a-text ul, .a-text ol { margin-top: 0; margin-bottom: 1.2rem; padding-left: 1.5rem; line-height: 1.8; }
+        .a-text li { margin-bottom: 0.6rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02); }
+        .diagram-caption { font-size: 0.9rem; color: var(--text-muted); margin-top: 1.2rem; font-style: italic; font-weight: 600; font-family: 'Plus Jakarta Sans', sans-serif; }
+        table { border-collapse: separate; border-spacing: 0; width: 100%; max-width: 850px; margin: 2rem 0; font-size: 0.95rem; border: 1px solid var(--border-light); border-radius: 8px; overflow: hidden; }
+        th, td { border-bottom: 1px solid var(--border-light); border-right: 1px solid var(--border-light); padding: 1rem 1.2rem; text-align: left; }
+        th { background: #f7fafc; font-weight: 700; color: #2b6cb0; font-family: 'Plus Jakarta Sans', sans-serif; }
+        tr:last-child td { border-bottom: none; }
+        th:last-child, td:last-child { border-right: none; }
+        tr:nth-child(even) { background: #fbfbfc; }
+        .code-block { font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; box-shadow: var(--shadow-sm); }
+        .note-skeleton { background: #f7fafc; padding: 1.8rem; border-radius: 12px; border: 1px dashed #cbd5e0; color: #718096; margin-top: 1.2rem; }
+        .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
+        .note-skeleton li { margin-bottom: 0.5rem; }
+        .note-skeleton b { color: #4a5568; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="se_index.html">← Back to Software Engineering Index</a>
+        <span class="nav-title">Software Engineering (ESC501) — Group B</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Question Bank Navigator</h3>
+                <ul><li><a href="se_group_a.html" class=""><b>Group A</b><br><span class="toc-meta">52 questions</span></a></li><li><a href="se_group_b.html" class="active"><b>Group B</b><br><span class="toc-meta">40 questions</span></a></li><li><a href="se_group_c.html" class=""><b>Group C</b><br><span class="toc-meta">30 questions</span></a></li></ul>
+                <p class="toc-foot"><a href="se_important_qa.html">View all groups on one page →</a></p>
+            </div>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-b">Group B — Medium / Descriptive Questions (5 Marks Each)</h1>
+
+            <div class="qa-card" id="gb-1">
+                <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain Classical Waterfall Model phases, advantages, and limitations.</span></div>
+                <div class="a-text">
+                    <h3>Classical Waterfall Model</h3>
+<p>The Classical Waterfall Model is the oldest and simplest Software Development Life Cycle (SDLC) model. It is a linear-sequential model where progress flows strictly downwards through distinct phases.</p>
+<div class="diagram-container">
+<div class="mermaid">
+graph TD
+    A[Requirements] --> B[Design]
+      B --> C[Implementation]
+      C --> D[Testing]
+      D --> E[Deployment]
+      E --> F[Maintenance]
+      style A fill:#e0f2fe,stroke:#0284c7
+      style B fill:#e0f2fe,stroke:#0284c7
+      style C fill:#e0f2fe,stroke:#0284c7
+      style D fill:#e0f2fe,stroke:#0284c7
+</div>
+</div>
+<ul>
+  <li><strong>Advantages:</strong> Simple to understand. Easy to manage because each phase has specific deliverables and a review process. Phases are completed one at a time without overlap.</li>
+  <li><strong>Limitations:</strong> Highly inflexible. Once a phase is finished, you cannot go back (no feedback loops). High risk of failure if initial requirements are misunderstood. No working software is produced until late in the lifecycle.</li>
+  <li><strong>Suitability:</strong> Best for small projects with crystal clear, frozen requirements (like a simple payroll system).</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-2">
+                <div class="q-text"><span class="q-badge b5">Q2</span><span>Explain Spiral Model quadrants and risk-driven approach.</span></div>
+                <div class="a-text">
+                    <h3>Spiral Model</h3>
+<p>The Spiral Model (proposed by Barry Boehm) is a <strong>risk-driven</strong> iterative software development process. It combines the systematic aspects of the Waterfall model with the iterative nature of the Prototyping model.</p>
+<p>The project is developed in continuous loops (spirals). Each loop represents a phase of the process and consists of 4 quadrants:</p>
+<ol>
+  <li><strong>Determine Objectives:</strong> Identify specific goals, alternatives, and constraints for the current iteration.</li>
+  <li><strong>Identify & Resolve Risks:</strong> Evaluate alternatives relative to objectives and constraints. The core of this quadrant is building <strong>prototypes</strong> to mitigate technical and market risks.</li>
+  <li><strong>Development & Testing:</strong> Develop the next version of the product (similar to the standard waterfall phases for that iteration).</li>
+  <li><strong>Plan Next Phase:</strong> Review the iteration's output with the customer and plan the next spiral based on feedback.</li>
+</ol>
+<p><strong>Suitability:</strong> Ideal for large, expensive, and complex projects (e.g., aerospace software) where risk mitigation is paramount.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-3">
+                <div class="q-text"><span class="q-badge b5">Q3</span><span>Explain Prototyping Model workflow and suitability.</span></div>
+                <div class="a-text">
+                    <h3>Prototyping Model</h3>
+<p>The Prototyping Model involves building a working, simplified version (a prototype) of the software before developing the actual final product. This prototype is used to understand requirements better.</p>
+<h4>Workflow</h4>
+<ol>
+  <li><strong>Initial Requirements:</strong> Gather basic requirements from the client.</li>
+  <li><strong>Quick Design & Build:</strong> Rapidly design and develop a prototype focusing on the user interface and core functionality (ignoring performance, security, and maintainability).</li>
+  <li><strong>Customer Evaluation:</strong> The client uses the prototype and provides feedback.</li>
+  <li><strong>Refine Prototype:</strong> The prototype is modified based on feedback until the client is satisfied.</li>
+  <li><strong>Develop Final Product:</strong> Once the prototype is approved, it serves as the definitive specification for building the actual software using a rigorous SDLC (like Waterfall). The initial prototype is usually thrown away (Throwaway Prototyping).</li>
+</ol>
+<p><strong>Suitability:</strong> Highly suitable when the client is unsure about their exact requirements, or for systems with complex User Interfaces.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-4">
+                <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain Agile Scrum Framework roles, events, and artifacts.</span></div>
+                <div class="a-text">
+                    <h3>Agile Scrum Framework</h3>
+<p>Scrum is a popular Agile framework that breaks software development into short, time-boxed iterations called <strong>Sprints</strong> (usually 2-4 weeks long).</p>
+<h4>1. Roles</h4>
+<ul>
+  <li><strong>Product Owner:</strong> Represents the customer. Owns the Product Backlog and prioritizes features.</li>
+  <li><strong>Scrum Master:</strong> A servant-leader who ensures the team follows Scrum practices and removes any impediments blocking the team.</li>
+  <li><strong>Development Team:</strong> A self-organizing, cross-functional team of developers, testers, and designers who build the product.</li>
+</ul>
+<h4>2. Artifacts</h4>
+<ul>
+  <li><strong>Product Backlog:</strong> A master list of all desired features, bug fixes, and requirements, prioritized by the Product Owner.</li>
+  <li><strong>Sprint Backlog:</strong> The subset of items from the Product Backlog chosen by the team to be completed in the current Sprint.</li>
+</ul>
+<h4>3. Events</h4>
+<ul>
+  <li><strong>Sprint Planning:</strong> Meeting to define what will be done in the Sprint.</li>
+  <li><strong>Daily Standup:</strong> A 15-minute daily meeting where team members answer: What did I do yesterday? What will I do today? Are there any blockers?</li>
+  <li><strong>Sprint Review:</strong> Meeting at the end of the Sprint to demo the working software to stakeholders.</li>
+  <li><strong>Sprint Retrospective:</strong> Meeting to reflect on the Sprint process and identify improvements for the next one.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-5">
+                <div class="q-text"><span class="q-badge b5">Q5</span><span>Explain SRS Document characteristics (Correct, Complete, Unambiguous, Verifiable).</span></div>
+                <div class="a-text">
+                    <h3>Characteristics of a Good SRS Document</h3>
+<p>A Software Requirement Specification (SRS) is a formal document detailing what the software must do. To be effective, an SRS must be:</p>
+<ol>
+  <li><strong>Correct:</strong> Every requirement stated must accurately reflect what the customer actually wants. There should be no technical errors in the specifications.</li>
+  <li><strong>Complete:</strong> It must include all significant requirements (functional, non-functional, constraints, interfaces). No feature expected by the client should be missing.</li>
+  <li><strong>Unambiguous:</strong> Every requirement must have one, and only one, interpretation. Language should be precise; vague terms like "fast," "user-friendly," or "good" should be avoided.</li>
+  <li><strong>Verifiable (Testable):</strong> A requirement is verifiable if there exists a finite, cost-effective process to check whether the final software meets that requirement. (e.g., Instead of "system should be fast", use "system must respond within 2 seconds").</li>
+  <li><strong>Consistent:</strong> No two requirements should contradict each other.</li>
+  <li><strong>Traceable:</strong> It should be easy to trace the origin of each requirement and track it through design, code, and testing phases.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-6">
+                <div class="q-text"><span class="q-badge b5">Q6</span><span>Explain Requirement Elicitation techniques (Interviews, Questionnaires, Prototyping).</span></div>
+                <div class="a-text">
+                    <h3>Requirement Elicitation Techniques</h3>
+<p>Requirement Elicitation is the process of gathering requirements directly from stakeholders, users, and customers. It is the most critical step in requirement engineering.</p>
+<ul>
+  <li><strong>Interviews:</strong> Direct face-to-face (or virtual) conversations with stakeholders.
+      <br/>• <em>Structured:</em> Following a strict predefined list of questions.
+      <br/>• <em>Unstructured:</em> Open-ended discussions allowing the stakeholder to express their vision freely.</li>
+  <li><strong>Questionnaires / Surveys:</strong> Useful when there is a massive user base (e.g., thousands of employees) spread across different locations. It helps gather quantitative data efficiently, though it lacks deep qualitative insights.</li>
+  <li><strong>Prototyping:</strong> Building a quick, interactive mockup of the proposed system. Users interact with the prototype and provide immediate, concrete feedback on what they like, dislike, or feel is missing. This is highly effective for resolving ambiguous requirements.</li>
+  <li><strong>Brainstorming:</strong> Group sessions where stakeholders and developers freely generate ideas without immediate criticism.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-7">
+                <div class="q-text"><span class="q-badge b5">Q7</span><span>Explain Data Flow Diagrams (DFD) notation rules and leveling.</span></div>
+                <div class="a-text">
+                    <h3>Data Flow Diagrams (DFD)</h3>
+<p>A DFD is a graphical representation of the flow of data through an information system. It focuses purely on data movement, ignoring control flow (like loops and if-statements).</p>
+<h4>Notation Rules</h4>
+<ul>
+  <li><strong>Circle/Bubble:</strong> Represents a <em>Process</em> (a function that transforms data).</li>
+  <li><strong>Arrow:</strong> Represents <em>Data Flow</em> (movement of data). Must be labeled.</li>
+  <li><strong>Parallel Lines:</strong> Represents a <em>Data Store</em> (database or file).</li>
+  <li><strong>Rectangle/Square:</strong> Represents an <em>External Entity</em> (source or sink of data, like a User or an External API).</li>
+</ul>
+<h4>Leveling</h4>
+<p>DFDs are constructed hierarchically (Top-Down Approach):</p>
+<ul>
+  <li><strong>Level 0 (Context Diagram):</strong> Shows the entire system as a single process bubble interacting with external entities. Gives a high-level overview.</li>
+  <li><strong>Level 1:</strong> Decomposes the Level 0 process into its major sub-processes, showing internal data stores and data flows between these sub-processes.</li>
+  <li><strong>Level 2+:</strong> Further decomposes complex Level 1 processes into more granular sub-processes.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-8">
+                <div class="q-text"><span class="q-badge b5">Q8</span><span>Explain Use Case Diagrams in UML with `<>` and `<>`.</span></div>
+                <div class="a-text">
+                    <h3>Use Case Diagrams</h3>
+<p>In UML, a Use Case Diagram models the dynamic behavior of a system by showing the interactions between external <strong>Actors</strong> (stick figures) and the system's <strong>Use Cases</strong> (ovals).</p>
+<h4>Relationships between Use Cases</h4>
+<ul>
+  <li><strong><code>&lt;&lt;include&gt;&gt;</code>:</strong> Used when one use case <em>always</em> requires the functionality of another use case to complete its task. It represents mandatory, reusable behavior.
+      <br/><em>Example:</em> <code>(Withdraw Money) --&lt;&lt;include&gt;&gt;--&gt; (Verify PIN)</code>. You cannot withdraw money without verifying the PIN.</li>
+  <li><strong><code>&lt;&lt;extend&gt;&gt;</code>:</strong> Used when a use case <em>optionally</em> adds functionality to a base use case under specific conditions. It represents optional or exceptional behavior. The arrow points from the extending (optional) use case to the base use case.
+      <br/><em>Example:</em> <code>(Print Receipt) --&lt;&lt;extend&gt;&gt;--&gt; (Withdraw Money)</code>. Printing a receipt only happens if the user specifically requests it during withdrawal.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-9">
+                <div class="q-text"><span class="q-badge b5">Q9</span><span>Explain Cohesion types from Functional (highest) to Coincidental (lowest).</span></div>
+                <div class="a-text">
+                    <h3>Cohesion in Software Design</h3>
+<p><strong>Cohesion</strong> measures the degree to which the elements inside a single module belong together. <strong>High cohesion is desired.</strong></p>
+<p>Types of Cohesion (from Best to Worst):</p>
+<ol>
+  <li><strong>Functional Cohesion (Best):</strong> All elements in the module execute a single, well-defined task (e.g., a function <code>calculateTax()</code>).</li>
+  <li><strong>Sequential Cohesion:</strong> The output of one element acts as the input for the next element within the same module (like an assembly line).</li>
+  <li><strong>Communicational Cohesion:</strong> Elements operate on the same core data structure, but perform different operations.</li>
+  <li><strong>Procedural Cohesion:</strong> Elements are grouped because they always execute in a specific sequence, even if they process different data.</li>
+  <li><strong>Temporal Cohesion:</strong> Elements are grouped solely because they must execute at the same time (e.g., an <code>initializeAll()</code> function that boots up the database, clears the screen, and loads user config).</li>
+  <li><strong>Logical Cohesion:</strong> Elements perform logically similar tasks (like all input routines) but are controlled by a flag passed by the caller.</li>
+  <li><strong>Coincidental Cohesion (Worst):</strong> Elements are grouped completely randomly with no meaningful relationship.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-10">
+                <div class="q-text"><span class="q-badge b5">Q10</span><span>Explain Coupling types from Content (highest/worst) to Data (lowest/best).</span></div>
+                <div class="a-text">
+                    <h3>Coupling in Software Design</h3>
+<p><strong>Coupling</strong> measures the degree of interdependence between two different modules. <strong>Low (Loose) coupling is desired.</strong></p>
+<p>Types of Coupling (from Worst to Best):</p>
+<ol>
+  <li><strong>Content Coupling (Worst):</strong> One module directly modifies or accesses the internal local data or code of another module. A nightmare for maintainability.</li>
+  <li><strong>Common Coupling:</strong> Multiple modules share access to the same Global Data (global variables). Changing the global data structure forces changes in all connected modules.</li>
+  <li><strong>Control Coupling:</strong> One module passes a control flag (like a boolean) to another module, dictating its internal execution logic.</li>
+  <li><strong>Stamp Coupling:</strong> Modules pass complex composite data structures (like a massive Struct or Object), but the receiving module only actually needs a few specific fields from it.</li>
+  <li><strong>Data Coupling (Best):</strong> Modules communicate strictly by passing simple, fundamental data types (like an <code>int</code> or <code>string</code>) via parameters. The receiving module uses all the data it is given.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-11">
+                <div class="q-text"><span class="q-badge b5">Q11</span><span>Explain Cyclomatic Complexity calculation methods with flow graph example.</span></div>
+                <div class="a-text">
+                    <h3>Cyclomatic Complexity Calculation</h3>
+<p><strong>Cyclomatic Complexity V(G)</strong> is a software metric used to indicate the complexity of a program. It directly measures the number of linearly independent paths through a program's source code.</p>
+<h4>Calculation Methods</h4>
+<p>Given a Control Flow Graph (CFG) of the code:</p>
+<ol>
+  <li><strong>Edge/Node Formula:</strong> \(V(G) = E - N + 2P\)
+      <br/>Where \(E\) = Number of edges, \(N\) = Number of nodes, \(P\) = Number of connected components (usually 1 for a single program).</li>
+  <li><strong>Predicate Node Formula:</strong> \(V(G) = D + 1\)
+      <br/>Where \(D\) = Number of predicate (decision) nodes (like <code>if</code>, <code>while</code>, <code>for</code>).</li>
+  <li><strong>Region Formula:</strong> \(V(G) = R\)
+      <br/>Where \(R\) = Number of regions in the planar flow graph (including the 1 infinite outer region).</li>
+</ol>
+<p><strong>Example:</strong> A simple <code>if-else</code> statement has 1 decision node (the <code>if</code> condition). Therefore, \(V(G) = 1 + 1 = 2\). There are exactly 2 independent paths (the true branch and the false branch).</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-12">
+                <div class="q-text"><span class="q-badge b5">Q12</span><span>Explain White-Box Testing techniques: Statement, Branch, and Path Coverage.</span></div>
+                <div class="a-text">
+                    <h3>White-Box Testing Techniques</h3>
+<p>White-Box testing involves testing the internal structures, logic, and code of the software rather than its external functionality. The tester must know programming.</p>
+<ul>
+  <li><strong>Statement Coverage:</strong> Designing test cases so that every single line of code (statement) in the program is executed at least once. It is the weakest metric (e.g., it might miss an empty <code>else</code> branch).</li>
+  <li><strong>Branch Coverage (Decision Coverage):</strong> Designing test cases so that every possible outcome (True and False) of all decision nodes (<code>if</code>, <code>while</code>) is executed at least once. It guarantees statement coverage.</li>
+  <li><strong>Path Coverage:</strong> Designing test cases to execute <em>every possible independent execution path</em> through the code from start to finish. The number of required test cases is exactly equal to the Cyclomatic Complexity \(V(G)\). This is the strongest metric but often impractical for large programs with loops.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-13">
+                <div class="q-text"><span class="q-badge b5">Q13</span><span>Explain Black-Box Testing techniques: Equivalence Partitioning & Boundary Value Analysis.</span></div>
+                <div class="a-text">
+                    <h3>Black-Box Testing Techniques</h3>
+<p>Black-Box testing focuses entirely on the inputs and outputs of the software without looking at the internal code. The goal is to verify the software meets its requirements.</p>
+<ul>
+  <li><strong>Equivalence Partitioning:</strong> Divides the input domain into "classes" (partitions) of equivalent data. The assumption is that if one value in a partition works, all values in that partition will work.
+      <br/><em>Example:</em> An age field accepting 18 to 60. Partitions: Invalid (< 18), Valid (18-60), Invalid (> 60). Test cases: 15, 30, 75.</li>
+  <li><strong>Boundary Value Analysis (BVA):</strong> An extension of Equivalence Partitioning. Since bugs frequently occur at the boundaries of input ranges, BVA specifically tests the exact boundary values and the values just inside and just outside the boundaries.
+      <br/><em>Example:</em> For age 18 to 60. Test cases: 17, 18, 19, 59, 60, 61.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-14">
+                <div class="q-text"><span class="q-badge b5">Q14</span><span>Explain Integration Testing strategies: Top-Down vs Bottom-Up (Stubs & Drivers).</span></div>
+                <div class="a-text">
+                    <h3>Integration Testing: Top-Down vs Bottom-Up</h3>
+<p>Integration testing verifies that individually tested modules work correctly when combined together.</p>
+<ul>
+  <li><strong>Top-Down Integration:</strong> Testing starts from the main control module and moves downwards to subordinate modules.
+      <br/>• <strong>Stubs:</strong> Since lower-level modules might not be developed yet, "Stubs" are used. A stub is a dummy program that simulates the behavior of the missing lower-level module.
+      <br/>• <em>Pros:</em> Major design flaws at the top are caught early.</li>
+  <li><strong>Bottom-Up Integration:</strong> Testing starts from the lowest-level atomic modules and moves upwards to the main control module.
+      <br/>• <strong>Drivers:</strong> Since the upper-level control modules might not be developed, "Drivers" are used. A driver is a dummy program that passes test cases down to the module being tested.
+      <br/>• <em>Pros:</em> Easy to test utility modules thoroughly. No need for complex stubs.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-15">
+                <div class="q-text"><span class="q-badge b5">Q15</span><span>Explain Basic COCOMO Model effort and development time formulas.</span></div>
+                <div class="a-text">
+                    <h3>Basic COCOMO Model</h3>
+<p>The Constructive Cost Model (COCOMO), developed by Barry Boehm, is an algorithmic model used to estimate the Effort and Time required to develop a software project based on its estimated size in Kilo Lines of Code (KLOC).</p>
+<h4>Formulas</h4>
+<ol>
+  <li><strong>Effort (E):</strong> Measured in Person-Months (PM).
+      <br/>\(E = a \times (KLOC)^b\)</li>
+  <li><strong>Development Time (Tdev):</strong> Measured in Months (M).
+      <br/>\(T_{dev} = c \times (E)^d\)</li>
+</ol>
+<h4>Project Modes (Constants a, b, c, d)</h4>
+<ul>
+  <li><strong>Organic:</strong> Small team, familiar environment. (a=2.4, b=1.05, c=2.5, d=0.38)</li>
+  <li><strong>Semi-Detached:</strong> Medium size, mixed experience. (a=3.0, b=1.12, c=2.5, d=0.35)</li>
+  <li><strong>Embedded:</strong> Complex, hardware constraints, tight regulations. (a=3.6, b=1.20, c=2.5, d=0.32)</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-16">
+                <div class="q-text"><span class="q-badge b5">Q16</span><span>Explain Function Point Analysis components and calculation.</span></div>
+                <div class="a-text">
+                    <h3>Function Point Analysis (FPA)</h3>
+<p>FPA is a method to estimate the size of a software project based on the functionality it provides to the user, rather than counting Lines of Code (LOC), which is language-dependent.</p>
+<h4>Components</h4>
+<p>The system is evaluated based on 5 functional parameters, each rated as Simple, Average, or Complex:</p>
+<ol>
+  <li><strong>External Inputs (EI):</strong> Screens/forms where users input data into the system.</li>
+  <li><strong>External Outputs (EO):</strong> Reports/screens where the system outputs data to the user.</li>
+  <li><strong>External Inquiries (EQ):</strong> Simple queries that retrieve data without updating files.</li>
+  <li><strong>Internal Logical Files (ILF):</strong> Databases/files maintained entirely within the system.</li>
+  <li><strong>External Interface Files (EIF):</strong> Files read by the system but maintained by another external system.</li>
+</ol>
+<p><strong>Calculation:</strong> Calculate the Unadjusted Function Points (UFP) by summing the weighted components. Then multiply UFP by the Value Adjustment Factor (VAF) to get the final FP count.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-17">
+                <div class="q-text"><span class="q-badge b5">Q17</span><span>Explain Software Project Scheduling tools: Gantt Chart vs PERT/CPM.</span></div>
+                <div class="a-text">
+                    <h3>Project Scheduling: Gantt Chart vs PERT/CPM</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Feature</th>
+    <th>Gantt Chart</th>
+    <th>PERT / CPM Network Graph</th>
+  </tr>
+  <tr>
+    <td><strong>Format</strong></td>
+    <td>Horizontal bar chart.</td>
+    <td>Directed network graph (nodes and arrows).</td>
+  </tr>
+  <tr>
+    <td><strong>Focus</strong></td>
+    <td>Focuses on the <em>timeline</em> and schedule. Easily shows when tasks start and end.</td>
+    <td>Focuses on <em>dependencies</em> between tasks and identifying the Critical Path.</td>
+  </tr>
+  <tr>
+    <td><strong>Dependencies</strong></td>
+    <td>Can show simple dependencies, but becomes very messy for complex projects.</td>
+    <td>Excellent at showing complex, intertwined task dependencies.</td>
+  </tr>
+  <tr>
+    <td><strong>Audience</strong></td>
+    <td>Best for high-level management and clients for easy visualization of progress.</td>
+    <td>Best for Project Managers to calculate slack time and optimize schedules.</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-18">
+                <div class="q-text"><span class="q-badge b5">Q18</span><span>Explain Risk Management steps: Identification, Analysis, Planning, Monitoring.</span></div>
+                <div class="a-text">
+                    <h3>Risk Management Process</h3>
+<p>Risk Management is a proactive approach to dealing with uncertain events that could negatively impact the software project.</p>
+<ol>
+  <li><strong>Risk Identification:</strong> Systematically brainstorming potential risks (e.g., technology failures, staff turnover, requirement changes).</li>
+  <li><strong>Risk Analysis (Projection):</strong> Assessing each identified risk based on two metrics:
+      <br/>• <em>Probability:</em> The likelihood of the risk occurring (e.g., 10%).
+      <br/>• <em>Impact:</em> The severity of the damage if it occurs (e.g., 1 to 5 scale).
+      <br/>• Risk Exposure = Probability &times; Impact.</li>
+  <li><strong>Risk Planning (Mitigation):</strong> Developing strategies to reduce the probability or impact of the highest-exposure risks (e.g., training staff, buying backup servers).</li>
+  <li><strong>Risk Monitoring:</strong> Continuously tracking the identified risks throughout the project lifecycle to see if their probability is increasing, and executing contingency plans if they occur.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-19">
+                <div class="q-text"><span class="q-badge b5">Q19</span><span>Explain Software Quality Assurance (SQA) activities.</span></div>
+                <div class="a-text">
+                    <h3>Software Quality Assurance (SQA)</h3>
+<p>SQA encompasses the entire software development process, monitoring and improving the process to ensure that the final product meets specified quality standards.</p>
+<h4>Key SQA Activities:</h4>
+<ul>
+  <li><strong>Process Definition & Improvement:</strong> Establishing standard SDLC processes, coding standards, and methodologies (like Agile or CMMI) and continuously improving them.</li>
+  <li><strong>Formal Technical Reviews (FTR):</strong> Conducting structured peer reviews and code walkthroughs to find defects early before formal testing.</li>
+  <li><strong>Auditing:</strong> Checking if the development team is actually following the defined organizational processes and standards.</li>
+  <li><strong>Testing Management:</strong> Overseeing the testing strategy (unit, integration, system testing) to ensure adequate test coverage.</li>
+  <li><strong>Configuration Management:</strong> Ensuring all changes to code and documents are tracked and controlled properly via version control systems.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-20">
+                <div class="q-text"><span class="q-badge b5">Q20</span><span>Explain Capability Maturity Model Integration (CMMI) 5 Maturity Levels.</span></div>
+                <div class="a-text">
+                    <h3>Capability Maturity Model Integration (CMMI)</h3>
+<p>CMMI is a framework that assesses the maturity and quality of an organization's software development processes across 5 levels:</p>
+<ol>
+  <li><strong>Level 1 (Initial):</strong> Processes are unpredictable, poorly controlled, and reactive. Success depends entirely on individual heroics.</li>
+  <li><strong>Level 2 (Managed):</strong> Processes are planned, documented, and monitored at the <em>project</em> level. Basic project management (requirements, scheduling) is in place.</li>
+  <li><strong>Level 3 (Defined):</strong> Processes are standardized and documented across the <em>entire organization</em>. Projects tailor these standard processes for their specific needs.</li>
+  <li><strong>Level 4 (Quantitatively Managed):</strong> The organization uses statistical and quantitative techniques to measure process performance and control quality precisely.</li>
+  <li><strong>Level 5 (Optimizing):</strong> The organization focuses on continuous process improvement through quantitative feedback and adopting innovative new technologies.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-21">
+                <div class="q-text"><span class="q-badge b5">Q21</span><span>Explain Software Maintenance types: Corrective, Adaptive, Perfective, Preventive.
+
+
+
+
+--- Page 3 ---</span></div>
+                <div class="a-text">
+                    <h3>Types of Software Maintenance</h3>
+<p>Software maintenance is the process of modifying software after delivery to correct faults, improve performance, or adapt it to a changing environment. It consumes the majority of the software lifecycle cost.</p>
+<ul>
+  <li><strong>Corrective Maintenance:</strong> Reactive modification to fix discovered bugs and errors that prevent the software from functioning as specified. (e.g., Fixing a crash when users enter a negative number).</li>
+  <li><strong>Adaptive Maintenance:</strong> Modifying the software to keep it usable in a changing environment, such as a new OS version, updated hardware, or a new database schema. (e.g., Updating an iOS app to work with iOS 18).</li>
+  <li><strong>Perfective Maintenance:</strong> Enhancing the software by adding new features, improving the UI, or increasing performance based on user requests. (e.g., Adding a "Dark Mode" feature).</li>
+  <li><strong>Preventive Maintenance:</strong> Modifying the software to prevent potential future problems. This involves code refactoring, optimizing database queries, and updating deprecated libraries before they break.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-22">
+                <div class="q-text"><span class="q-badge b5">Q22</span><span>Explain Software Re-engineering and Reverse Engineering pipeline.</span></div>
+                <div class="a-text">
+                    <h3>Software Re-engineering & Reverse Engineering</h3>
+<p>Software Re-engineering is the process of examining, altering, and rebuilding an existing legacy system to reconstitute it in a new form without changing its overall functionality.</p>
+<h4>Re-engineering Pipeline:</h4>
+<ol>
+  <li><strong>Inventory Analysis:</strong> Sorting through legacy applications to decide which ones need re-engineering based on business value and maintenance cost.</li>
+  <li><strong>Document Restructuring:</strong> Updating outdated documentation to match the current state of the system.</li>
+  <li><strong>Reverse Engineering:</strong> Analyzing the legacy <em>source code</em> to extract higher-level design documents (like UML class diagrams and DFDs). It moves <em>backwards</em> through the SDLC (Code &rarr; Design &rarr; Requirements).</li>
+  <li><strong>Code/Data Restructuring:</strong> Refactoring spaghetti code into structured programming and normalizing legacy databases, keeping the same architecture.</li>
+  <li><strong>Forward Engineering:</strong> Using the recovered design documents to build a completely new, modern system (e.g., rewriting a legacy COBOL mainframe app into a modern Java/React microservice).</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-23">
+                <div class="q-text"><span class="q-badge b5">Q23</span><span>Explain Verification vs Validation with concrete examples.</span></div>
+                <div class="a-text">
+                    <h3>Verification vs. Validation</h3>
+<table border="1" style="border-collapse: collapse; width: 100%;">
+  <tr style="background-color: #f3e8ff;">
+    <th>Verification</th>
+    <th>Validation</th>
+  </tr>
+  <tr>
+    <td><em>"Are we building the product RIGHT?"</em></td>
+    <td><em>"Are we building the RIGHT product?"</em></td>
+  </tr>
+  <tr>
+    <td>Checks if the software conforms to its specification (the SRS document).</td>
+    <td>Checks if the software actually meets the customer's true needs and expectations.</td>
+  </tr>
+  <tr>
+    <td>Typically done by developers through static analysis, code reviews, and unit testing.</td>
+    <td>Typically done by testers and users through System Testing and User Acceptance Testing (UAT).</td>
+  </tr>
+  <tr>
+    <td>Catches errors introduced during the translation from design to code.</td>
+    <td>Catches errors where the original requirement itself was misunderstood or flawed.</td>
+  </tr>
+</table>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-24">
+                <div class="q-text"><span class="q-badge b5">Q24</span><span>Explain Formal Technical Reviews (FTR) and Code Walkthroughs.</span></div>
+                <div class="a-text">
+                    <h3>Formal Technical Reviews (FTR)</h3>
+<p>An FTR is a highly structured group meeting conducted by software engineers to uncover errors in logic, function, or implementation early in the process.</p>
+<h4>Goals of FTR:</h4>
+<ul>
+  <li>Uncover errors early (cheaper to fix).</li>
+  <li>Ensure the software meets predefined standards.</li>
+  <li>Make projects more manageable by creating milestones.</li>
+</ul>
+<h4>Code Walkthroughs:</h4>
+<p>A specific type of FTR where the author of the code leads the review team through a manual simulation of the code execution. The review team acts as a "human compiler," feeding test data into the logic to find edge cases, infinite loops, and logic errors. It is a form of static White-Box testing.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-25">
+                <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Software Architecture styles: Layered, Client-Server, Microservices.</span></div>
+                <div class="a-text">
+                    <h3>Software Architecture Styles</h3>
+<ul>
+  <li><strong>Layered Architecture:</strong> The system is organized into hierarchical layers (e.g., Presentation Layer &rarr; Business Logic Layer &rarr; Data Access Layer). Each layer only communicates with the layer directly below it. <em>Pros:</em> Excellent separation of concerns.</li>
+  <li><strong>Client-Server Architecture:</strong> The system is divided into two parts: Clients (which request services) and Servers (which provide services over a network). <em>Pros:</em> Centralized data management and security.</li>
+  <li><strong>Microservices Architecture:</strong> A large application is broken down into a suite of small, loosely coupled, independently deployable services that communicate via lightweight APIs (REST/gRPC). <em>Pros:</em> Highly scalable and resilient; different teams can use different tech stacks.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-26">
+                <div class="q-text"><span class="q-badge b5">Q26</span><span>Explain SOLID Principles of Object-Oriented Design.</span></div>
+                <div class="a-text">
+                    <h3>SOLID Principles of Object-Oriented Design</h3>
+<p>SOLID is an acronym for five design principles intended to make software designs more understandable, flexible, and maintainable.</p>
+<ul>
+  <li><strong>S - Single Responsibility Principle:</strong> A class should have one, and only one, reason to change. (It should only do one specific job).</li>
+  <li><strong>O - Open/Closed Principle:</strong> Software entities should be open for extension (adding new features), but closed for modification (don't change existing working code).</li>
+  <li><strong>L - Liskov Substitution Principle:</strong> Subtypes must be completely substitutable for their base types without altering the correctness of the program.</li>
+  <li><strong>I - Interface Segregation Principle:</strong> Clients should not be forced to depend on interfaces they do not use. (Better to have many small, specific interfaces than one massive, generic one).</li>
+  <li><strong>D - Dependency Inversion Principle:</strong> High-level modules should not depend on low-level modules. Both should depend on abstractions (interfaces).</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-27">
+                <div class="q-text"><span class="q-badge b5">Q27</span><span>Explain Creational, Structural, and Behavioral Design Patterns.</span></div>
+                <div class="a-text">
+                    <h3>Software Design Patterns</h3>
+<p>Design patterns are typical, reusable solutions to common problems in software design.</p>
+<ul>
+  <li><strong>Creational Patterns:</strong> Deal with object creation mechanisms, creating objects in a manner suitable to the situation.
+      <br/><em>Example (Singleton):</em> Ensures a class has only one instance and provides a global point of access to it (e.g., a Database Connection pool).</li>
+  <li><strong>Structural Patterns:</strong> Deal with object composition, helping to ensure that if one part of a system changes, the entire structure does not need to do so.
+      <br/><em>Example (Adapter):</em> Allows incompatible interfaces to work together (like a plug adapter).</li>
+  <li><strong>Behavioral Patterns:</strong> Deal with communication and assignment of responsibilities between objects.
+      <br/><em>Example (Observer):</em> A publish-subscribe model where multiple objects listen and react to state changes in a subject.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-28">
+                <div class="q-text"><span class="q-badge b5">Q28</span><span>Explain User Interface (UI) Design Golden Rules.</span></div>
+                <div class="a-text">
+                    <h3>Golden Rules of UI Design</h3>
+<p>Theo Mandel proposed three "Golden Rules" for designing effective User Interfaces:</p>
+<ol>
+  <li><strong>Place the User in Control:</strong> Do not force users into rigid sequences. Allow users to undo actions easily. Hide technical internals from the casual user. Provide shortcuts for power users.</li>
+  <li><strong>Reduce the User's Memory Load:</strong> The system should remember things so the user doesn't have to. Use recognizable visual cues (icons) rather than requiring the user to recall commands. Follow the "Rule of 7" (human short-term memory can hold roughly 7 items).</li>
+  <li><strong>Make the Interface Consistent:</strong> Keep layout, colors, typography, and button placements uniform across all screens. Follow established platform standards (e.g., a "Save" icon should always look like a floppy disk; red usually means "Delete" or "Error").</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-29">
+                <div class="q-text"><span class="q-badge b5">Q29</span><span>Explain Software Metrics: Size, Complexity, and Defect Density metrics.</span></div>
+                <div class="a-text">
+                    <h3>Software Metrics</h3>
+<p>Software metrics provide a quantitative basis for the development and management of software.</p>
+<ul>
+  <li><strong>Size Metrics:</strong> Measure the physical size of the product. The most common is <strong>LOC</strong> (Lines of Code) or KLOC (Thousands of Lines of Code). Alternatively, <strong>Function Points (FP)</strong> measure the functionality provided to the user.</li>
+  <li><strong>Complexity Metrics:</strong> Measure the logical complexity of the code. The most famous is <strong>McCabe's Cyclomatic Complexity \(V(G)\)</strong>, which counts the number of independent paths through the code. High complexity correlates with high bug rates.</li>
+  <li><strong>Quality (Defect) Metrics:</strong>
+      <br/>• <em>Defect Density:</em> Number of defects found per KLOC (Defects / KLOC). Lower is better.
+      <br/>• <em>Defect Removal Efficiency (DRE):</em> A measure of how effectively the QA team finds bugs before shipping.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-30">
+                <div class="q-text"><span class="q-badge b5">Q30</span><span>Explain Software Configuration Management (SCM) and Version Control.</span></div>
+                <div class="a-text">
+                    <h3>Software Configuration Management (SCM)</h3>
+<p>SCM is the discipline of managing, organizing, and controlling changes to software assets (code, documents, diagrams) over time.</p>
+<h4>Key SCM Activities:</h4>
+<ul>
+  <li><strong>Version Control (VCS):</strong> Tracking every single change made to source code. Systems like <strong>Git</strong> allow developers to branch off, experiment, and merge code back together without destroying the main project.</li>
+  <li><strong>Change Control:</strong> A formal process to evaluate, approve, and implement change requests from clients.</li>
+  <li><strong>Configuration Audit:</strong> Verifying that the software product matches its baseline requirements.</li>
+  <li><strong>Release Management:</strong> Packaging the software, generating version numbers (e.g., v1.4.2), and distributing it to users.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-31">
+                <div class="q-text"><span class="q-badge b5">Q31</span><span>Explain Fault, Error, and Failure definitions and relationships.</span></div>
+                <div class="a-text">
+                    <h3>Fault, Error, and Failure</h3>
+<p>These terms represent the chronological sequence of a software defect:</p>
+<ol>
+  <li><strong>Error (Mistake):</strong> A human action that produces an incorrect result. (e.g., A programmer misunderstands a requirement or makes a typo in the code).</li>
+  <li><strong>Fault (Defect/Bug):</strong> The manifestation of an error in the software code or documentation. A fault is a static defect in the code (e.g., <code>if (x = 5)</code> instead of <code>if (x == 5)</code>). A fault may remain dormant forever if that specific code block is never executed.</li>
+  <li><strong>Failure:</strong> The observable, incorrect behavior of the software when a fault is actually executed by the CPU. The software fails to perform its required function.</li>
+</ol>
+<p><em>Relationship:</em> An <strong>Error</strong> made by a human causes a <strong>Fault</strong> in the code, which, when executed under specific conditions, results in a system <strong>Failure</strong>.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-32">
+                <div class="q-text"><span class="q-badge b5">Q32</span><span>Explain System Testing types: Performance, Stress, Load, Security.</span></div>
+                <div class="a-text">
+                    <h3>System Testing: Non-Functional Types</h3>
+<p>System testing validates the fully integrated software product against its requirements. Non-functional testing focuses on <em>how well</em> the system performs.</p>
+<ul>
+  <li><strong>Performance Testing:</strong> Testing the system's speed, responsiveness, and stability under a <em>normal</em> expected workload. (e.g., Does the page load in under 2 seconds for 100 concurrent users?)</li>
+  <li><strong>Load Testing:</strong> Testing the system's behavior when subjected to the <em>maximum</em> expected concurrent user load. It checks if the system can handle its peak designed capacity.</li>
+  <li><strong>Stress Testing:</strong> Pushing the system <em>beyond</em> its maximum designed capacity until it breaks. The goal is to see how the system fails (does it crash gracefully or corrupt data?) and how it recovers.</li>
+  <li><strong>Security Testing:</strong> Evaluating the system's vulnerability to malicious attacks, unauthorized access, SQL injections, and data breaches.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-33">
+                <div class="q-text"><span class="q-badge b5">Q33</span><span>Explain Cleanroom Software Engineering approach.</span></div>
+                <div class="a-text">
+                    <h3>Cleanroom Software Engineering</h3>
+<p>Cleanroom software engineering is a formal, mathematically-based approach focused on defect <em>prevention</em> rather than defect removal.</p>
+<h4>Core Principles:</h4>
+<ol>
+  <li><strong>Formal Specification:</strong> The software requirements are mathematically modeled using state-box, clear-box, and black-box specifications.</li>
+  <li><strong>Incremental Development:</strong> The product is developed in small, verifiable increments.</li>
+  <li><strong>Statistical Testing:</strong> Instead of traditional unit testing, the software undergoes statistical use testing based on usage probability distributions.</li>
+  <li><strong>No Execution by Developers:</strong> Developers write the code and verify it mathematically (using correctness proofs), but they are <em>not allowed to compile or execute it</em>. An independent certification team tests the final integrated code.</li>
+</ol>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-34">
+                <div class="q-text"><span class="q-badge b5">Q34</span><span>Explain Software Reliability Models and MTBF metrics.</span></div>
+                <div class="a-text">
+                    <h3>Software Reliability and MTBF</h3>
+<p><strong>Software Reliability</strong> is the probability that a software system will fulfill its intended function without failure for a specified period of time in a specified environment.</p>
+<h4>Key Metrics:</h4>
+<ul>
+  <li><strong>MTTF (Mean Time To Failure):</strong> Average time the software operates continuously before failing.</li>
+  <li><strong>MTTR (Mean Time To Repair):</strong> Average time taken to fix the fault after a failure occurs.</li>
+  <li><strong>MTBF (Mean Time Between Failures):</strong> \(MTBF = MTTF + MTTR\). It represents the average time between two consecutive failures.</li>
+  <li><strong>Availability:</strong> The probability that the system is operating successfully at any given moment. \(Availability = \frac{MTTF}{MTBF} \times 100\%\).</li>
+</ul>
+<p><strong>Reliability Models:</strong> Models like the Jelinski-Moranda model or the Goel-Okumoto model use statistical formulas to predict future reliability and failure rates based on historical testing data.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-35">
+                <div class="q-text"><span class="q-badge b5">Q35</span><span>Explain Code Refactoring techniques and benefits.</span></div>
+                <div class="a-text">
+                    <h3>Code Refactoring</h3>
+<p>Refactoring is the process of restructuring existing computer code—changing the factoring—without changing its external behavior.</p>
+<h4>Common Techniques:</h4>
+<ul>
+  <li><strong>Extract Method:</strong> Taking a long, complex function and breaking it into several smaller, well-named helper functions.</li>
+  <li><strong>Rename Variable:</strong> Giving variables descriptive names instead of vague ones (e.g., changing <code>x</code> to <code>customerAge</code>).</li>
+  <li><strong>Replace Magic Number with Symbolic Constant:</strong> Replacing hardcoded numbers with named constants (e.g., replacing <code>3.14</code> with <code>PI</code>).</li>
+</ul>
+<h4>Benefits:</h4>
+<p>Improves code readability, reduces cyclomatic complexity, makes the code easier to maintain and extend, and helps uncover hidden bugs.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-36">
+                <div class="q-text"><span class="q-badge b5">Q36</span><span>Explain Static Analysis tools and Code LINTing.</span></div>
+                <div class="a-text">
+                    <h3>Static Analysis and Code LINTing</h3>
+<p><strong>Static Analysis</strong> is the automated checking of source code without actually compiling or executing it.</p>
+<p><strong>Code LINTing:</strong> A specific type of static analysis. A "linter" (like ESLint for JavaScript or SonarQube) scans the source code to flag:</p>
+<ul>
+  <li><strong>Stylistic Errors:</strong> Deviations from team coding standards (e.g., missing semicolons, wrong indentation).</li>
+  <li><strong>Programming Errors:</strong> Potential bugs like using uninitialized variables, unreachable code, or infinite loops.</li>
+  <li><strong>Security Flaws:</strong> Hardcoded passwords or vulnerable dependencies.</li>
+</ul>
+<p><em>Benefits:</em> Enforces code quality automatically, catches silly mistakes early before they reach code review, and trains junior developers on best practices.</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-37">
+                <div class="q-text"><span class="q-badge b5">Q37</span><span>Explain Component-Based Software Engineering (CBSE).</span></div>
+                <div class="a-text">
+                    <h3>Component-Based Software Engineering (CBSE)</h3>
+<p>CBSE is a paradigm that emphasizes the design and construction of software systems using reusable, independent, off-the-shelf software components.</p>
+<h4>Key Concepts:</h4>
+<ul>
+  <li><strong>Component:</strong> A self-contained, deployable software package that provides a specific functionality through well-defined interfaces (e.g., a pre-built payment processing module).</li>
+  <li><strong>Interface:</strong> Components interact exclusively through standard interfaces, making their internal implementations completely hidden (black-box).</li>
+</ul>
+<p><strong>Benefits:</strong> Drastically reduces development time and cost, improves reliability (since components are already heavily tested), and simplifies maintenance (components can be swapped out easily without affecting the rest of the system).</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-38">
+                <div class="q-text"><span class="q-badge b5">Q38</span><span>Explain DevOps principles and CI/CD Pipeline integration.</span></div>
+                <div class="a-text">
+                    <h3>DevOps and CI/CD Pipeline</h3>
+<p><strong>DevOps</strong> is a culture and set of practices that combines Software Development (Dev) and IT Operations (Ops) to shorten the development lifecycle and provide continuous delivery of high-quality software.</p>
+<h4>CI/CD Pipeline:</h4>
+<ul>
+  <li><strong>Continuous Integration (CI):</strong> Developers frequently merge their code changes into a central repository (like GitHub). Automated builds and unit tests run immediately upon every commit to detect integration errors instantly.</li>
+  <li><strong>Continuous Delivery (CD):</strong> The automated process of preparing the tested code for release to production. The software is always in a deployable state.</li>
+  <li><strong>Continuous Deployment:</strong> Taking it one step further, every change that passes the automated tests is automatically deployed directly to the production servers without human intervention.</li>
+</ul>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-39">
+                <div class="q-text"><span class="q-badge b5">Q39</span><span>Explain Software Economics and Cost Estimation trade-offs.</span></div>
+                <div class="a-text">
+                    <h3>Software Economics and Cost Estimation</h3>
+<p>Software Economics deals with making business decisions regarding software development based on cost, schedule, and quality trade-offs.</p>
+<h4>Trade-offs:</h4>
+<ul>
+  <li><strong>Brooks's Law:</strong> "Adding manpower to a late software project makes it later." You cannot infinitely reduce the schedule by adding more developers due to communication overhead.</li>
+  <li><strong>Cost-Quality-Time Triangle:</strong> You can only pick two. If you want high quality fast, it will cost a lot. If you want it cheap and fast, quality will suffer.</li>
+</ul>
+<h4>Cost Estimation Techniques:</h4>
+<p>Methods to estimate the required budget include Algorithmic Models (COCOMO), Expert Judgment (Delphi technique), and Estimation by Analogy (comparing to similar past projects).</p>
+
+                </div>
+            </div>
+            <div class="qa-card" id="gb-40">
+                <div class="q-text"><span class="q-badge b5">Q40</span><span>Explain CASE Tools classification and environment integration.</span></div>
+                <div class="a-text">
+                    <h3>CASE Tools (Computer-Aided Software Engineering)</h3>
+<p>CASE tools are automated software utilities that assist software engineers throughout the various phases of the SDLC.</p>
+<h4>Classification:</h4>
+<ul>
+  <li><strong>Upper CASE Tools:</strong> Support the early phases of SDLC (Requirements, Analysis, and Design). Examples: Diagramming tools (Visio) and prototyping software (Figma).</li>
+  <li><strong>Lower CASE Tools:</strong> Support the later phases of SDLC (Coding, Testing, and Maintenance). Examples: IDEs (VS Code), Compilers, and Testing frameworks (Selenium).</li>
+  <li><strong>Integrated CASE (I-CASE) Environments:</strong> Comprehensive suites that support the entire SDLC seamlessly from requirements to deployment (e.g., Azure DevOps, Jira).</li>
+</ul>
+
+                </div>
+            </div>
+            
+</main>
+</div>
+</body>
+</html>
