@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Software Engineering (ESC501) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default'});</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -54,8 +54,8 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
-        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
     <link rel="stylesheet" href="../../premium.css">
@@ -1622,7 +1622,7 @@ c) Compare Agile vs Traditional Waterfall on 6 dimensions.</span></div>
 <p>Scrum is an iterative framework operating in time-boxed <strong>Sprints</strong> (1-4 weeks).</p>
 <div class="diagram-container">
 <div class="mermaid">
-graph LR
+graph TD
     PB[(Product Backlog)] --> SP[Sprint Planning]
       SP --> SB[(Sprint Backlog)]
       SB --> DS((Daily Scrum))
@@ -1724,8 +1724,8 @@ b) Draw Use Case Diagram, Class Diagram, Sequence Diagram, and Activity Diagram 
 graph LR
     C((Customer)) -- Uses --> W(Withdraw Cash)
       C -- Uses --> B(Check Balance)
-      B --"<<include>>"--> A(Authenticate PIN)
-      W --"<<include>>"--> A
+      B -->|"#lt;#lt;include#gt;#gt;"| A(Authenticate PIN)
+      W -->|"#lt;#lt;include#gt;#gt;"| A
 </div>
 </div>
 
@@ -1872,7 +1872,7 @@ b) Detail Software Re-engineering lifecycle model including Reverse Engineering,
 <p>Re-engineering revamps a legacy system to a modern architecture without changing its core business logic.</p>
 <div class="diagram-container">
 <div class="mermaid">
-graph LR
+graph TD
     L[Legacy Code] --> RE[Reverse Engineering]
       RE --> D[Recovered Design]
       D --> RS[Restructuring]
@@ -2138,7 +2138,7 @@ b) Provide SRS outline, Level 1 DFD, Architecture diagram, and Test Strategy.</s
 <p><strong>2. Level 1 DFD:</strong></p>
 <div class="diagram-container">
 <div class="mermaid">
-graph LR
+graph TD
     U((Customer)) -- Order Details --> P1(1.0 Process Order)
       P1 -- Validation --> D1[(User DB)]
       P1 -- Push Notification --> R((Restaurant))
@@ -2315,7 +2315,7 @@ b) Detail Continuous Integration (CI), Continuous Testing (CT), and Continuous D
 <h4>Part (b) CI, CT, and CD Pipeline</h4>
 <div class="diagram-container">
 <div class="mermaid">
-graph LR
+graph TD
     Code[Git Push] --> CI[Continuous Integration]
       CI --> Build[Build & Compile]
       Build --> CT[Continuous Testing]

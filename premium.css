@@ -743,10 +743,25 @@ code { border-radius: 5px; }
     a { text-decoration: none; }
 }
 
-/* Fix for Mermaid diagrams rendering tiny */
-.mermaid svg {
-    min-width: 100% !important;
-    min-height: 300px !important;
-    height: auto !important;
-    max-width: 100% !important;
+/* Mermaid sizing.
+   `min-width: 100%` forced every SVG up to the container width and overrode
+   mermaid's own max-width — a 158px-wide diagram upscaled 5x to 2452px tall
+   and went blurry. Let each diagram keep its natural size; only shrink the
+   ones genuinely wider than the column, and let very wide ones scroll. */
+/* Mermaid emits its own `width="100%"` + inline `max-width:<natural>px`, which
+   renders each diagram at natural size and shrinks only the ones wider than the
+   column. Do not override that cap: forcing `min-width:100%` upscaled a 158px
+   diagram to 2452px tall, and forcing `max-width:100%` re-broke it the other
+   way. Only the height rule is needed, so the aspect ratio is preserved. */
+.mermaid {
+    overflow-x: auto;
+    max-width: 100%;
 }
+
+.mermaid svg { height: auto; }
+
+/* Fix Mermaid Clipping Bug */
+.mermaid svg {
+    overflow: visible !important;
+}
+

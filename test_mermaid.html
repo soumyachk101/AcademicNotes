@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Mermaid</title>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default'});</script>
+    <style>
+        .diagram-container { width: 100%; max-width: 800px; margin: 0 auto; border: 1px solid black; }
+    </style>
+</head>
+<body>
+    <div class="diagram-container">
+        <div class="mermaid">
+        graph LR
+            P["PERFORMANCE<br/>MEASURE (P)"] -.->|"evaluates"| E
+            E["ENVIRONMENT (E)"] -->|"Percepts"| S
+            subgraph AGENT["Intelligent Agent"]
+                S["SENSORS (S)"] --> F["Agent<br/>Program"]
+                F --> A["ACTUATORS (A)"]
+            end
+            A -->|"Actions"| E
+            style AGENT fill:#ffffff,stroke:#94a3b8,stroke-dasharray: 5 5
+        </div>
+    </div>
+</body>
+</html>

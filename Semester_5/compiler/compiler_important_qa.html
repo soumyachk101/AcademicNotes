@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Compiler Design (PCC-CS501) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default'});</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -54,8 +54,8 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
-        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
     <link rel="stylesheet" href="../../premium.css">
@@ -749,12 +749,12 @@ graph TD
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S1((1)) -- "ε" --> S2((2))
-      S1 -- "ε" --> S4((4))
+    S1((1)) -->|"ε"| S2((2))
+      S1 -->|"ε"| S4((4))
       S2 -- a --> S3((3))
       S4 -- b --> S5((5))
-      S3 -- "ε" --> S6((6))
-      S5 -- "ε" --> S6((6))
+      S3 -->|"ε"| S6((6))
+      S5 -->|"ε"| S6((6))
 </div>
 </div>
 <p><strong>Step 2: Construct NFA for (a | b)* (Kleene Star)</strong></p>
@@ -762,16 +762,16 @@ graph LR
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S0((0)) -- "ε" --> S1((1))
-      S0 -- "ε" --> S7((7))
-      S1 -- "ε" --> S2((2))
-      S1 -- "ε" --> S4((4))
+    S0((0)) -->|"ε"| S1((1))
+      S0 -->|"ε"| S7((7))
+      S1 -->|"ε"| S2((2))
+      S1 -->|"ε"| S4((4))
       S2 -- a --> S3((3))
       S4 -- b --> S5((5))
-      S3 -- "ε" --> S6((6))
-      S5 -- "ε" --> S6((6))
-      S6 -- "ε" --> S1((1))
-      S6 -- "ε" --> S7((7))
+      S3 -->|"ε"| S6((6))
+      S5 -->|"ε"| S6((6))
+      S6 -->|"ε"| S1((1))
+      S6 -->|"ε"| S7((7))
 </div>
 </div>
 <p><strong>Step 3: Construct Final NFA for (a | b)*a (Concatenation)</strong></p>
@@ -779,16 +779,16 @@ graph LR
 <div class="diagram-container">
 <div class="mermaid">
 graph LR
-    S0((0)) -- "ε" --> S1((1))
-      S0 -- "ε" --> S7((7))
-      S1 -- "ε" --> S2((2))
-      S1 -- "ε" --> S4((4))
+    S0((0)) -->|"ε"| S1((1))
+      S0 -->|"ε"| S7((7))
+      S1 -->|"ε"| S2((2))
+      S1 -->|"ε"| S4((4))
       S2 -- a --> S3((3))
       S4 -- b --> S5((5))
-      S3 -- "ε" --> S6((6))
-      S5 -- "ε" --> S6((6))
-      S6 -- "ε" --> S1((1))
-      S6 -- "ε" --> S7((7))
+      S3 -->|"ε"| S6((6))
+      S5 -->|"ε"| S6((6))
+      S6 -->|"ε"| S1((1))
+      S6 -->|"ε"| S7((7))
       S7 -- a --> S8(((8)))
 </div>
 </div>
@@ -2328,11 +2328,11 @@ b) Draw scope tree structure and explain symbol lookup in nested classes and met
 <div class="diagram-container">
 <div class="mermaid">
 graph TD
-    Global[Global Scope: Class A, Class B]
-      ClassA[Class A Scope: int x, method1()]
-      ClassB[Class B Scope: float y, method2()]
-      Method1[method1() Scope: int a, int b]
-      Block1[if-block Scope: int c]
+    Global["Global Scope: Class A, Class B"]
+      ClassA["Class A Scope: int x, method1()"]
+      ClassB["Class B Scope: float y, method2()"]
+      Method1["method1() Scope: int a, int b"]
+      Block1["if-block Scope: int c"]
        Block1 -- Parent Pointer --> Method1
       Method1 -- Parent Pointer --> ClassA
       ClassA -- Parent/Inheritance Pointer --> Global

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Artificial Intelligence (PEC-CS501B) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default'});</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -54,8 +54,8 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
-        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
     <link rel="stylesheet" href="../../premium.css">
@@ -701,14 +701,14 @@
                 <div class="q-text"><span class="q-badge b5">Q1</span><span>Explain PEAS Model with Automated Taxi and Medical Diagnosis examples.</span></div>
                 <div class="a-text">
                     <h3>Understanding the PEAS Model</h3><p>The <strong>PEAS (Performance, Environment, Actuators, Sensors)</strong> model is a formal specification used to design and define an intelligent agent's task environment before constructing the agent itself. A clearly defined task environment ensures that the agent can make rational decisions to maximize its performance measure.</p><ul>  <li><strong>Performance Measure (P):</strong> The objective criterion used to evaluate the agent's success or behavior.</li>  <li><strong>Environment (E):</strong> The external conditions and entities the agent interacts with and operates within.</li>  <li><strong>Actuators (A):</strong> The mechanisms or effectors the agent uses to perform actions and alter the environment.</li>  <li><strong>Sensors (S):</strong> The devices or inputs through which the agent perceives the state of the environment.</li></ul><div class="diagram-container"><div class="mermaid">
-graph LR
-    P["PERFORMANCE<br/>MEASURE (P)"] -. "evaluates" .-> E
-    E["ENVIRONMENT (E)"] -- "Percepts" --> S
+graph TD
+    P["PERFORMANCE<br/>MEASURE (P)"] -.->|"evaluates"| E
+    E["ENVIRONMENT (E)"] -->|"Percepts"| S
     subgraph AGENT["Intelligent Agent"]
         S["SENSORS (S)"] --> F["Agent<br/>Program"]
         F --> A["ACTUATORS (A)"]
     end
-    A -- "Actions" --> E
+    A -->|"Actions"| E
     style AGENT fill:#ffffff,stroke:#94a3b8,stroke-dasharray: 5 5
 </div><div class="diagram-caption">Figure: General Architecture of an Intelligent Agent interacting with its Environment</div></div><h3>Examples of PEAS Specifications</h3><table border="1" cellpadding="8" cellspacing="0" style="border-collapse: collapse; width: 100%;">  <thead>    <tr style="background-color: #f3e8ff;">      <th>Agent Type</th>      <th>Performance Measure (P)</th>      <th>Environment (E)</th>      <th>Actuators (A)</th>      <th>Sensors (S)</th>    </tr>  </thead>  <tbody>    <tr>      <td><strong>Automated Taxi Driver</strong></td>      <td>Safety, destination reach, time, comfort, traffic violations, profit.</td>      <td>Roads, traffic lights, pedestrians, other vehicles, weather conditions.</td>      <td>Steering wheel, accelerator, brake, signal indicators, horn, display.</td>      <td>Cameras, LiDAR, radar, GPS, speedometer, accelerometer, engine sensors.</td>    </tr>    <tr>      <td><strong>Medical Diagnosis System</strong></td>      <td>Accurate disease classification, minimized cost, patient survival rate.</td>      <td>Patient symptoms, medical history, hospital staff, laboratory results.</td>      <td>Screen display (questions, tests, diagnoses), printer for prescriptions.</td>      <td>Keyboard input of symptoms, direct medical scanners, database feeds.</td>    </tr>  </tbody></table>
                 </div>
@@ -730,10 +730,10 @@ Dynamic.</span></div>
                 <div class="q-text"><span class="q-badge b5">Q4</span><span>Explain A* Search Algorithm and g(n) + h(n) evaluation function.</span></div>
                 <div class="a-text">
                     <h3>A* Search Algorithm</h3><p><strong>A* Search</strong> is the most widely known form of Best-First Search. It is an informed (heuristic) search algorithm that efficiently finds the optimal path from the start node to a goal node by combining the actual cost reached so far with the estimated cost to the goal.</p><p>The core of A* is its <strong>Evaluation Function \(f(n)\)</strong>:</p>\[ f(n) = g(n) + h(n) \]<ul>  <li><strong>\(g(n)\):</strong> The exact path cost from the start node to the current node \(n\).</li>  <li><strong>\(h(n)\):</strong> The heuristic function; the estimated cheapest cost from node \(n\) to the goal.</li>  <li><strong>\(f(n)\):</strong> The estimated total cost of the cheapest solution path that passes through node \(n\).</li></ul><div class="diagram-container"><div class="mermaid">
-graph LR
-    S((Start Node)) -- "g(n) = Exact Cost" --> N((Node n))
-      N -. "h(n) = Estimated Cost" .-> G((Goal Node))
-      N -->|f(n) = g(n) + h(n)| N
+graph TD
+    S((Start Node)) -->|"g(n) = Exact Cost"| N((Node n))
+    N -.->|"h(n) = Estimated Cost"| G((Goal Node))
+    N -->|"f(n) = g(n) + h(n)"| N
 </div><div class="diagram-caption">Figure: Components of the A* Evaluation Function</div></div><p><strong>Mechanism & Optimality:</strong> A* maintains an Open List (priority queue sorted by \(f(n)\)) and a Closed List. It always expands the node with the lowest \(f(n)\) value. A* is guaranteed to be <strong>Complete</strong> (will find a goal if one exists) and <strong>Optimal</strong> (will find the shortest/cheapest path) provided that the heuristic function \(h(n)\) is <em>admissible</em> (never overestimates the cost) and <em>consistent</em>.</p>
                 </div>
             </div>
@@ -780,11 +780,11 @@ graph TD
                     <h3>Game Playing and the Minimax Algorithm</h3><p>In AI, game playing is typically modeled as a deterministic, fully observable, zero-sum environment where two agents compete (adversarial search). Examples include Chess, Tic-Tac-Toe, and Checkers. The two players are traditionally called <strong>MAX</strong> and <strong>MIN</strong>. MAX attempts to maximize the game score, while MIN attempts to minimize it.</p><h4>The Minimax Algorithm</h4><p>The <strong>Minimax Algorithm</strong> computes the optimal move for MAX by exploring the entire game tree down to the leaf/terminal nodes, assuming MIN plays optimally to oppose MAX.</p><div class="diagram-container"><div class="mermaid">
 graph TD
     MAX((MAX)) -->|Choose Max| MIN1[MIN]
-      MAX -->|Choose Max| MIN2[MIN]
-      MIN1 -->|Choose Min| T1((+1))
-      MIN1 -->|Choose Min| T2((-1))
-      MIN2 -->|Choose Min| T3((0))
-      MIN2 -->|Choose Min| T4((-1))
+    MAX -->|Choose Max| MIN2[MIN]
+    MIN1 -->|Choose Min| T1(("+1"))
+    MIN1 -->|Choose Min| T2(("-1"))
+    MIN2 -->|Choose Min| T3(("0"))
+    MIN2 -->|Choose Min| T4(("-1"))
 </div><div class="diagram-caption">Figure: Minimax Execution where MAX chooses the path maximizing the score after MIN minimizes it.</div></div><p><strong>Steps of Minimax:</strong></p><ol>  <li><strong>Generate Tree:</strong> Expand the game tree from the current state down to the terminal states (or a depth limit).</li>  <li><strong>Evaluate Leaves:</strong> Apply a utility function (or heuristic evaluation function) to the terminal nodes to get their scores.</li>  <li><strong>Back-propagate Values:</strong>      <br/>• If the parent node is a <strong>MIN node</strong>, it selects the <em>minimum</em> utility value of its children.      <br/>• If the parent node is a <strong>MAX node</strong>, it selects the <em>maximum</em> utility value of its children.  </li>  <li><strong>Decision:</strong> The root node (MAX's current turn) makes the move associated with the maximum backed-up value.</li></ol><p>While Minimax is optimal, its time complexity is \(O(b^m)\), which is impractical for complex games without depth limiting and Alpha-Beta pruning.</p>
                 </div>
             </div>
@@ -895,13 +895,13 @@ graph TD
                 <div class="q-text"><span class="q-badge b5">Q25</span><span>Explain Fuzzy Inference Systems (Mamdani Model).</span></div>
                 <div class="a-text">
                     <h3>Fuzzy Inference Systems (Mamdani Model)</h3><p>A <strong>Fuzzy Inference System (FIS)</strong> maps crisp inputs to crisp outputs using fuzzy logic. The most widely used architecture is the <strong>Mamdani Model</strong>, which follows a four-step pipeline:</p><div class="diagram-container"><div class="mermaid">
-graph LR
+graph TD
     Input[Crisp Inputs] --> F[1. Fuzzification]
-      F --> R[2. Rule Evaluation]
-      R --> A[3. Aggregation]
-      A --> D[4. Defuzzification]
-      D --> Output[Crisp Output]
-      KB[(Fuzzy Rule Base)] -.-> R
+    F --> R[2. Rule Evaluation]
+    R --> A[3. Aggregation]
+    A --> D[4. Defuzzification]
+    D --> Output[Crisp Output]
+    KB[(Fuzzy Rule Base)] -.-> R
 </div><div class="diagram-caption">Figure: Mamdani Fuzzy Inference Pipeline</div></div><ol>  <li><strong>Fuzzification:</strong> Crisp input values (e.g., Temperature = 32°C) are mapped to degrees of membership in fuzzy sets (e.g., "Hot" = 0.7, "Warm" = 0.2) using membership functions.</li>  <li><strong>Rule Evaluation (Inference):</strong> Fuzzy IF-THEN rules are evaluated. Fuzzy AND/OR operators are applied (usually MIN for AND, MAX for OR) to calculate the firing strength of the rule. The THEN part is truncated (clipped) by this firing strength.</li>  <li><strong>Aggregation:</strong> The truncated output fuzzy sets from all triggered rules are combined (usually via a MAX operation) into a single, unified output fuzzy set.</li>  <li><strong>Defuzzification:</strong> The aggregated output fuzzy set is converted back into a single crisp, numerical value. The most common method is the <strong>Centroid (Center of Gravity)</strong> method.</li></ol>
                 </div>
             </div>
@@ -952,11 +952,11 @@ graph TD
                 <div class="a-text">
                     <h3>The Perceptron Model</h3><p>The <strong>Perceptron</strong> is the simplest mathematical model of a biological neuron, forming the foundation of Artificial Neural Networks. It acts as a linear binary classifier.</p><h4>Mathematical Model</h4><p>Given input signals \(x_1, x_2, \dots, x_n\), the perceptron computes a weighted sum and adds a bias \(b\):</p>\[ z = \sum_{i=1}^n (w_i \cdot x_i) + b \]<p>This sum \(z\) is then passed through an <strong>Activation Function \(f(z)\)</strong> to determine the final output (whether the neuron "fires" or not).</p><div class="diagram-container"><div class="mermaid">
 graph LR
-    x1((x1)) -- w1 --> Sum((Sum Σ))
-      x2((x2)) -- w2 --> Sum
-      Bias((Bias)) --> Sum
-      Sum --> Act[Activation f(z)]
-      Act --> Output((Output))
+    x1((x1)) -- w1 --> Sum(("Sum Σ"))
+    x2((x2)) -- w2 --> Sum
+    Bias((Bias)) --> Sum
+    Sum --> Act["Activation f(z)"]
+    Act --> Output((Output))
 </div><div class="diagram-caption">Figure: Single Artificial Neuron (Perceptron) Architecture</div></div><h4>Activation Functions</h4><p>Activation functions introduce non-linearity, allowing networks to learn complex patterns.</p><ul>  <li><strong>Step Function:</strong> Outputs 1 if \(z \ge 0\), else 0. Used in classical perceptrons.</li>  <li><strong>Sigmoid:</strong> \(\sigma(z) = \frac{1}{1 + e^{-z}}\). Smoothly maps values to a (0, 1) range.</li>  <li><strong>ReLU (Rectified Linear Unit):</strong> \(f(z) = \max(0, z)\). Extremely fast and solves the vanishing gradient problem in deep networks.</li></ul>
                 </div>
             </div>
@@ -1035,15 +1035,15 @@ b) Explain Minimax Algorithm properties (Completeness, Optimality, Time/Space Co
                     <h3>Alpha-Beta Pruning and Minimax Properties</h3><p><b>Part (a) Alpha-Beta Pruning Execution Trace:</b></p><p>Given leaf nodes (L to R): 3, 5, 6, 9, 1, 2, 0, -1.</p><div class="diagram-container"><div class="mermaid">
 graph TD
     MAX((MAX)) --> MIN1((MIN))
-      MAX --> MIN2((MIN))
-      MIN1 --> MAXL1((MAX))
-      MIN1 --> MAXL2((MAX))
-      MIN2 --> MAXR1((MAX))
-      MIN2 --> MAXR2((MAX))
-      MAXL1 --> 3((3)) & 5((5))
-      MAXL2 --> 6((6)) & 9((9))
-      MAXR1 --> 1((1)) & 2((2))
-      MAXR2 -.-> 0((0)) & -1((-1))
+    MAX --> MIN2((MIN))
+    MIN1 --> MAXL1((MAX))
+    MIN1 --> MAXL2((MAX))
+    MIN2 --> MAXR1((MAX))
+    MIN2 --> MAXR2((MAX))
+    MAXL1 --> L1((3)) & L2((5))
+    MAXL2 --> L3((6)) & L4((9))
+    MAXR1 --> L5((1)) & L6((2))
+    MAXR2 -.-> L7((0)) & L8(("-1"))
 </div><div class="diagram-caption">Figure: 3-Level Game Tree. The entire MAXR2 branch (0, -1) is pruned!</div></div><ul>  <li><b>Bottom-Up Evaluation:</b>      <br/>- MAXL1 evaluates to \(\max(3, 5) = 5\).      <br/>- MAXL2 evaluates to \(\max(6, 9) = 9\).      <br/>- MIN1 receives 5 and 9. It evaluates to \(\min(5, 9) = 5\).      <br/>- Root MAX receives 5 from the left branch. It updates its \(\alpha = 5\).      <br/>- MAXR1 evaluates to \(\max(1, 2) = 2\).      <br/>- MIN2 evaluates its first child (MAXR1) and gets 2. MIN2's provisional value is now \(\le 2\). Thus, MIN2's \(\beta = 2\).  </li>  <li><b>Pruning Trigger:</b> At MIN2, \(\alpha = 5\) (from Root) and \(\beta = 2\). Since \(\alpha \ge \beta\) (\(5 \ge 2\)), the remaining children of MIN2 (the MAXR2 branch) are completely pruned. Root MAX ultimately chooses the left branch with a value of 5.</li></ul><p><b>Part (b) Minimax Algorithm Properties:</b></p><ul>  <li><b>Completeness:</b> Yes, it is complete if the game tree is finite (e.g., maximum depth \(m\) is bounded).</li>  <li><b>Optimality:</b> Yes, it is optimal against an optimal opponent. If the opponent plays sub-optimally, Minimax still guarantees at least the computed score.</li>  <li><b>Time Complexity:</b> \(O(b^m)\), where \(b\) is the legal moves (branching factor) and \(m\) is the maximum depth.</li>  <li><b>Space Complexity:</b> \(O(bm)\) if generating all successors at once, or \(O(m)\) if generating them one at a time (like DFS).</li></ul>
                 </div>
             </div>

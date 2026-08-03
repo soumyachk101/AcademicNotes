@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Computer Networks (PCC-CS504) - Exam-Ready Complete Solved Question Bank</title>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default'});</script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 60 }});</script>
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <style>
         :root {
@@ -54,8 +54,8 @@
         .note-skeleton ul { margin: 0; padding-left: 1.5rem; }
         .note-skeleton li { margin-bottom: 0.5rem; }
         .note-skeleton b { color: #4a5568; }
-        .mermaid { text-align: center; margin-bottom: 1rem; width: 100%; }
-        .mermaid svg { max-width: 100%; height: auto !important; min-height: 200px; }
+        .mermaid { text-align: center; margin-bottom: 1.5rem; width: 100%; }
+        
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
     <link rel="stylesheet" href="../../premium.css">
@@ -723,6 +723,17 @@
   <li><strong>Presentation Layer:</strong> Formats, encrypts, and compresses data so it can be understood by the application layer (SSL/TLS, JPEG, ASCII).</li>
   <li><strong>Application Layer:</strong> Directly interacts with the software application. Provides network services to end-users (HTTP, FTP, SMTP, DNS).</li>
 </ol>
+<div class="diagram-container"><div class="mermaid">
+graph TD
+    L7["Layer 7 — Application · Data (HTTP, FTP, SMTP, DNS)"]
+    L6["Layer 6 — Presentation · Data (SSL/TLS, JPEG, ASCII)"]
+    L5["Layer 5 — Session · Data (Session setup / teardown)"]
+    L4["Layer 4 — Transport · Segments (TCP, UDP, Ports)"]
+    L3["Layer 3 — Network · Packets (IP, Routers)"]
+    L2["Layer 2 — Data Link · Frames (MAC, Switches)"]
+    L1["Layer 1 — Physical · Bits (Cables, Hubs, Repeaters)"]
+    L7 --> L6 --> L5 --> L4 --> L3 --> L2 --> L1
+</div><div class="diagram-caption">Figure: OSI layer stack from Application (top) down to Physical (bottom), with the PDU handled at each layer.</div></div>
 
                 </div>
             </div>
@@ -757,6 +768,16 @@
     <td>Internet layer exclusively supports connectionless communication (IP).</td>
   </tr>
 </table>
+<div class="diagram-container"><div class="mermaid">
+graph LR
+    A7["7 · Application"] --> T4["Application"]
+    A6["6 · Presentation"] --> T4
+    A5["5 · Session"] --> T4
+    A4["4 · Transport"] --> T3["Transport"]
+    A3["3 · Network"] --> T2["Internet"]
+    A2["2 · Data Link"] --> T1["Network Access"]
+    A1["1 · Physical"] --> T1
+</div><div class="diagram-caption">Figure: Layer-to-layer mapping — OSI layers 5-7 collapse into the TCP/IP Application layer, and OSI layers 1-2 collapse into Network Access.</div></div>
 
                 </div>
             </div>
@@ -825,6 +846,17 @@
   <li><strong>Transmission:</strong> The sender replaces the appended zeros with the CRC checksum and transmits the frame.</li>
   <li><strong>Verification:</strong> The receiver divides the received frame by \(G\). If the remainder is exactly zero, the frame is accepted as error-free. Otherwise, it is rejected.</li>
 </ol>
+<div class="diagram-container"><div class="mermaid">
+graph TD
+    A["Sender: data M, k bits"] --> B["Append n-1 zeros to M"]
+    B --> C["Modulo-2 divide by generator G, n bits"]
+    C --> D["Remainder = CRC, n-1 bits"]
+    D --> E["Transmit frame = M followed by CRC"]
+    E --> F["Receiver divides whole frame by the same G"]
+    F --> G{"Remainder = 0 ?"}
+    G -->|Yes| H["Accept frame"]
+    G -->|No| I["Reject frame, error detected"]
+</div><div class="diagram-caption">Figure: CRC generation at the sender and verification at the receiver — a zero remainder means no error was detected.</div></div>
 
                 </div>
             </div>
@@ -872,6 +904,23 @@
   <li><strong>Retransmission:</strong> When the sender times out waiting for the ACK for frame 3, it must "Go Back N" frames and retransmit frame 3 <strong>AND all subsequent frames</strong> (4, 5, 6).</li>
   <li><strong>Efficiency:</strong> Much better than Stop-and-Wait, but wastes bandwidth on noisy channels due to retransmitting correctly received out-of-order frames.</li>
 </ul>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant S as Sender (Ws = N)
+    participant R as Receiver (Wr = 1)
+    S->>R: Frame 2
+    R-->>S: ACK 2
+    S-xR: Frame 3 (lost)
+    S->>R: Frame 4
+    Note right of R: Discards 4, expects 3
+    S->>R: Frame 5
+    Note right of R: Discards 5, expects 3
+    Note left of S: Timeout for Frame 3
+    S->>R: Frame 3 (resent)
+    S->>R: Frame 4 (resent)
+    S->>R: Frame 5 (resent)
+    R-->>S: ACK 5 (cumulative)
+</div><div class="diagram-caption">Figure: Go-Back-N — losing frame 3 forces the sender to retransmit 3, 4 and 5, because the receiver window is 1 and discards anything out of order.</div></div>
 
                 </div>
             </div>
@@ -887,6 +936,22 @@
   <li><strong>Mechanism:</strong> The receiver has a window larger than 1, meaning it can accept and buffer <em>out-of-order</em> frames. If frame 3 is lost, but 4, 5, and 6 arrive intact, the receiver buffers 4, 5, and 6 and sends a NAK specifically for frame 3.</li>
   <li><strong>Retransmission:</strong> The sender only retransmits the specific frame that was lost (frame 3). Once the receiver gets frame 3, it delivers 3, 4, 5, and 6 to the Network layer in order.</li>
 </ul>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant S as Sender (Ws = N)
+    participant R as Receiver (Wr = N)
+    S->>R: Frame 2
+    R-->>S: ACK 2
+    S-xR: Frame 3 (lost)
+    S->>R: Frame 4
+    Note right of R: Buffers 4 (out of order)
+    R-->>S: NAK 3
+    S->>R: Frame 5
+    Note right of R: Buffers 5
+    S->>R: Frame 3 (only 3 resent)
+    Note right of R: Delivers 3, 4, 5 in order
+    R-->>S: ACK 5
+</div><div class="diagram-caption">Figure: Selective Repeat — the receiver buffers out-of-order frames 4 and 5, so only the lost frame 3 is retransmitted.</div></div>
 
                 </div>
             </div>
@@ -935,6 +1000,20 @@
 </ol>
 <h4>Binary Exponential Backoff Algorithm</h4>
 <p>To prevent immediate re-collision, colliding stations wait a random amount of time before retrying. After the \(c\)-th collision (where \(c \le 10\)), a station chooses a random number \(K\) between \(0\) and \(2^c - 1\). It waits \(K \times 51.2 \mu s\) before sensing the line again. This exponentially increases the waiting time range, spreading out retries under heavy load.</p>
+<div class="diagram-container"><div class="mermaid">
+graph TD
+    A["Frame ready"] --> B{"Channel idle?"}
+    B -->|Busy| W["Defer, keep sensing"]
+    W --> B
+    B -->|Idle| C["Transmit and listen"]
+    C --> D{"Collision?"}
+    D -->|No| E["Frame sent OK"]
+    D -->|Yes| F["Abort, send jam signal"]
+    F --> G{"Attempts c = 16 ?"}
+    G -->|Yes| H["Give up, report error"]
+    G -->|No| I["Wait K x 51.2 us, 0 &lt;= K &lt; 2^c, c capped at 10"]
+    I --> B
+</div><div class="diagram-caption">Figure: CSMA/CD flow — sense, transmit-and-listen, jam on collision, then binary exponential backoff before re-sensing.</div></div>
 
                 </div>
             </div>
@@ -949,6 +1028,19 @@
   <li><strong>RTS/CTS Handshake:</strong> To avoid hidden terminals, the sender transmits a short Request To Send (RTS) frame. The Access Point responds with a Clear To Send (CTS) frame broadcasted to everyone, reserving the channel.</li>
   <li><strong>Data & ACK:</strong> The sender transmits the Data frame. The receiver replies with an ACK. If no ACK is received, a collision is assumed, and the sender uses exponential backoff before retrying.</li>
 </ol>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant A as Station A
+    participant AP as Access Point
+    participant C as Hidden Node C
+    Note over A: Idle for DIFS
+    A->>AP: RTS (NAV duration)
+    AP->>A: CTS (after SIFS)
+    AP->>C: same CTS, broadcast
+    Note over C: Sets NAV, silent
+    A->>AP: DATA
+    AP-->>A: ACK (after SIFS)
+</div><div class="diagram-caption">Figure: CSMA/CA with RTS/CTS — one broadcast CTS reserves the channel and silences the hidden station C for the NAV duration.</div></div>
 
                 </div>
             </div>
@@ -1054,6 +1146,16 @@
   <li><strong>BOOTP (Bootstrap Protocol):</strong> An improvement over RARP. It provided the IP address, subnet mask, and default gateway. However, mappings were static; an admin had to manually bind MACs to IPs in a server file.</li>
   <li><strong>DHCP (Dynamic Host Configuration Protocol):</strong> The modern standard. It dynamically leases IP addresses from a pool to devices for a specific duration. It automates entire network configurations (IP, Mask, Gateway, DNS servers) with zero manual admin work. Uses the DORA process (Discover, Offer, Request, Acknowledge).</li>
 </ul>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant C as Client (no IP)
+    participant S as DHCP Server
+    C->>S: 1. DHCPDISCOVER (broadcast)
+    S->>C: 2. DHCPOFFER (IP, mask, gateway, DNS)
+    C->>S: 3. DHCPREQUEST (broadcast)
+    S->>C: 4. DHCPACK (lease confirmed)
+    Note over C: Configured until lease expires
+</div><div class="diagram-caption">Figure: DHCP DORA exchange — Discover and Request are broadcast because the client has no IP address yet.</div></div>
 
                 </div>
             </div>
@@ -1177,6 +1279,19 @@ sequenceDiagram
       <br/>• <em>3 Duplicate ACKs (Fast Retransmit):</em> Implies mild congestion. <code>ssthresh</code> is halved, and <code>cwnd</code> is halved.
       <br/>• <em>Timeout:</em> Implies severe congestion (packet totally lost). <code>ssthresh</code> is halved, and <code>cwnd</code> drops all the way back to 1 MSS (Multiplicative Decrease).</li>
 </ol>
+<div class="diagram-container"><div class="mermaid">
+stateDiagram-v2
+    [*] --> SlowStart
+    SlowStart : Slow Start (cwnd doubles per RTT)
+    CongAvoid : Congestion Avoidance (cwnd + 1 MSS per RTT)
+    FastRecovery : Fast Recovery (cwnd = ssthresh)
+    SlowStart --> CongAvoid : cwnd reaches ssthresh
+    SlowStart --> SlowStart : Timeout - ssthresh = cwnd/2, cwnd = 1 MSS
+    CongAvoid --> SlowStart : Timeout - ssthresh = cwnd/2, cwnd = 1 MSS
+    CongAvoid --> FastRecovery : 3 duplicate ACKs - ssthresh = cwnd/2, cwnd = ssthresh
+    FastRecovery --> CongAvoid : New ACK arrives
+    FastRecovery --> SlowStart : Timeout
+</div><div class="diagram-caption">Figure: TCP congestion-control state machine — exponential growth until ssthresh, then linear growth; a timeout resets cwnd to 1 MSS while 3 duplicate ACKs only halve it.</div></div>
 
                 </div>
             </div>
@@ -1224,6 +1339,21 @@ sequenceDiagram
 </ul>
 <h4>Resolution Process</h4>
 <p>When you type a URL, your browser asks a <em>Recursive Resolver</em> (usually provided by your ISP). If the IP isn't cached, the resolver asks the Root Server &rarr; then the TLD Server &rarr; then the Authoritative Server, finally returning the IP to your browser.</p>
+<div class="diagram-container"><div class="mermaid">
+sequenceDiagram
+    participant R as Resolver
+    participant Ro as Root (.)
+    participant T as TLD (.com)
+    participant A as Auth NS
+    Note over R: Recursive query in
+    R->>Ro: www.google.com ?
+    Ro-->>R: Refer to .com
+    R->>T: www.google.com ?
+    T-->>R: Refer to ns.google.com
+    R->>A: www.google.com ?
+    A-->>R: A record = IP
+    Note over R: Cache, then reply
+</div><div class="diagram-caption">Figure: Recursive query from the browser, then iterative queries from the resolver down the Root &rarr; TLD &rarr; Authoritative hierarchy.</div></div>
 
                 </div>
             </div>
