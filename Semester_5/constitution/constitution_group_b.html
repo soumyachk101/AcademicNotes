@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constitution & IKT (MC-CS501) - Group B</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #d946ef; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #d946ef; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="constitution_index.html">&larr; Constitution & IKT</a>
+        <span class="nav-title">Constitution & IKT <span class="nav-code">MC-CS501</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="constitution_group_a.html" class="gs-item "><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="constitution_group_b.html" class="gs-item is-current"><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="constitution_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="constitution_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-b">Group B — Descriptive Questions (5 marks)</h1>
+
+            <div class="qa-card" id="gb-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Explain the salient features of the Indian Constitution.</span></div>
+                <div class="a-text">
+                    <h4>Q1. Discuss the Salient Features of the Indian Constitution.</h4><p>The Indian Constitution, adopted on November 26, 1949, is a unique document. It draws from various sources but is tailored to India's unique socio-cultural fabric. Its salient features include:</p><ul><li><b>Lengthiest Written Constitution:</b> It is the most comprehensive constitution globally, originally containing 395 Articles in 22 Parts and 8 Schedules. This is due to India's geographical and diversity, the influence of the bulky Government of India Act 1935, and the inclusion of both fundamental principles and detailed administrative provisions.</li><li><b>Blend of Rigidity and Flexibility:</b> Unlike the US Constitution (highly rigid) or the British (highly flexible), the Indian Constitution is a synthesis. Some provisions require a special majority in Parliament (rigid), others require ratification by half the states (highly rigid), while some can be amended by a simple majority (flexible).</li><li><b>Federal System with Unitary Bias:</b> It establishes a federal structure (two governments, division of powers, independent judiciary) but leans heavily towards a strong center, especially during emergencies (Article 352-360) where the federal structure converts into a unitary one without any formal amendment.</li><li><b>Parliamentary Form of Government:</b> Based on the Westminster model, it features nominal and real executives, majority party rule, collective responsibility of the executive to the legislature, and leadership of the Prime Minister.</li><li><b>Synthesis of Parliamentary Sovereignty and Judicial Supremacy:</b> It balances the British principle of parliamentary sovereignty with the American principle of judicial supremacy. The Supreme Court can strike down parliamentary laws, and Parliament can amend major portions of the Constitution.</li><li><b>Integrated and Independent Judiciary:</b> A single, unified judicial system with the Supreme Court at the top, enforcing both central and state laws, free from executive and legislative interference.</li><li><b>Fundamental Rights, Duties, and DPSPs:</b> Provides justifiable rights to citizens, non-justifiable directives to the state for welfare, and fundamental duties for citizens (added by the 42nd Amendment).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>Discuss the importance and objectives stated in the Preamble of the Indian Constitution.</span></div>
+                <div class="a-text">
+                    <h4>Q2. Explain the Importance and Objectives of the Preamble.</h4><p>The Preamble is the introductory statement to the Constitution. Based on Jawaharlal Nehru's 'Objective Resolution', it serves as the identity card of the Constitution, reflecting the dreams and aspirations of the founding fathers.</p><h5>Objectives of the Preamble:</h5><ul><li><b>Justice:</b> It promises Social (equal treatment regardless of caste/religion), Economic (non-discrimination on economic factors, reducing inequalities), and Political (equal political rights) justice.</li><li><b>Liberty:</b> Guarantees liberty of thought, expression, belief, faith, and worship, essential for the holistic development of individuals, subject to reasonable restrictions.</li><li><b>Equality:</b> Ensures equality of status and opportunity by abolishing privileges and untouchability (Articles 14-18).</li><li><b>Fraternity:</b> Promotes a sense of brotherhood, assuring the dignity of the individual and the unity and integrity of the nation (the word 'integrity' was added by the 42nd Amendment in 1976).</li></ul><h5>Importance of the Preamble:</h5><ul><li><b>Source of Authority:</b> It declares that the Constitution derives its authority from the "We, the people of India".</li><li><b>Nature of State:</b> It declares India to be a Sovereign, Socialist, Secular, Democratic, and Republic state.</li><li><b>Key to Interpretation:</b> As established in the <i>Berubari Union Case</i> and <i>Kesavananda Bharati Case</i>, while the Preamble is not a source of power, it is a crucial tool for interpreting ambiguous constitutional provisions. It holds the fundamental philosophy of the Constitution.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Differentiate between Fundamental Rights (Part III) and Directive Principles of State Policy (Part IV).</span></div>
+                <div class="a-text">
+                    <h4>Q3. Distinguish between Fundamental Rights (FRs) and Directive Principles of State Policy (DPSPs).</h4><p>Both Fundamental Rights (Part III, Articles 12-35) and Directive Principles of State Policy (Part IV, Articles 36-51) are essential features of the Constitution, yet they have distinct roles and characteristics.</p><ul><li><b>Justiciability and Enforcement:</b> The most significant difference is that FRs are legally justiciable. If violated, a citizen can directly move the Supreme Court (Art 32) or High Courts (Art 226). DPSPs are non-justiciable (Art 37); they are moral guidelines for the state and cannot be enforced by any court.</li><li><b>Nature of Obligations:</b> FRs are generally negative injunctions (e.g., "The State shall not discriminate..."), limiting the power of the government to protect individual liberties. DPSPs are positive obligations (e.g., "The State shall strive to promote..."), directing the state to act to achieve socio-economic welfare.</li><li><b>Core Objectives:</b> FRs aim to establish 'Political Democracy' by guaranteeing civil liberties and protecting against state tyranny. DPSPs aim to establish 'Social and Economic Democracy' by promoting a welfare state, reducing inequality, and ensuring livelihood.</li><li><b>Legal Precedence:</b> In case of a conflict, FRs generally hold legal supremacy over DPSPs (established in the <i>Champakam Dorairajan case</i>). However, laws implementing specific DPSPs (Article 39(b) and (c)) are protected against certain FR violations (Article 14, 19) due to Article 31C.</li><li><b>Scope and Application:</b> FRs are automatically enforced. DPSPs require specific legislation for their implementation (e.g., the Right to Education Act was passed to implement the directive in Article 45).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>Explain the Right to Freedom of Speech and Expression (Article 19) and its reasonable restrictions.</span></div>
+                <div class="a-text">
+                    <h4>Q4. Discuss the Right to Freedom of Speech and Expression (Article 19(1)(a)) and its Reasonable Restrictions.</h4><p>Article 19(1)(a) of the Indian Constitution guarantees to all citizens the right to freedom of speech and expression. This is a foundational pillar of any vibrant democracy, allowing citizens to participate in political processes and public discourse.</p><h5>Scope of Article 19(1)(a):</h5><p>The Supreme Court has continuously expanded the scope of this right through liberal interpretations. It is not just about spoken words but includes:</p><ul><li><b>Freedom of the Press:</b> (Implicitly covered, as established in the <i>Romesh Thappar case</i>).</li><li><b>Right to Information:</b> The right to know about government activities.</li><li><b>Right to Broadcast:</b> The government does not hold a monopoly on electronic media.</li><li><b>Right against Bandhs:</b> Right against forced strikes or bandhs called by political parties.</li><li><b>Right to Silence:</b> As affirmed in the <i>National Anthem case (Bijoe Emmanuel v. State of Kerala)</i>.</li></ul><h5>Reasonable Restrictions (Article 19(2)):</h5><p>This right is not absolute. The State can impose 'reasonable restrictions' under Article 19(2) on the following grounds:</p><ol><li><b>Sovereignty and Integrity of India:</b> To prevent secessionist activities.</li><li><b>Security of the State:</b> To prevent waging of war against the government.</li><li><b>Friendly Relations with Foreign States:</b> To maintain diplomatic ties.</li><li><b>Public Order, Decency, or Morality:</b> To prevent riots, violence, or obscenity.</li><li><b>Contempt of Court:</b> Protecting the dignity and authority of the judiciary.</li><li><b>Defamation:</b> Protecting the reputation of individuals.</li><li><b>Incitement to an Offence:</b> Preventing speech that encourages criminal acts.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Write a short note on the Right to Life and Personal Liberty under Article 21.</span></div>
+                <div class="a-text">
+                    <h4>Q5. Elaborate on the Right to Life and Personal Liberty (Article 21).</h4><p>Article 21 states: <i>"No person shall be deprived of his life or personal liberty except according to procedure established by law."</i> This right is available to both citizens and non-citizens. The Supreme Court has described it as the "heart of Fundamental Rights".</p><h5>Evolution of Article 21:</h5><ul><li><b>A.K. Gopalan Case (1950):</b> Initially, the Supreme Court took a narrow view, holding that Article 21 only provided protection against arbitrary executive action, not legislative action. If a law prescribed a procedure, life/liberty could be deprived.</li><li><b>Maneka Gandhi Case (1978):</b> A landmark judgment that revolutionized Article 21. The Court ruled that the "procedure established by law" must be "right, just, and fair," and not arbitrary or oppressive. It effectively introduced the American concept of <b>'Due Process of Law'</b> into India.</li></ul><h5>Expanded Scope (The 'Umbrella' Right):</h5><p>Over the years, judicial activism has expanded 'Life' to mean a 'life of dignity', not merely animal existence. The expanded rights include:</p><ul><li>Right to live with human dignity.</li><li>Right to a clean environment, pollution-free water, and air.</li><li>Right to livelihood and shelter.</li><li>Right to privacy (affirmed in the <i>Puttaswamy Case, 2017</i>).</li><li>Right to free legal aid and a speedy trial.</li><li>Right against solitary confinement and custodial violence.</li><li>Right to primary education (later formalized as Article 21A).</li></ul><p>Notably, Article 21 cannot be suspended even during a National Emergency (under Article 359).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>Describe the various Writs issued by the High Courts and Supreme Court under Articles 32 and 226.</span></div>
+                <div class="a-text">
+                    <h4>Q6. Explain the various types of Writs issued under Articles 32 and 226 of the Constitution.</h4><p>To enforce Fundamental Rights, the Constitution empowers the Supreme Court (Article 32) and High Courts (Article 226) to issue specific writs. Dr. B.R. Ambedkar called Article 32 the "heart and soul of the Constitution" because rights are meaningless without an effective remedy.</p><h5>The Five Prerogative Writs:</h5><ol><li><b>Habeas Corpus (<i>"To have the body of"</i>):</b> Issued to a person or authority who has detained another unlawfully. It commands them to bring the detained person before the court to examine the legality of the detention. It is a powerful safeguard against arbitrary arrest.</li><li><b>Mandamus (<i>"We Command"</i>):</b> Issued to a public official, corporation, lower court, or government directing them to perform a public or statutory duty that they have failed or refused to perform. It cannot be issued against a private individual or the President/Governor.</li><li><b>Prohibition (<i>"To forbid"</i>):</b> Issued by a higher court to a lower court or tribunal to prevent them from exceeding their jurisdiction or usurping a jurisdiction they do not possess. It is preventative in nature.</li><li><b>Certiorari (<i>"To be certified"</i> or <i>"To be informed"</i>):</b> Issued by a higher court to a lower court or tribunal to either transfer a case pending before them or to squash their order. It is both preventative and curative (correcting errors of law or jurisdiction).</li><li><b>Quo-Warranto (<i>"By what authority or warrant"</i>):</b> Issued to inquire into the legality of a person's claim to a public office. It prevents the illegal usurpation of a public office by an unqualified person.</li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Explain the powers and functions of the President of India.</span></div>
+                <div class="a-text">
+                    <h4>Q7. Discuss the Powers and Functions of the President of India.</h4><p>The President is the head of the Indian State, the first citizen of India, and the Supreme Commander of the Armed Forces. However, in India's parliamentary system, the President is a nominal executive (de jure head), while the real power lies with the Council of Ministers headed by the Prime Minister (de facto executive).</p><h5>Key Powers of the President:</h5><ul><li><b>Executive Powers:</b> All executive actions of the Government of India are formally taken in the President's name. The President appoints the Prime Minister, other ministers, the Attorney General, the Comptroller and Auditor General (CAG), Chief Election Commissioner, UPSC Chairman, and State Governors.</li><li><b>Legislative Powers:</b> The President is an integral part of Parliament. They can summon or prorogue Parliament and dissolve the Lok Sabha. The President addresses the first session after general elections. Crucially, the President can promulgate <b>Ordinances</b> (Article 123) when Parliament is not in session, which have the same force as an Act.</li><li><b>Financial Powers:</b> A Money Bill can only be introduced with the President's prior recommendation. The President causes the Union Budget (Annual Financial Statement) to be laid before Parliament and constitutes the Finance Commission every five years.</li><li><b>Judicial and Pardoning Powers (Article 72):</b> The President appoints the Chief Justice and judges of the Supreme Court and High Courts. The President can grant pardons, reprieves, respites, or remissions of punishment, or suspend, remit, or commute the sentence of any person convicted of any offence (including death sentences and court-martial cases).</li><li><b>Emergency Powers:</b> The President can declare three types of emergencies: National Emergency (Article 352), President's Rule/State Emergency (Article 356), and Financial Emergency (Article 360), subject to parliamentary approval.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>Discuss the composition, powers, and role of the Lok Sabha and Rajya Sabha.</span></div>
+                <div class="a-text">
+                    <h4>Q8. Detailed Comparison between the Lok Sabha and the Rajya Sabha.</h4><p>The Indian Parliament is a bicameral legislature. While both Houses are vital, they operate under distinct constitutional mandates and power structures.</p><table border="1"><tr><th>Feature</th><th>Lok Sabha (Lower House / House of the People)</th><th>Rajya Sabha (Upper House / Council of States)</th></tr><tr><td><b>Representational Basis</b></td><td>Directly represents the people of India as a whole.</td><td>Represents the interests of the States and Union Territories.</td></tr><tr><td><b>Composition & Election</b></td><td>Max 550 members. Members are directly elected via Universal Adult Franchise.</td><td>Max 250 members. 238 are indirectly elected by State MLAs; 12 are nominated by the President for excellence in art, science, etc.</td></tr><tr><td><b>Tenure</b></td><td>5 years (unless dissolved sooner). Dissolution is permanent upon expiry or by the President.</td><td>Permanent house (not subject to dissolution). 1/3rd of members retire every 2 years; members serve a 6-year term.</td></tr><tr><td><b>Financial Supremacy</b></td><td>Dominant. Money Bills can only be introduced here; Rajya Sabha cannot amend or reject them.</td><td>Limited. Can only delay Money Bills for 14 days and make non-binding suggestions.</td></tr><tr><td><b>Executive Control</b></td><td>The Council of Ministers is exclusively and collectively responsible to the Lok Sabha (Art 75).</td><td>Cannot pass a No-Confidence Motion to remove the government.</td></tr><tr><td><b>Legislative Power</b></td><td>Joint Sittings (Art 108) are presided over by the LS Speaker, generally giving the LS numerical advantage.</td><td>Has unique special powers under Art 249 (legislating on State List) and Art 312 (creating All-India Services).</td></tr></table>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Explain the law-making procedure in the Indian Parliament.</span></div>
+                <div class="a-text">
+                    <h4>Q9. Comprehensive Analysis of the Law-making Procedure in Parliament.</h4><p>The legislative process in India is a rigorous, multi-stage mechanism designed to ensure debate, deliberation, and public accountability. Ordinary bills undergo the following detailed cycle:</p><ol><li><b>Introduction (First Reading):</b> The Bill is introduced in either House. There is no debate at this stage; it is simply listed and published in the Gazette.</li><li><b>Second Reading (Detailed Scrutiny):</b> The most critical phase, consisting of three steps:<ul><li><b>General Discussion:</b> Members discuss the underlying principles of the bill.</li><li><b>Committee Stage:</b> The bill is typically referred to a Select or Joint Parliamentary Committee. These committees invite expert testimony and stakeholders to refine the provisions.</li><li><b>Consideration Stage:</b> The House debates the bill clause by clause. Amendments are moved, discussed, and voted upon.</li></ul></li><li><b>Third Reading (Final Vote):</b> A debate is held on whether to accept the bill as a whole. No new amendments are permitted. If passed by a simple majority, it moves to the second House.</li><li><b>Action by Second House:</b> The process repeats. If the Houses disagree for six months, the President may convene a <b>Joint Sitting</b> (Art 108) where the bill is resolved by a majority vote.</li><li><b>Presidential Assent (Article 111):</b> Upon presentation, the President has three options:<ul><li><b>Assent:</b> The Bill becomes an Act.</li><li><b>Withhold Assent:</b> The Bill dies (Absolute Veto).</li><li><b>Return for Reconsideration:</b> (Suspensive Veto). If passed again by both houses with or without amendments, the President <b>must</b> provide assent.</li></ul></li></ol>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Write a short note on the doctrine of 'Basic Structure' laid down in the Kesavananda Bharati case.</span></div>
+                <div class="a-text">
+                    <h4>Q10. In-depth Study of the 'Basic Structure Doctrine' (Kesavananda Bharati v. State of Kerala, 1973).</h4><p>The 'Basic Structure Doctrine' represents the pinnacle of Indian judicial review, defining the boundary between Parliament's constituent power and the Constitution's inviolable essence.</p><h5>Conceptual Foundation:</h5><p>Article 368 empowers Parliament to amend the Constitution. However, the landmark 13-judge bench in <i>Kesavananda Bharati</i> established that this power is limited to amending provisions <i>without</i> damaging the foundational framework. The Court held that "the donee of a power cannot use the power to destroy the very instrument which confers it."</p><h5>Evolution and Judicial Determination:</h5><p>The Supreme Court acts as the guardian of this doctrine, determining the 'basic structure' on a case-by-case basis. Features deemed immune from abrogation include:</p><ul><li><b>Constitutional Supremacy:</b> The Constitution is above all organs of state.</li><li><b>Democratic Republic:</b> India cannot be transformed into an autocracy or absolute monarchy.</li><li><b>Secularism:</b> Ensuring freedom of religion and equal state treatment.</li><li><b>Separation of Powers:</b> The checks and balances between the Judiciary, Executive, and Legislature.</li><li><b>Federalism:</b> The distribution of powers between Union and States.</li><li><b>Judicial Review:</b> The power of the courts to examine the constitutionality of legislative and executive acts (Minerva Mills v. Union of India, 1980).</li><li><b>Rule of Law:</b> Equality before law and the absence of arbitrary power.</li></ul><h5>Constitutional Significance:</h5><p>The doctrine serves as a vital safeguard against 'constitutional authoritarianism'. By preventing a temporary parliamentary majority from altering the core values of the polity (such as secularism or judicial independence), it protects the long-term democratic integrity of the nation. Any amendment violating these features is declared <i>ultra vires</i> and struck down.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Discuss the role and independence of the Judiciary in India.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Explain the Emergency provisions under the Indian Constitution (Articles 352, 356, and 360).</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Discuss the distribution of legislative powers between the Union and States under the 7th Schedule.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>Explain the structure and functions of the Election Commission of India.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Write a short note on the Comptroller and Auditor General (CAG) of India.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Explain the provisions of Panchayati Raj instituted by the 73rd Amendment Act.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>Discuss the concept of Federalism with strong Unitary bias in India.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>Explain the process of Amendment of the Constitution under Article 368.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Write a short note on Fundamental Duties (Article 51A) and their enforcement.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>Explain the concept of Public Interest Litigation (PIL) and its impact on Indian society.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Discuss the historical background and structure of Vedic Literature.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>Explain the philosophical concepts embedded in the Bhagavad Gita regarding Work Ethics (Karma Yoga).</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Write a short note on the Six Systems of Indian Philosophy (Shad-Darshanas).</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Discuss the contributions of Sushruta and Charaka to ancient medicine and surgery.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>Explain the mathematical achievements of ancient India, focusing on Aryabhata and Bhaskara.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>Discuss the architectural and engineering marvels of ancient Indian temples and town planning.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>Explain the concept of Town Planning in the Indus Valley Civilization.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Write a short note on Kautilya's Arthashastra and its statecraft principles.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>Explain the education model of ancient Indian Universities like Nalanda and Takshashila.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Discuss the metallurgical knowledge of ancient India with reference to the Iron Pillar of Delhi and Wootz Steel.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>Explain the environmental ethos and conservation principles found in ancient Indian texts.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>Write a short note on Patanjali's Ashtanga Yoga and its holistic health benefits.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Discuss the astronomical observations and calendar systems developed in ancient India.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>Explain the relevance of Indian Knowledge Traditions (IKT) in National Education Policy (NEP) 2020.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>Write a short note on ancient Indian linguistics and Panini's Ashtadhyayi.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>Discuss the governance and administrative mechanisms depicted in ancient Epics.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Explain the role of Trade and Maritime Navigation in ancient India.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>Discuss the concept of Sustainable Living in Indian Knowledge Systems.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>Write a short note on the integration of traditional Indian knowledge with modern technological innovations.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Explain the role of Indian Knowledge Tradition in fostering global harmony and ethics.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

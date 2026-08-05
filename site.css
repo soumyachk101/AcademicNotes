@@ -222,7 +222,107 @@ h1 {
     white-space: nowrap;
 }
 
-/* ---------- Cards ---------- */
+/* ============================================================
+   The subject tile — one card component used by every page:
+   landing, semester index and subject index.
+   ============================================================ */
+
+.tiles {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(288px, 1fr));
+    gap: 1rem;
+}
+
+.tile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 236px;
+    padding: 1.55rem 1.55rem 1.35rem;
+    border-radius: 18px;
+    text-decoration: none;
+    overflow: hidden;
+    isolation: isolate;
+    color: #fff;
+    /* Three stops, so the surface turns rather than just darkens */
+    background: linear-gradient(158deg,
+        color-mix(in srgb, var(--c) 92%, #ffffff) 0%,
+        var(--c) 42%,
+        color-mix(in srgb, var(--c) 70%, #0b1220) 100%);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .14),
+        0 1px 2px rgba(15, 23, 42, .10),
+        0 16px 34px -20px color-mix(in srgb, var(--c) 62%, #0b1220);
+    transition: transform 420ms var(--ease), box-shadow 420ms var(--ease);
+}
+
+/* Specular highlight from the top-left, so it reads as a lit surface */
+.tile::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(125% 92% at 10% -6%, rgba(255,255,255,.26), transparent 60%);
+}
+
+.tile:hover, .tile:focus-visible {
+    transform: translateY(-5px);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, .2),
+        0 2px 4px rgba(15, 23, 42, .12),
+        0 30px 54px -24px color-mix(in srgb, var(--c) 72%, #0b1220);
+}
+.tile:focus-visible { outline: 3px solid var(--ink-strong); outline-offset: 3px; }
+
+.tile-code {
+    align-self: flex-start;
+    padding: 0.3rem 0.62rem;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, .18);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .16);
+    font-family: var(--util);
+    font-size: 0.67rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #fff;
+}
+
+.tile h3 {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.13;
+    letter-spacing: -0.028em;
+    color: #fff;
+    margin: 0.9rem 0 0.5rem;
+    text-wrap: balance;
+}
+
+.tile p {
+    font-size: 0.865rem;
+    line-height: 1.52;
+    color: rgba(255, 255, 255, .8);
+    text-wrap: pretty;
+}
+
+.tile-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: auto;
+    padding-top: 1.15rem;
+    border-top: 1px solid rgba(255, 255, 255, .24);
+    font-family: var(--util);
+    font-size: 0.74rem;
+    font-variant-numeric: tabular-nums;
+    color: rgba(255, 255, 255, .88);
+}
+
+.tile-foot .arrow { font-size: 1.05rem; line-height: 1; transition: transform 320ms var(--ease); }
+.tile:hover .arrow { transform: translateX(4px); }
+
+/* ---------- Legacy card grid ---------- */
 
 .subjects {
     display: grid;

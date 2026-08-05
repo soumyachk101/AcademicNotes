@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Management (HS-MC501) - Group B</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #f59e0b; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #f59e0b; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="management_index.html">&larr; Industrial Management</a>
+        <span class="nav-title">Industrial Management <span class="nav-code">HS-MC501</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="management_group_a.html" class="gs-item "><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="management_group_b.html" class="gs-item is-current"><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="management_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="management_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-b">Group B — Descriptive Questions (5 marks)</h1>
+
+            <div class="qa-card" id="gb-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Explain the functions of Management (Planning, Organizing, Staffing, Directing, Controlling).</span></div>
+                <div class="a-text">
+                    <h4>Q1. Explain the Five Primary Functions of Management.</h4><p>Management is often defined as the process of getting things done through and with people in formally organized groups. It is a continuous process that involves five highly interrelated primary functions. These form the fundamental cycle of any managerial role, whether in a small startup or a multinational corporation:</p><ul><li><b>Planning:</b> This is the foundational function. It involves deciding in advance what to do, how to do it, when to do it, and who is to do it. Planning bridges the gap from where we are to where we want to go. It requires forecasting, establishing objectives, formulating policies, and developing schedules. Without planning, all other functions would be aimless.</li><li><b>Organizing:</b> Once the plan is set, management must arrange resources (human, financial, physical, and informational) to execute it. Organizing involves dividing the work into manageable tasks, grouping these tasks into departments (departmentalization), assigning duties to personnel, and delegating the necessary authority (creating a scalar chain).</li><li><b>Staffing:</b> Often called Human Resource Management. It involves filling and keeping filled the positions in the organizational structure. This includes manpower planning, recruitment, selection, training, performance appraisal, and compensation. A poorly staffed organization will fail regardless of how good the plan is.</li><li><b>Directing (Leading):</b> This is the interpersonal aspect of management. It deals with influencing, guiding, supervising, and motivating subordinates for the achievement of organizational goals. It involves effective communication, providing strong leadership, and understanding human psychology to keep morale high.</li><li><b>Controlling:</b> The final function ensures that events conform to plans. It involves establishing standards of performance, measuring actual performance, comparing actual performance against standards, and taking corrective action if there are deviations. Controlling brings the management cycle back to planning, as it provides feedback for future strategies.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>Discuss FW Taylor's Scientific Management principles and techniques.</span></div>
+                <div class="a-text">
+                    <h4>Q2. Discuss F.W. Taylor's principles of Scientific Management and the techniques used to implement them.</h4><p>Frederick Winslow Taylor, an American mechanical engineer, introduced "Scientific Management" in the early 20th century to improve industrial efficiency. Before Taylor, work was done based on "rule-of-thumb" (tradition and guesswork). Taylor advocated for a rigorous, data-driven approach.</p><h5>Four Core Principles:</h5><ul><li><b>Science, Not Rule of Thumb:</b> Management must scientifically study every element of a worker's job, replacing old intuitive methods. This involves finding the "one best way" to perform a task.</li><li><b>Harmony, Not Discord:</b> There must be complete mental revolution and harmony between management and workers. Both sides must realize they need each other, aligning the prosperity of the employer with the prosperity of the employee.</li><li><b>Cooperation, Not Individualism:</b> Work should be driven by mutual cooperation between workers and management, rather than fierce individualism. Management should listen to worker suggestions.</li><li><b>Development of Each Person to Greatest Efficiency:</b> Workers should be scientifically selected based on physical and mental capabilities, and then rigorously trained to perform the specific job assigned to them.</li></ul><h5>Techniques of Scientific Management:</h5><ul><li><b>Time and Motion Studies:</b> Using a stopwatch to record the exact time taken for each motion, eliminating unnecessary movements to determine a "standard time" for a job.</li><li><b>Functional Foremanship:</b> Taylor rejected the concept of "Unity of Command" at the shop floor. He proposed 8 specialized foremen (e.g., speed boss, repair boss, inspector) to guide workers, ensuring specialized supervision.</li><li><b>Differential Piece-Rate System:</b> To incentivize workers, Taylor introduced a dual wage system. Workers producing at or above standard targets were paid at a higher rate per piece than those producing below standard, financially penalizing inefficiency.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Compare Line, Functional, and Line & Staff Organizational Structures.</span></div>
+                <div class="a-text">
+                    <h4>Q3. Explain the different types of Organizational Structures with their advantages and disadvantages.</h4><p>An organizational structure defines how activities such as task allocation, coordination, and supervision are directed toward the achievement of organizational aims. It dictates the flow of information and authority.</p><ul><li><b>1. Line Structure (Military/Scalar Organization):</b><br/>This is the oldest and simplest structure. Authority flows directly vertically from top management down to subordinates. There are no staff specialists.<br/><i>Advantages:</i> Extremely simple to understand, clear lines of authority, quick decision-making, strict discipline.<br/><i>Disadvantages:</i> Overloads top executives with administrative work, lacks specialization, and can become rigid.</li><li><b>2. Functional Structure:</b><br/>Introduced by F.W. Taylor, this structure groups employees together based on their specialized functions (e.g., all marketing people in one department, all finance in another).<br/><i>Advantages:</i> Promotes high-level specialization, improves operational efficiency, and provides a clear career path within a functional area.<br/><i>Disadvantages:</i> Can create "functional silos" where departments stop communicating with each other, leading to conflicts of interest (e.g., Sales vs. Production).</li><li><b>3. Line and Staff Structure:</b><br/>A hybrid that attempts to combine the clear authority of the Line structure with the specialized knowledge of the Functional structure. 'Line' managers have the authority to issue orders, while 'Staff' personnel act in an advisory capacity (e.g., a Legal Advisor or HR specialist advising a Production Manager).<br/><i>Advantages:</i> Relieves line managers of specialized tasks, leading to better decision-making with expert advice.<br/><i>Disadvantages:</i> Potential for conflict between line and staff (line managers may ignore advice; staff may feel they lack real authority).</li></ul><div class="mermaid">
+graph TD;
+    A[CEO] --> B[Production Manager - Line];
+    A --> C[Marketing Manager - Line];
+    A -.-> D[Legal Advisor - Staff];
+    B --> E[Workers];
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>Explain Maslow's Hierarchy of Needs theory and its managerial implications.</span></div>
+                <div class="a-text">
+                    <h4>Q4. Discuss Maslow's Hierarchy of Needs and its implications for management.</h4><p>Abraham Maslow's Hierarchy of Needs is a foundational theory in organizational psychology and motivation. Maslow proposed that human behavior is driven by the desire to satisfy a specific sequence of needs, arranged in a pyramid.</p><h5>The Five Levels of Needs (Bottom to Top):</h5><ol><li><b>Physiological Needs:</b> Basic survival needs (food, water, shelter). In a workplace context, this translates to a living wage, comfortable working conditions, and basic cafeteria services.</li><li><b>Safety Needs:</b> Need for security and protection from physical/emotional harm. Managerial application includes providing job security, health insurance, safe working environments, and a grievance system.</li><li><b>Social (Belongingness) Needs:</b> The desire for affection, belonging, and acceptance. Managers can address this by fostering a team-oriented culture, encouraging collaborative projects, and organizing social events.</li><li><b>Esteem Needs:</b> Internal factors (self-respect, autonomy, achievement) and external factors (status, recognition, attention). Met through promotions, prestigious job titles, Employee of the Month awards, and public recognition.</li><li><b>Self-Actualization Needs:</b> The drive to become what one is capable of becoming (growth, achieving potential). Managers fulfill this by offering challenging assignments, opportunities for creativity, and funding for higher education.</li></ol><h5>Managerial Implications:</h5><p>A key principle of Maslow's theory is that <b>a satisfied need is no longer a motivator</b>. Managers must identify where an employee currently stands on the hierarchy and focus on satisfying needs at or above that level. For instance, offering a prestigious title (Esteem) will not motivate an employee who fears layoffs (Safety).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Discuss McGregor's Theory X and Theory Y with practical workplace examples.</span></div>
+                <div class="a-text">
+                    <h4>Q5. Compare and Contrast McGregor's Theory X and Theory Y.</h4><p>Douglas McGregor formulated two contrasting models of workforce motivation based on managers' assumptions about human nature. These assumptions profoundly dictate a manager's leadership style.</p><h5>Theory X (The Authoritarian View):</h5><p>Theory X assumes a negative view of human nature. Managers holding this view believe:</p><ul><li>Employees inherently dislike work and will avoid it if possible.</li><li>Because they dislike work, they must be coerced, controlled, or threatened with punishment to achieve goals.</li><li>Employees avoid responsibility and seek formal direction whenever possible.</li><li>Most workers place security above all other factors associated with work and display little ambition.</li></ul><p><b>Managerial Style:</b> Leads to a heavily centralized, autocratic leadership style, micromanagement, and a reliance on punishment. (e.g., Factory assembly lines of the early 20th century).</p><h5>Theory Y (The Participative View):</h5><p>Theory Y assumes a positive view of human nature. Managers holding this view believe:</p><ul><li>Employees view work as natural as rest or play.</li><li>People will exercise self-direction and self-control if they are committed to the objectives.</li><li>The average person can learn to accept, and even seek, responsibility.</li><li>The ability to make innovative decisions is widely dispersed throughout the population.</li></ul><p><b>Managerial Style:</b> Leads to a decentralized, participative leadership style. Managers delegate authority, encourage employee empowerment, and focus on intrinsic motivation. (e.g., Modern tech companies like Google or Microsoft).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>Differentiate Leadership and Management. Describe various Leadership Styles.</span></div>
+                <div class="a-text">
+                    <h4>Q6. Distinguish between Leadership and Management, and describe the primary Leadership Styles.</h4><p>While often used interchangeably, leadership and management are distinct concepts. <b>Management</b> is about coping with complexity (planning, budgeting, organizing, controlling) to bring order and predictability. <b>Leadership</b> is about coping with change (setting a vision, aligning people, motivating, inspiring).</p><table border="1"><tr><th>Dimension</th><th>Management</th><th>Leadership</th></tr><tr><td>Focus</td><td>Tasks, systems, structures, and efficiency.</td><td>People, vision, empowerment, and effectiveness.</td></tr><tr><td>Approach</td><td>Plans details, minimizes risks, follows rules.</td><td>Sets direction, takes risks, breaks old rules.</td></tr><tr><td>Power source</td><td>Formal authority/position (Position Power).</td><td>Influence, charisma, and respect (Personal Power).</td></tr><tr><td>Goal</td><td>Maintaining the status quo smoothly.</td><td>Challenging the status quo for innovation.</td></tr></table><h5>Primary Leadership Styles:</h5><ul><li><b>Autocratic (Authoritarian):</b> The leader retains all decision-making authority. No input is sought from subordinates. Very effective in crises or with unskilled labor, but can cause low morale and high turnover.</li><li><b>Democratic (Participative):</b> The leader involves subordinates in the decision-making process, though the final authority still rests with the leader. Builds trust, high morale, and better quality decisions, but can be time-consuming.</li><li><b>Laissez-Faire (Free-Rein):</b> The leader provides minimal direction and allows subordinates maximum freedom to make decisions. Effective only when the team consists of highly skilled, self-motivated experts (e.g., a team of senior research scientists).</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Explain Job Production, Batch Production, and Continuous Production systems with examples.</span></div>
+                <div class="a-text">
+                    <h4>Q7. Explain the different types of Production Systems with examples.</h4><p>A production system is the framework within which the conversion of inputs (raw materials, labor) into outputs (finished goods) occurs. The choice of system depends on the volume of demand and the degree of product customization.</p><ul><li><b>1. Job-Shop Production:</b><br/>Used for manufacturing one or a few quantities of products designed and produced strictly to customer specifications.<br/><i>Characteristics:</i> High variety, low volume. General-purpose machines and highly skilled labor are used.<br/><i>Examples:</i> Custom tailoring, shipbuilding, bespoke jewelry, special-purpose machine manufacturing.</li><li><b>2. Batch Production:</b><br/>Used when a limited quantity of identical products (a "batch") are produced at regular intervals to meet specific orders or for stocking.<br/><i>Characteristics:</i> Medium variety, medium volume. Once one batch is finished, the equipment is reconfigured for the next batch of a different product.<br/><i>Examples:</i> Pharmaceutical drugs, bakeries (baking batches of different cookies), clothing manufacturing (different sizes/colors).</li><li><b>3. Mass (Flow) Production:</b><br/>Used for the large-scale production of standardized products. Machines are arranged in a line (assembly line) according to the sequence of operations.<br/><i>Characteristics:</i> Low variety, high volume. Dedicated special-purpose machines, low-skilled repetitive labor.<br/><i>Examples:</i> Automobile assembly, consumer electronics manufacturing, FMCG products like soap.</li><li><b>4. Continuous Production:</b><br/>Used for manufacturing items where the production facilities run 24x7 without interruption. The product physically flows continuously.<br/><i>Characteristics:</i> Zero variety, extremely high volume. Highly automated, massive capital investment, very little direct labor.<br/><i>Examples:</i> Oil refineries, steel mills, chemical processing plants, paper mills.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>Compare Product (Line) Layout and Process (Functional) Layout.</span></div>
+                <div class="a-text">
+                    <h4>Q8. Differentiate between Product Layout and Process Layout.</h4><p>Plant layout is the physical arrangement of equipment, machinery, and workstations within a facility. The two fundamental types are Product and Process layouts.</p><table border="1"><tr><th>Feature</th><th>Product (Line) Layout</th><th>Process (Functional) Layout</th></tr><tr><td><b>Basis of Arrangement</b></td><td>Machines are arranged sequentially according to the processing steps of a single product.</td><td>Similar machines or functions (e.g., all lathes, all drills) are grouped together in one department.</td></tr><tr><td><b>Best Suited For</b></td><td>Mass/Continuous production (High volume, Low variety).</td><td>Job-shop/Batch production (Low volume, High variety).</td></tr><tr><td><b>Workflow</b></td><td>Continuous and smooth (straight line or U-shape).</td><td>Interrupted, non-linear, with frequent backtracking.</td></tr><tr><td><b>Efficiency vs Flexibility</b></td><td>Highly efficient but extremely inflexible. A breakdown stops the whole line.</td><td>Highly flexible but less efficient due to high material handling.</td></tr><tr><td><b>Capital Investment</b></td><td>High (requires specialized, dedicated machines).</td><td>Lower (uses general-purpose machines).</td></tr></table><div class="mermaid">
+graph LR;
+    subgraph Product Layout (Line)
+    A1[Raw Material] --> B1[Machine 1] --> C1[Machine 2] --> D1[Finished Good]
+    end
+    subgraph Process Layout (Functional)
+    M1[Lathe Dept] 
+    M2[Milling Dept] 
+    M3[Drilling Dept]
+    end
+</div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Discuss the factors influencing Plant Location decisions.</span></div>
+                <div class="a-text">
+                    <h4>Q9. What are the key factors influencing Plant Location decisions?</h4><p>Selecting the optimal location for a manufacturing plant is a critical, long-term strategic decision that heavily impacts operational costs and market competitiveness. Key factors include:</p><ul><li><b>Proximity to Raw Materials:</b> Crucial for weight-losing industries (e.g., sugar, steel). Locating near the source minimizes heavy transportation costs.</li><li><b>Proximity to Markets:</b> Crucial for weight-gaining industries (e.g., soft drinks) or perishable goods (e.g., bakeries) to ensure quick delivery and reduce outbound logistics costs.</li><li><b>Availability of Labor:</b> The region must have an adequate supply of labor with the right skill sets (unskilled, skilled, or highly technical) at acceptable wage rates.</li><li><b>Transportation and Logistics Infrastructure:</b> Access to highways, railways, seaports, and airports is essential for the smooth inflow of materials and outflow of finished goods.</li><li><b>Availability of Utilities:</b> Uninterrupted supply of power, water, and fuel at reasonable rates. (e.g., Aluminum extraction requires massive electricity).</li><li><b>Government Policies and Regulations:</b> Tax incentives, subsidies, Special Economic Zones (SEZs), and favorable labor/environmental laws can heavily influence location choices.</li><li><b>Climate and Geography:</b> Some industries require specific climates (e.g., humid climate for cotton spinning), though this is less critical today with artificial climate control.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Derive the Economic Order Quantity (EOQ) formula stating all assumptions.</span></div>
+                <div class="a-text">
+                    <h4>Q10. Explain the concept of Economic Order Quantity (EOQ).</h4><p>In inventory management, Economic Order Quantity (EOQ) is the optimal order quantity that a company should purchase to minimize the total costs associated with inventory management. These total costs primarily consist of two opposing forces: Ordering Costs and Holding (Carrying) Costs.</p><ul><li><b>Ordering Costs (Setup Costs):</b> Costs incurred every time an order is placed (e.g., clerical work, transportation, inspection). Ordering larger quantities fewer times reduces this cost.</li><li><b>Holding Costs (Carrying Costs):</b> Costs incurred to store inventory (e.g., warehouse rent, insurance, spoilage, opportunity cost of tied-up capital). Ordering larger quantities increases this cost.</li></ul><p>The EOQ is the exact point where Total Ordering Cost equals Total Holding Cost, resulting in the minimum Total Inventory Cost.</p><h5>The EOQ Formula:</h5><p><b>EOQ = &radic;(2DS / H)</b></p><ul><li><b>D</b> = Annual Demand (in units)</li><li><b>S</b> = Ordering Cost per order</li><li><b>H</b> = Holding cost per unit per year</li></ul><h5>Underlying Assumptions of the Basic EOQ Model:</h5><ul><li>Demand is known, constant, and independent.</li><li>Lead time (time between placing and receiving an order) is known and constant (often assumed to be zero).</li><li>Purchase price per unit is constant (no bulk discounts).</li><li>Holding and ordering costs are constant.</li><li>Stockouts (shortages) are completely avoided.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Explain ABC Analysis and VED Analysis in Inventory Control.</span></div>
+                <div class="a-text">
+                    <h3>ABC and VED Analysis</h3><p><b>ABC Analysis:</b> Categorizes inventory into A (high value, low quantity), B (moderate value and quantity), and C (low value, high quantity) for control prioritization.</p><p><b>VED Analysis:</b> Classifies items based on criticality into Vital (must have), Essential (should have), and Desirable (nice to have), commonly used for spare parts.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Explain the steps involved in conducting Method Study.</span></div>
+                <div class="a-text">
+                    <h3>Steps in Method Study</h3><p>1. Select the work to be studied.<br>2. Record all relevant facts about the present method.<br>3. Examine the facts critically.<br>4. Develop a more practical, economic, and effective method.<br>5. Define the new method clearly.<br>6. Install the new method as standard practice.<br>7. Maintain standard practice by regular routine checks.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Explain Time Study procedure and derivation of Standard Time from Observed Time.</span></div>
+                <div class="a-text">
+                    <h3>Time Study Procedure & Standard Time</h3><p>Involves dividing work into elements, timing them with a stopwatch, and rating the worker's pace. Observed Time is multiplied by the Rating Factor to get Normal/Basic Time. Standard Time = Normal Time + Allowances (for fatigue, personal needs, etc.).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>Discuss the principles and applications of Ergonomics in industry.</span></div>
+                <div class="a-text">
+                    <h3>Ergonomics</h3><p>Ergonomics (Human Factors Engineering) is the science of designing the workplace, equipment, and tasks to fit the worker. Principles include maintaining neutral postures, reducing excessive force, keeping everything in reach, and reducing excessive motions. It helps prevent Musculoskeletal Disorders (MSDs) and improves productivity.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Differentiate Quality Control (QC), Quality Assurance (QA), and Total Quality Management (TQM).</span></div>
+                <div class="a-text">
+                    <h3>QC, QA, and TQM</h3><p><b>QC (Quality Control):</b> Reactive, defect identification process (e.g., inspection).</p><p><b>QA (Quality Assurance):</b> Proactive, process-oriented approach to prevent defects.</p><p><b>TQM (Total Quality Management):</b> Comprehensive organization-wide philosophy continuous improvement and customer satisfaction, involving all employees.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Explain Control Charts for Variables (X-bar and R charts) and their construction.</span></div>
+                <div class="a-text">
+                    <h3>Control Charts for Variables</h3><p>Variables control charts measure continuous data. The <b>X-bar chart</b> monitors the process mean (average), while the <b>R chart</b> monitors process variation (range). They are constructed using sample averages and ranges to plot points against Upper and Lower Control Limits (UCL and LCL).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>Explain Control Charts for Attributes (p-chart, c-chart) and when they are used.</span></div>
+                <div class="a-text">
+                    <h3>Control Charts for Attributes</h3><p>Attribute charts track countable data (pass/fail, defective counts). The <b>p-chart</b> is used for the proportion of defective units in a sample. The <b>c-chart</b> is used for the number of defects per individual unit (e.g., blemishes on a painted surface).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>Discuss the concept of Six Sigma methodology (DMAIC framework).</span></div>
+                <div class="a-text">
+                    <h3>Six Sigma & DMAIC</h3><p>Six Sigma aims for near perfection (3.4 defects per million opportunities). DMAIC is its core framework: <b>Define</b> the problem, <b>Measure</b> current performance, <b>Analyze</b> root causes, <b>Improve</b> the process, and <b>Control</b> to sustain improvements.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Explain the ISO 9000 Quality Management System standards.</span></div>
+                <div class="a-text">
+                    <h3>ISO 9000 Standards</h3><p>ISO 9000 is a family of international quality management standards. It sets criteria for a Quality Management System (QMS), emphasizing customer focus, leadership, engagement of people, process approach, and continuous improvement to ensure consistent quality of products and services.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>Explain Break-Even Analysis with a neatly labeled Break-Even Chart.</span></div>
+                <div class="a-text">
+                    <h3>Break-Even Analysis</h3><p>BEP analysis determines the point where total revenue equals total costs (no profit, no loss). It helps in setting sales targets and pricing. <i>Break-Even Point = Fixed Costs / (Selling Price per Unit - Variable Cost per Unit).</i></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Define Working Capital and discuss factors affecting Working Capital requirements.</span></div>
+                <div class="a-text">
+                    <h3>Working Capital</h3><p>Working capital is the funds needed for day-to-day operations (Current Assets - Current Liabilities). Factors affecting it include the nature of business, scale of operations, production cycle duration, credit policy, and seasonal variations.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>Compare Straight Line Method and Written Down Value Method of Depreciation.</span></div>
+                <div class="a-text">
+                    <h3>Depreciation Methods</h3><p><b>Straight Line Method:</b> An equal amount of depreciation is charged each year over the asset's useful life.</p><p><b>Written Down Value (WDV):</b> Depreciation is charged at a fixed percentage on the reducing balance of the asset, resulting in higher depreciation in early years.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Differentiate PERT and CPM project management techniques.</span></div>
+                <div class="a-text">
+                    <h3>PERT vs CPM</h3><p><b>PERT:</b> Probabilistic approach used for R&D or new projects where time estimates are uncertain (3 time estimates). Focuses on time.</p><p><b>CPM:</b> Deterministic approach used for construction or repetitive projects where times are known. Focuses on cost and time trade-offs.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Explain how Critical Path is identified in a CPM network diagram.</span></div>
+                <div class="a-text">
+                    <h3>Critical Path in CPM</h3><p>The Critical Path is the longest continuous sequence of activities in a network diagram from start to finish. It dictates the shortest possible project duration. Any delay in critical path activities directly delays the entire project.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>Discuss the three time estimates used in PERT (Optimistic, Most Likely, Pessimistic).</span></div>
+                <div class="a-text">
+                    <h3>PERT Time Estimates</h3><p>PERT uses three estimates: <b>Optimistic (o):</b> Minimum time if everything goes perfectly. <b>Most Likely (m):</b> Normal time under average conditions. <b>Pessimistic (p):</b> Maximum time under adverse conditions. Expected time (te) = (o + 4m + p) / 6.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>Explain Just-In-Time (JIT) production and Kanban system.</span></div>
+                <div class="a-text">
+                    <h3>JIT and Kanban</h3><p><b>JIT:</b> An inventory strategy to increase efficiency by receiving goods only as they are needed in the production process, reducing inventory costs.</p><p><b>Kanban:</b> A visual scheduling system (using cards) that triggers production and movement of materials in a JIT environment.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>Discuss Preventive Maintenance vs Breakdown Maintenance strategies.</span></div>
+                <div class="a-text">
+                    <h3>Preventive vs Breakdown Maintenance</h3><p><b>Preventive:</b> Scheduled, proactive maintenance to prevent equipment failures (e.g., regular oil changes).</p><p><b>Breakdown:</b> Reactive maintenance performed only after an equipment fails or breaks down.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Explain Supply Chain Management (SCM) and its core components.</span></div>
+                <div class="a-text">
+                    <h3>Supply Chain Management (SCM)</h3><p>SCM is the management of the flow of goods, data, and finances related to a product, from raw material procurement to final product delivery. Core components include Planning, Sourcing, Making, Delivering, and Returning.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>Discuss the objectives and principles of Material Handling in factories.</span></div>
+                <div class="a-text">
+                    <h3>Material Handling</h3><p>Involves short-distance movement of materials. Objectives: Minimize handling costs, reduce damage, and improve safety. Principles include the Unit Load Principle (moving items in large batches/pallets) and the Gravity Principle (using gravity to move materials where possible).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Explain the functions of Human Resource Management (HRM).</span></div>
+                <div class="a-text">
+                    <h3>Functions of HRM</h3><p>HRM functions include Job Analysis, Recruitment and Selection, Training and Development, Performance Appraisal, Compensation and Benefits administration, and maintaining Employee Relations.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>Differentiate Job Description and Job Specification.</span></div>
+                <div class="a-text">
+                    <h3>Job Description vs Job Specification</h3><p><b>Job Description:</b> A document outlining the roles, responsibilities, duties, and scope of a specific job.</p><p><b>Job Specification:</b> Details the minimum qualifications, skills, education, and experience a candidate needs to perform the job.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>Discuss various methods of Performance Appraisal in modern organizations.</span></div>
+                <div class="a-text">
+                    <h3>Performance Appraisal</h3><p>Methods include: 360-Degree Feedback (ratings from peers, subordinates, managers), Management by Objectives (MBO - evaluating based on achieved goals), and Behaviorally Anchored Rating Scales (BARS - rating behavior against specific examples).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Explain the concept of Value Engineering and Value Analysis.</span></div>
+                <div class="a-text">
+                    <h3>Value Engineering and Value Analysis</h3><p>Both aim to reduce costs while maintaining or improving product function/quality. <b>Value Engineering</b> is applied during the design phase of a new product. <b>Value Analysis</b> is applied to existing products to identify cost-saving modifications.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>Discuss Industrial Safety and accident prevention measures in factories.</span></div>
+                <div class="a-text">
+                    <h3>Industrial Safety</h3><p>Accident prevention involves safe workplace design, providing Personal Protective Equipment (PPE), implementing safety protocols, regular safety training, machine guarding, and proper hazardous material handling.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>Explain Collective Bargaining and Industrial Disputes settlement mechanisms.</span></div>
+                <div class="a-text">
+                    <h3>Collective Bargaining</h3><p>A process where representatives of management and a labor union negotiate conditions of employment (wages, hours, working conditions). Disputes can be settled via Conciliation, Mediation, or Arbitration.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>Write a short note on Corporate Social Responsibility (CSR).</span></div>
+                <div class="a-text">
+                    <h3>Corporate Social Responsibility (CSR)</h3><p>CSR is a business model that helps a company be socially accountable to itself, its stakeholders, and the public. It includes philanthropic efforts, environmental conservation, and ethical labor practices.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Explain the concept of Enterprise Resource Planning (ERP).</span></div>
+                <div class="a-text">
+                    <h3>Enterprise Resource Planning (ERP)</h3><p>ERP is integrated software used by organizations to manage core business processes (finance, HR, manufacturing, supply chain, services, procurement) in a centralized database, ensuring data consistency across departments.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>Discuss the role of Management Information Systems (MIS) in decision making.</span></div>
+                <div class="a-text">
+                    <h3>Management Information Systems (MIS)</h3><p>MIS provides managers with the tools to organize, evaluate, and efficiently manage departments. It processes raw data into meaningful reports and dashboards, aiding in operational and strategic decision-making.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>Explain Cost Concepts: Fixed Cost, Variable Cost, Marginal Cost, and Sunk Cost.</span></div>
+                <div class="a-text">
+                    <h3>Cost Concepts</h3><p><b>Fixed Cost:</b> Remains constant regardless of production volume (e.g., rent). <b>Variable Cost:</b> Changes with production volume (e.g., raw materials). <b>Marginal Cost:</b> Cost of producing one additional unit. <b>Sunk Cost:</b> A cost already incurred and unrecoverable.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Discuss Lean Manufacturing principles and Elimination of Waste (Muda).</span></div>
+                <div class="a-text">
+                    <h3>Lean Manufacturing & Muda</h3><p>Lean focuses on maximizing customer value while minimizing waste. Elimination of Waste (Muda) targets 7 key areas (TIMWOOD): Transport, Inventory, Motion, Waiting, Overproduction, Overprocessing, and Defects.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

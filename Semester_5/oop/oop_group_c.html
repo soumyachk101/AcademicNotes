@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Oriented Programming (PCC-CS503) - Group C</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #ec4899; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #ec4899; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="oop_index.html">&larr; Object Oriented Programming</a>
+        <span class="nav-title">Object Oriented Programming <span class="nav-code">PCC-CS503</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="oop_group_a.html" class="gs-item "><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="oop_group_b.html" class="gs-item "><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="oop_group_c.html" class="gs-item is-current"><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="oop_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-c">Group C — Long / numerical Questions (15 marks)</h1>
+
+            <div class="qa-card" id="gc-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Design and implement a Banking System in Java demonstrating Encapsulation, Inheritance, Polymorphism, Exception Handling, and File I/O.</span></div>
+                <div class="a-text">
+                    <h3>Q1. Design and implement a Banking System in Java demonstrating Encapsulation, Inheritance, Polymorphism, Exception Handling, and File I/O.</h3><p><b>Introduction</b><br/>Object-Oriented Programming (OOP) provides a robust framework for building complex, real-world applications like a Banking System. By modeling the system using OOP principles, we ensure code reusability, security, and maintainability.</p><h4>1. Core OOP Concepts Applied</h4><ul><li><b>Encapsulation (Data Hiding):</b> The account balance and account number must be kept secure. We declare them as <code>private</code> variables and provide controlled access via <code>public</code> getter and setter methods. This prevents unauthorized direct modification.</li><li><b>Inheritance (Code Reusability):</b> A generic <code>Account</code> class acts as the superclass. Specialized accounts like <code>SavingsAccount</code> and <code>CurrentAccount</code> inherit from it, promoting code reuse (e.g., both share the deposit logic).</li><li><b>Polymorphism (Dynamic Dispatch):</b> The <code>withdraw()</code> method behaves differently for a Savings Account (cannot withdraw below minimum balance) vs a Current Account (allows overdraft). We achieve this via Method Overriding.</li><li><b>Exception Handling (Robustness):</b> When a user tries to withdraw more than they have, instead of crashing, we throw a custom checked exception <code>InsufficientFundsException</code>.</li><li><b>File I/O (Persistence):</b> To maintain an audit trail, every transaction is logged to a text file using <code>FileWriter</code> and <code>BufferedWriter</code>.</li></ul><h4>2. System Architecture (UML Class Diagram)</h4><div class="mermaid">
+classDiagram
+    class Account {
+        -String accountNumber
+        #double balance
+        +deposit(amount: double)
+        +withdraw(amount: double)*
+        +getBalance() double
+        #logTransaction(msg: String)
+    }
+    class SavingsAccount {
+        -double interestRate
+        +addInterest()
+        +withdraw(amount: double)
+    }
+    class CurrentAccount {
+        -double overdraftLimit
+        +withdraw(amount: double)
+    }
+    class InsufficientFundsException {
+        +InsufficientFundsException(message: String)
+    }
+    Account <|-- SavingsAccount
+    Account <|-- CurrentAccount
+    Account ..> InsufficientFundsException : throws
+</div><h4>3. Complete Java Implementation</h4>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+// 1. Custom Exception (Exception Handling)
+class InsufficientFundsException extends Exception {
+    public InsufficientFundsException(String message) {
+        super(message);
+    }
+}
+
+// 2. Abstract Base Class (Abstraction &amp; Encapsulation)
+abstract class Account {
+    private String accountNumber; // Encapsulated
+    protected double balance;     // Accessible to child classes
+
+    public Account(String accountNumber, double balance) {
+        this.accountNumber = accountNumber;
+        this.balance = balance;
+    }
+
+    public String getAccountNumber() { return accountNumber; }
+    public double getBalance() { return balance; }
+
+    public void deposit(double amount) {
+        if (amount &gt; 0) {
+            balance += amount;
+            logTransaction(&quot;Deposited: $&quot; + amount + &quot; | New Balance: $&quot; + balance);
+        }
+    }
+
+    // Polymorphic method to be overridden
+    public abstract void withdraw(double amount) throws InsufficientFundsException;
+
+    // 3. File I/O for persistent logging
+    protected void logTransaction(String message) {
+        try (FileWriter fw = new FileWriter(accountNumber + &quot;_log.txt&quot;, true);
+             PrintWriter pw = new PrintWriter(fw)) {
+            pw.println(message);
+        } catch (IOException e) {
+            System.err.println(&quot;Failed to log transaction for &quot; + accountNumber);
+        }
+    }
+}
+
+// 4. Inheritance &amp; Polymorphism (Savings Account)
+class SavingsAccount extends Account {
+    private double minimumBalance = 500.0;
+
+    public SavingsAccount(String accNo, double initialBalance) {
+        super(accNo, initialBalance);
+    }
+
+    @Override
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (balance - amount &lt; minimumBalance) {
+            throw new InsufficientFundsException(&quot;Transaction Failed: Minimum balance of $500 must be maintained.&quot;);
+        }
+        balance -= amount;
+        logTransaction(&quot;Withdrew: $&quot; + amount + &quot; | New Balance: $&quot; + balance);
+    }
+}
+
+// 5. Inheritance &amp; Polymorphism (Current Account)
+class CurrentAccount extends Account {
+    private double overdraftLimit = 1000.0;
+
+    public CurrentAccount(String accNo, double initialBalance) {
+        super(accNo, initialBalance);
+    }
+
+    @Override
+    public void withdraw(double amount) throws InsufficientFundsException {
+        if (balance - amount &lt; -overdraftLimit) {
+            throw new InsufficientFundsException(&quot;Transaction Failed: Overdraft limit of $&quot; + overdraftLimit + &quot; exceeded.&quot;);
+        }
+        balance -= amount;
+        logTransaction(&quot;Withdrew: $&quot; + amount + &quot; | New Balance: $&quot; + balance);
+    }
+}
+
+// Execution Class
+public class BankingSystem {
+    public static void main(String[] args) {
+        try {
+            Account mySavings = new SavingsAccount(&quot;SAV-101&quot;, 2000);
+            mySavings.deposit(500);
+            mySavings.withdraw(300); // Success
+            System.out.println(&quot;Savings Balance: $&quot; + mySavings.getBalance());
+            
+            mySavings.withdraw(2000); // Throws Exception
+        } catch (InsufficientFundsException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+}</code></pre>
+            </div>
+        </div>
+        <h4>Conclusion</h4><p>This implementation proves the power of OOP. If the bank decides to add a 'LoanAccount' tomorrow, we simply extend the <code>Account</code> class without modifying the existing, tested code (adhering to the Open/Closed Principle).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>Critically analyze Dynamic Method Dispatch in Java. Show how run-time polymorphism enables runtime pluggability with code examples.</span></div>
+                <div class="a-text">
+                    <h3>Q2. Critically analyze Dynamic Method Dispatch in Java. Show how run-time polymorphism enables runtime pluggability with code examples.</h3><p><b>Introduction</b><br/>Polymorphism in Java is divided into Compile-time (Method Overloading) and Run-time (Method Overriding). <b>Dynamic Method Dispatch (DMD)</b> is the core mechanism by which Java implements run-time polymorphism. It allows Java to determine which overridden method to call at runtime rather than at compile time.</p><h4>1. The Mechanism of Dynamic Method Dispatch</h4><p>In Java, a superclass reference variable can point to a subclass object. When an overridden method is called through this superclass reference, the Java Virtual Machine (JVM) looks at the <b>actual object type</b> created in memory at runtime, NOT the reference type, to decide which method implementation to execute.</p><ul><li><b>Compile Time:</b> The compiler checks if the method exists in the superclass (the reference type). If it does, compilation succeeds.</li><li><b>Run Time:</b> The JVM invokes the method belonging to the actual object type assigned to the reference.</li></ul><h4>2. Why is DMD Important? (Runtime Pluggability)</h4><p>DMD is the foundation of <b>Runtime Pluggability</b> (or the Strategy Pattern). It allows a system to swap out behaviors dynamically without recompiling the core logic. A common example is a Payment Gateway in an e-commerce application. The cart doesn't need to know <i>how</i> a payment is processed (Credit Card vs UPI), it just needs to know that the payment strategy <i>can</i> be processed.</p><h4>3. Code Example: E-Commerce Payment Gateway</h4>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">// 1. The Strategy Interface (Super type)
+interface PaymentStrategy {
+    void processPayment(double amount);
+}
+
+// 2. Concrete Implementation A (Sub type)
+class CreditCardPayment implements PaymentStrategy {
+    private String cardNumber;
+    public CreditCardPayment(String card) { this.cardNumber = card; }
+    
+    @Override
+    public void processPayment(double amount) {
+        System.out.println(&quot;Processing $&quot; + amount + &quot; via Credit Card: &quot; + cardNumber);
+        // Complex credit card API logic here
+    }
+}
+
+// 3. Concrete Implementation B (Sub type)
+class UPIPayment implements PaymentStrategy {
+    private String upiId;
+    public UPIPayment(String upi) { this.upiId = upi; }
+    
+    @Override
+    public void processPayment(double amount) {
+        System.out.println(&quot;Processing $&quot; + amount + &quot; via UPI: &quot; + upiId);
+        // Complex UPI API logic here
+    }
+}
+
+// 4. The Core Application
+class ShoppingCart {
+    // Pluggable dependency - Notice we use the interface reference!
+    private PaymentStrategy paymentMethod;
+
+    // Injecting the strategy at runtime
+    public void setPaymentMethod(PaymentStrategy strategy) {
+        this.paymentMethod = strategy;
+    }
+
+    public void checkout(double totalAmount) {
+        if (paymentMethod == null) throw new IllegalStateException(&quot;Select a payment method.&quot;);
+        
+        // Dynamic Method Dispatch happens here!
+        // The compiler only knows paymentMethod is of type PaymentStrategy.
+        // The JVM dynamically calls the CreditCard or UPI processPayment at runtime.
+        paymentMethod.processPayment(totalAmount);
+    }
+}
+
+// Execution
+public class Main {
+    public static void main(String[] args) {
+        ShoppingCart cart = new ShoppingCart();
+        
+        // User selects UPI at runtime
+        cart.setPaymentMethod(new UPIPayment(&quot;user@okhdfcbank&quot;));
+        cart.checkout(150.50); // Outputs: Processing $150.5 via UPI
+        
+        // User switches to Credit Card at runtime
+        cart.setPaymentMethod(new CreditCardPayment(&quot;4111-2222-3333-4444&quot;));
+        cart.checkout(5000.00); // Outputs: Processing $5000.0 via Credit Card
+    }
+}</code></pre>
+            </div>
+        </div>
+        <h4>Conclusion</h4><p>Without Dynamic Method Dispatch, the <code>ShoppingCart</code> class would require complex, hard-coded <code>if-else</code> or <code>switch</code> statements to handle different payment types. DMD allows the code to be incredibly clean, modular, and adhering strictly to the Open/Closed Principle (open for extension by adding new payment classes, closed for modification of the cart class).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Implement a Producer-Consumer problem in Java using Multithreading, Thread Synchronization, and wait()/notify() mechanisms.</span></div>
+                <div class="a-text">
+                    <h3>Q3. Explain the Java Collections Framework (JCF). Differentiate between ArrayList, LinkedList, HashSet, and TreeSet with internal working details and time complexities.</h3><p><b>Introduction</b><br/>The Java Collections Framework (JCF) is a unified architecture representing and manipulating collections of objects (like a dynamic array, a set, or a queue). It provides ready-to-use, highly optimized, and standardized interfaces and classes, drastically reducing programming effort and increasing performance.</p><h4>1. Architecture of JCF</h4><p>The framework revolves around two main root interfaces:</p><ul><li><b>Collection Interface:</b> The root of the collection hierarchy. Extended by <code>List</code>, <code>Set</code>, and <code>Queue</code>.</li><li><b>Map Interface:</b> Represents key-value pairs. Does not extend the Collection interface but is part of the JCF.</li></ul><h4>2. Detailed Comparison of Key Data Structures</h4><p>Understanding the internal working of these classes is crucial for writing performant Java applications.</p><table border='1'><tr><th>Feature</th><th>ArrayList (List)</th><th>LinkedList (List/Deque)</th><th>HashSet (Set)</th><th>TreeSet (Set)</th></tr><tr><td><b>Internal Data Structure</b></td><td>Dynamic, resizable Array.</td><td>Doubly Linked List.</td><td>Hash Table (backed by a HashMap).</td><td>Self-Balancing Binary Search Tree (Red-Black Tree).</td></tr><tr><td><b>Ordering</b></td><td>Maintains Insertion Order.</td><td>Maintains Insertion Order.</td><td>Unordered (No guarantee of order).</td><td>Sorted Order (Natural sorting or via Comparator).</td></tr><tr><td><b>Duplicates</b></td><td>Allows duplicates.</td><td>Allows duplicates.</td><td>No duplicates.</td><td>No duplicates.</td></tr><tr><td><b>Time Complexity (Search/Get)</b></td><td><b>O(1)</b> - Instant access via index.</td><td><b>O(N)</b> - Must traverse nodes.</td><td><b>O(1)</b> average case via hashing.</td><td><b>O(log N)</b> via binary search.</td></tr><tr><td><b>Time Complexity (Insert/Delete)</b></td><td><b>O(N)</b> - Requires shifting elements if not at the end.</td><td><b>O(1)</b> - If the node reference is known (just changing pointers).</td><td><b>O(1)</b> average case.</td><td><b>O(log N)</b> to maintain tree balance.</td></tr><tr><td><b>Best Use Case</b></td><td>Frequent read operations, random access.</td><td>Frequent insertions and deletions in the middle of the list.</td><td>Fastest way to ensure uniqueness and fast lookups.</td><td>When you need a unique collection that is always sorted.</td></tr></table><h4>3. Internal Working Details</h4><ul><li><b>ArrayList:</b> It starts with an initial capacity (default 10). When it gets full, it creates a new array (usually 1.5x the size), copies old elements over, and discards the old array. This makes adding elements at the end O(1) amortized, but inserting in the middle is O(N) due to array shifting.</li><li><b>LinkedList:</b> Consists of 'Nodes'. Each node holds data, a pointer to the previous node, and a pointer to the next node. There is no contiguous memory allocation. Memory overhead is higher per element compared to ArrayList.</li><li><b>HashSet:</b> Under the hood, it uses a <code>HashMap</code> where the element you insert is the 'Key' and a dummy object is the 'Value'. It uses the <code>hashCode()</code> and <code>equals()</code> methods to resolve hash collisions (using buckets with linked lists or balanced trees).</li><li><b>TreeSet:</b> Backed by a <code>TreeMap</code>. It relies on the <code>Comparable</code> interface (or a provided <code>Comparator</code>) to organize the nodes in a Red-Black tree, ensuring operations remain O(log N) even in worst-case scenarios.</li></ul><h4>Conclusion</h4><p>Choosing the right collection is the hallmark of a good Java developer. If you need fast access, use ArrayList. If you need fast sorting, use TreeSet. If you need lightning-fast unique storage, use HashSet. The JCF provides a perfectly tuned tool for every scenario.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>Design a custom Collection framework structure or generic Bounded Buffer class handling thread-safe concurrent access.</span></div>
+                <div class="a-text">
+                    <h3>Q4. Implement a Producer-Consumer problem in Java using Multithreading, Thread Synchronization, and wait()/notify() mechanisms.</h3><p><b>Introduction</b><br/>The Producer-Consumer problem is a classic synchronization problem in concurrent programming. It involves two threads, a Producer and a Consumer, sharing a common, fixed-size buffer. The Producer's job is to generate data and put it into the buffer. The Consumer's job is to consume the data from the buffer. The challenge is to ensure the Producer doesn't try to add data to a full buffer, and the Consumer doesn't try to remove data from an empty buffer.</p><h4>1. The Java Implementation</h4><p>We use Java's built-in monitor locks (<code>synchronized</code> blocks) along with the <code>wait()</code> and <code>notify()</code> methods inherited from the <code>Object</code> class to achieve Inter-Thread Communication.</p>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">import java.util.LinkedList;
+
+// The Shared Buffer Class
+class SharedBuffer {
+    private LinkedList&lt;Integer&gt; list = new LinkedList&lt;&gt;();
+    private int capacity = 2; // Bounded buffer size
+
+    // Called by Producer thread
+    public void produce() throws InterruptedException {
+        int value = 0;
+        while (true) {
+            synchronized (this) {
+                // Wait if buffer is full
+                while (list.size() == capacity) {
+                    System.out.println(&quot;Buffer is full. Producer is waiting...&quot;);
+                    wait(); // Releases lock and waits
+                }
+
+                System.out.println(&quot;Producer produced: &quot; + value);
+                list.add(value++); // Add data to buffer
+
+                // Notify the consumer that data is available
+                notify();
+
+                // Sleep to simulate time taken to produce
+                Thread.sleep(1000);
+            }
+        }
+    }
+
+    // Called by Consumer thread
+    public void consume() throws InterruptedException {
+        while (true) {
+            synchronized (this) {
+                // Wait if buffer is empty
+                while (list.size() == 0) {
+                    System.out.println(&quot;Buffer is empty. Consumer is waiting...&quot;);
+                    wait(); // Releases lock and waits
+                }
+
+                // Consume data
+                int val = list.removeFirst();
+                System.out.println(&quot;Consumer consumed: &quot; + val);
+
+                // Notify the producer that space is available
+                notify();
+
+                // Sleep to simulate time taken to consume
+                Thread.sleep(1000);
+            }
+        }
+    }
+}
+
+// Main Execution Class
+public class ProducerConsumerDemo {
+    public static void main(String[] args) throws InterruptedException {
+        final SharedBuffer buffer = new SharedBuffer();
+
+        // Create Producer Thread
+        Thread producerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try { buffer.produce(); }
+                catch (InterruptedException e) { e.printStackTrace(); }
+            }
+        });
+
+        // Create Consumer Thread
+        Thread consumerThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try { buffer.consume(); }
+                catch (InterruptedException e) { e.printStackTrace(); }
+            }
+        });
+
+        // Start both threads
+        producerThread.start();
+        consumerThread.start();
+    }
+}</code></pre>
+            </div>
+        </div>
+        <h4>2. Concept Analysis</h4><ul><li><b>synchronized(this):</b> Ensures that only one thread can execute the block of code inside the shared buffer at any given time, preventing race conditions.</li><li><b>while(...) { wait(); }:</b> A <code>while</code> loop is crucial here, not an <code>if</code> statement. When a thread wakes up from <code>wait()</code>, it must re-check the condition (spurious wakeups or another thread grabbing the lock first).</li><li><b>notify():</b> Wakes up a single thread that is waiting on the object's monitor (lock). In this two-thread scenario, <code>notify()</code> works perfectly. If there were multiple producers/consumers, <code>notifyAll()</code> would be necessary to prevent deadlocks.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Analyze Java Exception Handling architecture. Write a robust program handling multiple catch blocks, nested try-catch, and custom exceptions.</span></div>
+                <div class="a-text">
+                    <h3>Q5. Analyze Java Exception Handling architecture. Write a robust program handling multiple catch blocks, nested try-catch, and custom exceptions.</h3><p><b>Introduction</b><br/>Java's Exception Handling architecture is designed to manage runtime errors gracefully, ensuring the normal flow of the application is maintained. The root of the exception hierarchy is the <code>Throwable</code> class, which splits into <code>Error</code> (serious JVM problems, usually unrecoverable like OutOfMemoryError) and <code>Exception</code> (recoverable conditions).</p><h4>1. Key Architectural Components</h4><ul><li><b>Checked Exceptions:</b> Verified at compile-time (e.g., <code>IOException</code>). The compiler forces you to handle them (try/catch or throws).</li><li><b>Unchecked Exceptions:</b> Subclasses of <code>RuntimeException</code> (e.g., <code>NullPointerException</code>). Not checked at compile-time; usually indicate programming logic errors.</li><li><b>Keywords:</b> <code>try</code> (encloses risky code), <code>catch</code> (handles specific exceptions), <code>finally</code> (guaranteed execution for cleanup), <code>throw</code> (explicitly throws an exception), <code>throws</code> (declares exceptions a method might throw).</li></ul><h4>2. Comprehensive Implementation Example</h4><p>The following code demonstrates a robust architecture combining Custom Exceptions, Nested Try-Catch, Multiple Catch blocks, and the Finally block.</p>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">import java.util.Scanner;
+
+// 1. Creating a Custom Checked Exception
+class InvalidAgeException extends Exception {
+    public InvalidAgeException(String message) {
+        super(message);
+    }
+}
+
+public class RobustExceptionHandling {
+    
+    // Method declaring it might throw a custom checked exception
+    public static void validateVoterEligibility(int age) throws InvalidAgeException {
+        if (age &lt; 18) {
+            throw new InvalidAgeException(&quot;Applicant is under 18. Voting strictly prohibited.&quot;);
+        }
+        System.out.println(&quot;Age verified. Applicant is eligible to vote.&quot;);
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Outer Try-Catch
+        try {
+            System.out.print(&quot;Enter total registered voters (for calculation): &quot;);
+            String inputVoters = scanner.nextLine();
+            
+            // Multiple Catch scenario - parsing integer
+            int totalVoters = Integer.parseInt(inputVoters);
+            
+            System.out.print(&quot;Enter polling booths available: &quot;);
+            int booths = scanner.nextInt();
+            
+            // Nested Try-Catch for specific logic isolation
+            try {
+                int votersPerBooth = totalVoters / booths;
+                System.out.println(&quot;Voters per booth: &quot; + votersPerBooth);
+            } catch (ArithmeticException ae) {
+                System.err.println(&quot;Inner Catch: Cannot divide by zero booths! &quot; + ae.getMessage());
+            }
+
+            System.out.print(&quot;Enter voter age for registration: &quot;);
+            int age = scanner.nextInt();
+            
+            // Calling a method that throws a checked exception
+            validateVoterEligibility(age);
+            
+        } 
+        // Handling Multiple Exceptions (Ordering matters: Most specific to least specific)
+        catch (NumberFormatException nfe) {
+            System.err.println(&quot;Outer Catch: Invalid number format. Please enter valid integers.&quot;);
+        } 
+        catch (InvalidAgeException iae) {
+            System.err.println(&quot;Outer Catch: Validation Error -&gt; &quot; + iae.getMessage());
+        } 
+        catch (Exception e) {
+            // Generic fallback for any unforeseen exceptions
+            System.err.println(&quot;Outer Catch: An unexpected error occurred -&gt; &quot; + e.toString());
+        } 
+        finally {
+            // Cleanup block always executes
+            System.out.println(&quot;Finally Block: Releasing scanner resources and closing connection.&quot;);
+            scanner.close();
+        }
+        
+        System.out.println(&quot;Program execution completed smoothly.&quot;);
+    }
+}</code></pre>
+            </div>
+        </div>
+        <h4>3. Best Practices Highlighted</h4><ul><li><b>Custom Exceptions:</b> Provide specific domain meaning (like <code>InvalidAgeException</code>) rather than generic exceptions.</li><li><b>Catch Ordering:</b> <code>NumberFormatException</code> and <code>InvalidAgeException</code> are caught before the generic <code>Exception</code>. If <code>Exception e</code> was first, compilation would fail (unreachable code).</li><li><b>Resource Management:</b> The <code>finally</code> block ensures the <code>Scanner</code> is closed regardless of whether the program crashes or succeeds.</li><li><b>Nested Blocks:</b> The division by zero logic is isolated. If an <code>ArithmeticException</code> occurs, the inner catch handles it, and the program <i>continues</i> to the next line (asking for voter age), demonstrating true recovery.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>Compare and contrast Java Collections: ArrayList, LinkedList, HashSet, TreeSet, HashMap, and ConcurrentHashMap regarding performance time complexities.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Design and write a complete Java application demonstrating File I/O, Serialization, and Deserialization of complex user objects.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>Elaborate on Java 8 Features: Functional Interfaces, Lambda Expressions, Stream API, and Optional Class with comprehensive code examples.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Detail the Singleton Design Pattern. Implement thread-safe Bill Pugh Singleton and Double-Checked Locking Singleton implementations.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Implement the Factory Design Pattern and Abstract Factory Pattern for a Cross-Platform GUI toolkit (Windows vs Mac UI components).</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Analyze the SOLID Principles in detail with code refactoring examples (converting non-SOLID code into clean architecture).</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Construct a full UML Class Diagram and Sequence Diagram for an Automated Teller Machine (ATM) or Library Management System.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Solve the Diamond Problem of Multiple Inheritance in C++ using Virtual Base Classes. Compare this with Java's Interface mechanism.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>Analyze Memory Management in Java: JVM Memory Structure (Heap, Stack, Metaspace), Garbage Collection Algorithms (G1, CMS), and Memory Leaks.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Write a Java multithreaded application implementing a custom Thread Pool executor from scratch.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Design a Student Information Management System using Java Swing/JavaFX or Console I/O, JDBC database integration, and DAO Pattern.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>Compare Deep Copying vs Shallow Copying in Object Cloning. Implement Cloneable interface and write custom clone() methods.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>Explain the Observer Design Pattern. Implement a stock market notification system using Subject-Observer architecture in Java.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Design and implement an Order Processing Pipeline using Java Streams, Lambdas, and Functional Composition.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>Discuss the Decorator Design Pattern. Implement a Coffee Shop customization program (Base Coffee + Condiments) using Decorator classes.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Compare C++ and Java OOP paradigms in terms of Pointers, Memory Management, Multiple Inheritance, Operator Overloading, and Virtual Functions.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>Develop a Java program that reads a large CSV file, parses data into objects, filters data using Streams, and outputs summary analytics.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Analyze the Strategy Design Pattern. Implement a Payment Gateway system supporting Credit Card, PayPal, and UPI payment strategies.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Design a File Compression/Encryption utility interface in Java leveraging Decorator/Adapter streams.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>Discuss the Adapter Design Pattern with a practical example of integrating a legacy third-party logging library.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>Detailed study of Java Generics Type Erasure mechanism. Explain why primitive types cannot be used directly as generic parameters.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>Develop a Concurrent File Searcher in Java that recursively searches directories for matching text using multiple threads.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Analyze the MVC (Model-View-Controller) pattern. Construct a Java application separating Data Model, GUI View, and Controller Logic.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>Write a program demonstrating custom Annotation creation and processing using Java Reflection API.</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+            <div class="qa-card" id="gc-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Formulate an architectural design document and UML diagrams for a Real-Time Food Delivery Application (like Zomato/Swiggy).</span></div>
+                <div class="a-text">
+                    <p><em>Answer to be generated...</em></p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

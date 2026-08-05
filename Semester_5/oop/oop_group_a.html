@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Oriented Programming (PCC-CS503) - Group A</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #ec4899; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #ec4899; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="oop_index.html">&larr; Object Oriented Programming</a>
+        <span class="nav-title">Object Oriented Programming <span class="nav-code">PCC-CS503</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="oop_group_a.html" class="gs-item is-current"><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="oop_group_b.html" class="gs-item "><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="oop_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="oop_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-a">Group A — Short answer Questions (1 mark)</h1>
+
+            <div class="qa-card" id="ga-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Define Object-Oriented Programming (OOP) and contrast it with Procedural Programming.</span></div>
+                <div class="a-text">
+                    <p><b>OOP</b> is a paradigm based on 'objects' containing data and methods. Unlike Procedural Programming, which focuses on functions and top-down logic, OOP emphasizes data security (encapsulation) and reusability.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>What is an Object and what is a Class in Java/C++?</span></div>
+                <div class="a-text">
+                    <p>A <b>Class</b> is a blueprint or template that defines variables and methods. An <b>Object</b> is a runtime instance of a class containing actual values.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Define Encapsulation and Data Hiding.</span></div>
+                <div class="a-text">
+                    <p><b>Encapsulation</b> is wrapping data (variables) and code (methods) into a single unit. <b>Data Hiding</b> restricts direct access to internal data, usually achieved via private access modifiers.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>What is Abstraction? How is it implemented in Java?</span></div>
+                <div class="a-text">
+                    <p><b>Abstraction</b> hides complex implementation details and shows only the essential features. In Java, it is implemented using <b>abstract classes</b> and <b>interfaces</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Define Inheritance and state its primary benefit.</span></div>
+                <div class="a-text">
+                    <p><b>Inheritance</b> is a mechanism where a new class inherits properties and behaviors of an existing class. Its primary benefit is <b>code reusability</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>What is Polymorphism? Differentiate Compile-time and Run-time Polymorphism.</span></div>
+                <div class="a-text">
+                    <p><b>Polymorphism</b> allows entities to take multiple forms. <b>Compile-time</b> (method overloading) is resolved during compilation, while <b>Run-time</b> (method overriding) is resolved dynamically at execution.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>What is a Constructor? List its characteristics.</span></div>
+                <div class="a-text">
+                    <p>A <b>Constructor</b> is a special method used to initialize objects. Characteristics: it has the same name as the class, has no return type, and is called automatically during object creation.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>What is constructor overloading?</span></div>
+                <div class="a-text">
+                    <p><b>Constructor overloading</b> is defining multiple constructors in a class with different parameter lists (different number or types of arguments) to initialize objects in various ways.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>What is the 'this' keyword used for in Java?</span></div>
+                <div class="a-text">
+                    <p>The <b>'this'</b> keyword is a reference variable in Java that refers to the current object. It is used to resolve naming conflicts between instance variables and parameters.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Define the 'super' keyword and its uses.</span></div>
+                <div class="a-text">
+                    <p>The <b>'super'</b> keyword refers to the immediate parent class object. It is used to call parent class constructors, methods, and access hidden parent fields.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>What is the difference between Method Overloading and Method Overriding?</span></div>
+                <div class="a-text">
+                    <p><b>Overloading</b> occurs in the same class with same method name but different parameters (compile-time). <b>Overriding</b> occurs in a subclass with the exact same signature as the parent method (run-time).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Why does Java not support multiple inheritance with classes?</span></div>
+                <div class="a-text">
+                    <p>Java doesn't support multiple inheritance with classes to avoid the <b>Diamond Problem</b> (ambiguity when multiple parent classes have a method with the same signature).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>How do Interfaces help achieve multiple inheritance in Java?</span></div>
+                <div class="a-text">
+                    <p>A class can implement <b>multiple interfaces</b> simultaneously because interfaces only contain abstract methods (prior to Java 8), so there is no ambiguity in method implementation.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>What is the difference between an Abstract Class and an Interface?</span></div>
+                <div class="a-text">
+                    <p>An <b>Abstract Class</b> can have both abstract and concrete methods with state, while an <b>Interface</b> historically has only abstract methods and static final constants, and a class can implement multiple interfaces.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Define access modifiers in Java (public, private, protected, default).</span></div>
+                <div class="a-text">
+                    <p><ul><li><b>public:</b> Accessible everywhere.</li><li><b>private:</b> Accessible only within the same class.</li><li><b>protected:</b> Accessible within the package and subclasses.</li><li><b>default:</b> Accessible only within the same package.</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>What is a static variable and a static method?</span></div>
+                <div class="a-text">
+                    <p>A <b>static variable</b> belongs to the class rather than instances, shared among all objects. A <b>static method</b> can be called without creating an object and can only directly access static data.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>What is the purpose of the 'final' keyword with variables, methods, and classes?</span></div>
+                <div class="a-text">
+                    <p><ul><li><b>Variables:</b> Creates a constant.</li><li><b>Methods:</b> Prevents overriding.</li><li><b>Classes:</b> Prevents inheritance.</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>Explain Garbage Collection in Java and the role of finalize() / System.gc().</span></div>
+                <div class="a-text">
+                    <p><b>Garbage Collection</b> automatically frees memory by destroying unreachable objects. <b>System.gc()</b> requests a garbage collection run, and <b>finalize()</b> is a method called just before an object is destroyed for cleanup.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>What is a Package in Java? How is it created and imported?</span></div>
+                <div class="a-text">
+                    <p>A <b>Package</b> is a namespace that organizes a set of related classes and interfaces. It is created using the <code>package</code> keyword at the top of the file and imported using the <code>import</code> keyword.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>Define Exception Handling. What are checked and unchecked exceptions?</span></div>
+                <div class="a-text">
+                    <p><b>Exception Handling</b> manages runtime errors to maintain normal flow. <b>Checked exceptions</b> are verified at compile-time (e.g., IOException), while <b>Unchecked exceptions</b> occur at runtime (e.g., NullPointerException).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>What is the purpose of try, catch, finally, throw, and throws keywords?</span></div>
+                <div class="a-text">
+                    <p><ul><li><b>try:</b> Wraps risky code.</li><li><b>catch:</b> Handles exceptions.</li><li><b>finally:</b> Executes crucial cleanup code.</li><li><b>throw:</b> Manually triggers an exception.</li><li><b>throws:</b> Declares exceptions a method might throw.</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>What is a user-defined custom exception?</span></div>
+                <div class="a-text">
+                    <p>A <b>user-defined exception</b> is a custom exception class created by a developer (usually by extending the <code>Exception</code> or <code>RuntimeException</code> class) to handle application-specific errors.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Define Multithreading. What is a Thread?</span></div>
+                <div class="a-text">
+                    <p><b>Multithreading</b> is the concurrent execution of multiple threads to maximize CPU utilization. A <b>Thread</b> is the smallest lightweight unit of processing or execution within a program.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Differentiate between Process-based and Thread-based multitasking.</span></div>
+                <div class="a-text">
+                    <p><b>Process-based</b> involves heavyweight independent programs with separate memory spaces. <b>Thread-based</b> involves lightweight concurrent paths of execution that share the same memory space within one process.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>How can a thread be created in Java (Thread class vs Runnable interface)?</span></div>
+                <div class="a-text">
+                    <p>A thread can be created either by extending the <b>Thread class</b> and overriding <code>run()</code>, or by implementing the <b>Runnable interface</b> and passing it to a Thread constructor.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>What are thread priorities in Java?</span></div>
+                <div class="a-text">
+                    <p><b>Thread priorities</b> dictate the order in which threads are scheduled. In Java, priorities range from 1 (MIN_PRIORITY) to 10 (MAX_PRIORITY), with 5 being the default (NORM_PRIORITY).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>Define Thread Synchronization and the 'synchronized' keyword.</span></div>
+                <div class="a-text">
+                    <p><b>Thread Synchronization</b> restricts multiple threads from accessing shared resources concurrently to prevent data inconsistency. The <b>synchronized</b> keyword locks the object or class during execution.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>What is Inter-Thread Communication? Mention wait(), notify(), and notifyAll().</span></div>
+                <div class="a-text">
+                    <p><b>Inter-Thread Communication</b> allows synchronized threads to communicate. <code>wait()</code> pauses a thread, while <code>notify()</code> and <code>notifyAll()</code> wake up one or all waiting threads on that monitor.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>What is Deadlock in multithreading?</span></div>
+                <div class="a-text">
+                    <p><b>Deadlock</b> is a situation where two or more threads are blocked forever, each waiting for a lock held by the other, bringing the program to a halt.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>What is the String class in Java? Why are Strings immutable?</span></div>
+                <div class="a-text">
+                    <p>The <b>String class</b> represents a sequence of characters. Strings are <b>immutable</b> (unchangeable) for security, synchronization, caching, and to optimize the String Pool memory management.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>Differentiate between String, StringBuilder, and StringBuffer.</span></div>
+                <div class="a-text">
+                    <p><b>String</b> is immutable. <b>StringBuilder</b> is mutable and not thread-safe (faster). <b>StringBuffer</b> is mutable and thread-safe (synchronized, slower).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>What is a Wrapper Class? Define Autoboxing and Unboxing.</span></div>
+                <div class="a-text">
+                    <p>A <b>Wrapper Class</b> encapsulates a primitive type into an object. <b>Autoboxing</b> is automatic conversion of primitive to wrapper object; <b>Unboxing</b> is the reverse conversion.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>What is the Java Collections Framework (JCF)?</span></div>
+                <div class="a-text">
+                    <p>The <b>JCF</b> is a unified architecture providing ready-to-use classes and interfaces (like List, Set, Map) for storing, manipulating, and searching groups of objects.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>Differentiate between List, Set, and Map interfaces.</span></div>
+                <div class="a-text">
+                    <p><ul><li><b>List:</b> Ordered collection that allows duplicates.</li><li><b>Set:</b> Unordered collection with no duplicates.</li><li><b>Map:</b> Collection of Key-Value pairs, keys must be unique.</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>What is the difference between ArrayList and LinkedList?</span></div>
+                <div class="a-text">
+                    <p><b>ArrayList</b> uses a dynamic array (better for searching/random access). <b>LinkedList</b> uses a doubly linked list (better for frequent insertions/deletions).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>What is HashMap and how does it store key-value pairs?</span></div>
+                <div class="a-text">
+                    <p><b>HashMap</b> is a Map implementation that stores key-value pairs using a hash table. It uses a hashing algorithm on keys to compute indices for bucketing values.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Define Generics in Java and state their main advantage.</span></div>
+                <div class="a-text">
+                    <p><b>Generics</b> allow types (classes and interfaces) to be parameters when defining classes, interfaces, and methods. Their main advantage is <b>compile-time type safety</b> and avoiding explicit casting.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>What is File I/O in Java? Differentiate Byte Streams and Character Streams.</span></div>
+                <div class="a-text">
+                    <p><b>File I/O</b> handles reading and writing to files. <b>Byte Streams</b> (e.g., FileInputStream) read/write 8-bit bytes (for binary data). <b>Character Streams</b> (e.g., FileReader) read/write 16-bit Unicode characters.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>What is Serialization and Deserialization in Java?</span></div>
+                <div class="a-text">
+                    <p><b>Serialization</b> converts an object's state into a byte stream for saving or networking. <b>Deserialization</b> reconstructs the object from the byte stream.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Define the 'transient' keyword in Java Serialization.</span></div>
+                <div class="a-text">
+                    <p>The <b>transient</b> keyword marks a variable so that it is ignored during serialization; its value will not be saved or transmitted.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-41">
+                <div class="q-text"><span class="q-badge">Q41</span><span>What is a Lambda Expression in Java 8?</span></div>
+                <div class="a-text">
+                    <p>A <b>Lambda Expression</b> provides a concise syntax to write anonymous methods, typically used to implement the single abstract method of a functional interface.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-42">
+                <div class="q-text"><span class="q-badge">Q42</span><span>Define Functional Interface and give two standard examples.</span></div>
+                <div class="a-text">
+                    <p>A <b>Functional Interface</b> has exactly one abstract method. Examples include <code>Runnable</code> and <code>Callable</code> (or <code>Predicate</code> and <code>Function</code> from <code>java.util.function</code>).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-43">
+                <div class="q-text"><span class="q-badge">Q43</span><span>What is the Stream API in Java 8?</span></div>
+                <div class="a-text">
+                    <p>The <b>Stream API</b> provides a functional and declarative approach to process collections of objects (filtering, mapping, reducing) allowing for easy parallel execution.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-44">
+                <div class="q-text"><span class="q-badge">Q44</span><span>Define Design Patterns. Differentiate Creational, Structural, and Behavioral patterns.</span></div>
+                <div class="a-text">
+                    <p><b>Design Patterns</b> are proven solutions to common software design problems. <b>Creational</b> deals with object creation, <b>Structural</b> with object composition, and <b>Behavioral</b> with object communication.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-45">
+                <div class="q-text"><span class="q-badge">Q45</span><span>What is the Singleton Design Pattern?</span></div>
+                <div class="a-text">
+                    <p>The <b>Singleton</b> pattern ensures that a class has only one single instance throughout the application lifecycle and provides a global point of access to it.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-46">
+                <div class="q-text"><span class="q-badge">Q46</span><span>What is the Factory Method Pattern?</span></div>
+                <div class="a-text">
+                    <p>The <b>Factory Method</b> is a creational pattern that defines an interface for creating objects, but lets subclasses decide which class to instantiate.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-47">
+                <div class="q-text"><span class="q-badge">Q47</span><span>Define the SOLID principles of Object-Oriented Design.</span></div>
+                <div class="a-text">
+                    <p><b>SOLID</b> stands for Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, and Dependency Inversion—five principles for maintainable object-oriented design.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-48">
+                <div class="q-text"><span class="q-badge">Q48</span><span>What is Unified Modeling Language (UML)?</span></div>
+                <div class="a-text">
+                    <p><b>UML</b> is a standard visual modeling language used in software engineering to document, specify, construct, and visualize the artifacts of a software system.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-49">
+                <div class="q-text"><span class="q-badge">Q49</span><span>What is the difference between Association, Aggregation, and Composition?</span></div>
+                <div class="a-text">
+                    <p><b>Association</b> is a general relationship. <b>Aggregation</b> is a "has-a" relationship (weak ownership). <b>Composition</b> is a strict "part-of" relationship (strong ownership, part dies with whole).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-50">
+                <div class="q-text"><span class="q-badge">Q50</span><span>What is a Class Diagram in UML?</span></div>
+                <div class="a-text">
+                    <p>A <b>Class Diagram</b> is a structural UML diagram that shows the system's static structure by detailing classes, their attributes, methods, and relationships.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-51">
+                <div class="q-text"><span class="q-badge">Q51</span><span>Define Virtual Functions and Pure Virtual Functions in C++.</span></div>
+                <div class="a-text">
+                    <p>A <b>Virtual Function</b> allows derived classes to override a method for runtime polymorphism. A <b>Pure Virtual Function</b> (assigned = 0) forces derived classes to implement it, making the base class abstract.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-52">
+                <div class="q-text"><span class="q-badge">Q52</span><span>What is the Friend Function / Friend Class in C++?</span></div>
+                <div class="a-text">
+                    <p>A <b>Friend Function/Class</b> in C++ is granted access to the private and protected members of the class in which it is declared as a friend.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

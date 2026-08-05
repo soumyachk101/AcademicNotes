@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Management (HS-MC501) - Group A</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #f59e0b; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #f59e0b; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="management_index.html">&larr; Industrial Management</a>
+        <span class="nav-title">Industrial Management <span class="nav-code">HS-MC501</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="management_group_a.html" class="gs-item is-current"><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="management_group_b.html" class="gs-item "><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="management_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="management_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-a">Group A — Short answer Questions (1 mark)</h1>
+
+            <div class="qa-card" id="ga-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Define Management. Is Management an Art or a Science?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q1:</b> Management is the process of getting things done through others. It is both an <b>art</b> (requires skill) and a <b>science</b> (based on systematic principles).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>What are the four primary functions of Management (POSDCORB)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q2:</b> The four primary functions are:</p><ul><li>Planning</li><li>Organizing</li><li>Directing</li><li>Controlling</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>State Henry Fayol's 14 Principles of Management (any four).</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q3:</b> Four principles of Fayol:</p><ul><li>Division of work</li><li>Authority and responsibility</li><li>Discipline</li><li>Unity of command</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>Who is known as the Father of Scientific Management and what are his core tenets?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q4:</b> <b>F.W. Taylor</b>. Core tenets: Science not rule of thumb, Harmony not discord, Cooperation not individualism, Maximum output.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Define Organization Structure. Differentiate Line and Staff organization.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q5:</b> Organization structure defines how activities are directed. <b>Line</b> has direct authority; <b>Staff</b> advises and supports Line.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>What is Span of Control / Span of Management?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q6:</b> The number of subordinates a manager can effectively supervise.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Define Centralization vs Decentralization in management.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q7:</b> <b>Centralization</b> is the concentration of decision-making authority at the top; <b>decentralization</b> delegates it down the hierarchy.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>What is Organizational Behavior (OB)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q8:</b> The study of human behavior in organizational settings.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Define Motivation according to Maslow's Hierarchy of Needs.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q9:</b> Motivation is driven by a hierarchy of needs: physiological, safety, social, esteem, and self-actualization.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>What is Hertzberg's Two-Factor Theory of Motivation?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q10:</b> Motivation is influenced by <b>hygiene factors</b> (prevent dissatisfaction) and <b>motivators</b> (encourage satisfaction).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Differentiate Theory X and Theory Y of Douglas McGregor.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q11:</b> <b>Theory X</b> assumes employees are lazy and need control; <b>Theory Y</b> assumes employees are self-motivated and seek responsibility.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>What is Leadership? Differentiate Autocratic, Democratic, and Laissez-faire leadership styles.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q12:</b> Leadership is influencing others to achieve goals. <b>Autocratic:</b> leader decides alone. <b>Democratic:</b> team decides together. <b>Laissez-faire:</b> team has full freedom.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Define Production Planning and Control (PPC).</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q13:</b> PPC is the process of planning production in advance and coordinating resources to meet demand efficiently.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>What are the main types of Production Systems (Job, Batch, Mass/Continuous)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q14:</b> Types include:</p><ul><li><b>Job:</b> customized, one-off</li><li><b>Batch:</b> produced in groups</li><li><b>Mass/Continuous:</b> high volume, standardized</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Define Plant Layout. What is Process Layout vs Product Layout?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q15:</b> Plant layout is the physical arrangement of facilities. <b>Process layout</b> groups similar machines; <b>Product layout</b> arranges them in sequence of operations.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>What is Plant Location? Name two quantitative methods for site selection.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q16:</b> Plant location is choosing a region for operations. Methods: <b>Factor Rating Method</b>, <b>Center of Gravity Method</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>Define Inventory Management and state its primary objective.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q17:</b> Inventory management oversees the flow of goods. Objective: Minimize holding costs while ensuring continuous supply.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>What is Economic Order Quantity (EOQ)? State its basic formula.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q18:</b> EOQ minimizes total inventory costs. Formula: <b>&radic;(2DS/H)</b> where D=Demand, S=Ordering Cost, H=Holding Cost.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Define ABC Analysis in inventory control.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q19:</b> Categorizing inventory into <b>A</b> (high value, low volume), <b>B</b> (moderate), and <b>C</b> (low value, high volume) for control.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>What is Safety Stock and Reorder Level (ROL)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q20:</b> <b>Safety stock</b> acts as a buffer against stockouts. <b>ROL</b> is the inventory level that triggers a new order.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Define Work Study. What are its two main components?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q21:</b> Work study analyzes human work to improve efficiency. Components: <b>Method Study</b> and <b>Work Measurement</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>What is Method Study and what is its primary objective?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q22:</b> Method study evaluates how work is done. Objective: Find the most efficient and economical way to perform a task.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>What is Work Measurement / Time Study?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q23:</b> Technique to establish the time required for a qualified worker to carry out a specified job at a defined level of performance.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Define Allowance in Time Study. What is Standard Time?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q24:</b> <b>Allowance</b> is extra time added for fatigue/delays. <b>Standard Time</b> = Basic Time + Allowances.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>What is Ergonomics / Human Factors Engineering?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q25:</b> The study of designing workplaces and tools to fit human physical and cognitive capabilities.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>Define Quality Control (QC) and Quality Assurance (QA).</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q26:</b> <b>QC</b> identifies defects in finished products. <b>QA</b> prevents defects by ensuring proper processes are followed.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>What is Total Quality Management (TQM)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q27:</b> An organization-wide approach to continuous improvement of quality and customer satisfaction.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Define Statistical Process Control (SPC). What are Control Charts?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q28:</b> SPC uses statistical methods to monitor and control a process. <b>Control charts</b> visually track process variations over time.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>What is the difference between Variable Control Charts (X-bar, R chart) and Attribute Control Charts (p, c chart)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q29:</b> <b>Variable charts</b> measure continuous data (e.g., length), while <b>attribute charts</b> count discrete defects (pass/fail).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>What is ISO 9000 series certification?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q30:</b> A set of international standards for quality management systems (QMS) ensuring products meet customer and regulatory requirements.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>Define Six Sigma. What does DMAIC stand for?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q31:</b> Six Sigma is a methodology to reduce defects (3.4 per million). DMAIC: <b>D</b>efine, <b>M</b>easure, <b>A</b>nalyze, <b>I</b>mprove, <b>C</b>ontrol.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>What is Financial Management? State its main objectives.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q32:</b> Managing an organization's financial resources. Objectives: Profit maximization, wealth maximization, and maintaining liquidity.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Define Working Capital. Differentiate Gross and Net Working Capital.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q33:</b> Funds for day-to-day operations. <b>Gross</b> = Total current assets; <b>Net</b> = Current assets minus current liabilities.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>What is Break-Even Analysis? Define Break-Even Point (BEP).</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q34:</b> Analyzes relationship between cost, volume, and profit. <b>BEP</b> is the point where total revenue equals total costs (no profit, no loss).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>State the formula for calculating Break-Even Point in units and sales value.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q35:</b> BEP (Units) = Fixed Costs / Contribution per unit. BEP (Sales Value) = Fixed Costs / P/V Ratio.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>Define Fixed Cost and Variable Cost with examples.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q36:</b> <b>Fixed costs</b> remain constant regardless of output (e.g., rent). <b>Variable costs</b> change with output (e.g., raw materials).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>What is Contribution Margin and Profit-Volume (P/V) Ratio?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q37:</b> Contribution Margin = Sales - Variable Costs. P/V Ratio = (Contribution / Sales) * 100.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>Define Depreciation. Name two common methods of computing depreciation.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q38:</b> Reduction in the value of an asset over time. Methods: <b>Straight-Line Method</b>, <b>Written-Down Value Method</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>What is Project Management?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q39:</b> The application of knowledge, skills, and tools to execute projects efficiently and effectively.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Define Network Diagram in project planning.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q40:</b> A visual representation of project activities and their logical sequence or dependencies.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-41">
+                <div class="q-text"><span class="q-badge">Q41</span><span>What is PERT (Program Evaluation and Review Technique)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q41:</b> A network analysis technique used for managing projects with uncertain activity times (probabilistic).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-42">
+                <div class="q-text"><span class="q-badge">Q42</span><span>What is CPM (Critical Path Method)?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q42:</b> A network analysis technique used for projects with deterministic, well-defined activity times.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-43">
+                <div class="q-text"><span class="q-badge">Q43</span><span>Differentiate between PERT and CPM.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q43:</b> <b>PERT</b> is event-oriented and probabilistic; <b>CPM</b> is activity-oriented and deterministic.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-44">
+                <div class="q-text"><span class="q-badge">Q44</span><span>Define Critical Path and Slack/Float in network analysis.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q44:</b> <b>Critical path</b> is the longest sequence of activities determining project duration. <b>Slack/Float</b> is the time an activity can be delayed without delaying the project.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-45">
+                <div class="q-text"><span class="q-badge">Q45</span><span>What is a Gantt Chart?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q45:</b> A bar chart that illustrates a project schedule, showing start and finish dates of activities.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-46">
+                <div class="q-text"><span class="q-badge">Q46</span><span>Define Supply Chain Management (SCM).</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q46:</b> The management of the flow of goods, data, and finances from raw materials to final consumption.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-47">
+                <div class="q-text"><span class="q-badge">Q47</span><span>What is Just-In-Time (JIT) manufacturing / Kanban system?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q47:</b> <b>JIT</b> produces only what is needed, when needed. <b>Kanban</b> is a visual signaling system used to trigger production/movement in JIT.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-48">
+                <div class="q-text"><span class="q-badge">Q48</span><span>What is Maintenance Management? Differentiate Preventive and Breakdown maintenance.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q48:</b> Managing equipment reliability. <b>Preventive</b> avoids failures via regular checks; <b>Breakdown</b> fixes equipment after it fails.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-49">
+                <div class="q-text"><span class="q-badge">Q49</span><span>What is Material Handling? State two principles of material handling.</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q49:</b> Movement, protection, and control of materials. Principles: <b>Gravity principle</b>, <b>Unit load principle</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-50">
+                <div class="q-text"><span class="q-badge">Q50</span><span>Define Human Resource Management (HRM).</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q50:</b> The strategic approach to managing people, focusing on recruitment, training, and employee relations.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-51">
+                <div class="q-text"><span class="q-badge">Q51</span><span>What is Job Analysis, Job Description, and Job Specification?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q51:</b> <b>Job Analysis:</b> studying a job's requirements. <b>Job Description:</b> duties and responsibilities. <b>Job Specification:</b> required skills and qualifications.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-52">
+                <div class="q-text"><span class="q-badge">Q52</span><span>What is Performance Appraisal?</span></div>
+                <div class="a-text">
+                    <p><b>Ans Q52:</b> The regular evaluation of an employee's job performance and contribution to the organization.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

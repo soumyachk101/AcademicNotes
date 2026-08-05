@@ -159,69 +159,6 @@
         .shelf { max-width: 1200px; margin: 0 auto; padding: 0 clamp(1.15rem, 4.5vw, 4.25rem); }
         .shelf:first-of-type { padding-top: clamp(2.5rem, 5vw, 4rem); }
 
-        .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(288px, 1fr)); gap: 1rem; }
-
-        .tile {
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            min-height: 228px;
-            padding: 1.5rem 1.5rem 1.3rem;
-            border-radius: 18px;
-            text-decoration: none;
-            overflow: hidden;
-            isolation: isolate;
-            color: #fff;
-            background: linear-gradient(158deg, var(--c) 0%, color-mix(in srgb, var(--c) 74%, #0b1220) 100%);
-            box-shadow: 0 1px 2px rgba(15,23,42,.10), 0 14px 30px -18px color-mix(in srgb, var(--c) 60%, #0b1220);
-            transition: transform 420ms var(--ease), box-shadow 420ms var(--ease);
-        }
-        .tile::before {
-            content: "";
-            position: absolute; inset: 0; z-index: -1;
-            background: radial-gradient(120% 90% at 12% 0%, rgba(255,255,255,.22), transparent 62%);
-        }
-        .tile:hover, .tile:focus-visible {
-            transform: translateY(-5px);
-            box-shadow: 0 2px 4px rgba(15,23,42,.12), 0 28px 50px -22px color-mix(in srgb, var(--c) 70%, #0b1220);
-        }
-        .tile:focus-visible { outline: 3px solid var(--ink-strong); outline-offset: 3px; }
-
-        .tile-code {
-            align-self: flex-start;
-            padding: 0.28rem 0.6rem;
-            border-radius: 6px;
-            background: rgba(255,255,255,.18);
-            font-family: var(--util);
-            font-size: 0.67rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-        }
-        .tile h3 {
-            font-family: var(--display);
-            font-size: 1.48rem;
-            font-weight: 800;
-            line-height: 1.14;
-            letter-spacing: -0.026em;
-            color: #fff;
-            margin: 0.85rem 0 0.45rem;
-            text-wrap: balance;
-        }
-        .tile p { font-size: 0.86rem; line-height: 1.5; color: rgba(255,255,255,.78); text-wrap: pretty; }
-        .tile-foot {
-            display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-            margin-top: auto; padding-top: 1.15rem;
-            border-top: 1px solid rgba(255,255,255,.22);
-            font-family: var(--util); font-size: 0.74rem;
-            font-variant-numeric: tabular-nums;
-            color: rgba(255,255,255,.85);
-        }
-        .tile-foot .arrow { font-size: 1.05rem; line-height: 1; transition: transform 320ms var(--ease); }
-        .tile:hover .arrow { transform: translateX(4px); }
-
-        /* Every subject card is the same object. Hierarchy comes from
-           section order and the band labels, not from two card species. */
-
         /* ---------- Footer ---------- */
 
         .site-foot {
@@ -337,7 +274,7 @@
         <p class="eyebrow">MAKAUT &middot; B.Tech &middot; <span class="accent">Computer Science</span></p>
         <h1>Academic Notes</h1>
         <p class="lede">
-            MAKAUT previous-year question banks with every answer written out &mdash; 613 across
+            MAKAUT previous-year question banks with every answer written out &mdash; 979 across
             Semester 5 alone, kept in the same Group A / B / C order the exam uses.
         </p>
         <div class="cta-row">
@@ -374,7 +311,7 @@
 <div class="shelf" id="sem5">
     <div class="band">
         <h2>Semester 5</h2>
-        <span class="band-note">613 questions &middot; every group solved</span>
+        <span class="band-note">979 questions &middot; every group solved</span>
     </div>
     <section class="tiles">
 
@@ -410,6 +347,27 @@
             <span class="tile-code">ESC501</span>
             <h3>Software Engineering</h3>
             <p>Waterfall and Agile Scrum, SRS, DFD levels, cohesion and coupling, COCOMO, McCabe complexity.</p>
+            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="tile" href="Semester_5/constitution/constitution_index.html" style="--c: #d946ef">
+            <span class="tile-code">MC-CS501</span>
+            <h3>Constitution & IKT</h3>
+            <p>Constitution of India, Fundamental Rights, Directive Principles, IKT, Ancient Indian Philosophies, Vedas, Preamble.</p>
+            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="tile" href="Semester_5/management/management_index.html" style="--c: #f59e0b">
+            <span class="tile-code">HS-MC501</span>
+            <h3>Industrial Management</h3>
+            <p>Management functions, Taylor/Fayol principles, Motivation theories, Production systems, Inventory Control, PERT/CPM, TQM.</p>
+            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
+        </a>
+
+        <a class="tile" href="Semester_5/oop/oop_index.html" style="--c: #ec4899">
+            <span class="tile-code">PCC-CS503</span>
+            <h3>Object Oriented Programming</h3>
+            <p>Java OOP principles, Encapsulation, Inheritance, Polymorphism, Exception Handling, Multithreading, Generics, Collections, Design Patterns.</p>
             <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
         </a>
 

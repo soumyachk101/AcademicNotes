@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object Oriented Programming (PCC-CS503) - Group B</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #ec4899; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #ec4899; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="oop_index.html">&larr; Object Oriented Programming</a>
+        <span class="nav-title">Object Oriented Programming <span class="nav-code">PCC-CS503</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="oop_group_a.html" class="gs-item "><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="oop_group_b.html" class="gs-item is-current"><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="oop_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="oop_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-b">Group B — Descriptive Questions (5 marks)</h1>
+
+            <div class="qa-card" id="gb-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Explain the four fundamental pillars of Object-Oriented Programming with suitable code snippets.</span></div>
+                <div class="a-text">
+                    <h4>Q1. Discuss the four fundamental pillars of Object-Oriented Programming (OOP) with real-world examples.</h4><p>Object-Oriented Programming is a paradigm based on the concept of 'objects', which can contain data (attributes/fields) and code (methods). The four fundamental pillars that define OOP are:</p><ul><li><b>Encapsulation:</b> This is the mechanism of wrapping data (variables) and code acting on the data (methods) together as a single unit (a class). In encapsulation, the variables of a class are hidden from other classes and can only be accessed through the methods of their current class. Therefore, it is also known as data hiding.<br/><i>Real-World Example:</i> A medicinal capsule. The medicine (data/variables) is safely hidden inside the capsule cover (methods). Or a Bank Account where the <code>balance</code> is private and only updated via <code>deposit()</code> or <code>withdraw()</code> methods.</li><li><b>Inheritance:</b> It is a mechanism wherein a new class is derived from an existing class. The new class (subclass) inherits the attributes and methods of the existing class (superclass). This promotes code reusability and establishes an IS-A relationship.<br/><i>Real-World Example:</i> A <code>Vehicle</code> class might have properties like <code>wheels</code> and methods like <code>startEngine()</code>. A <code>Car</code> class inherits from <code>Vehicle</code>, automatically gaining those features, but can add its own specific features like <code>airConditioning()</code>.</li><li><b>Polymorphism:</b> Poly means "many" and morphism means "forms". Polymorphism allows us to perform a single action in different ways. In Java, this occurs via method overloading (compile-time) and method overriding (run-time).<br/><i>Real-World Example:</i> A person can have different roles at the same time. A man can be a father, a husband, and an employee. Thus, the same person behaves differently depending on the situation (context). In code, a <code>draw()</code> method will behave differently for a <code>Circle</code> object vs a <code>Square</code> object.</li><li><b>Abstraction:</b> It is the property of hiding complex implementation details and showing only the essential features of the object. It helps to reduce programming complexity and effort.<br/><i>Real-World Example:</i> Driving a car. You know that pressing the accelerator increases speed and pressing the brake stops it. You don't need to know the complex internal combustion engine mechanics to drive the car. In Java, this is achieved using abstract classes and interfaces.</li></ul>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>Compare Procedural Programming and Object-Oriented Programming.</span></div>
+                <div class="a-text">
+                    <h4>Q2. Compare and contrast Procedural Programming with Object-Oriented Programming (OOP).</h4><p>Programming paradigms dictate how we approach problem-solving in code. Procedural Oriented Programming (POP) and Object-Oriented Programming (OOP) are the two most prominent paradigms.</p><table border="1"><tr><th>Feature</th><th>Procedural Programming (POP)</th><th>Object-Oriented Programming (OOP)</th></tr><tr><td><b>Core Concept</b></td><td>Focuses on functions and procedures. The program is divided into smaller parts called functions.</td><td>Focuses on data and objects. The program is divided into objects that interact with each other.</td></tr><tr><td><b>Approach</b></td><td>Follows a Top-Down approach in program design.</td><td>Follows a Bottom-Up approach in program design.</td></tr><tr><td><b>Data Security</b></td><td>Poor security. Data moves freely around the system from function to function. Most data is global.</td><td>High security. Data is hidden (encapsulated) and cannot be accessed by external functions without permission.</td></tr><tr><td><b>Real-world modeling</b></td><td>Difficult to map to real-world scenarios.</td><td>Extremely easy to map real-world entities into software objects.</td></tr><tr><td><b>Reusability</b></td><td>No direct mechanism for reusing code, though functions help to some extent.</td><td>Inheritance provides a powerful mechanism to reuse existing code.</td></tr><tr><td><b>Modifiability</b></td><td>Adding new data or functions is difficult as it might affect the entire program.</td><td>Highly extensible. Adding new classes or modifying existing ones is easier without breaking the system.</td></tr><tr><td><b>Examples</b></td><td>C, Pascal, FORTRAN, BASIC.</td><td>Java, C++, Python, C#.</td></tr></table><p><b>Conclusion:</b> While POP is suitable for small, simple scripts where execution speed is critical, OOP is indispensable for building large, complex, maintainable, and scalable enterprise applications.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Explain Constructor Chaining in Java using 'this()' and 'super()'.</span></div>
+                <div class="a-text">
+                    <h4>Q3. What is Constructor Chaining in Java? Explain with a relevant code snippet.</h4><p>Constructor chaining is the process of calling one constructor from another constructor within the same class (or from a child class to a parent class) during the object creation process. This technique is primarily used to prevent code duplication and to ensure that multiple constructors share common initialization logic.</p><h5>Types of Constructor Chaining:</h5><ul><li><b>Within the same class:</b> Achieved using the <code>this()</code> keyword. It must always be the first statement inside the constructor.</li><li><b>From a child class to a parent class:</b> Achieved using the <code>super()</code> keyword. It also must be the first statement. If not explicitly written, the Java compiler implicitly inserts a default <code>super()</code> call.</li></ul><h5>Code Example:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">class Employee {
+    String name;
+    int id;
+    String department;
+
+    // Constructor 1 (Takes only name)
+    public Employee(String name) {
+        // Calls Constructor 2
+        this(name, 0);
+        System.out.println(&quot;Inside Constructor 1&quot;);
+    }
+
+    // Constructor 2 (Takes name and id)
+    public Employee(String name, int id) {
+        // Calls Constructor 3 (The main initialization constructor)
+        this(name, id, &quot;Unassigned&quot;);
+        System.out.println(&quot;Inside Constructor 2&quot;);
+    }
+
+    // Constructor 3 (Takes all parameters)
+    public Employee(String name, int id, String department) {
+        // This constructor actually sets the values
+        this.name = name;
+        this.id = id;
+        this.department = department;
+        System.out.println(&quot;Inside Constructor 3&quot;);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // When we call the single-parameter constructor, it triggers the chain.
+        Employee emp = new Employee(&quot;Alice&quot;);
+    }
+}</code></pre>
+            </div>
+        </div>
+        <p><b>Output of the above code:</b><br/>Inside Constructor 3<br/>Inside Constructor 2<br/>Inside Constructor 1</p><p>As seen in the output, the <code>this()</code> call immediately pauses the execution of the current constructor and jumps to the target constructor, meaning the most parameterized constructor finishes executing first.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>Discuss dynamic method dispatch (Run-time Polymorphism) with a code example.</span></div>
+                <div class="a-text">
+                    <h4>Q4. Explain Dynamic Method Dispatch (Runtime Polymorphism) in Java with an example.</h4><p>Dynamic Method Dispatch is a mechanism by which a call to an overridden method is resolved at runtime, rather than at compile-time. This is how Java implements runtime polymorphism. When an overridden method is called through a superclass reference, Java determines which version of that method to execute based on the actual <b>type of the object</b> being referred to at the time the call occurs, not the type of the reference variable.</p><h5>Key Rules:</h5><ul><li>Upcasting is required: A superclass reference variable must point to a subclass object.</li><li>The method must be overridden in the subclass.</li></ul><h5>Code Example:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">class Animal {
+    public void sound() {
+        System.out.println(&quot;Animal makes a generic sound&quot;);
+    }
+}
+
+class Dog extends Animal {
+    @Override
+    public void sound() {
+        System.out.println(&quot;Dog barks: Woof Woof!&quot;);
+    }
+}
+
+class Cat extends Animal {
+    @Override
+    public void sound() {
+        System.out.println(&quot;Cat meows: Meow!&quot;);
+    }
+}
+
+public class RuntimePolymorphismDemo {
+    public static void main(String[] args) {
+        // Superclass reference points to Animal object
+        Animal myAnimal = new Animal();
+        myAnimal.sound(); // Output: Animal makes a generic sound
+
+        // Superclass reference points to Dog object (Upcasting)
+        Animal myDog = new Dog(); 
+        // At runtime, JVM checks the actual object type (Dog) 
+        myDog.sound(); // Output: Dog barks: Woof Woof!
+
+        // Superclass reference points to Cat object (Upcasting)
+        Animal myCat = new Cat();
+        myCat.sound(); // Output: Cat meows: Meow!
+    }
+}</code></pre>
+            </div>
+        </div>
+        <p><b>Advantages:</b> It allows Java to support overriding, which is central to OOP. It enables you to write robust, extensible code because you can write methods that accept a superclass parameter and they will automatically behave correctly for any subclass passed to them.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Differentiate Abstract Class and Interface in Java with appropriate use-cases.</span></div>
+                <div class="a-text">
+                    <h4>Q5. Differentiate between Abstract Class and Interface in Java.</h4><p>Both abstract classes and interfaces are used to achieve abstraction in Java, but they have distinct differences in their design and usage.</p><table border="1"><tr><th>Feature</th><th>Abstract Class</th><th>Interface</th></tr><tr><td><b>Keyword & Definition</b></td><td>Declared using the <code>abstract</code> keyword. Can have both abstract (no body) and concrete (with body) methods.</td><td>Declared using the <code>interface</code> keyword. (Before Java 8) Could only have abstract methods. Now can have <code>default</code> and <code>static</code> methods.</td></tr><tr><td><b>Variables</b></td><td>Can have final, non-final, static, and non-static variables.</td><td>Variables are implicitly <code>public static final</code> (constants).</td></tr><tr><td><b>Inheritance</b></td><td>A class can <code>extend</code> only ONE abstract class (Single Inheritance).</td><td>A class can <code>implement</code> MULTIPLE interfaces (Multiple Inheritance).</td></tr><tr><td><b>Constructors</b></td><td>Can have a constructor (used during subclass object creation).</td><td>Cannot have a constructor.</td></tr><tr><td><b>Access Modifiers</b></td><td>Methods and variables can have any access modifier (private, protected, etc.).</td><td>Methods are implicitly <code>public abstract</code>.</td></tr></table><h5>Code Example:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">// Interface
+interface Drawable {
+    void draw(); // implicitly public and abstract
+}
+
+// Abstract Class
+abstract class Shape {
+    String color;
+    // Constructor in abstract class
+    public Shape(String color) { this.color = color; }
+    // Concrete method
+    public void displayColor() { System.out.println(&quot;Color: &quot; + color); }
+    // Abstract method
+    abstract double calculateArea();
+}
+
+// Concrete Class implementing Interface AND extending Abstract Class
+class Circle extends Shape implements Drawable {
+    double radius;
+    public Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+    @Override
+    public void draw() { System.out.println(&quot;Drawing a Circle.&quot;); }
+    @Override
+    double calculateArea() { return Math.PI * radius * radius; }
+}</code></pre>
+            </div>
+        </div>
+        
+                </div>
+            </div>
+            <div class="qa-card" id="gb-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>Explain access specifiers in Java and their visibility scopes across packages.</span></div>
+                <div class="a-text">
+                    <h4>Q6. Explain Access Specifiers (Modifiers) in Java with examples.</h4><p>Access specifiers determine the scope or visibility of classes, variables, methods, and constructors in Java. They are crucial for implementing Encapsulation (data hiding). Java provides four access specifiers:</p><ul><li><b>1. private:</b> The access level is restricted strictly within the class. It cannot be accessed from outside the class, not even by subclasses. It provides the highest level of security.</li><li><b>2. default (no keyword):</b> If you don't explicitly specify an access modifier, it is considered 'default'. The access level is restricted within the same package. It cannot be accessed from outside the package.</li><li><b>3. protected:</b> The access level is within the same package, and outside the package <b>only</b> through child classes (inheritance). If a class outside the package does not extend it, it cannot access protected members.</li><li><b>4. public:</b> The access level is everywhere. It can be accessed from within the class, within the package, outside the package by subclasses, and outside the package by non-subclasses.</li></ul><h5>Code Summary:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">package com.example.pack1;
+
+public class Parent {
+    private int privateVar = 1;      // Visible ONLY inside Parent
+    int defaultVar = 2;              // Visible ONLY inside pack1
+    protected int protectedVar = 3;  // Visible inside pack1 AND subclasses everywhere
+    public int publicVar = 4;        // Visible everywhere
+
+    public void show() {
+        System.out.println(privateVar); // OK
+    }
+}
+
+// Different package scenario:
+package com.example.pack2;
+import com.example.pack1.Parent;
+
+class Child extends Parent {
+    public void testAccess() {
+        // System.out.println(privateVar);  // Error: private
+        // System.out.println(defaultVar);  // Error: different package
+        System.out.println(protectedVar);   // OK: accessed via inheritance
+        System.out.println(publicVar);      // OK: public
+    }
+}</code></pre>
+            </div>
+        </div>
+        
+                </div>
+            </div>
+            <div class="qa-card" id="gb-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Discuss static blocks, static variables, and static methods in Java with an example.</span></div>
+                <div class="a-text">
+                    <h4>Q7. Describe the role of the 'static' keyword in Java.</h4><p>The <code>static</code> keyword in Java is used primarily for memory management. It indicates that a particular member belongs to the class itself, rather than to instances (objects) of the class. It can be applied to variables, methods, blocks, and nested classes.</p><ul><li><b>1. Static Variables:</b> A static variable is shared among all objects of that class. Memory is allocated only once in the class area at the time of class loading. It is useful for representing common properties (e.g., company name for all employees).</li><li><b>2. Static Methods:</b> A static method belongs to the class and can be invoked without creating an object of the class (using <code>ClassName.methodName()</code>). A crucial rule is that static methods can only directly access other static data and static methods; they cannot access non-static (instance) data directly or use <code>this</code> or <code>super</code> keywords.</li><li><b>3. Static Blocks:</b> Used to initialize static variables. It is executed automatically exactly once when the class is loaded into memory, even before the <code>main()</code> method executes.</li></ul><h5>Code Example:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">class Student {
+    int rollNo; // Instance variable
+    String name; // Instance variable
+    static String college = &quot;MIT&quot;; // Static variable shared by all
+
+    // Static Block
+    static {
+        System.out.println(&quot;Static Block Executed&quot;);
+        // college = &quot;Stanford&quot;; // Can modify static variables here
+    }
+
+    public Student(int r, String n) {
+        rollNo = r;
+        name = n;
+    }
+
+    // Static Method
+    public static void changeCollege(String newCollege) {
+        college = newCollege;
+        // name = &quot;John&quot;; // ERROR: Cannot make a static reference to non-static field
+    }
+
+    public void display() {
+        System.out.println(rollNo + &quot; &quot; + name + &quot; &quot; + college);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Student.changeCollege(&quot;Harvard&quot;); // Calling static method without object
+        Student s1 = new Student(101, &quot;Alice&quot;);
+        Student s2 = new Student(102, &quot;Bob&quot;);
+        
+        s1.display(); // 101 Alice Harvard
+        s2.display(); // 102 Bob Harvard
+    }
+}</code></pre>
+            </div>
+        </div>
+        
+                </div>
+            </div>
+            <div class="qa-card" id="gb-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>Explain the usage and implications of the 'final' keyword when applied to classes, methods, and variables.</span></div>
+                <div class="a-text">
+                    <h4>Q8. What is the significance of the 'final' keyword in Java?</h4><p>The <code>final</code> keyword in Java is a non-access modifier used to restrict the user. It can be applied in three different contexts: variables, methods, and classes. Once applied, it signifies that the entity is complete and cannot be altered.</p><ul><li><b>1. Final Variable (Constant):</b> When a variable is declared as final, its value cannot be changed once initialized. It effectively becomes a constant. A blank final variable (uninitialized at declaration) can only be initialized inside a constructor.</li><li><b>2. Final Method (Prevents Overriding):</b> When a method is declared as final, it cannot be overridden by any subclasses. This is useful for locking down the implementation of a critical method to prevent unexpected behavior in child classes.</li><li><b>3. Final Class (Prevents Inheritance):</b> When a class is declared as final, it cannot be extended (inherited) by any other class. For security and immutability reasons, many core Java classes like <code>String</code>, <code>Integer</code>, and <code>Math</code> are declared as final.</li></ul><h5>Code Example:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">// 1. Final Class
+final class Vehicle {
+    public void drive() { System.out.println(&quot;Driving a vehicle&quot;); }
+}
+// class Car extends Vehicle { } // ERROR: Cannot inherit from final Vehicle
+
+class Parent {
+    // 2. Final Method
+    public final void show() {
+        System.out.println(&quot;This is a final method&quot;);
+    }
+}
+
+class Child extends Parent {
+    // public void show() { } // ERROR: Cannot override final method
+    
+    public void testVariable() {
+        // 3. Final Variable
+        final int MAX_AGE = 100;
+        // MAX_AGE = 101; // ERROR: Cannot assign a value to final variable
+        System.out.println(&quot;Max age is: &quot; + MAX_AGE);
+    }
+}</code></pre>
+            </div>
+        </div>
+        
+                </div>
+            </div>
+            <div class="qa-card" id="gb-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Explain Exception Handling mechanism in Java with try-catch-finally blocks.</span></div>
+                <div class="a-text">
+                    <h4>Q9. Describe Exception Handling in Java using try, catch, and finally blocks.</h4><p>An exception is an unwanted or unexpected event occurring during the execution of a program (at runtime) that disrupts the normal flow of instructions. Java provides a robust mechanism to handle these exceptions so that the program can terminate gracefully or recover.</p><h5>The Core Keywords:</h5><ul><li><b>try:</b> The <code>try</code> block encloses the code that might throw an exception. It must be followed by either a <code>catch</code> or a <code>finally</code> block.</li><li><b>catch:</b> The <code>catch</code> block is used to handle the exception thrown by the preceding <code>try</code> block. You can have multiple catch blocks to handle different types of exceptions specifically.</li><li><b>finally:</b> The <code>finally</code> block contains crucial code that must execute whether an exception occurs or not, and whether it is caught or not. It is primarily used for cleaning up resources (closing files, database connections, network sockets).</li></ul><h5>Code Example:</h5>
+        <div class="mac-window">
+            <div class="mac-header">
+                <div class="mac-dot red"></div>
+                <div class="mac-dot yellow"></div>
+                <div class="mac-dot green"></div>
+                <div class="mac-title">JAVA</div>
+            </div>
+            <div class="mac-body">
+                <pre><code class="language-java">import java.util.Scanner;
+
+public class ExceptionDemo {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.print(&quot;Enter a number to divide 100 by: &quot;);
+            int divisor = scanner.nextInt();
+            
+            // Risky code that might throw an ArithmeticException
+            int result = 100 / divisor; 
+            System.out.println(&quot;Result: &quot; + result);
+            
+        } catch (ArithmeticException e) {
+            // Handled if divisor is 0
+            System.out.println(&quot;Error: Cannot divide by zero!&quot;);
+            
+        } catch (Exception e) {
+            // Generic catch-all for any other exception (e.g., InputMismatchException)
+            System.out.println(&quot;An unexpected error occurred: &quot; + e.getMessage());
+            
+        } finally {
+            // This block ALWAYS executes
+            System.out.println(&quot;Executing finally block: Closing resources.&quot;);
+            scanner.close();
+        }
+        
+        System.out.println(&quot;Program continues normally after try-catch-finally.&quot;);
+    }
+}</code></pre>
+            </div>
+        </div>
+        
+                </div>
+            </div>
+            <div class="qa-card" id="gb-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Differentiate Checked Exceptions and Unchecked Exceptions with examples.</span></div>
+                <div class="a-text">
+                    <h4>Q10. Differentiate between Checked and Unchecked Exceptions in Java.</h4><p>In Java, the <code>java.lang.Throwable</code> class is the root class of all exceptions and errors. The exception hierarchy is divided into two primary categories: Checked and Unchecked exceptions.</p><table border="1"><tr><th>Feature</th><th>Checked Exceptions</th><th>Unchecked Exceptions</th></tr><tr><td><b>Verification Time</b></td><td>Checked at <b>Compile-time</b> by the compiler.</td><td>Occur at <b>Runtime</b>. The compiler does not check them.</td></tr><tr><td><b>Handling Requirement</b></td><td>Must be explicitly handled using a <code>try-catch</code> block or declared in the method signature using the <code>throws</code> keyword. Otherwise, the code will not compile.</td><td>No mandatory requirement to handle or declare them, though it is good programming practice to do so if they are predictable.</td></tr><tr><td><b>Hierarchy</b></td><td>Classes that extend <code>Throwable</code> or <code>Exception</code> (except <code>RuntimeException</code> and its subclasses).</td><td>Classes that extend <code>RuntimeException</code> (and <code>Error</code>, though errors are typically unrecoverable system failures).</td></tr><tr><td><b>Typical Use Case</b></td><td>Represents conditions outside the immediate control of the program (e.g., a missing file, a broken network connection). The programmer is forced to plan for these.</td><td>Represents programming logic errors (e.g., dividing by zero, accessing a null reference, going out of array bounds). These should be fixed by writing better code.</td></tr><tr><td><b>Examples</b></td><td><code>IOException</code>, <code>SQLException</code>, <code>ClassNotFoundException</code>, <code>InterruptedException</code>.</td><td><code>NullPointerException</code>, <code>ArithmeticException</code>, <code>ArrayIndexOutOfBoundsException</code>, <code>IllegalArgumentException</code>.</td></tr></table>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>Write a Java program to create and throw a custom user-defined exception.</span></div>
+                <div class="a-text">
+                    <p><b>Custom Exception:</b></p><div class="code-block">class MyEx extends Exception { MyEx(String s) { super(s); } } throw new MyEx("Error");</div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Explain Thread Life Cycle in Java with a state transition diagram.</span></div>
+                <div class="a-text">
+                    <p><b>Thread Life Cycle:</b> New -> Runnable -> Running -> Blocked/Waiting -> Terminated.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Compare extending Thread class vs implementing Runnable interface for multithreading.</span></div>
+                <div class="a-text">
+                    <p><b>Thread vs Runnable:</b> Implementing Runnable is better as Java doesn't support multiple inheritance, so you can extend another class if needed.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>Explain Thread Synchronization using synchronized methods and synchronized blocks.</span></div>
+                <div class="a-text">
+                    <p><b>Thread Synchronization:</b> Prevents thread interference using <code>synchronized</code> keyword on methods or blocks.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Explain Inter-Thread communication using wait(), notify(), and notifyAll().</span></div>
+                <div class="a-text">
+                    <p><b>Inter-Thread Communication:</b> Threads communicate via <code>wait()</code>, <code>notify()</code>, and <code>notifyAll()</code> inside synchronized context.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Discuss the concept of Deadlock in Multithreading and how to avoid it.</span></div>
+                <div class="a-text">
+                    <p><b>Deadlock:</b> Two or more threads are blocked forever, waiting for each other. Avoid by acquiring locks in a consistent order.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>Explain why String objects are immutable in Java. Compare String, StringBuilder, and StringBuffer.</span></div>
+                <div class="a-text">
+                    <p><b>String Immutability:</b> Strings cannot be changed once created for security, thread-safety, and performance (String Pool).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>Explain Autoboxing and Unboxing in Java with code examples.</span></div>
+                <div class="a-text">
+                    <p><b>Autoboxing and Unboxing:</b> Automatic conversion between primitive types and their corresponding wrapper classes.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Compare ArrayList and Vector classes in Java Collections Framework.</span></div>
+                <div class="a-text">
+                    <p><b>ArrayList vs Vector:</b> ArrayList is unsynchronized and fast. Vector is synchronized and slow.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>Explain the internal working mechanism of HashMap in Java (hashing, buckets, collision handling).</span></div>
+                <div class="a-text">
+                    <p><b>HashMap Working:</b> Uses hashing. Stores key-value pairs in buckets. Handles collisions using Linked Lists or Trees.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Discuss Java Generics and wildcards (, , ).</span></div>
+                <div class="a-text">
+                    <p><b>Java Generics and Wildcards:</b> Generics provide compile-time type safety. Wildcards (<code>?</code>) allow flexibility in generic types.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>Explain Byte Streams vs Character Streams in Java File I/O.</span></div>
+                <div class="a-text">
+                    <p><b>Byte vs Character Streams:</b> Byte streams (InputStream/OutputStream) read/write 1 byte at a time. Character streams (Reader/Writer) read/write 2 bytes (Unicode).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>Explain Object Serialization and Deserialization in Java with an example program.</span></div>
+                <div class="a-text">
+                    <p><b>Serialization:</b> Process of converting an object into a byte stream. Deserialization is the reverse.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Discuss Lambda Expressions in Java 8 and how they simplify code syntax.</span></div>
+                <div class="a-text">
+                    <p><b>Lambda Expressions:</b> Anonymous functions in Java 8 that simplify code by treating functionality as a method argument.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>Explain Functional Interfaces and the @FunctionalInterface annotation.</span></div>
+                <div class="a-text">
+                    <p><b>Functional Interfaces:</b> Interfaces with exactly one abstract method. Annotated with <code>@FunctionalInterface</code>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>Write a Java program to demonstrate Stream API operations (filter, map, reduce).</span></div>
+                <div class="a-text">
+                    <p><b>Stream API:</b></p><div class="code-block">list.stream().filter(x -> x>5).map(x -> x*2).collect(Collectors.toList());</div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>Explain the Singleton Design Pattern implementation (Lazy initialization vs Eager initialization).</span></div>
+                <div class="a-text">
+                    <p><b>Singleton Pattern:</b> Ensures only one instance exists. Lazy initializes on first use; Eager initializes at class loading.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Explain the Factory Method Design Pattern with a clean class diagram and code snippet.</span></div>
+                <div class="a-text">
+                    <p><b>Factory Pattern:</b> Creates objects without exposing the instantiation logic to the client.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>Explain the SOLID principles of OOD with brief definitions.</span></div>
+                <div class="a-text">
+                    <p><b>SOLID Principles:</b> Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Explain UML Relationships: Association, Aggregation, and Composition with real-world examples.</span></div>
+                <div class="a-text">
+                    <p><b>UML Relationships:</b> Association (uses-a), Aggregation (has-a, weak), Composition (part-of, strong).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>Draw and explain a UML Use Case Diagram for an Online Shopping System.</span></div>
+                <div class="a-text">
+                    <p><b>Use Case Diagram:</b> Visual representation of system interactions by actors and use cases.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>Explain Friend Functions and Friend Classes in C++ with code snippets.</span></div>
+                <div class="a-text">
+                    <p><b>Friend Functions:</b> Functions in C++ that can access private/protected members of a class.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Explain Operator Overloading in C++ with an example.</span></div>
+                <div class="a-text">
+                    <p><b>Operator Overloading:</b> Giving special meaning to an existing operator in C++ for user-defined types.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>Explain Deep Copy vs Shallow Copy in C++/Java constructors.</span></div>
+                <div class="a-text">
+                    <p><b>Deep vs Shallow Copy:</b> Shallow copy copies references. Deep copy creates new copies of the referenced objects.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>Discuss Virtual Base Classes and Multiple Inheritance ambiguity (Diamond Problem) in C++.</span></div>
+                <div class="a-text">
+                    <p><b>Diamond Problem:</b> Ambiguity in multiple inheritance. Solved in C++ using <code>virtual</code> inheritance.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>Write a program to implement a Generic Stack class using Java Generics.</span></div>
+                <div class="a-text">
+                    <p><b>Generic Stack:</b></p><div class="code-block">class Stack&lt;T&gt; { List&lt;T&gt; items = new ArrayList&lt;&gt;(); }</div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Explain the concept of Reflection API in Java.</span></div>
+                <div class="a-text">
+                    <p><b>Reflection API:</b> Allows inspection and modification of classes, interfaces, fields, and methods at runtime.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>Discuss the Try-with-Resources statement introduced in Java 7.</span></div>
+                <div class="a-text">
+                    <p><b>Try-with-Resources:</b> Automatically closes resources like files or sockets at the end of the statement.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>Write a Java program to count word frequencies in a text file using Collections/Maps.</span></div>
+                <div class="a-text">
+                    <p><b>Word Frequency:</b></p><div class="code-block">Map&lt;String, Integer&gt; map = new HashMap&lt;&gt;(); // Logic to split words and map.put(word, map.getOrDefault(word, 0) + 1);</div>
+                </div>
+            </div>
+            <div class="qa-card" id="gb-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Explain the concept of Model-View-Controller (MVC) Architecture.</span></div>
+                <div class="a-text">
+                    <p><b>MVC Architecture:</b> Separates application into Model (data), View (UI), and Controller (logic).</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

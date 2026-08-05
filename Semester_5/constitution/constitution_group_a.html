@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Constitution & IKT (MC-CS501) - Group A</title>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <style>
+        :root {
+            --bg-desk: #f4f7f6; --bg-paper: #ffffff; --text-main: #2d3748; --text-muted: #718096; --primary: #d946ef; --border-light: rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02); --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08); --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
+        .top-nav { padding: 1rem 2.5rem; background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); transition: all 0.3s ease; }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+        .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
+        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
+        .section-title:first-child { margin-top: 0; }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: #d946ef; padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .diagram-container { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+        .code-block { white-space: pre-wrap; font-family: 'JetBrains Mono', Courier, monospace; background: #1a202c; color: #e2e8f0; padding: 1.5rem; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; margin: 1.5rem 0; line-height: 1.6; }
+        .mac-window { background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
+        .mac-dot.red { background: #ff5f56; }
+        .mac-dot.yellow { background: #ffbd2e; }
+        .mac-dot.green { background: #27c93f; }
+        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
+        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
+        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
+        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
+    </style>
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="constitution_index.html">&larr; Constitution & IKT</a>
+        <span class="nav-title">Constitution & IKT <span class="nav-code">MC-CS501</span></span>
+        <a href="../index.html">All subjects</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <nav class="group-switch">
+                <a href="constitution_group_a.html" class="gs-item is-current"><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+                <a href="constitution_group_b.html" class="gs-item "><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+                <a href="constitution_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+            </nav>
+            <p class="toc-foot"><a href="constitution_important_qa.html">All groups on one page &rarr;</a></p>
+        </aside>
+
+        <main class="content">
+            <h1 class="section-title" id="group-a">Group A — Short answer Questions (1 mark)</h1>
+
+            <div class="qa-card" id="ga-1">
+                <div class="q-text"><span class="q-badge">Q1</span><span>Define Constitution. Why is India called a Sovereign, Socialist, Secular, Democratic Republic?</span></div>
+                <div class="a-text">
+                    <p><b>Constitution</b> is the supreme law of a country. India is <b>Sovereign</b> (independent), <b>Socialist</b> (welfare state), <b>Secular</b> (no official state religion), <b>Democratic</b> (elected government), and <b>Republic</b> (elected head of state).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-2">
+                <div class="q-text"><span class="q-badge">Q2</span><span>What is the significance of the Preamble in the Indian Constitution?</span></div>
+                <div class="a-text">
+                    <p>The <b>Preamble</b> serves as an introduction to the Constitution, outlining its basic philosophy, objectives, and the source of its authority (the people).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-3">
+                <div class="q-text"><span class="q-badge">Q3</span><span>Which Article of the Constitution guarantees Equality before Law?</span></div>
+                <div class="a-text">
+                    <p><b>Article 14</b> guarantees Equality before Law.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-4">
+                <div class="q-text"><span class="q-badge">Q4</span><span>What is the difference between Fundamental Rights and Directive Principles of State Policy?</span></div>
+                <div class="a-text">
+                    <p><b>Fundamental Rights</b> are justiciable and enforceable by courts, whereas <b>Directive Principles of State Policy</b> are non-justiciable guidelines for the state.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-5">
+                <div class="q-text"><span class="q-badge">Q5</span><span>Name the six fundamental freedoms guaranteed under Article 19.</span></div>
+                <div class="a-text">
+                    <p>The six freedoms are: <ul><li>Speech and expression</li><li>Peaceful assembly</li><li>Forming associations</li><li>Free movement</li><li>Residence</li><li>Practicing any profession/trade</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-6">
+                <div class="q-text"><span class="q-badge">Q6</span><span>What is Habeas Corpus and when is it issued?</span></div>
+                <div class="a-text">
+                    <p><b>Habeas Corpus</b> is a writ issued by a court directing a person holding another in custody to produce the detainee, ensuring they are not held unlawfully.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-7">
+                <div class="q-text"><span class="q-badge">Q7</span><span>Which Article contains the Right to Constitutional Remedies?</span></div>
+                <div class="a-text">
+                    <p><b>Article 32</b> contains the Right to Constitutional Remedies.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-8">
+                <div class="q-text"><span class="q-badge">Q8</span><span>What is the minimum age required to become the President of India?</span></div>
+                <div class="a-text">
+                    <p>The minimum age required is <b>35 years</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-9">
+                <div class="q-text"><span class="q-badge">Q9</span><span>Who is the custodian of the Indian Constitution?</span></div>
+                <div class="a-text">
+                    <p>The <b>Supreme Court of India</b> is the custodian of the Indian Constitution.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-10">
+                <div class="q-text"><span class="q-badge">Q10</span><span>Define the term 'Rule of Law'.</span></div>
+                <div class="a-text">
+                    <p><b>Rule of Law</b> means that law is supreme and applies equally to all citizens, including the government, with no one being above the law.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-11">
+                <div class="q-text"><span class="q-badge">Q11</span><span>What is meant by 'Judicial Review'?</span></div>
+                <div class="a-text">
+                    <p><b>Judicial Review</b> is the power of the judiciary to examine the constitutionality of legislative acts and executive orders.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-12">
+                <div class="q-text"><span class="q-badge">Q12</span><span>Under which Article can the President declare a National Emergency?</span></div>
+                <div class="a-text">
+                    <p><b>Article 352</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-13">
+                <div class="q-text"><span class="q-badge">Q13</span><span>Name the fundamental duty added by the 86th Constitutional Amendment Act.</span></div>
+                <div class="a-text">
+                    <p>The duty to provide opportunities for education to children between <b>6 and 14 years</b> of age.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-14">
+                <div class="q-text"><span class="q-badge">Q14</span><span>What is the tenure of a member of Rajya Sabha?</span></div>
+                <div class="a-text">
+                    <p>The tenure is <b>6 years</b>, with one-third of the members retiring every two years.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-15">
+                <div class="q-text"><span class="q-badge">Q15</span><span>Who appoints the Chief Justice of India?</span></div>
+                <div class="a-text">
+                    <p>The <b>President of India</b> appoints the Chief Justice.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-16">
+                <div class="q-text"><span class="q-badge">Q16</span><span>Define Federalism in the context of the Indian Constitution.</span></div>
+                <div class="a-text">
+                    <p><b>Federalism</b> refers to the division of power between the central Union government and the State governments.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-17">
+                <div class="q-text"><span class="q-badge">Q17</span><span>What is the significance of the 73rd and 74th Constitutional Amendments?</span></div>
+                <div class="a-text">
+                    <p>They granted constitutional status to local self-governments: <b>Panchayats</b> (73rd) and <b>Municipalities</b> (74th).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-18">
+                <div class="q-text"><span class="q-badge">Q18</span><span>What is the Election Commission of India and under which Article is it established?</span></div>
+                <div class="a-text">
+                    <p>It is an autonomous body responsible for administering elections in India, established under <b>Article 324</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-19">
+                <div class="q-text"><span class="q-badge">Q19</span><span>Define 'Quo-Warranto'.</span></div>
+                <div class="a-text">
+                    <p><b>Quo-Warranto</b> is a writ asking a person to show 'by what authority' they hold a public office.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-20">
+                <div class="q-text"><span class="q-badge">Q20</span><span>What is the quorum required to hold a meeting of Lok Sabha?</span></div>
+                <div class="a-text">
+                    <p>The quorum is <b>one-tenth (1/10th)</b> of the total number of members of the House.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-21">
+                <div class="q-text"><span class="q-badge">Q21</span><span>Which Schedule of the Indian Constitution deals with anti-defection law?</span></div>
+                <div class="a-text">
+                    <p>The <b>Tenth Schedule</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-22">
+                <div class="q-text"><span class="q-badge">Q22</span><span>Define 'Public Interest Litigation' (PIL).</span></div>
+                <div class="a-text">
+                    <p><b>Public Interest Litigation (PIL)</b> refers to litigation filed in a court of law for the protection of public interest, such as combating pollution or securing human rights.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-23">
+                <div class="q-text"><span class="q-badge">Q23</span><span>What is the Comptroller and Auditor General (CAG) of India?</span></div>
+                <div class="a-text">
+                    <p>The <b>CAG</b> is an independent constitutional authority responsible for auditing all receipts and expenditures of the government.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-24">
+                <div class="q-text"><span class="q-badge">Q24</span><span>Which Article provides for State Emergency (President's Rule)?</span></div>
+                <div class="a-text">
+                    <p><b>Article 356</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-25">
+                <div class="q-text"><span class="q-badge">Q25</span><span>What is the Joint Sitting of Parliament and who presides over it?</span></div>
+                <div class="a-text">
+                    <p>It is a combined session of the Lok Sabha and Rajya Sabha to resolve legislative deadlocks, presided over by the <b>Speaker of the Lok Sabha</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-26">
+                <div class="q-text"><span class="q-badge">Q26</span><span>Define the concept of 'Basic Structure Doctrine'.</span></div>
+                <div class="a-text">
+                    <p>The <b>Basic Structure Doctrine</b> states that certain fundamental features of the Constitution cannot be altered or destroyed by the Parliament through amendments.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-27">
+                <div class="q-text"><span class="q-badge">Q27</span><span>What is the term of office of a Supreme Court Judge?</span></div>
+                <div class="a-text">
+                    <p>A Supreme Court Judge holds office until they attain the age of <b>65 years</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-28">
+                <div class="q-text"><span class="q-badge">Q28</span><span>Name the three lists under the Seventh Schedule of the Constitution.</span></div>
+                <div class="a-text">
+                    <p><ul><li>Union List</li><li>State List</li><li>Concurrent List</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-29">
+                <div class="q-text"><span class="q-badge">Q29</span><span>What is meant by 'Uniform Civil Code' (Article 44)?</span></div>
+                <div class="a-text">
+                    <p><b>Uniform Civil Code</b> proposes a common set of secular civil laws governing personal matters like marriage, divorce, and inheritance for all citizens across India.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-30">
+                <div class="q-text"><span class="q-badge">Q30</span><span>Define 'Money Bill' under Article 110.</span></div>
+                <div class="a-text">
+                    <p>A <b>Money Bill</b> is a bill that deals exclusively with taxation, borrowing of money, or financial obligations of the government.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-31">
+                <div class="q-text"><span class="q-badge">Q31</span><span>What is the role of the Finance Commission of India?</span></div>
+                <div class="a-text">
+                    <p>To recommend the distribution of tax revenues between the Union and the States and advise on fiscal matters.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-32">
+                <div class="q-text"><span class="q-badge">Q32</span><span>What is the main objective of the Essence of Indian Knowledge Tradition (IKT)?</span></div>
+                <div class="a-text">
+                    <p>To preserve, study, and apply ancient Indian wisdom, scientific knowledge, and practices for holistic development and contemporary problem-solving.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-33">
+                <div class="q-text"><span class="q-badge">Q33</span><span>Define 'Vedas' and list the four primary Samhitas.</span></div>
+                <div class="a-text">
+                    <p><b>Vedas</b> are ancient sacred texts of India. The four primary Samhitas are: <ul><li>Rigveda</li><li>Samaveda</li><li>Yajurveda</li><li>Atharvaveda</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-34">
+                <div class="q-text"><span class="q-badge">Q34</span><span>What are the Upanishads and what philosophy do they teach?</span></div>
+                <div class="a-text">
+                    <p><b>Upanishads</b> are the concluding philosophical texts of the Vedas that teach Vedanta, focusing on concepts like <b>Brahman</b> (ultimate reality) and <b>Atman</b> (inner self).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-35">
+                <div class="q-text"><span class="q-badge">Q35</span><span>Name the six Vedangas (Auxiliary Sciences of Vedas).</span></div>
+                <div class="a-text">
+                    <p><ul><li>Shiksha (Phonetics)</li><li>Kalpa (Rituals)</li><li>Vyakarana (Grammar)</li><li>Nirukta (Etymology)</li><li>Chhandas (Meter)</li><li>Jyotisha (Astronomy)</li></ul></p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-36">
+                <div class="q-text"><span class="q-badge">Q36</span><span>What is the difference between Sruti and Smriti literature?</span></div>
+                <div class="a-text">
+                    <p><b>Sruti</b> ('that which is heard') refers to divinely revealed texts like the Vedas, whereas <b>Smriti</b> ('that which is remembered') refers to authoritative texts composed by humans, like the Puranas.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-37">
+                <div class="q-text"><span class="q-badge">Q37</span><span>Define the Shad-Darshanas (Six Systems of Indian Philosophy).</span></div>
+                <div class="a-text">
+                    <p>They are the six orthodox schools of Hindu philosophy: <b>Nyaya, Vaisheshika, Samkhya, Yoga, Mimamsa, and Vedanta</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-38">
+                <div class="q-text"><span class="q-badge">Q38</span><span>What is Ayurveda and who wrote the Charaka Samhita?</span></div>
+                <div class="a-text">
+                    <p><b>Ayurveda</b> is the traditional Indian system of holistic medicine. The Charaka Samhita was originally composed by Agnivesha and revised by <b>Maharshi Charaka</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-39">
+                <div class="q-text"><span class="q-badge">Q39</span><span>What is Sushruta Samhita famous for in ancient Indian science?</span></div>
+                <div class="a-text">
+                    <p>It is famous for its foundational knowledge on ancient surgery, especially <b>plastic surgery</b> (rhinoplasty).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-40">
+                <div class="q-text"><span class="q-badge">Q40</span><span>Name the ancient Indian mathematician who invented zero and decimal system.</span></div>
+                <div class="a-text">
+                    <p><b>Aryabhata</b> (and Brahmagupta who formalized mathematical rules for zero).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-41">
+                <div class="q-text"><span class="q-badge">Q41</span><span>What contribution did Aryabhata make to astronomy and mathematics?</span></div>
+                <div class="a-text">
+                    <p>He explained solar/lunar eclipses, deduced the earth's rotation, gave a close approximation of pi, and made significant contributions to trigonometry.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-42">
+                <div class="q-text"><span class="q-badge">Q42</span><span>What is Sulba Sutras and what is its geometric significance?</span></div>
+                <div class="a-text">
+                    <p><b>Sulba Sutras</b> are ancient Indian texts containing rules for precise altar construction, significant for early geometry and statements similar to the <b>Pythagorean theorem</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-43">
+                <div class="q-text"><span class="q-badge">Q43</span><span>Define 'Dharma', 'Artha', 'Kama', and 'Moksha' (Purusharthas).</span></div>
+                <div class="a-text">
+                    <p>They are the four goals of human life: <b>Dharma</b> (righteousness/duty), <b>Artha</b> (wealth/prosperity), <b>Kama</b> (desire/pleasure), and <b>Moksha</b> (liberation).</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-44">
+                <div class="q-text"><span class="q-badge">Q44</span><span>What is the significance of Panchatantra in ancient Indian education?</span></div>
+                <div class="a-text">
+                    <p>It served as a prominent pedagogical tool for teaching ethics, statecraft, and practical wisdom through animal fables.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-45">
+                <div class="q-text"><span class="q-badge">Q45</span><span>What was the educational system of Takshashila and Nalanda universities?</span></div>
+                <div class="a-text">
+                    <p>It was a residential (Gurukul-style) and holistic system focusing on subjects like philosophy, medicine, logic, and mathematics in renowned centers of learning.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-46">
+                <div class="q-text"><span class="q-badge">Q46</span><span>What is Varahamihira known for in ancient Indian science?</span></div>
+                <div class="a-text">
+                    <p>He was a polymath known for his work in astronomy, mathematics, and astrology, notably authoring the encyclopedic <b>Brihat Samhita</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-47">
+                <div class="q-text"><span class="q-badge">Q47</span><span>Define 'Yoga' according to Patanjali's Yoga Sutras.</span></div>
+                <div class="a-text">
+                    <p>Yoga is defined as <b>'Yogas chitta vritti nirodhah'</b>, meaning the calming or stilling of the fluctuations of the mind.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-48">
+                <div class="q-text"><span class="q-badge">Q48</span><span>What is the concept of 'Vasudhaiva Kutumbakam'?</span></div>
+                <div class="a-text">
+                    <p>It is a philosophical concept from ancient texts meaning <b>'The World is One Family'</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-49">
+                <div class="q-text"><span class="q-badge">Q49</span><span>What is Indian Astronomy (Jyotisha) and how was time measured in ancient India?</span></div>
+                <div class="a-text">
+                    <p><b>Jyotisha</b> is the traditional system of astronomy. Time was measured using precise astronomical observations and units like <b>Ghati, Muhurta, and Kalpa</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-50">
+                <div class="q-text"><span class="q-badge">Q50</span><span>What are the key Metallurgical achievements of ancient India (e.g., Delhi Iron Pillar)?</span></div>
+                <div class="a-text">
+                    <p>Key achievements include the rust-resistant <b>Delhi Iron Pillar</b> and the high-carbon <b>Wootz steel</b>.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-51">
+                <div class="q-text"><span class="q-badge">Q51</span><span>What is the significance of Arthashastra written by Kautilya (Chanakya)?</span></div>
+                <div class="a-text">
+                    <p><b>Arthashastra</b> is an ancient Indian treatise offering comprehensive guidelines on statecraft, economic policy, governance, and military strategy.</p>
+                </div>
+            </div>
+            <div class="qa-card" id="ga-52">
+                <div class="q-text"><span class="q-badge">Q52</span><span>How does Indian Knowledge Tradition contribute to modern sustainable development?</span></div>
+                <div class="a-text">
+                    <p>By offering principles of ecological conservation, holistic health systems (Yoga/Ayurveda), and sustainable ethical living derived from ancient wisdom.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
