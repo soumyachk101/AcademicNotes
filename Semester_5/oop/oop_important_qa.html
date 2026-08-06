@@ -38,8 +38,8 @@
         .a-text h3 { color: var(--text-primary); margin-top: 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; }
         .a-text h4 { color: color-mix(in srgb, var(--text-primary) 90%, var(--primary)); margin-top: 1.5rem; }
         .a-text strong { color: var(--text-primary); }
-        .diagram-container { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
-        .mac-window { background: #13141a; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mermaid { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; overflow: auto; clear: both; width: 100%; box-sizing: border-box; }
+        .mac-window { clear: both; background: #13141a; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
         .mac-header { background: #1a1b23; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.5); }
         .mac-dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 1px 2px rgba(255,255,255,0.2); }
         .mac-dot.red { background: #ff5f56; }
@@ -5213,7 +5213,161 @@ Total orders successfully processed: " + completedOrders.size());
             </div>
             <div class="qa-card">
                 <div class="q-text">Q20. Discuss the Decorator Design Pattern. Implement a Coffee Shop customization program (Base Coffee + Condiments) using Decorator classes.</div>
-                <div class="a-text"><p><em>Answer to be generated...</em></p></div>
+                <div class="a-text"><h2>1. Introduction to the Decorator Design Pattern</h2>
+<p>The Decorator Design Pattern is a highly versatile structural pattern that allows developers to dynamically attach new behaviors, responsibilities, or state to an individual object at runtime, without fundamentally altering the structure of the underlying object's class. It achieves this by placing the target object inside a special wrapper object—the decorator—which implements the exact same interface as the wrapped object. This pattern provides a highly flexible, compositional alternative to static subclassing for extending functionality.</p>
+<p>The Decorator pattern is intrinsically linked to the Open/Closed Principle (OCP) of Object-Oriented Design, which dictates that software entities (classes, modules, functions) should be open for extension but closed for modification. If we were to rely on traditional inheritance to add multiple variations of behavior, we would quickly suffer from a "class explosion." For example, if a base class has three distinct optional features, creating subclasses for every possible combination of those features would result in an exponential number of classes. The Decorator pattern avoids this by allowing these features to be mixed and matched dynamically at runtime through object composition.</p>
+
+<h2>2. Core Components of the Decorator Architecture</h2>
+<p>A standard implementation of the Decorator pattern involves four essential components:</p>
+<ul>
+    <li><strong>Component Interface:</strong> This defines the common contract for both the core objects that will be decorated and the decorators themselves. This ensures that the client code can treat both the raw object and the decorated object interchangeably without needing to know the difference.</li>
+    <li><strong>Concrete Component:</strong> This is the foundational class that implements the Component interface. It represents the base object to which additional functionality will be appended.</li>
+    <li><strong>Base Decorator (Abstract):</strong> This class implements the Component interface and contains a reference field pointing to a Component object. Its primary purpose is to define the wrapping interface and delegate all operations to the wrapped component by default.</li>
+    <li><strong>Concrete Decorators:</strong> These classes extend the Base Decorator. They override the methods of the component, executing their own specific, additional behaviors either before or after delegating the core task to the wrapped object.</li>
+</ul>
+
+<h2>3. Real-World Application: The Coffee Shop Customization</h2>
+<p>A classic, intuitive example of the Decorator pattern is a Point-of-Sale system for a Coffee Shop. The base product is a simple cup of coffee. However, customers can heavily customize their order by adding various condiments such as milk, sugar, caramel, whipped cream, or vanilla syrup. Each condiment incurs an additional cost and modifies the description of the beverage.</p>
+<p>If we used inheritance, we would need classes like <code>CoffeeWithMilkAndSugar</code>, <code>CoffeeWithCaramel</code>, <code>CoffeeWithMilkAndCaramel</code>, resulting in an unmanageable class hierarchy. Using the Decorator pattern, we simply create a <code>SimpleCoffee</code> component, and discrete decorator classes for <code>Milk</code>, <code>Sugar</code>, and <code>Caramel</code>. We can then dynamically wrap the coffee in any combination of decorators at runtime to calculate the precise cost and description.</p>
+
+<h2>4. Complete Java Implementation</h2>
+<p>The following Java code provides a complete, executable implementation of the Coffee Shop scenario using the Decorator pattern.</p>
+
+<pre><code>
+// 1. Component Interface
+// This acts as the common contract for all coffees and decorators.
+interface Coffee {
+    String getDescription();
+    double getCost();
+}
+
+// 2. Concrete Component
+// This is our base object that will be decorated.
+class SimpleCoffee implements Coffee {
+    @Override
+    public String getDescription() {
+        return "Simple House Blend Coffee";
+    }
+
+    @Override
+    public double getCost() {
+        return 2.00; // Base price
+    }
+}
+
+// 3. Base Decorator (Abstract Class)
+// Implements the Coffee interface and holds a reference to a Coffee object.
+abstract class CoffeeDecorator implements Coffee {
+    protected Coffee decoratedCoffee;
+
+    // Constructor to inject the coffee to be decorated
+    public CoffeeDecorator(Coffee coffee) {
+        this.decoratedCoffee = coffee;
+    }
+
+    // Default delegation to the wrapped object
+    @Override
+    public String getDescription() {
+        return decoratedCoffee.getDescription();
+    }
+
+    @Override
+    public double getCost() {
+        return decoratedCoffee.getCost();
+    }
+}
+
+// 4. Concrete Decorators
+// Each adds specific state/behavior (condiments and price adjustments).
+
+class MilkDecorator extends CoffeeDecorator {
+    public MilkDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        // Appending to the base description
+        return super.getDescription() + ", with Steamed Milk";
+    }
+
+    @Override
+    public double getCost() {
+        // Adding the cost of milk
+        return super.getCost() + 0.50;
+    }
+}
+
+class SugarDecorator extends CoffeeDecorator {
+    public SugarDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + ", with Sugar";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 0.20;
+    }
+}
+
+class CaramelDecorator extends CoffeeDecorator {
+    public CaramelDecorator(Coffee coffee) {
+        super(coffee);
+    }
+
+    @Override
+    public String getDescription() {
+        return super.getDescription() + ", with Caramel Drizzle";
+    }
+
+    @Override
+    public double getCost() {
+        return super.getCost() + 0.75;
+    }
+}
+
+// 5. Main Execution class demonstrating dynamic decoration
+public class CoffeeShopDemo {
+    public static void main(String[] args) {
+        System.out.println("--- Welcome to the Java Coffee Shop ---");
+
+        // Order 1: Just a plain coffee
+        Coffee order1 = new SimpleCoffee();
+        System.out.println("Order 1: " + order1.getDescription());
+        System.out.println("Cost: $" + String.format("%.2f", order1.getCost()) + "\
+");
+
+        // Order 2: Coffee with Milk and Sugar
+        // Notice how we recursively wrap the objects
+        Coffee order2 = new SimpleCoffee();
+        order2 = new MilkDecorator(order2);
+        order2 = new SugarDecorator(order2);
+        System.out.println("Order 2: " + order2.getDescription());
+        System.out.println("Cost: $" + String.format("%.2f", order2.getCost()) + "\
+");
+
+        // Order 3: The \"Everything\" Deluxe Coffee
+        Coffee order3 = new SimpleCoffee();
+        order3 = new MilkDecorator(order3);
+        order3 = new SugarDecorator(order3);
+        order3 = new CaramelDecorator(order3);
+        // We can even add double caramel by wrapping it again!
+        order3 = new CaramelDecorator(order3);
+        
+        System.out.println("Order 3: " + order3.getDescription());
+        System.out.println("Cost: $" + String.format("%.2f", order3.getCost()) + "\
+");
+    }
+}
+</code></pre>
+
+<h2>5. Conclusion</h2>
+<p>The Decorator pattern is a powerful tool in a Java developer's arsenal for promoting code reuse and modularity. In the Coffee Shop example, adding a new condiment like "Whipped Cream" simply requires creating a new <code>WhippedCreamDecorator</code> class without altering the <code>SimpleCoffee</code> class or any existing decorators. This dynamic approach completely bypasses the rigidity of inheritance hierarchies, proving its worth particularly in systems requiring extensive runtime customization, such as Graphical User Interface (GUI) toolkits and Java's own I/O Streams (e.g., wrapping a <code>FileInputStream</code> inside a <code>BufferedInputStream</code>).</p>"
+</div>
             </div>
             <div class="qa-card">
                 <div class="q-text">Q21. Compare C++ and Java OOP paradigms in terms of Pointers, Memory Management, Multiple Inheritance, Operator Overloading, and Virtual Functions.</div>
