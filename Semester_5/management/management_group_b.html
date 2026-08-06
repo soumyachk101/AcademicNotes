@@ -147,55 +147,667 @@ graph LR;
             <div class="qa-card" id="gb-11">
                 <div class="q-text"><span class="q-badge">Q11</span><span>Explain ABC Analysis and VED Analysis in Inventory Control.</span></div>
                 <div class="a-text">
-                    <h3>ABC and VED Analysis</h3><p><b>ABC Analysis:</b> Categorizes inventory into A (high value, low quantity), B (moderate value and quantity), and C (low value, high quantity) for control prioritization.</p><p><b>VED Analysis:</b> Classifies items based on criticality into Vital (must have), Essential (should have), and Desirable (nice to have), commonly used for spare parts.</p>
+                    <div class="answer">
+    <h2>ABC Analysis and VED Analysis in Inventory Control</h2>
+    <p>Inventory control is a critical aspect of supply chain and operations management, aimed at minimizing costs while ensuring the availability of materials for production or sales. Two highly effective techniques used for classifying and managing inventory are ABC Analysis and VED Analysis. They approach inventory categorization from different perspectives: ABC focuses on financial value, while VED focuses on operational criticality.</p>
+    
+    <h3>ABC Analysis (Always Better Control)</h3>
+    <p>ABC analysis is an inventory categorization technique based on the Pareto Principle (the 80/20 rule). It classifies inventory items into three categories based on their annual consumption value (Annual Demand &times; Unit Cost). The goal is to exercise the highest degree of control over items that represent the most significant investment.</p>
+    <ul>
+        <li><strong>'A' Items (High Value):</strong> These constitute approximately 10% to 20% of the total inventory items but account for about 70% to 80% of the total annual consumption value. These require strict inventory control, frequent reviews, highly accurate records, and low safety stocks. Purchasing is often done in small quantities with frequent deliveries.</li>
+        <li><strong>'B' Items (Moderate Value):</strong> These items make up about 30% of the total items and account for roughly 15% to 20% of the annual consumption value. They require moderate control, regular reviews, and standard record-keeping. Management of these items is usually based on past data and standard Economic Order Quantity (EOQ) principles.</li>
+        <li><strong>'C' Items (Low Value):</strong> These represent about 50% to 60% of the inventory items but only contribute to 5% to 10% of the total annual consumption value. These require minimal control. Bulk ordering is common to minimize ordering costs, and high safety stocks are maintained since the holding costs for these items are negligible.</li>
+    </ul>
+    
+    <h3>VED Analysis (Vital, Essential, Desirable)</h3>
+    <p>While ABC analysis is based on cost, VED analysis is based on the criticality of an item to the functioning of the production process or operations. It is particularly useful for managing spare parts and maintenance supplies.</p>
+    <ul>
+        <li><strong>Vital (V):</strong> The absence of these items will bring the entire production process to a halt. Their unavailability causes massive losses. Therefore, they must be in stock at all times, regardless of their cost. Strict control and high safety stocks are maintained.</li>
+        <li><strong>Essential (E):</strong> The absence of these items will not immediately halt production but will severely reduce efficiency or performance. A temporary stockout might be tolerated for a very short duration, but standard safety stocks must be kept to prevent operational hiccups.</li>
+        <li><strong>Desirable (D):</strong> The absence of these items does not affect the immediate production process. They are needed for routine maintenance or non-critical operations. Low safety stocks are acceptable.</li>
+    </ul>
+
+    <h3>ABC-VED Matrix Diagram</h3>
+    <p>By combining ABC and VED, management can create a 3x3 matrix to prioritize both cost and criticality, ensuring a balanced approach to inventory management.</p>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="400" height="300" viewBox="0 0 400 300" style="font-family: sans-serif;">
+            <rect x="50" y="50" width="100" height="60" fill="#ff9999" stroke="#333"/>
+            <rect x="150" y="50" width="100" height="60" fill="#ffb366" stroke="#333"/>
+            <rect x="250" y="50" width="100" height="60" fill="#ffff99" stroke="#333"/>
+            
+            <rect x="50" y="110" width="100" height="60" fill="#ffb366" stroke="#333"/>
+            <rect x="150" y="110" width="100" height="60" fill="#ffff99" stroke="#333"/>
+            <rect x="250" y="110" width="100" height="60" fill="#c2f0c2" stroke="#333"/>
+            
+            <rect x="50" y="170" width="100" height="60" fill="#ffff99" stroke="#333"/>
+            <rect x="150" y="170" width="100" height="60" fill="#c2f0c2" stroke="#333"/>
+            <rect x="250" y="170" width="100" height="60" fill="#99e699" stroke="#333"/>
+            
+            <!-- Text Labels -->
+            <text x="100" y="40" text-anchor="middle" font-weight="bold">V (Vital)</text>
+            <text x="200" y="40" text-anchor="middle" font-weight="bold">E (Essential)</text>
+            <text x="300" y="40" text-anchor="middle" font-weight="bold">D (Desirable)</text>
+            
+            <text x="40" y="85" text-anchor="end" font-weight="bold">A (High Cost)</text>
+            <text x="40" y="145" text-anchor="end" font-weight="bold">B (Med Cost)</text>
+            <text x="40" y="205" text-anchor="end" font-weight="bold">C (Low Cost)</text>
+            
+            <text x="100" y="85" text-anchor="middle">Category I</text>
+            <text x="200" y="85" text-anchor="middle">Category II</text>
+            <text x="300" y="85" text-anchor="middle">Category III</text>
+            
+            <text x="100" y="145" text-anchor="middle">Category II</text>
+            <text x="200" y="145" text-anchor="middle">Category III</text>
+            <text x="300" y="145" text-anchor="middle">Category IV</text>
+            
+            <text x="100" y="205" text-anchor="middle">Category III</text>
+            <text x="200" y="205" text-anchor="middle">Category IV</text>
+            <text x="300" y="205" text-anchor="middle">Category V</text>
+            
+            <text x="200" y="260" text-anchor="middle" font-size="12">Red/Orange (I, II) = High Priority Control</text>
+            <text x="200" y="280" text-anchor="middle" font-size="12">Green (IV, V) = Low Priority Control</text>
+        </svg>
+    </div>
+    <p>In conclusion, while ABC analysis controls the capital tied up in inventory, VED analysis ensures that operational bottlenecks do not occur. Using them together allows managers to allocate resources efficiently, focusing on items that are both highly expensive and highly critical, while relaxing controls on cheap, non-critical items.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-12">
                 <div class="q-text"><span class="q-badge">Q12</span><span>Explain the steps involved in conducting Method Study.</span></div>
                 <div class="a-text">
-                    <h3>Steps in Method Study</h3><p>1. Select the work to be studied.<br>2. Record all relevant facts about the present method.<br>3. Examine the facts critically.<br>4. Develop a more practical, economic, and effective method.<br>5. Define the new method clearly.<br>6. Install the new method as standard practice.<br>7. Maintain standard practice by regular routine checks.</p>
+                    <div class="answer">
+    <h2>Steps Involved in Conducting Method Study</h2>
+    <p>Method Study is a systematic and scientific recording and critical examination of existing and proposed ways of doing work, as a means of developing and applying easier and more effective methods and reducing costs. It is one of the two core components of Work Study (the other being Work Measurement). The ultimate objective of method study is to improve productivity, reduce worker fatigue, and establish standard procedures for operations.</p>
+    
+    <p>The procedure for conducting a Method Study follows a well-defined sequence of steps, often remembered by the acronym <strong>SREDIM</strong>:</p>
+    
+    <ol>
+        <li><strong>Select (S):</strong> The first step is to select the job, process, or operation to be studied. Selection should be based on economic considerations (high-cost operations, bottlenecks), technical considerations (processes with high defect rates or obsolete technology), and human considerations (operations involving excessive fatigue, high accident rates, or worker complaints). Defining the scope and boundaries of the study is crucial here.</li>
+        
+        <li><strong>Record (R):</strong> Once the job is selected, all relevant facts about the present method must be recorded accurately. This is done using various recording techniques and charts. The choice of technique depends on the complexity of the operation. Common recording techniques include:
+            <ul>
+                <li><strong>Process Charts:</strong> Outline Process Chart, Flow Process Chart (Man, Material, Equipment types), and Two-Handed Process Chart.</li>
+                <li><strong>Diagrams:</strong> Flow Diagram, String Diagram (used to track the path of movement over a layout), and Multiple Activity Chart.</li>
+                <li><strong>Photographic/Video Aids:</strong> Micromotion study using cameras.</li>
+            </ul>
+        </li>
+        
+        <li><strong>Examine (E):</strong> The recorded facts are subjected to a critical and systematic examination. This is the heart of Method Study. It involves the <em>Critical Examination Technique</em>, often utilizing a questioning sequence:
+            <ul>
+                <li><strong>Purpose:</strong> What is achieved? Why is it necessary? Can it be eliminated?</li>
+                <li><strong>Place:</strong> Where is it done? Why there? Can it be moved?</li>
+                <li><strong>Sequence:</strong> When is it done? Why then? Can the order be changed?</li>
+                <li><strong>Person:</strong> Who does it? Why that person? Can someone else do it better?</li>
+                <li><strong>Means:</strong> How is it done? Why this way? Is there a better alternative?</li>
+            </ul>
+        </li>
+        
+        <li><strong>Develop (D):</strong> Based on the critical examination, a new, improved method is developed. This involves eliminating unnecessary operations, combining steps, changing sequences, or simplifying movements. The new method should be safer, easier, and more productive. It is often drafted on a new process chart for comparison with the old method.</li>
+        
+        <li><strong>Install (I):</strong> The new method is installed as standard practice. This phase involves gaining acceptance from management and workers. It requires training operators in the new method, setting up new equipment or layouts, and ensuring all necessary tools and instructions are available. Smooth transition management is key here.</li>
+        
+        <li><strong>Maintain (M):</strong> Finally, the new method must be maintained in its specified form. Routine checks and audits are conducted to ensure that workers do not slip back into old, inefficient habits. Feedback is collected to make further minor adjustments if necessary.</li>
+    </ol>
+    
+    <h3>Method Study Process Flow</h3>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="500" height="150" viewBox="0 0 500 150">
+            <defs>
+                <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#000" />
+                </marker>
+            </defs>
+            <rect x="10" y="50" width="70" height="40" rx="5" fill="#lightblue" stroke="#000"/>
+            <text x="45" y="75" text-anchor="middle" font-size="12">SELECT</text>
+            <line x1="80" y1="70" x2="100" y2="70" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <rect x="100" y="50" width="70" height="40" rx="5" fill="#lightblue" stroke="#000"/>
+            <text x="135" y="75" text-anchor="middle" font-size="12">RECORD</text>
+            <line x1="170" y1="70" x2="190" y2="70" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <rect x="190" y="50" width="70" height="40" rx="5" fill="#lightgreen" stroke="#000"/>
+            <text x="225" y="75" text-anchor="middle" font-size="12">EXAMINE</text>
+            <line x1="260" y1="70" x2="280" y2="70" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <rect x="280" y="50" width="70" height="40" rx="5" fill="#lightyellow" stroke="#000"/>
+            <text x="315" y="75" text-anchor="middle" font-size="12">DEVELOP</text>
+            <line x1="350" y1="70" x2="370" y2="70" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <rect x="370" y="50" width="70" height="40" rx="5" fill="#ffcccb" stroke="#000"/>
+            <text x="405" y="75" text-anchor="middle" font-size="12">INSTALL</text>
+            <line x1="440" y1="70" x2="450" y2="70" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            
+            <rect x="450" y="50" width="70" height="40" rx="5" fill="#ffcccb" stroke="#000"/>
+            <text x="485" y="75" text-anchor="middle" font-size="10">MAINTAIN</text>
+        </svg>
+    </div>
+    <p>By rigorously following the SREDIM steps, organizations can systematically weed out inefficiencies, minimize unnecessary movements, and establish optimized operating procedures that form the foundation for standard time calculations and incentive schemes.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-13">
                 <div class="q-text"><span class="q-badge">Q13</span><span>Explain Time Study procedure and derivation of Standard Time from Observed Time.</span></div>
                 <div class="a-text">
-                    <h3>Time Study Procedure & Standard Time</h3><p>Involves dividing work into elements, timing them with a stopwatch, and rating the worker's pace. Observed Time is multiplied by the Rating Factor to get Normal/Basic Time. Standard Time = Normal Time + Allowances (for fatigue, personal needs, etc.).</p>
+                    <div class="answer">
+    <h2>Time Study Procedure and Derivation of Standard Time</h2>
+    <p>Time Study, a core technique of Work Measurement, involves directly observing and recording the time taken by a qualified worker to perform a specific task under specified conditions. The ultimate objective is to establish a "Standard Time"&mdash;the time required by an average, skilled worker to complete the task while working at a normal pace, accounting for necessary breaks and delays.</p>
+    
+    <h3>Procedure for Conducting a Time Study</h3>
+    <ol>
+        <li><strong>Selection of the Job and Worker:</strong> Choose a task that has been method-studied and standardized. Select a representative worker who possesses average skill and operates at a normal pace.</li>
+        <li><strong>Obtaining and Recording Information:</strong> Record all relevant details about the job, the work environment, machinery used, and the operator.</li>
+        <li><strong>Breaking Down the Job into Elements:</strong> The complete job is divided into smaller, distinct, and measurable parts called elements (e.g., "pick up part," "insert into machine," "press start"). This makes timing and rating more accurate.</li>
+        <li><strong>Measuring Time (Observed Time):</strong> Using a stopwatch (continuous or fly-back method), the time taken for each element is recorded over multiple cycles. Unusually high or low times (outliers caused by fumbling or anomalies) are discarded. The average of these recorded times gives the <strong>Observed Time (OT)</strong>.</li>
+        <li><strong>Performance Rating:</strong> Because the observed worker may be working faster or slower than a "standard" normal pace, the analyst applies a Performance Rating factor. If the worker is fast, the rating is >100%; if slow, <100%. This standardizes the time.</li>
+        <li><strong>Applying Allowances:</strong> Humans are not machines. They require time for personal needs, resting from fatigue, and experiencing unavoidable delays. These are added as percentages to calculate the final Standard Time.</li>
+    </ol>
+    
+    <h3>Derivation of Standard Time from Observed Time</h3>
+    <p>The mathematical derivation of Standard Time proceeds in three distinct stages:</p>
+    
+    <div style="background: #f4f4f4; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <h4>1. Calculating Observed Time (OT)</h4>
+        <p>$$ OT = \frac{\sum \	ext{Recorded Times for an Element}}{\	ext{Number of valid observations}} $$</p>
+        
+        <h4>2. Calculating Normal Time (NT) / Basic Time</h4>
+        <p>Normal time is the time it would take an average worker working at a standard pace to complete the task, without any breaks.</p>
+        <p>$$ NT = OT \	imes \frac{\	ext{Performance Rating}}{100} $$</p>
+        <p><em>Example: If OT = 2.0 mins and Rating = 110%, NT = 2.0 &times; 1.1 = 2.2 mins.</em></p>
+        
+        <h4>3. Calculating Standard Time (ST)</h4>
+        <p>Standard Time includes the Normal Time plus a series of Allowances.</p>
+        <p>Common Allowances include:</p>
+        <ul>
+            <li><strong>Personal Allowance:</strong> For bathroom breaks, drinking water (usually 5-7%).</li>
+            <li><strong>Fatigue Allowance:</strong> For physical or mental exhaustion (depends on job strenuousness).</li>
+            <li><strong>Contingency/Delay Allowance:</strong> For unavoidable machine breakdowns or waiting for materials.</li>
+        </ul>
+        <p>$$ ST = NT + \	ext{Allowances} $$</p>
+        <p>Often, allowances are expressed as a percentage of Normal Time:</p>
+        <p>$$ ST = NT \	imes (1 + \% \	ext{Allowances}) $$</p>
+    </div>
+
+    <h3>Time Derivation Block Diagram</h3>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="400" height="250" viewBox="0 0 400 250">
+            <rect x="50" y="20" width="300" height="40" rx="5" fill="#cce5ff" stroke="#000"/>
+            <text x="200" y="45" text-anchor="middle" font-weight="bold">Observed Time (OT)</text>
+            
+            <line x1="200" y1="60" x2="200" y2="90" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="210" y="80" font-size="12">Multiply by Performance Rating</text>
+            
+            <rect x="50" y="90" width="300" height="40" rx="5" fill="#d4edda" stroke="#000"/>
+            <text x="200" y="115" text-anchor="middle" font-weight="bold">Normal Time (NT) / Basic Time</text>
+            
+            <line x1="200" y1="130" x2="200" y2="160" stroke="#000" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="210" y="150" font-size="12">Add Allowances (Personal, Fatigue, Delay)</text>
+            
+            <rect x="50" y="160" width="300" height="40" rx="5" fill="#f8d7da" stroke="#000"/>
+            <text x="200" y="185" text-anchor="middle" font-weight="bold">Standard Time (ST)</text>
+        </svg>
+    </div>
+    
+    <p>Standard Time forms the basis for production planning, cost estimation, and the implementation of wage incentive plans. An accurately derived standard time ensures fair wages for workers and reliable production schedules for management.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-14">
                 <div class="q-text"><span class="q-badge">Q14</span><span>Discuss the principles and applications of Ergonomics in industry.</span></div>
                 <div class="a-text">
-                    <h3>Ergonomics</h3><p>Ergonomics (Human Factors Engineering) is the science of designing the workplace, equipment, and tasks to fit the worker. Principles include maintaining neutral postures, reducing excessive force, keeping everything in reach, and reducing excessive motions. It helps prevent Musculoskeletal Disorders (MSDs) and improves productivity.</p>
+                    <div class="answer">
+    <h2>Principles and Applications of Ergonomics in Industry</h2>
+    <p>Ergonomics, often called Human Factors Engineering, is the scientific discipline concerned with the understanding of interactions among humans and other elements of a system. Its fundamental goal in an industrial setting is to optimize the fit between the worker, the equipment they use, and the environment they work in. By designing workstations, tools, and tasks to fit the human body's capabilities and limitations, ergonomics seeks to improve efficiency, productivity, and safety while reducing fatigue, discomfort, and the risk of Musculoskeletal Disorders (MSDs).</p>
+    
+    <h3>Core Principles of Ergonomics</h3>
+    <p>Ergonomics is guided by several physiological and biomechanical principles aimed at minimizing bodily strain:</p>
+    <ul>
+        <li><strong>Work in Neutral Postures:</strong> The body is strongest and most efficient in a neutral posture. Tasks should be designed to keep the spine naturally aligned, shoulders relaxed, and elbows close to the body, minimizing awkward twisting or overreaching.</li>
+        <li><strong>Reduce Excessive Force:</strong> High force requirements tire muscles quickly and cause joint damage. Tools should be designed to provide mechanical advantage, and hoists or conveyors should be used for heavy lifting.</li>
+        <li><strong>Keep Everything in Reach:</strong> The "strike zone" or optimal reach envelope should house frequently used tools and materials to prevent excessive stretching and leaning, which strains the back and shoulders.</li>
+        <li><strong>Work at Proper Heights:</strong> Work surfaces should be adjustable. Precision work requires higher surfaces to support the arms and bring the work closer to the eyes, while heavy manual work requires lower surfaces to utilize body weight.</li>
+        <li><strong>Reduce Excessive Motions:</strong> Repetitive motions, especially without adequate recovery time, lead to repetitive strain injuries. Tasks should be varied, or automated, to reduce repetition.</li>
+        <li><strong>Minimize Contact Stress:</strong> Continuous pressure from hard edges on tools or work surfaces can restrict blood flow and nerve function. Padded grips and rounded edges are essential.</li>
+        <li><strong>Provide Adequate Clearance:</strong> Workers need enough physical space for their head, knees, and feet to move freely and safely without bumping into obstacles.</li>
+    </ul>
+    
+    <h3>Applications of Ergonomics in Industry</h3>
+    <p>Applying ergonomic principles yields tangible benefits across various industrial domains:</p>
+    
+    <ol>
+        <li><strong>Workstation Design:</strong> In assembly lines and manufacturing floors, workstations are designed with adjustable chairs, anti-fatigue mats, and height-adjustable tables. This allows workers of different percentiles (anthropometric dimensions) to operate comfortably, drastically reducing back pain and absenteeism.</li>
+        <li><strong>Tool and Equipment Design:</strong> Power tools are designed to minimize vibration (which can cause Hand-Arm Vibration Syndrome) and are shaped to maintain straight wrists during operation. Handles are textured and sized for optimal grip strength.</li>
+        <li><strong>Material Handling:</strong> Ergonomics drives the implementation of lifting aids like vacuum lifters, forklifts, and ergonomic carts. Training workers on proper lifting biomechanics (lifting with legs, not the back) is a direct application of ergonomics.</li>
+        <li><strong>Environmental Ergonomics:</strong> Optimizing the physical environment is crucial. This includes providing adequate <strong>illumination</strong> for precision tasks to prevent eye strain, controlling <strong>noise</strong> levels to prevent hearing loss and distraction, and maintaining a comfortable <strong>thermal environment</strong> (ventilation and temperature control) to prevent heat exhaustion.</li>
+        <li><strong>Software and Display Interfaces (Cognitive Ergonomics):</strong> In control rooms (like power plants or automated manufacturing), dashboards and control panels are designed so that information is easily perceived, preventing cognitive overload and catastrophic human errors.</li>
+    </ol>
+    
+    <h3>Ergonomic System Diagram</h3>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="400" height="250" viewBox="0 0 400 250">
+            <circle cx="200" cy="125" r="100" fill="none" stroke="#333" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="200" y="35" text-anchor="middle" font-size="14" font-weight="bold">Working Environment</text>
+            <text x="200" y="50" text-anchor="middle" font-size="10">(Lighting, Noise, Temperature, Space)</text>
+            
+            <circle cx="150" cy="140" r="50" fill="#add8e6" opacity="0.8"/>
+            <text x="150" y="145" text-anchor="middle" font-weight="bold">Human</text>
+            
+            <circle cx="250" cy="140" r="50" fill="#90ee90" opacity="0.8"/>
+            <text x="250" y="145" text-anchor="middle" font-weight="bold">Machine</text>
+            
+            <path d="M170 120 Q 200 90 230 120" fill="none" stroke="#000" marker-end="url(#arrow)"/>
+            <path d="M230 160 Q 200 190 170 160" fill="none" stroke="#000" marker-end="url(#arrow)"/>
+            
+            <text x="200" y="110" text-anchor="middle" font-size="10">Control Input</text>
+            <text x="200" y="185" text-anchor="middle" font-size="10">Information Display</text>
+        </svg>
+    </div>
+    <p>In conclusion, Ergonomics is not merely about comfort; it is a strategic approach that directly impacts a company's bottom line. By proactively applying ergonomic principles, industries experience a reduction in workplace injuries, lower healthcare and compensation costs, enhanced employee morale, and significantly higher productivity and product quality.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-15">
                 <div class="q-text"><span class="q-badge">Q15</span><span>Differentiate Quality Control (QC), Quality Assurance (QA), and Total Quality Management (TQM).</span></div>
                 <div class="a-text">
-                    <h3>QC, QA, and TQM</h3><p><b>QC (Quality Control):</b> Reactive, defect identification process (e.g., inspection).</p><p><b>QA (Quality Assurance):</b> Proactive, process-oriented approach to prevent defects.</p><p><b>TQM (Total Quality Management):</b> Comprehensive organization-wide philosophy continuous improvement and customer satisfaction, involving all employees.</p>
+                    <div class="answer">
+    <h2>Differentiating Quality Control (QC), Quality Assurance (QA), and Total Quality Management (TQM)</h2>
+    <p>Quality Control, Quality Assurance, and Total Quality Management represent the evolutionary stages of quality management in industry. While they are often used interchangeably in casual conversation, they are fundamentally distinct concepts with different scopes, focuses, and methodologies. Understanding the difference is crucial for implementing a robust quality framework in any organization.</p>
+    
+    <h3>1. Quality Control (QC)</h3>
+    <p>Quality Control is the most fundamental and narrowest of the three concepts. It is a <strong>product-oriented</strong>, reactive process. The primary focus of QC is to identify and correct defects in the finished product before it reaches the customer. It involves the actual inspection, testing, and measurement of the product against predefined specifications. QC answers the question: "Does the final product meet the required standards?"</p>
+    <ul>
+        <li><strong>Focus:</strong> Defect Identification (Reactive).</li>
+        <li><strong>Scope:</strong> The final product and specific operational processes.</li>
+        <li><strong>Activities:</strong> Inspection, testing, statistical sampling, and measurement.</li>
+        <li><strong>Responsibility:</strong> Dedicated QC inspectors or testers at the end of the production line.</li>
+    </ul>
+
+    <h3>2. Quality Assurance (QA)</h3>
+    <p>Quality Assurance is a step up from QC. It is a <strong>process-oriented</strong>, proactive approach. The primary focus of QA is to prevent defects from occurring in the first place by ensuring that the processes used to create the product are robust, standardized, and followed correctly. QA builds confidence that quality requirements will be fulfilled. It answers the question: "Are we following the right processes to build a good product?"</p>
+    <ul>
+        <li><strong>Focus:</strong> Defect Prevention (Proactive).</li>
+        <li><strong>Scope:</strong> The entire process of product development and manufacturing.</li>
+        <li><strong>Activities:</strong> Process definition, creating Standard Operating Procedures (SOPs), quality audits, training, and setting up ISO 9000 systems.</li>
+        <li><strong>Responsibility:</strong> The QA team, managers, and everyone involved in defining the process.</li>
+    </ul>
+
+    <h3>3. Total Quality Management (TQM)</h3>
+    <p>Total Quality Management is the most comprehensive philosophy. It is a <strong>system-oriented</strong> and culture-oriented approach that encompasses both QA and QC. TQM involves the continuous improvement of all processes, products, and services within an organization, driven by customer satisfaction. It is deeply embedded in the corporate culture and requires participation from every single employee, from the CEO down to the shop floor worker. TQM views quality not just as a technical requirement, but as a primary business strategy.</p>
+    <ul>
+        <li><strong>Focus:</strong> Continuous Improvement and Customer Satisfaction.</li>
+        <li><strong>Scope:</strong> The entire organization, including suppliers and business strategies.</li>
+        <li><strong>Activities:</strong> Strategic planning, employee empowerment, cross-functional teamwork, customer feedback loops, and Kaizen.</li>
+        <li><strong>Responsibility:</strong> Every single individual in the organization.</li>
+    </ul>
+
+    <h3>Visualizing the Relationship</h3>
+    <p>The relationship between the three can be visualized as concentric circles, where TQM is the overarching philosophy that encompasses QA, which in turn provides the framework within which QC operates.</p>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="400" height="300" viewBox="0 0 400 300">
+            <!-- TQM Circle -->
+            <circle cx="200" cy="150" r="140" fill="#e6f2ff" stroke="#0066cc" stroke-width="2"/>
+            <text x="200" y="40" text-anchor="middle" font-size="16" font-weight="bold" fill="#0066cc">Total Quality Management (TQM)</text>
+            <text x="200" y="60" text-anchor="middle" font-size="12" fill="#333">Company-wide Culture & Continuous Improvement</text>
+            
+            <!-- QA Circle -->
+            <circle cx="200" cy="170" r="100" fill="#cce6ff" stroke="#004c99" stroke-width="2"/>
+            <text x="200" y="100" text-anchor="middle" font-size="16" font-weight="bold" fill="#004c99">Quality Assurance (QA)</text>
+            <text x="200" y="120" text-anchor="middle" font-size="12" fill="#333">Process Focus & Defect Prevention</text>
+            
+            <!-- QC Circle -->
+            <circle cx="200" cy="200" r="60" fill="#99ccff" stroke="#003366" stroke-width="2"/>
+            <text x="200" y="195" text-anchor="middle" font-size="16" font-weight="bold" fill="#003366">Quality Control (QC)</text>
+            <text x="200" y="215" text-anchor="middle" font-size="12" fill="#333">Product Focus &</text>
+            <text x="200" y="230" text-anchor="middle" font-size="12" fill="#333">Defect Detection</text>
+        </svg>
+    </div>
+
+    <h3>Summary Comparison Table</h3>
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse: collapse; text-align: left;">
+        <tr style="background-color: #f2f2f2;">
+            <th>Feature</th>
+            <th>Quality Control (QC)</th>
+            <th>Quality Assurance (QA)</th>
+            <th>Total Quality Management (TQM)</th>
+        </tr>
+        <tr>
+            <td><strong>Orientation</strong></td>
+            <td>Product-oriented</td>
+            <td>Process-oriented</td>
+            <td>System/Culture-oriented</td>
+        </tr>
+        <tr>
+            <td><strong>Primary Goal</strong></td>
+            <td>Identify and fix defects</td>
+            <td>Prevent defects</td>
+            <td>Continuous overall improvement</td>
+        </tr>
+        <tr>
+            <td><strong>Approach</strong></td>
+            <td>Reactive</td>
+            <td>Proactive</td>
+            <td>Holistic & Strategic</td>
+        </tr>
+        <tr>
+            <td><strong>Who is Responsible?</strong></td>
+            <td>Inspectors / Testing Team</td>
+            <td>Process Owners / QA Team</td>
+            <td>Everyone (Top to Bottom)</td>
+        </tr>
+    </table>
+    
+    <p>In conclusion, QC ensures the product is right, QA ensures the process building the product is right, and TQM ensures the entire organization is focused on continuously doing everything better to delight the customer.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-16">
                 <div class="q-text"><span class="q-badge">Q16</span><span>Explain Control Charts for Variables (X-bar and R charts) and their construction.</span></div>
                 <div class="a-text">
-                    <h3>Control Charts for Variables</h3><p>Variables control charts measure continuous data. The <b>X-bar chart</b> monitors the process mean (average), while the <b>R chart</b> monitors process variation (range). They are constructed using sample averages and ranges to plot points against Upper and Lower Control Limits (UCL and LCL).</p>
+                    <div class="answer">
+    <h2>Control Charts for Variables (X-bar and R charts) and Their Construction</h2>
+    <p>In Statistical Process Control (SPC), Control Charts are essential graphical tools used to monitor and maintain process stability over time. They help distinguish between variations caused by normal, inherent fluctuations (common causes) and those caused by abnormal, specific events (assignable causes). <strong>Variable Control Charts</strong> are used when the quality characteristic being measured is continuous and can be quantified on a numerical scale&mdash;such as length, weight, temperature, or diameter.</p>
+    <p>The most common set of variable control charts used together are the <strong>X-bar Chart</strong> (Mean Chart) and the <strong>R Chart</strong> (Range Chart).</p>
+    
+    <h3>The X-bar (Mean) Chart</h3>
+    <p>The X-bar chart monitors the <strong>central tendency</strong> (the average) of a process over time. It shows whether the process mean is shifting away from the target value. For example, if a machine starts cutting metal rods slightly longer over time due to tool wear, the X-bar chart will detect this shift.</p>
+    
+    <h3>The R (Range) Chart</h3>
+    <p>The R chart monitors the <strong>dispersion or variability</strong> of the process over time. It tracks the difference between the maximum and minimum values in each sample. If the variability increases (e.g., due to a loose machine bearing causing inconsistent cuts), the R chart will show points moving beyond the control limits, even if the average (X-bar) remains perfectly centered.</p>
+    <p><em>Note: The R chart must always be checked for stability before interpreting the X-bar chart. If the variability (R) is out of control, the control limits for the X-bar chart are meaningless.</em></p>
+
+    <h3>Construction of X-bar and R Charts</h3>
+    <p>The construction involves collecting data, performing calculations, and plotting the limits. The process follows these steps:</p>
+    
+    <ol>
+        <li><strong>Data Collection:</strong> Collect <i>k</i> samples (subgroups), typically 20 to 25 subgroups, over a period. Each subgroup should contain <i>n</i> observations (usually <i>n</i> = 4 or 5).</li>
+        <li><strong>Calculate Sample Means and Ranges:</strong>
+            <ul>
+                <li>For each subgroup <i>i</i>, calculate its mean (X-bar): sum of observations divided by <i>n</i>.</li>
+                <li>Calculate its Range (R): R = X_max - X_min within that subgroup.</li>
+            </ul>
+        </li>
+        <li><strong>Calculate Grand Mean and Average Range:</strong>
+            <ul>
+                <li>Grand Mean (X-double-bar) = Sum of X-bar / <i>k</i>. This is the Center Line (CL) for the X-bar chart.</li>
+                <li>Average Range (R-bar) = Sum of R / <i>k</i>. This is the Center Line (CL) for the R chart.</li>
+            </ul>
+        </li>
+        <li><strong>Determine Control Limits:</strong> Control limits are set at &plusmn; 3 standard deviations from the center line. We use standard SPC factors (A2, D3, D4) based on the subgroup size <i>n</i> (found in statistical tables).
+            <ul>
+                <li><strong>For the X-bar Chart:</strong>
+                    <ul>
+                        <li>Upper Control Limit (UCL) = X-double-bar + (A2 &times; R-bar)</li>
+                        <li>Lower Control Limit (LCL) = X-double-bar - (A2 &times; R-bar)</li>
+                    </ul>
+                </li>
+                <li><strong>For the R Chart:</strong>
+                    <ul>
+                        <li>UCL = D4 &times; R-bar</li>
+                        <li>LCL = D3 &times; R-bar (Note: For <i>n</i> < 7, D3 is usually 0, making LCL = 0).</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><strong>Plotting and Interpretation:</strong> Draw the Center Lines, UCL, and LCL on a graph. Plot the X-bar and R values. If any point falls outside the control limits, or if there is a non-random pattern (like 7 consecutive points on one side of the mean), the process is deemed "Out of Control."</li>
+    </ol>
+
+    <h3>Visual Representation of an X-bar Chart</h3>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="500" height="250" viewBox="0 0 500 250">
+            <!-- Axes -->
+            <line x1="50" y1="200" x2="480" y2="200" stroke="#000" stroke-width="2"/>
+            <line x1="50" y1="20" x2="50" y2="200" stroke="#000" stroke-width="2"/>
+            
+            <!-- Control Limits and Center Line -->
+            <line x1="50" y1="50" x2="480" y2="50" stroke="red" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="490" y="55" font-size="12" fill="red">UCL</text>
+            
+            <line x1="50" y1="110" x2="480" y2="110" stroke="green" stroke-width="2"/>
+            <text x="490" y="115" font-size="12" fill="green">CL (X-double bar)</text>
+            
+            <line x1="50" y1="170" x2="480" y2="170" stroke="red" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="490" y="175" font-size="12" fill="red">LCL</text>
+            
+            <!-- Data Points & Line -->
+            <polyline points="80,120 120,90 160,115 200,80 240,140 280,100 320,150 360,165 400,105 440,30" fill="none" stroke="blue" stroke-width="2"/>
+            
+            <circle cx="80" cy="120" r="4" fill="blue"/>
+            <circle cx="120" cy="90" r="4" fill="blue"/>
+            <circle cx="160" cy="115" r="4" fill="blue"/>
+            <circle cx="200" cy="80" r="4" fill="blue"/>
+            <circle cx="240" cy="140" r="4" fill="blue"/>
+            <circle cx="280" cy="100" r="4" fill="blue"/>
+            <circle cx="320" cy="150" r="4" fill="blue"/>
+            <circle cx="360" cy="165" r="4" fill="blue"/>
+            <circle cx="400" cy="105" r="4" fill="blue"/>
+            <circle cx="440" cy="30" r="5" fill="red"/> <!-- Out of control point -->
+            
+            <text x="450" y="25" font-size="12" fill="red" font-weight="bold">Out of Control!</text>
+            
+            <text x="250" y="230" text-anchor="middle" font-size="14" font-weight="bold">Sample Number</text>
+            <text x="20" y="110" transform="rotate(-90 20,110)" text-anchor="middle" font-size="14" font-weight="bold">Sample Mean (X-bar)</text>
+        </svg>
+    </div>
+    <p>By regularly updating and analyzing these charts, quality engineers can detect anomalies early, investigate assignable causes, and take corrective action before defective products are manufactured, ensuring high product quality and reduced scrap.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-17">
                 <div class="q-text"><span class="q-badge">Q17</span><span>Explain Control Charts for Attributes (p-chart, c-chart) and when they are used.</span></div>
                 <div class="a-text">
-                    <h3>Control Charts for Attributes</h3><p>Attribute charts track countable data (pass/fail, defective counts). The <b>p-chart</b> is used for the proportion of defective units in a sample. The <b>c-chart</b> is used for the number of defects per individual unit (e.g., blemishes on a painted surface).</p>
+                    <div class="answer">
+    <h2>Control Charts for Attributes (p-chart, c-chart) and Their Applications</h2>
+    <p>While Variable Control Charts (X-bar and R) are used for continuous, measurable data, <strong>Attribute Control Charts</strong> are used in Statistical Process Control (SPC) when quality characteristics cannot be easily measured on a continuous scale. Instead, the product is evaluated based on discrete attributes&mdash;it either possesses a characteristic or it doesn't. Data is gathered by counting, such as counting the number of defective units in a batch or the number of defects on a single unit. The data follows discrete probability distributions like the Binomial or Poisson distribution.</p>
+    <p>The two most common attribute charts are the <strong>p-chart</strong> and the <strong>c-chart</strong>.</p>
+    
+    <h3>The p-chart (Proportion Defective Chart)</h3>
+    <p>The p-chart is used to monitor the <strong>proportion or fraction of nonconforming (defective) units</strong> in a sample or batch. A unit is considered defective if it fails to meet overall quality standards and must be rejected or reworked.</p>
+    <ul>
+        <li><strong>Underlying Distribution:</strong> Binomial Distribution.</li>
+        <li><strong>When to Use:</strong> Used when we are inspecting a batch of items and categorizing each item simply as "Pass" or "Fail" (Good or Bad). It is suitable for both constant and variable sample sizes, although constant sample sizes make chart interpretation easier.</li>
+        <li><strong>Examples:</strong> 
+            <ul>
+                <li>Tracking the percentage of lightbulbs that fail a go/no-go electrical test in daily production runs.</li>
+                <li>Monitoring the fraction of incomplete medical forms out of total forms processed per day.</li>
+            </ul>
+        </li>
+        <li><strong>Construction:</strong>
+            <ul>
+                <li>Center Line (p-bar) = Total Defectives / Total Items Inspected.</li>
+                <li>Standard Deviation (Sp) = SquareRoot[ (p-bar &times; (1 - p-bar)) / n ], where <i>n</i> is sample size.</li>
+                <li>UCL / LCL = p-bar &plusmn; (3 &times; Sp) (If LCL is negative, it is set to 0).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>The c-chart (Count of Defects Chart)</h3>
+    <p>The c-chart is used to monitor the <strong>total number of defects (nonconformities) within a single unit</strong> of product or a fixed area of opportunity. Unlike a defective unit (which is entirely rejected), a single unit can have multiple defects but still be acceptable or repairable.</p>
+    <ul>
+        <li><strong>Underlying Distribution:</strong> Poisson Distribution.</li>
+        <li><strong>When to Use:</strong> Used when the sample size (or area of opportunity) is constant, and we are counting the occurrences of an event (defects) across that constant area. The number of possible defects must be large, but the probability of any specific defect occurring in a specific spot must be small.</li>
+        <li><strong>Examples:</strong>
+            <ul>
+                <li>Counting the number of scratches on a car door panel. (One panel is the constant unit, it can have 0, 1, or 5 scratches).</li>
+                <li>Counting the number of typos on a printed page of a newspaper.</li>
+                <li>Monitoring the number of defective solder joints on a standard Printed Circuit Board (PCB).</li>
+            </ul>
+        </li>
+        <li><strong>Construction:</strong>
+            <ul>
+                <li>Center Line (c-bar) = Total Defects / Total Number of Units Inspected.</li>
+                <li>Standard Deviation (Sc) = SquareRoot[ c-bar ].</li>
+                <li>UCL / LCL = c-bar &plusmn; (3 &times; SquareRoot[ c-bar ]) (If LCL is negative, it is set to 0).</li>
+            </ul>
+        </li>
+    </ul>
+
+    <h3>Decision Tree: Choosing the Right Control Chart</h3>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="500" height="300" viewBox="0 0 500 300">
+            <defs>
+                <marker id="arrow2" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L0,6 L9,3 z" fill="#000" />
+                </marker>
+            </defs>
+            <!-- Root -->
+            <rect x="150" y="20" width="200" height="40" rx="5" fill="#e0e0e0" stroke="#000"/>
+            <text x="250" y="45" text-anchor="middle" font-weight="bold">What type of data?</text>
+            
+            <!-- Lines from Root -->
+            <line x1="250" y1="60" x2="150" y2="100" stroke="#000" stroke-width="2" marker-end="url(#arrow2)"/>
+            <line x1="250" y1="60" x2="350" y2="100" stroke="#000" stroke-width="2" marker-end="url(#arrow2)"/>
+            
+            <!-- Continuous Data -->
+            <rect x="50" y="100" width="150" height="40" rx="5" fill="#cce5ff" stroke="#000"/>
+            <text x="125" y="125" text-anchor="middle">Continuous (Measurable)</text>
+            <line x1="125" y1="140" x2="125" y2="180" stroke="#000" stroke-width="2" marker-end="url(#arrow2)"/>
+            <rect x="50" y="180" width="150" height="40" rx="5" fill="#99ccff" stroke="#000"/>
+            <text x="125" y="205" text-anchor="middle" font-weight="bold">Use X-bar & R Charts</text>
+            
+            <!-- Attribute Data -->
+            <rect x="275" y="100" width="200" height="40" rx="5" fill="#f8d7da" stroke="#000"/>
+            <text x="375" y="125" text-anchor="middle">Attribute (Count/Discrete)</text>
+            
+            <line x1="375" y1="140" x2="300" y2="180" stroke="#000" stroke-width="2" marker-end="url(#arrow2)"/>
+            <line x1="375" y1="140" x2="450" y2="180" stroke="#000" stroke-width="2" marker-end="url(#arrow2)"/>
+            
+            <text x="325" y="165" font-size="10">Defective Units</text>
+            <text x="425" y="165" font-size="10">Defects per Unit</text>
+            
+            <rect x="225" y="180" width="120" height="40" rx="5" fill="#ffb3b3" stroke="#000"/>
+            <text x="285" y="205" text-anchor="middle" font-weight="bold">Use p-chart</text>
+            
+            <rect x="375" y="180" width="120" height="40" rx="5" fill="#ffb3b3" stroke="#000"/>
+            <text x="435" y="205" text-anchor="middle" font-weight="bold">Use c-chart</text>
+        </svg>
+    </div>
+    
+    <p>In summary, attribute charts are highly versatile because they can assess the overall quality of a product (e.g., passing a visual inspection) rather than just one specific dimension. They are critical tools for quality management when precise measurements are either impossible, too expensive, or simply unnecessary.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-18">
                 <div class="q-text"><span class="q-badge">Q18</span><span>Discuss the concept of Six Sigma methodology (DMAIC framework).</span></div>
                 <div class="a-text">
-                    <h3>Six Sigma & DMAIC</h3><p>Six Sigma aims for near perfection (3.4 defects per million opportunities). DMAIC is its core framework: <b>Define</b> the problem, <b>Measure</b> current performance, <b>Analyze</b> root causes, <b>Improve</b> the process, and <b>Control</b> to sustain improvements.</p>
+                    <div class="answer">
+    <h2>The Concept of Six Sigma Methodology (DMAIC Framework)</h2>
+    <p>Six Sigma is a highly disciplined, data-driven methodology and approach for eliminating defects (driving toward six standard deviations between the mean and the nearest specification limit) in any process&mdash;from manufacturing to transactional and from product to service. Originally developed by Motorola in the 1980s, its primary goal is to achieve near-perfection by reducing process variation and ensuring that products or services meet customer requirements 99.99966% of the time (equivalent to allowing only 3.4 defects per million opportunities).</p>
+    
+    <p>The core execution strategy for existing processes within Six Sigma is the <strong>DMAIC</strong> framework. DMAIC is a structured, five-phase cyclical problem-solving methodology designed to deliver sustainable business results.</p>
+    
+    <h3>The DMAIC Framework</h3>
+    
+    <ol>
+        <li><strong>Define (D):</strong> This phase sets the foundation for the project. The goal is to define the problem, the project scope, customer requirements (Voice of the Customer - VOC), and the project goals. 
+            <br><em>Key Tools:</em> Project Charter, SIPOC Diagram (Supplier, Input, Process, Output, Customer), Stakeholder Analysis.</li>
+        
+        <li><strong>Measure (M):</strong> In this phase, the project team establishes a baseline for current performance. It involves determining what to measure, defining data collection plans, and actually gathering data to quantify the magnitude of the problem. Crucially, the measurement system itself must be validated to ensure data accuracy.
+            <br><em>Key Tools:</em> Process Mapping, Measurement System Analysis (Gauge R&R), Data Collection Plans, Process Capability Analysis.</li>
+        
+        <li><strong>Analyze (A):</strong> With data collected, the team analyzes it to identify the root causes of the defects or process variations. The focus shifts from symptoms to underlying causes. Hypotheses are generated and statistically tested to verify true root causes.
+            <br><em>Key Tools:</em> Cause-and-Effect (Fishbone) Diagrams, 5 Whys, Hypothesis Testing (ANOVA, t-tests), Scatter Plots, Regression Analysis.</li>
+        
+        <li><strong>Improve (I):</strong> Once the root causes are verified, the team develops, tests, and implements solutions to eliminate them. This phase aims to optimize the process and significantly reduce variation or defects. Solutions are often piloted before full-scale rollout.
+            <br><em>Key Tools:</em> Design of Experiments (DOE), Brainstorming, Poka-Yoke (Mistake Proofing), Failure Mode and Effects Analysis (FMEA).</li>
+        
+        <li><strong>Control (C):</strong> The final phase ensures that the improvements are sustained over time. The team standardizes the new process, documents procedures, trains employees, and sets up monitoring systems. If the process begins to drift out of control, mechanisms are in place to correct it immediately.
+            <br><em>Key Tools:</em> Statistical Process Control (SPC) Charts, Control Plans, Standard Operating Procedures (SOPs).</li>
+    </ol>
+
+    <h3>DMAIC Cycle Diagram</h3>
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="400" height="350" viewBox="0 0 400 350">
+            <!-- Center -->
+            <circle cx="200" cy="175" r="50" fill="#fff" stroke="#333" stroke-width="3"/>
+            <text x="200" y="170" text-anchor="middle" font-size="18" font-weight="bold">Six</text>
+            <text x="200" y="190" text-anchor="middle" font-size="18" font-weight="bold">Sigma</text>
+            
+            <!-- Define -->
+            <path d="M200 125 A 50 50 0 0 1 247.5 159.5 L 314 137.5 A 120 120 0 0 0 200 55 Z" fill="#ff9999" stroke="#fff" stroke-width="2"/>
+            <text x="210" y="90" font-weight="bold" font-size="14">DEFINE</text>
+            <text x="210" y="105" font-size="10">What is the problem?</text>
+            
+            <!-- Measure -->
+            <path d="M247.5 159.5 A 50 50 0 0 1 229.4 215.4 L 270 270.8 A 120 120 0 0 0 314 137.5 Z" fill="#ffcc99" stroke="#fff" stroke-width="2"/>
+            <text x="270" y="180" font-weight="bold" font-size="14">MEASURE</text>
+            <text x="270" y="195" font-size="10">How big is it?</text>
+            
+            <!-- Analyze -->
+            <path d="M229.4 215.4 A 50 50 0 0 1 170.6 215.4 L 130 270.8 A 120 120 0 0 0 270 270.8 Z" fill="#ffff99" stroke="#fff" stroke-width="2"/>
+            <text x="200" y="250" text-anchor="middle" font-weight="bold" font-size="14">ANALYZE</text>
+            <text x="200" y="265" text-anchor="middle" font-size="10">What causes it?</text>
+            
+            <!-- Improve -->
+            <path d="M170.6 215.4 A 50 50 0 0 1 152.5 159.5 L 86 137.5 A 120 120 0 0 0 130 270.8 Z" fill="#ccffcc" stroke="#fff" stroke-width="2"/>
+            <text x="130" y="180" text-anchor="end" font-weight="bold" font-size="14">IMPROVE</text>
+            <text x="130" y="195" text-anchor="end" font-size="10">Fix the root causes</text>
+            
+            <!-- Control -->
+            <path d="M152.5 159.5 A 50 50 0 0 1 200 125 L 200 55 A 120 120 0 0 0 86 137.5 Z" fill="#99ccff" stroke="#fff" stroke-width="2"/>
+            <text x="175" y="90" text-anchor="end" font-weight="bold" font-size="14">CONTROL</text>
+            <text x="175" y="105" text-anchor="end" font-size="10">Sustain the gains</text>
+        </svg>
+    </div>
+    
+    <p>By heavily relying on statistical tools and a rigid, logical structure, Six Sigma removes guesswork from process improvement. It creates a culture of objective problem solving, leading to dramatic reductions in costs, improvements in cycle times, and a significant boost in customer satisfaction.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-19">
                 <div class="q-text"><span class="q-badge">Q19</span><span>Explain the ISO 9000 Quality Management System standards.</span></div>
                 <div class="a-text">
-                    <h3>ISO 9000 Standards</h3><p>ISO 9000 is a family of international quality management standards. It sets criteria for a Quality Management System (QMS), emphasizing customer focus, leadership, engagement of people, process approach, and continuous improvement to ensure consistent quality of products and services.</p>
+                    <div class="answer">
+    <h2>The ISO 9000 Quality Management System Standards</h2>
+    <p>ISO 9000 is a globally recognized series of international standards developed and published by the International Organization for Standardization (ISO). These standards define, establish, and maintain an effective Quality Management System (QMS) for manufacturing and service industries. It is important to note that ISO 9000 is not a standard for the products themselves; rather, it dictates the standards for the <strong>processes</strong> that create those products. The underlying philosophy is that consistent, well-managed processes yield consistent, high-quality products.</p>
+    
+    <h3>Key Standards in the Series</h3>
+    <p>The ISO 9000 family comprises several documents, with the three most critical being:</p>
+    <ul>
+        <li><strong>ISO 9000 (Fundamentals and Vocabulary):</strong> This document outlines the core concepts, principles, and vocabulary used in quality management. It serves as an introduction to the series.</li>
+        <li><strong>ISO 9001 (Requirements):</strong> This is the most crucial document. It contains the actual requirements that an organization must fulfill to achieve certification. It is the only standard in the family against which organizations can be certified. It focuses on customer focus, leadership, process approach, and continuous improvement.</li>
+        <li><strong>ISO 9004 (Managing for the Sustained Success of an Organization):</strong> This standard provides guidelines that go beyond the basic requirements of ISO 9001, focusing on improving overall performance, efficiency, and long-term sustained success.</li>
+    </ul>
+
+    <h3>The Seven Quality Management Principles of ISO 9001</h3>
+    <p>The ISO 9001 standard is built upon seven foundational principles:</p>
+    <ol>
+        <li><strong>Customer Focus:</strong> Understanding and exceeding customer expectations.</li>
+        <li><strong>Leadership:</strong> Establishing a unified purpose and direction within the organization.</li>
+        <li><strong>Engagement of People:</strong> Empowering employees at all levels to create value.</li>
+        <li><strong>Process Approach:</strong> Managing activities and related resources as interconnected processes to achieve more consistent results.</li>
+        <li><strong>Improvement:</strong> Maintaining an ongoing focus on continuous improvement.</li>
+        <li><strong>Evidence-based Decision Making:</strong> Making decisions based on the analysis of accurate data and information.</li>
+        <li><strong>Relationship Management:</strong> Managing relationships with interested parties, such as suppliers and partners, to optimize performance.</li>
+    </ol>
+
+    <h3>ISO 9000 Documentation Hierarchy</h3>
+    <p>A hallmark of ISO 9000 certification is robust documentation, ensuring processes are repeatable and auditable. The documentation structure is typically represented as a pyramid.</p>
+    
+    <div style="display:flex; justify-content:center; margin:20px 0;">
+        <svg width="400" height="300" viewBox="0 0 400 300">
+            <!-- Tier 1 -->
+            <polygon points="200,30 150,100 250,100" fill="#ffcccc" stroke="#000"/>
+            <text x="200" y="80" text-anchor="middle" font-weight="bold">Quality</text>
+            <text x="200" y="95" text-anchor="middle" font-weight="bold">Manual</text>
+            
+            <!-- Tier 2 -->
+            <polygon points="150,100 250,100 280,160 120,160" fill="#ffffcc" stroke="#000"/>
+            <text x="200" y="135" text-anchor="middle" font-weight="bold">Quality Procedures</text>
+            <text x="200" y="150" text-anchor="middle" font-size="10">(Who, What, When, Where)</text>
+            
+            <!-- Tier 3 -->
+            <polygon points="120,160 280,160 320,220 80,220" fill="#ccffcc" stroke="#000"/>
+            <text x="200" y="190" text-anchor="middle" font-weight="bold">Work Instructions</text>
+            <text x="200" y="205" text-anchor="middle" font-size="10">(How tasks are done step-by-step)</text>
+            
+            <!-- Tier 4 -->
+            <polygon points="80,220 320,220 370,280 30,280" fill="#cce5ff" stroke="#000"/>
+            <text x="200" y="250" text-anchor="middle" font-weight="bold">Quality Records &amp; Forms</text>
+            <text x="200" y="265" text-anchor="middle" font-size="10">(Evidence that processes were followed)</text>
+        </svg>
+    </div>
+    
+    <p>Adopting ISO 9000 standards provides companies with a competitive advantage. It streamlines internal operations, reduces waste, enhances product quality, and significantly boosts market credibility, as many global corporations require their suppliers to be ISO 9001 certified.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-20">
@@ -207,121 +819,1127 @@ graph LR;
             <div class="qa-card" id="gb-21">
                 <div class="q-text"><span class="q-badge">Q21</span><span>Define Working Capital and discuss factors affecting Working Capital requirements.</span></div>
                 <div class="a-text">
-                    <h3>Working Capital</h3><p>Working capital is the funds needed for day-to-day operations (Current Assets - Current Liabilities). Factors affecting it include the nature of business, scale of operations, production cycle duration, credit policy, and seasonal variations.</p>
+                    
+<h2>Definition of Working Capital</h2>
+<p>Working Capital refers to the capital of a business which is used in its day-to-day trading operations, calculated as the current assets minus the current liabilities. It is a financial metric which represents operating liquidity available to a business, organization, or other entity, including governmental entities. Along with fixed assets such as plant and equipment, working capital is considered a part of operating capital. Gross working capital refers to the firm’s total investment in current assets. Net working capital is the difference between current assets and current liabilities. A positive net working capital indicates that the company has enough short-term assets to cover its short-term debt, while a negative working capital implies that current liabilities exceed current assets, which could indicate financial distress.</p>
+<p>Adequate working capital is essential for a business to run its operations smoothly. It ensures that the company can pay its suppliers, cover employee wages, and meet other short-term obligations on time. Working capital management involves managing inventories, accounts receivable and payable, and cash.</p>
+<h2>Factors Affecting Working Capital Requirements</h2>
+<p>The requirement of working capital is not uniform across all businesses; it varies significantly based on numerous factors:</p>
+<ol>
+<li><strong>Nature of Business:</strong> Trading or commercial firms require more working capital as they carry large inventories and offer credit to customers. Conversely, public utility companies require less working capital because they have steady cash inflows and primarily invest in fixed assets.</li>
+<li><strong>Size of Business:</strong> Larger businesses typically require more working capital than smaller ones due to the scale of their operations, larger workforce, and higher inventory levels.</li>
+<li><strong>Production Cycle:</strong> The duration from the procurement of raw materials to their conversion into finished goods is the production cycle. A longer production cycle requires a larger investment in working capital because funds are tied up in work-in-progress for an extended period.</li>
+<li><strong>Business Cycle Fluctuations:</strong> During an economic boom, increased demand necessitates higher production, leading to larger working capital requirements to build inventory and extend credit. During a recession, the requirement falls as sales decline.</li>
+<li><strong>Seasonal Variations:</strong> Businesses with seasonal demand (like woollen garments or air conditioners) require substantial working capital during peak seasons to meet high production and inventory needs.</li>
+<li><strong>Credit Policy:</strong> A liberal credit policy (allowing customers more time to pay) increases accounts receivable, thereby increasing the need for working capital. A strict credit policy reduces this need.</li>
+<li><strong>Availability of Credit:</strong> If a company can easily obtain credit from its suppliers on favorable terms, its requirement for working capital is reduced.</li>
+<li><strong>Growth and Expansion:</strong> As a company grows, its need for working capital naturally increases to support higher levels of production, sales, and inventory.</li>
+</ol>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: Working Capital Cycle</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+[Cash] --> (Purchases) --> [Raw Materials]
+   ^                               |
+   | (Collections)                 v (Production)
+[Debtors/Receivables] <--- [Finished Goods]
+          (Sales)
+  </pre>
+  <p><em>The cycle demonstrates the continuous flow of cash into inventory, which is then converted into finished goods, sold to create receivables, and finally collected back as cash.</em></p>
+</div>
+<p>By carefully analyzing these factors, a firm's management can accurately estimate its working capital requirements, thereby avoiding both under-capitalization (which risks insolvency) and over-capitalization (which wastes resources and reduces profitability).</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-22">
                 <div class="q-text"><span class="q-badge">Q22</span><span>Compare Straight Line Method and Written Down Value Method of Depreciation.</span></div>
                 <div class="a-text">
-                    <h3>Depreciation Methods</h3><p><b>Straight Line Method:</b> An equal amount of depreciation is charged each year over the asset's useful life.</p><p><b>Written Down Value (WDV):</b> Depreciation is charged at a fixed percentage on the reducing balance of the asset, resulting in higher depreciation in early years.</p>
+                    
+<h2>Straight Line Method (SLM) vs. Written Down Value (WDV) Method of Depreciation</h2>
+<p>Depreciation is the systematic allocation of the cost of a tangible asset over its useful life. It reflects the wear and tear, obsolescence, or aging of the asset. The two most common methods of computing depreciation are the Straight Line Method (SLM) and the Written Down Value (WDV) Method, also known as the Diminishing Balance Method.</p>
+<h3>Straight Line Method (SLM)</h3>
+<p>Under the Straight Line Method, an equal amount of depreciation is charged every year over the asset's useful life. The formula for calculating depreciation under SLM is:</p>
+<p><strong>Depreciation = (Original Cost - Estimated Salvage Value) / Estimated Useful Life</strong></p>
+<p>The primary advantage of SLM is its simplicity. It completely writes off the asset to zero or its salvage value by the end of its useful life. It is most suitable for assets whose utility is relatively constant over their lifespan, such as furniture or leases. However, it does not account for the fact that an asset might be more efficient (and generate more revenue) in its early years, and it ignores the increasing maintenance costs as the asset ages.</p>
+<h3>Written Down Value (WDV) Method</h3>
+<p>Under the Written Down Value method, depreciation is charged at a fixed percentage on the diminishing balance (book value) of the asset each year. As the book value decreases each year, the amount of depreciation also decreases. The formula is:</p>
+<p><strong>Depreciation = Book Value at the beginning of the year &times; Rate of Depreciation</strong></p>
+<p>This method is more logical because it matches higher depreciation charges in the early years (when the asset is highly efficient) with lower repair charges. In later years, as depreciation falls, repair costs typically rise, keeping the total profit-and-loss charge relatively stable. It is ideal for assets that rapidly lose their value or become obsolete quickly, such as computers, vehicles, and machinery. However, under WDV, the asset's value can never be completely reduced to zero.</p>
+<h3>Comparative Analysis</h3>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width:100%;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th>Basis of Difference</th>
+      <th>Straight Line Method (SLM)</th>
+      <th>Written Down Value Method (WDV)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Amount of Depreciation</strong></td>
+      <td>Remains constant every year.</td>
+      <td>Decreases year after year.</td>
+    </tr>
+    <tr>
+      <td><strong>Basis of Calculation</strong></td>
+      <td>Calculated on the original cost of the asset.</td>
+      <td>Calculated on the written-down value (book value).</td>
+    </tr>
+    <tr>
+      <td><strong>Zero Value</strong></td>
+      <td>The book value can be reduced to zero.</td>
+      <td>The book value can never be reduced to zero.</td>
+    </tr>
+    <tr>
+      <td><strong>Impact on P&amp;L Account</strong></td>
+      <td>Total charge (Depreciation + Repairs) increases as the asset ages.</td>
+      <td>Total charge (Depreciation + Repairs) remains somewhat constant.</td>
+    </tr>
+    <tr>
+      <td><strong>Suitability</strong></td>
+      <td>Suitable for assets with negligible repair charges and constant utility.</td>
+      <td>Suitable for assets requiring heavier repairs in later years.</td>
+    </tr>
+  </tbody>
+</table>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: Depreciation Value Over Time</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+Value
+ ^
+ |  * (Original Cost)
+ |  | \ (SLM - linear decline)
+ |  |   \
+ |  |     \ 
+ |  |       \
+ |  |\ (WDV - curve)
+ |  |  \
+ |  |    -
+ |  |      _
+ |  |        ---___
+ +------------------------> Time
+  </pre>
+</div>
+<p>In conclusion, the choice between SLM and WDV depends on the nature of the asset, industry standards, and statutory requirements (like taxation laws, which often mandate WDV for certain asset classes). WDV generally provides a more realistic matching of revenue and expenses over the asset's lifecycle.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-23">
                 <div class="q-text"><span class="q-badge">Q23</span><span>Differentiate PERT and CPM project management techniques.</span></div>
                 <div class="a-text">
-                    <h3>PERT vs CPM</h3><p><b>PERT:</b> Probabilistic approach used for R&D or new projects where time estimates are uncertain (3 time estimates). Focuses on time.</p><p><b>CPM:</b> Deterministic approach used for construction or repetitive projects where times are known. Focuses on cost and time trade-offs.</p>
+                    
+<h2>Differentiating PERT and CPM Project Management Techniques</h2>
+<p>Project management relies heavily on network analysis techniques to plan, schedule, and control complex projects. The two most prominent techniques are PERT (Program Evaluation and Review Technique) and CPM (Critical Path Method). While both are used for project scheduling and use network diagrams, they have distinct origins, approaches, and applications.</p>
+<h3>PERT (Program Evaluation and Review Technique)</h3>
+<p>PERT was developed in the 1950s by the U.S. Navy for the Polaris submarine missile program. It is primarily designed for projects where the time required to complete individual activities is highly uncertain. It is a probabilistic model that uses three time estimates for each activity:</p>
+<ul>
+  <li><strong>Optimistic Time (t_o):</strong> The shortest possible time to complete the activity if everything goes perfectly.</li>
+  <li><strong>Most Likely Time (t_m):</strong> The most realistic time estimate under normal conditions.</li>
+  <li><strong>Pessimistic Time (t_p):</strong> The maximum time required if everything goes wrong (excluding major catastrophes).</li>
+</ul>
+<p>Using these, the Expected Time (t_e) is calculated as: <strong>t_e = (t_o + 4t_m + t_p) / 6</strong>. PERT focuses heavily on managing time and is an event-oriented technique.</p>
+<h3>CPM (Critical Path Method)</h3>
+<p>CPM was developed independently around the same time by DuPont and Remington Rand for scheduling maintenance shutdowns at chemical plants. It is used for projects where activity durations are well-known and deterministic. Since the times are known, CPM uses a single time estimate for each activity. Furthermore, CPM incorporates cost considerations, allowing for "crashing" the project—spending more money (on overtime, extra resources) to reduce the project duration on the critical path. CPM is an activity-oriented technique.</p>
+<h3>Key Differences Between PERT and CPM</h3>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width:100%;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th>Feature</th>
+      <th>PERT</th>
+      <th>CPM</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Nature of Model</strong></td>
+      <td>Probabilistic (accounts for uncertainty in time).</td>
+      <td>Deterministic (time is known).</td>
+    </tr>
+    <tr>
+      <td><strong>Estimates</strong></td>
+      <td>Uses three time estimates (Optimistic, Most Likely, Pessimistic).</td>
+      <td>Uses a single, precise time estimate.</td>
+    </tr>
+    <tr>
+      <td><strong>Orientation</strong></td>
+      <td>Event-oriented (focuses on the start and completion of events).</td>
+      <td>Activity-oriented (focuses on the activities themselves).</td>
+    </tr>
+    <tr>
+      <td><strong>Primary Focus</strong></td>
+      <td>Time control (meeting deadlines in unpredictable projects).</td>
+      <td>Cost and time optimization (trading off cost against time).</td>
+    </tr>
+    <tr>
+      <td><strong>Crashing</strong></td>
+      <td>Not typically applicable, as costs are not directly integrated.</td>
+      <td>Integral to the method; allows crashing activities to reduce time.</td>
+    </tr>
+    <tr>
+      <td><strong>Application</strong></td>
+      <td>R&amp;D projects, new product development, aerospace.</td>
+      <td>Construction, routine maintenance, manufacturing.</td>
+    </tr>
+  </tbody>
+</table>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: PERT vs CPM Focus</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+[ Project Environment ]
+         |
+    +----+----+
+    |         |
+[Uncertain] [Predictable]
+    |         |
+ [PERT]     [CPM]
+    |         |
+ (Time)  (Time &amp; Cost)
+  </pre>
+</div>
+<p>In modern project management software, the distinction between PERT and CPM has blurred, as tools often combine the probabilistic time estimates of PERT with the cost-crashing capabilities of CPM. However, understanding their foundational differences is crucial for selecting the right approach based on project predictability and constraints.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-24">
                 <div class="q-text"><span class="q-badge">Q24</span><span>Explain how Critical Path is identified in a CPM network diagram.</span></div>
                 <div class="a-text">
-                    <h3>Critical Path in CPM</h3><p>The Critical Path is the longest continuous sequence of activities in a network diagram from start to finish. It dictates the shortest possible project duration. Any delay in critical path activities directly delays the entire project.</p>
+                    
+<h2>Identifying the Critical Path in a CPM Network Diagram</h2>
+<p>The Critical Path Method (CPM) is a fundamental project management technique used to schedule and manage complex projects. The core concept of CPM is the identification of the "Critical Path." The critical path is the longest sequence of dependent activities in a project plan that must be completed on time for the project to finish by its due date. Any delay in an activity on the critical path directly delays the entire project. Therefore, activities on the critical path have zero "slack" or "float."</p>
+<h3>Steps to Identify the Critical Path</h3>
+<p>Identifying the critical path involves a systematic process of forward and backward passes through a network diagram.</p>
+<ol>
+  <li><strong>List All Activities and Dependencies:</strong> First, break down the project into individual tasks (Work Breakdown Structure). Identify the immediate predecessors for each activity to establish dependencies.</li>
+  <li><strong>Estimate Activity Durations:</strong> Assign a deterministic time estimate to each activity.</li>
+  <li><strong>Construct the Network Diagram:</strong> Draw a visual representation (usually Activity-on-Node) where nodes represent activities and arrows represent dependencies.</li>
+  <li><strong>Perform the Forward Pass (Calculate Earliest Times):</strong> 
+    <ul>
+      <li>Start from the initial activity. Its Earliest Start (ES) is 0.</li>
+      <li>Calculate Earliest Finish (EF) = ES + Duration.</li>
+      <li>For subsequent activities, the ES is the maximum of the EF of its immediate predecessors.</li>
+      <li>Continue this until the last activity is reached. The final EF is the minimum project completion time.</li>
+    </ul>
+  </li>
+  <li><strong>Perform the Backward Pass (Calculate Latest Times):</strong>
+    <ul>
+      <li>Start from the last activity. Its Latest Finish (LF) equals its EF.</li>
+      <li>Calculate Latest Start (LS) = LF - Duration.</li>
+      <li>For preceding activities, the LF is the minimum of the LS of all its immediate successors.</li>
+      <li>Continue this backwards to the initial activity.</li>
+    </ul>
+  </li>
+  <li><strong>Calculate Slack / Float:</strong> For each activity, calculate the Slack or Float using the formula: <strong>Slack = LS - ES</strong> (or Slack = LF - EF). Slack is the amount of time an activity can be delayed without delaying the project.</li>
+  <li><strong>Identify the Critical Path:</strong> The critical path consists of all activities where the Slack is exactly zero. This continuous path from the start node to the end node dictates the project's overall duration.</li>
+</ol>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: Example Network with Critical Path</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+       +--[B (Dur:4)]--+
+       |               v
+[Start]--&gt;[A (Dur:3)]----&gt;[D (Dur:5)]--&gt;[End]
+       |               ^
+       +--[C (Dur:2)]--+
+
+Path 1: Start -&gt; A(3) -&gt; B(4) -&gt; D(5) -&gt; End = 12 days (Critical Path)
+Path 2: Start -&gt; A(3) -&gt; C(2) -&gt; D(5) -&gt; End = 10 days
+(Slack for C = 12 - 10 = 2 days. B has 0 slack.)
+  </pre>
+</div>
+<p>By identifying the critical path, project managers know exactly which activities require close monitoring. If a critical activity is slipping, the manager must immediately intervene—perhaps by allocating more resources (crashing) or running activities in parallel (fast-tracking)—to bring the project back on schedule.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-25">
                 <div class="q-text"><span class="q-badge">Q25</span><span>Discuss the three time estimates used in PERT (Optimistic, Most Likely, Pessimistic).</span></div>
                 <div class="a-text">
-                    <h3>PERT Time Estimates</h3><p>PERT uses three estimates: <b>Optimistic (o):</b> Minimum time if everything goes perfectly. <b>Most Likely (m):</b> Normal time under average conditions. <b>Pessimistic (p):</b> Maximum time under adverse conditions. Expected time (te) = (o + 4m + p) / 6.</p>
+                    
+<h2>The Three Time Estimates Used in PERT</h2>
+<p>The Program Evaluation and Review Technique (PERT) is a probabilistic project management tool designed to handle projects characterized by a high degree of uncertainty regarding activity durations. Unlike the Critical Path Method (CPM), which uses a single deterministic time estimate, PERT acknowledges that real-world tasks often encounter unforeseen variables. To quantify this uncertainty and mathematically model the project duration, PERT employs three distinct time estimates for every activity.</p>
+<h3>1. Optimistic Time (t_o)</h3>
+<p>The optimistic time estimate represents the absolute minimum amount of time required to execute an activity. It assumes that everything goes perfectly: no resource shortages, no machine breakdowns, no approval delays, and optimal productivity from the workforce. Statistically, it is the best-case scenario and represents the shortest possible duration. The probability of actually completing the task in this time is very low (often considered to be around 1%).</p>
+<h3>2. Most Likely Time (t_m)</h3>
+<p>The most likely time is the most realistic estimate of the time required to complete an activity under normal conditions. It assumes that standard procedures are followed, typical delays occur, and average productivity is achieved. This estimate reflects the duration that would occur most frequently if the activity were repeated numerous times under identical conditions. It acts as the mode of the probability distribution for the activity's time.</p>
+<h3>3. Pessimistic Time (t_p)</h3>
+<p>The pessimistic time estimate represents the maximum possible time required to complete the activity under adverse conditions. It accounts for everything that could realistically go wrong: severe supply chain disruptions, equipment failures, significant rework, and poor weather conditions. However, it explicitly excludes "acts of God" or catastrophic events like major earthquakes or fires. Like the optimistic time, the probability of the activity taking this long is very low (around 1%).</p>
+<h3>Calculating Expected Time and Variance</h3>
+<p>PERT uses these three estimates, assuming a Beta probability distribution, to calculate a single Expected Time (t_e) and a Variance (&sigma;&sup2;) for each activity.</p>
+<ul>
+  <li><strong>Expected Time (t_e):</strong> This is a weighted average that gives heavy emphasis to the most likely time. Formula: <strong>t_e = (t_o + 4t_m + t_p) / 6</strong></li>
+  <li><strong>Variance (&sigma;&sup2;):</strong> This measures the degree of uncertainty or dispersion in the time estimates. Formula: <strong>&sigma;&sup2; = [(t_p - t_o) / 6]&sup2;</strong></li>
+</ul>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: PERT Beta Distribution Curve</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+Probability
+  |
+  |       *  (Most Likely, tm)
+  |      / \
+  |     /   \
+  |    /  |  \
+  |   /   |   \
+  |  /    te   \
+  |_/           \___________
+   to           tp          Time
+(Opt.)        (Pess.)
+  </pre>
+  <p><em>The curve is typically skewed to the right, reflecting that delays (pessimistic) tend to extend further from the most likely time than early finishes (optimistic). The expected time (t_e) is pulled slightly towards the longer tail.</em></p>
+</div>
+<p>By calculating the expected time and variance for all activities on the critical path, project managers can compute the overall expected project duration and determine the statistical probability of completing the project by any given target date. This probabilistic approach is invaluable in R&amp;D, software development, and aerospace industries where historical data is scarce and innovation brings inherent uncertainty.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-26">
                 <div class="q-text"><span class="q-badge">Q26</span><span>Explain Just-In-Time (JIT) production and Kanban system.</span></div>
                 <div class="a-text">
-                    <h3>JIT and Kanban</h3><p><b>JIT:</b> An inventory strategy to increase efficiency by receiving goods only as they are needed in the production process, reducing inventory costs.</p><p><b>Kanban:</b> A visual scheduling system (using cards) that triggers production and movement of materials in a JIT environment.</p>
+                    
+<h2>Just-In-Time (JIT) Production and the Kanban System</h2>
+<p>Just-In-Time (JIT) is an inventory strategy and production methodology pioneered by Toyota in the 1970s, forming a core pillar of the Toyota Production System (TPS). The fundamental philosophy of JIT is to produce and deliver exactly what is needed, in the exact quantity needed, at the exact time it is needed. It represents a shift from traditional "push" manufacturing systems, which build inventory based on forecasts, to a "pull" system driven by actual customer demand.</p>
+<h3>Principles of Just-In-Time (JIT) Production</h3>
+<p>The primary goal of JIT is the relentless elimination of waste (Muda), particularly the waste of overproduction and excess inventory. Holding large inventories ties up capital, occupies valuable warehouse space, and can hide underlying production problems (like defective machinery or unreliable suppliers).</p>
+<p>Key elements required for successful JIT implementation include:</p>
+<ul>
+  <li><strong>Continuous Flow:</strong> Arranging production so that parts move smoothly from one process to the next without waiting in queues.</li>
+  <li><strong>Takt Time:</strong> Synchronizing the pace of production with the pace of customer demand.</li>
+  <li><strong>Small Lot Sizes:</strong> Reducing batch sizes to improve flexibility and reduce work-in-progress inventory. This requires drastically reducing machine setup/changeover times (SMED).</li>
+  <li><strong>Supplier Partnerships:</strong> Establishing tight, collaborative relationships with a few reliable suppliers who can deliver high-quality parts precisely when required, bypassing incoming inspection.</li>
+  <li><strong>Built-in Quality (Jidoka):</strong> Defect-free production is mandatory; if a defect occurs, production stops immediately to fix the root cause, preventing defects from traveling downstream.</li>
+</ul>
+<h3>The Kanban System</h3>
+<p>Kanban is the nervous system of JIT. It is a visual signaling system used to control the flow of materials and manage inventory in a pull production system. "Kanban" translates to "visual card" or "signboard" in Japanese.</p>
+<p>In a Kanban system, downstream processes signal upstream processes when they need parts. Without a Kanban signal, the upstream process does not produce anything.</p>
+<ol>
+  <li><strong>Withdrawal Kanban:</strong> This card authorizes the movement of parts from a supermarket (inventory holding area) to a downstream consuming process.</li>
+  <li><strong>Production Kanban:</strong> This card authorizes an upstream producing process to manufacture a specific quantity of parts to replace what was just withdrawn.</li>
+</ol>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: The Kanban Pull System</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+[Customer Demand] 
+       | (Triggers final assembly)
+       v
+[Final Assembly Station] --(Sends Kanban Card)--&gt; [Supermarket/Buffer]
+                                                         ^
+                                                         | (Triggers production)
+                                              [Machining Station]
+  </pre>
+  <p><em>In this pull system, no station produces a part unless it receives a Kanban signal from the station downstream, cascading all the way from actual customer demand.</em></p>
+</div>
+<p>By using Kanban cards, bins, or electronic signals, the production system automatically self-regulates. It prevents overproduction, drastically minimizes inventory levels, and immediately highlights production bottlenecks. JIT and Kanban together transform a factory into a highly responsive, efficient, and lean operation, though they require high operational discipline and are vulnerable to supply chain disruptions.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-27">
                 <div class="q-text"><span class="q-badge">Q27</span><span>Discuss Preventive Maintenance vs Breakdown Maintenance strategies.</span></div>
                 <div class="a-text">
-                    <h3>Preventive vs Breakdown Maintenance</h3><p><b>Preventive:</b> Scheduled, proactive maintenance to prevent equipment failures (e.g., regular oil changes).</p><p><b>Breakdown:</b> Reactive maintenance performed only after an equipment fails or breaks down.</p>
+                    
+<h2>Preventive Maintenance vs. Breakdown Maintenance Strategies</h2>
+<p>Maintenance management is critical in industrial operations to ensure equipment reliability, maximize uptime, and minimize production costs. The two most fundamental, yet diametrically opposed, maintenance strategies are Preventive Maintenance (PM) and Breakdown Maintenance (also known as Run-to-Failure or Reactive Maintenance).</p>
+<h3>Breakdown Maintenance (Reactive Maintenance)</h3>
+<p>Breakdown maintenance operates on the principle of "fix it when it breaks." Under this strategy, equipment is operated until it completely fails or malfunctions, at which point the maintenance team is dispatched to repair or replace the broken components.</p>
+<p><strong>Pros:</strong> This strategy requires minimal upfront planning and zero initial investment in condition monitoring or scheduled downtime. It is perfectly suitable for cheap, non-critical, or disposable items (like lightbulbs or generic hand tools) where the cost of repair or replacement is lower than the cost of maintaining them.</p>
+<p><strong>Cons:</strong> For critical machinery, breakdown maintenance is disastrous. Failures are highly unpredictable, often occurring during peak production hours, leading to severe unplanned downtime, missed deadlines, and lost revenue. Furthermore, sudden failures can cause catastrophic secondary damage to other machine parts and pose severe safety hazards to operators. Expedited shipping for emergency spare parts and overtime labor costs make this strategy very expensive in the long run.</p>
+<h3>Preventive Maintenance (PM)</h3>
+<p>Preventive Maintenance is a proactive, time-based or meter-based strategy designed to avert equipment failure before it occurs. Maintenance tasks—such as lubrication, filter changes, belt tightening, and parts replacement—are performed at predetermined intervals (e.g., every 500 operating hours or every 3 months), regardless of the current condition of the equipment.</p>
+<p><strong>Pros:</strong> PM significantly reduces the likelihood of unexpected equipment failures, leading to increased machine reliability, extended equipment lifespan, and improved safety. Production schedules become highly predictable because maintenance downtime is planned in advance. It also reduces overall maintenance costs by avoiding expensive emergency repairs and secondary damage.</p>
+<p><strong>Cons:</strong> PM can be labor-intensive and costly to set up. A major drawback is the risk of "over-maintenance"—replacing parts that still have significant useful life remaining simply because the schedule dictates it. It also introduces the risk of maintenance-induced failures (human error during unnecessary servicing).</p>
+<h3>Comparative Summary</h3>
+<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width:100%;">
+  <thead>
+    <tr style="background-color: #f2f2f2;">
+      <th>Criteria</th>
+      <th>Breakdown Maintenance</th>
+      <th>Preventive Maintenance</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Approach</strong></td>
+      <td>Reactive (Fix after failure)</td>
+      <td>Proactive (Fix before failure)</td>
+    </tr>
+    <tr>
+      <td><strong>Planning required</strong></td>
+      <td>Minimal / None</td>
+      <td>High (Requires schedules and logs)</td>
+    </tr>
+    <tr>
+      <td><strong>Equipment Lifespan</strong></td>
+      <td>Generally shorter</td>
+      <td>Significantly extended</td>
+    </tr>
+    <tr>
+      <td><strong>Unplanned Downtime</strong></td>
+      <td>High</td>
+      <td>Low</td>
+    </tr>
+    <tr>
+      <td><strong>Overall Cost (Critical Assets)</strong></td>
+      <td>Very High (Emergency repairs, lost production)</td>
+      <td>Lower (Optimized life cycle cost)</td>
+    </tr>
+    <tr>
+      <td><strong>Best Suited For</strong></td>
+      <td>Non-critical, cheap, redundant equipment</td>
+      <td>Critical, expensive machinery</td>
+    </tr>
+  </tbody>
+</table>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: Maintenance Cost Curve</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+Cost
+ |
+ |  * (High Breakdown Costs)
+ |   \
+ |    \         * (Total Cost Optimum Point)
+ |     \      /   \
+ |      \   /       \ * (High PM Costs)
+ |       - -          \
+ |      Preventive Cost line -&gt;
+ +--------------------------------&gt; Level of Maintenance
+  </pre>
+  <p><em>As preventive maintenance increases, breakdown costs fall rapidly. The goal is to find the optimal point where the total maintenance cost (PM + Breakdown) is minimized.</em></p>
+</div>
+<p>Modern industries strive to minimize breakdown maintenance on critical assets, transitioning primarily to Preventive Maintenance, and eventually advancing to Predictive Maintenance (condition monitoring) to further optimize costs and reliability.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-28">
                 <div class="q-text"><span class="q-badge">Q28</span><span>Explain Supply Chain Management (SCM) and its core components.</span></div>
                 <div class="a-text">
-                    <h3>Supply Chain Management (SCM)</h3><p>SCM is the management of the flow of goods, data, and finances related to a product, from raw material procurement to final product delivery. Core components include Planning, Sourcing, Making, Delivering, and Returning.</p>
+                    
+<h2>Supply Chain Management (SCM) and Its Core Components</h2>
+<p>Supply Chain Management (SCM) is the holistic coordination and management of the entire network of businesses, individuals, resources, activities, and technologies involved in creating a product and delivering it to the end consumer. It encompasses the end-to-end flow of materials, information, and capital, from the procurement of raw materials to the final delivery of the finished product, and even beyond to returns and recycling.</p>
+<p>The primary objective of SCM is to maximize total supply chain value and achieve a sustainable competitive advantage by balancing supply with demand, minimizing costs, improving delivery speed, and enhancing customer satisfaction.</p>
+<h3>Core Components of Supply Chain Management</h3>
+<p>A robust supply chain is built on several highly integrated core components:</p>
+<ol>
+  <li><strong>Plan (Strategy):</strong> This is the strategic portion of SCM. It involves forecasting demand, determining the required resources, and creating a blueprint to meet customer demand efficiently. It includes defining supply chain metrics to monitor performance, costs, quality, and value.</li>
+  <li><strong>Source (Procurement):</strong> This component focuses on selecting reliable suppliers who will provide the goods and services needed to create the product. It involves negotiating contracts, establishing payment terms, managing vendor relationships, and overseeing the ordering, receiving, and inventorying of raw materials.</li>
+  <li><strong>Make (Manufacturing/Production):</strong> This is the execution phase where raw materials are transformed into finished products. It involves scheduling production activities, testing for quality, packaging, and preparing for delivery. This phase is heavily focused on productivity, efficiency, and quality control (often utilizing lean manufacturing principles).</li>
+  <li><strong>Deliver (Logistics):</strong> Often referred to as logistics, this component manages the coordination of customer orders, scheduling delivery, dispatching loads, invoicing customers, and receiving payments. It includes managing warehouses, selecting transportation carriers (road, rail, air, sea), and optimizing delivery routes to ensure timely and cost-effective distribution.</li>
+  <li><strong>Return (Reverse Logistics):</strong> An effective supply chain must be capable of handling returns smoothly. This involves establishing a responsive network for receiving defective, excess, or unwanted products back from customers. It includes customer support, repairs, recycling, or environmentally friendly disposal.</li>
+</ol>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: Flows in a Supply Chain</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+[Suppliers] ---&gt; [Manufacturers] ---&gt; [Distributors] ---&gt; [Retailers] ---&gt; [Consumers]
+
+1. Material Flow (Downstream): Raw Materials -&gt; Finished Goods -----------&gt;
+2. Information Flow (Bidirectional): &lt;--- Demand, Orders, Feedback, Status ---&gt;
+3. Financial Flow (Upstream): &lt;-------------------- Payments, Invoices, Credit
+  </pre>
+</div>
+<p>In modern globalized business, SCM is highly complex and relies heavily on sophisticated enterprise resource planning (ERP) software and real-time data analytics. Effective SCM minimizes the "bullwhip effect" (where small fluctuations in retail demand cause massive swings in wholesale and manufacturing supply), reduces holding costs, and ensures that the right product is at the right place at the right time.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-29">
                 <div class="q-text"><span class="q-badge">Q29</span><span>Discuss the objectives and principles of Material Handling in factories.</span></div>
                 <div class="a-text">
-                    <h3>Material Handling</h3><p>Involves short-distance movement of materials. Objectives: Minimize handling costs, reduce damage, and improve safety. Principles include the Unit Load Principle (moving items in large batches/pallets) and the Gravity Principle (using gravity to move materials where possible).</p>
+                    
+<h2>Objectives and Principles of Material Handling in Factories</h2>
+<p>Material Handling is defined as the movement, storage, protection, and control of materials and products throughout the processes of manufacturing, distribution, consumption, and disposal. It is not just about moving items from point A to point B; it is a critical, integrated system that directly impacts factory efficiency, safety, and operational costs. It is estimated that material handling accounts for 20% to 50% of the total manufacturing cost, despite adding zero direct value to the final product.</p>
+<h3>Objectives of Material Handling</h3>
+<p>The overarching goal of material handling is to transport materials safely, efficiently, and at the lowest possible cost. Specific objectives include:</p>
+<ul>
+  <li><strong>Minimize Handling Cost:</strong> Reducing the time, labor, and equipment involved in moving materials directly reduces production costs.</li>
+  <li><strong>Reduce Manufacturing Cycle Time:</strong> Efficient handling ensures that machines and operators are never waiting for parts, thereby accelerating the overall production cycle.</li>
+  <li><strong>Improve Utilization of Space:</strong> Maximizing vertical storage (using racks) and optimizing warehouse layouts to store more materials in less cubic space.</li>
+  <li><strong>Enhance Safety and Working Conditions:</strong> Eliminating heavy manual lifting reduces workplace accidents, ergonomic strains, and worker fatigue.</li>
+  <li><strong>Minimize Material Damage:</strong> Using appropriate equipment (like specialized pallets, shock-absorbing conveyors) prevents scratching, breakage, or contamination of sensitive components during transit.</li>
+</ul>
+<h3>Principles of Material Handling</h3>
+<p>To achieve these objectives, industrial engineers follow a set of established guidelines known as the Principles of Material Handling (originally codified by the Material Handling Institute):</p>
+<ol>
+  <li><strong>Planning Principle:</strong> All material handling should be the result of a deliberate plan that defines needs, performance objectives, and functional specifications before implementation.</li>
+  <li><strong>Standardization Principle:</strong> Standardize handling methods, equipment, bins, and pallets wherever possible to increase flexibility and reduce spare parts inventory.</li>
+  <li><strong>Work Principle:</strong> Material handling work should be minimized without sacrificing productivity. Eliminate unnecessary movements by optimizing plant layout (e.g., placing sequential machines closer together).</li>
+  <li><strong>Ergonomic Principle:</strong> Human capabilities and limitations must be recognized. Equipment should be designed to eliminate awkward postures, repetitive stress, and heavy manual lifting.</li>
+  <li><strong>Unit Load Principle:</strong> Materials should be aggregated into a single, larger unit (e.g., a loaded pallet or a standardized container) to be moved as one entity. Moving one pallet of 100 boxes via forklift is vastly more efficient than moving 100 boxes individually by hand.</li>
+  <li><strong>Space Utilization Principle:</strong> Effective and efficient use must be made of all available space, particularly utilizing overhead vertical space in warehouses.</li>
+  <li><strong>System Principle:</strong> Material handling and storage activities should be fully integrated to form a coordinated, operational system encompassing receiving, inspection, storage, production, packaging, and shipping.</li>
+  <li><strong>Automation Principle:</strong> Material handling operations should be mechanized or automated where feasible to improve operational efficiency, increase responsiveness, and improve consistency.</li>
+  <li><strong>Environmental Principle:</strong> Environmental impact and energy consumption should be considered criteria when designing or selecting alternative equipment and material handling systems.</li>
+  <li><strong>Life Cycle Cost Principle:</strong> A thorough economic analysis should account for the entire life cycle of all material handling equipment, including initial cost, maintenance, operating energy, and salvage value, rather than just the initial purchase price.</li>
+</ol>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: Unit Load Principle</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+Inefficient (Individual Handling)        Efficient (Unit Load Handling)
+[Box 1] [Box 2] [Box 3] [Box 4]          +-----------------+
+  |       |       |       |       ---&gt;   | [1][2][3][4]    |
+ (Hand Carried, 4 Trips)                 | [Pallet]        |
+                                         +-----------------+
+                                         (Moved via Forklift, 1 Trip)
+  </pre>
+</div>
+<p>By rigorously applying these principles, factory management can transform material handling from a necessary operational evil into a streamlined system that significantly boosts overall factory productivity and profitability.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-30">
                 <div class="q-text"><span class="q-badge">Q30</span><span>Explain the functions of Human Resource Management (HRM).</span></div>
                 <div class="a-text">
-                    <h3>Functions of HRM</h3><p>HRM functions include Job Analysis, Recruitment and Selection, Training and Development, Performance Appraisal, Compensation and Benefits administration, and maintaining Employee Relations.</p>
+                    
+<h2>The Functions of Human Resource Management (HRM)</h2>
+<p>Human Resource Management (HRM) is the strategic and operational process of managing an organization's most valuable asset: its employees. HRM focuses on recruiting, managing, developing, and retaining the workforce to ensure that the organization can achieve its strategic objectives effectively. The functions of HRM are broad and multi-dimensional, typically categorized into Managerial Functions and Operative Functions.</p>
+<h3>I. Managerial Functions</h3>
+<p>These are the foundational management tasks applied specifically to human resources, mirroring general management principles.</p>
+<ul>
+  <li><strong>Planning:</strong> Forecasting the organization's future human resource needs (HR Planning). It involves determining the number and type of employees required, ensuring the right people are in the right jobs at the right time.</li>
+  <li><strong>Organizing:</strong> Designing the organizational structure, dividing work into distinct jobs, grouping tasks into departments, and defining relationships, authority, and accountability among employees.</li>
+  <li><strong>Directing:</strong> Activating the workforce through effective leadership, motivation, communication, and supervision to encourage employees to perform to the best of their abilities.</li>
+  <li><strong>Controlling:</strong> Establishing performance standards, measuring actual performance against those standards, and taking corrective actions. This includes performance appraisals and HR audits.</li>
+</ul>
+<h3>II. Operative (Specific) Functions</h3>
+<p>These are the day-to-day tactical activities executed by the HR department.</p>
+<ol>
+  <li><strong>Procurement / Acquisition:</strong> This is the process of securing the right personnel.
+    <ul>
+      <li><em>Job Analysis:</em> Determining the duties, responsibilities, and skills required for a job.</li>
+      <li><em>Recruitment:</em> Attracting a pool of qualified candidates.</li>
+      <li><em>Selection:</em> Interviewing, testing, and hiring the best-fit candidate from the pool.</li>
+      <li><em>Placement &amp; Induction:</em> Assigning the employee to a specific job and introducing them to the organization's culture and policies.</li>
+    </ul>
+  </li>
+  <li><strong>Development:</strong> Upgrading the skills and knowledge of employees to meet current and future job demands.
+    <ul>
+      <li><em>Training:</em> Providing specific skills required for the immediate job.</li>
+      <li><em>Executive Development:</em> Long-term educational programs for managers.</li>
+      <li><em>Career Planning:</em> Helping employees map out their growth path within the company.</li>
+    </ul>
+  </li>
+  <li><strong>Compensation:</strong> Determining fair and equitable remuneration for work performed.
+    <ul>
+      <li><em>Job Evaluation:</em> Determining the relative worth of each job to establish pay structures.</li>
+      <li><em>Wage and Salary Administration:</em> Managing base pay, bonuses, and incentives.</li>
+      <li><em>Fringe Benefits:</em> Administering health insurance, retirement plans, paid leave, and other perks.</li>
+    </ul>
+  </li>
+  <li><strong>Integration &amp; Maintenance:</strong> Fostering a positive work environment and retaining talent.
+    <ul>
+      <li><em>Employee Relations:</em> Handling grievances, disciplinary actions, and maintaining harmony between management and labor unions (Collective Bargaining).</li>
+      <li><em>Motivation:</em> Designing systems to keep employee morale high.</li>
+      <li><em>Health and Safety:</em> Ensuring a safe physical working environment compliant with industrial laws (e.g., Factories Act).</li>
+    </ul>
+  </li>
+</ol>
+<div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+  <h4 style="margin-top:0;">Diagram: HRM Core Functions Lifecycle</h4>
+  <pre style="background:#f4f4f4; padding:10px;">
+       +--&gt; [1. Acquisition] (Recruitment &amp; Selection)
+       |            |
+       |            v
+[4. Maintenance]  [2. Development] (Training &amp; Career Growth)
+(Retention &amp;        |
+Relations)          v
+       |            |
+       +---- [3. Compensation] (Salary, Benefits, Rewards)
+  </pre>
+  <p><em>The operative functions form a continuous lifecycle, constantly bringing in talent, developing their skills, rewarding them appropriately, and maintaining a positive environment to retain them.</em></p>
+</div>
+<p>In the contemporary corporate landscape, HRM has evolved from a purely administrative "personnel" role into a strategic partnership role, heavily involved in shaping corporate culture, managing change, and driving organizational success through human capital.</p>
+
                 </div>
             </div>
             <div class="qa-card" id="gb-31">
                 <div class="q-text"><span class="q-badge">Q31</span><span>Differentiate Job Description and Job Specification.</span></div>
                 <div class="a-text">
-                    <h3>Job Description vs Job Specification</h3><p><b>Job Description:</b> A document outlining the roles, responsibilities, duties, and scope of a specific job.</p><p><b>Job Specification:</b> Details the minimum qualifications, skills, education, and experience a candidate needs to perform the job.</p>
+                    <div class="answer-container">
+    <h2>Job Description vs. Job Specification</h2>
+    <p>In the realm of Human Resource Management, job analysis is a fundamental process that yields two critical documents: the <strong>Job Description</strong> and the <strong>Job Specification</strong>. While they are closely related and often developed simultaneously, they serve distinct purposes and contain different types of information.</p>
+    
+    <h3>What is a Job Description?</h3>
+    <p>A Job Description is a broad, written statement of a specific job. It defines the duties, responsibilities, reporting relationships, working conditions, and supervisory responsibilities. Essentially, it profiles the <em>job itself</em> rather than the person who will fill the job. It acts as a primary tool for explaining what the company expects from the employee in that specific role.</p>
+    <ul>
+        <li><strong>Focus:</strong> The tasks, environment, and responsibilities of the role.</li>
+        <li><strong>Components:</strong> Job title, location, summary, duties, machines/tools used, working conditions, and hazards.</li>
+        <li><strong>Purpose:</strong> Used for orientation, training, performance appraisal, and defining boundaries of responsibility.</li>
+    </ul>
+
+    <h3>What is a Job Specification?</h3>
+    <p>A Job Specification (also known as employee specification or person specification) is a written statement of the minimum acceptable qualifications, skills, physical and psychological traits that an individual must possess to perform the job successfully. It profiles the <em>ideal candidate</em> for the job, serving as a yardstick for evaluating applicants.</p>
+    <ul>
+        <li><strong>Focus:</strong> The human attributes, competencies, and qualifications required to do the job.</li>
+        <li><strong>Components:</strong> Education, experience, training, physical effort, communication skills, emotional characteristics, and sensory demands.</li>
+        <li><strong>Purpose:</strong> Used primarily for recruitment, selection, interviewing, and hiring decisions.</li>
+    </ul>
+
+    <h3>Key Differences (Comparative Diagram)</h3>
+    <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; margin-bottom: 20px;">
+        <tr style="background-color:#f2f2f2;">
+            <th>Basis of Difference</th>
+            <th>Job Description</th>
+            <th>Job Specification</th>
+        </tr>
+        <tr>
+            <td><strong>Meaning</strong></td>
+            <td>A document detailing what the job entails (duties, roles).</td>
+            <td>A document detailing what the employee must possess (skills, qualifications).</td>
+        </tr>
+        <tr>
+            <td><strong>Focus</strong></td>
+            <td>Focuses on the <em>Job</em>.</td>
+            <td>Focuses on the <em>Person</em>.</td>
+        </tr>
+        <tr>
+            <td><strong>Origin</strong></td>
+            <td>Derived from job analysis.</td>
+            <td>Derived from the job description.</td>
+        </tr>
+        <tr>
+            <td><strong>Content</strong></td>
+            <td>Tasks, responsibilities, working conditions, hazards, reporting structure.</td>
+            <td>Qualifications, experience, physical traits, mental abilities.</td>
+        </tr>
+        <tr>
+            <td><strong>Utility</strong></td>
+            <td>Helps in evaluating job performance, training, and setting compensation.</td>
+            <td>Helps in selecting, recruiting, and hiring the right candidate.</td>
+        </tr>
+        <tr>
+            <td><strong>Orientation</strong></td>
+            <td>Task-oriented.</td>
+            <td>Personnel-oriented.</td>
+        </tr>
+    </table>
+    
+    <h3>Visualizing the Relationship</h3>
+    <div style="text-align: center; margin: 20px 0; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
+        <p><strong>[ Job Analysis ]</strong> &rarr; Generates Data</p>
+        <p>&#8601; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &#8600;</p>
+        <p><strong>[ Job Description ]</strong> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <strong>[ Job Specification ]</strong></p>
+        <p><small>(Tasks, Duties, Responsibilities)</small> &nbsp; &nbsp; &nbsp; &nbsp; <small>(Skills, Education, Experience)</small></p>
+    </div>
+    
+    <p>In conclusion, a job description outlines the parameters of the position within the organization, while the job specification outlines the human characteristics needed to execute those parameters effectively. Together, they form the backbone of modern recruitment, talent management, and organizational structuring strategies. Understanding both is critical for HR professionals aiming to match the right talent with the right roles.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-32">
                 <div class="q-text"><span class="q-badge">Q32</span><span>Discuss various methods of Performance Appraisal in modern organizations.</span></div>
                 <div class="a-text">
-                    <h3>Performance Appraisal</h3><p>Methods include: 360-Degree Feedback (ratings from peers, subordinates, managers), Management by Objectives (MBO - evaluating based on achieved goals), and Behaviorally Anchored Rating Scales (BARS - rating behavior against specific examples).</p>
+                    <div class="answer-container">
+    <h2>Methods of Performance Appraisal in Modern Organizations</h2>
+    <p>Performance appraisal is the systematic evaluation of an employee's performance, productivity, and potential against pre-established criteria and organizational objectives. In modern organizations, performance appraisal has evolved from a simple annual review into a continuous, multi-dimensional process. The methods of performance appraisal are broadly categorized into <strong>Traditional Methods</strong> and <strong>Modern Methods</strong>.</p>
+    
+    <h3>Traditional Methods</h3>
+    <p>These methods are older and often focus on rating personal traits rather than measurable outcomes.</p>
+    <ul>
+        <li><strong>Graphic Rating Scale:</strong> Evaluates employees on a scale (e.g., 1 to 5) across various traits like attendance, teamwork, and quality of work. It is simple but prone to rater biases (like the halo effect).</li>
+        <li><strong>Ranking Method:</strong> Employees are ranked from best to worst based on overall performance. This is useful for small groups but difficult for large departments.</li>
+        <li><strong>Paired Comparison:</strong> Each employee is compared with every other employee in the group. The one with the most "wins" ranks highest.</li>
+        <li><strong>Critical Incident Method:</strong> The manager records specific incidents of highly favorable or highly unfavorable employee behaviors. This provides specific examples for review but requires continuous documentation.</li>
+    </ul>
+
+    <h3>Modern Methods</h3>
+    <p>Modern methods are more objective, future-oriented, and focused on development and measurable achievements.</p>
+    <ul>
+        <li><strong>Management by Objectives (MBO):</strong> Developed by Peter Drucker, this involves the manager and employee collaboratively setting specific, measurable goals (SMART goals) for a specific period. Performance is then evaluated based on the achievement of these goals. It aligns individual goals with organizational objectives.</li>
+        <li><strong>360-Degree Feedback:</strong> Performance feedback is collected from all around the employee&mdash;supervisors, peers, subordinates, and sometimes customers. This provides a holistic view of the employee's performance and behavior, reducing individual bias.</li>
+        <li><strong>Behaviorally Anchored Rating Scales (BARS):</strong> Combines elements of the critical incident and graphic rating scale approaches. It rates employees along a scale, but the points on the scale are anchored with specific behavioral examples. It is highly valid but time-consuming to develop.</li>
+        <li><strong>Assessment Centers:</strong> Employees participate in simulations, role-plays, and group discussions while being observed by trained evaluators. Primarily used for identifying managerial potential.</li>
+        <li><strong>Human Resource Accounting (HRA):</strong> Evaluates an employee's performance in terms of the monetary value they bring to the organization compared to the cost incurred on them (salary, training).</li>
+    </ul>
+
+    <h3>Diagram: The 360-Degree Feedback Ecosystem</h3>
+    <div style="border:1px solid #ccc; padding: 20px; text-align: center; border-radius: 8px; margin: 20px 0; background-color:#fafafa;">
+        <p><strong>Manager / Supervisor</strong></p>
+        <p>&#8595;</p>
+        <p><strong>Peers / Colleagues</strong> &rarr; &nbsp; <strong>[ EMPLOYEE ]</strong> &nbsp; &larr; <strong>Customers / Clients</strong></p>
+        <p>&#8593;</p>
+        <p><strong>Subordinates / Direct Reports</strong></p>
+        <p><em>(Self-Appraisal is also included at the center)</em></p>
+    </div>
+
+    <p>In conclusion, modern organizations increasingly prefer methods like MBO, 360-Degree Feedback, and continuous performance management over static traditional methods. The choice of method depends on the organization's culture, the nature of the jobs, and the primary purpose of the appraisal (e.g., compensation vs. development). A hybrid approach combining MBO for objective results and 360-degree feedback for behavioral insights is highly effective.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-33">
                 <div class="q-text"><span class="q-badge">Q33</span><span>Explain the concept of Value Engineering and Value Analysis.</span></div>
                 <div class="a-text">
-                    <h3>Value Engineering and Value Analysis</h3><p>Both aim to reduce costs while maintaining or improving product function/quality. <b>Value Engineering</b> is applied during the design phase of a new product. <b>Value Analysis</b> is applied to existing products to identify cost-saving modifications.</p>
+                    <div class="answer-container">
+    <h2>Value Engineering and Value Analysis</h2>
+    <p>Value Engineering (VE) and Value Analysis (VA) are systematic, function-based approaches used to improve the value of products, projects, or processes. The core objective is to maximize the function/utility of a product while minimizing its cost, without degrading quality, reliability, or performance. The formula for Value is:</p>
+    
+    <div style="text-align: center; margin: 15px; font-size: 1.2em;">
+        <strong>Value = Function (Utility) / Cost</strong>
+    </div>
+
+    <h3>Concept of Value Analysis (VA)</h3>
+    <p>Value Analysis is a post-manufacturing process. It is applied to <em>existing products</em> that are already in the market or production phase. The goal is to analyze the existing product to see if its cost can be reduced or its function improved.</p>
+    <ul>
+        <li><strong>Application Phase:</strong> Existing products.</li>
+        <li><strong>Objective:</strong> Cost reduction and elimination of unnecessary features or materials.</li>
+        <li><strong>Team:</strong> Usually involves cross-functional teams from production, purchasing, and engineering evaluating a product already in use.</li>
+        <li><strong>Example:</strong> Analyzing a currently manufactured vacuum cleaner and replacing metal casing parts with high-grade, cheaper plastics without losing durability.</li>
+    </ul>
+
+    <h3>Concept of Value Engineering (VE)</h3>
+    <p>Value Engineering is a pre-manufacturing process. It is applied during the <em>design and development stage</em> of a new product. It aims to build value into the product from the very beginning, preventing unnecessary costs before they occur.</p>
+    <ul>
+        <li><strong>Application Phase:</strong> Product design and development.</li>
+        <li><strong>Objective:</strong> Cost avoidance and optimizing the design before production starts.</li>
+        <li><strong>Team:</strong> Involves design engineers, R&D, and cost estimators.</li>
+        <li><strong>Example:</strong> Designing a new smartphone and choosing to integrate components onto a single motherboard early in the design phase to avoid the cost of multiple connectors later.</li>
+    </ul>
+
+    <h3>The Systematic Job Plan for VE/VA</h3>
+    <p>Both VE and VA generally follow a structured approach known as the Value Methodology Job Plan, which includes several phases:</p>
+    <ol>
+        <li><strong>Information Phase:</strong> What is the product? What does it do? What does it cost?</li>
+        <li><strong>Function Analysis Phase:</strong> Identify and classify the functions (Basic vs. Secondary). Determine the worth of each function.</li>
+        <li><strong>Creative Phase:</strong> Brainstorm alternative ways to achieve the basic function. "How else can we do this?"</li>
+        <li><strong>Evaluation Phase:</strong> Evaluate the brainstormed alternatives based on feasibility, cost, and quality.</li>
+        <li><strong>Development Phase:</strong> Develop the best alternatives into concrete proposals.</li>
+        <li><strong>Presentation Phase:</strong> Present the recommended solution to management for approval.</li>
+    </ol>
+
+    <h3>Comparison Diagram</h3>
+    <table border="1" cellpadding="10" cellspacing="0" style="width:100%; border-collapse:collapse; margin-bottom: 20px;">
+        <tr style="background-color:#eef2f3;">
+            <th>Parameter</th>
+            <th>Value Engineering (VE)</th>
+            <th>Value Analysis (VA)</th>
+        </tr>
+        <tr>
+            <td><strong>Timing</strong></td>
+            <td>Pre-production / Design stage.</td>
+            <td>Post-production / Existing products.</td>
+        </tr>
+        <tr>
+            <td><strong>Primary Goal</strong></td>
+            <td>Cost Avoidance & Value Creation.</td>
+            <td>Cost Reduction.</td>
+        </tr>
+        <tr>
+            <td><strong>Nature of Action</strong></td>
+            <td>Proactive approach.</td>
+            <td>Reactive approach.</td>
+        </tr>
+        <tr>
+            <td><strong>Impact on Cost</strong></td>
+            <td>High potential to lock in low costs.</td>
+            <td>Limited by existing manufacturing setups.</td>
+        </tr>
+    </table>
+
+    <p>In summary, while both techniques seek to enhance the Value ratio (Function/Cost), Value Engineering is proactive and focuses on designing value in, whereas Value Analysis is reactive and focuses on analyzing and improving existing products to strip unnecessary costs out.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-34">
                 <div class="q-text"><span class="q-badge">Q34</span><span>Discuss Industrial Safety and accident prevention measures in factories.</span></div>
                 <div class="a-text">
-                    <h3>Industrial Safety</h3><p>Accident prevention involves safe workplace design, providing Personal Protective Equipment (PPE), implementing safety protocols, regular safety training, machine guarding, and proper hazardous material handling.</p>
+                    <div class="answer-container">
+    <h2>Industrial Safety and Accident Prevention Measures in Factories</h2>
+    <p>Industrial safety refers to the management of all operations and events within an industry in order to protect its employees and assets by minimizing hazards, risks, accidents, and near-misses. In factories, where heavy machinery, hazardous chemicals, and high-energy processes are common, ensuring occupational health and safety is of paramount importance for moral, legal, and financial reasons.</p>
+    
+    <h3>Causes of Industrial Accidents</h3>
+    <p>Accidents do not just happen; they are caused. The causes can be broadly classified into two categories:</p>
+    <ul>
+        <li><strong>Unsafe Conditions (Technical Causes):</strong> Defective equipment, lack of machine guards, poor lighting, poor ventilation, slippery floors, and improper material storage.</li>
+        <li><strong>Unsafe Acts (Human Causes):</strong> Operating equipment without authority, working at unsafe speeds, bypassing safety devices, failure to use Personal Protective Equipment (PPE), and horseplay.</li>
+    </ul>
+
+    <h3>Measures for Accident Prevention</h3>
+    <p>Preventing accidents requires a comprehensive strategy that addresses engineering, education, and enforcement (often called the 3 E's of Safety). Detailed measures include:</p>
+    
+    <h4>1. Engineering and Technical Measures</h4>
+    <ul>
+        <li><strong>Machine Guarding:</strong> Installing physical barriers, light curtains, or two-hand controls on moving parts of machinery (like flywheels, gears, and belts) to prevent contact.</li>
+        <li><strong>Ergonomic Design:</strong> Designing workstations, tools, and tasks to fit the worker, reducing physical strain, fatigue, and the risk of musculoskeletal disorders.</li>
+        <li><strong>Plant Maintenance:</strong> Implementing strict preventive maintenance schedules for machinery to avoid unexpected breakdowns that can lead to accidents.</li>
+        <li><strong>Safe Environment:</strong> Ensuring adequate illumination, proper ventilation to remove toxic fumes, controlling noise levels, and maintaining clean, slip-resistant floors.</li>
+    </ul>
+
+    <h4>2. Administrative and Educational Measures</h4>
+    <ul>
+        <li><strong>Safety Training:</strong> Conducting mandatory safety induction programs for new employees and continuous refresher training on hazard recognition and emergency procedures.</li>
+        <li><strong>Standard Operating Procedures (SOPs):</strong> Developing and strictly enforcing SOPs for all hazardous tasks.</li>
+        <li><strong>Use of PPE:</strong> Mandating the use of Personal Protective Equipment such as safety helmets, goggles, earplugs, safety shoes, and gloves, and ensuring they are regularly inspected.</li>
+        <li><strong>Safety Audits and Inspections:</strong> Regular safety patrols and formal audits to identify and rectify unsafe acts and conditions proactively.</li>
+    </ul>
+
+    <h4>3. Organizational Measures</h4>
+    <ul>
+        <li><strong>Safety Committees:</strong> Forming bipartite safety committees comprising both management and worker representatives to investigate incidents and recommend improvements.</li>
+        <li><strong>Safety Culture:</strong> Promoting a "safety-first" culture where employees feel empowered to report hazards without fear of reprisal. Management commitment is crucial here.</li>
+        <li><strong>Emergency Preparedness:</strong> Conducting regular fire drills, maintaining clear evacuation routes, and keeping first-aid facilities well-stocked and accessible.</li>
+    </ul>
+
+    <h3>Hierarchy of Hazard Controls (Diagram)</h3>
+    <div style="text-align: center; margin: 20px 0; font-family: sans-serif;">
+        <div style="background-color: #ff4d4d; color: white; padding: 10px; width: 80%; margin: 0 auto; border-radius: 4px;"><strong>1. Elimination:</strong> Physically remove the hazard (Most Effective)</div>
+        <div style="background-color: #ff751a; color: white; padding: 10px; width: 70%; margin: 5px auto; border-radius: 4px;"><strong>2. Substitution:</strong> Replace the hazard</div>
+        <div style="background-color: #ffb84d; color: white; padding: 10px; width: 60%; margin: 5px auto; border-radius: 4px;"><strong>3. Engineering Controls:</strong> Isolate people from the hazard</div>
+        <div style="background-color: #ffd11a; color: black; padding: 10px; width: 50%; margin: 5px auto; border-radius: 4px;"><strong>4. Administrative Controls:</strong> Change the way people work</div>
+        <div style="background-color: #2eb82e; color: white; padding: 10px; width: 40%; margin: 5px auto; border-radius: 4px;"><strong>5. PPE:</strong> Protect the worker with equipment (Least Effective)</div>
+    </div>
+
+    <p>In conclusion, industrial safety is not a one-time setup but a continuous process. By rigorously implementing engineering controls, fostering safety awareness through training, and adhering to industrial legislation (like the Factories Act, 1948 in India), organizations can drastically reduce accident rates, thereby boosting morale and productivity while reducing compensation and breakdown costs.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-35">
                 <div class="q-text"><span class="q-badge">Q35</span><span>Explain Collective Bargaining and Industrial Disputes settlement mechanisms.</span></div>
                 <div class="a-text">
-                    <h3>Collective Bargaining</h3><p>A process where representatives of management and a labor union negotiate conditions of employment (wages, hours, working conditions). Disputes can be settled via Conciliation, Mediation, or Arbitration.</p>
+                    <div class="answer-container">
+    <h2>Collective Bargaining and Industrial Disputes Settlement Mechanisms</h2>
+    <p>In industrial relations, conflicts and disputes between employers and employees (often represented by trade unions) are inevitable. Establishing robust mechanisms to negotiate terms and settle these disputes is critical for maintaining industrial peace, uninterrupted production, and economic stability.</p>
+    
+    <h3>Collective Bargaining</h3>
+    <p>Collective bargaining is a fundamental process in industrial relations. It is a negotiation process between employers (or a group of employers) and a group of employees (usually represented by a labor union) aimed at reaching agreements that regulate working conditions.</p>
+    <ul>
+        <li><strong>Core Objective:</strong> To arrive at a collective agreement regarding wages, working hours, benefits, workplace safety, and grievance procedures.</li>
+        <li><strong>Process:</strong> It involves preparation, proposal, negotiation (give and take), agreement, and finally, administration of the contract.</li>
+        <li><strong>Importance:</strong> It democratizes the workplace, giving workers a collective voice. It is a proactive mechanism that prevents disputes from escalating into strikes or lockouts by establishing mutually agreed terms.</li>
+    </ul>
+
+    <h3>Mechanisms for Settlement of Industrial Disputes</h3>
+    <p>When collective bargaining fails, or grievances arise during the tenure of an agreement, formal dispute settlement mechanisms are triggered. In India, the Industrial Disputes Act, 1947 outlines several statutory mechanisms, progressing from amicable settlement to legal adjudication.</p>
+
+    <h4>1. Conciliation</h4>
+    <p>Conciliation is a non-binding process where an independent third party (the Conciliation Officer or a Board of Conciliation) helps the disputing parties resolve their differences amicably.</p>
+    <ul>
+        <li>The conciliator acts as a facilitator, trying to bridge the gap between the parties.</li>
+        <li>The conciliator has no power to impose a decision. If an agreement is reached, a memorandum of settlement is signed.</li>
+    </ul>
+
+    <h4>2. Arbitration</h4>
+    <p>If conciliation fails, parties may voluntarily agree to submit their dispute to an independent arbitrator. Arbitration can be voluntary or compulsory.</p>
+    <ul>
+        <li>The arbitrator (who could be a retired judge or an industry expert mutually agreed upon) listens to both sides, examines evidence, and delivers a judgment known as an <strong>Award</strong>.</li>
+        <li>Unlike conciliation, the arbitrator's award is usually binding on both parties.</li>
+    </ul>
+
+    <h4>3. Adjudication</h4>
+    <p>Adjudication is the ultimate legal remedy. It involves the mandatory settlement of an industrial dispute by a labor court or tribunal appointed by the government.</p>
+    <ul>
+        <li><strong>Labour Courts:</strong> Deal with matters specified in the Second Schedule (e.g., legality of an order passed by an employer, dismissal, discharge, or withdrawal of concessions).</li>
+        <li><strong>Industrial Tribunals:</strong> Deal with broader and more significant matters in the Third Schedule (e.g., wages, compensatory allowances, hours of work, bonus, provident fund).</li>
+        <li><strong>National Tribunals:</strong> Appointed by the Central Government for disputes of national importance or affecting industrial establishments situated in more than one state.</li>
+        <li>The decision of the adjudicatory body is binding and legally enforceable.</li>
+    </ul>
+
+    <h3>Flowchart of Dispute Settlement</h3>
+    <div style="background-color: #f9f9f9; padding: 15px; border: 1px solid #ccc; border-radius: 5px; text-align: center; margin: 20px 0;">
+        <p><strong>Industrial Dispute Arises</strong></p>
+        <p style="font-size: 20px;">&#8595;</p>
+        <p><strong>Bipartite Negotiation (Collective Bargaining)</strong><br><span style="color:red; font-size: 0.9em;">(If Failure)</span></p>
+        <p style="font-size: 20px;">&#8595;</p>
+        <p><strong>Conciliation (Tripartite, Facilitative)</strong><br><span style="color:red; font-size: 0.9em;">(If Failure)</span></p>
+        <p style="font-size: 20px;">&#8595;</p>
+        <p><strong>Voluntary Arbitration</strong> (Optional Path)</p>
+        <p><em>OR</em> <span style="font-size: 20px;">&#8595;</span></p>
+        <p><strong>Adjudication (Labour Court / Industrial Tribunal - Legal & Binding)</strong></p>
+    </div>
+
+    <p>In conclusion, collective bargaining acts as the first line of defense against industrial unrest by fostering mutual agreement. However, when negotiations deadlock, the escalating mechanisms of conciliation, arbitration, and adjudication provide a structured, legal pathway to resolve disputes, ensuring that grievances are addressed systematically without crippling industrial operations.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-36">
                 <div class="q-text"><span class="q-badge">Q36</span><span>Write a short note on Corporate Social Responsibility (CSR).</span></div>
                 <div class="a-text">
-                    <h3>Corporate Social Responsibility (CSR)</h3><p>CSR is a business model that helps a company be socially accountable to itself, its stakeholders, and the public. It includes philanthropic efforts, environmental conservation, and ethical labor practices.</p>
+                    <div class="answer-container">
+    <h2>Short Note on Corporate Social Responsibility (CSR)</h2>
+    <p>Corporate Social Responsibility (CSR) is a self-regulating business model that helps a company be socially accountable—to itself, its stakeholders, and the public. By practicing corporate social responsibility, also called corporate citizenship, companies can be conscious of the kind of impact they are having on all aspects of society, including economic, social, and environmental.</p>
+    
+    <h3>Core Concept and Philosophy</h3>
+    <p>Traditionally, a corporation's primary responsibility was seen solely as maximizing shareholder wealth (the Friedman doctrine). However, the modern CSR paradigm argues that businesses operate within a society and rely on its resources (human, natural, and infrastructure). Therefore, they have a moral obligation to give back and ensure their operations do not harm the society or the environment. CSR shifts the focus from the "bottom line" (profit) to the <strong>"Triple Bottom Line" (People, Planet, Profit)</strong>.</p>
+
+    <h3>Key Dimensions of CSR</h3>
+    <ul>
+        <li><strong>Environmental Responsibility:</strong> Focuses on reducing carbon footprints, utilizing renewable energy, minimizing waste, conserving water, and engaging in sustainable manufacturing practices. Examples include planting trees or eliminating single-use plastics in operations.</li>
+        <li><strong>Social/Ethical Responsibility:</strong> Ensuring fair labor practices, human rights across the supply chain, promoting diversity and inclusion, and ensuring safe working conditions. It also involves ethical marketing and transparency.</li>
+        <li><strong>Philanthropic Responsibility:</strong> Active charitable giving and community involvement. This includes funding educational programs, healthcare initiatives, disaster relief, and supporting local NGOs.</li>
+        <li><strong>Economic Responsibility:</strong> The baseline requirement that a company must be profitable to survive, but it should achieve profitability while adhering to the other three responsibilities. It implies fair pricing, paying fair wages, and fulfilling tax obligations.</li>
+    </ul>
+
+    <h3>CSR in the Indian Context (Legal Mandate)</h3>
+    <p>India is the first country in the world to make CSR mandatory, following an amendment to the <strong>Companies Act, 2013</strong> (under Section 135). The law stipulates that businesses with a net worth of ₹500 crore or more, a turnover of ₹1,000 crore or more, or a net profit of ₹5 crore or more during any financial year must spend <strong>at least 2% of their average net profits</strong> made during the three immediately preceding financial years on CSR activities.</p>
+    
+    <h3>Benefits of CSR to the Corporation</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 15px;" border="1" cellpadding="8">
+        <tr style="background-color: #f4f4f4;">
+            <th>Benefit</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><strong>Brand Reputation</strong></td>
+            <td>Enhances public image and builds trust with consumers who increasingly prefer socially responsible brands.</td>
+        </tr>
+        <tr>
+            <td><strong>Talent Attraction</strong></td>
+            <td>Millennials and Gen Z workers heavily favor employers with strong environmental and social commitments.</td>
+        </tr>
+        <tr>
+            <td><strong>Risk Management</strong></td>
+            <td>Proactive environmental and social policies mitigate regulatory risks and potential PR disasters.</td>
+        </tr>
+        <tr>
+            <td><strong>Customer Loyalty</strong></td>
+            <td>Consumers often remain loyal to brands that align with their personal ethical values.</td>
+        </tr>
+    </table>
+
+    <p>In conclusion, Corporate Social Responsibility is no longer merely a philanthropic afterthought or a public relations exercise; it is a core strategic function. In the modern industrial landscape, integrating CSR into business strategy is essential for sustainable growth, risk mitigation, and fostering long-term stakeholder value.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-37">
                 <div class="q-text"><span class="q-badge">Q37</span><span>Explain the concept of Enterprise Resource Planning (ERP).</span></div>
                 <div class="a-text">
-                    <h3>Enterprise Resource Planning (ERP)</h3><p>ERP is integrated software used by organizations to manage core business processes (finance, HR, manufacturing, supply chain, services, procurement) in a centralized database, ensuring data consistency across departments.</p>
+                    <div class="answer-container">
+    <h2>The Concept of Enterprise Resource Planning (ERP)</h2>
+    <p>Enterprise Resource Planning (ERP) is a comprehensive, integrated software system used by organizations to manage and automate core business processes across various departments. ERP systems act as the central nervous system of a business, collecting inputs from various departments—such as accounting, manufacturing, supply chain, sales, marketing, and human resources—and storing them in a single, unified database.</p>
+    
+    <h3>The Evolution and Core Concept</h3>
+    <p>Before ERP, companies typically used separate, siloed software systems for different departments (e.g., HR had one system, Finance had another, Inventory had another). This led to data duplication, inconsistencies, and lack of real-time visibility. ERP solved this by providing a <strong>single source of truth</strong>.</p>
+    <p>When an order is placed by a customer in the sales module, it automatically triggers actions in the inventory module to allocate stock, in the manufacturing module to schedule production (if stock is low), and in the finance module to generate an invoice. This seamless flow of information is the hallmark of ERP.</p>
+
+    <h3>Key Modules of an ERP System</h3>
+    <p>Modern ERP systems (like SAP, Oracle, Microsoft Dynamics) are highly modular. Key modules include:</p>
+    <ul>
+        <li><strong>Financial Management:</strong> Handles general ledger, accounts payable/receivable, asset management, budgeting, and financial reporting.</li>
+        <li><strong>Human Capital Management (HCM):</strong> Manages payroll, recruitment, performance evaluation, time tracking, and employee records.</li>
+        <li><strong>Supply Chain Management (SCM):</strong> Oversees procurement, inventory management, warehousing, logistics, and supplier relationships.</li>
+        <li><strong>Manufacturing / Production Planning:</strong> Manages Bill of Materials (BOM), production scheduling, capacity planning, and shop floor control.</li>
+        <li><strong>Customer Relationship Management (CRM):</strong> Tracks sales leads, customer interactions, order history, and after-sales service.</li>
+    </ul>
+
+    <h3>ERP Integration Diagram</h3>
+    <div style="text-align: center; margin: 20px 0;">
+        <pre style="background-color: #f0f8ff; padding: 15px; border: 1px solid #b3d4fc; border-radius: 8px; display: inline-block; text-align: left; font-family: monospace; font-size: 14px;">
+       [ Sales & CRM ]      [ Human Resources ]
+              \                  /
+               \                /
+             ========================
+            |                        |
+[ Finance ] |  CENTRAL ERP DATABASE  | [ Supply Chain ]
+            |                        |
+             ========================
+               /                  \
+              /                    \
+    [ Manufacturing ]      [ Inventory/Warehouse ]
+        </pre>
+    </div>
+
+    <h3>Benefits of Implementing ERP</h3>
+    <ul>
+        <li><strong>Data Integration and Accuracy:</strong> Eliminates data silos, ensuring that everyone in the organization relies on the same accurate, real-time data.</li>
+        <li><strong>Operational Efficiency:</strong> Automates routine tasks, reduces manual data entry, and accelerates order fulfillment and financial closing cycles.</li>
+        <li><strong>Enhanced Decision Making:</strong> Provides management with comprehensive dashboards and analytics for holistic performance monitoring.</li>
+        <li><strong>Regulatory Compliance:</strong> Standardizes processes and maintains detailed audit trails, aiding in financial and industry compliance.</li>
+    </ul>
+
+    <h3>Challenges of ERP</h3>
+    <p>Despite the immense benefits, ERP implementations are notoriously difficult. They require high capital investment (software licenses, hardware, consulting fees). The implementation process is time-consuming and often requires disruptive Business Process Reengineering (BPR) to align company operations with the software's architecture. Furthermore, user resistance to change and extensive training requirements are significant hurdles.</p>
+    
+    <p>In summary, an ERP system transforms a fragmented organization into an integrated, efficient enterprise by standardizing processes and centralizing data, thereby serving as the backbone for modern digital business operations.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-38">
                 <div class="q-text"><span class="q-badge">Q38</span><span>Discuss the role of Management Information Systems (MIS) in decision making.</span></div>
                 <div class="a-text">
-                    <h3>Management Information Systems (MIS)</h3><p>MIS provides managers with the tools to organize, evaluate, and efficiently manage departments. It processes raw data into meaningful reports and dashboards, aiding in operational and strategic decision-making.</p>
+                    <div class="answer-container">
+    <h2>The Role of Management Information Systems (MIS) in Decision Making</h2>
+    <p>A Management Information System (MIS) is a computerized database-driven system organized and programmed in such a way that it produces regular reports on operations for every level of management in a company. It focuses on providing managers with the information they need to evaluate performance, control operations, and make informed, data-driven decisions. In the modern data-rich environment, MIS forms the critical bridge between raw data and actionable business strategy.</p>
+    
+    <h3>Information Hierarchy and MIS</h3>
+    <p>MIS takes raw, unorganized <strong>Data</strong> from transaction processing systems (TPS) and processes it into meaningful <strong>Information</strong>. This information is contextualized to generate <strong>Knowledge</strong>, which managers use to apply <strong>Wisdom</strong> in decision making. Without MIS, managers would be drowning in data but starved of insight.</p>
+
+    <h3>Role of MIS at Different Levels of Management</h3>
+    <p>Decision-making needs vary significantly across the managerial hierarchy. MIS supports all three primary levels:</p>
+    
+    <h4>1. Operational Management (Lower Level)</h4>
+    <ul>
+        <li><strong>Decision Type:</strong> Structured and highly repetitive decisions (e.g., inventory reordering, daily production scheduling).</li>
+        <li><strong>MIS Role:</strong> Provides highly detailed, highly accurate, and real-time transaction reports. It helps supervisors track daily outputs, monitor employee attendance, and ensure operational targets are met efficiently.</li>
+    </ul>
+
+    <h4>2. Tactical Management (Middle Level)</h4>
+    <ul>
+        <li><strong>Decision Type:</strong> Semi-structured decisions focusing on resource allocation and departmental performance (e.g., setting the quarterly marketing budget, analyzing monthly sales variations).</li>
+        <li><strong>MIS Role:</strong> Provides summary reports, exception reports, and comparative analysis (e.g., comparing actual sales vs. budgeted sales). It helps middle managers monitor trends, identify operational anomalies, and adjust tactics.</li>
+    </ul>
+
+    <h4>3. Strategic Management (Top Level)</h4>
+    <ul>
+        <li><strong>Decision Type:</strong> Unstructured, complex, and long-term decisions (e.g., entering a new market, launching a new product line, mergers and acquisitions).</li>
+        <li><strong>MIS Role:</strong> Executive Information Systems (EIS) and Decision Support Systems (DSS)—which are specialized forms of MIS—provide macro-level dashboards, predictive modeling, and what-if analysis combining internal data with external market intelligence.</li>
+    </ul>
+
+    <h3>Diagram: MIS and the Management Pyramid</h3>
+    <div style="text-align: center; margin: 20px 0;">
+        <table style="margin: 0 auto; border-collapse: collapse; width: 80%;">
+            <tr>
+                <td style="border-bottom: 2px solid white; background-color: #003366; color: white; padding: 10px; width: 33%;"><strong>Strategic Level</strong></td>
+                <td style="border-bottom: 2px solid white; background-color: #f2f2f2; padding: 10px;">Executive Info Systems (EIS)<br><em>Unstructured Decisions</em></td>
+            </tr>
+            <tr>
+                <td style="border-bottom: 2px solid white; background-color: #0066cc; color: white; padding: 10px;"><strong>Tactical Level</strong></td>
+                <td style="border-bottom: 2px solid white; background-color: #f2f2f2; padding: 10px;">Management Info Systems (MIS)<br><em>Semi-structured Decisions</em></td>
+            </tr>
+            <tr>
+                <td style="background-color: #3399ff; color: white; padding: 10px;"><strong>Operational Level</strong></td>
+                <td style="background-color: #f2f2f2; padding: 10px;">Transaction Processing Systems (TPS)<br><em>Structured Decisions</em></td>
+            </tr>
+        </table>
+    </div>
+
+    <h3>Specific Contributions to Decision Making</h3>
+    <ul>
+        <li><strong>Speed and Accuracy:</strong> Automates data gathering, ensuring managers have rapid access to accurate figures rather than relying on gut feeling.</li>
+        <li><strong>Exception Reporting:</strong> MIS can highlight only the areas where performance deviates from the norm (e.g., a sudden spike in defective parts), allowing managers to focus their attention where it is needed most (Management by Exception).</li>
+        <li><strong>Predictive Analytics:</strong> Advanced MIS systems use historical data to forecast future trends, helping in proactive rather than reactive decision-making.</li>
+        <li><strong>Scenario Planning:</strong> Through "what-if" models, managers can simulate the outcomes of different decisions (e.g., "What happens to profit if raw material costs rise by 10%?") before committing resources.</li>
+    </ul>
+    
+    <p>In conclusion, MIS is the backbone of organizational decision-making. By filtering, processing, and presenting data tailored to the specific needs of various management tiers, MIS ensures that decisions are timely, rational, and aligned with the strategic goals of the enterprise.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-39">
                 <div class="q-text"><span class="q-badge">Q39</span><span>Explain Cost Concepts: Fixed Cost, Variable Cost, Marginal Cost, and Sunk Cost.</span></div>
                 <div class="a-text">
-                    <h3>Cost Concepts</h3><p><b>Fixed Cost:</b> Remains constant regardless of production volume (e.g., rent). <b>Variable Cost:</b> Changes with production volume (e.g., raw materials). <b>Marginal Cost:</b> Cost of producing one additional unit. <b>Sunk Cost:</b> A cost already incurred and unrecoverable.</p>
+                    <div class="answer-container">
+    <h2>Cost Concepts: Fixed Cost, Variable Cost, Marginal Cost, and Sunk Cost</h2>
+    <p>In managerial economics and cost accounting, understanding the behavior and relevance of different types of costs is fundamental for pricing, budgeting, and strategic decision-making. Managers classify costs based on how they react to changes in the level of production or activity. The four critical cost concepts are Fixed Cost, Variable Cost, Marginal Cost, and Sunk Cost.</p>
+    
+    <h3>1. Fixed Cost (FC)</h3>
+    <p>Fixed costs are costs that <strong>do not change in total</strong> regardless of the volume of production or sales over a relevant range and time period. They are incurred even if the production is zero.</p>
+    <ul>
+        <li><strong>Characteristics:</strong> Time-related rather than volume-related. While total fixed cost remains constant, <em>fixed cost per unit decreases</em> as production volume increases (since the cost is spread over more units).</li>
+        <li><strong>Examples:</strong> Factory rent, property taxes, insurance premiums, depreciation of machinery (on a straight-line basis), and salaries of permanent managerial staff.</li>
+        <li><strong>Decision Implication:</strong> High fixed costs create a high Break-Even Point, increasing financial risk but allowing for higher profitability once the break-even is surpassed (operating leverage).</li>
+    </ul>
+
+    <h3>2. Variable Cost (VC)</h3>
+    <p>Variable costs are costs that <strong>change in direct proportion</strong> to the level of production or activity. If production increases by 10%, total variable costs also increase by approximately 10%. If production is zero, variable costs are zero.</p>
+    <ul>
+        <li><strong>Characteristics:</strong> Volume-related. While total variable cost changes, the <em>variable cost per unit remains relatively constant</em>.</li>
+        <li><strong>Examples:</strong> Direct materials (raw materials), direct labor (wages of assembly line workers paid per piece), packaging costs, and sales commissions.</li>
+        <li><strong>Decision Implication:</strong> Key to calculating the Contribution Margin (Sales - Variable Costs). Controlling variable costs is essential for maintaining per-unit profitability.</li>
+    </ul>
+
+    <h3>3. Marginal Cost (MC)</h3>
+    <p>Marginal cost is the <strong>additional cost incurred in producing one more unit</strong> of output. Mathematically, it is the change in Total Cost (or change in Total Variable Cost, since Fixed Cost doesn't change) divided by the change in quantity.</p>
+    <ul>
+        <li><strong>Characteristics:</strong> At a given level of capacity, the marginal cost is usually equal to the variable cost per unit. However, if producing an extra unit requires stepping up capacity (like renting a new machine), marginal cost can suddenly jump.</li>
+        <li><strong>Examples:</strong> If producing 100 units costs $1000 and producing 101 units costs $1015, the marginal cost of the 101st unit is $15.</li>
+        <li><strong>Decision Implication:</strong> Vital for short-term pricing decisions, accepting special orders, and deciding whether to make or buy a component. If Marginal Revenue > Marginal Cost, it is profitable to produce the extra unit.</li>
+    </ul>
+
+    <h3>4. Sunk Cost</h3>
+    <p>A sunk cost is a cost that <strong>has already been incurred and cannot be recovered</strong> by any future action. Because they are in the past and irreversible, they are completely irrelevant to future business decisions.</p>
+    <ul>
+        <li><strong>Characteristics:</strong> Historical costs that are irretrievable. They should not affect rational decision-making.</li>
+        <li><strong>Examples:</strong> Money spent on a failed R&D project, non-refundable deposits, or the cost of specialized machinery that has no resale value.</li>
+        <li><strong>Decision Implication:</strong> Managers must avoid the "Sunk Cost Fallacy"—the psychological trap of continuing a failing project just because a lot of money has already been spent on it. Decisions must be based on future marginal costs and revenues, ignoring sunk costs.</li>
+    </ul>
+
+    <h3>Cost Behavior Diagram</h3>
+    <div style="background-color:#f9f9f9; padding: 15px; border: 1px solid #ccc; text-align: center; margin: 15px 0; border-radius: 5px;">
+        <p><strong>Y-Axis: Total Cost ($) | X-Axis: Volume of Production (Units)</strong></p>
+        <pre style="font-family: monospace; display: inline-block; text-align: left; font-size: 14px; background: white; padding: 10px; border: 1px dashed #999;">
+      |        / Total Cost (TC = FC + VC)
+      |       /
+      |      /
+      |     /  * Variable Cost (Starts from FC, slopes up)
+$FC   |----/----------------- Fixed Cost (Horizontal Line)
+      |   /
+      |  /
+      | /
+      |/
+      +---------------------- Volume
+        </pre>
+    </div>
+
+    <p>In summary, understanding these costs allows managers to perform Break-Even Analysis, set optimal pricing strategies, and make rational economic choices without being skewed by irrelevant historical expenditures.</p>
+</div>
                 </div>
             </div>
             <div class="qa-card" id="gb-40">
                 <div class="q-text"><span class="q-badge">Q40</span><span>Discuss Lean Manufacturing principles and Elimination of Waste (Muda).</span></div>
                 <div class="a-text">
-                    <h3>Lean Manufacturing & Muda</h3><p>Lean focuses on maximizing customer value while minimizing waste. Elimination of Waste (Muda) targets 7 key areas (TIMWOOD): Transport, Inventory, Motion, Waiting, Overproduction, Overprocessing, and Defects.</p>
+                    <div class="answer-container">
+    <h2>Lean Manufacturing Principles and Elimination of Waste (Muda)</h2>
+    <p>Lean Manufacturing is a systematic, continuous improvement methodology originated by the Toyota Production System (TPS). Its primary objective is to maximize value to the customer while minimizing waste. It operates on the philosophy that any activity that consumes resources but creates no value for the end customer is a waste and should be eliminated.</p>
+    
+    <h3>The Five Principles of Lean</h3>
+    <p>According to Womack and Jones, Lean thinking is guided by five core principles:</p>
+    <ol>
+        <li><strong>Identify Value:</strong> Define value from the perspective of the final customer. What is the customer actually willing to pay for?</li>
+        <li><strong>Map the Value Stream:</strong> Analyze the entire lifecycle of a product (from raw material to the customer). Map every step, process, and delay. Identify which steps add value and which do not.</li>
+        <li><strong>Create Flow:</strong> Ensure that the value-creating steps occur in a tight, continuous sequence. Eliminate bottlenecks, reduce batch sizes, and prevent interruptions so the product flows smoothly toward the customer.</li>
+        <li><strong>Establish Pull:</strong> Instead of pushing products into the market based on forecasts (which leads to overproduction), let customer demand "pull" the product through the system. Produce only what is ordered, when it is ordered (Just-In-Time).</li>
+        <li><strong>Pursue Perfection:</strong> Lean is not a one-time project. It requires continuous improvement (Kaizen). Teams must constantly strive to remove further wastes as they become visible.</li>
+    </ol>
+
+    <h3>Elimination of Waste (Muda)</h3>
+    <p>In Lean terminology, waste is called <strong>Muda</strong>. Taiichi Ohno, the father of TPS, identified seven original wastes that plague manufacturing processes, commonly remembered by the acronym <strong>TIMWOOD</strong>. A modern eighth waste (Non-utilized Talent) has since been added.</p>
+
+    <table border="1" cellpadding="8" cellspacing="0" style="width:100%; border-collapse:collapse; margin-top: 15px;">
+        <tr style="background-color:#ffe6e6;">
+            <th>Type of Waste (Muda)</th>
+            <th>Description & Example</th>
+        </tr>
+        <tr>
+            <td><strong>T</strong>ransportation</td>
+            <td>Moving products/materials unnecessarily. (e.g., moving parts between distant warehouses before assembly).</td>
+        </tr>
+        <tr>
+            <td><strong>I</strong>nventory</td>
+            <td>Excess raw materials, work-in-progress (WIP), or finished goods tying up capital and hiding defects. (e.g., overstocking due to fear of shortages).</td>
+        </tr>
+        <tr>
+            <td><strong>M</strong>otion</td>
+            <td>Unnecessary physical movement by workers that causes strain or wastes time. (e.g., walking to find a tool, bending constantly). Eradicated by Ergonomics and 5S.</td>
+        </tr>
+        <tr>
+            <td><strong>W</strong>aiting</td>
+            <td>Idle time due to waiting for materials, information, machine cycles, or previous steps. (e.g., an operator waiting for a machine to finish heating up).</td>
+        </tr>
+        <tr>
+            <td><strong>O</strong>verproduction</td>
+            <td>Producing more, sooner, or faster than is required by the next process or customer. <strong>(Considered the worst waste as it causes all other wastes).</strong></td>
+        </tr>
+        <tr>
+            <td><strong>O</strong>verprocessing</td>
+            <td>Doing more work or using tighter tolerances than required by the customer. (e.g., polishing a part that will be hidden inside a machine).</td>
+        </tr>
+        <tr>
+            <td><strong>D</strong>efects</td>
+            <td>Producing scrap or parts that require rework. Wastes materials, labor, and capacity.</td>
+        </tr>
+        <tr>
+            <td><strong>S</strong>kills (Modern 8th)</td>
+            <td>Underutilizing people's talents, skills, and knowledge by not involving them in problem-solving.</td>
+        </tr>
+    </table>
+
+    <h3>Diagram: The Lean Pillars</h3>
+    <div style="text-align: center; margin: 20px 0; border: 2px solid #333; padding: 15px; border-radius: 8px; background-color: #f9f9f9;">
+        <h4 style="margin-top:0;">Lean Manufacturing Roof<br><small>(Customer Focus: Highest Quality, Lowest Cost, Shortest Lead Time)</small></h4>
+        <div style="display:flex; justify-content: space-around; margin: 15px 0;">
+            <div style="border: 1px solid #666; padding: 20px; width: 40%; background-color:#e6f2ff;">
+                <strong>Pillar 1: Just-In-Time (JIT)</strong><br>
+                <small>Takt Time, Continuous Flow, Pull System (Kanban)</small>
+            </div>
+            <div style="border: 1px solid #666; padding: 20px; width: 40%; background-color:#e6ffe6;">
+                <strong>Pillar 2: Jidoka (Built-in Quality)</strong><br>
+                <small>Autonomation, Stop the Line (Andon), Poka-Yoke</small>
+            </div>
+        </div>
+        <div><strong>Foundation:</strong> Heijunka (Leveling), Standardized Work, Kaizen, 5S</div>
+    </div>
+
+    <p>In conclusion, Lean Manufacturing is a powerful philosophy that transforms organizational culture. By relentlessly hunting down and eliminating the eight wastes, companies can drastically reduce lead times, improve cash flow, and deliver superior quality, thereby gaining a significant competitive advantage in the market.</p>
+</div>
                 </div>
             </div>
         </main>
