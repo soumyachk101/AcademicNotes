@@ -15,79 +15,74 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
     <style>
         :root {
-            --bg-dark: #0a0a0f;
-            --bg-surface: rgba(20, 20, 25, 0.6);
-            --bg-surface-hover: rgba(30, 30, 40, 0.8);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
+            --bg-desk: #eae6db;
+            --bg-paper: #fefdfb;
+            --text-main: #1e293b;
+            --text-muted: #57687e;
             --primary: #f59e0b;
-            --shadow-md: 0 10px 30px rgba(0,0,0,0.3);
-            --shadow-lg: 0 20px 50px rgba(0,0,0,0.5);
-            --glow: 0 0 20px color-mix(in srgb, var(--primary) 30%, transparent);
+            --border-light: rgba(15, 23, 42, 0.11);
+            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
+            --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
         }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-dark); color: var(--text-primary); margin: 0; padding: 0; line-height: 1.7; 
-               background-image: radial-gradient(circle at top right, color-mix(in srgb, var(--primary) 15%, transparent), transparent 40%),
-                                 radial-gradient(circle at bottom left, color-mix(in srgb, var(--primary) 10%, transparent), transparent 50%);
-               background-attachment: fixed; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
         
-        .top-nav { padding: 1.2rem 2.5rem; background: rgba(10, 10, 15, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-md); }
-        .top-nav a { text-decoration: none; color: var(--text-secondary); font-weight: 600; font-size: 0.95rem; transition: color 0.3s ease; }
-        .top-nav a:hover { color: var(--text-primary); text-shadow: 0 0 10px rgba(255,255,255,0.3); }
-        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
-        .nav-code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: color-mix(in srgb, var(--primary) 20%, transparent); color: var(--primary); padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent); }
+        .top-nav { padding: 1.2rem 2.5rem; background: rgba(254, 253, 251, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
+        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        .top-nav a:hover { color: var(--primary); }
+        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
+        .nav-code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(0,0,0,0.05); color: var(--primary); padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.1); }
         
         .layout { display: flex; max-width: 1400px; margin: 3rem auto; gap: 3rem; padding: 0 2rem; align-items: flex-start; }
         .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
         
         .group-switch { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-        .gs-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: var(--bg-surface); border: 1px solid var(--glass-border); border-radius: 16px; text-decoration: none; color: var(--text-secondary); transition: all 0.3s ease; backdrop-filter: blur(10px); }
-        .gs-item:hover { background: var(--bg-surface-hover); transform: translateX(5px); border-color: color-mix(in srgb, var(--primary) 40%, transparent); box-shadow: var(--glow); }
-        .gs-item.is-current { background: color-mix(in srgb, var(--primary) 15%, transparent); border-color: var(--primary); color: var(--text-primary); box-shadow: var(--glow); }
-        .gs-key { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 800; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.1); border-radius: 10px; color: var(--text-primary); }
-        .gs-item.is-current .gs-key { background: var(--primary); }
+        .gs-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: transparent; border: 1px solid transparent; border-radius: 12px; text-decoration: none; color: var(--text-muted); transition: all 0.2s ease; }
+        .gs-item:hover { background: rgba(255,255,255,0.5); transform: translateX(5px); color: var(--text-main); }
+        .gs-item.is-current { background: var(--bg-paper); border-color: var(--border-light); box-shadow: var(--shadow-sm); color: var(--text-main); }
+        .gs-key { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 800; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); border-radius: 10px; color: var(--text-main); }
+        .gs-item.is-current .gs-key { background: var(--primary); color: white; }
         .gs-body { display: flex; flex-direction: column; }
         .gs-name { font-weight: 700; font-size: 1.05rem; }
         .gs-marks { font-size: 0.8rem; opacity: 0.8; font-family: 'JetBrains Mono', monospace; }
-        .toc-foot a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: inline-block; padding: 0.5rem 1rem; background: color-mix(in srgb, var(--primary) 10%, transparent); border-radius: 8px; border: 1px solid color-mix(in srgb, var(--primary) 20%, transparent); }
-        .toc-foot a:hover { background: var(--primary); color: #fff; box-shadow: var(--glow); transform: translateY(-2px); }
+        .toc-foot a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.5); border-radius: 8px; border: 1px solid var(--border-light); }
+        .toc-foot a:hover { background: var(--bg-paper); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
         
-        .content { flex-grow: 1; min-width: 0; background: var(--bg-surface); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 4rem 5rem; border-radius: 24px; box-shadow: var(--shadow-lg); border: 1px solid var(--glass-border); transition: border-color 0.3s ease; }
+        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 4rem 5rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
+        .content:hover { box-shadow: var(--shadow-lg); }
         
-        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--text-primary); border-bottom: 2px dashed rgba(255,255,255,0.1); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
         .section-title:first-child { margin-top: 0; }
         
-        .qa-card { margin-bottom: 4rem; padding: 2.5rem; background: rgba(0,0,0,0.2); border-radius: 20px; border: 1px solid var(--glass-border); transition: all 0.3s ease; }
-        .qa-card:hover { background: rgba(0,0,0,0.3); border-color: color-mix(in srgb, var(--primary) 30%, transparent); box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: translateY(-3px); }
+        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; background: transparent; border: none; }
         
-        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--text-primary); margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
-        .q-badge { background: color-mix(in srgb, var(--primary) 20%, transparent); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.9rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid color-mix(in srgb, var(--primary) 50%, transparent); box-shadow: var(--glow); }
+        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
+        .q-badge { background: rgba(0,0,0, 0.05); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
         
-        .a-text { color: var(--text-secondary); padding-left: 1.8rem; border-left: 4px solid color-mix(in srgb, var(--primary) 50%, transparent); font-size: 1.05rem; }
-        .a-text h3 { color: var(--text-primary); margin-top: 2rem; font-family: 'Plus Jakarta Sans', sans-serif; }
-        .a-text h4 { color: color-mix(in srgb, var(--text-primary) 90%, var(--primary)); margin-top: 1.5rem; }
-        .a-text strong { color: var(--text-primary); }
+        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
+        .a-text h3 { color: var(--text-main); margin-top: 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; }
+        .a-text h4 { color: var(--text-main); margin-top: 1.5rem; font-weight: 600; }
+        .a-text strong { color: #1a202c; }
         
-        .mermaid { background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; overflow: auto; clear: both; width: 100%; box-sizing: border-box; }
+        .mermaid { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; overflow: auto; clear: both; width: 100%; box-sizing: border-box; }
         
-        .mac-window { clear: both; background: #13141a; border-radius: 12px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); margin: 2.5rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .mac-header { background: #1a1b23; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.5); }
-        .mac-dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 1px 2px rgba(255,255,255,0.2); }
+        .mac-window { clear: both; background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
+        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
+        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
         .mac-dot.red { background: #ff5f56; }
         .mac-dot.yellow { background: #ffbd2e; }
         .mac-dot.green { background: #27c93f; }
         .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); text-transform: uppercase; }
-        .mac-body { padding: 1.5rem; overflow-x: auto; background: #13141a; }
+        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
         .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
         .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
         
-        table { width: 100%; border-collapse: collapse; margin: 2rem 0; background: rgba(255,255,255,0.02); border-radius: 12px; overflow: hidden; }
-        th, td { padding: 1rem; border: 1px solid var(--glass-border); text-align: left; }
-        th { background: rgba(255,255,255,0.05); color: var(--text-primary); font-weight: 700; }
+        table { width: 100%; border-collapse: collapse; margin: 2rem 0; background: var(--bg-paper); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow-sm); }
+        th, td { padding: 1rem; border: 1px solid var(--border-light); text-align: left; }
+        th { background: #f7fafc; color: var(--text-main); font-weight: 700; }
         
         @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
     </style>
-    <link rel="stylesheet" href="../../premium.css">
 </head>
 <body>
     <nav class="top-nav">
