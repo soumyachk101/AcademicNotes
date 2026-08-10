@@ -1,421 +1,350 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Industrial Management (HS-MC501) - Group A</title>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-c.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
-    <style>
-        :root {
-            --bg-desk: #eae6db;
-            --bg-paper: #fefdfb;
-            --text-main: #1e293b;
-            --text-muted: #57687e;
-            --primary: #f59e0b;
-            --border-light: rgba(15, 23, 42, 0.11);
-            --shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
-            --shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08);
-            --shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
-        }
-        body { font-family: 'Inter', sans-serif; background-color: var(--bg-desk); color: var(--text-main); margin: 0; padding: 0; line-height: 1.7; }
-        
-        .top-nav { padding: 1.2rem 2.5rem; background: rgba(254, 253, 251, 0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid var(--border-light); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100; box-shadow: var(--shadow-sm); }
-        .top-nav a { text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
-        .top-nav a:hover { color: var(--primary); }
-        .nav-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.35rem; font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; display: flex; align-items: center; gap: 0.8rem; }
-        .nav-code { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(0,0,0,0.05); color: var(--primary); padding: 0.3rem 0.6rem; border-radius: 6px; border: 1px solid rgba(0,0,0,0.1); }
-        
-        .layout { display: flex; max-width: 1800px; width: 96%; margin: 3rem auto; gap: 3rem; align-items: flex-start; }
-        .sidebar { width: 300px; flex-shrink: 0; position: sticky; top: 100px; }
-        
-        .group-switch { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem; }
-        .gs-item { display: flex; align-items: center; gap: 1rem; padding: 1.2rem; background: transparent; border: 1px solid transparent; border-radius: 12px; text-decoration: none; color: var(--text-muted); transition: all 0.2s ease; }
-        .gs-item:hover { background: rgba(255,255,255,0.5); transform: translateX(5px); color: var(--text-main); }
-        .gs-item.is-current { background: var(--bg-paper); border-color: var(--border-light); box-shadow: var(--shadow-sm); color: var(--text-main); }
-        .gs-key { font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; font-weight: 800; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,0.05); border-radius: 10px; color: var(--text-main); }
-        .gs-item.is-current .gs-key { background: var(--primary); color: white; }
-        .gs-body { display: flex; flex-direction: column; }
-        .gs-name { font-weight: 700; font-size: 1.05rem; }
-        .gs-marks { font-size: 0.8rem; opacity: 0.8; font-family: 'JetBrains Mono', monospace; }
-        .toc-foot a { color: var(--primary); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.3s; display: inline-block; padding: 0.5rem 1rem; background: rgba(255,255,255,0.5); border-radius: 8px; border: 1px solid var(--border-light); }
-        .toc-foot a:hover { background: var(--bg-paper); box-shadow: var(--shadow-sm); transform: translateY(-2px); }
-        
-        .content { flex-grow: 1; min-width: 0; background: var(--bg-paper); padding: 3rem 4rem; border-radius: 16px; box-shadow: var(--shadow-md); border: 1px solid var(--border-light); transition: box-shadow 0.3s ease; }
-        .content:hover { box-shadow: var(--shadow-lg); }
-        
-        .section-title { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 2.4rem; font-weight: 800; color: #1a202c; border-bottom: 2px dashed rgba(0,0,0,0.06); padding-bottom: 1rem; margin-bottom: 3rem; margin-top: 4rem; letter-spacing: -1px; }
-        .section-title:first-child { margin-top: 0; }
-        
-        .qa-card { margin-bottom: 4rem; padding-bottom: 3rem; border-bottom: 1px solid var(--border-light); transition: opacity 0.3s ease; background: transparent; border: none; }
-        
-        .q-text { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #2d3748; margin-bottom: 1.5rem; display: flex; gap: 1rem; line-height: 1.5; align-items: flex-start; }
-        .q-badge { background: rgba(0,0,0, 0.05); color: var(--primary); padding: 0.3rem 0.8rem; border-radius: 8px; font-size: 0.85rem; height: fit-content; white-space: nowrap; font-weight: 800; border: 1px solid rgba(0,0,0, 0.1); }
-        
-        .a-text { color: #4a5568; padding-left: 1.8rem; border-left: 4px solid var(--primary); font-size: 1rem; }
-        .a-text h3 { color: var(--text-main); margin-top: 2rem; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.1rem; }
-        .a-text h4 { color: var(--text-main); margin-top: 1.5rem; font-weight: 600; }
-        .a-text strong { color: #1a202c; }
-        
-        .mermaid { background: #f7fafc; border: 1px solid var(--border-light); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; overflow: auto; clear: both; width: 100%; box-sizing: border-box; }
-        
-        .mac-window { clear: both; background: #1d1f21; border-radius: 8px; box-shadow: var(--shadow-md); margin: 2rem 0; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); }
-        .mac-header { background: #2d2d2d; padding: 12px 16px; display: flex; gap: 8px; align-items: center; border-bottom: 1px solid #1a1a1a; }
-        .mac-dot { width: 12px; height: 12px; border-radius: 50%; }
-        .mac-dot.red { background: #ff5f56; }
-        .mac-dot.yellow { background: #ffbd2e; }
-        .mac-dot.green { background: #27c93f; }
-        .mac-title { margin: 0 auto; color: #858585; font-size: 0.75rem; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.5px; transform: translateX(-24px); text-transform: uppercase; }
-        .mac-body { padding: 1.5rem; overflow-x: auto; background: #1d1f21; }
-        .mac-body pre { margin: 0 !important; padding: 0 !important; background: transparent !important; text-shadow: none !important; font-size: 0.95rem; }
-        .mac-body code { font-family: 'JetBrains Mono', Courier, monospace; }
-        
-        table { display: block; max-width: 100%; overflow-x: auto; width: 100%; border-collapse: collapse; margin: 2rem 0; background: var(--bg-paper); border-radius: 12px; box-shadow: var(--shadow-sm); }
-        th, td { padding: 1rem; border: 1px solid var(--border-light); text-align: left; }
-        th { background: #f7fafc; color: var(--text-main); font-weight: 700; }
-        
-        @media (max-width: 1024px) { .layout { flex-direction: column; } .sidebar { width: 100%; position: static; } .content { padding: 2.5rem; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Industrial Management (HS-MC501) - Group A</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+<script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
+<style>
+:root {
+--bg-desk: #eae6db;
+--bg-paper: #fefdfb;
+--text-main: #1e293b;
+--text-muted: #57687e;
+--primary: #f59e0b;
+--border-light: rgba(15,23,42,0.11);
+--shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
+--shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08);
+--shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
+}
+body{font-family:'Inter',sans-serif;background-color:var(--bg-desk);color:var(--text-main);margin:0;padding:0;line-height:1.7}
+.top-nav{padding:1.2rem 2.5rem;background:rgba(254,253,251,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
+.top-nav a{text-decoration:none;color:var(--text-muted);font-weight:600;font-size:0.95rem;transition:color 0.2s}
+.top-nav a:hover{color:var(--primary)}
+.nav-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.35rem;font-weight:800;color:var(--text-main);letter-spacing:-0.5px;display:flex;align-items:center;gap:0.8rem}
+.nav-code{font-family:'JetBrains Mono',monospace;font-size:0.8rem;background:rgba(0,0,0,0.05);color:var(--primary);padding:0.3rem 0.6rem;border-radius:6px;border:1px solid rgba(0,0,0,0.1)}
+.layout{display:flex;max-width:1800px;width:96%;margin:3rem auto;gap:3rem;align-items:flex-start}
+.sidebar{width:300px;flex-shrink:0;position:sticky;top:100px}
+.group-switch{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
+.gs-item{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:transparent;border:1px solid transparent;border-radius:12px;text-decoration:none;color:var(--text-muted);transition:all 0.2s}
+.gs-item:hover{background:rgba(255,255,255,0.5);transform:translateX(5px);color:var(--text-main)}
+.gs-item.is-current{background:var(--bg-paper);border-color:var(--border-light);box-shadow:var(--shadow-sm);color:var(--text-main)}
+.gs-key{font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:800;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.05);border-radius:10px;color:var(--text-main)}
+.gs-item.is-current .gs-key{background:var(--primary);color:white}
+.gs-body{display:flex;flex-direction:column}
+.gs-name{font-weight:700;font-size:1.05rem}
+.gs-marks{font-size:0.8rem;opacity:0.8;font-family:'JetBrains Mono',monospace}
+.toc-foot a{color:var(--primary);text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.3s;display:inline-block;padding:0.5rem 1rem;background:rgba(255,255,255,0.5);border-radius:8px;border:1px solid var(--border-light)}
+.toc-foot a:hover{background:var(--bg-paper);box-shadow:var(--shadow-sm);transform:translateY(-2px)}
+.content{flex-grow:1;min-width:0;background:var(--bg-paper);padding:3rem 4rem;border-radius:16px;box-shadow:var(--shadow-md);border:1px solid var(--border-light);transition:box-shadow 0.3s}
+.content:hover{box-shadow:var(--shadow-lg)}
+.section-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:800;color:#1a202c;border-bottom:2px dashed rgba(0,0,0,0.06);padding-bottom:1rem;margin-bottom:3rem;margin-top:4rem;letter-spacing:-1px}
+.section-title:first-child{margin-top:0}
+.qa-card{margin-bottom:4rem;padding-bottom:3rem;border-bottom:1px solid var(--border-light)}
+.q-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.25rem;color:#2d3748;margin-bottom:1.5rem;display:flex;gap:1rem;line-height:1.5;align-items:flex-start}
+.q-badge{background:rgba(0,0,0,0.05);color:var(--primary);padding:0.3rem 0.8rem;border-radius:8px;font-size:0.85rem;height:fit-content;white-space:nowrap;font-weight:800;border:1px solid rgba(0,0,0,0.1)}
+.a-text{color:#4a5568;padding-left:1.8rem;border-left:4px solid var(--primary);font-size:1rem}
+.a-text h3{color:var(--text-main);margin-top:2rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem}
+.a-text h4{color:var(--text-main);margin-top:1.5rem;font-weight:600}
+.a-text strong{color:#1a202c}
+.a-text ul{margin:0.5rem 0 0.5rem 1.5rem;padding:0}
+.a-text li{margin-bottom:0.4rem}
+.mermaid{background:#f7fafc;border:1px solid var(--border-light);border-radius:12px;padding:2rem;margin:2rem 0;text-align:center;overflow:auto;clear:both;width:100%;box-sizing:border-box}
+@media(max-width:1024px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.content{padding:2.5rem}}
+</style>
 </head>
 <body>
-    <nav class="top-nav">
-        <a href="management_index.html">&larr; Industrial Management</a>
-        <span class="nav-title">Industrial Management <span class="nav-code">HS-MC501</span></span>
-        <a href="../index.html">All subjects</a>
-    </nav>
-    <div class="layout">
-        <aside class="sidebar">
-            <nav class="group-switch">
-                <a href="management_group_a.html" class="gs-item is-current"><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
-                <a href="management_group_b.html" class="gs-item "><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
-                <a href="management_group_c.html" class="gs-item "><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
-            </nav>
-            <p class="toc-foot"><a href="management_important_qa.html">All groups on one page &rarr;</a></p>
-        </aside>
+<nav class="top-nav">
+<a href="management_index.html">&larr; Industrial Management</a>
+<span class="nav-title">Industrial Management <span class="nav-code">HS-MC501</span></span>
+<a href="../index.html">All subjects</a>
+</nav>
+<div class="layout">
+<aside class="sidebar">
+<nav class="group-switch">
+<a href="management_group_a.html" class="gs-item is-current"><span class="gs-key">A</span><span class="gs-body"><span class="gs-name">Short answer</span><span class="gs-marks">52 &times; 1 mark</span></span></a>
+<a href="management_group_b.html" class="gs-item"><span class="gs-key">B</span><span class="gs-body"><span class="gs-name">Descriptive</span><span class="gs-marks">40 &times; 5 marks</span></span></a>
+<a href="management_group_c.html" class="gs-item"><span class="gs-key">C</span><span class="gs-body"><span class="gs-name">Long / analytical</span><span class="gs-marks">30 &times; 15 marks</span></span></a>
+</nav>
+<p class="toc-foot"><a href="management_important_qa.html">All groups on one page &rarr;</a></p>
+</aside>
 
-        <main class="content">
-            <h1 class="section-title" id="group-a">Group A — Short answer Questions (1 mark)</h1>
+<main class="content">
+<h1 class="section-title" id="group-a">Group A — Short Answer Questions (1 mark)</h1>
 
-            <div class="qa-card" id="ga-1">
-                <div class="q-text"><span class="q-badge">Q1</span><span>Define Management. Is Management an Art or a Science?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q1:</b> Management is the process of getting things done through others. It is both an <b>art</b> (requires skill) and a <b>science</b> (based on systematic principles).</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-2">
-                <div class="q-text"><span class="q-badge">Q2</span><span>What are the four primary functions of Management (POSDCORB)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q2:</b> The four primary functions are:</p><ul><li>Planning</li><li>Organizing</li><li>Directing</li><li>Controlling</li></ul>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-3">
-                <div class="q-text"><span class="q-badge">Q3</span><span>State Henry Fayol's 14 Principles of Management (any four).</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q3:</b> Four principles of Fayol:</p><ul><li>Division of work</li><li>Authority and responsibility</li><li>Discipline</li><li>Unity of command</li></ul>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-4">
-                <div class="q-text"><span class="q-badge">Q4</span><span>Who is known as the Father of Scientific Management and what are his core tenets?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q4:</b> <b>F.W. Taylor</b>. Core tenets: Science not rule of thumb, Harmony not discord, Cooperation not individualism, Maximum output.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-5">
-                <div class="q-text"><span class="q-badge">Q5</span><span>Define Organization Structure. Differentiate Line and Staff organization.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q5:</b> Organization structure defines how activities are directed. <b>Line</b> has direct authority; <b>Staff</b> advises and supports Line.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-6">
-                <div class="q-text"><span class="q-badge">Q6</span><span>What is Span of Control / Span of Management?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q6:</b> The number of subordinates a manager can effectively supervise.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-7">
-                <div class="q-text"><span class="q-badge">Q7</span><span>Define Centralization vs Decentralization in management.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q7:</b> <b>Centralization</b> is the concentration of decision-making authority at the top; <b>decentralization</b> delegates it down the hierarchy.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-8">
-                <div class="q-text"><span class="q-badge">Q8</span><span>What is Organizational Behavior (OB)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q8:</b> The study of human behavior in organizational settings.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-9">
-                <div class="q-text"><span class="q-badge">Q9</span><span>Define Motivation according to Maslow's Hierarchy of Needs.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q9:</b> Motivation is driven by a hierarchy of needs: physiological, safety, social, esteem, and self-actualization.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-10">
-                <div class="q-text"><span class="q-badge">Q10</span><span>What is Hertzberg's Two-Factor Theory of Motivation?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q10:</b> Motivation is influenced by <b>hygiene factors</b> (prevent dissatisfaction) and <b>motivators</b> (encourage satisfaction).</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-11">
-                <div class="q-text"><span class="q-badge">Q11</span><span>Differentiate Theory X and Theory Y of Douglas McGregor.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q11:</b> <b>Theory X</b> assumes employees are lazy and need control; <b>Theory Y</b> assumes employees are self-motivated and seek responsibility.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-12">
-                <div class="q-text"><span class="q-badge">Q12</span><span>What is Leadership? Differentiate Autocratic, Democratic, and Laissez-faire leadership styles.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q12:</b> Leadership is influencing others to achieve goals. <b>Autocratic:</b> leader decides alone. <b>Democratic:</b> team decides together. <b>Laissez-faire:</b> team has full freedom.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-13">
-                <div class="q-text"><span class="q-badge">Q13</span><span>Define Production Planning and Control (PPC).</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q13:</b> PPC is the process of planning production in advance and coordinating resources to meet demand efficiently.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-14">
-                <div class="q-text"><span class="q-badge">Q14</span><span>What are the main types of Production Systems (Job, Batch, Mass/Continuous)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q14:</b> Types include:</p><ul><li><b>Job:</b> customized, one-off</li><li><b>Batch:</b> produced in groups</li><li><b>Mass/Continuous:</b> high volume, standardized</li></ul>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-15">
-                <div class="q-text"><span class="q-badge">Q15</span><span>Define Plant Layout. What is Process Layout vs Product Layout?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q15:</b> Plant layout is the physical arrangement of facilities. <b>Process layout</b> groups similar machines; <b>Product layout</b> arranges them in sequence of operations.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-16">
-                <div class="q-text"><span class="q-badge">Q16</span><span>What is Plant Location? Name two quantitative methods for site selection.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q16:</b> Plant location is choosing a region for operations. Methods: <b>Factor Rating Method</b>, <b>Center of Gravity Method</b>.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-17">
-                <div class="q-text"><span class="q-badge">Q17</span><span>Define Inventory Management and state its primary objective.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q17:</b> Inventory management oversees the flow of goods. Objective: Minimize holding costs while ensuring continuous supply.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-18">
-                <div class="q-text"><span class="q-badge">Q18</span><span>What is Economic Order Quantity (EOQ)? State its basic formula.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q18:</b> EOQ minimizes total inventory costs. Formula: <b>&radic;(2DS/H)</b> where D=Demand, S=Ordering Cost, H=Holding Cost.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-19">
-                <div class="q-text"><span class="q-badge">Q19</span><span>Define ABC Analysis in inventory control.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q19:</b> Categorizing inventory into <b>A</b> (high value, low volume), <b>B</b> (moderate), and <b>C</b> (low value, high volume) for control.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-20">
-                <div class="q-text"><span class="q-badge">Q20</span><span>What is Safety Stock and Reorder Level (ROL)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q20:</b> <b>Safety stock</b> acts as a buffer against stockouts. <b>ROL</b> is the inventory level that triggers a new order.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-21">
-                <div class="q-text"><span class="q-badge">Q21</span><span>Define Work Study. What are its two main components?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q21:</b> Work study analyzes human work to improve efficiency. Components: <b>Method Study</b> and <b>Work Measurement</b>.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-22">
-                <div class="q-text"><span class="q-badge">Q22</span><span>What is Method Study and what is its primary objective?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q22:</b> Method study evaluates how work is done. Objective: Find the most efficient and economical way to perform a task.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-23">
-                <div class="q-text"><span class="q-badge">Q23</span><span>What is Work Measurement / Time Study?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q23:</b> Technique to establish the time required for a qualified worker to carry out a specified job at a defined level of performance.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-24">
-                <div class="q-text"><span class="q-badge">Q24</span><span>Define Allowance in Time Study. What is Standard Time?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q24:</b> <b>Allowance</b> is extra time added for fatigue/delays. <b>Standard Time</b> = Basic Time + Allowances.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-25">
-                <div class="q-text"><span class="q-badge">Q25</span><span>What is Ergonomics / Human Factors Engineering?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q25:</b> The study of designing workplaces and tools to fit human physical and cognitive capabilities.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-26">
-                <div class="q-text"><span class="q-badge">Q26</span><span>Define Quality Control (QC) and Quality Assurance (QA).</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q26:</b> <b>QC</b> identifies defects in finished products. <b>QA</b> prevents defects by ensuring proper processes are followed.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-27">
-                <div class="q-text"><span class="q-badge">Q27</span><span>What is Total Quality Management (TQM)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q27:</b> An organization-wide approach to continuous improvement of quality and customer satisfaction.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-28">
-                <div class="q-text"><span class="q-badge">Q28</span><span>Define Statistical Process Control (SPC). What are Control Charts?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q28:</b> SPC uses statistical methods to monitor and control a process. <b>Control charts</b> visually track process variations over time.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-29">
-                <div class="q-text"><span class="q-badge">Q29</span><span>What is the difference between Variable Control Charts (X-bar, R chart) and Attribute Control Charts (p, c chart)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q29:</b> <b>Variable charts</b> measure continuous data (e.g., length), while <b>attribute charts</b> count discrete defects (pass/fail).</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-30">
-                <div class="q-text"><span class="q-badge">Q30</span><span>What is ISO 9000 series certification?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q30:</b> A set of international standards for quality management systems (QMS) ensuring products meet customer and regulatory requirements.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-31">
-                <div class="q-text"><span class="q-badge">Q31</span><span>Define Six Sigma. What does DMAIC stand for?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q31:</b> Six Sigma is a methodology to reduce defects (3.4 per million). DMAIC: <b>D</b>efine, <b>M</b>easure, <b>A</b>nalyze, <b>I</b>mprove, <b>C</b>ontrol.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-32">
-                <div class="q-text"><span class="q-badge">Q32</span><span>What is Financial Management? State its main objectives.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q32:</b> Managing an organization's financial resources. Objectives: Profit maximization, wealth maximization, and maintaining liquidity.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-33">
-                <div class="q-text"><span class="q-badge">Q33</span><span>Define Working Capital. Differentiate Gross and Net Working Capital.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q33:</b> Funds for day-to-day operations. <b>Gross</b> = Total current assets; <b>Net</b> = Current assets minus current liabilities.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-34">
-                <div class="q-text"><span class="q-badge">Q34</span><span>What is Break-Even Analysis? Define Break-Even Point (BEP).</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q34:</b> Analyzes relationship between cost, volume, and profit. <b>BEP</b> is the point where total revenue equals total costs (no profit, no loss).</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-35">
-                <div class="q-text"><span class="q-badge">Q35</span><span>State the formula for calculating Break-Even Point in units and sales value.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q35:</b> BEP (Units) = Fixed Costs / Contribution per unit. BEP (Sales Value) = Fixed Costs / P/V Ratio.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-36">
-                <div class="q-text"><span class="q-badge">Q36</span><span>Define Fixed Cost and Variable Cost with examples.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q36:</b> <b>Fixed costs</b> remain constant regardless of output (e.g., rent). <b>Variable costs</b> change with output (e.g., raw materials).</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-37">
-                <div class="q-text"><span class="q-badge">Q37</span><span>What is Contribution Margin and Profit-Volume (P/V) Ratio?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q37:</b> Contribution Margin = Sales - Variable Costs. P/V Ratio = (Contribution / Sales) * 100.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-38">
-                <div class="q-text"><span class="q-badge">Q38</span><span>Define Depreciation. Name two common methods of computing depreciation.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q38:</b> Reduction in the value of an asset over time. Methods: <b>Straight-Line Method</b>, <b>Written-Down Value Method</b>.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-39">
-                <div class="q-text"><span class="q-badge">Q39</span><span>What is Project Management?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q39:</b> The application of knowledge, skills, and tools to execute projects efficiently and effectively.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-40">
-                <div class="q-text"><span class="q-badge">Q40</span><span>Define Network Diagram in project planning.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q40:</b> A visual representation of project activities and their logical sequence or dependencies.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-41">
-                <div class="q-text"><span class="q-badge">Q41</span><span>What is PERT (Program Evaluation and Review Technique)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q41:</b> A network analysis technique used for managing projects with uncertain activity times (probabilistic).</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-42">
-                <div class="q-text"><span class="q-badge">Q42</span><span>What is CPM (Critical Path Method)?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q42:</b> A network analysis technique used for projects with deterministic, well-defined activity times.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-43">
-                <div class="q-text"><span class="q-badge">Q43</span><span>Differentiate between PERT and CPM.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q43:</b> <b>PERT</b> is event-oriented and probabilistic; <b>CPM</b> is activity-oriented and deterministic.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-44">
-                <div class="q-text"><span class="q-badge">Q44</span><span>Define Critical Path and Slack/Float in network analysis.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q44:</b> <b>Critical path</b> is the longest sequence of activities determining project duration. <b>Slack/Float</b> is the time an activity can be delayed without delaying the project.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-45">
-                <div class="q-text"><span class="q-badge">Q45</span><span>What is a Gantt Chart?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q45:</b> A bar chart that illustrates a project schedule, showing start and finish dates of activities.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-46">
-                <div class="q-text"><span class="q-badge">Q46</span><span>Define Supply Chain Management (SCM).</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q46:</b> The management of the flow of goods, data, and finances from raw materials to final consumption.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-47">
-                <div class="q-text"><span class="q-badge">Q47</span><span>What is Just-In-Time (JIT) manufacturing / Kanban system?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q47:</b> <b>JIT</b> produces only what is needed, when needed. <b>Kanban</b> is a visual signaling system used to trigger production/movement in JIT.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-48">
-                <div class="q-text"><span class="q-badge">Q48</span><span>What is Maintenance Management? Differentiate Preventive and Breakdown maintenance.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q48:</b> Managing equipment reliability. <b>Preventive</b> avoids failures via regular checks; <b>Breakdown</b> fixes equipment after it fails.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-49">
-                <div class="q-text"><span class="q-badge">Q49</span><span>What is Material Handling? State two principles of material handling.</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q49:</b> Movement, protection, and control of materials. Principles: <b>Gravity principle</b>, <b>Unit load principle</b>.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-50">
-                <div class="q-text"><span class="q-badge">Q50</span><span>Define Human Resource Management (HRM).</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q50:</b> The strategic approach to managing people, focusing on recruitment, training, and employee relations.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-51">
-                <div class="q-text"><span class="q-badge">Q51</span><span>What is Job Analysis, Job Description, and Job Specification?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q51:</b> <b>Job Analysis:</b> studying a job's requirements. <b>Job Description:</b> duties and responsibilities. <b>Job Specification:</b> required skills and qualifications.</p>
-                </div>
-            </div>
-            <div class="qa-card" id="ga-52">
-                <div class="q-text"><span class="q-badge">Q52</span><span>What is Performance Appraisal?</span></div>
-                <div class="a-text">
-                    <p><b>Ans Q52:</b> The regular evaluation of an employee's job performance and contribution to the organization.</p>
-                </div>
-            </div>
-        </main>
-    </div>
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q1</span><span>Define a 'System' in the context of Industrial Management.</span></div>
+<div class="a-text"><p>A <b>system</b> is a set of interrelated components working together to achieve common objectives. In industrial management, it views the organization as a <b>unified whole</b> where inputs (raw materials, labor, capital) are transformed through processes into outputs (finished goods/services), with feedback controlling the system. Key characteristics: it has boundaries, receives inputs, processes them, produces outputs, and interacts with the external environment.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q2</span><span>Differentiate between open system and closed system with suitable industrial examples.</span></div>
+<div class="a-text"><p>An <b>OPEN SYSTEM</b> continuously interacts with its environment, exchanging matter, energy, and information. Example: A manufacturing company that takes raw materials from suppliers (input from environment) and sells products to customers (output to environment). A <b>CLOSED SYSTEM</b> has no interaction with its environment — it is self-contained. Example: A sealed chemical reaction vessel. In practice, no industrial system is perfectly closed; most operate as open systems.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q3</span><span>List the four fundamental parameters/variables defining a management system.</span></div>
+<div class="a-text"><p>The four fundamental parameters are: <b>(1) Inputs</b> — resources like raw materials, labor, capital, information; <b>(2) Transformation Process</b> — activities converting inputs to outputs (production, assembly, services); <b>(3) Outputs</b> — finished goods, services, or results; <b>(4) Feedback</b> — information about output quality and quantity used to control and improve the system.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q4</span><span>Define 'Management' according to Henry Fayol.</span></div>
+<div class="a-text"><p>According to Henry Fayol, "<b>Management is to forecast and plan, to organize, to command, to coordinate and to control.</b>" He defined it as a universal process consisting of five core functions (POSDCORB) applicable to all organizations, both business and non-business.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q5</span><span>State the four core functions of management.</span></div>
+<div class="a-text"><p>The four core functions are: <b>(1) PLANNING</b> — setting objectives and deciding on actions to achieve them; <b>(2) ORGANIZING</b> — arranging resources and tasks to implement plans; <b>(3) DIRECTING/LEADING</b> — guiding, motivating, and supervising people to perform tasks; <b>(4) CONTROLLING</b> — measuring performance against standards and taking corrective action.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q6</span><span>What is meant by Organization Structure?</span></div>
+<div class="a-text"><p>Organization structure is the <b>formal framework</b> that defines how tasks are divided, grouped, and coordinated within an organization. It establishes reporting relationships (who reports to whom), departmentalization, span of control, and the hierarchy of authority. It provides clarity on roles, responsibilities, and communication channels.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q7</span><span>State two primary goals of establishing a formal organization structure.</span></div>
+<div class="a-text"><p><b>(1)</b> To facilitate efficient coordination and communication among different departments and individuals. <b>(2)</b> To clearly define roles, responsibilities, and reporting relationships so that tasks are completed efficiently and accountability is established.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q8</span><span>Define 'Division of Labor' and state its primary advantage.</span></div>
+<div class="a-text"><p><b>Division of labor</b> (specialization) is the process of breaking down a complex task into smaller, simpler tasks assigned to different workers based on their skills. <b>Primary advantage:</b> It increases productivity and efficiency by allowing workers to develop expertise in specific tasks, reducing wastage of time and effort (as advocated by Adam Smith and F.W. Taylor).</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q9</span><span>Differentiate between Scalar process and Functional process.</span></div>
+<div class="a-text"><p><b>SCALAR PROCESS</b> refers to the vertical chain of command — the hierarchy of authority from top management to the lowest level, defining who reports to whom (the "chain of superiors"). <b>FUNCTIONAL PROCESS</b> refers to the horizontal grouping of similar activities into departments (e.g., production, finance, marketing) for specialization and efficiency. Scalar is about authority flow; Functional is about activity grouping.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q10</span><span>Define 'Span of Control'. What factors influence the span of control?</span></div>
+<div class="a-text"><p><b>Span of control</b> is the number of subordinates a manager can effectively supervise. Influencing factors: <b>(1)</b> Nature of work — complex work requires narrower span; <b>(2)</b> Ability of manager — experienced managers handle wider spans; <b>(3)</b> Time available for supervision; <b>(4)</b> Degree of decentralization; <b>(5)</b> Use of technology and communication systems.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q11</span><span>What is meant by Delegation of Authority?</span></div>
+<div class="a-text"><p><b>Delegation of authority</b> is the process by which a superior transfers a portion of their authority and responsibility to a subordinate to perform specific tasks. It involves three elements: <b>(1) Assignment of duties/responsibility</b>, <b>(2) Granting of authority/power</b> to act, and <b>(3) Creation of accountability</b> — the subordinate remains answerable to the superior. Delegation does NOT mean abdication — ultimate accountability stays with the superior.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q12</span><span>Distinguish between Centralization and Decentralization of authority.</span></div>
+<div class="a-text"><p><b>CENTRALIZATION</b> concentrates decision-making authority at top levels. Advantages: consistency, quick crisis decisions, better control. <b>DECENTRALIZATION</b> distributes authority to lower/middle levels. Advantages: faster decisions, employee development, local flexibility. Decentralization is preferred when the organization is large, geographically dispersed, or needs quick local responses.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q13</span><span>Differentiate between Organizational Culture and Organizational Climate.</span></div>
+<div class="a-text"><p><b>ORGANIZATIONAL CULTURE</b> is the shared set of values, beliefs, norms, and practices that characterize how members think and behave — deep-seated, long-term, socially constructed. <b>ORGANIZATIONAL CLIMATE</b> is the employees' shared perception of the work environment — how it feels to work there — more temporary and emotionally experienced. Culture is "what we believe"; Climate is "how we feel about working here."</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q14</span><span>Define employee 'Morale' in an industrial setting.</span></div>
+<div class="a-text"><p>Employee morale is the overall <b>attitude, satisfaction, and confidence</b> that employees feel toward their work, organization, and colleagues. High morale reflects enthusiasm, willingness to work hard, loyalty, and satisfaction with working conditions. Morale is a group-level concept reflecting the collective spirit of the workforce.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q15</span><span>State the relationship between employee morale and productivity.</span></div>
+<div class="a-text"><p>Generally, <b>high morale is positively correlated with high productivity</b> — satisfied, motivated employees work harder and more efficiently. However, the relationship is not always direct: high morale may exist in a low-productivity environment if workers are satisfied with low output standards; and low morale often leads to absenteeism, turnover, and poor quality. Morale is a necessary but not always sufficient condition for productivity.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q16</span><span>Define 'Job Satisfaction' and name two key factors influencing it.</span></div>
+<div class="a-text"><p><b>Job satisfaction</b> is the positive emotional state resulting from an individual's appraisal of their job experiences — how content they are with their role. Two key influencing factors: <b>(1) WORK CONDITIONS</b> — physical environment, safety, tools, working hours; <b>(2) RECOGNITION AND REWARDS</b> — fair compensation, promotions, appreciation. Other factors include job security, relationships with supervisors/peers, and opportunities for growth.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q17</span><span>Mention two crucial safety provisions under the Indian Factories Act, 1948.</span></div>
+<div class="a-text"><p><b>(1) FENCING OF MACHINERY</b> — all dangerous parts of machinery must be securely fenced to protect workers. <b>(2) EMERGENCY STOP DEVICES</b> — every machine must have easily accessible stopping/starting devices. Other provisions include: workers must not enter areas with naked flames near flammable materials, pregnant women cannot work at dangerous machines, and every factory must have adequate fire-fighting equipment.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q18</span><span>What is the statutory limitation on weekly working hours for an adult worker under the Factories Act?</span></div>
+<div class="a-text"><p>The Factories Act, 1948 limits adult workers to a maximum of <b>48 hours per week</b> (8 hours per day). No worker can work more than 9 hours in any single day (including overtime). One weekly holiday is mandatory. Overtime beyond 9 hours/day or 48 hours/week must be compensated at <b>twice the ordinary rate of wages</b>.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q19</span><span>Expand CPM and PERT.</span></div>
+<div class="a-text"><p><b>CPM</b> = <b>C</b>ritical <b>P</b>ath <b>M</b>ethod. <b>PERT</b> = <b>P</b>rogram <b>E</b>valuation and <b>R</b>eview <b>T</b>echnique. Both are network analysis tools used for project planning, scheduling, and controlling complex projects involving many interdependent activities.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q20</span><span>State one fundamental difference between CPM and PERT regarding activity duration estimation.</span></div>
+<div class="a-text"><p><b>CPM</b> uses <b>DETERMINISTIC</b> (single) time estimates — each activity has one fixed duration based on past experience. <b>PERT</b> uses <b>PROBABILISTIC</b> (three) time estimates — Optimistic (a), Most Likely (m), and Pessimistic (b) — and calculates expected duration using $t_e = (a + 4m + b) / 6$. CPM is used when activity times are well-known; PERT is used for R&D projects with uncertainty.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q21</span><span>Define an 'Activity' and an 'Event' in a network diagram.</span></div>
+<div class="a-text"><p>An <b>ACTIVITY</b> is a task or operation that consumes time, resources, and effort. It is represented by an arrow in a network diagram and has a defined start and end. An <b>EVENT</b> (or node) is a specific point in time marking the START or COMPLETION of one or more activities. It does NOT consume time or resources. Events = circles/nodes; Activities = arrows.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q22</span><span>What is a 'Dummy Activity'? Why is it introduced in network analysis?</span></div>
+<div class="a-text"><p>A <b>dummy activity</b> (dotted arrow) is an imaginary activity that does NOT consume time or resources. It is introduced to: <b>(1)</b> Show correct dependency relationships when two activities share a common predecessor; <b>(2)</b> Avoid ambiguity in network diagrams; <b>(3)</b> Ensure each activity has unique identification. Dummy activities are never numbered in activity lists.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q23</span><span>Define 'Earliest Start Time' (EST) and 'Earliest Finish Time' (EFT).</span></div>
+<div class="a-text"><p><b>EST</b> (Earliest Start Time) is the earliest time at which an activity can begin, assuming all predecessor activities have been completed as early as possible. <b>EFT</b> (Earliest Finish Time) is the earliest time at which an activity can finish: $\text{EFT} = \text{EST} + \text{Activity Duration}$. EST/EFT are computed by the <b>FORWARD PASS</b> method through the network.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q24</span><span>Define 'Latest Start Time' (LST) and 'Latest Finish Time' (LFT).</span></div>
+<div class="a-text"><p><b>LFT</b> (Latest Finish Time) is the latest time by which an activity must finish without delaying the project. <b>LST</b> (Latest Start Time) is the latest time by which an activity can start: $\text{LST} = \text{LFT} - \text{Activity Duration}$. LST/LFT are computed by the <b>BACKWARD PASS</b> method from the final event of the network.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q25</span><span>What is the Critical Path in a project network?</span></div>
+<div class="a-text"><p>The <b>Critical Path</b> is the <b>longest path</b> through the network from start event to end event. It represents the minimum time required to complete the project. Activities on the critical path have <b>ZERO float</b> — any delay directly delays the entire project. The critical path is found by identifying events where $\text{EST} = \text{LST}$ (or $\text{EFT} = \text{LFT}$).</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q26</span><span>Define 'Total Float' of an activity.</span></div>
+<div class="a-text"><p><b>Total Float</b> is the maximum time by which an activity can be delayed without delaying the project completion date. Formula: $\text{Total Float} = \text{LST} - \text{EST} = \text{LFT} - \text{EFT}$. Activities on the critical path have Total Float = 0. Total float is shared among activities on the same path.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q27</span><span>Differentiate between Free Float and Independent Float.</span></div>
+<div class="a-text"><p><b>FREE FLOAT</b> is the time by which an activity can be delayed without delaying the EARLIEST start time of any successor. Formula: $\text{FF} = \text{EST}(\text{successor}) - \text{EFT}(\text{current})$. <b>INDEPENDENT FLOAT</b> is the portion of total float that belongs exclusively to one activity. Formula: $\text{IF} = \text{Total Float} - \text{Free Float}$. Independent float is available only when preceding activities finish early AND succeeding activities start late.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q28</span><span>What is meant by 'Network Crashing'?</span></div>
+<div class="a-text"><p><b>Network crashing</b> is shortening project duration by allocating additional resources (extra workers, overtime, better equipment) to critical activities at increased cost. The goal is to find the optimum project duration at minimum total cost by balancing: <b>(1)</b> Reduced indirect costs (shorter project = less overhead) and <b>(2)</b> Increased direct costs (crashing = more resource cost). Crashing is applied only to critical path activities.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q29</span><span>Define 'Cost Slope' in network crashing.</span></div>
+<div class="a-text"><p><b>Cost Slope</b> is the additional cost per unit time when an activity is crashed. Formula: $\text{Cost Slope} = \frac{\text{Crash Cost} - \text{Normal Cost}}{\text{Normal Time} - \text{Crash Time}}$. It represents the rate at which crashing costs increase. Activities with the <b>lowest cost slope</b> are crashed first (most economical) until another path becomes critical.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q30</span><span>Define 'Materials Management' and state its ultimate objective.</span></div>
+<div class="a-text"><p><b>Materials Management</b> is the integrated function of planning, organizing, and controlling the flow of materials from initial procurement through manufacturing to final distribution. It encompasses purchasing, storekeeping, inventory control, and materials handling. <b>Ultimate objective:</b> To ensure the right materials are available in the right quantity, at the right time, at the right place, and at the minimum total cost.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q31</span><span>State two primary objectives of the Purchasing Department.</span></div>
+<div class="a-text"><p><b>(1)</b> To procure the right quality of materials at the right price and right time, ensuring uninterrupted production. <b>(2)</b> To maintain good supplier relationships and negotiate favorable terms while minimizing total procurement costs (purchase price + ordering cost + carrying cost).</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q32</span><span>Distinguish between Centralized Purchasing and Decentralized Purchasing.</span></div>
+<div class="a-text"><p><b>CENTRALIZED:</b> One purchasing department buys for all units/plants. Advantages: bulk discounts, better control, uniform standards, expert buyers. Disadvantages: slow response, less local flexibility. <b>DECENTRALIZED:</b> Each department/plant buys independently. Advantages: fast response, local adaptation, accountability. Disadvantages: no bulk discounts, duplication, less control. Centralized suits large uniform needs; Decentralized suits diverse/local needs.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q33</span><span>What is a Purchase Requisition form?</span></div>
+<div class="a-text"><p>A <b>Purchase Requisition</b> is an internal document prepared by the department needing materials, requesting the purchasing department to procure specified items. It contains: item description, quantity required, specification, budget code, date required, and authorized signature. It is the FIRST step in the purchasing cycle and triggers the purchase process.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q34</span><span>Define 'Storekeeping' and list its primary function.</span></div>
+<div class="a-text"><p><b>Storekeeping</b> is the function of receiving, storing, protecting, and issuing materials/equipment in a systematic manner. Primary functions: <b>(1)</b> Receiving and inspecting incoming materials; <b>(2)</b> Storing materials safely and systematically; <b>(3)</b> Issuing materials against authorized requisitions; <b>(4)</b> Maintaining accurate inventory records; <b>(5)</b> Preventing losses from theft, damage, or obsolescence.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q35</span><span>What is a Bin Card? How does it differ from a Stores Ledger?</span></div>
+<div class="a-text"><p>A <b>BIN CARD</b> is a card attached to each storage bin, showing the quantity of a specific item held in that bin. It records: item name, bin number, receipts, issues, and balance — updated after EACH transaction. It is a STORE-LEVEL record. A <b>STORES LEDGER</b> is a formal accounting record (like a ledger account) for each item, showing the monetary value (quantity × price). Key difference: Bin Card = physical/quantitative record at the bin; Stores Ledger = financial/accounting record in the ledger.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q36</span><span>State the need for Codification of Stores.</span></div>
+<div class="a-text"><p>Codification assigns a unique code/number to each store item to: <b>(1)</b> Eliminate confusion from similar item names; <b>(2)</b> Simplify and speed up record-keeping and retrieval; <b>(3)</b> Enable computerization of inventory systems; <b>(4)</b> Standardize naming across departments; <b>(5)</b> Facilitate classification and analysis (e.g., ABC analysis); <b>(6)</b> Reduce storage and handling costs through systematic arrangement.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q37</span><span>Define 'Inventory Control'.</span></div>
+<div class="a-text"><p><b>Inventory Control</b> is the systematic management of stocked goods to maintain optimal inventory levels — ensuring materials are available when needed while minimizing carrying costs. It involves: setting reorder points, determining order quantities, monitoring stock levels, and controlling wastage/obsolescence. The goal is to balance the costs of holding inventory against the costs of stockouts.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q38</span><span>What does EOQ stand for? State the EOQ formula with notation expansion.</span></div>
+<div class="a-text"><p><b>EOQ</b> = <b>E</b>conomic <b>O</b>rder <b>Q</b>uantity. It is the optimal order quantity that minimizes total inventory cost. Formula: $\text{EOQ} = \sqrt{\frac{2 \times D \times O}{H}}$ where: $D$ = Annual demand (units), $O$ = Ordering cost per order (Rs.), $H$ = Carrying cost per unit per year (Rs.).</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q39</span><span>Explain the basis of classification in ABC Analysis (Always Better Control).</span></div>
+<div class="a-text"><p>ABC Analysis classifies inventory items based on their <b>ANNUAL USAGE VALUE</b> (consumption value = unit cost × annual consumption), following the Pareto Principle (80/20 rule). <b>A-items:</b> Top ~10% of items accounting for ~70% of total usage value (high value, tight control). <b>B-items:</b> Next ~20% of items accounting for ~20% of value (moderate control). <b>C-items:</b> Remaining ~70% of items accounting for ~10% of value (loose control).</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q40</span><span>What is Wilson's Inventory Model?</span></div>
+<div class="a-text"><p><b>Wilson's Model</b> determines the optimal order quantity and reorder point to minimize total inventory cost. Key assumptions: <b>(1)</b> Demand is constant and known; <b>(2)</b> Replenishment is instantaneous; <b>(3)</b> No quantity discounts; <b>(4)</b> Carrying cost is proportional to average inventory. The model produces the EOQ formula and recommends placing a new order when stock reaches the <b>Reorder Point (ROP)</b> = Lead time demand.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q41</span><span>Explain the working principle of the Two-Bin Inventory System.</span></div>
+<div class="a-text"><p>In the <b>Two-Bin System</b>, stock is kept in two bins. Items are consumed from <b>Bin 1</b> first. When Bin 1 is EMPTY, an order is placed for quantity = EOQ, and consumption shifts to <b>Bin 2</b> (which contains exactly enough stock to cover demand during lead time). When Bin 2 is also empty, the new order arrives and refills Bin 1. The system provides a simple visual reorder point without needing continuous monitoring.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q42</span><span>Expand MRP. What are its two main inputs?</span></div>
+<div class="a-text"><p><b>MRP</b> = <b>M</b>aterial <b>R</b>equirements <b>P</b>lanning. It is a computer-based system that calculates what materials are needed, how many, and when. The TWO MAIN INPUTS are: <b>(1) MASTER PRODUCTION SCHEDULE (MPS)</b> — what end products to make and when; <b>(2) BILL OF MATERIALS (BOM)</b> — the component structure showing what materials/subassemblies are needed for each product. Additional input: Inventory Status File.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q43</span><span>Differentiate between Job Production and Continuous (Mass) Production.</span></div>
+<div class="a-text"><p><b>JOB PRODUCTION:</b> One-off or small batches, custom-made. Characteristics: high variety, low volume, general-purpose machines, skilled labor, flexible layout, high cost/unit. Example: shipbuilding. <b>CONTINUOUS/MASS PRODUCTION:</b> Standardized products in large quantities. Characteristics: low variety, high volume, specialized machines, semi-skilled labor, fixed/line layout, low cost/unit. Example: automobile assembly lines.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q44</span><span>Define 'Production Planning and Control' (PPC).</span></div>
+<div class="a-text"><p><b>PPC</b> is the process of planning the production workflow in advance and controlling it to ensure production targets are met efficiently. It bridges the gap between planning and execution. Core functions: Routing, Loading, Scheduling, Dispatching, Expediting, Inspection, Evaluating, and Corrective Action. PPC ensures that the right quantity of the right quality product is delivered at the right time at minimum cost.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q45</span><span>State two main functions of the Scheduling phase in PPC.</span></div>
+<div class="a-text"><p><b>(1) TIMING</b> — determining WHEN each operation should start and finish, based on priorities, deadlines, and available capacity. <b>(2) SEQUENCING</b> — deciding the ORDER in which jobs should be processed on each machine to minimize idle time, meet delivery dates, and maximize utilization. Scheduling converts the production plan into a time-based timetable.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q46</span><span>What is a Gantt Chart? Who developed it?</span></div>
+<div class="a-text"><p>A <b>Gantt Chart</b> is a horizontal bar chart showing a project schedule — tasks, their start/end dates, durations, and progress. Each bar represents an activity; its length represents duration. Developed by <b>Henry L. Gantt</b> (American mechanical engineer) around 1910-1915. Widely used in PPC for scheduling, monitoring, and comparing planned vs. actual progress.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q47</span><span>Define 'Critical Ratio' in shop-floor scheduling.</span></div>
+<div class="a-text"><p><b>Critical Ratio (CR)</b> is a dynamic scheduling priority index measuring job urgency. Formula: $\text{CR} = \frac{\text{Due Date} - \text{Current Date}}{\text{Processing Time Remaining}}$. Interpretation: <b>CR &gt; 1</b> → ahead of schedule (low priority); <b>CR = 1</b> → on schedule (normal priority); <b>CR &lt; 1</b> → overdue (highest priority). Jobs with lower CR are scheduled first.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q48</span><span>What is a 'Bottleneck Operation' in a production line?</span></div>
+<div class="a-text"><p>A <b>bottleneck</b> is the slowest/most constrained stage in a production system — the operation with the lowest capacity that limits the throughput of the entire system. It creates a queue of work-in-process (WIP) upstream and causes idle time downstream. Identifying and eliminating bottlenecks is critical for improving overall system efficiency (Theory of Constraints by Goldratt).</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q49</span><span>Define 'Value Analysis' (VA). State the value formula (V = F/C).</span></div>
+<div class="a-text"><p><b>Value Analysis</b> is a systematic, function-oriented approach to analyzing the functions of a product/component to achieve the required function at the LOWEST TOTAL COST without compromising quality. Value Formula: $V = \frac{F}{C}$ where $V$ = Value, $F$ = Function (utility/performance), $C$ = Cost. High value = high function at low cost. VA aims to increase V by increasing F, decreasing C, or both.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q50</span><span>Expand the DARSIRI method used in Value Analysis.</span></div>
+<div class="a-text"><p><b>DARSIRI</b> = <b>D</b>ata gathering → <b>A</b>nalysis → <b>R</b>esearch → <b>S</b>olution → <b>I</b>mplementation → <b>R</b>eview → <b>I</b>nspection. <b>(1) Data:</b> Collect all information about the product; <b>(2) Analysis:</b> Identify functions, costs, and problem areas; <b>(3) Research:</b> Explore alternative ways to perform each function; <b>(4) Solution:</b> Select the best alternative; <b>(5) Implementation:</b> Put the solution into practice; <b>(6) Review:</b> Evaluate results; <b>(7) Inspection:</b> Verify solution works and maintain standards.</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q51</span><span>Differentiate between Cost Control and Cost Reduction.</span></div>
+<div class="a-text"><p><b>COST CONTROL</b> is maintaining costs within predetermined standards/budgets through planning, monitoring, and corrective action. It focuses on PREVENTING cost overruns and is a TEMPORARY measure for a specific period. <b>COST REDUCTION</b> is the permanent, continuous effort to lower costs WITHOUT compromising quality. It challenges existing standards and seeks better methods. Cost Control = "costs should not exceed budget"; Cost Reduction = "costs can be reduced further."</p></div>
+</div>
+
+<div class="qa-card">
+<div class="q-text"><span class="q-badge">Q52</span><span>Define ERP (Enterprise Resource Planning) and list two major benefits.</span></div>
+<div class="a-text"><p><b>ERP</b> is an integrated software system that manages and automates core business processes across an entire organization using a single shared database. It integrates functions like finance, HR, manufacturing, supply chain, and sales. Two major benefits: <b>(1) IMPROVED DATA CONSISTENCY</b> — single source of truth eliminates data redundancy and errors; <b>(2) ENHANCED DECISION-MAKING</b> — real-time information across departments enables faster, better-informed decisions.</p></div>
+</div>
+
+</main>
+</div>
+
+<footer style="padding:2rem 4rem;text-align:center;color:var(--text-muted);font-size:0.85rem">
+<span>Compiled by <a href="../../index.html" style="color:var(--primary);text-decoration:none;font-weight:600">Soumya Chakraborty</a></span>
+<span class="colophon-note"> &middot; MAKAUT paper structure &mdash; Group A / B / C</span>
+</footer>
+
 </body>
 </html>
