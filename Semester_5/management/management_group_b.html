@@ -6,59 +6,12 @@
 <title>Industrial Management (HS-MC501) - Group B</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: false, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+<script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+<link rel="stylesheet" href="../qa-styles.css">
 <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-<style>
-:root {
---bg-desk: #eae6db;
---bg-paper: #fefdfb;
---text-main: #1e293b;
---text-muted: #57687e;
---primary: #f59e0b;
---border-light: rgba(15,23,42,0.11);
---shadow-sm: 0 4px 6px rgba(0,0,0,0.02);
---shadow-md: 0 10px 30px -10px rgba(0,0,0,0.08);
---shadow-lg: 0 20px 40px -10px rgba(0,0,0,0.1);
-}
-body{font-family:'Inter',sans-serif;background-color:var(--bg-desk);color:var(--text-main);margin:0;padding:0;line-height:1.7}
-.top-nav{padding:1.2rem 2.5rem;background:rgba(254,253,251,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border-light);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:100;box-shadow:var(--shadow-sm)}
-.top-nav a{text-decoration:none;color:var(--text-muted);font-weight:600;font-size:0.95rem;transition:color 0.2s}
-.top-nav a:hover{color:var(--primary)}
-.nav-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.35rem;font-weight:800;color:var(--text-main);letter-spacing:-0.5px;display:flex;align-items:center;gap:0.8rem}
-.nav-code{font-family:'JetBrains Mono',monospace;font-size:0.8rem;background:rgba(0,0,0,0.05);color:var(--primary);padding:0.3rem 0.6rem;border-radius:6px;border:1px solid rgba(0,0,0,0.1)}
-.layout{display:flex;max-width:1800px;width:96%;margin:3rem auto;gap:3rem;align-items:flex-start}
-.sidebar{width:300px;flex-shrink:0;position:sticky;top:100px}
-.group-switch{display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem}
-.gs-item{display:flex;align-items:center;gap:1rem;padding:1.2rem;background:transparent;border:1px solid transparent;border-radius:12px;text-decoration:none;color:var(--text-muted);transition:all 0.2s}
-.gs-item:hover{background:rgba(255,255,255,0.5);transform:translateX(5px);color:var(--text-main)}
-.gs-item.is-current{background:var(--bg-paper);border-color:var(--border-light);box-shadow:var(--shadow-sm);color:var(--text-main)}
-.gs-key{font-family:'JetBrains Mono',monospace;font-size:1.2rem;font-weight:800;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,0.05);border-radius:10px;color:var(--text-main)}
-.gs-item.is-current .gs-key{background:var(--primary);color:white}
-.gs-body{display:flex;flex-direction:column}
-.gs-name{font-weight:700;font-size:1.05rem}
-.gs-marks{font-size:0.8rem;opacity:0.8;font-family:'JetBrains Mono',monospace}
-.toc-foot a{color:var(--primary);text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.3s;display:inline-block;padding:0.5rem 1rem;background:rgba(255,255,255,0.5);border-radius:8px;border:1px solid var(--border-light)}
-.toc-foot a:hover{background:var(--bg-paper);box-shadow:var(--shadow-sm);transform:translateY(-2px)}
-.content{flex-grow:1;min-width:0;background:var(--bg-paper);padding:3rem 4rem;border-radius:16px;box-shadow:var(--shadow-md);border:1px solid var(--border-light)}
-.section-title{font-family:'Plus Jakarta Sans',sans-serif;font-size:2.4rem;font-weight:800;color:#1a202c;border-bottom:2px dashed rgba(0,0,0,0.06);padding-bottom:1rem;margin-bottom:3rem;margin-top:4rem;letter-spacing:-1px}
-.section-title:first-child{margin-top:0}
-.qa-card{margin-bottom:4rem;padding-bottom:3rem;border-bottom:1px solid var(--border-light)}
-.q-text{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.25rem;color:#2d3748;margin-bottom:1.5rem;display:flex;gap:1rem;line-height:1.5;align-items:flex-start}
-.q-badge{background:rgba(0,0,0,0.05);color:var(--primary);padding:0.3rem 0.8rem;border-radius:8px;font-size:0.85rem;height:fit-content;white-space:nowrap;font-weight:800;border:1px solid rgba(0,0,0,0.1)}
-.a-text{color:#4a5568;padding-left:1.8rem;border-left:4px solid var(--primary);font-size:1rem}
-.a-text h4{color:var(--text-main);margin-top:2rem;font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem}
-.a-text h5{color:var(--text-main);margin-top:1.5rem;font-weight:600;font-size:1rem}
-.a-text strong{color:#1a202c}
-.a-text ul{margin:0.5rem 0 0.5rem 1.5rem;padding:0}
-.a-text li{margin-bottom:0.4rem}
-.mermaid{background:#f7fafc;border:1px solid var(--border-light);border-radius:12px;padding:2rem;margin:2rem 0;text-align:center;overflow:auto;clear:both;width:100%;box-sizing:border-box}
-table{display:block;max-width:100%;overflow-x:auto;width:100%;border-collapse:collapse;margin:2rem 0;background:var(--bg-paper);border-radius:12px;box-shadow:var(--shadow-sm)}
-th,td{padding:1rem;border:1px solid var(--border-light);text-align:left}
-th{background:#f7fafc;color:var(--text-main);font-weight:700}
-@media(max-width:1024px){.layout{flex-direction:column}.sidebar{width:100%;position:static}.content{padding:2.5rem}}
-</style>
+</head>
 </head>
 <body>
 <nav class="top-nav">
