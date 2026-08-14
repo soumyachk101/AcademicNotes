@@ -238,82 +238,84 @@ h1 {
  display: flex;
  flex-direction: column;
  min-height: 236px;
- padding: 1.7rem 1.55rem 1.35rem;
- background: #ffffff;
- border: 1px solid rgba(15, 23, 42, 0.06);
- border-radius: 20px;
+ padding: 1.75rem 1.6rem 1.5rem;
+ background: linear-gradient(180deg, #ffffff 0%, #fafaf9 100%);
+ border: 1px solid rgba(15, 23, 42, 0.05);
+ border-radius: 16px;
  box-shadow: 
-  0 2px 8px -2px rgba(15, 23, 42, 0.03), 
-  0 4px 16px -4px rgba(15, 23, 42, 0.02);
+  0 2px 8px -2px rgba(15, 23, 42, 0.04),
+  inset 0 1px 0 #ffffff;
  text-decoration: none;
  overflow: hidden;
  isolation: isolate;
  color: inherit;
- transition:
- transform 420ms var(--ease),
- box-shadow 420ms var(--ease),
- border-color 420ms var(--ease);
+ transition: all 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .tile::before {
  content: "";
  position: absolute;
- inset: 0 0 auto 0;
- height: 4px;
+ top: -40px;
+ right: -40px;
+ width: 140px;
+ height: 140px;
+ border-radius: 50%;
  background: var(--c);
- opacity: 0.9;
- transition: height 300ms var(--ease), opacity 300ms var(--ease);
-}
-
-.tile::after {
- content: "";
- position: absolute;
- inset: 0;
+ filter: blur(40px);
+ opacity: 0.12;
  z-index: -1;
- background: linear-gradient(180deg, color-mix(in srgb, var(--c) 4%, transparent) 0%, transparent 60%);
- opacity: 0;
- transition: opacity 420ms var(--ease);
+ transition: all 500ms var(--ease);
 }
 
 .tile:hover, .tile:focus-visible {
- transform: translateY(-5px);
- border-color: color-mix(in srgb, var(--c) 25%, rgba(15, 23, 42, 0.1));
+ transform: translateY(-4px) scale(1.005);
+ border-color: color-mix(in srgb, var(--c) 20%, rgba(15, 23, 42, 0.08));
  box-shadow: 
-  0 4px 12px -2px color-mix(in srgb, var(--c) 8%, rgba(15, 23, 42, 0.05)),
-  0 16px 32px -8px color-mix(in srgb, var(--c) 15%, rgba(15, 23, 42, 0.08));
+  0 12px 32px -8px color-mix(in srgb, var(--c) 15%, rgba(15, 23, 42, 0.12)),
+  0 4px 12px -2px rgba(15, 23, 42, 0.06),
+  inset 0 1px 0 #ffffff;
 }
 
-.tile:hover::before, .tile:focus-visible::before { opacity: 1; }
-.tile:hover::after, .tile:focus-visible::after { opacity: 1; }
+.tile:hover::before, .tile:focus-visible::before {
+ opacity: 0.25;
+ transform: scale(1.2);
+}
+
 .tile:focus-visible { outline: 2px solid var(--c); outline-offset: 3px; }
 
 .tile-code {
  align-self: flex-start;
- padding: 0.35rem 0.7rem;
- border-radius: 8px;
- background: color-mix(in srgb, var(--c) 10%, transparent);
- border: 1px solid color-mix(in srgb, var(--c) 15%, transparent);
+ padding: 0.35rem 0.75rem;
+ border-radius: 99px;
+ background: #ffffff;
+ border: 1px solid color-mix(in srgb, var(--c) 20%, rgba(15, 23, 42, 0.08));
  font-family: var(--util);
  font-size: 0.68rem;
  font-weight: 700;
  letter-spacing: 0.08em;
  color: var(--c);
- box-shadow: 0 2px 4px -1px color-mix(in srgb, var(--c) 10%, transparent);
+ box-shadow: 0 2px 6px -2px color-mix(in srgb, var(--c) 15%, rgba(15, 23, 42, 0.08));
+ transition: all 300ms var(--ease);
+}
+
+.tile:hover .tile-code {
+ border-color: color-mix(in srgb, var(--c) 35%, transparent);
+ background: color-mix(in srgb, var(--c) 4%, #ffffff);
 }
 
 .tile h3 {
  font-family: var(--display);
- font-size: 1.38rem;
- font-weight: 800;
- line-height: 1.2;
+ font-size: 1.4rem;
+ font-weight: 700;
+ line-height: 1.25;
  letter-spacing: -0.025em;
  color: var(--ink-strong);
- margin: 1rem 0 0.5rem;
+ margin: 1.1rem 0 0.5rem;
 }
 
 .tile p {
- font-size: 0.875rem;
- line-height: 1.6;
+ font-size: 0.9rem;
+ line-height: 1.55;
  color: var(--ink-muted);
  margin-bottom: 1.5rem;
  text-wrap: pretty;
@@ -325,17 +327,17 @@ h1 {
  justify-content: space-between;
  gap: 1rem;
  margin-top: auto;
- padding-top: 1.15rem;
- border-top: 1px solid var(--rule-soft);
+ padding-top: 1.25rem;
+ border-top: 1px solid rgba(15, 23, 42, 0.06);
  font-family: var(--util);
- font-size: 0.74rem;
- font-weight: 500;
+ font-size: 0.75rem;
+ font-weight: 600;
  font-variant-numeric: tabular-nums;
  color: var(--ink-muted);
 }
 
-.tile-foot .arrow { font-size: 1.1rem; line-height: 1; color: var(--c); transition: transform 350ms var(--ease); }
-.tile:hover .arrow { transform: translateX(6px); }
+.tile-foot .arrow { font-size: 1.15rem; line-height: 1; color: var(--ink-muted); transition: all 300ms var(--ease); }
+.tile:hover .arrow { transform: translateX(6px); color: var(--c); }
 
 /* ---------- Legacy card grid ---------- */
 
