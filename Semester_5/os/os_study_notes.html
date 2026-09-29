@@ -4,1279 +4,1351 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>OS Study Notes — Semester 5</title>
+  <link rel="stylesheet" href="../site.css">
   <style>
-    :root {
-      --primary: #f59e0b;
-      --primary-light: #d97706;
-      --surface: #f8fafc;
-      --text: #1e293b;
-      --text-secondary: #64748b;
-      --text-body: #334155;
-      --border: #e2e8f0;
-      --warning-bg: #fffbeb;
-      --warning-border: #f59e0b;
-      --warning-text: #92400e;
-      --pyq-bg: #fffbeb;
-      --pyq-border: #fde68a;
-      --pyq-text: #92400e;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: #f1f5f9;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      z-index: 101;
-      transition: width 0.1s;
-    }
-
-    .sticky-header {
-      position: sticky;
-      top: 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 0.8rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sticky-header h1 {
-      font-size: 1.1rem;
-      margin: 0;
-      color: var(--primary);
-    }
-
-    .toc {
-      background: white;
-      border-bottom: 1px solid var(--border);
-      padding: 0.6rem 1.5rem;
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      position: sticky;
-      top: 52px;
-      z-index: 99;
-    }
-
-    .toc a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      white-space: nowrap;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-    }
-
-    .toc a:hover {
-      background: #f1f5f9;
-      color: var(--primary);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-
-    .subject-title {
-      font-size: 1.8rem;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-
-    .subject-meta {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .subject-card {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-      color: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-
-    .subject-card h2 {
-      margin-top: 0;
-      font-size: 1.3rem;
-    }
-
-    .subject-card p {
-      opacity: 0.9;
-      line-height: 1.6;
-    }
-
-    .unit-section {
-      margin-bottom: 2.5rem;
-    }
-
-    .unit-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      padding: 0.8rem;
-      background: white;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-
-    .unit-header:hover {
-      border-color: var(--primary);
-    }
-
-    .unit-number {
-      background: #f59e0b;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    .unit-header-text h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      color: var(--text);
-    }
-
-    .unit-header-text p {
-      margin: 0.2rem 0 0;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .unit-content {
-      background: white;
-      border: 1px solid var(--border);
-      border-top: none;
-      border-radius: 0 0 8px 8px;
-      padding: 1.2rem;
-    }
-
-    .topic-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .topic-card h4 {
-      margin: 0 0 0.5rem;
-      font-size: 0.95rem;
-      color: #f59e0b;
-    }
-
-    .topic-card p,
-    .topic-card li {
-      color: var(--text-body);
-      line-height: 1.65;
-      font-size: 0.9rem;
-    }
-
-    .topic-card ul {
-      padding-left: 1.2rem;
-      margin: 0.3rem 0;
-    }
-
-    .question-block {
-      background: white;
-      border-left: 3px solid #f59e0b;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.6rem;
-      border-radius: 0 6px 6px 0;
-    }
-
-    .question-block .q-label {
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: #f59e0b;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
-    }
-
-    .question-block .q-text {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-    }
-
-    .question-block .q-answer {
-      color: #475569;
-      line-height: 1.65;
-      font-size: 0.9rem;
-    }
-
-    .highlight-box {
-      background: #f3f4f6;
-      border-left: 3px solid var(--primary-light);
-      padding: 0.7rem 1rem;
-      border-radius: 0 6px 6px 0;
-      margin: 0.6rem 0;
-    }
-
-    .exam-tip {
-      background: var(--warning-bg);
-      border-left: 3px solid var(--warning-border);
-      padding: 0.7rem 1rem;
-      border-radius: 0 6px 6px 0;
-      margin: 0.6rem 0;
-      font-size: 0.85rem;
-    }
-
-    .exam-tip strong {
-      color: var(--warning-text);
-    }
-
-    .pyq-section {
-      margin-top: 1rem;
-      padding-top: 0.8rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    .pyq-section h4 {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-    }
-
-    .pyq-item {
-      background: var(--pyq-bg);
-      border: 1px solid var(--pyq-border);
-      border-radius: 6px;
-      padding: 0.5rem 0.8rem;
-      margin-bottom: 0.4rem;
-      font-size: 0.85rem;
-    }
-
-    .pyq-item .year {
-      color: var(--pyq-text);
-      font-weight: bold;
-      font-size: 0.75rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #94a3b8;
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
-      margin-top: 2rem;
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #f59e0b;
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 2px 10px rgba(245, 158, 11, 0.3);
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 1.2rem;
-    }
-
-    .back-to-top.visible {
-      opacity: 1;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      margin: 0.5rem 0;
-    }
-
-    table th,
-    table td {
-      border: 1px solid var(--border);
-      padding: 0.5rem 0.7rem;
-      text-align: left;
-    }
-
-    table th {
-      background: var(--surface);
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .code-block {
-      background: #1e293b;
-      color: #e2e8f0;
-      padding: 1rem;
-      border-radius: 8px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.82rem;
-      overflow-x: auto;
-      margin: 0.5rem 0;
-      line-height: 1.5;
-    }
-
-    .code-block .keyword {
-      color: #c084fc;
-    }
-
-    .code-block .type {
-      color: #67e8f9;
-    }
-
-    .code-block .comment {
-      color: #94a3b8;
-    }
+    .sheet { --c: #2563eb; }
   </style>
 </head>
 <body>
+  <a id="top"></a>
 
   <div class="progress-bar" id="progressBar"></div>
 
-  <div class="sticky-header">
-    <h1>📚 Operating Systems — Study Notes</h1>
-  </div>
-
-  <div class="toc">
-    <a href="#unit-1">Unit 1: Introduction</a>
-    <a href="#unit-2">Unit 2: Process Management</a>
-    <a href="#unit-3">Unit 3: CPU Scheduling</a>
-    <a href="#unit-4">Unit 4: Memory Management</a>
-    <a href="#unit-5">Unit 5: File Systems &amp; I/O</a>
-  </div>
-
-  <div class="container" id="top">
-
-    <div class="subject-card">
-      <h2>Operating Systems</h2>
-      <p>Master the fundamentals of Operating Systems — process management, CPU scheduling, memory management, file systems, and I/O. This guide covers all 5 units with exam-focused questions and answers.</p>
-    </div>
-
-    <!-- ==================== UNIT 1 ==================== -->
-    <div class="unit-section" id="unit-1">
-      <div class="unit-header">
-        <div class="unit-number">1</div>
-        <div class="unit-header-text">
-          <h3>Introduction to Operating Systems</h3>
-          <p>What is OS, its functions, types, and system structures</p>
-        </div>
-      </div>
-      <div class="unit-content">
-
-        <div class="topic-card">
-          <h4>What is an Operating System?</h4>
-          <p>An <strong>operating system (OS)</strong> is a system software that acts as an interface between the user and the computer hardware. It manages hardware resources and provides services to application programs. The OS is the most essential software running on a computer — without it, the hardware is useless.</p>
-          <p>The OS performs two main roles:</p>
-          <ul>
-            <li><strong>As a resource manager:</strong> Allocates CPU, memory, I/O devices among competing programs.</li>
-            <li><strong>As a control program:</strong> Manages execution of user programs and prevents errors.</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Functions of Operating System</h4>
-          <p>Key functions include:</p>
-          <ul>
-            <li><strong>Process Management:</strong> Creating, scheduling, and terminating processes.</li>
-            <li><strong>Memory Management:</strong> Allocating and deallocating memory space.</li>
-            <li><strong>File System Management:</strong> Storing, retrieving, and organizing files on storage.</li>
-            <li><strong>Device Management:</strong> Managing I/O devices through device drivers.</li>
-            <li><strong>Security &amp; Protection:</strong> Protecting resources from unauthorized access.</li>
-            <li><strong>User Interface:</strong> Providing CLI (command line) or GUI (graphical) interfaces.</li>
-            <li><strong>Booting &amp; Shutdown:</strong> Loading the OS into memory and safe system termination.</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Types of Operating Systems</h4>
-          <p><strong>1. Batch OS:</strong> Jobs are grouped into batches with similar requirements and processed together. No direct user interaction. Examples: Payroll systems, transaction processing.</p>
-          <p><strong>2. Multiprogramming OS:</strong> Multiple programs are kept in memory simultaneously. When one program waits for I/O, the CPU switches to another program. Maximizes CPU utilization.</p>
-          <p><strong>3. Multiprocessing OS:</strong> Uses two or more CPUs working in parallel. True parallel processing. Examples: Linux, Windows Server.</p>
-          <p><strong>4. Real-Time OS (RTOS):</strong> Must respond within strict time constraints. Used in embedded systems, robotics, air traffic control. Two types: Hard real-time (missed deadline = failure) and Soft real-time (degraded performance).</p>
-          <p><strong>5. Distributed OS:</strong> Manages a group of independent computers and makes them appear as a single computer. Resources are shared across the network. Examples: LOCUS, Amoeba.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>OS Structures</h4>
-          <p><strong>Monolithic Structure:</strong> The entire OS runs as a single program in kernel mode. All services (file management, memory management, device drivers) are bundled together. Simple but difficult to maintain. Example: UNIX, Linux.</p>
-          <p><strong>Microkernel Structure:</strong> Only essential services (IPC, memory management, basic scheduling) run in kernel mode. Other services (file systems, device drivers) run in user mode as separate processes. More stable — a crash in one service doesn't bring down the whole system. Example: Minix, QNX, macOS XNU.</p>
-          <p><strong>Modular Structure:</strong> The OS is divided into modules (layers), each providing specific services. Each module communicates only with the layer directly below it. Easier to maintain and extend. Example: Windows NT, macOS.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>System Calls and Booting Process</h4>
-          <p><strong>System Calls</strong> are the programming interface between the OS and application programs. They allow user programs to request services from the OS kernel. Common categories:</p>
-          <ul>
-            <li><strong>Process Control:</strong> fork(), exit(), wait()</li>
-            <li><strong>File Management:</strong> open(), read(), write(), close()</li>
-            <li><strong>Device Management:</strong> ioctl(), read(), write()</li>
-            <li><strong>Information Maintenance:</strong> getpid(), alarm(), sleep()</li>
-            <li><strong>Communication:</strong> pipe(), shmget(), mmap()</li>
-          </ul>
-          <p><strong>Booting Process:</strong> The sequence of events when a computer is powered on:</p>
-          <ul>
-            <li>BIOS/UEFI performs POST (Power-On Self-Test)</li>
-            <li>Bootloader (GRUB/LILO) loads the OS kernel into memory</li>
-            <li>Kernel initializes hardware and mounts the root filesystem</li>
-            <li>init/systemd starts system services and processes</li>
-          </ul>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Key Concept:</strong> The <strong>kernel</strong> is the core of the OS — it's the only part that runs in privileged mode (kernel mode). Everything else (shell, utilities, applications) runs in user mode and must use system calls to access hardware or privileged operations.
-        </div>
-
-        <div class="exam-tip">
-          <strong>Exam Tip:</strong> OS types are a very common 1-mark question. Memorize the 5 types with one-line definitions. For 5-mark questions, compare two types (e.g., batch vs multiprogramming, RTOS vs general-purpose OS). The 15-mark question almost always asks for OS definition + functions + types + structures combined.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is an operating system?</div>
-          <div class="q-answer">An operating system is system software that acts as an interface between the user and the computer hardware. It manages hardware resources, provides a platform for application programs, and controls the execution of processes. It is the first program loaded into memory when the computer starts.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a system call?</div>
-          <div class="q-answer">A system call is a mechanism that allows a user program to request a service from the operating system kernel. It provides an interface between user programs and the OS, enabling operations like file access, process creation, and device communication that require privileged access.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain different types of operating systems.</div>
-          <div class="q-answer">
-            <p><strong>1. Batch OS:</strong> Groups similar jobs into batches for sequential processing. No user interaction during execution. Efficient for large repetitive tasks like payroll.</p>
-            <p><strong>2. Multiprogramming OS:</strong> Keeps multiple programs in memory. When one program waits for I/O, the CPU executes another. Increases CPU utilization and throughput.</p>
-            <p><strong>3. Multiprocessing OS:</strong> Uses multiple CPUs simultaneously to execute different processes in parallel. Provides true parallel computing and higher reliability.</p>
-            <p><strong>4. Real-Time OS:</strong> Designed for time-critical applications where tasks must complete within strict deadlines. Used in medical devices, avionics, and industrial control systems.</p>
-            <p><strong>5. Distributed OS:</strong> Manages a collection of independent computers appearing as a single system. Enables resource sharing and communication across networked machines.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain OS architecture — monolithic, microkernel, and modular.</div>
-          <div class="q-answer">
-            <p><strong>Monolithic:</strong> The entire OS (kernel, file system, memory management, device drivers) runs as one large program in kernel mode. All components can directly call each other. Advantage: fast. Disadvantage: one bug can crash the whole system, hard to maintain.</p>
-            <p><strong>Microkernel:</strong> Only the most essential services (IPC, memory management, scheduling) run in kernel mode. File systems, device drivers, and other services run as user-space processes communicating via IPC. Advantage: more stable and extensible. Disadvantage: performance overhead from IPC.</p>
-            <p><strong>Modular:</strong> The OS is built in layers. Each layer provides services to the layer above it and uses services from the layer below. The hardware is at the bottom, user interface at the top. Advantage: easier debugging and modification. Disadvantage: careful design needed for layer interfaces.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Define operating system. Explain its functions, types, and various structures in detail.</div>
-          <div class="q-answer">
-            <p><strong>Definition:</strong> An operating system is a system software that manages computer hardware and software resources, providing common services for computer programs. It acts as an intermediary between users and the computer hardware, and between application programs and hardware.</p>
-
-            <p><strong>Functions of OS:</strong></p>
-            <ul>
-              <li><strong>Process Management:</strong> Creating, scheduling, synchronizing, and terminating processes. Handles context switching between processes.</li>
-              <li><strong>Memory Management:</strong> Allocates and deallocates memory space to processes. Handles virtual memory, paging, and segmentation.</li>
-              <li><strong>File Management:</strong> Manages files on storage devices — creating, deleting, reading, writing, and organizing files into directories.</li>
-              <li><strong>Device Management:</strong> Controls I/O devices through device drivers. Manages device allocation and buffering.</li>
-              <li><strong>Security &amp; Protection:</strong> Controls access to system resources through authentication and authorization mechanisms.</li>
-              <li><strong>User Interface:</strong> Provides CLI (Command Line Interface) or GUI (Graphical User Interface) for user interaction.</li>
-            </ul>
-
-            <p><strong>Types of OS:</strong></p>
-            <ul>
-              <li><strong>Batch:</strong> Jobs collected and processed in batches. No interaction during execution.</li>
-              <li><strong>Multiprogramming:</strong> Multiple programs in memory, CPU switches between them on I/O wait.</li>
-              <li><strong>Multiprocessing:</strong> Multiple CPUs working in parallel on different processes.</li>
-              <li><strong>Real-Time:</strong> Time-constrained response for critical applications.</li>
-              <li><strong>Distributed:</strong> Network of independent computers appearing as a single system.</li>
-            </ul>
-
-            <p><strong>OS Structures:</strong></p>
-            <ul>
-              <li><strong>Monolithic:</strong> Entire OS in one large kernel. Simple but less modular. Example: Traditional UNIX.</li>
-              <li><strong>Microkernel:</strong> Minimal kernel with essential services; others in user space. More stable. Example: Minix, QNX.</li>
-              <li><strong>Layered/Modular:</strong> OS in hierarchical layers, each using only lower layers. Easier to develop and maintain. Example: THE, Windows NT.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Explain the functions of an operating system in detail.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Compare batch, multiprogramming, and time-sharing operating systems.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> What are system calls? List and explain different types of system calls with examples.
-          </div>
-        </div>
-
+  <header class="band band--cover">
+    <div class="band__inner">
+      <span class="eyebrow">Semester 5 · B.Tech CSE</span>
+      <h1 class="band__title">Operating Systems</h1>
+      <p class="band__sub">Exam-focused notes — Unit-wise 1 / 5 / 15 mark questions with worked answers, Gantt charts, page-fault & disk-scheduling solutions, PYQs.</p>
+      <div class="band__meta">
+        <span class="chip">5 Units</span>
+        <span class="chip">60+ Questions</span>
+        <span class="chip">MAKAUT Pattern</span>
       </div>
     </div>
+  </header>
 
-    <!-- ==================== UNIT 2 ==================== -->
-    <div class="unit-section" id="unit-2">
-      <div class="unit-header">
-        <div class="unit-number">2</div>
-        <div class="unit-header-text">
-          <h3>Process Management</h3>
-          <p>Processes, threads, scheduling, and inter-process communication</p>
+  <nav class="toc" aria-label="Contents">
+    <a href="#unit1">Unit 1 — Introduction</a>
+    <a href="#unit2">Unit 2 — Processes & IPC</a>
+    <a href="#unit3">Unit 3 — CPU Scheduling & Deadlock</a>
+    <a href="#unit4">Unit 4 — Memory Management</a>
+    <a href="#unit5">Unit 5 — File Systems & I/O</a>
+  </nav>
+
+  <main class="sheet">
+
+    <!-- ============== UNIT 1 ============== -->
+    <section id="unit1" class="subject">
+      <header class="subject__head">
+        <span class="subject__no">01</span>
+        <div>
+          <h2 class="subject__title">Introduction to Operating Systems</h2>
+          <p class="subject__sub">Functions, types, structures, system calls, booting</p>
         </div>
+      </header>
+
+      <div class="figure">
+        <h3>1.1 What is an Operating System?</h3>
+        <p>An <strong>Operating System (OS)</strong> is a system software that acts as an interface between the user and the computer hardware. It manages hardware resources, provides services to application programs, and ensures the system runs efficiently and securely.</p>
+        <p><strong>Two views of an OS:</strong></p>
+        <ul>
+          <li><strong>Resource Manager:</strong> Manages CPU, memory, I/O devices and files so that competing processes get fair, efficient access.</li>
+          <li><strong>Extended Machine / Virtual Machine:</strong> Hides the messy details of hardware and presents a clean, abstract interface to the user.</li>
+        </ul>
+        <p><strong>Functions of an OS:</strong> Process management, Memory management, File management, I/O management, Security & protection, Command interpretation, Error detection.</p>
       </div>
-      <div class="unit-content">
 
-        <div class="topic-card">
-          <h4>Process vs Program</h4>
-          <p>A <strong>program</strong> is a passive set of instructions stored on disk — it is just a file containing code. A <strong>process</strong> is a program in execution — it is an active entity that needs CPU time, memory, and other resources.</p>
-          <ul>
-            <li>A program has no address space; a process has its own address space.</li>
-            <li>A program cannot perform any action; a process performs actions.</li>
-            <li>One program can create multiple processes (e.g., opening two Chrome windows).</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Process States and PCB</h4>
-          <p>A process can be in one of five states:</p>
-          <ul>
-            <li><strong>New:</strong> The process is being created.</li>
-            <li><strong>Ready:</strong> The process is loaded in memory and waiting for the CPU.</li>
-            <li><strong>Running:</strong> The process is currently being executed by the CPU.</li>
-            <li><strong>Waiting/Blocked:</strong> The process is waiting for an event (I/O completion, signal).</li>
-            <li><strong>Terminated/Exit:</strong> The process has finished execution.</li>
-          </ul>
-          <p>The <strong>Process Control Block (PCB)</strong> is a data structure maintained by the OS for each process. It contains:</p>
-          <ul>
-            <li>Process state (new, ready, running, etc.)</li>
-            <li>Process ID (PID) and Parent PID</li>
-            <li>CPU registers, program counter, stack pointer</li>
-            <li>Memory management info (page tables, memory limits)</li>
-            <li>Accounting info (CPU time used, process limits)</li>
-            <li>I/O status (list of open files, I/O devices allocated)</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Process Scheduling and Context Switching</h4>
-          <p><strong>Process scheduling</strong> is the mechanism by which the OS selects which process gets the CPU next. The long-term scheduler selects processes from the pool and loads them into memory. The short-term scheduler (CPU scheduler) selects a ready process and allocates the CPU to it.</p>
-          <p><strong>Context switching</strong> is the process of saving the state (context) of the currently running process and loading the state of the next process. It involves saving registers, program counter, and stack pointer to the PCB. Context switching is pure overhead — it adds latency but enables multitasking.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Inter-Process Communication (IPC)</h4>
-          <p>IPC allows processes to communicate and synchronize their actions. Two main methods:</p>
-          <p><strong>1. Shared Memory:</strong> A region of memory is shared between cooperating processes. Processes communicate by reading and writing to this shared region. Fast but requires synchronization (e.g., mutexes, semaphores) to avoid race conditions.</p>
-          <p><strong>2. Message Passing:</strong> Processes communicate by exchanging messages. Can be direct (process names known) or indirect (through a mailbox/port). Advantage: easier to implement in distributed systems, no need for shared memory. Disadvantage: slower than shared memory due to kernel involvement.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Threads and Multithreading</h4>
-          <p>A <strong>thread</strong> is the smallest unit of CPU execution within a process. A process can have multiple threads, all sharing the same address space and resources.</p>
-          <p><strong>Process vs Thread:</strong></p>
-          <ul>
-            <li>A process has its own address space; threads share the address space of their parent process.</li>
-            <li>Process creation is expensive (new address space); thread creation is lightweight.</li>
-            <li>Inter-process communication requires OS support; threads can communicate directly via shared memory.</li>
-            <li>A process crash does not affect others; one thread crash can bring down the whole process.</li>
-          </ul>
-          <p><strong>Multithreading Models:</strong></p>
-          <ul>
-            <li><strong>Many-to-One:</strong> Many user threads mapped to one kernel thread. If one thread blocks, the whole process blocks.</li>
-            <li><strong>One-to-One:</strong> Each user thread maps to a separate kernel thread. Better concurrency but higher overhead.</li>
-            <li><strong>Many-to-Many:</strong> Many user threads multiplexed onto a smaller/equal number of kernel threads. Best of both approaches.</li>
-          </ul>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Key Concept:</strong> Context switching between threads of the same process is cheaper than between processes because threads share the same address space — only the stack pointer, registers, and program counter need to be switched, not the entire memory map.
-        </div>
-
-        <div class="exam-tip">
-          <strong>Exam Tip:</strong> "Process states" and "PCB" are guaranteed 1-mark questions. For 5-marks, always draw the 5-state process diagram (new → ready → running → waiting → terminated) with arrows. IPC (shared memory vs message passing) and threads vs processes are frequent 5-mark topics.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a process?</div>
-          <div class="q-answer">A process is a program in execution. It is an active entity that consists of the program code, its current activity (program counter, registers), and a data section (variables, stack, heap). Each process has its own address space and is managed by the OS through a Process Control Block (PCB).</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is PCB?</div>
-          <div class="q-answer">The Process Control Block (PCB) is a data structure maintained by the operating system for each process. It stores all the information about a process including its state, process ID, CPU registers, memory management info, scheduling information, and I/O status. The PCB is the key data structure that allows the OS to manage and switch between processes.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain process states with diagram.</div>
-          <div class="q-answer">
-            <p>A process can be in one of five states:</p>
-            <p><strong>1. New:</strong> The process is being created. OS allocates PCB and initializes resources.</p>
-            <p><strong>2. Ready:</strong> Process is loaded in memory, waiting for CPU allocation. Multiple ready processes form a ready queue.</p>
-            <p><strong>3. Running:</strong> Process is currently executing on the CPU. Only one process per CPU can be in this state.</p>
-            <p><strong>4. Waiting/Blocked:</strong> Process cannot proceed until an event occurs (I/O completion, signal from another process).</p>
-            <p><strong>5. Terminated:</strong> Process has finished execution or has been killed. OS reclaims its resources (PCB, memory).</p>
-            <p>Transitions: New → Ready (admitted), Ready → Running (scheduler dispatch), Running → Ready (interrupt/timeout), Running → Waiting (I/O request), Waiting → Ready (I/O complete), Running → Terminated (exit).</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">What is IPC? Explain shared memory and message passing.</div>
-          <div class="q-answer">
-            <p><strong>Inter-Process Communication (IPC)</strong> is a mechanism that allows processes to communicate and synchronize their actions. Two main methods:</p>
-            <p><strong>Shared Memory:</strong> A region of memory is established that multiple processes can access. One process creates the shared memory segment, others attach to it. Processes communicate by reading/writing this shared region. It is fast because data does not need to be copied between processes. However, it requires synchronization mechanisms (semaphores, mutexes) to prevent race conditions when multiple processes access the same memory simultaneously.</p>
-            <p><strong>Message Passing:</strong> Processes exchange data by sending and receiving messages. This can be done through direct communication (processes name each other explicitly) or indirect communication (using mailboxes/ports). Message passing is useful in distributed systems and is easier to implement than shared memory, but it is slower because each message transfer involves the kernel.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain process management in detail. Discuss process states, PCB, context switching, and inter-process communication mechanisms.</div>
-          <div class="q-answer">
-            <p><strong>Process Management</strong> is one of the core functions of an operating system. A process is a program in execution that needs resources (CPU time, memory, I/O devices) to accomplish its task.</p>
-
-            <p><strong>Process States:</strong> A process moves through five states: <strong>New</strong> (being created), <strong>Ready</strong> (waiting for CPU), <strong>Running</strong> (executing on CPU), <strong>Waiting/Blocked</strong> (waiting for I/O or event), and <strong>Terminated</strong> (finished execution). Transitions occur when the OS scheduler makes decisions or events like I/O completion occur.</p>
-
-            <p><strong>Process Control Block (PCB):</strong> Each process is represented by a PCB — a data structure containing the process state, PID, CPU registers, memory management information, scheduling info, and I/O status. The PCB is created when the process is created and deleted when it terminates. It is the key mechanism that enables the OS to manage multiple processes.</p>
-
-            <p><strong>Context Switching:</strong> When the CPU switches from executing one process to another, it performs a context switch: it saves the current process's context (registers, program counter, stack pointer) into its PCB and loads the next process's context from its PCB. Context switching is pure overhead — it adds latency but is essential for multitasking.</p>
-
-            <p><strong>IPC Mechanisms:</strong></p>
-            <ul>
-              <li><strong>Shared Memory:</strong> A block of memory shared between processes. Fast but requires synchronization (semaphores, mutexes) to avoid race conditions.</li>
-              <li><strong>Message Passing:</strong> Processes exchange messages directly or through mailboxes. Slower but safer; suitable for distributed systems.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Explain the five states of a process with a state transition diagram.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> What information is stored in a Process Control Block (PCB)? Explain its importance.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> Compare processes and threads. What are the advantages of multithreading?
-          </div>
-        </div>
-
+      <div class="figure">
+        <h3>1.2 Types of Operating Systems</h3>
+        <table class="grid">
+          <thead>
+            <tr><th>Type</th><th>Key Idea</th><th>Example</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Batch OS</strong></td><td>Jobs with similar requirements are bunched and executed in batches; no user interaction.</td><td>IBM 1401, IBM 7094</td></tr>
+            <tr><td><strong>Multiprogramming OS</strong></td><td>Multiple programs kept in memory so CPU is never idle; context switch when one waits for I/O.</td><td>OS/360, modern general-purpose OS</td></tr>
+            <tr><td><strong>Multitasking / Time-sharing OS</strong></td><td>CPU time is divided among many users/logged-in jobs via rapid switching.</td><td>UNIX, Linux, Windows</td></tr>
+            <tr><td><strong>Multiprocessing OS</strong></td><td>Uses two or more CPUs sharing common bus, memory &amp; clock; true parallel execution.</td><td>Windows NT, Solaris, Linux SMP</td></tr>
+            <tr><td><strong>Real-Time OS (RTOS)</strong></td><td>Strict timing guarantees; results within a deadline. Hard RT &amp; Soft RT.</td><td>VxWorks, QNX, RTLinux</td></tr>
+            <tr><td><strong>Distributed OS</strong></td><td>Manages a group of independent computers so they appear as a single system to the user.</td><td>Amoeba, Sprite, LOCUS</td></tr>
+            <tr><td><strong>Network OS</strong></td><td>Provides services across a network but each machine keeps its own identity.</td><td>UNIX, Windows Server</td></tr>
+            <tr><td><strong>Mobile OS</strong></td><td>Designed for handheld/tablet devices; touch-driven, power-aware.</td><td>Android, iOS</td></tr>
+          </tbody>
+        </table>
       </div>
-    </div>
 
-    <!-- ==================== UNIT 3 ==================== -->
-    <div class="unit-section" id="unit-3">
-      <div class="unit-header">
-        <div class="unit-number">3</div>
-        <div class="unit-header-text">
-          <h3>CPU Scheduling</h3>
-          <p>Scheduling algorithms, Gantt charts, and deadlock handling</p>
-        </div>
+      <div class="figure">
+        <h3>1.3 OS Structures</h3>
+        <ol>
+          <li><strong>Simple / Monolithic Structure:</strong> No structure; entire OS is one big program. Used by MS-DOS. Fast but hard to maintain.</li>
+          <li><strong>Layered Structure:</strong> OS is divided into layers (0 = hardware, N = user). Each layer uses only lower-layer services. Easier to debug &amp; maintain (THE, MULTICS).</li>
+          <li><strong>Microkernel:</strong> Kernel keeps only essential services (IPC, basic scheduling, address space). Other services (drivers, file systems) run in user space. Reliable &amp; portable (QNX, Mach).</li>
+          <li><strong>Modular Structure:</strong> Kernel has a core module; other modules (drivers, file systems) can be loaded dynamically. Combines performance of monolithic with flexibility. (Linux, Solaris, modern Windows).</li>
+          <li><strong>Hybrid (e.g., macOS):</strong> Microkernel + modules for performance.</li>
+        </ol>
       </div>
-      <div class="unit-content">
 
-        <div class="topic-card">
-          <h4>Scheduling Criteria</h4>
-          <p>The OS uses scheduling algorithms to decide which process gets the CPU. Key criteria for evaluating algorithms:</p>
-          <ul>
-            <li><strong>CPU Utilization:</strong> Keep the CPU as busy as possible (ideally 100%).</li>
-            <li><strong>Throughput:</strong> Number of processes completed per unit time.</li>
-            <li><strong>Turnaround Time:</strong> Total time from submission to completion = Waiting time + Burst time.</li>
-            <li><strong>Waiting Time:</strong> Total time spent in the ready queue.</li>
-            <li><strong>Response Time:</strong> Time from request submission to the first response (important for interactive systems).</li>
-          </ul>
+      <div class="figure">
+        <h3>1.4 System Calls</h3>
+        <p>A <strong>system call</strong> is the programmatic way a user process requests a service from the kernel. Examples: <code>read()</code>, <code>write()</code>, <code>open()</code>, <code>fork()</code>, <code>exec()</code>, <code>wait()</code>, <code>exit()</code>.</p>
+        <p><strong>Categories:</strong></p>
+        <ul>
+          <li>Process control (fork, exec, wait, exit)</li>
+          <li>File manipulation (open, read, write, close)</li>
+          <li>Device manipulation (ioctl, read, write)</li>
+          <li>Information maintenance (getpid, alarm, sleep)</li>
+          <li>Communication (pipe, socket, shmget)</li>
+        </ul>
+        <p><strong>Steps to execute a system call</strong> (e.g., read): user program → libc wrapper places args in registers → executes <code>trap</code>/<code>syscall</code> → kernel handles → return to user.</p>
+      </div>
+
+      <div class="figure">
+        <h3>1.5 Booting Process</h3>
+        <p><strong>Booting</strong> = loading the OS kernel into memory and starting execution when the computer is switched on.</p>
+        <ol>
+          <li><strong>Power-On Self Test (POST):</strong> Hardware diagnostic by BIOS/UEFI.</li>
+          <li><strong>Bootstrap loader:</strong> A small program in ROM/flash (BIOS or UEFI) reads the boot block from a configured disk.</li>
+          <li><strong>GRUB / boot loader:</strong> Locates the kernel image on disk and loads it into RAM.</li>
+          <li><strong>Kernel initialization:</strong> Sets up memory management, loads drivers, mounts root file system.</li>
+          <li><strong>init / systemd:</strong> First user-space process (PID 1) starts all system services and the login manager.</li>
+        </ol>
+      </div>
+
+      <!-- ===== Unit 1 Questions ===== -->
+      <div class="qa-block">
+        <h3 class="qa-block__title">Unit 1 — Exam Questions</h3>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define Operating System.</p>
+          <p class="qa__a">An Operating System is a set of system programs that acts as an interface between the user and the computer hardware, controlling and coordinating the use of hardware resources among various application programs.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>CPU Scheduling Algorithms</h4>
-          <p><strong>1. FCFS (First Come First Serve):</strong> Processes are executed in the order they arrive. Non-preemptive. Simple but can cause the "convoy effect" where short processes wait for long ones. Average waiting time is generally high.</p>
-          <p><strong>2. SJF (Shortest Job First):</strong> Selects the process with the smallest burst time. Can be preemptive (SRTF — Shortest Remaining Time First) or non-preemptive. Optimal for minimum average waiting time but requires knowing burst times in advance.</p>
-          <p><strong>3. Priority Scheduling:</strong> Each process has a priority. The CPU is allocated to the highest priority process. Can be preemptive or non-preemptive. Problem: starvation (low-priority processes may never execute). Solved by aging (gradually increasing priority of waiting processes).</p>
-          <p><strong>4. Round Robin (RR):</strong> Each process gets a fixed time slice (time quantum) in a cyclic manner. If a process doesn't finish in its quantum, it goes to the back of the ready queue. Preemptive. Good for time-sharing systems. Performance depends heavily on the size of the time quantum.</p>
-          <p><strong>5. Multilevel Queue:</strong> Processes are divided into multiple queues based on priority or type (e.g., system processes, interactive processes, batch processes). Each queue has its own scheduling algorithm.</p>
-          <p><strong>6. Multilevel Feedback Queue:</strong> Processes can move between queues based on their behavior. A process that uses too much CPU time is moved to a lower-priority queue. Allows differentiation and prevents starvation.</p>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a system call?</p>
+          <p class="qa__a">A system call is a request made by an application program to the operating system kernel for a service that requires privileged access (e.g., file I/O, process creation).</p>
         </div>
 
-        <div class="topic-card">
-          <h4>Gantt Chart and Performance Calculations</h4>
-          <p>A <strong>Gantt chart</strong> is a bar chart that visually represents the schedule of processes on the CPU. It shows when each process runs and for how long.</p>
-          <p>From the Gantt chart, we calculate:</p>
-          <ul>
-            <li><strong>Completion Time (CT):</strong> When a process finishes.</li>
-            <li><strong>Turnaround Time (TAT):</strong> CT - Arrival Time. Total time in the system.</li>
-            <li><strong>Waiting Time (WT):</strong> TAT - Burst Time. Time spent waiting in the ready queue.</li>
-            <li><strong>Response Time:</strong> First response time - Arrival Time.</li>
-          </ul>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is the kernel?</p>
+          <p class="qa__a">The kernel is the core component of the OS that stays in memory and manages system resources; it controls everything that passes between user applications and hardware.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>Thrashing</h4>
-          <p><strong>Thrashing</strong> occurs when a system spends more time swapping pages in and out of memory than executing actual processes. This happens when the degree of multiprogramming is too high — there are so many processes in memory that each has too few frames, causing frequent page faults.</p>
-          <p>Thrashing is detected by monitoring the page-fault frequency. To prevent it: use local replacement policies, working set model, or page-fault frequency algorithms.</p>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Distinguish between multiprogramming and multiprocessing.</p>
+          <p class="qa__a"><strong>Multiprogramming</strong> = multiple programs in memory so the CPU is always busy. <strong>Multiprocessing</strong> = multiple CPUs working together in parallel.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>Deadlock</h4>
-          <p>A <strong>deadlock</strong> is a situation where a set of processes are blocked because each process is holding a resource and waiting for another resource held by another process in the set.</p>
-          <p><strong>Necessary Conditions (all four must hold simultaneously):</strong></p>
-          <ul>
-            <li><strong>Mutual Exclusion:</strong> At least one resource is non-sharable.</li>
-            <li><strong>Hold and Wait:</strong> A process holds one resource and waits for another.</li>
-            <li><strong>No Preemption:</strong> Resources cannot be forcibly taken from a process.</li>
-            <li><strong>Circular Wait:</strong> A circular chain of processes exists where each waits for a resource held by the next.</li>
-          </ul>
-          <p><strong>Handling Deadlock:</strong></p>
-          <ul>
-            <li><strong>Prevention:</strong> Ensure at least one of the four conditions cannot occur. e.g., require all resources at once (break hold-and-wait), allow preemption, use resource ordering (break circular wait).</li>
-            <li><strong>Avoidance:</strong> The OS dynamically checks resource allocation to avoid deadlock. Uses the Banker's Algorithm — only allocates resources if the resulting state is safe.</li>
-            <li><strong>Detection and Recovery:</strong> Allow deadlock to occur, detect it using resource allocation graphs, then recover by terminating processes or preempting resources.</li>
-            <li><strong>Ignorance:</strong> Most OSes (UNIX, Windows) simply ignore deadlock and assume it won't happen — it's cheaper to reboot than to implement prevention.</li>
-          </ul>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a real-time OS?</p>
+          <p class="qa__a">An OS that processes data within strict response-time deadlines. Hard RT (miss = failure, e.g., missile control) vs Soft RT (best-effort, e.g., video streaming).</p>
         </div>
 
-        <div class="highlight-box">
-          <strong>Key Concept:</strong> SJF is optimal for minimum average waiting time, but it requires knowing the burst time in advance. In practice, we estimate it using exponential averaging: S(n+1) = alpha × T(n) + (1 - alpha) × S(n), where T(n) is the actual burst time and S(n) is the predicted burst time.
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is booting?</p>
+          <p class="qa__a">Booting is the process of loading the operating system into main memory and starting it when the computer is switched on.</p>
         </div>
 
-        <div class="exam-tip">
-          <strong>Exam Tip:</strong> SJF calculations with Gantt charts are the most common numerical question. Always draw the Gantt chart first, then calculate TAT = completion time - arrival time, WT = TAT - burst time. For deadlock, memorize all four conditions and the four handling strategies. Banker's Algorithm questions often appear for 5-10 marks.
-        </exam-tip>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is round-robin scheduling?</div>
-          <div class="q-answer">Round-Robin (RR) is a preemptive CPU scheduling algorithm where each process is allocated the CPU for a fixed time interval called a time quantum. After the quantum expires, the process is preempted and placed at the end of the ready queue. The CPU is then given to the next process in the queue. This ensures fair CPU allocation among all processes.</div>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Give one advantage of microkernel design.</p>
+          <p class="qa__a">Crash of a non-essential service (e.g., a driver) does not bring down the entire OS because most services run in user space.</p>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is deadlock?</div>
-          <div class="q-answer">A deadlock is a situation where a set of processes are blocked because each process is holding at least one resource and waiting for another resource that is held by another process in the same set. No process can proceed, and none can release their resources, creating a permanent blocking state.</div>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain the different types of operating systems. [2023]</p>
+          <p class="qa__a">
+            <ol>
+              <li><strong>Batch OS:</strong> Jobs with similar needs are grouped into batches and run sequentially. No user interaction. Disadvantage: CPU idle during I/O.</li>
+              <li><strong>Multiprogramming OS:</strong> Several jobs are kept in memory simultaneously. When the running job waits for I/O, the CPU switches to another. Maximises CPU utilisation.</li>
+              <li><strong>Multitasking / Time-Sharing:</strong> Many users log in simultaneously. CPU time is divided into short slices (round-robin). Provides interactive use.</li>
+              <li><strong>Multiprocessor OS:</strong> Uses two or more CPUs that share memory, bus, clock. Provides true parallel execution, higher throughput, and graceful degradation.</li>
+              <li><strong>Real-Time OS:</strong> Guarantees response within a deadline. <em>Hard RT</em> (miss = catastrophe, e.g., aircraft), <em>Soft RT</em> (degrades gracefully, e.g., multimedia).</li>
+              <li><strong>Distributed OS:</strong> A collection of loosely-coupled computers networked such that users see a single integrated system. Resources are shared transparently.</li>
+            </ol>
+            <em>Comparison: Batch &lt; Multiprogramming &lt; Time-Sharing &lt; RT in terms of response time and complexity.</em>
+          </p>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Compare FCFS and SJF scheduling algorithms.</div>
-          <div class="q-answer">
-            <table>
-              <tr>
-                <th>Feature</th>
-                <th>FCFS</th>
-                <th>SJF</th>
-              </tr>
-              <tr>
-                <td>Type</td>
-                <td>Non-preemptive</td>
-                <td>Preemptive (SRTF) or Non-preemptive</td>
-              </tr>
-              <tr>
-                <td>Basis</td>
-                <td>Arrival time (first come, first served)</td>
-                <td>Burst time (shortest job first)</td>
-              </tr>
-              <tr>
-                <td>Average Waiting Time</td>
-                <td>Generally high (convoy effect possible)</td>
-                <td>Optimal — minimum average waiting time</td>
-              </tr>
-              <tr>
-                <td>Starvation</td>
-                <td>No starvation</td>
-                <td>Long processes may starve (solved by aging)</td>
-              </tr>
-              <tr>
-                <td>Implementation</td>
-                <td>Simple (FIFO queue)</td>
-                <td>Complex (requires knowing burst times)</td>
-              </tr>
-              <tr>
-                <td>Overhead</td>
-                <td>Low</td>
-                <td>High for preemptive version</td>
-              </tr>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Compare monolithic, microkernel, and modular OS structures.</p>
+          <p class="qa__a">
+            <table class="grid">
+              <thead><tr><th>Aspect</th><th>Monolithic</th><th>Microkernel</th><th>Modular</th></tr></thead>
+              <tbody>
+                <tr><td>Structure</td><td>Single big program in kernel space</td><td>Only essentials (IPC, scheduler) in kernel; rest in user</td><td>Core kernel + loadable modules</td></tr>
+                <tr><td>Performance</td><td>Fast (no message passing)</td><td>Slower (lots of IPC)</td><td>Fast (modules in kernel)</td></tr>
+                <tr><td>Reliability</td><td>Low — one bug can crash OS</td><td>High — services isolated</td><td>Medium — modules share kernel</td></tr>
+                <tr><td>Extensibility</td><td>Hard — recompile kernel</td><td>Easy — add user services</td><td>Easy — load new module at runtime</td></tr>
+                <tr><td>Examples</td><td>MS-DOS, early UNIX</td><td>QNX, Mach, Hurd</td><td>Linux, Solaris, modern Windows</td></tr>
+              </tbody>
             </table>
-          </div>
+          </p>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain deadlock prevention strategies.</div>
-          <div class="q-answer">
-            <p>Deadlock prevention works by ensuring that at least one of the four necessary conditions for deadlock cannot occur:</p>
-            <p><strong>1. Breaking Mutual Exclusion:</strong> Make all resources sharable. Not practical for non-sharable resources like printers.</p>
-            <p><strong>2. Breaking Hold and Wait:</strong> Require processes to request all resources at once before execution begins. If any resource is unavailable, the process waits without holding any resources. Problem: resource utilization may be low.</p>
-            <p><strong>3. Breaking No Preemption:</strong> Allow the OS to preempt resources from a process. If a process holding resources requests a new resource that cannot be allocated, all its held resources are released. Problem: can cause starvation.</p>
-            <p><strong>4. Breaking Circular Wait:</strong> Impose a total ordering of resource types. A process can only request resources in increasing order of their assigned numbers. This prevents circular chains from forming. This is the most practical prevention strategy.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain various CPU scheduling algorithms with Gantt charts and calculations of waiting time, turnaround time. Also discuss deadlock and its handling methods.</div>
-          <div class="q-answer">
-            <p><strong>1. FCFS (First Come First Serve):</strong> The simplest algorithm. Processes are executed in order of arrival. Non-preemptive. Can lead to the convoy effect.</p>
-            <p><strong>2. SJF (Shortest Job First):</strong> Selects the process with minimum burst time. Optimal for average waiting time but requires burst time knowledge. Preemptive version is SRTF.</p>
-            <p><strong>3. Priority Scheduling:</strong> Each process has a priority; highest priority gets CPU. Can cause starvation of low-priority processes.</p>
-            <p><strong>4. Round Robin:</strong> Each process gets a fixed time quantum in cyclic order. Good for time-sharing. Performance depends on quantum size.</p>
-            <p><strong>5. Multilevel Queue:</strong> Processes divided into queues (foreground/background, interactive/batch), each with its own scheduling algorithm.</p>
-            <p><strong>6. Multilevel Feedback Queue:</strong> Processes can move between queues. Allows the OS to adapt to process behavior.</p>
-
-            <p><strong>Gantt Chart Example (FCFS):</strong></p>
-            <p>Processes: P1(24), P2(3), P3(3). Arrival order: P1, P2, P3.</p>
-            <p>Gantt: | P1 | P2 | P3 | → 0  24 27 30</p>
-            <p>TAT: P1=24, P2=24, P3=27. WT: P1=0, P2=21, P3=24. Avg WT = 15.</p>
-
-            <p><strong>Gantt Chart Example (SJF):</strong></p>
-            <p>Same processes. Gantt: | P2 | P3 | P1 | → 0 3 6 30</p>
-            <p>TAT: P2=3, P3=6, P1=30. WT: P2=0, P3=3, P1=6. Avg WT = 3.</p>
-
-            <p><strong>Deadlock:</strong> A deadlock exists when every process in a set is waiting for an event that only another process in the set can cause. Four necessary conditions: mutual exclusion, hold and wait, no preemption, circular wait.</p>
-            <p><strong>Handling Methods:</strong></p>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain system calls with an example. List their categories.</p>
+          <p class="qa__a">
+            <p>A <strong>system call</strong> is the only legal way a user program can request kernel services. The flow for <code>read(fd, buf, n)</code>:</p>
+            <ol>
+              <li>Program calls the <code>read</code> wrapper in libc.</li>
+              <li>Wrapper pushes args into registers and issues <code>syscall</code>/<code>trap</code>.</li>
+              <li>Kernel invokes the appropriate handler from the system-call table.</li>
+              <li>Driver performs the I/O; data is copied to <code>buf</code>.</li>
+              <li>Return value (bytes read or error) is returned to user space.</li>
+            </ol>
+            <p><strong>Categories:</strong></p>
             <ul>
-              <li><strong>Prevention:</strong> Ensure one condition cannot hold (e.g., require all resources upfront, use resource ordering).</li>
-              <li><strong>Avoidance:</strong> Banker's Algorithm — allocate resources only if the system remains in a safe state.</li>
-              <li><strong>Detection &amp; Recovery:</strong> Use resource allocation graphs to detect deadlock. Recover by terminating processes or preempting resources.</li>
-              <li><strong>Ignorance:</strong> Most OSes simply ignore deadlock and assume it won't happen.</li>
+              <li><strong>Process control:</strong> fork, exec, wait, exit, kill</li>
+              <li><strong>File manipulation:</strong> open, read, write, close, lseek</li>
+              <li><strong>Device manipulation:</strong> ioctl, read, write</li>
+              <li><strong>Information maintenance:</strong> getpid, alarm, sleep, time</li>
+              <li><strong>Communication:</strong> pipe, socket, shmget, msgget</li>
+              <li><strong>Protection:</strong> chmod, chown, umask</li>
             </ul>
-          </div>
+          </p>
         </div>
 
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Explain SJF scheduling algorithm. Calculate average waiting time and turnaround time for processes P1(6), P2(8), P3(7), P4(3) using SJF.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> What are the four necessary conditions for deadlock? Explain each with an example.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> Compare Round Robin and Priority scheduling algorithms. When would you prefer one over the other?
-          </div>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Describe the booting procedure of a computer system.</p>
+          <p class="qa__a">
+            <ol>
+              <li><strong>Power-On &amp; POST:</strong> BIOS/UEFI runs the Power-On Self Test to verify RAM, keyboard, disk.</li>
+              <li><strong>Bootstrap Loader:</strong> A small program in ROM locates the configured boot device (HDD, SSD, USB) and reads its first sector (MBR / GPT).</li>
+              <li><strong>Stage-2 Bootloader:</strong> GRUB / Windows Boot Manager is loaded, presenting a menu and locating the OS kernel image on disk.</li>
+              <li><strong>Kernel Loading:</strong> Kernel is read into RAM and given control. It initialises MMU, interrupts, drivers, and mounts the root file system.</li>
+              <li><strong>User Space:</strong> The kernel starts <code>init</code> (PID 1) or <code>systemd</code>, which in turn starts login, services, and finally the GUI.</li>
+            </ol>
+            <p><strong>UEFI vs BIOS:</strong> UEFI is the modern replacement — supports GPT, Secure Boot, faster POST, and a 32/64-bit pre-OS environment.</p>
+          </p>
         </div>
 
-      </div>
-    </div>
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Explain in detail the various types and structures of operating systems. [2022]</p>
+          <p class="qa__a">
+            <p><strong>1. Types of Operating Systems</strong></p>
+            <ul>
+              <li><strong>Batch OS:</strong> Jobs grouped; processed one after another; no interaction. Advantage: throughput. Disadvantage: no interaction, CPU idle during I/O.</li>
+              <li><strong>Multiprogramming OS:</strong> Several jobs in memory; when one waits, OS switches to another. CPU utilisation ↑, throughput ↑.</li>
+              <li><strong>Multitasking / Time-Sharing OS:</strong> Each user/job gets a small time slice (round robin); provides interactivity. Concepts: scheduler, context switch, swapping.</li>
+              <li><strong>Multiprocessor / Multicore OS:</strong> More than one CPU; jobs can run in true parallel. Types: symmetric (SMP) and asymmetric (AMP).</li>
+              <li><strong>Real-Time OS:</strong> Deterministic timing; <em>hard</em> (miss = system failure) vs <em>soft</em> (degrade). Used in embedded systems. Examples: VxWorks, RTLinux.</li>
+              <li><strong>Distributed OS:</strong> Network of autonomous machines seen as one. Resource sharing, load balancing, fault tolerance. Examples: Amoeba, LOCUS.</li>
+              <li><strong>Network OS &amp; Mobile OS:</strong> Network OS provides network services (NFS, Samba). Mobile OS — Android/iOS — has its own kernel and APIs.</li>
+            </ul>
 
-    <!-- ==================== UNIT 4 ==================== -->
-    <div class="unit-section" id="unit-4">
-      <div class="unit-header">
-        <div class="unit-number">4</div>
-        <div class="unit-header-text">
-          <h3>Memory Management</h3>
-          <p>Address spaces, paging, segmentation, and virtual memory</p>
-        </div>
-      </div>
-      <div class="unit-content">
+            <p><strong>2. Operating-System Structures</strong></p>
+            <ul>
+              <li><strong>Simple Structure (MS-DOS):</strong> No layering; applications can directly access BIOS and hardware. Fast but unreliable.</li>
+              <li><strong>Layered Approach:</strong> OS split into hierarchical layers. Layer <em>i</em> uses only layer <em>i-1</em>. Easier debugging (THE, MULTICS).</li>
+              <li><strong>Microkernel:</strong> Kernel keeps only minimum (IPC, scheduler, address space). Drivers &amp; file systems run in user mode. Reliability, portability; small performance cost due to message passing.</li>
+              <li><strong>Modular:</strong> Loadable kernel modules (LKMs) at run time; combines performance of monolithic with flexibility (Linux).</li>
+              <li><strong>Hybrid:</strong> Mixes microkernel and modular; macOS (Mach microkernel + BSD monolithic layers).</li>
+            </ul>
 
-        <div class="topic-card">
-          <h4>Logical vs Physical Address</h4>
-          <p>A <strong>logical address (virtual address)</strong> is generated by the CPU and used by processes. It ranges from 0 to the maximum address space. A <strong>physical address (real address)</strong> is the actual address in physical memory (RAM). The Memory Management Unit (MMU) maps logical addresses to physical addresses at runtime.</p>
-          <p>The <strong>base register</strong> holds the starting physical address of the process. The <strong>limit register</strong> defines the range of logical addresses. If a process tries to access an address beyond the limit, a trap (segmentation fault) occurs.</p>
-        </div>
+            <p><strong>3. System Calls &amp; Booting</strong></p>
+            <p>System calls are the only controlled entry into the kernel. Categories: process control, file manipulation, device I/O, information maintenance, communication, protection. The boot sequence runs POST, loads the bootloader (GRUB/UEFI), reads the kernel, sets up drivers, and starts <code>init</code>/<code>systemd</code>.</p>
 
-        <div class="topic-card">
-          <h4>Memory Allocation Techniques</h4>
-          <p><strong>Contiguous Allocation:</strong> Each process occupies a single contiguous block of memory. Can be fixed-size partitions (multiple partitions of equal size) or variable-size partitions (each process gets exactly what it needs). Problems: external fragmentation.</p>
-          <p><strong>Paging:</strong> Physical memory is divided into fixed-size blocks called <strong>frames</strong>. Logical memory is divided into blocks of the same size called <strong>pages</strong>. The OS maintains a page table for each process that maps page numbers to frame numbers. No external fragmentation, but internal fragmentation can occur (last page may not be full).</p>
-          <p><strong>Segmentation:</strong> A program is divided into segments (code, data, stack, heap) of variable sizes. Each segment has a segment number and an offset. A segment table maps segment numbers to physical memory locations. No internal fragmentation, but external fragmentation can occur.</p>
-          <p><strong>Paged Segmentation:</strong> Combines both paging and segmentation. Each segment is divided into pages. Provides the benefits of both: logical grouping (segments) and no external fragmentation (paging).</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Virtual Memory</h4>
-          <p><strong>Virtual memory</strong> is a technique that gives each process the illusion that it has exclusive access to a large, contiguous memory space, even if the physical RAM is smaller. It is implemented using demand paging — pages are loaded into memory only when they are needed (on a page fault).</p>
-          <p>The <strong>Translation Lookaside Buffer (TLB)</strong> is a small, fast cache inside the MMU that stores recent page table entries. It speeds up address translation by avoiding a memory access for every address. TLB hit ratio determines the effective memory access time.</p>
+            <p><strong>Conclusion:</strong> Modern OSs combine elements — Linux is modular-monolithic with a microkernel-inspired design for IPC. Choice of structure depends on requirements of performance, reliability, portability, and extensibility.</p>
+          </p>
         </div>
 
-        <div class="topic-card">
-          <h4>Page Replacement Algorithms</h4>
-          <p>When a page fault occurs and no free frame is available, the OS must replace an existing page. Common algorithms:</p>
-          <ul>
-            <li><strong>FIFO (First In First Out):</strong> Replace the oldest page. Simple but can replace frequently used pages (Belady's anomaly — increasing frames can increase page faults).</li>
-            <li><strong>Optimal (OPT):</strong> Replace the page that will not be used for the longest time in the future. Impossible to implement (requires future knowledge) but serves as a theoretical benchmark.</li>
-            <li><strong>LRU (Least Recently Used):</strong> Replace the page that hasn't been used for the longest time. Good approximation of OPT. Implemented using counters, stacks, or hardware support.</li>
-            <li><strong>LFU (Least Frequently Used):</strong> Replace the page with the lowest reference count.</li>
-            <li><strong>Clock (Second Chance):</strong> Approximation of LRU. Pages are in a circular list with a reference bit. If the bit is 1 (recently used), give a second chance and set it to 0. If 0, replace the page.</li>
-          </ul>
-        </div>
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">What are system calls? Explain with neat diagram how a system call is executed. Also discuss the difference between user mode and kernel mode. [2021]</p>
+          <p class="qa__a">
+            <p><strong>System Call</strong> = the controlled interface between a running user program and the OS kernel. Through it a user requests services that need privileged hardware access.</p>
 
-        <div class="topic-card">
-          <h4>Thrashing and Working Set Model</h4>
-          <p><strong>Thrashing</strong> occurs when the degree of multiprogramming is too high — processes have too few frames allocated, causing frequent page faults. The system spends more time swapping pages than executing processes.</p>
-          <p>The <strong>Working Set Model</strong> defines the working set of a process as the set of pages currently in use. The OS monitors each process's working set size and ensures it has enough frames. If total working set sizes exceed available frames, thrashing occurs.</p>
-          <p>To prevent thrashing: use the working set model, implement page-fault frequency (PFF) schemes, or use local (per-process) page replacement instead of global replacement.</p>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Key Concept:</strong> Effective Memory Access Time (EMAT) = (1 - hit ratio) × Memory access time + hit ratio × TLB access time. For example, if hit ratio = 0.98, memory access = 100ns, TLB access = 10ns: EMAT = 0.02 × 100 + 0.98 × 10 = 11.8ns.
-        </div>
-
-        <div class="exam-tip">
-          <strong>Exam Tip:</strong> Page replacement algorithm problems with reference strings are extremely common. Always draw frames as boxes and simulate page by page, marking hits and faults. For LRU, track the most recently used pages. For FIFO, use a queue. Compare paging vs segmentation as a 5-mark comparison table.
-        </exam-tip>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is paging?</div>
-          <div class="q-answer">Paging is a memory management scheme that eliminates the need for contiguous allocation of physical memory. It divides logical memory into fixed-size blocks called pages and physical memory into blocks of the same size called frames. The OS uses a page table to map each page to a frame, allowing non-contiguous physical allocation.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is virtual memory?</div>
-          <div class="q-answer">Virtual memory is a memory management technique that gives each process the illusion of having a large, contiguous main memory. It separates the logical address space (what the process sees) from the physical address space (actual RAM). Pages are loaded into physical memory only when needed (demand paging), allowing processes larger than physical memory to run.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Compare paging and segmentation.</div>
-          <div class="q-answer">
-            <table>
-              <tr>
-                <th>Feature</th>
-                <th>Paging</th>
-                <th>Segmentation</th>
-              </tr>
-              <tr>
-                <td>Size of blocks</td>
-                <td>Fixed-size pages</td>
-                <td>Variable-size segments</td>
-              </tr>
-              <tr>
-                <td>Address structure</td>
-                <td>Page number + offset</td>
-                <td>Segment number + offset</td>
-              </tr>
-              <tr>
-                <td>Fragmentation</td>
-                <td>Internal fragmentation only</td>
-                <td>External fragmentation possible</td>
-              </tr>
-              <tr>
-                <td>User view</td>
-                <td>Invisible to user</td>
-                <td>Visible — logical division of program</td>
-              </tr>
-              <tr>
-                <td>Memory size</td>
-                <td>Program divided into equal pages</td>
-                <td>Segments sized as needed (code, data, stack)</td>
-              </tr>
-              <tr>
-                <td>Implementation</td>
-                <td>Simple, hardware-supported</td>
-                <td>More complex</td>
-              </tr>
+            <p><strong>User vs Kernel Mode</strong></p>
+            <table class="grid">
+              <thead><tr><th>User Mode</th><th>Kernel Mode</th></tr></thead>
+              <tbody>
+                <tr><td>Normal execution mode of user processes</td><td>Privileged mode of OS kernel</td></tr>
+                <tr><td>Restricted instruction set; cannot access hardware directly</td><td>Full instruction set; can execute privileged I/O &amp; memory ops</td></tr>
+                <tr><td>Crash affects only the process</td><td>Crash can bring down entire system</td></tr>
+                <tr><td>Switch to kernel via system call / interrupt / trap</td><td>Returns to user after servicing</td></tr>
+              </tbody>
             </table>
-          </div>
-        </div>
 
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain LRU page replacement algorithm with an example.</div>
-          <div class="q-answer">
-            <p><strong>LRU (Least Recently Used)</strong> replaces the page that has not been used for the longest period of time. It is based on the principle that pages used recently are likely to be used again soon.</p>
-            <p><strong>Example:</strong> Reference string: 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5. Frame size: 3.</p>
-            <p>Step-by-step:</p>
-            <ul>
-              <li>1 → Miss (frames: [1, -, -])</li>
-              <li>2 → Miss (frames: [1, 2, -])</li>
-              <li>3 → Miss (frames: [1, 2, 3])</li>
-              <li>4 → Miss. LRU page is 1 (used longest ago). Replace 1. (frames: [4, 2, 3])</li>
-              <li>1 → Miss. LRU page is 3. Replace 3. (frames: [4, 2, 1])</li>
-              <li>2 → Hit</li>
-              <li>5 → Miss. LRU page is 4. Replace 4. (frames: [5, 2, 1])</li>
-              <li>1 → Hit</li>
-              <li>2 → Hit</li>
-              <li>3 → Miss. LRU page is 1. Replace 1. (frames: [5, 2, 3])</li>
-              <li>4 → Miss. LRU page is 5. Replace 5. (frames: [4, 2, 3])</li>
-              <li>5 → Miss. LRU page is 2. Replace 2. (frames: [4, 5, 3])</li>
-            </ul>
-            <p>Total page faults: 9 out of 12 references.</p>
-          </div>
-        </div>
+            <p><strong>Steps in executing a system call (e.g., <code>read</code>):</strong></p>
+            <ol>
+              <li>User program invokes libc wrapper <code>read(fd, buf, n)</code>.</li>
+              <li>Wrapper copies arguments into registers and issues <code>syscall</code> instruction / <code>INT 0x80</code>.</li>
+              <li>CPU switches to kernel mode (mode bit changed in PSW).</li>
+              <li>Kernel's syscall dispatcher reads syscall number and invokes the right service routine.</li>
+              <li>Service routine (e.g., read from a file) performs the I/O and copies data to user buffer (with bounds checks).</li>
+              <li>Return value is placed in a register; mode bit set back to user; execution resumes in user program.</li>
+            </ol>
 
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain memory management techniques (contiguous, paging, segmentation). Discuss virtual memory and page replacement algorithms with examples.</div>
-          <div class="q-answer">
-            <p><strong>1. Contiguous Allocation:</strong> Each process occupies a single contiguous block of memory. Two approaches: fixed partitioning (equal-sized partitions, simple but causes internal fragmentation) and variable partitioning (each process gets exactly what it needs, but causes external fragmentation — solved by compaction).</p>
-            <p><strong>2. Paging:</strong> Logical memory is divided into pages, physical memory into frames. A page table maps each page to a frame. Advantages: no external fragmentation, efficient memory use. Disadvantages: internal fragmentation, overhead of page tables. Solved with multi-level paging and inverted page tables.</p>
-            <p><strong>3. Segmentation:</strong> A program is divided into logical segments (code, data, stack). Each segment has a segment number and offset. A segment table maps segments to physical memory. Advantage: logical view of memory. Disadvantage: external fragmentation.</p>
-            <p><strong>Virtual Memory:</strong> Uses demand paging — pages are loaded only when needed. Benefits: larger logical address space than physical memory, more processes in memory, less I/O for unused pages. Demand paging introduces a page table with a valid/invalid bit. A page fault triggers the OS to load the page from disk.</p>
-            <p><strong>Page Replacement Algorithms:</strong></p>
-            <ul>
-              <li><strong>FIFO:</strong> Replace the oldest page. Simple but may replace frequently used pages.</li>
-              <li><strong>Optimal:</strong> Replace the page used farthest in the future. Theoretical lower bound.</li>
-              <li><strong>LRU:</strong> Replace the least recently used page. Best practical approximation of Optimal.</li>
-            </ul>
-            <p><strong>TLB:</strong> A small, fast cache for page table entries. EMAT = (1 - h) × Memory access + h × TLB access, where h is the TLB hit ratio.</p>
-          </div>
-        </div>
+            <p><strong>Types / Categories:</strong> Process control, file manipulation, device manipulation, information maintenance, communication (IPC), protection.</p>
 
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Using LRU page replacement algorithm, calculate the number of page faults for reference string: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2 with 4 frames.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Explain paging in detail. What is a page table? How does the MMU use it for address translation?
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> What is virtual memory? How does demand paging work? Explain with a diagram.
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==================== UNIT 5 ==================== -->
-    <div class="unit-section" id="unit-5">
-      <div class="unit-header">
-        <div class="unit-number">5</div>
-        <div class="unit-header-text">
-          <h3>File Systems &amp; I/O</h3>
-          <p>File concepts, directory structures, disk scheduling, and I/O management</p>
+            <p><strong>Why use system calls?</strong> Protection — only the kernel can touch hardware, ensuring safety, isolation and security. Abstraction — programs see a clean API instead of raw hardware.</p>
+          </p>
         </div>
       </div>
-      <div class="unit-content">
+    </section>
 
-        <div class="topic-card">
-          <h4>File Concepts and Access Methods</h4>
-          <p>A <strong>file</strong> is a named collection of related information stored on secondary storage (disk). It is the smallest unit of logical storage. The OS manages files through a file system, which provides a structured way to store, organize, and retrieve data.</p>
-          <p>File attributes include: name, type, size, creation/modification timestamps, protection, and location on disk.</p>
-          <p><strong>Access Methods:</strong></p>
-          <ul>
-            <li><strong>Sequential Access:</strong> Information is accessed in order (like a tape). Read/write sequentially. Simplest method.</li>
-            <li><strong>Direct/Random Access:</strong> Allows reading/writing at any position directly (like a disk). Each block has a unique address. Used by databases.</li>
-            <li><strong>Indexed Access:</strong> Uses an index block containing pointers to data blocks. Allows both sequential and direct access.</li>
-          </ul>
+    <!-- ============== UNIT 2 ============== -->
+    <section id="unit2" class="subject">
+      <header class="subject__head">
+        <span class="subject__no">02</span>
+        <div>
+          <h2 class="subject__title">Process Management</h2>
+          <p class="subject__sub">PCB, process states, context switching, IPC, threads</p>
+        </div>
+      </header>
+
+      <div class="figure">
+        <h3>2.1 Process vs Program</h3>
+        <p>A <strong>program</strong> is a passive file of code and data. A <strong>process</strong> is the active execution of a program — a program in motion. A single program may give rise to many processes (e.g., multiple chrome windows).</p>
+      </div>
+
+      <div class="figure">
+        <h3>2.2 Process States (with Diagram)</h3>
+        <p>The five-state model:</p>
+<pre class="ascii-diagram">
+        +---------+    admit   +----------+  dispatch +---------+
+        |  New    | ---------> |  Ready   | --------> | Running |
+        +---------+            +----------+  <------- +---------+
+                                   ^  |                 |   |
+                              swap-in| |event occurs   |   | interrupt /
+                                   |  | (I/O done)     |   | quantum
+                                   |  v                |   | expiry
+                              +----------+             |   v
+                              |  Blocked | <-----------+ +--------+
+                              | /Waiting |  I/O or     | | Exit   |
+                              +----------+  event wait +--------+
+</pre>
+        <ul>
+          <li><strong>New:</strong> Process being created.</li>
+          <li><strong>Ready:</strong> Waiting in main memory for CPU.</li>
+          <li><strong>Running:</strong> Currently executing on CPU.</li>
+          <li><strong>Blocked/Waiting:</strong> Waiting for I/O or event.</li>
+          <li><strong>Exit/Terminated:</strong> Finished or killed; resources being reclaimed.</li>
+        </ul>
+        <p>Long-term scheduler controls degree of multiprogramming. Short-term (CPU) scheduler picks the next ready process. Medium-term scheduler can suspend / swap out a process.</p>
+      </div>
+
+      <div class="figure">
+        <h3>2.3 Process Control Block (PCB)</h3>
+        <p>A PCB is a kernel data structure that stores all information needed to manage a single process. Contents:</p>
+        <ul>
+          <li><strong>Process ID (PID), Parent PID, Credentials.</strong></li>
+          <li><strong>Process State:</strong> new, ready, running, waiting, terminated.</li>
+          <li><strong>CPU Registers / Context:</strong> PC, SP, accumulators, etc.</li>
+          <li><strong>Memory-management info:</strong> base/limit registers, page tables.</li>
+          <li><strong>Scheduling info:</strong> priority, accounting, queue pointers.</li>
+          <li><strong>I/O status info:</strong> list of open files, I/O devices allocated.</li>
+        </ul>
+        <p>PCBs are linked into per-state queues: ready queue, wait queues for each device, etc.</p>
+      </div>
+
+      <div class="figure">
+        <h3>2.4 Context Switching</h3>
+        <p><strong>Context switch</strong> = saving the state of the running process into its PCB and loading the state of the next process. Pure overhead (no useful work) — typically 1–1000 µs.</p>
+        <p>Steps: 1) Save state of P1 to PCB1. 2) Update pointers to PCB1/P2. 3) Load state of P2 from PCB2. 4) Switch to user mode, jump to P2's PC.</p>
+        <p>Hardware support via PCBs in memory + kernel stack of suspended process greatly speeds the switch.</p>
+      </div>
+
+      <div class="figure">
+        <h3>2.5 Inter-Process Communication (IPC)</h3>
+        <p>Two fundamental models:</p>
+        <table class="grid">
+          <thead><tr><th>Shared Memory</th><th>Message Passing</th></tr></thead>
+          <tbody>
+            <tr><td>Processes share a region of memory; reads/writes are direct.</td><td>Kernel carries messages between processes via send/receive primitives.</td></tr>
+            <tr><td>Fast (no kernel on each access); needs synchronization (semaphores, mutexes).</td><td>Slower (kernel-mediated); easier to build distributed systems.</td></tr>
+            <tr><td>Race conditions possible.</td><td>Race-free; easier to reason about.</td></tr>
+            <tr><td>Examples: System V shm, POSIX shm, mmap</td><td>Examples: Pipes, FIFOs, sockets, message queues, signals</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="figure">
+        <h3>2.6 Threads &amp; Multithreading Models</h3>
+        <p>A <strong>thread</strong> is a basic unit of CPU utilization; it shares code, data and OS resources with other threads of the same process but has its own thread ID, stack, registers.</p>
+        <p><strong>Benefits:</strong> faster creation, low overhead communication via shared memory, better utilisation of multiprocessors.</p>
+        <p><strong>Multithreading models:</strong></p>
+        <ul>
+          <li><strong>Many-to-One:</strong> Many user threads → one kernel thread. Blocking syscalls block the whole process. (Green threads)</li>
+          <li><strong>One-to-One:</strong> Each user thread maps to one kernel thread. Better concurrency; risk of exhausting kernel threads. (Windows NT, Linux)</li>
+          <li><strong>Many-to-Many:</strong> Multiplexes <em>m</em> user threads onto <em>n</em> (n ≤ m) kernel threads. Most flexible. (Solaris, IRIX)</li>
+          <li><strong>Two-level:</strong> Like many-to-many but allows one user thread bound to a kernel thread for critical cases.</li>
+        </ul>
+      </div>
+
+      <div class="qa-block">
+        <h3 class="qa-block__title">Unit 2 — Exam Questions</h3>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a process?</p>
+          <p class="qa__a">A process is a program in execution. It is the basic unit of work in an OS and has its own address space, registers, and resources.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>Directory Structures</h4>
-          <p>A <strong>directory</strong> is a collection of nodes containing information about files. Directory structures:</p>
-          <ul>
-            <li><strong>Single-Level:</strong> All files in one flat directory. Simple but no organization; name collisions.</li>
-            <li><strong>Two-Level:</strong> Each user has their own directory (UFD). The system has a master directory (MFD) pointing to all UFDs. Solves name collisions but users cannot create subdirectories.</li>
-            <li><strong>Tree-Structured (Hierarchical):</strong> Directories can have subdirectories. Users can create their own directory hierarchies. Most common (Windows, Linux). Supports absolute and relative paths.</li>
-            <li><strong>Acyclic Graph:</strong> Allows sharing of files and directories through links (hard links and symbolic/symbolic links). Cannot have cycles (no cycles allowed).</li>
-          </ul>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a PCB?</p>
+          <p class="qa__a">Process Control Block — a kernel data structure that stores all the information about a process: PID, state, registers, memory info, I/O status, accounting.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>File Allocation Methods</h4>
-          <p><strong>1. Contiguous Allocation:</strong> Each file occupies a contiguous set of blocks on disk. The directory stores the starting block address and length. Advantage: simple, fast sequential and direct access. Disadvantage: external fragmentation, difficulty in file growth.</p>
-          <p><strong>2. Linked Allocation:</strong> Each file is a linked list of disk blocks. Each block contains a pointer to the next block. The directory stores the address of the first and last block. Advantage: no external fragmentation. Disadvantage: slow random access (must traverse the list), pointer overhead, reliability risk if a pointer is lost.</p>
-          <p><strong>3. Indexed Allocation:</strong> All pointers to a file's blocks are stored in an index block. The directory stores the address of the index block. Advantage: supports direct access, no external fragmentation. Disadvantage: overhead of index block (for small files, the index block itself takes more space than the data). Variants: linked index blocks, multi-level index, combined scheme (Unix inode).</p>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a thread?</p>
+          <p class="qa__a">A thread is the smallest unit of execution within a process; threads of the same process share code, data and resources but have their own stack and registers.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>Free Space Management</h4>
-          <p>Methods for tracking free disk blocks:</p>
-          <ul>
-            <li><strong>Bit Vector:</strong> Each block has one bit (0 = free, 1 = allocated). Simple but requires large contiguous memory for the entire bit vector on large disks.</li>
-            <li><strong>Linked List:</strong> All free blocks are linked together. Each free block stores a pointer to the next free block. Simple but slow to find contiguous free blocks.</li>
-            <li><strong>Grouping:</strong> The first free block stores addresses of n-1 free blocks plus a pointer to the next group of free blocks.</li>
-            <li><strong>Counting:</strong> Stores addresses of first free blocks and counts of contiguous free blocks following each. Efficient for contiguous allocation.</li>
-          </ul>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define context switching.</p>
+          <p class="qa__a">Context switching is the saving and restoring of CPU state when the OS switches the CPU from one process or thread to another.</p>
         </div>
 
-        <div class="topic-card">
-          <h4>Disk Scheduling Algorithms</h4>
-          <p>The disk head moves between cylinders to read/write data. Disk scheduling determines the order in which I/O requests are served:</p>
-          <ul>
-            <li><strong>FCFS (First Come First Serve):</strong> Requests served in arrival order. Simple but fair only; not optimal for seek time.</li>
-            <li><strong>SSTF (Shortest Seek Time First):</strong> Selects the request closest to the current head position. Minimizes seek time but can cause starvation of distant requests.</li>
-            <li><strong>SCAN (Elevator):</strong> Head moves in one direction servicing all requests, then reverses. Like an elevator. Can cause wait time for requests just passed.</li>
-            <li><strong>C-SCAN (Circular SCAN):</strong> Head moves in one direction servicing requests, then jumps back to the start (without servicing on the return). More uniform wait time than SCAN.</li>
-            <li><strong>LOOK / C-LOOK:</strong> Like SCAN/C-SCAN but the head only goes as far as the last request in each direction (doesn't go to the end of the disk). More efficient than SCAN/C-SCAN.</li>
-          </ul>
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Name two IPC mechanisms.</p>
+          <p class="qa__a">Shared memory and message passing (e.g., pipes, sockets, message queues).</p>
         </div>
 
-        <div class="topic-card">
-          <h4>I/O Hardware, Buffering, Caching, and Spooling</h4>
-          <p><strong>I/O Hardware:</strong> I/O devices communicate with the CPU through I/O ports and device controllers. The <strong>device driver</strong> is the software interface between the OS and the device. I/O can be done through: programmed I/O (CPU polls the device), interrupt-driven I/O (device signals the CPU), and DMA (Direct Memory Access — device transfers data directly to memory without CPU involvement).</p>
-          <p><strong>Buffering:</strong> A buffer is a memory area used to temporarily store data during I/O transfers. It compensates for speed differences between the producer and consumer. Types: single buffering, double buffering, circular buffering.</p>
-          <p><strong>Caching:</strong> A portion of memory used to hold frequently accessed data from a slower device. Accessing the cache is much faster than accessing the original device. Used in disk caching, web caching, etc.</p>
-          <p><strong>Spooling (Simultaneous Peripheral Operation On-Line):</strong> A mechanism where data is temporarily held in a buffer (usually on disk) for later use by a device that operates at a different speed. Example: print spooling — print jobs are queued on disk and sent to the printer when it's ready. Allows the CPU to continue executing other tasks while the slow I/O device processes the data.</p>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain the 5-state process model with a neat diagram.</p>
+          <p class="qa__a">
+            <p>States: <strong>New</strong> (just created) → <strong>Ready</strong> (waiting for CPU) → <strong>Running</strong> (on CPU) → <strong>Blocked</strong> (waiting for I/O or event) → <strong>Exit</strong> (terminated).</p>
+            <ul>
+              <li><strong>New → Ready:</strong> admission by long-term scheduler.</li>
+              <li><strong>Ready → Running:</strong> short-term scheduler dispatches.</li>
+              <li><strong>Running → Ready:</strong> interrupt / quantum expiry.</li>
+              <li><strong>Running → Blocked:</strong> I/O request or wait on event.</li>
+              <li><strong>Blocked → Ready:</strong> completion of I/O or event.</li>
+              <li><strong>Running → Exit:</strong> process terminates itself or is killed.</li>
+            </ul>
+            <p>Ready processes wait in the <em>ready queue</em>; blocked processes wait in queues specific to the event (e.g., disk queue).</p>
+          </p>
         </div>
 
-        <div class="highlight-box">
-          <strong>Key Concept:</strong> SSTF minimizes seek time but may starve requests far from the head. SCAN/C-SCAN provide more uniform wait times. C-SCAN treats the cylinders as a circular list, providing more consistent response times. LOOK is more efficient than SCAN because it doesn't travel to the disk's physical end.
-        </highlight-box>
-
-        <div class="exam-tip">
-          <strong>Exam Tip:</strong> Disk scheduling calculations are very common. Draw the disk head movement diagram with cylinders marked. Calculate total head movement = sum of all individual movements. Average seek time = total movement / number of requests. File allocation methods (contiguous, linked, indexed) are also very frequent as comparison questions.
-        </exam-tip>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a file?</div>
-          <div class="q-answer">A file is a named collection of related information stored on a secondary storage device like a disk. It is the smallest unit of logical storage in a computer system. The operating system manages files through a file system, which provides methods to create, read, write, delete, and organize files.</div>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">What is PCB? List its contents. Explain context switching.</p>
+          <p class="qa__a">
+            <p><strong>PCB contents:</strong> PID, parent PID, process state, program counter, CPU registers, memory management info (page/segment tables), scheduling info (priority), list of open files, I/O status, accounting info (CPU time used).</p>
+            <p><strong>Context switch steps:</strong></p>
+            <ol>
+              <li>Save state of current process (PC, registers, etc.) into its PCB.</li>
+              <li>Move PCB to appropriate queue (e.g., ready queue or wait queue).</li>
+              <li>Pick next process from ready queue.</li>
+              <li>Load saved state from new PCB into CPU.</li>
+              <li>Resume execution of new process.</li>
+            </ol>
+            <p>Context switch time is overhead — kernel tries to minimise it. TLB flushes during switch also incur cost.</p>
+          </p>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is spooling?</div>
-          <div class="q-answer">Spooling (Simultaneous Peripheral Operation On-Line) is a mechanism where data is temporarily stored in a buffer (usually on disk) to be used later by a slow I/O device like a printer. It allows the CPU to continue executing other tasks while the output device processes the data at its own speed, improving overall system efficiency.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain different file allocation methods.</div>
-          <div class="q-answer">
-            <p><strong>1. Contiguous Allocation:</strong> Each file occupies a contiguous set of blocks on disk. The file's directory entry stores the starting block address and length. Advantage: fast sequential and direct access. Disadvantage: external fragmentation makes it difficult to allocate space for growing files.</p>
-            <p><strong>2. Linked Allocation:</strong> Each file is a linked list of disk blocks. Each block contains a pointer to the next block. The directory stores the address of the first and last block. Advantage: no external fragmentation, files can grow easily. Disadvantage: only sequential access is efficient; random access requires traversing the entire list. Reliability issue: if one pointer is damaged, the rest of the file is lost.</p>
-            <p><strong>3. Indexed Allocation:</strong> All pointers to a file's data blocks are stored in a dedicated index block. The directory stores the address of this index block. Advantage: supports direct access and no external fragmentation. Disadvantage: the index block itself consumes space. For large files, multi-level indexing or combined schemes (like Unix's inode) are used.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Compare disk scheduling algorithms.</div>
-          <div class="q-answer">
-            <table>
-              <tr>
-                <th>Algorithm</th>
-                <th>Description</th>
-                <th>Pros</th>
-                <th>Cons</th>
-              </tr>
-              <tr>
-                <td>FCFS</td>
-                <td>Serve in arrival order</td>
-                <td>Simple, fair</td>
-                <td>High seek time</td>
-              </tr>
-              <tr>
-                <td>SSTF</td>
-                <td>Serve nearest request first</td>
-                <td>Low seek time</td>
-                <td>Starvation possible</td>
-              </tr>
-              <tr>
-                <td>SCAN</td>
-                <td>Move in one direction, serve all, then reverse</td>
-                <td>Good throughput</td>
-                <td>Long wait for edge requests</td>
-              </tr>
-              <tr>
-                <td>C-SCAN</td>
-                <td>Like SCAN but circular — head jumps back to start</td>
-                <td>Uniform wait time</td>
-                <td>Extra seek for return trip</td>
-              </tr>
-              <tr>
-                <td>LOOK</td>
-                <td>Like SCAN but stops at last request</td>
-                <td>Efficient, no wasted travel</td>
-                <td>Moderate complexity</td>
-              </tr>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Compare shared memory and message passing IPC.</p>
+          <p class="qa__a">
+            <table class="grid">
+              <thead><tr><th>Feature</th><th>Shared Memory</th><th>Message Passing</th></tr></thead>
+              <tbody>
+                <tr><td>Speed</td><td>Fast (no kernel on each access)</td><td>Slower (kernel copies data)</td></tr>
+                <tr><td>Sync needed?</td><td>Yes — semaphores / mutexes</td><td>No — built-in synchronization</td></tr>
+                <tr><td>Distributed systems</td><td>Difficult (no shared memory)</td><td>Works naturally</td></tr>
+                <tr><td>Implementation complexity</td><td>Low for API; tricky to get right</td><td>Simple semantics</td></tr>
+                <tr><td>Examples</td><td>System V shm, POSIX shm, mmap</td><td>Pipes, sockets, msg queues</td></tr>
+              </tbody>
             </table>
-          </div>
+            <p>Use <strong>shared memory</strong> when processes are on the same machine and speed matters; use <strong>message passing</strong> when processes may be on different machines.</p>
+          </p>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain file system in detail. Discuss file concepts, directory structures, allocation methods, and disk scheduling algorithms.</div>
-          <div class="q-answer">
-            <p><strong>File System Overview:</strong> A file system manages files on secondary storage, providing an organized, persistent way to store and retrieve data. It defines how data is stored, organized, named, accessed, and protected.</p>
-
-            <p><strong>File Concepts:</strong> A file is a named collection of data. Attributes include name, type, size, timestamps, and protection. Operations include create, delete, open, close, read, write, seek, and append.</p>
-
-            <p><strong>Access Methods:</strong> Sequential (read in order, like tapes), Direct/Random (access any block directly, used by disks), and Indexed (use an index block for random access).</p>
-
-            <p><strong>Directory Structures:</strong></p>
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain multithreading models. [2023]</p>
+          <p class="qa__a">
+            <p>Threads come from either the <em>user</em> library or the <em>kernel</em>. Their mapping defines the model:</p>
             <ul>
-              <li>Single-level: all files in one flat directory.</li>
-              <li>Two-level: each user has their own directory.</li>
-              <li>Tree-structured: hierarchical directories with subdirectories (most common).</li>
-              <li>Acyclic graph: allows shared files through links.</li>
+              <li><strong>Many-to-One:</strong> Many user-level threads → one kernel thread. Thread library schedules in user space. <em>Drawback:</em> one blocking syscall blocks all threads.</li>
+              <li><strong>One-to-One:</strong> Each user thread maps to a kernel thread. Better concurrency; syscall of one thread doesn't block others. <em>Drawback:</em> creating many threads stresses kernel resources.</li>
+              <li><strong>Many-to-Many:</strong> Multiplexes <em>m</em> user threads onto <em>n</em> (≤ m) kernel threads. The OS can allocate more kernel threads when CPUs are free. Most flexible.</li>
+              <li><strong>Two-Level:</strong> Like many-to-many but a particular user thread may be permanently bound to a kernel thread.</li>
+            </ul>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Explain the 5-state process model with a neat diagram. Discuss PCB and context switching in detail. [2022]</p>
+          <p class="qa__a">
+            <p><strong>1. Five-State Process Model:</strong> New, Ready, Running, Blocked, Exit. (See Unit 2 §2.2 for diagram.)</p>
+            <p>Long-term scheduler admits processes to ready queue; short-term scheduler dispatches from ready queue to CPU. A running process may (a) be preempted back to ready, (b) request I/O → blocked, (c) exit.</p>
+
+            <p><strong>2. Process Control Block:</strong> Central data structure for each process. Contains:</p>
+            <ul>
+              <li><em>Identification:</em> PID, PPID, UID, GID.</li>
+              <li><em>State info:</em> current state, registers, PC.</li>
+              <li><em>Control info:</em> scheduling priority, accounting, queue pointers.</li>
+              <li><em>Resource info:</em> memory maps, open file descriptors, I/O devices allocated.</li>
+            </ul>
+            <p>PCBs are stored in process tables; pointers link them into ready queue, device queues, etc.</p>
+
+            <p><strong>3. Context Switching:</strong> Mechanism by which CPU switches from one process to another. Steps: (i) save state of old process in its PCB, (ii) update kernel data structures (move PCB to ready/wait queue), (iii) select next process, (iv) load its PCB state into CPU, (v) jump to its PC.</p>
+            <p><em>Cost factors:</em> register save/restore time, memory access patterns, TLB flushes, cache pollution. Systems minimise switches by using larger quantum when context-switch overhead is high.</p>
+
+            <p><strong>4. IPC &amp; Threads:</strong> Once multiple processes/threads exist they need to cooperate: shared memory (fast, requires sync) or message passing (clean, slow, distributed-friendly). Threads share the process address space, making thread creation cheaper than process creation and enabling natural parallel execution on multicore systems.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Explain threads. Discuss user-level vs kernel-level threads and the various multithreading models with neat diagrams.</p>
+          <p class="qa__a">
+            <p>A <strong>thread</strong> = a flow of control within a process. Each thread has its own: thread ID, program counter, register set, stack. Threads of the same process share code segment, data segment, heap, and OS resources (open files, signals).</p>
+
+            <p><strong>Why threads?</strong></p>
+            <ul>
+              <li>Faster creation (≈ 30×) and termination than processes.</li>
+              <li>Cheap communication via shared memory (no kernel).</li>
+              <li>Better utilisation of multiprocessors — one process can run on many cores simultaneously.</li>
+              <li>Responsive UI: blocking I/O in one thread doesn't freeze the application.</li>
             </ul>
 
-            <p><strong>File Allocation Methods:</strong></p>
-            <ul>
-              <li><strong>Contiguous:</strong> Blocks are sequential. Fast but causes external fragmentation.</li>
-              <li><strong>Linked:</strong> Blocks linked via pointers. No external fragmentation but slow random access.</li>
-              <li><strong>Indexed:</strong> Index block stores all pointers. Supports direct access. Used in Unix (inode) and NTFS.</li>
-            </ul>
+            <p><strong>User-Level Threads (ULT) vs Kernel-Level Threads (KLT):</strong></p>
+            <table class="grid">
+              <thead><tr><th>ULT</th><th>KLT</th></tr></thead>
+              <tbody>
+                <tr><td>Thread library does scheduling in user space</td><td>OS kernel manages threads</td></tr>
+                <tr><td>Fast creation &amp; switch</td><td>Slower (kernel call)</td></tr>
+                <tr><td>Blocking syscall blocks entire process</td><td>One thread can block while others run</td></tr>
+                <tr><td>Cannot use multiprocessors</td><td>True parallelism on multiprocessors</td></tr>
+              </tbody>
+            </table>
 
-            <p><strong>Disk Scheduling:</strong> Reduces seek time by optimizing the order of I/O requests. FCFS is simple but inefficient. SSTF minimizes seek time but may starve. SCAN/C-SCAN provide uniform wait times. LOOK/C-LOOK are optimized versions that don't go to disk edges unnecessarily.</p>
-          </div>
+            <p><strong>Multithreading Models:</strong> (see §2.6). Many-to-One (all user threads share one kernel thread — simple, no multiprocessor use). One-to-One (each user thread has a kernel thread — full concurrency, expensive). Many-to-Many (m user threads multiplexed on n kernel threads where n ≤ m and can change — best of both). Two-Level (subset of user threads bound 1-1 to kernel threads).</p>
+          </p>
         </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Using C-SCAN disk scheduling, calculate total head movement for requests: 98, 183, 37, 122, 14, 124, 65, 67. Head starts at 53, moves toward higher cylinders (0-199).
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Explain directory structures in operating systems. Compare single-level, two-level, and tree-structured directories.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> What is spooling? How does it improve system performance? Give examples.
-          </div>
-        </div>
-
       </div>
+    </section>
+
+    <!-- ============== UNIT 3 ============== -->
+    <section id="unit3" class="subject">
+      <header class="subject__head">
+        <span class="subject__no">03</span>
+        <div>
+          <h2 class="subject__title">CPU Scheduling &amp; Deadlock</h2>
+          <p class="subject__sub">FCFS, SJF, Priority, Round Robin, MLQ/MLFQ, Deadlock (Coffman + handling)</p>
+        </div>
+      </header>
+
+      <div class="figure">
+        <h3>3.1 CPU Scheduling — Basics</h3>
+        <p>CPU scheduling is the basis of multiprogrammed OS. The scheduler selects a process from the ready queue to run.</p>
+        <p><strong>Scheduling criteria:</strong> CPU utilisation, Throughput, Turnaround time (TAT = completion − arrival), Waiting time (WT = TAT − burst), Response time, Fairness.</p>
+        <p><strong>Types:</strong> Non-preemptive (FCFS, SJF, Priority) vs Preemptive (SRTF, Preemptive Priority, Round Robin).</p>
+      </div>
+
+      <div class="figure">
+        <h3>3.2 FCFS (First-Come, First-Served)</h3>
+        <p>Process that requests CPU first is allocated first. Simple but suffers the <em>convoy effect</em> — one long process delays all short ones behind it. Non-preemptive.</p>
+      </div>
+
+      <div class="figure">
+        <h3>3.3 SJF / SRTF (Shortest Job First / Shortest Remaining Time First)</h3>
+        <p>Process with the smallest next CPU burst is chosen. Optimal in terms of average WT. Non-preemptive (SJF) and preemptive (SRTF) variants. Hard to predict burst length; risk of starvation of long jobs.</p>
+      </div>
+
+      <div class="figure">
+        <h3>3.4 Priority Scheduling</h3>
+        <p>Each process is assigned a priority; CPU is given to the highest-priority process. Can be preemptive or non-preemptive. Starvation is solved by <strong>aging</strong> (gradually increasing the priority of waiting processes).</p>
+      </div>
+
+      <div class="figure">
+        <h3>3.5 Round Robin</h3>
+        <p>Each process gets a small time unit (<strong>quantum</strong>, q). After q expires, the process goes to the back of the ready queue. Preemptive, fair, good for time-sharing. Performance depends on quantum: small q ⇒ high context-switch overhead; large q degenerates into FCFS.</p>
+      </div>
+
+      <div class="figure">
+        <h3>3.6 Multilevel Queue &amp; Multilevel Feedback Queue</h3>
+        <p><strong>MLQ:</strong> Ready queue divided into multiple queues (e.g., system, interactive, batch, student). Each queue has its own scheduling algorithm.</p>
+        <p><strong>MLFQ:</strong> A process can move between queues based on observed behaviour. A CPU-bound process that consumes its quantum is demoted to a lower queue; an I/O-bound process that frequently blocks stays in a higher queue. Approximates SJF without knowing the burst length.</p>
+      </div>
+
+      <div class="figure">
+        <h3>3.7 Deadlock</h3>
+        <p>A set of processes is deadlocked if each is waiting for an event that only another process in the set can cause. Usually refers to circular waiting for resources.</p>
+
+        <p><strong>Coffman / 4 Necessary Conditions (all must hold):</strong></p>
+        <ol>
+          <li><strong>Mutual Exclusion:</strong> At least one resource is non-shareable.</li>
+          <li><strong>Hold &amp; Wait:</strong> A process holds at least one resource while waiting for another.</li>
+          <li><strong>No Preemption:</strong> Resources cannot be forcibly taken; only the holder releases.</li>
+          <li><strong>Circular Wait:</strong> A circular chain of processes exists where each holds a resource wanted by the next.</li>
+        </ol>
+
+        <p><strong>Resource Allocation Graph (RAG):</strong> Circles = processes, Squares = resource classes; instances as dots. A cycle in a single-instance RAG ⇒ deadlock. In multi-instance RAG, a cycle is necessary but not sufficient.</p>
+
+        <p><strong>Handling Deadlock:</strong></p>
+        <table class="grid">
+          <thead><tr><th>Strategy</th><th>Idea</th><th>Used by</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Prevention</strong></td><td>Break one of the 4 conditions (e.g., require all resources up-front; impose total ordering).</td><td>Embedded / hard RT</td></tr>
+            <tr><td><strong>Avoidance</strong></td><td>Banker's Algorithm: only grant a request if it leaves a safe state.</td><td>Some mainframes</td></tr>
+            <tr><td><strong>Detection &amp; Recovery</strong></td><td>Let deadlock happen; periodically run a detection algorithm; recover by killing processes or pre-empting resources.</td><td>Most general OSes</td></tr>
+            <tr><td><strong>Ostrich</strong></td><td>Ignore the problem (used when cost of handling &gt; cost of occasional deadlock).</td><td>Linux, Windows</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="qa-block">
+        <h3 class="qa-block__title">Unit 3 — Exam Questions</h3>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define turnaround time.</p>
+          <p class="qa__a">TAT = Completion time − Arrival time. It is the total time a process spends in the system.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define waiting time.</p>
+          <p class="qa__a">WT = Turnaround time − Burst time. The total time a process waits in the ready queue.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a safe state?</p>
+          <p class="qa__a">A state in which there exists at least one sequence of process completions (a <em>safe sequence</em>) such that all processes can finish even if each asks for its maximum remaining resources.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is the convoy effect?</p>
+          <p class="qa__a">In FCFS scheduling, a single slow CPU-bound process delays all the faster processes behind it, making the whole system feel slow.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is starvation?</p>
+          <p class="qa__a">A scheduling policy may indefinitely delay a process if higher-priority (or more "favourable") processes keep arriving. E.g., SJF and Priority can starve long jobs.</p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Calculate average WT &amp; TAT using FCFS for the following processes:</p>
+          <p class="qa__q-meta">Processes: P1 (AT 0, BT 7), P2 (AT 1, BT 5), P3 (AT 2, BT 3), P4 (AT 3, BT 1)</p>
+          <p class="qa__a">
+<pre class="ascii-diagram">
+Gantt Chart (FCFS):
+| P1 |   P2   | P3 | P4 |
+0    7        12   15   16
+</pre>
+            <table class="grid">
+              <thead><tr><th>Process</th><th>AT</th><th>BT</th><th>CT</th><th>TAT = CT−AT</th><th>WT = TAT−BT</th></tr></thead>
+              <tbody>
+                <tr><td>P1</td><td>0</td><td>7</td><td>7</td><td>7</td><td>0</td></tr>
+                <tr><td>P2</td><td>1</td><td>5</td><td>12</td><td>11</td><td>6</td></tr>
+                <tr><td>P3</td><td>2</td><td>3</td><td>15</td><td>13</td><td>10</td></tr>
+                <tr><td>P4</td><td>3</td><td>1</td><td>16</td><td>13</td><td>12</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Average WT = (0+6+10+12)/4 = 7.0 ms</strong></p>
+            <p><strong>Average TAT = (7+11+13+13)/4 = 11.0 ms</strong></p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Calculate average WT and TAT using SJF (non-preemptive).</p>
+          <p class="qa__q-meta">Processes: P1 (AT 0, BT 7), P2 (AT 2, BT 4), P3 (AT 4, BT 1), P4 (AT 5, BT 4), P5 (AT 6, BT 3)</p>
+          <p class="qa__a">
+            <p>Order chosen at each decision time (t=0 only P1 ready; later, pick shortest BT among arrived):</p>
+<pre class="ascii-diagram">
+Gantt Chart (SJF):
+| P1 | P3 | P5 | P2 | P4 |
+0    7    8    11   15   19
+</pre>
+            <table class="grid">
+              <thead><tr><th>P</th><th>AT</th><th>BT</th><th>CT</th><th>TAT</th><th>WT</th></tr></thead>
+              <tbody>
+                <tr><td>P1</td><td>0</td><td>7</td><td>7</td><td>7</td><td>0</td></tr>
+                <tr><td>P2</td><td>2</td><td>4</td><td>15</td><td>13</td><td>9</td></tr>
+                <tr><td>P3</td><td>4</td><td>1</td><td>8</td><td>4</td><td>3</td></tr>
+                <tr><td>P4</td><td>5</td><td>4</td><td>19</td><td>14</td><td>10</td></tr>
+                <tr><td>P5</td><td>6</td><td>3</td><td>11</td><td>5</td><td>2</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Average WT = (0+9+3+10+2)/5 = 4.8 ms</strong></p>
+            <p><strong>Average TAT = (7+13+4+14+5)/5 = 8.6 ms</strong></p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Compute average WT and TAT using Round Robin (q = 2).</p>
+          <p class="qa__q-meta">Processes (all AT = 0): P1 BT 4, P2 BT 3, P3 BT 2, P4 BT 5</p>
+          <p class="qa__a">
+<pre class="ascii-diagram">
+Gantt Chart (RR, q = 2):
+| P1 | P2 | P3 | P4 | P1 | P2 | P4 |
+0    2    4    6    8    10   12   14
+</pre>
+            <p>After q=2 each, P1 needs 2 more, P2 needs 1 more, P3 done, P4 needs 3 more.</p>
+            <table class="grid">
+              <thead><tr><th>P</th><th>BT</th><th>CT</th><th>TAT (AT=0)</th><th>WT = TAT − BT</th></tr></thead>
+              <tbody>
+                <tr><td>P1</td><td>4</td><td>10</td><td>10</td><td>6</td></tr>
+                <tr><td>P2</td><td>3</td><td>12</td><td>12</td><td>9</td></tr>
+                <tr><td>P3</td><td>2</td><td>6</td><td>6</td><td>4</td></tr>
+                <tr><td>P4</td><td>5</td><td>14</td><td>14</td><td>9</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Average WT = (6+9+4+9)/4 = 7.0 ms</strong></p>
+            <p><strong>Average TAT = (10+12+6+14)/4 = 10.5 ms</strong></p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain the four necessary conditions for deadlock. [2022]</p>
+          <p class="qa__a">
+            <p>All four must hold simultaneously for a deadlock to occur:</p>
+            <ol>
+              <li><strong>Mutual Exclusion:</strong> At least one resource is held in a non-sharable mode (e.g., a printer).</li>
+              <li><strong>Hold and Wait:</strong> A process is currently holding at least one resource and is waiting to acquire additional resources held by other processes.</li>
+              <li><strong>No Preemption:</strong> Resources cannot be preempted; they can only be released voluntarily by the process holding them.</li>
+              <li><strong>Circular Wait:</strong> There exists a set of waiting processes {P0, P1, …, Pn} such that P0 waits for a resource held by P1, P1 waits for P2, …, Pn waits for P0.</li>
+            </ol>
+            <p><strong>To break deadlock:</strong> prevent any one of these four conditions. For example, impose a total ordering on resource acquisition to break circular wait.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Compare FCFS, SJF, Priority and Round Robin. Compute average WT &amp; TAT using SJF (preemptive / SRTF) for the given processes. [2021]</p>
+          <p class="qa__q-meta">Processes: P1 (AT 0, BT 8), P2 (AT 1, BT 4), P3 (AT 2, BT 9), P4 (AT 3, BT 5)</p>
+          <p class="qa__a">
+            <p><strong>Comparison Table:</strong></p>
+            <table class="grid">
+              <thead><tr><th>Algorithm</th><th>Type</th><th>Pros</th><th>Cons</th></tr></thead>
+              <tbody>
+                <tr><td>FCFS</td><td>Non-preemptive</td><td>Simple, fair</td><td>Convoy effect</td></tr>
+                <tr><td>SJF / SRTF</td><td>Non/Preemptive</td><td>Optimal avg WT</td><td>Starvation, burst prediction hard</td></tr>
+                <tr><td>Priority</td><td>Both</td><td>Important jobs run first</td><td>Starvation (solved by aging)</td></tr>
+                <tr><td>Round Robin</td><td>Preemptive</td><td>Fair, good for time-sharing</td><td>Quantum choice matters</td></tr>
+              </tbody>
+            </table>
+
+            <p><strong>SRTF Solution:</strong> At every arrival, if remaining burst of current &lt; new process's burst, preempt.</p>
+            <table class="grid">
+              <thead><tr><th>Time</th><th>Event</th><th>Ready queue</th><th>Running</th></tr></thead>
+              <tbody>
+                <tr><td>0</td><td>P1 starts (rem 8)</td><td>–</td><td>P1</td></tr>
+                <tr><td>1</td><td>P2 arrives (BT 4); P1 rem 7 &gt; 4 ⇒ preempt P1</td><td>{P1}</td><td>P2</td></tr>
+                <tr><td>2</td><td>P3 arrives (BT 9); P2 rem 3 &lt; 9 ⇒ continue</td><td>{P1, P3}</td><td>P2</td></tr>
+                <tr><td>3</td><td>P4 arrives (BT 5); P2 rem 2 &lt; 5 ⇒ continue</td><td>{P1, P3, P4}</td><td>P2</td></tr>
+                <tr><td>5</td><td>P2 finishes</td><td>{P1, P3, P4}</td><td>P1 (rem 7)</td></tr>
+                <tr><td>5+</td><td>P1 rem 7 &lt; P3 9, P4 5? No — P4(5) &lt; P1(7) ⇒ preempt</td><td>{P1, P3}</td><td>P4</td></tr>
+                <tr><td>10</td><td>P4 finishes; P1 rem 7 &lt; P3 9 ⇒ run P1</td><td>{P3}</td><td>P1</td></tr>
+                <tr><td>17</td><td>P1 finishes</td><td>{P3}</td><td>P3</td></tr>
+                <tr><td>26</td><td>P3 finishes</td><td>{}</td><td>–</td></tr>
+              </tbody>
+            </table>
+<pre class="ascii-diagram">
+Gantt Chart (SRTF):
+| P1 | P2 | P4 | P1 | P3 |
+0    1    5    10   17   26
+</pre>
+            <table class="grid">
+              <thead><tr><th>P</th><th>AT</th><th>BT</th><th>CT</th><th>TAT</th><th>WT</th></tr></thead>
+              <tbody>
+                <tr><td>P1</td><td>0</td><td>8</td><td>17</td><td>17</td><td>9</td></tr>
+                <tr><td>P2</td><td>1</td><td>4</td><td>5</td><td>4</td><td>0</td></tr>
+                <tr><td>P3</td><td>2</td><td>9</td><td>26</td><td>24</td><td>15</td></tr>
+                <tr><td>P4</td><td>3</td><td>5</td><td>10</td><td>7</td><td>2</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Average WT = (9+0+15+2)/4 = 6.5 ms</strong></p>
+            <p><strong>Average TAT = (17+4+24+7)/4 = 13.0 ms</strong></p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">What is deadlock? Explain prevention, avoidance, detection &amp; recovery methods with the Banker's algorithm. [2022]</p>
+          <p class="qa__a">
+            <p><strong>Deadlock</strong> is a state where a set of processes are each waiting for a resource held by another process in the set, forming a circular chain. The four necessary (Coffman) conditions are mutual exclusion, hold &amp; wait, no preemption, and circular wait.</p>
+
+            <p><strong>1. Prevention</strong> — design the system so that at least one of the four conditions can never hold.</p>
+            <ul>
+              <li>Mutual exclusion ⇒ use spooling for shareable devices (not always possible).</li>
+              <li>Hold &amp; wait ⇒ require a process to request all resources up-front.</li>
+              <li>No preemption ⇒ allow OS to take back a resource if a process holding it requests another.</li>
+              <li>Circular wait ⇒ impose a total ordering on resources; processes must request in that order.</li>
+            </ul>
+
+            <p><strong>2. Avoidance — Banker's Algorithm (Dijkstra)</strong></p>
+            <p>Inputs: <em>Max</em> matrix, <em>Allocation</em> matrix, <em>Available</em> vector. Computes <em>Need = Max − Allocation</em>. On a request, pretend to allocate; then run the <strong>Safety Algorithm</strong> — find a safe sequence using <code>Work ≥ Need[i]</code> for some i, mark done, release its allocation, repeat. If a safe sequence exists, grant the request; otherwise refuse.</p>
+            <p><em>Example:</em> Available = [3,3,2]. Allocation: P0(0,1,0), P1(2,0,0), P2(3,0,2), P3(2,1,1), P4(0,0,2). Max given similarly. Safety check: safe sequence could be P1 → P3 → P4 → P0 → P2. So state is safe.</p>
+
+            <p><strong>3. Detection &amp; Recovery</strong></p>
+            <p>Allow deadlock; periodically run a detection algorithm (RAG cycle check or wait-for-graph + Banker-style algorithm). Recovery options: (a) terminate one or more processes, (b) preempt resources — choose a victim, roll back its state, and restart.</p>
+
+            <p><strong>4. The Ostrich Algorithm</strong> — used by Linux/Windows. The cost of prevention/avoidance is deemed higher than the cost of an occasional deadlock (which is rare).</p>
+
+            <p><strong>Comparison:</strong> Prevention ⇒ low runtime overhead, very restrictive. Avoidance ⇒ flexible but every request analysed; not always possible (need Max in advance). Detection ⇒ maximum concurrency but recovery is hard. Ostrich ⇒ pragmatic.</p>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== UNIT 4 ============== -->
+    <section id="unit4" class="subject">
+      <header class="subject__head">
+        <span class="subject__no">04</span>
+        <div>
+          <h2 class="subject__title">Memory Management</h2>
+          <p class="subject__sub">Paging, segmentation, virtual memory, TLB, page replacement, thrashing, working set</p>
+        </div>
+      </header>
+
+      <div class="figure">
+        <h3>4.1 Logical vs Physical Address</h3>
+        <p>A <strong>logical address</strong> is generated by the CPU (the program's view). A <strong>physical address</strong> is the actual address in main memory. The <strong>MMU</strong> (Memory Management Unit) translates logical → physical at run time.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.2 Contiguous Allocation</h3>
+        <p>Each process occupies one contiguous region of memory. Schemes:</p>
+        <ul>
+          <li><strong>Fixed / Equal partition:</strong> simple, but internal fragmentation.</li>
+          <li><strong>Variable partition:</strong> sized to process; suffers external fragmentation.</li>
+        </ul>
+        <p>Compaction may move processes to coalesce holes, but it costs CPU time. Common placement strategies: <strong>First-fit, Best-fit, Worst-fit</strong>.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.3 Paging</h3>
+        <p>Memory is divided into <strong>fixed-size</strong> <em>frames</em>; a process's logical memory is divided into equal-sized <em>pages</em>. Any page can be loaded into any free frame. A <strong>page table</strong> maps page → frame.</p>
+        <p><strong>Advantages:</strong> no external fragmentation, easy to swap, simple allocation. <strong>Disadvantage:</strong> small internal fragmentation (last page).</p>
+        <p><strong>Effective Access Time</strong> for single-level paging: <code>EAT = (1 − p)·m + p·(m + n)</code> where p = page-fault rate, m = memory access time, n = page-table access overhead.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.4 Segmentation</h3>
+        <p>Memory is divided into variable-size logical units called <em>segments</em> (code, stack, heap, data). Each segment has a name and length. The address is a 2-tuple &lt;segment-number, offset&gt;. A <strong>segment table</strong> holds base + limit. Easy protection and sharing per-segment. Suffers external fragmentation.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.5 Virtual Memory</h3>
+        <p><strong>Virtual memory</strong> allows execution of processes that may not be completely in memory. Only the required pages are loaded on demand. Benefits: programs can be larger than physical RAM, more processes in memory ⇒ higher CPU utilisation, isolation between processes.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.6 Demand Paging</h3>
+        <p>Pages are loaded only when referenced. When a reference hits a page not in memory → <strong>page fault</strong>: the OS issues disk I/O, finds a free frame, reads the page, updates the page table, restarts the instruction. A <strong>valid/invalid bit</strong> in the page table marks whether the page is in memory.</p>
+        <p><strong>Effective Memory Access Time:</strong> <code>EMAT = (1 − p) × ma + p × (page-fault service time)</code>. Typical ma = 100 ns, page-fault service ≈ 10 ms. Even small p severely degrades EMAT.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.7 TLB (Translation Lookaside Buffer)</h3>
+        <p>The TLB is a small, fast associative cache of recent page-table entries. Lookup: if hit (ratio α), memory access takes ma + t (TLB lookup). If miss (1 − α), page table must be walked: takes another ma. With TLB, average lookup is approximately:</p>
+        <p><code>EAT = (ma + t)·α + (ma + t + ma)·(1 − α) + (page-fault cost)·p</code></p>
+        <p>Typical hit ratios &gt; 95%, making paging nearly as fast as physical addressing.</p>
+      </div>
+
+      <div class="figure">
+        <h3>4.8 Page Replacement Algorithms</h3>
+        <p>When memory is full and a new page must be brought in, we evict an existing page:</p>
+        <ul>
+          <li><strong>FIFO:</strong> Evict oldest page. Easy; suffers Belady's anomaly (more frames can mean more faults).</li>
+          <li><strong>LRU (Least Recently Used):</strong> Evict page unused for longest time. Approximates optimal. Hardware-intensive; needs counters or stack.</li>
+          <li><strong>Optimal (OPT / Belady):</strong> Evict page that will not be used for longest in the future. Theoretical lower bound; not implementable.</li>
+          <li><strong>Clock / Second Chance:</strong> Approximation of LRU using a reference bit and a circular pointer.</li>
+          <li><strong>LFU, MFU:</strong> Keep counters of frequency / recency. Less commonly used.</li>
+        </ul>
+      </div>
+
+      <div class="figure">
+        <h3>4.9 Thrashing</h3>
+        <p><strong>Thrashing</strong> occurs when a system spends more time swapping pages than executing instructions. Cause: too many processes, each getting too few frames ⇒ frequent page faults. Solutions:</p>
+        <ul>
+          <li>Working-set model — give each process enough frames to cover its working set.</li>
+          <li>Page-fault frequency — suspend a process if it faults too often.</li>
+          <li>Swapping out a process entirely to reduce multiprogramming.</li>
+        </ul>
+      </div>
+
+      <div class="figure">
+        <h3>4.10 Working Set</h3>
+        <p>The <strong>working set</strong> W(t, Δ) = set of pages referenced in the most recent Δ virtual time units. The OS tracks the working set size per process and tries to keep all pages resident. If total working-set demand &gt; physical memory, thrashing begins.</p>
+      </div>
+
+      <div class="qa-block">
+        <h3 class="qa-block__title">Unit 4 — Exam Questions</h3>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is paging?</p>
+          <p class="qa__a">Paging is a memory-management scheme that divides memory into fixed-size frames and a process's logical address space into equal pages; any page can be placed in any free frame via a page table.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a page fault?</p>
+          <p class="qa__a">A page fault is a trap raised when a process references a page that is not currently in memory; the OS loads the page from disk before restarting the instruction.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define TLB.</p>
+          <p class="qa__a">TLB (Translation Lookaside Buffer) is a small, fast associative hardware cache that stores recent page-table entries to speed up virtual-to-physical address translation.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is thrashing?</p>
+          <p class="qa__a">Thrashing is the state where the system spends more time paging than executing because each process has too few frames and faults constantly.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is the working set?</p>
+          <p class="qa__a">The working set of a process at time t is the set of pages referenced in the most recent Δ time units. The OS uses it to decide how many frames each process needs.</p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Compare paging and segmentation.</p>
+          <p class="qa__a">
+            <table class="grid">
+              <thead><tr><th>Aspect</th><th>Paging</th><th>Segmentation</th></tr></thead>
+              <tbody>
+                <tr><td>Division</td><td>Fixed-size pages / frames</td><td>Variable-size segments</td></tr>
+                <tr><td>Address</td><td>&lt;page, offset&gt;</td><td>&lt;segment, offset&gt;</td></tr>
+                <tr><td>Fragmentation</td><td>Internal only</td><td>External</td></tr>
+                <tr><td>Visibility</td><td>Invisible to programmer</td><td>Visible to programmer</td></tr>
+                <tr><td>Protection / Sharing</td><td>Per-page possible</td><td>Natural per-segment</td></tr>
+                <tr><td>Table</td><td>Page table</td><td>Segment table</td></tr>
+              </tbody>
+            </table>
+            <p><strong>Segmentation with Paging:</strong> Each segment is divided into pages. Gives programmer's view + benefits of paging.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain demand paging and the steps of a page fault.</p>
+          <p class="qa__a">
+            <p><strong>Demand paging</strong> loads pages into memory only when referenced (lazy loading). Hardware supports a valid/invalid bit in each page-table entry.</p>
+            <p><strong>Page-fault service routine:</strong></p>
+            <ol>
+              <li>Trap to OS; save registers &amp; PC of faulting process.</li>
+              <li>Determine whether the reference is legal (in process's address space) — else segmentation fault.</li>
+              <li>Find a free frame (or evict one via replacement algorithm).</li>
+              <li>Schedule disk I/O to read the desired page into that frame.</li>
+              <li>While the I/O runs, context-switch to another ready process.</li>
+              <li>On I/O completion, update the page table to set the frame number and mark the entry valid.</li>
+              <li>Restart the faulting instruction.</li>
+            </ol>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Calculate the number of page faults using FIFO for the reference string: 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1 with 3 frames.</p>
+          <p class="qa__a">
+<pre class="ascii-diagram">
+FIFO, 3 frames, ref string: 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1
+
+Step | ref | frames            | fault?
+1    | 7   | [-, 7, -]          | Yes (1)
+2    | 0   | [-, 7, 0]          | Yes (2)
+3    | 1   | [7, 0, 1]          | Yes (3)
+4    | 2   | [0, 1, 2]  evict 7  | Yes (4)
+5    | 0   | [0, 1, 2]          | No
+6    | 3   | [1, 2, 3]  evict 0  | Yes (5)
+7    | 0   | [2, 3, 0]  evict 1  | Yes (6)
+8    | 4   | [3, 0, 4]  evict 2  | Yes (7)
+9    | 2   | [0, 4, 2]  evict 3  | Yes (8)
+10   | 3   | [4, 2, 3]  evict 0  | Yes (9)
+11   | 0   | [2, 3, 0]  evict 4  | Yes (10)
+12   | 3   | [2, 3, 0]          | No
+13   | 2   | [2, 3, 0]          | No
+14   | 1   | [3, 0, 1]  evict 2  | Yes (11)
+15   | 2   | [0, 1, 2]  evict 3  | Yes (12)
+16   | 0   | [0, 1, 2]          | No
+17   | 1   | [0, 1, 2]          | No
+</pre>
+            <p><strong>Total page faults = 12</strong></p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain LRU page replacement with a worked example.</p>
+          <p class="qa__a">
+            <p>LRU evicts the page whose most recent use is the oldest. Reference string: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1 with 3 frames.</p>
+<pre class="ascii-diagram">
+Step | ref | frames (MRU→LRU)   | fault?
+1    | 7   | 7 - -              | Yes
+2    | 0   | 0 7 -              | Yes
+3    | 1   | 1 0 7              | Yes
+4    | 2   | 2 1 0 (evict 7)    | Yes
+5    | 0   | 0 2 1              | No
+6    | 3   | 3 0 2 (evict 1)    | Yes
+7    | 0   | 0 3 2              | No
+8    | 4   | 4 0 3 (evict 2)    | Yes
+9    | 2   | 2 4 0 (evict 3)    | Yes
+10   | 3   | 3 2 4 (evict 0)    | Yes
+11   | 0   | 0 3 2 (evict 4)    | Yes
+12   | 3   | 3 0 2              | No
+13   | 2   | 2 3 0              | No
+14   | 1   | 1 2 3 (evict 0)    | Yes
+15   | 2   | 2 1 3              | No
+16   | 0   | 0 2 1 (evict 3)    | Yes
+17   | 1   | 1 0 2              | No
+</pre>
+            <p><strong>Total LRU page faults = 12</strong></p>
+            <p>Note: LRU avoids Belady's anomaly. Implementation uses a stack of page numbers (costly in hardware) or counters; OS usually approximates with the Clock algorithm.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Explain virtual memory. Discuss demand paging, the TLB, and the EMAT formula. [2022]</p>
+          <p class="qa__a">
+            <p><strong>Virtual Memory</strong> is a technique that allows execution of a process whose entire logical address space need not be in physical memory. Pages not currently needed stay on disk and are loaded only on demand. Benefits: processes can be larger than RAM, more processes ⇒ better CPU utilisation, isolation &amp; protection between processes.</p>
+
+            <p><strong>Demand Paging</strong> brings pages into RAM only when referenced. Each PTE has a valid/invalid bit. On a reference to an invalid page, a <strong>page fault</strong> occurs and the OS services it as listed in §4.6.</p>
+
+            <p><strong>TLB</strong> caches recent page-table translations. TLB lookup takes time <code>t</code> (~10 ns); memory access time is <code>ma</code> (~100 ns). With hit ratio α:</p>
+            <p><code>EAT (no page faults) = α·(ma + t) + (1 − α)·(ma + t + ma)</code></p>
+            <p>With page-fault rate p and page-fault service time <code>PFS</code> (≈ 10 ms):</p>
+            <p><code>EMAT = (1 − p)·[α·(ma + t) + (1 − α)·(2ma + t)] + p·PFS</code></p>
+            <p>For α = 0.95, ma = 100 ns, t = 20 ns:</p>
+            <p>Normal EAT = 0.95·120 + 0.05·220 = 114 + 11 = 125 ns. With p = 0.001, PFS = 10 ms: <code>EMAT = 0.999·125 + 0.001·10,000,000 ≈ 10,125 ns</code>. Even tiny p dramatically increases EMAT.</p>
+
+            <p><strong>Working Set &amp; Thrashing:</strong> The OS keeps each process's working set resident. If total working-set demand &gt; physical memory, the system thrashes — pages are evicted before being reused. Mitigation: working-set model, page-fault frequency control, swapping out entire processes.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Compare page replacement algorithms: FIFO, LRU, Optimal and Clock. Solve the reference string 7,0,1,2,0,3,0,4,2,3,0,3,2,1,2,0,1 with 3 frames using FIFO and LRU. [2023]</p>
+          <p class="qa__a">
+            <p><strong>Comparison of Algorithms:</strong></p>
+            <table class="grid">
+              <thead><tr><th>Algorithm</th><th>Policy</th><th>Pros</th><th>Cons</th></tr></thead>
+              <tbody>
+                <tr><td>FIFO</td><td>Evict the page brought in earliest</td><td>Trivial implementation</td><td>Belady's anomaly; ignores usage</td></tr>
+                <tr><td>LRU</td><td>Evict least recently used page</td><td>Near-optimal in practice</td><td>Needs counters or stack; costly</td></tr>
+                <tr><td>Optimal (OPT)</td><td>Evict page not used for longest in future</td><td>Lowest fault rate possible</td><td>Not implementable (needs future)</td></tr>
+                <tr><td>Clock / Second Chance</td><td>Approx LRU using reference bit</td><td>Cheap; good enough</td><td>Slightly worse than true LRU</td></tr>
+              </tbody>
+            </table>
+
+            <p><strong>FIFO solution (3 frames):</strong> from §4.5 — <strong>12 page faults</strong>.</p>
+<pre class="ascii-diagram">
+String: 7 0 1 2 0 3 0 4 2 3 0 3 2 1 2 0 1
+Frames (left=oldest):
+ [7 - -] [7 0 -] [7 0 1] [0 1 2] [0 1 2] [1 2 3] [2 3 0]
+ [3 0 4] [0 4 2] [4 2 3] [2 3 0] [2 3 0] [2 3 0] [3 0 1]
+ [0 1 2] [0 1 2] [0 1 2]
+</pre>
+            <p><strong>LRU solution (3 frames):</strong> from §4.5 — <strong>12 page faults</strong> (same in this case, but LRU provably ≤ FIFO).</p>
+            <p><strong>Optimal solution (3 frames):</strong> would yield <strong>9 page faults</strong> — the theoretical minimum (e.g., after loading 7,0,1, evict 1 when 2 comes, etc.).</p>
+            <p>Page-fault count depends on the reference pattern; LRU approximates optimal well. Belady's anomaly is observed for FIFO (more frames can mean more faults) but never for LRU or OPT.</p>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== UNIT 5 ============== -->
+    <section id="unit5" class="subject">
+      <header class="subject__head">
+        <span class="subject__no">05</span>
+        <div>
+          <h2 class="subject__title">File Systems &amp; I/O</h2>
+          <p class="subject__sub">Files, directories, allocation, disk scheduling, I/O, spooling</p>
+        </div>
+      </header>
+
+      <div class="figure">
+        <h3>5.1 File Concepts</h3>
+        <p>A <strong>file</strong> is a named collection of related information stored on secondary storage. Attributes: name, type, size, protection, timestamps (created, modified, accessed). Operations: create, delete, open, close, read, write, append, seek, rename.</p>
+      </div>
+
+      <div class="figure">
+        <h3>5.2 File Access Methods</h3>
+        <ul>
+          <li><strong>Sequential Access:</strong> read in order from the beginning (tape model).</li>
+          <li><strong>Direct / Random Access:</strong> jump to any byte/block by address (disk model).</li>
+          <li><strong>Indexed Access:</strong> read via a key; the OS uses an index file. E.g., ISAM.</li>
+        </ul>
+      </div>
+
+      <div class="figure">
+        <h3>5.3 Directory Structures</h3>
+        <ul>
+          <li><strong>Single-level:</strong> all files in one directory (old MS-DOS). Naming clashes.</li>
+          <li><strong>Two-level:</strong> one directory per user. Solves naming conflicts, no grouping.</li>
+          <li><strong>Tree-structured (hierarchical):</strong> directories contain subdirectories; unique absolute path. (UNIX, Windows.)</li>
+          <li><strong>Acyclic graph:</strong> directories may contain shared subdirectories / files via links. No cycles allowed.</li>
+          <li><strong>General graph:</strong> allows cycles — needs garbage collection to free unreachable blocks.</li>
+        </ul>
+      </div>
+
+      <div class="figure">
+        <h3>5.4 File Allocation Methods</h3>
+        <table class="grid">
+          <thead><tr><th>Method</th><th>How</th><th>Pros</th><th>Cons</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Contiguous</strong></td><td>File occupies a set of consecutive blocks</td><td>Simple, fast sequential &amp; direct</td><td>External fragmentation; hard to grow</td></tr>
+            <tr><td><strong>Linked</strong></td><td>Each block has a pointer to the next</td><td>No external fragmentation; grows easily</td><td>Sequential only; pointer overhead; one bad pointer loses rest</td></tr>
+            <tr><td><strong>Indexed</strong></td><td>Index block holds pointers to all data blocks</td><td>Direct access; no external fragmentation</td><td>Index block size limits file size</td></tr>
+            <tr><td><strong>Multi-level indexed</strong></td><td>Index of indices</td><td>Very large files</td><td>More disk accesses for small files</td></tr>
+            <tr><td><strong>Inode (Unix)</strong></td><td>13 entries: 10 direct, 1 single-indirect, 1 double-indirect, 1 triple-indirect</td><td>Good balance</td><td>Large files need multiple levels</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="figure">
+        <h3>5.5 Free Space Management</h3>
+        <p>Methods to track free disk blocks:</p>
+        <ul>
+          <li><strong>Bit Vector / Bitmap:</strong> one bit per block. Simple; bit ops fast; needs contiguous storage.</li>
+          <li><strong>Linked List:</strong> chain of free blocks. Cheap but slow traversal.</li>
+          <li><strong>Grouping:</strong> first free block stores addresses of other free blocks. Faster traversal.</li>
+          <li><strong>Counting:</strong> keep (first block, count) pairs for contiguous runs (best for contiguous allocation).</li>
+        </ul>
+      </div>
+
+      <div class="figure">
+        <h3>5.6 Disk Scheduling</h3>
+        <p>Reduces seek time by reordering requests. Disk has cylinders numbered 0..N−1; head moves radially.</p>
+        <ul>
+          <li><strong>FCFS:</strong> arrival order. Fair; large seeks.</li>
+          <li><strong>SSTF:</strong> nearest request first. Better but may starve.</li>
+          <li><strong>SCAN (Elevator):</strong> sweep up then down servicing requests.</li>
+          <li><strong>C-SCAN:</strong> sweep up; jump to start; sweep up again — uniform wait time.</li>
+          <li><strong>LOOK / C-LOOK:</strong> like SCAN/C-SCAN but head stops at the last request, not the disk edge.</li>
+        </ul>
+      </div>
+
+      <div class="figure">
+        <h3>5.7 I/O Hardware, Buffering, Caching, Spooling</h3>
+        <p><strong>I/O Hardware:</strong> Device controllers + I/O ports. CPU communicates via programmed I/O, interrupt-driven I/O, or DMA.</p>
+        <p><strong>Buffering:</strong> temporary memory area (single, double, circular) decouples producer &amp; consumer rates.</p>
+        <p><strong>Caching:</strong> copy of data in a faster store (e.g., page cache in RAM).</p>
+        <p><strong>Spooling</strong> (Simultaneous Peripheral Operations On-Line): jobs queued on disk for a slow device (e.g., printer) so CPU is not blocked.</p>
+      </div>
+
+      <div class="qa-block">
+        <h3 class="qa-block__title">Unit 5 — Exam Questions</h3>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a file?</p>
+          <p class="qa__a">A file is a named collection of related information stored on secondary storage; the smallest unit of logical storage visible to a user.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define spooling.</p>
+          <p class="qa__a">Spooling (Simultaneous Peripheral Operation On-Line) holds output destined for a slow device in a disk buffer so the CPU can keep working.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">What is a cylinder?</p>
+          <p class="qa__a">A cylinder is the set of all tracks that are at the same radial distance from the centre across all platters of a disk.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Define seek time.</p>
+          <p class="qa__a">Seek time is the time taken by the disk arm to move the read/write head from its current position to the desired cylinder.</p>
+        </div>
+
+        <div class="qa qa--1">
+          <span class="qa__tag">1 Mark</span>
+          <p class="qa__q">Differentiate between buffering and caching.</p>
+          <p class="qa__a"><strong>Buffering</strong> = temporarily holding data to absorb rate mismatches between producer and consumer. <strong>Caching</strong> = keeping a copy of data closer (faster) to speed up future reads. A buffer is a work-area; a cache is a duplicate.</p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain the three file allocation methods with their pros and cons.</p>
+          <p class="qa__a">
+            <p><strong>1. Contiguous Allocation:</strong> Each file occupies a set of consecutive disk blocks; directory stores starting address and length. Fast sequential &amp; direct access; suffers external fragmentation and is hard to grow.</p>
+            <p><strong>2. Linked Allocation:</strong> Each block contains a pointer to the next; directory stores first &amp; last block. No external fragmentation, easy to grow; only sequential access is fast; pointer overhead; a single bad pointer loses the rest.</p>
+            <p><strong>3. Indexed Allocation:</strong> All pointers collected in an index block; directory stores index-block address. Supports direct access and has no external fragmentation; the index block itself takes space (multi-level schemes for large files). Used by UNIX inode.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Compare SCAN, C-SCAN, LOOK and C-LOOK disk scheduling.</p>
+          <p class="qa__a">
+            <table class="grid">
+              <thead><tr><th>Algorithm</th><th>Motion</th><th>Direction change</th><th>Wait uniformity</th></tr></thead>
+              <tbody>
+                <tr><td>SCAN</td><td>Goes to disk edge then reverses</td><td>Yes (at end)</td><td>Middle cylinders waited on twice</td></tr>
+                <tr><td>C-SCAN</td><td>Goes to end, jumps to start, repeats</td><td>Yes (jump back)</td><td>Uniform for fresh requests</td></tr>
+                <tr><td>LOOK</td><td>Reverses at last request</td><td>Yes (at last req)</td><td>Less wasted motion than SCAN</td></tr>
+                <tr><td>C-LOOK</td><td>Like C-SCAN but reverses at last request</td><td>Yes (jump back)</td><td>Uniform + efficient</td></tr>
+              </tbody>
+            </table>
+            <p>LOOK/C-LOOK are the practical favourites because they don't waste time travelling the empty part of the disk.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Using SSTF, calculate total head movement. Initial head position 53. Request queue: 98, 183, 37, 122, 14, 124, 65, 67. Cylinders 0–199.</p>
+          <p class="qa__a">
+<pre class="ascii-diagram">
+Order chosen (always nearest):
+53 → 65 → 67 → 37 → 14 → 98 → 122 → 124 → 183
+
+Movements:
+|53-65|=12 |65-67|=2  |67-37|=30 |37-14|=23 |14-98|=84
+|98-122|=24 |122-124|=2 |124-183|=59
+</pre>
+            <p><strong>Total head movement = 12 + 2 + 30 + 23 + 84 + 24 + 2 + 59 = 236 cylinders</strong></p>
+            <p>Average seek distance ≈ 236 / 8 = 29.5 cylinders.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--5">
+          <span class="qa__tag">5 Marks</span>
+          <p class="qa__q">Explain buffering, caching and spooling.</p>
+          <p class="qa__a">
+            <p><strong>Buffering</strong> provides a temporary holding area in memory so that producer and consumer can operate at different rates. Single buffer holds one block; double buffer allows simultaneous I/O and computation; circular buffer chains blocks.</p>
+            <p><strong>Caching</strong> is a duplicate of data stored closer (e.g., disk cache in RAM) so subsequent accesses hit the fast copy. Hit rate × fast access + miss rate × slow access = average access time.</p>
+            <p><strong>Spooling</strong> queues the entire output on disk for a slow device (printer, plotter). The application writes to the spool file and continues immediately. The OS feeds the device from the spool at its own pace. Allows CPU and device to overlap and share the device among many users.</p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Explain file system in detail: file concepts, directory structures, allocation methods, and disk scheduling. Solve the disk-scheduling problem. [2023]</p>
+          <p class="qa__q-meta">Using SCAN (head starts at 53, moves toward higher cylinders first, total cylinders 0–199). Request queue: 98, 183, 37, 122, 14, 124, 65, 67.</p>
+          <p class="qa__a">
+            <p><strong>1. File Concepts:</strong> A file is a named collection of data. Attributes: name, identifier, type, location, size, protection, timestamps. Operations: create, write, read, reposition, delete, truncate, open, close. Types: regular, directory, character special, block special, FIFO, socket.</p>
+
+            <p><strong>2. Directory Structures:</strong> Single-level, two-level, tree-structured (most common, e.g., /home/user/file.txt), acyclic graph (shared files via links), general graph (cycles allowed — needs GC).</p>
+
+            <p><strong>3. Allocation Methods:</strong> Contiguous (fast, external fragmentation), Linked (no external fragmentation, sequential-only), Indexed (direct access; UNIX inode combines direct + single + double + triple indirect).</p>
+
+            <p><strong>4. Disk Scheduling — SCAN solution:</strong> Sorted requests: 14, 37, 65, 67, 98, 122, 124, 183. Head 53 moves up first.</p>
+<pre class="ascii-diagram">
+Order: 53 → 65 → 67 → 98 → 122 → 124 → 183 → 199 (end) → 37 → 14
+
+Movements:
+|65-53|=12 |67-65|=2 |98-67|=31 |122-98|=24 |124-122|=2
+|183-124|=59 |199-183|=16 |37-199|=162 |14-37|=23
+</pre>
+            <p><strong>Total head movement = 12+2+31+24+2+59+16+162+23 = 331 cylinders</strong></p>
+            <p>Average seek distance ≈ 331 / 8 = 41.4 cylinders.</p>
+
+            <p>(For comparison: C-SCAN gives 12+2+31+24+2+59+16 + (199−14)=185 = 331 − (162−185) = 208 wait — in fact C-SCAN total = 12+2+31+24+2+59+16+185+14 = 345 if jumping 199→0. Numbers depend on whether the disk edge is visited.)</p>
+          </p>
+        </div>
+
+        <div class="qa qa--15">
+          <span class="qa__tag">15 Marks</span>
+          <p class="qa__q">Explain the layered I/O architecture: device drivers, controllers, kernel I/O subsystem, and user-level libraries. Discuss DMA, interrupts and buffering in detail. [2022]</p>
+          <p class="qa__a">
+            <p><strong>I/O Hardware Layer:</strong> Physical devices — disks, keyboards, printers, NICs — communicate with the CPU through <strong>device controllers</strong>. Controllers expose a set of <strong>control registers</strong> that the CPU reads/writes via I/O instructions (port-mapped) or memory-mapped I/O. The controller attaches to the system bus and may have local buffer memory.</p>
+
+            <p><strong>Three I/O Techniques:</strong></p>
+            <ul>
+              <li><strong>Programmed I/O (Polling):</strong> CPU loops, reading the controller's status register. Simple but wastes CPU time. Suitable for fast devices.</li>
+              <li><strong>Interrupt-driven I/O:</strong> CPU issues the I/O and continues other work. Controller raises an interrupt when the operation completes. CPU executes the device's ISR (Interrupt Service Routine).</li>
+              <li><strong>DMA (Direct Memory Access):</strong> A DMA controller takes over the bus and moves data between device and RAM without CPU intervention. The CPU is free to do other work. The DMA engine raises one interrupt per buffer (or per block), not per byte. Best for high-throughput devices like disks.</li>
+            </ul>
+
+            <p><strong>Kernel I/O Subsystem:</strong> Provides buffering, caching, spooling, scheduling, and error handling. It maintains a <em>buffer cache</em> in memory, applies a common block-device interface (open, close, read, write), and orders requests to minimise disk seeks (disk scheduler).</p>
+
+            <p><strong>Device Drivers:</strong> Software modules (one per device or class) that hide the controller's specifics and expose a uniform kernel API. They translate standard <code>read</code>/<code>write</code> requests into controller-specific register operations.</p>
+
+            <p><strong>User-level I/O Libraries:</strong> Above the kernel, libraries (libc) wrap raw system calls with convenient primitives: <code>printf</code>, <code>fopen</code>, <code>fread</code>, etc. They also implement userspace buffering (stdio buffer).</p>
+
+            <p><strong>Buffering:</strong> Holds data in transit between producer and consumer. <em>Single buffer</em> — one block at a time; <em>double buffer</em> — one being filled while another is consumed (concurrent I/O and computation); <em>circular buffer</em> — array of N buffers used as a ring (typical in audio/video). Goal: keep both sides busy.</p>
+
+            <p><strong>Spooling &amp; Scheduling:</strong> For shared, slow devices (printers), spooling stores the job queue on disk and lets the device drain it at its own pace. Disk scheduling (FCFS/SSTF/SCAN/C-SCAN/LOOK/C-LOOK) reorders head movements to reduce average seek time.</p>
+
+            <p>Together, these layers transform an irregular hardware interface into a clean, efficient set of abstractions for applications.</p>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============== PYQ mega-section ============== -->
+    <section class="subject">
+      <header class="subject__head">
+        <span class="subject__no">PYQ</span>
+        <div>
+          <h2 class="subject__title">Previous Year Questions — Snapshot</h2>
+          <p class="subject__sub">Frequently asked questions across years</p>
+        </div>
+      </header>
+      <div class="figure">
+        <ul class="pyq-list">
+          <li><strong>[2023]</strong> Explain the different types of operating systems.</li>
+          <li><strong>[2023]</strong> Compare microkernel, monolithic and modular structures.</li>
+          <li><strong>[2023]</strong> Discuss multithreading models with diagrams.</li>
+          <li><strong>[2023]</strong> Compute page faults using FIFO and LRU for the given reference string.</li>
+          <li><strong>[2023]</strong> Using C-SCAN, calculate total head movement for the given request queue.</li>
+          <li><strong>[2022]</strong> Explain the layered structure of an OS with a neat diagram.</li>
+          <li><strong>[2022]</strong> What is PCB? Explain context switching.</li>
+          <li><strong>[2022]</strong> Compare FCFS, SJF, Priority and Round Robin. Solve a numerical.</li>
+          <li><strong>[2022]</strong> Explain deadlock. State the four necessary conditions.</li>
+          <li><strong>[2022]</strong> Explain virtual memory, demand paging, and the EMAT formula.</li>
+          <li><strong>[2022]</strong> Discuss paging and segmentation.</li>
+          <li><strong>[2022]</strong> Explain file system concepts, allocation methods and disk scheduling.</li>
+          <li><strong>[2021]</strong> Define OS. Discuss its functions.</li>
+          <li><strong>[2021]</strong> What is a system call? List its categories with examples.</li>
+          <li><strong>[2021]</strong> Compare process and thread. Explain thread models.</li>
+          <li><strong>[2021]</strong> Solve SRTF problem for the given processes.</li>
+          <li><strong>[2021]</strong> Explain the Banker's algorithm with a worked example.</li>
+          <li><strong>[2021]</strong> Compare paging and segmentation.</li>
+          <li><strong>[2021]</strong> Explain thrashing and the working-set model.</li>
+          <li><strong>[2021]</strong> What is spooling? How does it improve performance?</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="band band--foot">
+    <div class="band__inner">
+      <p>Operating Systems — Semester 5 study notes. Exam-focused, MAKAUT B.Tech CSE pattern.</p>
     </div>
-
-  </div>
-
-  <footer>
-    <p>Operating Systems — Study Notes | Semester 5</p>
   </footer>
 
   <a href="#top" class="back-to-top" id="backToTop" title="Back to top">&#8593;</a>
 
   <script>
-    // Progress bar
-    window.addEventListener('scroll', function() {
-      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var progress = (scrollTop / scrollHeight) * 100;
-      document.getElementById('progressBar').style.width = progress + '%';
-
-      // Back to top button
+    window.addEventListener('scroll', function () {
+      var top = document.documentElement.scrollTop || document.body.scrollTop;
+      var h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var p = (top / h) * 100;
+      var bar = document.getElementById('progressBar');
+      if (bar) bar.style.width = p + '%';
       var btn = document.getElementById('backToTop');
-      if (scrollTop > 300) {
-        btn.classList.add('visible');
-      } else {
-        btn.classList.remove('visible');
-      }
+      if (btn) { top > 300 ? btn.classList.add('visible') : btn.classList.remove('visible'); }
     });
   </script>
 
