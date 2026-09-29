@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compiler Design (PCC-CS501) — Study Notes</title>
+    <meta name="description" content="Comprehensive Q&A study notes for MAKAUT Compiler Design (PCC-CS501) B.Tech 5th Semester.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../qa-styles.css">
+    <link rel="stylesheet" href="../../premium.css">
+    <link rel="stylesheet" href="../../site.css">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* ============ Q&A BLOCK STYLES ============ */
+        .qa-block {
+            border-radius: 12px;
+            padding: 18px 22px;
+            margin-bottom: 18px;
+            transition: box-shadow 0.2s;
+            background: #fff;
+        }
+        .qa-block:hover {
+            box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+        }
+        .qa-block[data-marks="1"] {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-left: 5px solid #22c55e;
+        }
+        .qa-block[data-marks="5"] {
+            background: #fffbeb;
+            border: 1px solid #fde68a;
+            border-left: 5px solid #f59e0b;
+        }
+        .qa-block[data-marks="15"] {
+            background: #faf5ff;
+            border: 1px solid #d8b4fe;
+            border-left: 5px solid #8b5cf6;
+        }
+        .qa-block .question {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            line-height: 1.5;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .qa-block[data-marks="1"] .question { color: #166534; }
+        .qa-block[data-marks="5"] .question { color: #92400e; }
+        .qa-block[data-marks="15"] .question { color: #5b21b6; }
+        .qa-block .question .marks-badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            vertical-align: middle;
+            letter-spacing: 0.03em;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .qa-block[data-marks="1"] .marks-badge { background: #22c55e; }
+        .qa-block[data-marks="5"] .marks-badge { background: #f59e0b; }
+        .qa-block[data-marks="15"] .marks-badge { background: #8b5cf6; }
+        .qa-block .answer {
+            font-size: 0.93rem;
+            line-height: 1.75;
+            color: #374151;
+        }
+        .qa-block .answer p { margin: 6px 0; }
+        .qa-block .answer ul, .qa-block .answer ol {
+            margin: 6px 0;
+            padding-left: 22px;
+        }
+        .qa-block .answer li { margin: 3px 0; }
+        .qa-block .answer code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(0,0,0,0.06);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.88em;
+            color: #1f2937;
+        }
+        .qa-block .answer strong {
+            color: #111827;
+        }
+        .qa-block .answer h4 {
+            margin: 12px 0 6px 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+        }
+        .qa-block .answer .formula-box {
+            background: #1f2937;
+            color: #f9fafb;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin: 10px 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            overflow-x: auto;
+            line-height: 1.6;
+        }
+        .qa-block .answer .key-point {
+            background: rgba(37,99,235,0.06);
+            border-left: 3px solid #2563eb;
+            padding: 10px 14px;
+            margin: 10px 0;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.9rem;
+        }
+        .qa-block .answer .exam-tip {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 8px;
+            padding: 10px 14px;
+            margin: 10px 0;
+            font-size: 0.88rem;
+            color: #7c2d12;
+        }
+        .qa-block .answer .exam-tip::before {
+            content: "Exam Tip: ";
+            font-weight: 700;
+            color: #c2410c;
+        }
+        .qa-block .answer .diagram-container {
+            text-align: center;
+            margin: 14px 0;
+        }
+        .qa-block .answer table.comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+            font-size: 0.88rem;
+        }
+        .qa-block .answer table.comparison-table th {
+            background: #2563eb;
+            color: #fff;
+            padding: 8px 10px;
+            text-align: left;
+            font-weight: 600;
+        }
+        .qa-block .answer table.comparison-table td {
+            padding: 7px 10px;
+            border-bottom: 1px solid #e5e7eb;
+            vertical-align: top;
+        }
+        .qa-block .answer table.comparison-table tr:nth-child(even) {
+            background: rgba(0,0,0,0.02);
+        }
+        /* ============ UNIT SECTION ============ */
+        .unit-section {
+            margin-bottom: 48px;
+        }
+        .unit-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 14px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        .unit-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            color: #fff;
+            flex-shrink: 0;
+        }
+        .unit-header h2 {
+            margin: 0;
+            font-size: 1.4rem;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .unit-header .unit-meta {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-left: auto;
+        }
+        .toc-container {
+            background: var(--card);
+            border-radius: 12px;
+            padding: 20px 24px;
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+        .toc-container h3 {
+            margin: 0 0 12px 0;
+            font-size: 1rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .toc-container ol {
+            margin: 0;
+            padding-left: 20px;
+            line-height: 1.9;
+            columns: 2;
+        }
+        .toc-container ol li a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.88rem;
+        }
+        .toc-container ol li a:hover {
+            color: var(--accent);
+        }
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .back-link:hover {
+            color: var(--accent);
+        }
+        @media (max-width: 768px) {
+            .toc-container ol { columns: 1; }
+        }
+    </style>
+</head>
+<body class="sheet">
+<main class="sheet">
+
+    <a class="back-link" href="compiler_index.html">&larr; Back to Compiler Design</a>
+
+    <header class="masthead">
+        <div class="masthead-text">
+            <p class="eyebrow">Semester 5 &middot; <span class="accent" style="color:#7c3aed">PCC-CS501</span></p>
+            <h1>Compiler Design — Q&amp;A Study Notes</h1>
+            <p class="standfirst">Comprehensive question-answer bank for MAKAUT B.Tech CSE 5th Semester. Covers all 9 units with 1-mark, 5-mark, and 15-mark questions.</p>
+            <p class="paper-meta"><span>9 Units</span><span>Q&amp;A Bank</span><span>Filter by Marks</span></p>
+        </div>
+    </header>
+
+    <div class="toc-container">
+        <h3>Table of Contents</h3>
+        <ol>
+            <li><a href="#unit-1">Unit 1: Introduction to Compiling</a></li>
+            <li><a href="#unit-2">Unit 2: Lexical Analysis</a></li>
+            <li><a href="#unit-3">Unit 3: Syntax Analysis</a></li>
+            <li><a href="#unit-4">Unit 4: Syntax Directed Translation</a></li>
+            <li><a href="#unit-5">Unit 5: Type Checking</a></li>
+            <li><a href="#unit-6">Unit 6: Run Time Environments</a></li>
+            <li><a href="#unit-7">Unit 7: Intermediate Code Generation</a></li>
+            <li><a href="#unit-8">Unit 8: Code Optimization</a></li>
+            <li><a href="#unit-9">Unit 9: Code Generation</a></li>
+        </ol>
+    </div>
+
+    <div class="unit-section" id="unit-1">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#2563eb">U1</span>
+            <h2>Unit 1: Introduction to Compiling</h2>
+            <span class="unit-meta">3 Lectures · 9 Questions</span>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a compiler? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>compiler</strong> is a program that translates source code written in a high-level language into an equivalent target program in machine language (object code) for a specific computer architecture. It performs <em>analysis</em> of the source and <em>synthesis</em> of the target.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an assembler? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>assembler</strong> translates assembly language programs into machine language. It is simpler than a compiler because assembly is closer to machine code. A compiler may invoke an assembler as one of its phases to produce the final object code.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an interpreter? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>interpreter</strong> directly executes source code line by line without producing an intermediate object file. It translates and executes each statement before moving to the next. Examples: Python (CPython), Ruby. Interpreters are slower than compilers but enable interactive debugging.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: List the main phases of a compiler. <span class="marks-badge">1M</span></div>
+            <div class="answer">
+                <p>The six phases are:</p>
+                <ol>
+                    <li><strong>Lexical Analysis</strong></li>
+                    <li><strong>Syntax Analysis</strong></li>
+                    <li><strong>Semantic Analysis</strong></li>
+                    <li><strong>Intermediate Code Generation</strong></li>
+                    <li><strong>Code Optimization</strong></li>
+                    <li><strong>Target Code Generation</strong></li>
+                </ol>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What are the "cousins" of a compiler? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>The cousins of a compiler are: <strong>Preprocessors</strong> (macro expansion, file inclusion), <strong>Assemblers</strong>, <strong>Linkers</strong> (combine object files), <strong>Loaders</strong> (load into memory), and <strong>Editors/Debuggers</strong> (IDE tools).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is source program analysis? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Source program analysis</strong> (the front-end) examines the source code to understand its structure and meaning. It includes lexical, syntactic, and semantic analysis. The output is an intermediate representation (IR) and a symbol table.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: Differentiate between analysis and synthesis phases. <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Analysis</strong> (front-end) breaks the source program into pieces and creates IR + symbol table. <strong>Synthesis</strong> (back-end) constructs the target program from the IR. Analysis is language-dependent; synthesis is machine-dependent.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a cross-compiler? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>cross-compiler</strong> runs on machine A (host) but generates machine code for machine B (target). Used in embedded systems where the target has limited resources.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is bootstrapping in compiler construction? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Bootstrapping</strong> is the technique of writing a compiler in its own language. It uses a series of stages where each stage uses a simpler compiler to compile a more advanced version, eventually producing a self-hosted compiler.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the various phases of a compiler with a brief description of each. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>A compiler has six major phases:</p>
+                <ol>
+                    <li><strong>Lexical Analysis (Scanner):</strong> Reads input characters and groups them into tokens (lexemes). Removes whitespace and comments. Uses regular expressions and finite automata. Output: stream of tokens.</li>
+                    <li><strong>Syntax Analysis (Parser):</strong> Groups tokens into grammatical phrases using context-free grammars. Builds a parse tree / syntax tree. Checks if the token sequence follows grammar rules. Output: parse tree.</li>
+                    <li><strong>Semantic Analysis:</strong> Checks the source program for semantic consistency. Performs type checking, ensures declarations are consistent. Uses attribute grammars. Output: Annotated syntax tree.</li>
+                    <li><strong>Intermediate Code Generation:</strong> Translates the annotated syntax tree into an intermediate representation (IR). Common forms: Three-Address Code (3AC). IR is independent of target machine.</li>
+                    <li><strong>Code Optimization:</strong> Improves the IR to produce faster/smaller code. Techniques: constant folding, dead code elimination, loop optimization. Local (basic block) or global (entire procedure).</li>
+                    <li><strong>Target Code Generation:</strong> Translates the optimized IR into the target machine language. Handles register allocation, instruction selection, and addressing modes.</li>
+                </ol>
+                <div class="exam-tip">Draw the 6-phase pipeline: Scanner → Parser → Semantic → IR Gen → Optimizer → Code Generator.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the cousins of a compiler with examples. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>Compilers work with several related tools called "cousins":</p>
+                <table class="comparison-table">
+                    <tr><th>Cousin</th><th>Function</th><th>Example</th></tr>
+                    <tr><td><strong>Preprocessor</strong></td><td>Handles directives: macro expansion, file inclusion (#include), conditional compilation</td><td>CPP for C/C++</td></tr>
+                    <tr><td><strong>Assembler</strong></td><td>Converts assembly code to machine code (object files)</td><td>as (Unix), MASM</td></tr>
+                    <tr><td><strong>Linker</strong></td><td>Combines multiple object files and libraries into a single executable</td><td>ld (Unix), link.exe</td></tr>
+                    <tr><td><strong>Loader</strong></td><td>Loads the executable into memory and starts execution</td><td>OS loader</td></tr>
+                    <tr><td><strong>Editor / Debugger</strong></td><td>IDE tools for writing, debugging programs</td><td>VS Code, GDB</td></tr>
+                </table>
+                <p>The compilation pipeline: <code>Source → Preprocessor → Compiler → Assembler → Linker → Loader → Execution</code></p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain all the phases of a compiler in detail. Differentiate between analysis and synthesis phases. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Analysis Phases (Front-End)</h4>
+                <p><strong>1. Lexical Analysis:</strong> Reads source character by character, groups into lexemes, produces tokens &lt;token-name, attribute-value&gt;. Removes whitespace and comments. Uses REs and finite automata.</p>
+                <p><strong>2. Syntax Analysis:</strong> Uses token stream to construct a parse tree. Checks if the source follows CFG rules. Reports syntax errors. Output: parse tree / AST.</p>
+                <p><strong>3. Semantic Analysis:</strong> Checks semantic consistency. Performs type checking, ensures identifiers are declared before use. Uses syntax-directed definitions (SDD). Output: Annotated syntax tree.</p>
+                <h4>B. Synthesis Phases (Back-End)</h4>
+                <p><strong>4. Intermediate Code Generation:</strong> Translates the annotated syntax tree into IR (e.g., Three-Address Code). IR is platform-independent.</p>
+                <p><strong>5. Code Optimization:</strong> Improves the IR to reduce execution time or space. Local optimization (within a basic block) and global optimization (across basic blocks).</p>
+                <p><strong>6. Target Code Generation:</strong> Translates optimized IR into target machine code. Handles register allocation and instruction selection.</p>
+                <h4>C. Analysis vs Synthesis</h4>
+                <table class="comparison-table">
+                    <tr><th>Aspect</th><th>Analysis Phase</th><th>Synthesis Phase</th></tr>
+                    <tr><td>Direction</td><td>Breaks down source</td><td>Builds up target</td></tr>
+                    <tr><td>Dependency</td><td>Language-dependent</td><td>Machine-dependent</td></tr>
+                    <tr><td>Output</td><td>IR + Symbol Table</td><td>Target machine code</td></tr>
+                    <tr><td>Phases</td><td>Lexical, Syntax, Semantic</td><td>IR Gen, Optimization, Code Gen</td></tr>
+                    <tr><td>Error checking</td><td>Detects source errors</td><td>Assumes IR is valid</td></tr>
+                </table>
+                <div class="diagram-container">
+                <div class="mermaid">graph LR
+    A["Source Program"] --> L["1. Lexical Analysis"]
+    L -->|"Tokens"| P["2. Syntax Analysis"]
+    P -->|"Parse Tree"| S["3. Semantic Analysis"]
+    S -->|"Annotated Tree"| I["4. Intermediate Code Gen"]
+    I -->|"3AC / IR"| O["5. Code Optimization"]
+    O -->|"Optimized IR"| C["6. Target Code Generation"]
+    C --> X["Target Program"]
+    ST[(Symbol Table)] -.-> L & P & S & I & O & C
+    style A fill:#dbeafe,stroke:#2563eb
+    style X fill:#dbeafe,stroke:#2563eb</div>
+                </div>
+                <div class="exam-tip">The 6-phase pipeline diagram is a favourite. Also note: Symbol Table and Error Handler are auxiliary components shared by all phases.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="unit-section" id="unit-2">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#7c3aed">U2</span>
+            <h2>Unit 2: Lexical Analysis</h2>
+            <span class="unit-meta">6 Lectures · 13 Questions</span>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a token? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>token</strong> is a pair (token-name, optional attribute-value). Token-name is an abstract symbol representing a kind of lexical unit; attribute-value points to the symbol table entry for the lexeme.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a pattern? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>pattern</strong> is a rule describing the set of lexemes that can represent a particular token. Often expressed as a regular expression.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a lexeme? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>lexeme</strong> is the actual sequence of characters in the source program that matches the pattern for a token. Example: For token <code>id</code>, lexemes could be <code>x</code>, <code>count</code>, <code>_sum</code>.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: Differentiate between lexeme and token. <span class="marks-badge">1M</span></div>
+            <div class="answer">
+                <table class="comparison-table">
+                    <tr><th>Lexeme</th><th>Token</th></tr>
+                    <tr><td>Actual character sequence</td><td>Abstract category</td></tr>
+                    <tr><td>Example: <code>count</code></td><td>Example: <code>identifier</code></td></tr>
+                    <tr><td>Found in source</td><td>Produced by scanner</td></tr>
+                </table>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: Name two input buffering schemes used in lexical analysis. <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>(i) <strong>One-buffer scheme</strong> — single buffer; lookahead character only. (ii) <strong>Two-buffer scheme (sentinel)</strong> — two halves concatenated with an <code>EOF</code> sentinel, allowing arbitrary lookahead.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: Define finite automata. <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>finite automaton (FA)</strong> is a 5-tuple (Σ, Q, δ, q₀, F) where Σ is input alphabet, Q is finite set of states, δ is transition function, q₀ is start state, and F ⊆ Q are accepting states.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an NFA? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>Non-deterministic Finite Automaton</strong> — a finite automaton where δ: Q × Σ → 2<sup>Q</sup> may return multiple next states (or none) for a given input. NFAs accept the same class of languages as DFAs (regular languages).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a DFA? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>Deterministic Finite Automaton</strong> — δ: Q × Σ → Q is a single-valued total function. No ε-transitions and no two transitions from the same state on the same symbol.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a regular expression? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>regular expression (RE)</strong> is a notation to describe a regular language. Built from: ε, ∅, symbols in Σ, and operators union (|), concatenation, Kleene closure (*).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is the role of a lexical analyzer? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>The lexical analyzer (scanner) reads source characters, groups them into lexemes, and produces tokens. It also strips comments/whitespace, tracks line numbers, and may store identifiers in the symbol table.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: Why separate lexical and syntax analysis? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>(1) <strong>Simplicity</strong> — Parser is cleaner without character-level detail. (2) <strong>Efficiency</strong> — Specialized buffering & I/O for tokens. (3) <strong>Portability</strong> — Lexer handles platform-specific characters; parser stays portable.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the role of the lexical analyzer in detail. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>The <strong>lexical analyzer</strong> is the first phase of a compiler. Its primary roles are:</p>
+                <ul>
+                    <li><strong>Tokenization:</strong> Read input characters and group them into lexemes, then produce tokens of the form <code>&lt;token-name, attribute&gt;</code>.</li>
+                    <li><strong>Skip whitespace &amp; comments:</strong> These have no meaning to later phases.</li>
+                    <li><strong>Correlate errors with line numbers:</strong> Track source positions for error reporting.</li>
+                    <li><strong>Symbol table interaction:</strong> For identifiers, install the lexeme into the symbol table; the token attribute points to that entry.</li>
+                    <li><strong>Lookahead:</strong> Decide between alternative patterns (e.g., <code>=</code> vs <code>==</code>) using one or two characters of lookahead.</li>
+                </ul>
+                <p><strong>Advantages of separating lexer from parser:</strong> Simpler design, better efficiency, portability, and the ability to use specialized tools (Lex/Flex).</p>
+                <div class="formula-box">position = position + 1; // move forward one char
+forward = buffer[position];  // peek next char</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Convert the regular expression (a|b)*abb to NFA using Thompson's construction. Then convert the NFA to DFA using subset construction. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>RE: (a|b)*abb</strong></p>
+                <p><strong>Step 1 — Thompson's NFA:</strong> Each sub-expression gets its own fragment:</p>
+                <ul>
+                    <li>For <code>a</code>: state A →a→ B</li>
+                    <li>For <code>b</code>: state C →b→ D</li>
+                    <li>For <code>a|b</code>: ε-branch from new start to A and C; ε-merge at new end.</li>
+                    <li>For <code>(a|b)*</code>: new start with ε to old start, ε from old end back to old start, ε from new start to new end, ε from old end to new end.</li>
+                    <li>For <code>abb</code>: chain three transitions on a, b, b.</li>
+                </ul>
+                <p><strong>Step 2 — Subset Construction (NFA → DFA):</strong></p>
+                <div class="formula-box">Start:  ε-closure(0) = {0,1,2,4,7}        → D0
+D0 on 'a' = ε-closure({3,8})  = {3,8,1,2,4,7,9}  → D1
+D0 on 'b' = ε-closure({5})    = {5,1,2,4,7,6}     → D2
+D1 on 'a' = ε-closure({3,8})  = D1
+D1 on 'b' = ε-closure({5,9})  = {5,9,1,2,4,7,6,10} → D3
+D1 on ...  ...
+D3 on 'b' = {10,1,2,4,7}      → D4 (accepting)</div>
+                <p><strong>Final DFA states:</strong> D0, D1, D2, D3, D4. D4 is the only accepting state.</p>
+                <div class="exam-tip">Always show: ε-closure of start, then for each new subset compute transitions on each input symbol.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the design of a Lex-based lexical analyzer generator. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Lex</strong> (or Flex) is a tool that generates a lexical analyzer from a specification file <code>.lex</code>. The workflow:</p>
+                <ol>
+                    <li><strong>Lex source file</strong> contains: <code>{ definitions %}{ rules %}{ user code }</code>.
+                        <ul>
+                            <li><strong>Definitions</strong>: variable declarations and named regular expressions.</li>
+                            <li><strong>Rules</strong>: pairs of <code>pattern { action }</code>. Patterns are REs; actions are C code.</li>
+                            <li><strong>User code</strong>: auxiliary functions copied to the output.</li>
+                        </ul>
+                    </li>
+                    <li><strong>Lex compiler</strong> reads the <code>.lex</code> file and produces <code>lex.yy.c</code> (a C program implementing the DFA).</li>
+                    <li><strong>C compiler</strong> compiles <code>lex.yy.c</code> with <code>-lfl</code> to produce the executable scanner.</li>
+                </ol>
+                <p><strong>Internally</strong>, Lex:</p>
+                <ol>
+                    <li>Builds an NFA from the patterns using Thompson's construction.</li>
+                    <li>Merges all NFAs into one combined NFA with a new start state.</li>
+                    <li>Converts NFA → DFA via subset construction.</li>
+                    <li>Minimizes the DFA (Hopcroft's algorithm).</li>
+                </ol>
+                <p><strong>Conflict resolution:</strong> When multiple patterns match, Lex uses the rule with the <em>longest match</em>, and on ties the rule <em>listed first</em>.</p>
+                <div class="exam-tip">Mention <code>yylex()</code>, <code>yylval</code>, <code>yytext</code>, <code>ECHO</code>, and <code>yywrap()</code>.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain the design of a Lexical Analyzer Generator (Lex). Discuss the role of RE → NFA → DFA conversion with a complete worked example. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Lex Architecture</h4>
+                <p><strong>Lex</strong> is a tool that automates the construction of a lexical analyzer. The user provides a specification file containing:</p>
+                <ul>
+                    <li><strong>Declarations</strong>: definitions, header inclusions, declarations of variables used in actions.</li>
+                    <li><strong>Translation rules</strong>: <code>P1  { A1 }</code> where <code>Pi</code> is a regular expression and <code>Ai</code> is a C action.</li>
+                    <li><strong>Auxiliary procedures</strong>: user-defined helper functions.</li>
+                </ul>
+                <p>Lex produces <code>lex.yy.c</code>, which contains a tabular representation of the DFA and a driver <code>yylex()</code> that runs the scanner. Compile with C compiler + <code>-ll</code> (or <code>-lfl</code>).</p>
+                <h4>B. Construction Pipeline</h4>
+                <div class="diagram-container">
+                <div class="mermaid">graph LR
+    A["Lex source .lex"] --> B["Lex Compiler"]
+    B --> C["lex.yy.c (C code)"]
+    C --> D["C Compiler + lfl"]
+    D --> E["a.out (Scanner)"]
+    B -. NFA Construction .-> B
+    B -. NFA → DFA .-> B
+    B -. DFA Minimization .-> B</div>
+                </div>
+                <h4>C. Worked Example — RE to NFA (Thompson's Construction)</h4>
+                <p>Consider RE: <code>(a|b)*abb</code></p>
+                <ol>
+                    <li>Build NFA for <code>a</code>: two states with one transition.</li>
+                    <li>Build NFA for <code>b</code>: similar.</li>
+                    <li>Build NFA for <code>a|b</code>: ε-branching.</li>
+                    <li>Build NFA for <code>(a|b)*</code>: ε-loop.</li>
+                    <li>Build NFA for <code>abb</code>: chain three transitions.</li>
+                    <li>Concatenate to form the full NFA (start state 0, final state with double circle).</li>
+                </ol>
+                <h4>D. NFA to DFA (Subset Construction)</h4>
+                <p><strong>Algorithm:</strong> Start with ε-closure(start). For each subset S and each input symbol a, compute Dtran(S, a) = ε-closure(move(S, a)). Add new subset until no more.</p>
+                <div class="formula-box">Dstates = { ε-closure(0) }
+For each subset S in Dstates, for each symbol a:
+    T = ε-closure(move(S, a))
+    if T not in Dstates: add T
+    Dtran[S, a] = T</div>
+                <h4>E. Worked DFA Construction</h4>
+                <div class="formula-box">D0 = ε-cl(0) = {0,1,2,4,7}
+D0 --a--> D1 = {1,2,3,4,7,8,9}
+D0 --b--> D2 = {1,2,4,5,6,7}
+D1 --a--> D1
+D1 --b--> D3 = {1,2,4,5,6,7,9,10}
+D2 --b--> D2
+D2 --a--> D1
+D3 --b--> D4 = {1,2,4,5,6,7,10}   ← ACCEPTING
+D3 --a--> D1</div>
+                <p><strong>DFA Minimization (Hopcroft):</strong> Partition states into accepting (D4) and non-accepting (D0, D1, D2, D3). Split groups until all members behave identically on every input.</p>
+                <h4>F. Lex Action Execution</h4>
+                <p>The driver <code>yylex()</code> simulates the DFA on the input buffer. When no further transition exists, the current state determines the matched token. The longest match wins; on ties, the rule listed first in <code>.lex</code> wins. <code>yytext</code> holds the lexeme and <code>yyleng</code> its length.</p>
+                <div class="exam-tip">Always present: RE → Thompson's NFA → subset-construction DFA → minimized DFA. Note that Lex combines all patterns into one combined NFA before DFA conversion.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_3 -->
+    <div class="unit-section" id="unit-3">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#059669">U3</span>
+            <h2>Unit 3: Syntax Analysis (Parsing)</h2>
+            <span class="unit-meta">6 Lectures · 15 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a context-free grammar (CFG)? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>CFG</strong> is a 4-tuple G = (V, T, P, S) where V = set of variables, T = set of terminals, P = set of productions A → α, S = start symbol. CFGs generate context-free languages.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: Define left-most and right-most derivations. <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Left-most derivation:</strong> At each step, expand the leftmost variable. <strong>Right-most derivation:</strong> At each step, expand the rightmost variable. Every left-most derivation corresponds to a pre-order traversal of the parse tree.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an LL(1) parser? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>LL(1) parser</strong> is a top-down parser that reads Left-to-right, produces a Left-most derivation, using 1 token of lookahead. It uses a parsing table constructed from FIRST and FOLLOW sets.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an LR parser? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>LR parser</strong> is a bottom-up parser that reads Left-to-right, produces a Right-most derivation (in reverse). Variants: LR(0), SLR(1), CLR(1), LALR(1).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is FIRST(α) for a string α? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>FIRST(α)</strong> is the set of terminals that can begin strings derived from α. If α can derive ε, then ε ∈ FIRST(α).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is FOLLOW(A) for a non-terminal A? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>FOLLOW(A)</strong> is the set of terminals that can appear immediately to the right of A in some sentential form. If A can be the rightmost symbol, $ ∈ FOLLOW(A).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a parse tree? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>parse tree</strong> (concrete syntax tree) is an ordered tree where interior nodes are grammar variables, leaves are terminals, and each interior node's children correspond to the RHS of a production applied at that node.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is left recursion? Why is it a problem for top-down parsers? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Left recursion:</strong> A production like A → Aα | β. For top-down parsers it causes infinite recursion because the parser keeps expanding A without consuming input. Eliminate by rewriting: A → βA', A' → αA' | ε.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is backtracking in top-down parsing? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Backtracking</strong> means when one production fails, the parser resets input and tries another alternative. It is inefficient; LL(1) parsers avoid backtracking by using 1-symbol lookahead and parsing tables.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is the handle of a right-sentential form? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>handle</strong> is a production A → β whose right-hand side β appears as a substring in a right-sentential form, and replacing β by A is one step in the right-most derivation. Bottom-up parsers reduce handles.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an LR(0) item? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>LR(0) item</strong> is a production with a dot at some position: A → α·β. Items represent how much of a production has been recognized so far. Sets of items form the states of an LR parser.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the construction of an LL(1) parsing table. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>To construct an <strong>LL(1) parsing table</strong> for grammar G:</p>
+                <ol>
+                    <li><strong>Eliminate left recursion</strong> and <strong>left-factor</strong> the grammar.</li>
+                    <li>Compute <strong>FIRST(α)</strong> for every RHS α of productions.</li>
+                    <li>Compute <strong>FOLLOW(A)</strong> for every non-terminal A.</li>
+                    <li>For each production A → α:<br>
+                        For each terminal a ∈ FIRST(α), set Table[A, a] = A → α.<br>
+                        If ε ∈ FIRST(α), for each b ∈ FOLLOW(A), set Table[A, b] = A → α.<br>
+                        If ε ∈ FIRST(α) and $ ∈ FOLLOW(A), set Table[A, $] = A → α.</li>
+                </ol>
+                <p>The grammar is <strong>LL(1)</strong> if no table entry has more than one production. The parser then uses the table to predict which production to apply based on the top-of-stack non-terminal and the next input token.</p>
+                <div class="exam-tip">Key condition: FIRST(αi) ∩ FIRST(αj) = ∅ for all i≠j, and if ε∈FIRST(αi) then FIRST(αj) ∩ FOLLOW(A) = ∅.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Differentiate between SLR(1), CLR(1) and LALR(1) parsers. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <table class="comparison-table">
+                    <tr><th>Aspect</th><th>SLR(1)</th><th>CLR(1)</th><th>LALR(1)</th></tr>
+                    <tr><td>Items</td><td>LR(0)</td><td>LR(1)</td><td>Merged LR(1)</td></tr>
+                    <tr><td>Lookahead</td><td>FOLLOW sets</td><td>Full 1-symbol lookahead in items</td><td>LR(1) cores merged</td></tr>
+                    <tr><td>Table size</td><td>Smallest</td><td>Largest</td><td>Medium</td></tr>
+                    <tr><td>Power</td><td>Least powerful</td><td>Most powerful</td><td>Between SLR &amp; CLR</td></tr>
+                    <tr><td>Reduce actions</td><td>On FOLLOW(A)</td><td>On specific lookahead</td><td>On merged lookahead</td></tr>
+                    <tr><td>Conflict handling</td><td>May report spurious conflicts</td><td>Most precise</td><td>May introduce conflicts not in CLR</td></tr>
+                </table>
+                <p><strong>Summary:</strong> CLR(1) is the most powerful. LALR(1) merges CLR(1) states with identical cores to reduce table size. SLR(1) uses FOLLOW(A) for reduce actions, which is less precise than lookahead sets.</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain the construction of LR(0) and SLR(1) parsing tables with a complete worked example. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. LR(0) Items and Augmented Grammar</h4>
+                <p>Given grammar G, augment it with S' → S. An <strong>LR(0) item</strong> is A → α·β (dot marks how much is recognized). A set of items forms a parser state. The <strong>closure</strong> of an item set adds all productions for non-terminals after the dot.</p>
+                <h4>B. Construction Steps for LR(0)</h4>
+                <ol>
+                    <li><strong>Augment</strong> G: add S' → S.</li>
+                    <li><strong>Construct canonical collection</strong> of LR(0) items using goto(I, X).</li>
+                    <li><strong>Create ACTION and GOTO</strong> tables from the collection.</li>
+                </ol>
+                <div class="formula-box">For item set I and symbol X:
+closure(I) = I ∪ { B → ·γ | A → α·Bβ ∈ I }
+goto(I, X) = closure( { A → αX·β | A → α·Xβ ∈ I } )</div>
+                <h4>C. Worked Example</h4>
+                <p>Grammar: E → E+T | T, T → T*F | F, F → (E) | id</p>
+                <p>After augmentation: E' → E</p>
+                <p>Key item sets:</p>
+                <div class="formula-box">I0: E'→·E, E→·E+T, E→·T, T→·T*F, T→·F, F→·(E), F→·id
+I1: E'→E·       → accepting (reduce)
+I2: E→E·+T      → shift on '+'
+I3: E→T·        → reduce E→T
+I4: T→T·*F      → shift on '*'
+I5: T→F·        → reduce T→F
+I6: F→(·E)      → goto on '('
+I7: F→id·       → reduce F→id
+I8: E→E+T·      → reduce E→E+T
+I9: T→T*·F      → goto on 'F'
+I10: F→(E·)     → shift on ')'
+I11: F→(E)·    → reduce F→(E)</div>
+                <p><strong>LR(0) ACTION table:</strong> States on rows, terminals on columns. For each item A → α·aβ, set ACTION[s, a] = shift t where t = goto(s, a). For A → α·, set reduce A → α. For E' → E· in final state, set accept.</p>
+                <h4>D. SLR(1) Improvement</h4>
+                <p>SLR(1) uses FOLLOW sets: for item A → α·, instead of reducing on every terminal, reduce only on terminals in FOLLOW(A). This eliminates some spurious conflicts present in LR(0).</p>
+                <h4>E. Conflict Detection</h4>
+                <p>A <strong>shift-reduce conflict</strong>: same state has both a shift on terminal a and a reduce by A → α on a. A <strong>reduce-reduce conflict</strong>: two different reductions in the same state for the same lookahead. SLR(1) still reports conflicts for grammars that CLR(1) handles (e.g., the dangling-else grammar without modification).</p>
+                <div class="exam-tip">Draw the DFA of LR(0) item sets. Show I0 through I11. Then show the ACTION/GOTO tables. Explain where SLR(1) differs from LR(0) in reduce actions.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain top-down parsing. Construct the LL(1) parsing table for a given grammar and trace the parsing of an input string. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Top-Down Parsing</h4>
+                <p><strong>Top-down parsing</strong> attempts to derive the input string from the start symbol S by expanding non-terminals left-to-right. It constructs the parse tree from root to leaves. A <strong>recursive descent parser</strong> uses a separate procedure per non-terminal. <strong>Predictive (LL(1))</strong> parsing uses a parsing table with 1-token lookahead to choose productions without backtracking.</p>
+                <h4>B. Elimination of Left Recursion and Left Factoring</h4>
+                <p>For LL(1), the grammar must have no left recursion and must be left-factored. <strong>Immediate left recursion elimination:</strong></p>
+                <div class="formula-box">A → Aα₁ | Aα₂ | … | Aβ | γ
+becomes:
+A → γA'
+A' → α₁A' | α₂A' | … | αₖA' | ε</div>
+                <p><strong>Left factoring:</strong> When two productions share a common prefix α:</p>
+                <div class="formula-box">A → αβ₁ | αβ₂ | … | αβₖ | γ
+becomes:
+A → αA' | γ
+A' → β₁ | β₂ | … | βₖ</div>
+                <h4>C. LL(1) Parsing Table Construction</h4>
+                <p>Given grammar G (after preprocessing):</p>
+                <ol>
+                    <li>Compute FIRST(α) for each RHS α.</li>
+                    <li>Compute FOLLOW(A) for each non-terminal A.</li>
+                    <li>For each production A → α: for each a ∈ FIRST(α), set M[A, a] = A → α. If ε ∈ FIRST(α), for each b ∈ FOLLOW(A), set M[A, b] = A → α.</li>
+                </ol>
+                <h4>D. Worked Example</h4>
+                <p>Grammar: E → T E', E' → + T E' | ε, T → id</p>
+                <p>FIRST(E) = {id}, FIRST(E') = {+, ε}, FIRST(T) = {id}</p>
+                <p>FOLLOW(E) = {$}, FOLLOW(E') = {$}, FOLLOW(T) = {+, $}</p>
+                <div class="formula-box">Parsing Table:
+         id        +          $
+E  → T E'    -           -
+E' → -       → + T E'   → ε
+T  → id      -           -</div>
+                <h4>E. Trace for input "id + id $"</h4>
+                <div class="formula-box">Stack           Input           Action
+E$             id+id$          M[E,id]=E→TE'
+TE'$           id+id$          M[T,id]=T→id
+idE'$          id+id$          match id
+E'$            +id$           M[E',+]=E'→+TE'
++TE'$          +id$           match +
+TE'$           id$            M[T,id]=T→id
+idE'$          id$            match id
+E'$            $              M[E',$]=E'→ε
+$              $              accept</div>
+                <div class="exam-tip">Always show the parsing table and a step-by-step stack trace. Mention that LL(1) accepts a string iff the stack empties exactly when input ends.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_4 -->
+    <div class="unit-section" id="unit-4">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#059669">U4</span>
+            <h2>Unit 4: Syntax Directed Translation</h2>
+            <span class="unit-meta">4 Lectures · 10 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a syntax-directed definition (SDD)? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>SDD</strong> is a CFG with semantic rules (attributes) attached to grammar symbols. It specifies how to compute attribute values at each node of the parse tree.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a synthesized attribute? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>synthesized attribute</strong> is computed from the attribute values of children in the parse tree. Value flows bottom-up (children → parent). E.g., the value of an expression.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an inherited attribute? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>inherited attribute</strong> is computed from parent and/or siblings (not children). Value flows top-down or left-to-right. E.g., type of a variable propagated to its usage.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an S-attributed definition? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>S-attributed</strong> SDD uses only synthesized attributes. It can be evaluated during a bottom-up (LR) parse using a post-order traversal of the parse tree.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an L-attributed definition? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>L-attributed</strong> SDD allows inherited attributes but restricts them: inherited attributes of a symbol in a production can only depend on attributes to the left. L-attributed SDDs can be evaluated during a top-down (LL) parse.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain S-attributed and L-attributed definitions with examples. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>S-attributed Definitions:</strong> Use only synthesized attributes. Evaluated in a bottom-up traversal (post-order). All semantic actions are placed at the right end of the production.</p>
+                <div class="formula-box">Example (expression value):
+E → E₁ + T  { E.val = E₁.val + T.val }
+E → T        { E.val = T.val }
+T → num      { T.val = num.lexval }</div>
+                <p><strong>L-attributed Definitions:</strong> Allow inherited attributes with the restriction that inherited attributes of symbol Xᵢ can only depend on: (1) attributes of symbols to the left (X₁…Xᵢ₋₁), (2) the inherited attributes of the parent. Can be evaluated during a top-down parse.</p>
+                <div class="formula-box">Example (type checking in declarations):
+D → T id  { id.inhtype = T.type }
+T → int    { T.type = integer }
+T → real   { T.type = real }</div>
+                <p>The inherited attribute <code>inhtype</code> flows from the parent non-terminal T to the child id. This is valid L-attributed because id's inherited attribute depends only on T, which is to its left.</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: What is a syntax directed translation scheme (SDTS)? Give an example. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>A <strong>Syntax Directed Translation Scheme (SDTS)</strong> is an SDD where semantic actions are embedded within the productions of the grammar. The actions are fragments of code to be executed when the production is used during parsing.</p>
+                <p>The order of semantic actions must respect attribute dependencies:</p>
+                <ul>
+                    <li>In a <strong>bottom-up parse</strong>, actions are placed at the right end (S-attributed).</li>
+                    <li>In a <strong>top-down parse</strong>, actions are placed to compute inherited attributes before their use (L-attributed).</li>
+                </ul>
+                <div class="formula-box">Example — generating 3AC from expressions:
+E → E₁ + T   { E.place = newtemp(); emit(E.place, '=', E₁.place, '+', T.place) }
+E → T         { E.place = T.place }
+T → T₁ * F   { T.place = newtemp(); emit(T.place, '=', T₁.place, '*', F.place) }
+T → F         { T.place = F.place }
+F → ( E )    { F.place = E.place }
+F → num       { F.place = num.place }</div>
+                <p>Each production's semantic action generates a Three-Address Code instruction. The function <code>newtemp()</code> allocates a new temporary variable.</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain bottom-up evaluation of S-attributed definitions and top-down evaluation of L-attributed definitions. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Bottom-Up Evaluation of S-Attributed SDD</h4>
+                <p>S-attributed definitions have only synthesized attributes. During a bottom-up (LR) parse, a parse tree is implicitly built. When a reduction A → α is performed, the semantic action fires, computing A's synthesized attributes from the attribute values already stored in the stack records for symbols in α.</p>
+                <p><strong>Implementation via the parser stack:</strong> Each stack entry holds a record with the grammar symbol and its synthesized attributes. On reduction A → α, pop |α| records, evaluate the semantic action using those values, and push a new record for A with its computed attributes.</p>
+                <div class="formula-box">Stack entry format: (symbol, {attr₁: val₁, attr₂: val₂, …})
+On reduction by A → B C:
+  pop B_rec, pop C_rec
+  A_rec.synth_attr = f(B_rec.synth_attr, C_rec.synth_attr)
+  push A_rec</div>
+                <h4>B. Top-Down Evaluation of L-Attributed SDD</h4>
+                <p>L-attributed definitions allow inherited attributes. During a top-down (LL) parse, inherited attributes are passed down before expanding a non-terminal. For a production A → X₁ X₂ … Xₙ:</p>
+                <ul>
+                    <li>Before expanding X₁: compute inherited attributes of X₁ from A's inherited attributes.</li>
+                    <li>Before expanding Xᵢ (i > 1): compute inherited attributes of Xᵢ from A's inherited attributes and the <em>synthesized</em> attributes of X₁…Xᵢ₋₁.</li>
+                    <li>Synthesized attributes of A are computed after all children are expanded.</li>
+                </ul>
+                <div class="formula-box">Example:
+D → T id
+   { id.inh = T.type }   ← inherited attr passed left-to-right
+
+During D → T id:
+  Step 1: Expand T, compute T.type (synthesized)
+  Step 2: Before expanding id, set id.inh = T.type</div>
+                <h4>C. Key Differences</h4>
+                <table class="comparison-table">
+                    <tr><th>Feature</th><th>S-Attributed (Bottom-Up)</th><th>L-Attributed (Top-Down)</th></tr>
+                    <tr><td>Attribute types</td><td>Only synthesized</td><td>Synthesized + inherited (restricted)</td></tr>
+                    <tr><td>Parse direction</td><td>Bottom-up (LR)</td><td>Top-down (LL)</td></tr>
+                    <tr><td>Evaluation order</td><td>Post-order (children first)</td><td>Pre-order / left-to-right</td></tr>
+                    <tr><td>Implementation</td><td>Stack records in LR parser</td><td>Pass parameters in recursive descent</td></tr>
+                    <tr><td>Flexibility</td><td>Less flexible</td><td>More flexible (inheritance)</td></tr>
+                </table>
+                <div class="exam-tip">S-attributed = LR / bottom-up. L-attributed = LL / top-down. L-attributed is a superset of S-attributed. L-attributed is the class of SDDs that can be evaluated in a single left-to-right pass.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_5 -->
+    <div class="unit-section" id="unit-5">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#059669">U5</span>
+            <h2>Unit 5: Type Checking</h2>
+            <span class="unit-meta">3 Lectures · 8 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is type checking in a compiler? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Type checking</strong> verifies that the operands of an operator are of compatible types. It is performed during the semantic analysis phase, typically by traversing the syntax tree and applying type rules.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a type expression? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>type expression</strong> is a formula that denotes a type. Basic types (int, real, char) are atomic. Composite types are formed using type constructors: array, record, function, pointer.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is type coercion? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Type coercion</strong> is the implicit conversion of one type to another by the compiler when types in an expression don't match but are compatible (e.g., int → float in mixed-mode arithmetic).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a type environment? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>type environment</strong> (or type map) is a function mapping identifiers to their types. It is extended during declaration processing and queried during expression type checking.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain type equivalence — name equivalence vs structural equivalence. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Type Equivalence</strong> determines whether two type expressions denote the same type:</p>
+                <ul>
+                    <li><strong>Name equivalence:</strong> Two types are equivalent if they have the same name (from the same declaration). Simple and safe. Used by languages like Pascal.</li>
+                    <li><strong>Structural equivalence:</strong> Two types are equivalent if they have the same structure (same base type, same number of fields with equivalent types). Used by languages like C (with typedef, it gets complicated).</li>
+                </ul>
+                <p><strong>Example:</strong> In C, <code>typedef int Age;</code> — <code>int</code> and <code>Age</code> may or may not be equivalent depending on the language's rules. Ada uses name equivalence strictly.</p>
+                <div class="exam-tip">Structural equivalence can be expensive (recursive comparison). Name equivalence is O(1) but less flexible for typedefs.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain type conversion rules and their implementation in a compiler. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Type Conversion</strong> occurs when operands in an expression have different but compatible types. There are two forms:</p>
+                <ul>
+                    <li><strong>Widening (promotion):</strong> Converting a narrower type to a wider one (e.g., short → int, int → float). No information loss.</li>
+                    <li><strong>Narrowing:</strong> Converting a wider type to a narrower one (e.g., float → int). May lose information.</li>
+                </ul>
+                <p><strong>Implementation:</strong> The type checker applies conversion rules during traversal of the AST. For example, in C, integer promotion happens before arithmetic: <code>char + int</code> promotes char to int. In mixed-mode <code>int + float</code>, int is widened to float.</p>
+                <div class="formula-box">Type rules (inference rules):
+E → E₁ + E₂   type(E) = type(E₁) + type(E₂)
+If type(E₁) ≠ type(E₂): apply coercion
+  If compatible: widen narrower type
+  Else: type error</div>
+                <p>The semantic action inserts an explicit conversion node (e.g., <code>float(i)</code>) in the IR when widening is needed.</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain the type checking process in detail, including type expressions, type environments, and polymorphic functions. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Type Expressions</h4>
+                <p>A <strong>type expression</strong> describes a type. Basic types are atomic. Composite types use constructors:</p>
+                <ul>
+                    <li><strong>Array:</strong> array(type, index-range), e.g., array(int, 1..10)</li>
+                    <li><strong>Record/Struct:</strong> record(f₁:t₁, f₂:t₂, …)</li>
+                    <li><strong>Function:</strong> function(param-types) → return-type</li>
+                    <li><strong>Pointer:</strong> pointer to type</li>
+                    <li><strong>Union/Enum:</strong> sum of alternatives</li>
+                </ul>
+                <h4>B. Type Environments</h4>
+                <p>A <strong>type environment</strong> T maps identifiers to type expressions. Initially empty. During declaration processing, T is extended: T(x) = type(x). During expression checking, T is consulted for identifier types.</p>
+                <h4>C. Type Checking Rules (Inference Rules)</h4>
+                <p>For each expression form, a typing rule specifies how to check and what type to assign:</p>
+                <div class="formula-box">E → E₁ + E₂:
+  if type(E₁) = int and type(E₂) = int → type(E) = int
+  if type(E₁) = real and type(E₂) = real → type(E) = real
+  if compatible (one int, one real) → type(E) = real, insert conversion
+  else → TYPE ERROR</div>
+                <h4>D. Polymorphic Functions</h4>
+                <p><strong>Polymorphism</strong> allows a function to operate on arguments of multiple types:</p>
+                <ul>
+                    <li><strong>Parametric polymorphism</strong> (generics): a function has a type parameter. E.g., <code>length(list&lt;T&gt;)</code> works for any T.</li>
+                    <li><strong>Overloading</strong>: multiple functions with same name but different parameter types. Resolved at compile time.</li>
+                    <li><strong>Coercion polymorphism</strong>: implicit type conversions make a function appear polymorphic.</li>
+                </ul>
+                <p><strong>Implementation:</strong> The type checker generates a type-scheme for each polymorphic function. When the function is called, the compiler instantiates the type-scheme with actual types (Hindley-Milner type inference in ML/Haskell).</p>
+                <h4>E. Overloading Resolution</h4>
+                <p>When multiple versions of a function exist, the compiler selects the most specific matching type. Ambiguity (no unique best match) is a compile-time error.</p>
+                <div class="exam-tip">Key exam points: type environment as a function, inference rules format, three kinds of polymorphism, and how type checking is integrated into the semantic analysis phase via tree traversal.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_6 -->
+    <div class="unit-section" id="unit-6">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#059669">U6</span>
+            <h2>Unit 6: Run Time Environments</h2>
+            <span class="unit-meta">4 Lectures · 9 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an activation record (AR)? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>activation record (AR)</strong> (or stack frame) is a block of memory allocated on the call stack for each function invocation. It contains: parameters, return address, return value, control link, access link, and local variables.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a control link in an activation record? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>control link</strong> (dynamic link) points to the activation record of the caller. It allows the runtime to restore the caller's AR when the callee returns.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an access link in an activation record? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>access link</strong> (static link) points to the AR of the lexically enclosing scope. Used for accessing non-local variables in nested/non-local scopes (block-structured languages).</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is the display data structure? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>display</strong> is an array of pointers to activation records, one per nesting depth. <code>display[d]</code> points to the AR of the innermost active procedure at depth d. Allows O(1) access to non-local variables.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is variable-length data in an AR? How is it handled? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Variable-length data</strong> (sized arrays, dynamic locals) is placed above the fixed part of the AR. A pointer to the top (SP) is kept. The compiler generates code to access them via offsets from this pointer.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the organization of an activation record with a diagram. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>An <strong>activation record</strong> is organized as follows (on the runtime stack, growing downward):</p>
+                <div class="formula-box">High Addresses
+┌──────────────────────┐
+│ Actual Parameters    │
+│ Return Value         │
+│ Return Address       │
+│ Saved Registers      │
+│ Control Link (dyn)   │
+│ Access Link (static) │
+│ Local Variables      │
+│ Temporaries          │
+│ Variable-Length Data │ ← SP
+└──────────────────────┘
+Low Addresses</div>
+                <p><strong>Fields explained:</strong></p>
+                <ul>
+                    <li><strong>Actual Parameters:</strong> Arguments passed by caller (above the AR boundary).</li>
+                    <li><strong>Return Value:</strong> Space for the function's return value.</li>
+                    <li><strong>Return Address:</strong> Where to resume execution in the caller.</li>
+                    <li><strong>Saved Registers:</strong> Callee-saved registers pushed before use.</li>
+                    <li><strong>Control Link:</strong> Pointer to caller's AR (for stack unwinding).</li>
+                    <li><strong>Access Link:</strong> Pointer to the lexically enclosing AR (for nested scopes).</li>
+                    <li><strong>Local Variables:</strong> Fixed-size locals, addressed by offset from FP.</li>
+                    <li><strong>Temporaries:</strong> Intermediate results from expression evaluation.</li>
+                    <li><strong>Variable-Length Data:</strong> Dynamically sized arrays.</li>
+                </ul>
+                <p><strong>Access:</strong> A <strong>frame pointer (FP)</strong> points to the middle of the AR. Offsets to local variables are computed from FP. The <strong>stack pointer (SP)</strong> points to the top.</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain static vs dynamic scoping. Describe how access links and displays are used for non-local variable access. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Static vs Dynamic Scoping</h4>
+                <p><strong>Static (lexical) scoping:</strong> The scope of a variable is determined at compile time by the program's textual structure. A non-local variable reference is resolved to the lexically enclosing declaration.</p>
+                <p><strong>Dynamic scoping:</strong> The scope of a variable is determined at runtime by the call chain. A non-local variable reference is resolved to the most recent activation of a procedure that declared the variable.</p>
+                <div class="formula-box">Example:
+int x = 10;
+void f() { print(x); }
+void g() { int x = 20; f(); }
+Static: f() prints 10 (f's enclosing scope declares x=10)
+Dynamic: f() prints 20 (g's activation has x=20, and g called f)</div>
+                <h4>B. Access Links (Static Links)</h4>
+                <p>In a block-structured language with static scoping, each AR contains an <strong>access link</strong> pointing to the AR of the lexically enclosing procedure. To access a non-local variable at nesting depth d, the compiler knows the nesting depth of the reference and follows d access links.</p>
+                <p><strong>Cost:</strong> Accessing a variable at depth difference k requires following k access links — O(k) time.</p>
+                <h4>C. Display Data Structure</h4>
+                <p>A <strong>display</strong> is an array D[0..max_depth] where D[i] always points to the AR of the innermost active procedure at nesting depth i. When a procedure at depth d is called, D[d] is saved and replaced by the new AR pointer. On return, D[d] is restored.</p>
+                <p><strong>Cost:</strong> O(1) access to any non-local variable regardless of nesting depth. The trade-off is O(1) overhead per call/return for saving/restoring the display entry.</p>
+                <h4>D. Comparison</h4>
+                <table class="comparison-table">
+                    <tr><th>Feature</th><th>Access Links</th><th>Display</th></tr>
+                    <tr><td>Access time</td><td>O(k) — k = depth diff</td><td>O(1)</td></tr>
+                    <tr><td>Space per AR</td><td>1 pointer</td><td>No extra per-AR space</td></tr>
+                    <tr><td>Global array size</td><td>None</td><td>max_depth entries</td></tr>
+                    <tr><td>Call/return overhead</td><td>O(1)</td><td>O(1) save/restore</td></tr>
+                    <tr><td>Used in</td><td>Pascal, early Algol</td><td>Algol 60, optimized Pascal</td></tr>
+                </table>
+                <div class="exam-tip">Most WBUT questions on this topic ask for a diagram of the AR with both links labeled, or a comparison table of static vs dynamic scoping. Be prepared to trace execution for nested procedure calls.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_7 -->
+    <div class="unit-section" id="unit-7">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#059669">U7</span>
+            <h2>Unit 7: Intermediate Code Generation</h2>
+            <span class="unit-meta">4 Lectures · 10 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is Three-Address Code (TAC)? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Three-Address Code (TAC)</strong> is an intermediate representation where each instruction performs at most one operation and has at most three addresses (operands). E.g., <code>x = y + z</code>. It resembles assembly but is machine-independent.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a quadruple (quad)? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>quadruple</strong> is a 4-tuple (op, arg₁, arg₂, result) representing a 3AC instruction. For unary/branching ops, unused fields are empty. Quads are easy to generate and optimize.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a triple? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>triple</strong> is a 3-tuple (op, arg₁, arg₂) where arguments refer to instruction positions (pointers) instead of temporary names. Useful when instruction ordering changes during optimization.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is an indirect triple? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>An <strong>indirect triple</strong> uses a separate list of pointers to triples. It avoids updating pointers when triples are reordered — only the pointer list needs updating.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is the purpose of backpatching? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Backpatching</strong> is a technique to handle forward jumps in boolean code generation. When the target address of a jump is unknown, a placeholder is left. A list of pending jumps is maintained and filled in when the target label is generated.</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Generate Three-Address Code for the expression: a = (b + c) * (d - e) + f * g. Show quads and triples. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Source:</strong> a = (b + c) * (d - e) + f * g</p>
+                <p><strong>Step 1 — Decompose into TAC:</strong></p>
+                <div class="formula-box">t1 = b + c
+t2 = d - e
+t3 = t1 * t2
+t4 = f * g
+t5 = t3 + t4
+a  = t5</div>
+                <p><strong>Step 2 — Quadruples:</strong></p>
+                <div class="formula-box">(+, b, c, t1)
+(-, d, e, t2)
+(*, t1, t2, t3)
+(*, f, g, t4)
+(+, t3, t4, t5)
+(=, t5, -, a)</div>
+                <p><strong>Step 3 — Triples (instruction positions as references):</strong></p>
+                <div class="formula-box">(0): (+, b, c)
+(1): (-, d, e)
+(2): (*, 0, 1)
+(3): (*, f, g)
+(4): (+, 2, 3)
+(5): (a, =, 4)</div>
+                <p>In triples, <code>t3</code> and <code>t5</code> are replaced by instruction indices (2 and 4 respectively).</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain backpatching with an example of boolean code generation for if and if-else statements. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Backpatching</strong> is used when generating code for boolean expressions and control-flow statements where jump targets are not yet known.</p>
+                <p><strong>Mechanism:</strong> Maintain a <strong>list</strong> of quadruple indices for each pending jump. When the target address becomes known, backpatch all pending jumps to that address.</p>
+                <div class="formula-box">makelist(i)      = [i]
+merge(p1,p2)     = p1 ∪ p2
+backpatch(p, m)  = fill quad[p].result = m for each p ∈ pending list</div>
+                <p><strong>Example — if (B) S:</strong></p>
+                <div class="formula-box">gen('if B.goto -')        → quad index i, pending list B.truelist = [i]
+backpatch(B.truelist, nextquad)
+gen S.code
+→ nextquad points here</div>
+                <p><strong>Example — if (B) S₁ else S₂:</strong></p>
+                <div class="formula-box">gen('if B.goto -')          → i, B.truelist
+backpatch(B.truelist, nextquad) → jump to S₁
+gen S₁.code
+gen('goto -')              → j, S₁.nextlist
+backpatch(S₁.nextlist, nextquad) → after S₁
+gen S₂.code
+backpatch(B.falselist, S₂.address)</div>
+                <p>The truelist of B is patched to the start of S₁; the falselist to the start of S₂. After S₁, a goto skips S₂.</p>
+                <div class="exam-tip">Always use makelist, merge, and backpatch in your answer. Draw the quad indices showing where each patch occurs.</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain in detail: (i) Three-address code and its representations (quads, triples, indirect triples), and (ii) Translation of boolean expressions and control flow statements using backpatching. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Three-Address Code (TAC)</h4>
+                <p><strong>Three-Address Code</strong> is the most common IR. Each instruction has at most three operands and performs one operation. It is the natural output of syntax-directed translation.</p>
+                <p><strong>Types of TAC instructions:</strong></p>
+                <ul>
+                    <li>Assignment: <code>x = y op z</code></li>
+                    <li>Copy: <code>x = y</code></li>
+                    <li>Unary: <code>x = op y</code></li>
+                    <li>Conditional jump: <code>if x relop y goto z</code></li>
+                    <li>Unconditional jump: <code>goto L</code></li>
+                    <li>Procedure call: <code>param x; call p, n</code></li>
+                    <li>Indexed access: <code>x = y[i]</code></li>
+                    <li>Address/pointer: <code>x = &y; x = *y; *x = y</code></li>
+                </ul>
+                <h4>B. Quadruples (Quads)</h4>
+                <p>A <strong>quadruple</strong> has four fields: (operator, arg1, arg2, result). Each instruction is identified by its position (index). Temporary names are explicit.</p>
+                <div class="formula-box">  op     arg1   arg2   result
+0:   +      b      c       t1
+1:   *      t1     t2      t3
+2:   =      t3     -       a</div>
+                <p><strong>Pros:</strong> Easy to generate, clear naming. <strong>Cons:</strong> Names are not updated when instructions are reordered during optimization.</p>
+                <h4>C. Triples</h4>
+                <p>A <strong>triple</strong> has (op, arg1, arg2) where arg1 and arg2 refer to instruction positions (or symbol table indices). No temporary names needed.</p>
+                <div class="formula-box">  op     arg1   arg2
+0:   +      b      c
+1:   -      d      e
+2:   *      0      1
+3:   +      2      t4   ← t4 from elsewhere</div>
+                <p><strong>Pros:</strong> Names automatically update when order changes. <strong>Cons:</strong> Harder to read, pointer arithmetic needed.</p>
+                <h4>D. Indirect Triples</h4>
+                <p>An <strong>indirect triple</strong> stores pointers to triples in a separate list. Reordering is done by changing the pointer list, not the triples themselves.</p>
+                <div class="formula-box">Triples:
+  0: (+, b, c)
+  1: (*, 0, 2)
+  2: (a, =, 1)
+
+Pointer list:
+  → 0 → 1 → 2</div>
+                <h4>E. Boolean Expressions and Backpatching</h4>
+                <p>Boolean expressions in an if-statement generate code with conditional and unconditional jumps. Because the target addresses of jumps may not be known when the conditional is generated, <strong>backpatching</strong> is used.</p>
+                <div class="formula-box">For "if B goto L": generate quad "if B.goto -", record its index in a pending list.
+When L is known: backpatch(pending_list, L).</div>
+                <p><strong>Translation of S → if B then S₁:</strong></p>
+                <div class="formula-box">S.nextlist = merge(B.falselist, S₁.nextlist)
+gen('goto -') → pending</div>
+                <p><strong>Translation of S → if B then S₁ else S₂:</strong></p>
+                <div class="formula-box">backpatch(B.truelist, S₁.instr)
+S₁.nextlist → merge with goto
+backpatch(B.falselist, S₂.instr)
+S.nextlist = merge(S₁.nextlist, S₂.nextlist)</div>
+                <p><strong>While loop translation (S → while B do S₁):</strong></p>
+                <div class="formula-box">marker = nextquad    ← loop start
+gen B.code
+backpatch(B.truelist, S₁.instr)
+gen S₁.code
+gen('goto marker')  ← loop back
+backpatch(B.falselist, nextquad)  ← exit</div>
+                <div class="exam-tip">Always draw the quad list with indices. Show how truelist/falselist/nextlist flow through productions. Backpatching is a very common 15-mark question.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_8 -->
+    <div class="unit-section" id="unit-8">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#d97706">U8</span>
+            <h2>Unit 8: Code Optimization</h2>
+            <span class="unit-meta">5 Lectures · 12 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is code optimization? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Code optimization</strong> transforms the intermediate representation to produce more efficient target code — faster execution, smaller size, or lower power consumption — while preserving the original program's semantics.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a basic block? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>basic block</strong> is a sequence of statements where control enters at the first statement and leaves at the last without any jumps in between (except at the end). All statements in a block are executed sequentially.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a leader in basic block construction? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>leader</strong> is the first statement of a basic block. Leaders are: (1) the first statement, (2) any target of a goto/branch, (3) any statement immediately following a goto/branch.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a Directed Acyclic Graph (DAG) in optimization? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>DAG</strong> for a basic block is a graph where interior nodes are operators, leaves are operands, and each node stores the value of the subexpression it represents. Common subexpressions are merged into a single node.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is peephole optimization? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Peephole optimization</strong> examines a small sliding window ("peephole") of target instructions and applies local transformations: dead code elimination, constant folding, algebraic simplification, etc.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is constant folding? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Constant folding</strong> evaluates constant expressions at compile time. E.g., <code>3 + 5</code> → <code>8</code>. Done during code optimization on the IR.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is loop optimization? Name two loop optimizations. <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Loop optimization</strong> improves code inside loops (which dominate runtime). Two techniques: <strong>Code motion</strong> (invariant code moved out of loop) and <strong>Induction variable elimination</strong> (replace array-index arithmetic with simpler increments).</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the construction of basic blocks and the flow graph. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Step 1 — Identify Leaders:</strong> A statement is a leader if: (1) it is the first statement, (2) it is the target of a conditional/unconditional goto, or (3) it immediately follows a goto.</p>
+                <p><strong>Step 2 — Form Basic Blocks:</strong> Each block starts at a leader and ends just before the next leader.</p>
+                <p><strong>Step 3 — Build Flow Graph:</strong> Nodes are basic blocks. Add edge B₁ → B₂ if B₂ can immediately follow B₁. Designate an <strong>Entry</strong> node and an <strong>Exit</strong> node.</p>
+                <div class="formula-box">Example:
+1:  a = b + c     ← Leader 1
+2:  goto 6
+3:  x = y * z     ← Leader 2
+4:  if x > 0 goto 3 ← Leader 3
+5:  a = d - e
+6:  ...</div>
+                <p>Blocks: B₁={1,2}, B₂={3}, B₃={4}, B₄={5,6}. Edges: B₁→B₂, B₁→B₄, B₂→B₃, B₃→B₂, B₃→B₄.</p>
+                <p><strong>Dominators:</strong> Node d dominates n if every path from entry to n passes through d. Loops are identified via back edges (edges to dominating nodes).</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Construct the DAG for the following basic block and explain optimizations. <br><code>a = b + c; b = a - d; c = b + c; d = a - d;</code> <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>Step 1 — Draw the DAG:</strong></p>
+                <div class="formula-box">    (+)
+   /       \
+  b         c        → t1 (= b+c)
+(t1 stored at 'a')
+
+    (-)
+   /     \
+ t1       d         → t2 (= t1-d)
+(t2 stored at 'b')
+
+    (+)
+   /     \
+ t2       c         → t3 (= t2+c)
+(t3 stored at 'c')
+
+    (-)
+   /     \
+ t1       d         → t4 (= t1-d)  ← same as t2!
+(t4 stored at 'd')</div>
+                <p><strong>Step 2 — Apply optimizations:</strong></p>
+                <ul>
+                    <li><strong>Common subexpression elimination:</strong> The second <code>a-d</code> (statement 4) is the same as <code>b = a - d</code> (statement 2). The DAG merges both into one (-) node. So <code>d = t2</code> — no new computation.</li>
+                    <li><strong>Dead code elimination:</strong> If <code>a</code> is never used after this block, the first computation <code>a = b+c</code> is dead.</li>
+                    <li><strong>Optimized code:</strong><br>
+                        <code>t1 = b + c<br>b = t1 - d<br>c = b + c<br>d = t1 - d</code> (only 3 operations instead of 4)</li>
+                </ul>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain code optimization techniques: local optimization (constant folding, CSE, DAG), loop optimization, and peephole optimization. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Local Optimization (Within a Basic Block)</h4>
+                <p>Local optimizations apply to a single basic block without considering control flow across blocks.</p>
+                <p><strong>1. Constant Folding:</strong> Evaluate constant expressions at compile time.</p>
+                <div class="formula-box">Before: x = 3 + 5 * 2
+After:  x = 13</div>
+                <p><strong>2. Algebraic Simplification:</strong> Apply algebraic identities.</p>
+                <div class="formula-box">x + 0 → x
+x * 1 → x
+x * 0 → 0
+x - x → 0</div>
+                <p><strong>3. Common Subexpression Elimination (CSE):</strong> If <code>a+b</code> is computed twice with unchanged operands, compute once and reuse.</p>
+                <p><strong>4. Dead Code Elimination:</strong> Remove assignments to variables that are never used later.</p>
+                <p><strong>5. DAG Representation:</strong> The DAG for a basic block merges common subexpression nodes, enabling efficient CSE and copy propagation.</p>
+                <h4>B. Loop Optimization</h4>
+                <p>Loops are the most frequently executed parts of a program. Loop optimizations include:</p>
+                <ul>
+                    <li><strong>Code Motion (Loop Invariant Code Motion):</strong> Move computations whose values don't change across iterations outside the loop.<br>
+                        <code>for i=1 to n: x = a[i]; y = a[i] + c;</code> → <code>for i=1 to n: x = a[i]; y = x + c;</code></li>
+                    <li><strong>Induction Variable Elimination:</strong> Replace array index calculations with simple increments.<br>
+                        <code>j = 4*i</code> inside a loop where i increments by 1 → <code>j = j + 4</code></li>
+                    <li><strong>Loop Unrolling:</strong> Repeat loop body multiple times to reduce branch overhead.</li>
+                    <li><strong>Loop Fusion:</strong> Combine two loops with the same iteration range into one.</li>
+                </ul>
+                <h4>C. Peephole Optimization</h4>
+                <p><strong>Peephole optimization</strong> examines a small window of consecutive instructions and applies replacement rules. Applied after code generation or on the IR.</p>
+                <ul>
+                    <li><strong>Unreachable code elimination:</strong> <code>goto L; ...; L: ...</code> — remove code between goto and its target if not jumped to.</li>
+                    <li><strong>Redundant load/store elimination:</strong> <code>x = y; ... = x</code> → <code>... = y</code></li>
+                    <li><strong>Algebraic simplifications:</strong> <code>x = x + 0</code> → delete; <code>x = x * 1</code> → delete.</li>
+                    <li><strong>Single use / single assignment:</strong> Merge if a variable is assigned once and used once.</li>
+                </ul>
+                <div class="exam-tip">Draw a DAG for a basic block with common subexpressions. Show the optimized sequence of quads. Loop optimization questions often ask for induction variable elimination — show the before/after code.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UNIT_PLACEHOLDER_9 -->
+    <div class="unit-section" id="unit-9">
+        <div class="unit-header">
+            <span class="unit-badge" style="background:#7c3aed">U9</span>
+            <h2>Unit 9: Code Generation</h2>
+            <span class="unit-meta">4 Lectures · 10 Questions</span>
+        </div>
+
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is code generation in a compiler? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Code generation</strong> is the final compiler phase that translates the intermediate representation (optimized IR) into the target machine language (object code). It involves instruction selection, register allocation, and instruction scheduling.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is register allocation? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Register allocation</strong> assigns program variables to CPU registers (fast) or memory (spill) to minimize execution time. The graph coloring algorithm maps variables to a limited set of registers.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a call graph? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p>A <strong>call graph</strong> is a directed graph where nodes are procedures and edges represent procedure calls. Used for interprocedural analysis and register allocation across function boundaries.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a usage count of a register? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Usage count</strong> = (uses × cost-of-not-in-register) / (defs × cost-of-spill). It estimates how much benefit keeping a variable in a register provides, guiding register allocation decisions.</p></div>
+        </div>
+        <div class="qa-block" data-marks="1">
+            <div class="question">Q: What is a next-use information? <span class="marks-badge">1M</span></div>
+            <div class="answer"><p><strong>Next-use information</strong> records for each variable definition the next statement where that variable is used. If a variable is not used again, its register can be freed immediately (dead variable).</p></div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the issues in code generation: (i) instruction selection, (ii) register allocation, and (iii) evaluation order. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p><strong>1. Instruction Selection:</strong> Choose target machine instructions to implement each IR operation. Simple approach: one-to-one mapping (TAC → assembly). Better approaches use templates or tree rewriting to match instruction patterns and cover multiple IR operations in one instruction (e.g., <code>MOVE R1, M[R0]</code> addressing modes).</p>
+                <p><strong>2. Register Allocation:</strong> Assign frequently used variables to CPU registers. Since the number of registers is limited (typically 16–32), some variables must be <em>spilled</em> to memory. The standard method is <strong>graph coloring</strong>: build an interference graph where nodes are variables and edges connect simultaneously live variables. Color the graph with k colors (k = number of registers). If more than k colors are needed, spill the variable with the lowest usage count.</p>
+                <p><strong>3. Evaluation Order:</strong> The order in which operands are evaluated affects register pressure. Strategies include: evaluate left-to-right, evaluate right-to-left (to free registers sooner), or use a heuristic based on usage counts. The goal is to minimize live ranges of temporaries.</p>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="5">
+            <div class="question">Q: Explain the simple code generation algorithm using next-use information. <span class="marks-badge">5M</span></div>
+            <div class="answer">
+                <p>The <strong>simple code generation algorithm</strong> processes a basic block left-to-right and decides for each variable whether to keep it in a register or spill to memory based on next-use information:</p>
+                <ol>
+                    <li><strong>Compute next-use:</strong> For each definition, find the next statement where the variable is used. Variables with no future use are "dead."</li>
+                    <li><strong>Maintain a set of live variables</strong> and available registers.</li>
+                    <li><strong>For each statement x = y op z:</strong><br>
+                        If y is not in a register and is live → load y into a register.<br>
+                        If z is not in a register and is live → load z into a register.<br>
+                        Generate the operation.<br>
+                        If x was previously in a register and is dead → free that register.<br>
+                        Assign x to a register (prefer the register holding y if y is dead).</li>
+                </ol>
+                <p><strong>Register selection strategy:</strong> Prefer the register that holds a variable that will not be used again (dead). If all registers hold live variables, spill the one with the farthest next-use (or lowest usage count).</p>
+                <div class="formula-box">For statement: t = a + b
+1. Ensure a is in register Ra (load if needed)
+2. Ensure b is in register Rb (load if needed)
+3. ADD Ra, Rb, Rt
+4. Record that t is in Rt</div>
+            </div>
+        </div>
+        <div class="qa-block" data-marks="15">
+            <div class="question">Q: Explain code generation in detail, covering instruction selection strategies, register allocation by graph coloring, and a simple code generation algorithm with a worked example. <span class="marks-badge">15M</span></div>
+            <div class="answer">
+                <h4>A. Instruction Selection</h4>
+                <p><strong>Instruction selection</strong> maps IR operations to target machine instructions. Two main approaches:</p>
+                <ul>
+                    <li><strong>Direct translation:</strong> Each IR instruction → one machine instruction. Simple but not optimal.</li>
+                    <li><strong>Pattern matching (tree covering):</strong> The IR is represented as a tree. Instruction templates match subtrees. A dynamic programming algorithm finds the minimum-cost covering. This can match multiple IR operations into one complex machine instruction.</li>
+                </ul>
+                <p><strong>Example:</strong> For <code>a = b + c * d</code>, a direct translation gives <code>t1 = c * d; a = b + t1</code> (2 instructions). With pattern matching, <code>MUL R1, c, d; ADD a, b, R1</code> — even better on architectures with complex addressing modes like <code>MOVE a, b(c,d)</code>.</p>
+                <h4>B. Register Allocation by Graph Coloring</h4>
+                <p>When the number of simultaneously live variables exceeds the number of CPU registers, we must <strong>spill</strong> some variables to memory.</p>
+                <p><strong>Algorithm (iterative approach):</strong></p>
+                <ol>
+                    <li>Build the <strong>interference graph</strong>: nodes = variables; edge (u,v) exists if u and v are simultaneously live.</li>
+                    <li>If a node has degree < k (fewer than k neighbors), remove it (it can always be colored).</li>
+                    <li>If all remaining nodes have degree ≥ k, pick a variable with the lowest <strong>usage count</strong> as the spill candidate.</li>
+                    <li>After coloring, if a spill was needed, insert load/store instructions and repeat.</li>
+                </ol>
+                <div class="formula-box">Usage count formula:
+usage(v) = Σ(uses(v) × cost_not_in_reg + defs(v) × cost_spill)
+Spill the variable with the smallest usage(v).</div>
+                <h4>C. Simple Code Generation Algorithm with Next-Use</h4>
+                <p><strong>Next-use information</strong>: for each definition of a variable x, record the next statement where x is used. Computed by a backward scan of the block.</p>
+                <p><strong>Algorithm:</strong></p>
+                <ol>
+                    <li>Initialize all registers as free.</li>
+                    <li>For each statement <code>x = y op z</code> in order:<br>
+                        a. If y is not in a register and y is live → load y into a free register.<br>
+                        b. If z is not in a register and z is live → load z into a free register.<br>
+                        c. If no free register → spill the register whose variable has the farthest next-use.<br>
+                        d. Generate the machine instruction.<br>
+                        e. If the register previously holding x has x dead → free it.<br>
+                        f. Mark x as in the result register.</li>
+                </ol>
+                <h4>D. Worked Example</h4>
+                <p>Basic block (assuming R0 holds a, R1 holds b, R2 holds c):</p>
+                <div class="formula-box">S1: a = b + c
+S2: b = a - d
+S3: c = b + c
+S4: d = a - d</div>
+                <p><strong>Next-use table:</strong></p>
+                <div class="formula-box">Variable  Defined in  Next used in
+a         S1          S2, S4
+b         S2          S3
+c         S3          (none)
+d         S4          (none)</div>
+                <p><strong>Code generation (k=3 registers):</strong></p>
+                <div class="formula-box">S1: ADD R0, R1, R2      // a = b+c; a in R0
+S2: SUB R0, R3, R0      // b = a-d; load d into R3 first
+    MOV R0, R1           // b now in R1
+S3: ADD R1, R2, R1      // c = b+c; c now in R1 (was b, now dead)
+S4: SUB R0, R3, R0      // d = a-d; d in R3 (was R1 holding c, now dead)</div>
+                <div class="exam-tip">Show the interference graph: a, b, c, d all interfere pairwise (simultaneously live at some points). With 3 registers and 4 variables, one must be spilled. Show which one and why.</div>
+            </div>
+        </div>
+    </div>
+
+</main>
+</body>
+</html>

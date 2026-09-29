@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Software Engineering (PCC-CS505) — Study Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
+    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="stylesheet" href="../../qa-styles.css">
+    <link rel="stylesheet" href="../../premium.css">
+</head>
+<body>
+    <nav class="top-nav">
+        <a href="se_index.html">← Back to Software Engineering Index</a>
+        <span class="nav-title">Software Engineering (PCC-CS505) — Study Notes</span>
+        <a href="../index.html">Home</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="toc-box">
+                <h3>Table of Contents</h3>
+                <ul>
+                    <li><a href="#unit-1"><b>Unit 1</b><br/>Software Process Models &amp; Project Management</a></li>
+                    <li><a href="#unit-2"><b>Unit 2</b><br/>Requirement Analysis &amp; Specification</a></li>
+                    <li><a href="#unit-3"><b>Unit 3</b><br/>Software Design &amp; Testing</a></li>
+                    <li><a href="#unit-4"><b>Unit 4</b><br/>Software Quality &amp; Maintenance</a></li>
+                    <li><a href="#formulas"><b>Formula Sheet</b></a></li>
+                    <li><a href="#key-terms"><b>Key Terms</b></a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="content">
+
+            <h1 class="section-title" id="unit-1">Unit 1 — Software Process Models &amp; Project Management</h1>
+
+            <div class="concept-card">
+                <h3>What is Software Engineering?</h3>
+                <p>Software Engineering is the application of engineering principles to the design, development, testing, and maintenance of software. The goal is to produce reliable, cost-effective software on time. Three core forces act on every software project: <b>customer requirements</b>, <b>time/budget constraints</b>, and <b>technical quality</b>.</p>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Software Process Model Comparison</h3>
+<div class="mermaid">
+flowchart BT
+    W[Waterfall - Sequential, fixed reqs] --> I[Iterative - Refinement cycles]
+    I --> INC[Incremental - Functional slices]
+    INC --> S[Spiral - Risk-driven loops]
+    S --> A[Agile - Customer-collaborative]
+    A --> CBD[Component-Based - Reusable parts]
+    CBD --> FM[Formal Methods - Math-based]
+    FM --> XP[eXtreme Programming]
+    XP --> SCR[Scrum]
+</div>
+            </div>
+
+            <div class="note-card">
+                <h3>The Generic Process Model (Pressman)</h3>
+                <p>Five framework activities that every project uses, regardless of model choice:</p>
+                <ol>
+                    <li><b>Communication</b> — Understand stakeholder needs.</li>
+                    <li><b>Planning</b> — Scope, resources, schedule, risks.</li>
+                    <li><b>Modeling</b> — Analysis &amp; design (UML models).</li>
+                    <li><b>Construction</b> — Coding &amp; testing.</li>
+                    <li><b>Deployment</b> — Delivery to users, feedback.</li>
+                </ol>
+                <p><b>Umbrella activities</b> run across all five: project tracking, risk management, QA, configuration management, and reviews.</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>Waterfall Model</h3>
+                <p>Linear sequential phases: Feasibility → Requirements → Design → Coding → Testing → Deployment → Maintenance. Each phase is completed and baselined before the next begins. <b>Best when</b> requirements are well understood and stable; <b>unsuitable</b> when requirements change frequently.</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>Iterative vs Incremental Model</h3>
+                <p><b>Iterative</b>: The entire system is repeatedly refined through cycles — each cycle produces a more complete version. <b>Incremental</b>: The system is built piece by piece — each increment delivers a new, usable set of features.</p>
+                <p>In practice, Iterative-Incremental combines both: each iteration delivers an increment.</p>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Spiral Model — Risk-Driven Development</h3>
+<div class="mermaid">
+flowchart TD
+    D[Determine Objectives] --> RA[Identify &amp; Resolve Risks]
+    RA --> ED[Develop &amp; Test]
+    ED --> PE[Plan Next Cycle]
+    PE --> D
+</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>Agile Manifesto Values</h3>
+                <div class="summary-card">
+                    <p><b>Individuals &amp; interactions</b> over processes &amp; tools<br/>
+                    <b>Working software</b> over comprehensive documentation<br/>
+                    <b>Customer collaboration</b> over contract negotiation<br/>
+                    <b>Responding to change</b> over following a plan</p>
+                </div>
+                <p>12 Agile Principles: early delivery, welcome changing requirements, daily business-developer collaboration, face-to-face conversation, working software as primary measure, sustainable pace, technical excellence, simplicity, self-organising teams, regular reflection.</p>
+            </div>
+
+            <div class="tip-card">
+                <h3>Agile vs Plan-Driven</h3>
+                <p><b>Plan-driven</b> (waterfall) assumes predictable processes and change is costly. <b>Agile</b> embraces change as a source of value. Hybrid approaches (Agile-Waterfall, ScrumBan) are increasingly common.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Scrum Framework</h3>
+                <p><b>Roles:</b> Product Owner (prioritises backlog), Scrum Master (facilitator, impediment remover), Development Team (self-organising, 3–9 members).</p>
+                <p><b>Events:</b> Sprint (1–4 weeks), Sprint Planning, Daily Standup (15 min), Sprint Review, Sprint Retrospective, Backlog Refinement.</p>
+                <p><b>Artefacts:</b> Product Backlog, Sprint Backlog, Product Increment, Burn-down Chart.</p>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Scrum Sprint Flow</h3>
+<div class="mermaid">
+flowchart TD
+    PB[Product Backlog] --> SP[Sprint Planning]
+    SP --> SB[Sprint Backlog]
+    SB --> DS[Daily Scrum 15 min]
+    DS --> DEV[Development Sprint]
+    DEV --> SR[Sprint Review]
+    SR --> SRET[Retrospective]
+    SRET -->|New backlog| PB
+</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>RUP Phases</h3>
+                <p><b>Inception:</b> Scope, feasibility, use-case model outline.<br/>
+                <b>Elaboration:</b> Refine requirements, establish architecture baseline.<br/>
+                <b>Construction:</b> Iterative implementation, continuous testing.<br/>
+                <b>Transition:</b> Beta releases, user training, deployment.</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>Software Project Management</h3>
+                <p><b>Project Planning:</b> Scope → WBS → Gantt/PERT → resource allocation.<br/>
+                <b>Cost Estimation:</b> COCOMO, Function Points, Expert Judgment.<br/>
+                <b>Metrics:</b> LOC, FP, Cyclomatic Complexity, Defect Density.<br/>
+                <b>Scheduling:</b> PERT, Gantt charts, CPM (Critical Path Method).<br/>
+                <b>Tracking:</b> Earned Value Management (EVM), burn-down charts.</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>COCOMO — Basic Formula</h3>
+                <p>\[ E = a \times (KLOC)^b \]</p>
+                <p>\[ T_{dev} = c \times (E)^d \]</p>
+                <p>\[ SS = \frac{E}{T_{dev}} \]</p>
+                <p><b>Where:</b> E = Effort (person-months), Tdev = Duration (months), SS = Avg staffing, KLOC = size.</p>
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr style="background-color: #f3e8ff;"><th>Mode</th><th>a</th><th>b</th><th>c</th><th>d</th><th>Project Size</th></tr>
+                    <tr><td><b>Organic</b></td><td>2.4</td><td>1.05</td><td>2.5</td><td>0.38</td><td>Small, familiar (2–50 KLOC)</td></tr>
+                    <tr><td><b>Semi-Detached</b></td><td>3.0</td><td>1.12</td><td>2.5</td><td>0.35</td><td>Medium, mixed (50–300 KLOC)</td></tr>
+                    <tr><td><b>Embedded</b></td><td>3.6</td><td>1.20</td><td>2.5</td><td>0.32</td><td>Large, complex (&gt;300 KLOC)</td></tr>
+                </table>
+                <p><b>Example:</b> Organic project, 20 KLOC: \(E = 2.4 \times 20^{1.05} \approx 55.7\) PM, \(T_{dev} = 2.5 \times 55.7^{0.38} \approx 11.95\) months, \(SS = 55.7/11.95 \approx 5\) engineers.</p>
+            </div>
+
+            <div class="tip-card">
+                <h3>Key Takeaway for Unit 1</h3>
+                <p>Choose the process model based on project characteristics: use <b>Waterfall</b> for stable requirements, <b>Spiral</b> for high-risk projects, <b>Agile</b> for changing requirements, and <b>CBD</b> when reusable components are available.</p>
+            </div>
+
+            <h1 class="section-title" id="unit-2">Unit 2 — Requirement Analysis &amp; Specification</h1>
+
+            <div class="concept-card">
+                <h3>Requirements Engineering Process</h3>
+                <div class="diagram-card">
+<div class="mermaid">
+flowchart LR
+    E[Elicitation] --> A[Analysis]
+    A --> N[Negotiation]
+    N --> V[Validation]
+    V --> S[Specification]
+    S --> M[Management]
+    M -.->|Change| E
+</div>
+                </div>
+            </div>
+
+            <div class="note-card">
+                <h3>Elicitation Techniques</h3>
+                <ul>
+                    <li><b>Interviews</b> — Structured, open-ended, closed questions.</li>
+                    <li><b>Workshops / JAD</b> — Facilitated group sessions.</li>
+                    <li><b>Surveys / Questionnaires</b> — Broad stakeholder coverage.</li>
+                    <li><b>Observation (Ethnography)</b> — Watch real work practice.</li>
+                    <li><b>Prototyping</b> — Build a throwaway or evolutionary prototype.</li>
+                    <li><b>Brainstorming</b> — Free-form idea generation.</li>
+                    <li><b>Use-Case Driven</b> — Identify actors, scenarios, goals.</li>
+                </ul>
+            </div>
+
+            <div class="tip-card">
+                <h3>Elicitation Pitfalls</h3>
+                <p>Customers may not know what they want until they see it. Hidden requirements come from tacit knowledge. Always prototype and validate early. Watch for ambiguity, incompleteness, inconsistency, and wishful thinking in requirements.</p>
+            </div>
+
+            <div class="diagram-card">
+                <h3>SRS Document Structure (IEEE 830)</h3>
+<div class="mermaid">
+mindmap
+  root((SRS))
+    1 Introduction
+      Purpose Scope Glossary References
+    2 Overall Description
+      Product Perspective
+      Product Functions
+      Constraints Assumptions
+    3 Functional Requirements
+      Inputs Processing Logic
+      Error Handling
+    4 Non-Functional
+      Performance Security
+      Usability Reliability
+    5 Appendices
+</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>Functional vs Non-Functional Requirements</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr style="background-color: #f3e8ff;"><th>Type</th><th>Description</th><th>Example</th></tr>
+                    <tr><td><b>Functional</b></td><td>What the system does (features, functions)</td><td>"User can reset password via email."</td></tr>
+                    <tr><td><b>Performance</b></td><td>Speed, throughput, capacity</td><td>"Page loads in under 2 seconds."</td></tr>
+                    <tr><td><b>Security</b></td><td>Authentication, authorisation</td><td>"Encrypt data at rest using AES-256."</td></tr>
+                    <tr><td><b>Usability</b></td><td>Ease of use, accessibility</td><td>"WCAG 2.1 AA compliant."</td></tr>
+                    <tr><td><b>Reliability</b></td><td>Uptime, fault tolerance</td><td>"99.95% availability."</td></tr>
+                    <tr><td><b>Maintainability</b></td><td>Ease of modification</td><td>"Code coverage ≥ 80%."</td></tr>
+                </table>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Requirement Traceability Matrix</h3>
+<div class="mermaid">
+flowchart LR
+    SRC[Stakeholder Need] --> R[REQ-001]
+    R --> D[Design Class]
+    D --> C[Source Code]
+    C --> T[Test Cases]
+    T -.->|Backward trace| R
+    R -.->|Forward trace| T
+</div>
+                <p><b>Forward traceability</b> ensures every requirement is implemented and tested. <b>Backward traceability</b> ensures every artefact traces to a valid requirement — prevents gold-plating and scope creep.</p>
+            </div>
+
+            <h1 class="section-title" id="unit-3">Unit 3 — Software Design &amp; Testing</h1>
+
+            <div class="concept-card">
+                <h3>Software Design Concepts</h3>
+                <ul>
+                    <li><b>Abstraction:</b> Expose only essential features; hide complexity.</li>
+                    <li><b>Refinement:</b> Top-down decomposition of a problem into smaller, more manageable pieces.</li>
+                    <li><b>Modularity:</b> Decompose into cohesive, loosely-coupled modules.</li>
+                    <li><b>Software Architecture:</b> High-level organisation and component interaction.</li>
+                    <li><b>Control Hierarchy:</b> Calling structure of the modules.</li>
+                    <li><b>Structural Partitioning:</b> Horizontal (layers) and vertical (tasks) partitioning.</li>
+                    <li><b>Information Hiding:</b> Each module hides its implementation details behind an interface.</li>
+                </ul>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Software Testing Levels</h3>
+<div class="mermaid">
+flowchart BT
+    U[Unit Testing] --> I[Integration Testing]
+    I --> S[System Testing]
+    S --> A[Acceptance Testing]
+    A -.->|Feedback| U
+</div>
+                <p><b>Unit:</b> Individual functions/classes in isolation.<br/>
+                <b>Integration:</b> Interface correctness between combined modules.<br/>
+                <b>System:</b> Full system compliance with SRS on production-like environment.<br/>
+                <b>Acceptance:</b> User-driven alpha (in-house) and beta (customer-site) testing.</p>
+            </div>
+
+            <div class="code-card">
+                <h3>JUnit 5 Unit Test Example</h3>
+<pre><code class="language-java">import org.junit.jupiter.api.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+class CalculatorTest {
+
+    @Test
+    void testAddition() {
+        assertEquals(5, Calculator.add(2, 3));
+        assertEquals(-1, Calculator.add(-2, 1));
+    }
+
+    @Test
+    void testDivisionByZero() {
+        ArithmeticException ex = assertThrows(
+            ArithmeticException.class,
+            () -> Calculator.divide(10, 0)
+        );
+        assertEquals("/ by zero", ex.getMessage());
+    }
+
+    @Test
+    void testEdgeCases() {
+        assertEquals(0, Calculator.add(0, 0));
+        assertEquals(Integer.MAX_VALUE, Calculator.add(0, Integer.MAX_VALUE));
+    }
+}</code></pre>
+                <p>Good unit tests cover: <b>happy path</b>, <b>edge cases</b>, and <b>error paths</b>. Use parameterised tests for multiple inputs.</p>
+            </div>
+
+            <div class="concept-card">
+                <h3>Design Patterns (Gang of Four)</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr style="background-color: #f3e8ff;"><th>Category</th><th>Pattern</th><th>Intent</th></tr>
+                    <tr><td rowspan="5"><b>Creational</b></td><td>Singleton</td><td>One instance per JVM</td></tr>
+                    <tr><td>Factory</td><td>Create objects without specifying concrete classes</td></tr>
+                    <tr><td>Abstract Factory</td><td>Families of related objects</td></tr>
+                    <tr><td>Builder</td><td>Step-by-step complex object construction</td></tr>
+                    <tr><td>Prototype</td><td>Clone existing objects</td></tr>
+                    <tr><td rowspan="5"><b>Structural</b></td><td>Adapter</td><td>Convert interface to another</td></tr>
+                    <tr><td>Decorator</td><td>Add responsibilities dynamically</td></tr>
+                    <tr><td>Facade</td><td>Simplify a complex subsystem</td></tr>
+                    <tr><td>Composite</td><td>Tree structures uniformly</td></tr>
+                    <tr><td>Proxy</td><td>Control access to another object</td></tr>
+                    <tr><td rowspan="5"><b>Behavioural</b></td><td>Observer</td><td>Notify dependents of state changes</td></tr>
+                    <tr><td>Strategy</td><td>Interchangeable algorithms</td></tr>
+                    <tr><td>Command</td><td>Encapsulate request as object</td></tr>
+                    <tr><td>State</td><td>Object changes behaviour with state</td></tr>
+                    <tr><td>Iterator</td><td>Sequential access without exposing internals</td></tr>
+                </table>
+            </div>
+
+            <div class="code-card">
+                <h3>Observer Pattern in Java</h3>
+<pre><code class="language-java">import java.util.*;
+
+interface Observer {
+    void update(String message);
+}
+
+class Subject {
+    private final List&lt;Observer&gt; observers = new ArrayList&lt;&gt;();
+
+    void subscribe(Observer o) { observers.add(o); }
+    void unsubscribe(Observer o) { observers.remove(o); }
+
+    void notifyObservers(String msg) {
+        for (Observer o : observers) o.update(msg);
+    }
+}
+
+class EmailNotifier implements Observer {
+    private String email;
+    EmailNotifier(String email) { this.email = email; }
+    public void update(String msg) {
+        System.out.println("Email to " + email + ": " + msg);
+    }
+}
+
+class SMSNotifier implements Observer {
+    private String phone;
+    SMSNotifier(String phone) { this.phone = phone; }
+    public void update(String msg) {
+        System.out.println("SMS to " + phone + ": " + msg);
+    }
+}</code></pre>
+            </div>
+
+            <div class="concept-card">
+                <h3>Architectural Styles</h3>
+                <ul>
+                    <li><b>Layered (N-Tier):</b> Presentation → Business Logic → Data Access → Database.</li>
+                    <li><b>Client-Server:</b> Thin/fat clients communicate with a central server.</li>
+                    <li><b>Pipe-and-Filter:</b> Data flows through a chain of filters (compilers, Unix pipelines).</li>
+                    <li><b>Repository (Shared Data):</b> Central data store + independent agents (blackboard for AI).</li>
+                    <li><b>Event-Driven:</b> Components react to events posted on a bus (Kafka, RabbitMQ).</li>
+                    <li><b>Microservices:</b> Independently deployable services communicating via APIs; each owns its data store.</li>
+                </ul>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Microservices Architecture</h3>
+<div class="mermaid">
+flowchart LR
+    U[User/Client] --> G[API Gateway]
+    G --> A[Auth Service]
+    G --> O[Order Service]
+    G --> P[Payment Service]
+    G --> N[Notification Service]
+    A --> DB1[(Auth DB)]
+    O --> DB2[(Order DB)]
+    P --> DB3[(Payment DB)]
+</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>User Interface Design Principles</h3>
+                <p><b>Shneiderman's Golden Rules:</b></p>
+                <ol>
+                    <li>Place the user in control (undo, shortcuts, flexible interaction).</li>
+                    <li>Reduce the user's memory load (recognise over recall).</li>
+                    <li>Make the interface consistent (uniform terminology, actions, layout).</li>
+                </ol>
+                <p><b>Nielsen's 10 Usability Heuristics:</b> Visibility, Real-world mapping, User control, Consistency, Error prevention, Recognition over recall, Flexibility, Minimalist design, Helpful error messages, Help system.</p>
+            </div>
+
+            <div class="tip-card">
+                <h3>UI Design Checklist</h3>
+                <p>Consistent navigation? Error messages helpful? Feedback on every action? Accessible (keyboard, screen reader)? Responsive across devices? Adequate contrast ratio? Labels descriptive? Login/signup clear? Search prominent? Loading states visible?</p>
+            </div>
+
+            <h1 class="section-title" id="unit-4">Unit 4 — Software Quality &amp; Maintenance</h1>
+
+            <div class="concept-card">
+                <h3>Software Quality Assurance (SQA)</h3>
+                <p>SQA is a <b>planned, systematic set of activities</b> ensuring that processes and products conform to standards and requirements. Activities: Audits, Formal Technical Reviews (FTRs), Testing, Configuration Audits, Process &amp; Product Quality Reviews.</p>
+            </div>
+
+            <div class="note-card">
+                <h3>Formal Technical Reviews (FTRs)</h3>
+                <ul>
+                    <li><b>Walkthroughs:</b> Author-led, open-ended, primarily to find defects and improve understanding.</li>
+                    <li><b>Inspections:</b> Formal process (7 steps), 5 roles: Moderator, Recorder, Reader, Author, Reviewer — most effective for defect removal.</li>
+                    <li><b>Code Reviews:</b> Peer-level review focusing on code quality, standards, efficiency.</li>
+                </ul>
+            </div>
+
+            <div class="concept-card">
+                <h3>Software Quality Concepts</h3>
+                <div class="summary-card">
+                    <p><b>McCall's Quality Model:</b></p>
+                    <p><b>Product Operation:</b> Correctness, Reliability, Efficiency, Integrity, Usability.</p>
+                    <p><b>Product Revision:</b> Maintainability, Flexibility, Testability.</p>
+                    <p><b>Product Transition:</b> Portability, Reusability, Interoperability.</p>
+                </div>
+            </div>
+
+            <div class="diagram-card">
+                <h3>SEI CMM — Five Maturity Levels</h3>
+<div class="mermaid">
+flowchart BT
+    L1[Level 1: Initial] --> L2
+    L2[Level 2: Repeatable<br/>Project tracking, SCM, SQA] --> L3
+    L3[Level 3: Defined<br/>Org-standardised processes] --> L4
+    L4[Level 4: Managed<br/>Quantitative controls] --> L5
+    L5[Level 5: Optimising<br/>Continuous improvement]
+</div>
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr style="background-color: #f3e8ff;"><th>Level</th><th>Focus</th><th>Key KPAs</th></tr>
+                    <tr><td>1 Initial</td><td>Ad-hoc, heroic effort</td><td>None</td></tr>
+                    <tr><td>2 Repeatable</td><td>Project-level discipline</td><td>PM, SCM, SQA, RM</td></tr>
+                    <tr><td>3 Defined</td><td>Organisation-wide standards</td><td>Org PM, Training, PEI</td></tr>
+                    <tr><td>4 Managed</td><td>Measurable quality</td><td>QPM, OPP</td></tr>
+                    <tr><td>5 Optimising</td><td>Continuous innovation</td><td>CAR, OPM</td></tr>
+                </table>
+            </div>
+
+            <div class="tip-card">
+                <h3>CMM vs CMMI Quick Comparison</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr style="background-color: #f3e8ff;"><th>Aspect</th><th>CMM</th><th>CMMI</th></tr>
+                    <tr><td>Scope</td><td>Software only</td><td>Software + Systems + Services</td></tr>
+                    <tr><td>Levels</td><td>5 maturity levels</td><td>5 maturity + 6 capability levels</td></tr>
+                    <tr><td>Status</td><td>Deprecated</td><td>Current (ISACA)</td></tr>
+                </table>
+            </div>
+
+            <div class="concept-card">
+                <h3>Software Configuration Management (SCM)</h3>
+                <p>SCM ensures the integrity of software artefacts throughout their lifecycle. Key activities:</p>
+                <ol>
+                    <li><b>Configuration Identification</b> — Name and catalogue CI.</li>
+                    <li><b>Version Control</b> — Branch, merge, tag.</li>
+                    <li><b>Baseline Management</b> — Formal freeze points.</li>
+                    <li><b>Change Control</b> — CCB approves modifications.</li>
+                    <li><b>Configuration Audit</b> — Verify conformance.</li>
+                    <li><b>Release Management</b> — Package, distribute.</li>
+                </ol>
+            </div>
+
+            <div class="concept-card">
+                <h3>Software Reliability</h3>
+                <p>Reliability is the probability of failure-free operation for a specified time.</p>
+                <div class="formula-card">
+                    <p>\[ MTBF = MTTF + MTTR \]</p>
+                    <p>\[ \text{Availability} = \frac{MTTF}{MTBF} \]</p>
+                    <p>\[ \text{Failure Rate} \lambda = \frac{1}{MTTF} \]</p>
+                    <p>\[ R(t) = e^{-\lambda t} \]</p>
+                </div>
+            </div>
+
+            <div class="note-card">
+                <h3>Software Maintenance</h3>
+                <ul>
+                    <li><b>Corrective:</b> Fix bugs.</li>
+                    <li><b>Adaptive:</b> Adapt to new environment.</li>
+                    <li><b>Perfective:</b> New features, performance improvements.</li>
+                    <li><b>Preventive:</b> Refactor to prevent future degradation.</li>
+                </ul>
+            </div>
+
+            <div class="diagram-card">
+                <h3>Software Re-engineering Process</h3>
+<div class="mermaid">
+flowchart LR
+    LEG[Legacy System] --> INV[Inventory Analysis]
+    INV --> DRS[Document Restructuring]
+    DRS --> RE[Reverse Engineering]
+    RE --> CR[Code Restructuring]
+    CR --> DR[Data Restructuring]
+    DR --> FE[Forward Engineering]
+    FE --> MOD[Modern System]
+</div>
+            </div>
+
+            <div class="concept-card">
+                <h3>ISO 9000 &amp; SEI CMM</h3>
+                <p><b>ISO 9000</b> is an international quality-management standard. ISO 9001:2015 focuses on process approach, risk-based thinking, Plan-Do-Check-Act (PDCA) cycle.</p>
+                <p><b>SEI CMM</b> is a maturity framework specifically for software. Organisations are assessed against Key Process Areas (KPAs) and receive a maturity level from 1 to 5.</p>
+            </div>
+
+            <h1 class="section-title" id="formulas">Formula Sheet</h1>
+
+            <div class="formula-card">
+                <h3>COCOMO — Basic</h3>
+                <p>\[ E = a \times (KLOC)^b \qquad T_{dev} = c \times E^d \qquad SS = \frac{E}{T_{dev}} \]</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>COCOMO-II Maintenance</h3>
+                <p>\[ AT = \frac{\text{Added} + \text{Modified}}{\text{Original Size}} \]</p>
+                <p>\[ AD = AT \times AAF \qquad E_{maintenance} = 2.4 \times (AD)^{1.05} \]</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>Software Reliability</h3>
+                <p>\[ MTBF = MTTF + MTTR \]</p>
+                <p>\[ \text{Availability} = \frac{MTTF}{MTBF} \]</p>
+                <p>\[ \lambda = \frac{1}{MTTF} \qquad R(t) = e^{-\lambda t} \]</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>Function Points</h3>
+                <p>\[ UFP = \sum (Count_i \times Weight_i) \]</p>
+                <p>\[ VAF = 0.65 + (0.01 \times \Sigma F_i) \]</p>
+                <p>\[ FP = UFP \times VAF \]</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>Cyclomatic Complexity</h3>
+                <p>\[ CC = E - N + 2P \]</p>
+                <p>E = edges, N = nodes, P = connected components. This equals the number of linearly-independent paths, giving the minimum test cases needed for path coverage.</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>Halstead Complexity Measures</h3>
+                <p>\[ N = \eta_1 + \eta_2 \qquad n = n_1 + n_2 \]</p>
+                <p>\[ V = N \times \log_2 n \qquad D = \frac{n_1}{2} \times \frac{n_2}{n_1} \]</p>
+                <p>\[ E = V \times D \qquad T = \frac{E}{S} \]</p>
+            </div>
+
+            <div class="formula-card">
+                <h3>Earned Value Management (EVM)</h3>
+                <p>\[ PV = \text{Planned Value (BCWS)} \]</p>
+                <p>\[ EV = \text{Earned Value (BCWP)} \]</p>
+                <p>\[ AC = \text{Actual Cost (ACWP)} \]</p>
+                <p>\[ SV = EV - PV \qquad CV = EV - AC \]</p>
+                <p>\[ SPI = \frac{EV}{PV} \qquad CPI = \frac{EV}{AC} \]</p>
+                <p>\[ EAC = \frac{BAC}{CPI} \qquad ETC = EAC - AC \]</p>
+            </div>
+
+            <h1 class="section-title" id="key-terms">Key Terms — Quick Reference</h1>
+
+            <div class="summary-card">
+                <table border="1" style="border-collapse: collapse; width: 100%;">
+                    <tr style="background-color: #f3e8ff;"><th>Term</th><th>Definition</th></tr>
+                    <tr><td><b>Agile</b></td><td>Iterative approach emphasising collaboration and flexibility.</td></tr>
+                    <tr><td><b>COCOMO</b></td><td>Algorithmic cost estimation model (Boehm).</td></tr>
+                    <tr><td><b>DDD</b></td><td>Domain-Driven Design — aligns software with domain model.</td></tr>
+                    <tr><td><b>DFD</b></td><td>Data Flow Diagram — data movement through a system.</td></tr>
+                    <tr><td><b>ERD</b></td><td>Entity-Relationship Diagram — data model.</td></tr>
+                    <tr><td><b>FTR</b></td><td>Formal Technical Review — peer defect detection.</td></tr>
+                    <tr><td><b>FP</b></td><td>Function Point — size metric independent of language.</td></tr>
+                    <tr><td><b>ISO 9000</b></td><td>Quality management standards family.</td></tr>
+                    <tr><td><b>KPA</b></td><td>Key Process Area — CMM process focus area.</td></tr>
+                    <tr><td><b>KLOC</b></td><td>Thousand Lines of Code — traditional size metric.</td></tr>
+                    <tr><td><b>RUP</b></td><td>Rational Unified Process — iterative framework.</td></tr>
+                    <tr><td><b>SRS</b></td><td>Software Requirements Specification document.</td></tr>
+                    <tr><td><b>RTM</b></td><td>Requirements Traceability Matrix.</td></tr>
+                    <tr><td><b>SCM</b></td><td>Software Configuration Management.</td></tr>
+                    <tr><td><b>SQA</b></td><td>Software Quality Assurance.</td></tr>
+                    <tr><td><b>SEI CMM</b></td><td>5-level process maturity framework.</td></tr>
+                    <tr><td><b>Use Case</b></td><td>Description of a functional interaction between actor and system.</td></tr>
+                    <tr><td><b>UML</b></td><td>Unified Modelling Language.</td></tr>
+                    <tr><td><b>WBS</b></td><td>Work Breakdown Structure.</td></tr>
+                    <tr><td><b>XP</b></td><td>Extreme Programming — Agile practice (pair programming, TDD).</td></tr>
+                </table>
+            </div>
+
+            <div class="summary-card" style="margin-top: 2rem;">
+                <h3>Quick Exam Recap</h3>
+                <p><b>Unit 1:</b> Process models, Agile/Scrum, COCOMO, Project Management.<br/>
+                <b>Unit 2:</b> Requirements engineering, SRS, FURPS+, RTM, elicitation.<br/>
+                <b>Unit 3:</b> Design concepts, patterns, architectural styles, testing levels, BVA, Equivalence.<br/>
+                <b>Unit 4:</b> SQA, SCM, ISO 9000, SEI CMM, maintenance types, re-engineering.</p>
+            </div>
+
+        </main>
+    </div>
+</body>
+</html>
