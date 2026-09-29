@@ -1,1645 +1,855 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Artificial Intelligence (PEC-IT501B) — Comprehensive Study Notes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme:'default', flowchart:{useMaxWidth:true, htmlLabels:true}});</script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism-tomorrow.min.css" integrity="sha384-ZSs6LKr2GoUPDyHrN+rCQgyHL1yUyok5xMniSrgeRG7rUvA6vTmxronM1eZOfjgz" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js" integrity="sha384-06z5D//U/xpvxZHuUz92xBvq3DqBBFi7Up53HRrbV7Jlv7Yvh/MZ7oenfUe9iCEt" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js" integrity="sha384-WJdEkJKrbsqw0evQ4GB6mlsKe5cGTxBOw4KAEIa52ZLB7DDpliGkwdme/HMa5n1m" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js" integrity="sha384-DioAMZB4yk91W6LuFit5wJDh8c5Ov09f/MBvja94y0PodMqTpTZeBeejqpRUru7D" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../../qa-styles.css">
-    <link rel="stylesheet" href="../../premium.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Notes — Semester 5</title>
+  <style>
+    :root {
+      --primary: #8b5cf6;
+      --primary-light: #6366f1;
+      --bg: #fafafa;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-body: #374151;
+      --border: #e2e8f0;
+      --surface: #f8fafc;
+      --warning-bg: #fef3c7;
+      --warning-border: #f59e0b;
+      --warning-text: #92400e;
+      --pyq-bg: #fef2f2;
+      --pyq-border: #fecaca;
+      --pyq-text: #dc2626;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: var(--primary);
+      width: 0%;
+      transition: width 0.3s;
+      position: fixed;
+      top: 0;
+      z-index: 101;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sticky-header h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .toc {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      position: sticky;
+      top: 52px;
+      z-index: 99;
+    }
+
+    .toc a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .toc a:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .subject-title {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .subject-meta {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject-card {
+      background: linear-gradient(135deg, var(--primary), var(--primary-light));
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .subject-card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .subject-card p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .unit-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .unit-header:hover {
+      border-color: var(--primary);
+    }
+
+    .unit-number {
+      background: var(--primary);
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .unit-header-text h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .unit-header-text p {
+      margin: 0.2rem 0 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .unit-content {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.2rem;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .topic-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      color: var(--primary);
+    }
+
+    .topic-card p,
+    .topic-card li {
+      color: var(--text-body);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .topic-card ul {
+      padding-left: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .question-block {
+      background: white;
+      border-left: 3px solid var(--primary);
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-block .q-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .question-block .q-text {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .question-block .q-answer {
+      color: #475569;
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: #f3f4f6;
+      border-left: 3px solid var(--primary-light);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+    }
+
+    .exam-tip {
+      background: var(--warning-bg);
+      border-left: 3px solid var(--warning-border);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+      font-size: 0.85rem;
+    }
+
+    .exam-tip strong {
+      color: var(--warning-text);
+    }
+
+    .pyq-section {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .pyq-section h4 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pyq-item {
+      background: var(--pyq-bg);
+      border: 1px solid var(--pyq-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .pyq-item .year {
+      color: var(--pyq-text);
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--surface);
+      font-weight: 600;
+      color: var(--primary);
+    }
+  </style>
 </head>
 <body>
-    <nav class="top-nav">
-        <a href="ai_index.html">← Back to AI Index</a>
-        <span class="nav-title">Artificial Intelligence (PEC-IT501B) — Comprehensive Study Notes</span>
-        <a href="../index.html">Home</a>
-    </nav>
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="toc-box">
-                <h3>Unit Navigator</h3>
-                <ul>
-                    <li><a href="#unit-1"><b>Unit 1: Introduction to AI</b></a></li>
-                    <li><a href="#unit-2"><b>Unit 2: Search Techniques</b></a></li>
-                    <li><a href="#unit-3"><b>Unit 3: Knowledge &amp; Reasoning</b></a></li>
-                    <li><a href="#unit-4"><b>Unit 4: Predicate Logic</b></a></li>
-                    <li><a href="#unit-5"><b>Unit 5: NLP &amp; Expert Systems</b></a></li>
-                </ul>
-            </div>
-        </aside>
-        <main class="content">
 
-            <h1 class="section-title">Artificial Intelligence (PEC-IT501B) — Complete Study Guide</h1>
-            <p>Welcome to your comprehensive AI study guide. This resource covers all five units of the syllabus in depth, with code examples, diagrams, formulas, and practice questions.</p>
-
-            <!-- ═══════════════ UNIT 1 ═══════════════ -->
-            <h2 class="section-title" id="unit-1">Unit 1: Introduction to AI &amp; Intelligent Agents</h2>
-
-            <div class="concept-card">
-                <h3>1.1 What is Artificial Intelligence?</h3>
-                <p><b>Artificial Intelligence (AI)</b> is the science of making machines perform tasks that would normally require human intelligence. These include:</p>
-                <ul>
-                    <li><b>Learning</b> — acquiring knowledge from data</li>
-                    <li><b>Reasoning</b> — drawing conclusions from facts</li>
-                    <li><b>Perception</b> — understanding images, speech, signals</li>
-                    <li><b>Planning</b> — choosing sequences of actions</li>
-                    <li><b>Natural Language Understanding</b> — interpreting human language</li>
-                </ul>
-                <p>AI is a multi-disciplinary field drawing from computer science, mathematics, psychology, linguistics, neuroscience, philosophy, and economics.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.2 Problems of AI</h3>
-                <p>Major problems that AI addresses:</p>
-                <ol>
-                    <li><b>Search and Planning</b> — finding optimal solutions in combinatorial spaces</li>
-                    <li><b>Knowledge Representation</b> — encoding information efficiently</li>
-                    <li><b>Reasoning under Uncertainty</b> — probabilistic and fuzzy methods</li>
-                    <li><b>Machine Learning</b> — automatically discovering patterns</li>
-                    <li><b>Natural Language Processing</b> — understanding and generating text</li>
-                    <li><b>Computer Vision</b> — interpreting visual information</li>
-                    <li><b>Robotics</b> — physical interaction with the world</li>
-                    <li><b>Generalization and Transfer Learning</b></li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.3 AI Technique</h3>
-                <p>An <b>AI technique</b> is a method that exploits knowledge represented in a structured manner to enable efficient reasoning in complex situations. Key properties of AI techniques:</p>
-                <ul>
-                    <li>Use <b>domain-specific knowledge</b> instead of brute force</li>
-                    <li>Operate on <b>structured representations</b> of facts and rules</li>
-                    <li>Must be <b>efficient</b> enough for practical use</li>
-                    <li>Should be <b>scalable</b> to large problem instances</li>
-                </ul>
-                <p><b>Example:</b> Medical diagnosis — instead of checking every possible disease (brute force), an expert system uses rules like "IF fever AND cough THEN possible infection" to reason efficiently.</p>
-            </div>
-
-            <div class="example-card">
-                <h3>1.4 Tic-Tac-Toe Problem</h3>
-                <p>The <b>Tic-Tac-Toe problem</b> is a classic AI example demonstrating game-tree search.</p>
-                <ul>
-                    <li>Total states: $3^9 = 19,683$ (or $9! = 362,880$ considering symmetry)</li>
-                    <li>Demonstrates: <b>game tree</b>, <b> search</b>, <b>evaluation function</b></li>
-                    <li>With perfect play, Tic-Tac-Toe is a <b>draw</b> — it is a "solved" game</li>
-                </ul>
-                <div class="diagram-card">
-                    <div class="mermaid">
-                    graph TD
-                        A[Initial State] --> B1[X moves center]
-                        A --> B2[X moves corner]
-                        A --> B3[X moves edge]
-                        B1 --> C1[O response 1]
-                        B1 --> C2[O response 2]
-                        B1 --> C3[O response 3]
-                        C1 --> D1[Outcome: Win]
-                        C1 --> D2[Outcome: Draw]
-                        C1 --> D3[Outcome: Loss]
-                    </div>
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.5 Intelligent Agents</h3>
-                <p>An <b>agent</b> is anything that perceives its environment through sensors and acts upon that environment through actuators.</p>
-                <div class="formula-card">
-                    <p><b>Mathematical definition:</b></p>
-                    <p>$$\text{Agent function: } f: P^* \to A$$</p>
-                    <p>where $P^*$ is the set of percept sequences and $A$ is the set of actions.</p>
-                </div>
-                <p><b>Agent = Architecture + Agent Program</b></p>
-                <ul>
-                    <li><b>Architecture:</b> The physical device (sensors, actuators, computational hardware)</li>
-                    <li><b>Agent Program:</b> The software that implements the agent function</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.6 Rationality</h3>
-                <p>A <b>rational agent</b> is one that for every possible percept sequence, selects an action that maximizes its expected performance measure, given:</p>
-                <ol>
-                    <li>The evidence from the percept sequence</li>
-                    <li>Any prior knowledge the agent has</li>
-                    <li>The actions it can perform</li>
-                </ol>
-                <p>Rationality ≠ Omniscience. A rational agent maximizes expected performance based on what it knows.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.7 PEAS Representation</h3>
-                <p><b>PEAS</b> defines the task environment of an agent:</p>
-                <ul>
-                    <li><b>P</b>erformance measure — How is success measured?</li>
-                    <li><b>E</b>nvironment — Where does the agent operate?</li>
-                    <li><b>A</b>ctuators — How does the agent act?</li>
-                    <li><b>S</b>ensors — How does the agent perceive?</li>
-                </ul>
-                <p><b>Example — Vacuum Cleaner Agent:</b></p>
-                <ul>
-                    <li>P: Clean floor, time taken</li>
-                    <li>E: Room A, Room B, dirt locations</li>
-                    <li>A: Wheels, vacuum pump</li>
-                    <li>S: Location sensor, dirt sensor</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>1.8 Types of Agents</h3>
-                <div class="mermaid">
-                graph TD
-                    A[Intelligent Agents] --> B[Simple Reflex]
-                    A --> C[Model-Based Reflex]
-                    A --> D[Goal-Based]
-                    A --> E[Utility-Based]
-                    A --> F[Learning Agent]
-                    B --> B1[Condition-Action Rules]
-                    C --> C1[Internal World Model]
-                    D --> D1[Goals and Planning]
-                    E --> E1[Utility Function]
-                    F --> F1[Improves over time]
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.9 Simple Reflex Agent</h3>
-                <p>The simplest agent type. Selects actions based only on the current percept, ignoring percept history.</p>
-                <p><b>Example rules:</b></p>
-                <ul>
-                    <li>IF (percept = dirty) THEN (action = suck)</li>
-                    <li>IF (percept = clean) AND (location = A) THEN (action = move right)</li>
-                    <li>IF (percept = clean) AND (location = B) THEN (action = move left)</li>
-                </ul>
-                <p><b>Limitation:</b> Cannot handle partial observability. For example, if the current square is clean but there is dirt two squares away, a simple reflex agent won't know to go there.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.10 Model-Based Reflex Agent</h3>
-                <p>Maintains an <b>internal state</b> that depends on the percept history and reflects at least some of the unobserved aspects of the current state.</p>
-                <p>Uses a <b>world model</b>: how the world evolves independently of the agent (transition model) and how the agent's actions affect the world (sensor model).</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.11 Goal-Based Agent</h3>
-                <p>Uses <b>goals</b> to choose between multiple possibilities. It reasons about future actions, considering "what will happen if I do X?" — this is the key advantage over reflex agents.</p>
-                <p>The agent must consider sequences of actions and find a path that leads to the goal state.</p>
-                <p><b>Trade-off:</b> Goal-based agents are more flexible but slower than reflex agents.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.12 Utility-Based Agent</h3>
-                <p>When there are multiple goals (often conflicting), or when there are multiple ways to achieve the same goal, a <b>utility function</b> maps each possible state to a real number representing how "good" the state is for the agent.</p>
-                <p>A utility-based agent chooses the action that maximizes expected utility. It enables rational decisions when:</p>
-                <ul>
-                    <li>Goals are not sufficient to determine the best action</li>
-                    <li>Trade-offs between conflicting goals are needed</li>
-                    <li>The probability of success is uncertain</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.13 Learning Agent</h3>
-                <p>A <b>learning agent</b> improves its performance over time. It has four conceptual components:</p>
-                <ul>
-                    <li><b>Learning Element:</b> Receives feedback and improves performance</li>
-                    <li><b>Performance Element:</b> Selects external actions (the agent itself)</li>
-                    <li><b>Critic:</b> Tells the learning element how well the agent is doing</li>
-                    <li><b>Problem Generator:</b> Suggests exploratory actions that lead to new experiences</li>
-                </ul>
-                <p>This design allows agents to operate in unknown environments and improve automatically with experience.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.14 Environment Types</h3>
-                <table style="width:100%;border-collapse:collapse;margin:1rem 0;">
-                    <tr style="background:#f1f5f9;"><th style="border:1px solid #ddd;padding:8px;">Property</th><th style="border:1px solid #ddd;padding:8px;">Description</th><th style="border:1px solid #ddd;padding:8px;">Example</th></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Fully Observable</td><td style="border:1px solid #ddd;padding:8px;">Sensors access full state</td><td style="border:1px solid #ddd;padding:8px;">Chess</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Partially Observable</td><td style="border:1px solid #ddd;padding:8px;">Some state hidden</td><td style="border:1px solid #ddd;padding:8px;">Poker, Taxi</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Deterministic</td><td style="border:1px solid #ddd;padding:8px;">Actions have predictable effects</td><td style="border:1px solid #ddd;padding:8px;">Chess, 8-puzzle</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Stochastic</td><td style="border:1px solid #ddd;padding:8px;">Outcomes involve uncertainty</td><td style="border:1px solid #ddd;padding:8px;">Backgammon, Taxi</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Episodic</td><td style="border:1px solid #ddd;padding:8px;">Each action independent</td><td style="border:1px solid #ddd;padding:8px;">Image classification</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Sequential</td><td style="border:1px solid #ddd;padding:8px;">Decisions affect future</td><td style="border:1px solid #ddd;padding:8px;">Chess, Driving</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Static</td><td style="border:1px solid #ddd;padding:8px;">World unchanged during deliberation</td><td style="border:1px solid #ddd;padding:8px;">Crossword</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Dynamic</td><td style="border:1px solid #ddd;padding:8px;">World changes during deliberation</td><td style="border:1px solid #ddd;padding:8px;">Taxi, Robot</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Discrete</td><td style="border:1px solid #ddd;padding:8px;">Finite states/actions</td><td style="border:1px solid #ddd;padding:8px;">Chess</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Continuous</td><td style="border:1px solid #ddd;padding:8px;">Infinite states</td><td style="border:1px solid #ddd;padding:8px;">Driving</td></tr>
-                </table>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.15 Problem Solving as State Space Search</h3>
-                <p><b>Search</b> is the core technique for AI problem solving. It involves systematically exploring the space of possible solutions.</p>
-                <p><b>Components of a Search Problem:</b></p>
-                <ul>
-                    <li><b>Initial State:</b> Where the agent starts</li>
-                    <li><b>Actions:</b> Available moves</li>
-                    <li><b>Transition Model:</b> $Result(s, a)$ — state after action $a$ in state $s$</li>
-                    <li><b>Goal Test:</b> Determines whether a state is a goal</li>
-                    <li><b>Path Cost:</b> Cost of a sequence of actions</li>
-                </ul>
-                <p>The <b>state space</b> is a graph representation of all reachable states.</p>
-            </div>
-
-            <div class="example-card">
-                <h3>1.16 Example — 8-Puzzle Problem</h3>
-                <ul>
-                    <li><b>States:</b> Each tile arrangement</li>
-                    <li><b>Initial State:</b> Any arrangement</li>
-                    <li><b>Actions:</b> Move a tile into the blank (up/down/left/right)</li>
-                    <li><b>Goal Test:</b> Configuration matches goal state</li>
-                    <li><b>Path Cost:</b> Each move costs 1</li>
-                </ul>
-                <p><b>Search tree branching factor:</b> at most 4, average 3</p>
-                <p><b>State space size:</b> $\frac{9!}{2} = 181,440$ reachable states</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.17 Production System</h3>
-                <p>A <b>production system</b> is a computational framework consisting of:</p>
-                <ol>
-                    <li><b>A set of production rules:</b> IF (condition) THEN (action)</li>
-                    <li><b>A working memory / knowledge base:</b> Stores current state</li>
-                    <li><b>A control strategy:</b> Determines rule selection order</li>
-                </ol>
-                <p><b>Conflict Resolution Strategies:</b></p>
-                <ul>
-                    <li><b>Specificity ordering:</b> More specific rules first</li>
-                    <li><b>Recency ordering:</b> Recently used rules first</li>
-                    <li><b>Rule ordering:</b> Predefined priority</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.18 Problem Characteristics</h3>
-                <ol>
-                    <li><b>Decomposable:</b> Can the problem be broken into sub-problems? (e.g., $a^2 \cdot b^2 = (a \cdot b)^2$)</li>
-                    <li><b>Solution steps ignorable:</b> Can any path work? (Chess vs route planning)</li>
-                    <li><b>Problem universe predictable:</b> Are outcomes certain?</li>
-                    <li><b>Solution quality measurable:</b> Is there a clear measure?</li>
-                    <li><b>Internal structure:</b> Is knowledge needed?</li>
-                    <li><b>Solution requires interaction:</b> Must agent interact with world?</li>
-                </ol>
-            </div>
-
-            <div class="tip-card">
-                <h3>1.19 Exam Tips — Unit 1</h3>
-                <ul>
-                    <li>For 1-mark: memorize definitions exactly (Agent, PEAS, Rational Agent)</li>
-                    <li>For 5-mark: draw neat diagrams (agent-environment loop, agent types)</li>
-                    <li>For 15-mark: focus on PEAS for multiple agent examples (vacuum, taxi, medical)</li>
-                    <li>Key formula: $f: P^* \to A$</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <h3>1.20 Unit 1 Summary</h3>
-                <ul>
-                    <li>AI creates intelligent systems for tasks requiring human-like cognition</li>
-                    <li>Problems include search, KR, learning, perception, NLP</li>
-                    <li>Agents perceive and act; PEAS defines their environment</li>
-                    <li>Five agent types: Simple Reflex → Model-Based → Goal → Utility → Learning</li>
-                    <li>Six environment properties characterize agent's operating context</li>
-                    <li>Problem solving = state space search via well-formed representation</li>
-                    <li>Production systems use IF-THEN rules with control strategy</li>
-                </ul>
-            </div>
-
-            <!-- ═══════════════ UNIT 2 ═══════════════ -->
-            <h2 class="section-title" id="unit-2">Unit 2: Search Techniques</h2>
-
-            <div class="concept-card">
-                <h3>2.1 Problem-Solving Agents</h3>
-                <p>A <b>problem-solving agent</b> is a goal-based agent that searches for a sequence of actions leading to a goal state. It uses atomic representations (states are indivisible).</p>
-                <p>The process:</p>
-                <ol>
-                    <li><b>Goal Formulation:</b> What goals to pursue</li>
-                    <li><b>Problem Formulation:</b> What actions and states to consider</li>
-                    <li><b>Search:</b> Find a sequence of actions</li>
-                    <li><b>Execution:</b> Carry out the actions</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.2 Search Algorithm Components</h3>
-                <ul>
-                    <li><b>Search Tree:</b> Generated during search</li>
-                    <li><b>Search Node:</b> A node in the tree (state + parent + action + path-cost + depth)</li>
-                    <li><b>Frontier / Open List:</b> Set of unexpanded nodes</li>
-                    <li><b>Explored Set / Closed List:</b> Set of expanded nodes (to avoid revisiting)</li>
-                    <li><b>Expansion:</b> Generating successors of a node</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.3 Search Strategy Evaluation</h3>
-                <p>Four criteria to evaluate search strategies:</p>
-                <ol>
-                    <li><b>Completeness:</b> Does it find a solution if one exists?</li>
-                    <li><b>Optimality:</b> Does it find the best (lowest-cost) solution?</li>
-                    <li><b>Time Complexity:</b> How long does it take? (nodes generated/expanded)</li>
-                    <li><b>Space Complexity:</b> How much memory? (nodes kept in memory)</li>
-                </ol>
-                <p><b>Notation:</b></p>
-                <ul>
-                    <li>$b$ = branching factor</li>
-                    <li>$d$ = depth of shallowest solution</li>
-                    <li>$m$ = maximum depth of search tree</li>
-                    <li>$l$ = depth limit</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.4 Breadth-First Search (BFS)</h3>
-                <p>BFS expands nodes in order of depth — all nodes at depth $d$ are expanded before any at depth $d+1$. It uses a <b>FIFO queue</b>.</p>
-                <div class="formula-card">
-                    <p><b>Complexity:</b></p>
-                    <p>Time: $O(b^d)$, Space: $O(b^d)$</p>
-                    <p>Complete: Yes | Optimal: Yes (for uniform step costs)</p>
-                </div>
-                <p><b>Algorithm:</b></p>
-                <pre><code class="language-python">from collections import deque
-def bfs(start, goal_test):
-    frontier = deque([start])
-    explored = {start}
-    while frontier:
-        node = frontier.popleft()
-        if goal_test(node):
-            return node
-        for child in expand(node):
-            if child not in explored:
-                explored.add(child)
-                frontier.append(child)
-    return None</code></pre>
-                <p><b>Drawback:</b> Memory grows exponentially with $b^d$. For $b=10, d=12$: ~28 GB needed.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.5 Depth-First Search (DFS)</h3>
-                <p>DFS expands the deepest unexpanded node first using a <b>LIFO stack</b>.</p>
-                <div class="formula-card">
-                    <p><b>Complexity:</b></p>
-                    <p>Time: $O(b^m)$, Space: $O(bm)$</p>
-                    <p>Complete: No (infinite paths) | Optimal: No</p>
-                </div>
-                <pre><code class="language-python">def dfs(start, goal_test):
-    frontier = [start]
-    explored = set()
-    while frontier:
-        node = frontier.pop()
-        if goal_test(node):
-            return node
-        if node not in explored:
-            explored.add(node)
-            for child in expand(node):
-                frontier.append(child)
-    return None</code></pre>
-                <p><b>Pros:</b> Very memory-efficient (only one path in memory at a time).</p>
-                <p><b>Cons:</b> Can get stuck in long or infinite paths; not optimal.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.6 Depth-Limited Search (DLS)</h3>
-                <p>DLS is DFS with a depth limit $\ell$ to avoid infinite paths. If the depth limit is reached without finding a goal, it backtracks.</p>
-                <p><b>Properties:</b></p>
-                <ul>
-                    <li>Complete: Yes, if $\ell \geq d$</li>
-                    <li>Optimal: Yes, if $\ell = d$ (and unit costs)</li>
-                    <li>Time: $O(b^\ell)$, Space: $O(b\ell)$</li>
-                </ul>
-                <p><b>Problem:</b> Choosing $\ell$ requires some knowledge of the problem.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.7 Iterative Deepening DFS (IDDFS)</h3>
-                <p>IDDFS repeatedly runs DLS with increasing depth limits $\ell = 0, 1, 2, ...$ until a goal is found.</p>
-                <p><b>Properties:</b></p>
-                <ul>
-                    <li>Complete and optimal</li>
-                    <li>Time: $O(b^d)$, Space: $O(bd)$</li>
-                </ul>
-                <p>Although nodes are generated multiple times, the overhead is acceptable because most nodes are at the deepest level. IDDFS combines BFS's optimality with DFS's space efficiency.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.8 Bidirectional Search</h3>
-                <p>Runs two searches simultaneously — one forward from the initial state, one backward from the goal — and stops when they meet.</p>
-                <p><b>Time:</b> $O(b^{d/2})$, <b>Space:</b> $O(b^{d/2})$</p>
-                <p><b>Requirements:</b></p>
-                <ul>
-                    <li>The reverse action must be defined: $Pred(s, a)$</li>
-                    <li>Both searches must meet at a common state</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>2.9 Search Strategies Comparison</h3>
-                <div class="mermaid">
-                graph TD
-                    A[Search Strategies] --> B[Uninformed/Blind]
-                    A --> C[Informed/Heuristic]
-                    B --> B1[BFS]
-                    B --> B2[DFS]
-                    B --> B3[DLS]
-                    B --> B4[IDDFS]
-                    B --> B5[Bidirectional]
-                    C --> C1[Greedy Best-First]
-                    C --> C2[A*]
-                    C --> C3[SMA*]
-                    C --> C4[IDA*]
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.10 Heuristic Functions</h3>
-                <p>A <b>heuristic function</b> $h(n)$ estimates the cost of the cheapest path from $n$ to a goal.</p>
-                <p><b>Properties:</b></p>
-                <ul>
-                    <li><b>Admissible:</b> $h(n) \leq h^*(n)$ (never overestimates actual cost)</li>
-                    <li><b>Consistent (Monotonic):</b> $h(n) \leq c(n, a, n') + h(n')$</li>
-                </ul>
-                <p><b>Examples:</b></p>
-                <ul>
-                    <li><b>Manhattan Distance (8-puzzle):</b> sum of horizontal+vertical distances of each tile from goal</li>
-                    <li><b>Euclidean Distance (route finding):</b> straight-line distance</li>
-                    <li><b>Misplaced Tiles (8-puzzle):</b> count of tiles in wrong position</li>
-                </ul>
-                <div class="formula-card">
-                    <p><b>Dominance:</b> If $h_2(n) \geq h_1(n)$ for all $n$, then $h_2$ <b>dominates</b> $h_1$. For solvable problems with unit-cost actions, the heuristic with higher value gives better search efficiency.</p>
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.11 Greedy Best-First Search</h3>
-                <p>Greedy Best-First expands the node with the lowest $h(n)$ value — the node that appears closest to the goal.</p>
-                <p>$f(n) = h(n)$</p>
-                <p><b>Properties:</b></p>
-                <ul>
-                    <li>Complete: No (can get stuck in infinite loops)</li>
-                    <li>Optimal: No</li>
-                    <li>Time: $O(b^m)$, Space: $O(b^m)$ worst case</li>
-                </ul>
-                <p><b>Example:</b> For driving from Arad to Bucharest, use straight-line distance to Bucharest as heuristic. Greedy goes toward Bucharest but may miss optimal routes.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.12 A* Search</h3>
-                <p>A* combines path cost and heuristic estimate:</p>
-                <div class="formula-card">
-                    <p>$$f(n) = g(n) + h(n)$$</p>
-                    <p>where $g(n)$ is the actual cost from start to $n$ and $h(n)$ is the estimated cost from $n$ to goal.</p>
-                </div>
-                <p><b>Optimality Theorem:</b> If $h(n)$ is admissible, A* is both complete and optimal.</p>
-                <p><b>Why optimal?</b> Any suboptimal goal $G_2$ would have $f(G_2) = g(G_2) > f(G_1)$ where $G_1$ is optimal. A* would select $G_1$ before $G_2$ because every node expanded has $f(n) < f(G_2)$.</p>
-                <p><b>Consistent Heuristic + A* = Optimal without re-expansion</b></p>
-            </div>
-
-            <div class="example-card">
-                <h3>2.13 A* Example — Romania Route Finding</h3>
-                <p>From <b>Arad</b> to <b>Bucharest</b> using $f(n) = g(n) + h(n)$ where $h$ = straight-line distance to Bucharest:</p>
-                <table style="width:100%;border-collapse:collapse;margin:1rem 0;">
-                    <tr style="background:#f1f5f9;"><th style="border:1px solid #ddd;padding:8px;">Node</th><th style="border:1px solid #ddd;padding:8px;">$g(n)$</th><th style="border:1px solid #ddd;padding:8px;">$h(n)$</th><th style="border:1px solid #ddd;padding:8px;">$f(n)$</th></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Arad</td><td style="border:1px solid #ddd;padding:8px;">0</td><td style="border:1px solid #ddd;padding:8px;">366</td><td style="border:1px solid #ddd;padding:8px;">366</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Sibiu</td><td style="border:1px solid #ddd;padding:8px;">140</td><td style="border:1px solid #ddd;padding:8px;">253</td><td style="border:1px solid #ddd;padding:8px;">393</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Rimnicu Vilcea</td><td style="border:1px solid #ddd;padding:8px;">220</td><td style="border:1px solid #ddd;padding:8px;">193</td><td style="border:1px solid #ddd;padding:8px;">413</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Fagaras</td><td style="border:1px solid #ddd;padding:8px;">239</td><td style="border:1px solid #ddd;padding:8px;">176</td><td style="border:1px solid #ddd;padding:8px;">415</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Pitesti</td><td style="border:1px solid #ddd;padding:8px;">317</td><td style="border:1px solid #ddd;padding:8px;">100</td><td style="border:1px solid #ddd;padding:8px;">417</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Bucharest</td><td style="border:1px solid #ddd;padding:8px;">418</td><td style="border:1px solid #ddd;padding:8px;">0</td><td style="border:1px solid #ddd;padding:8px;">418</td></tr>
-                </table>
-                <p>A* picks node with lowest $f(n)$ at each step, guaranteeing an optimal path.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.14 Memory-Bounded Heuristic Search</h3>
-                <p><b>IDA* (Iterative Deepening A*):</b> Uses f-cost as cutoff instead of depth. Each iteration is DLS with f-cost limit.</p>
-                <p><b>SMA* (Simplified Memory-Bounded A*):</b> Uses all available memory. When memory is full, drops the worst leaf and writes it to disk. When generating a node already in memory, updates its cost. Recovers forgotten information when needed.</p>
-                <p>SMA* is optimally efficient — given $M$ memory, no algorithm using $M$ memory can expand fewer nodes than SMA*.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.15 Hill Climbing Search</h3>
-                <p>Hill climbing is a loop that keeps moving in the direction of increasing value until a peak is reached.</p>
-                <p><b>Algorithm:</b></p>
-                <pre><code class="language-python">def hill_climbing(problem):
-    current = problem.initial_state()
-    while True:
-        neighbors = problem.expand(current)
-        if not neighbors: return current
-        neighbor = max(neighbors, key=problem.evaluate)
-        if problem.evaluate(neighbor) <= problem.evaluate(current):
-            return current
-        current = neighbor</code></pre>
-                <p><b>Problems:</b></p>
-                <ul>
-                    <li><b>Local Maxima:</b> Better than neighbors but not global optimum</li>
-                    <li><b>Ridges:</b> Sequence of local maxima making navigation hard</li>
-                    <li><b>Plateaux:</b> Flat region; no uphill direction but not optimum</li>
-                </ul>
-                <p><b>Variants:</b></p>
-                <ul>
-                    <li><b>Steepest-Ascent:</b> Move to best of all neighbors</li>
-                    <li><b>First-Choice:</b> Move to first better neighbor found</li>
-                    <li><b>Random-Restart:</b> Run multiple times from random starts</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.16 Simulated Annealing</h3>
-                <p>Simulated Annealing (SA) combines hill climbing with a random walk in a way that allows downhill moves to escape local maxima.</p>
-                <div class="formula-card">
-                    <p><b>Acceptance Probability:</b></p>
-                    <p>$$P(\text{accept bad move}) = e^{-\Delta E / T}$$</p>
-                    <p>where $\Delta E > 0$ is the energy increase and $T$ is the current temperature.</p>
-                </div>
-                <p><b>Algorithm:</b></p>
-                <pre><code class="language-python">import random, math
-def simulated_annealing(problem, schedule):
-    current = problem.initial_state()
-    for t in range(1, 100000):
-        T = schedule(t)
-        if T == 0: return current
-        next_node = random.choice(problem.expand(current))
-        delta_e = problem.evaluate(next_node) - problem.evaluate(current)
-        if delta_e > 0 or random.random() < math.exp(delta_e / T):
-            current = next_node</code></pre>
-                <p>As $T \to 0$, SA behaves like hill climbing; as $T \to \infty$, it makes random moves.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.17 Local Beam Search</h3>
-                <p>Beam Search keeps track of $k$ states at each level. At each iteration, all successors of all $k$ states are generated, and the $k$ best are kept.</p>
-                <p><b>Stochastic Beam Search:</b> Instead of always picking the $k$ best, sample $k$ successors with probability proportional to their evaluation — maintains diversity.</p>
-                <p>Beam Search helps when there are many paths of similar cost that can share information.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.18 Genetic Algorithms</h3>
-                <p>A <b>genetic algorithm (GA)</b> is a stochastic beam search variant with a population of size $k$ and generation operators inspired by evolution.</p>
-                <p><b>Steps per generation:</b></p>
-                <ol>
-                    <li><b>Selection:</b> Choose fit individuals for reproduction</li>
-                    <li><b>Crossover:</b> Combine pairs to produce offspring</li>
-                    <li><b>Mutation:</b> Randomly perturb offspring chromosomes</li>
-                    <li><b>Replacement:</b> Replace weakest with offspring</li>
-                </ol>
-                <pre><code class="language-python">import random
-
-def fitness(chromosome):
-    return sum(1 for i, c in enumerate(chromosome) if c == goal[i])
-
-def crossover(p1, p2):
-    point = random.randint(1, len(p1) - 1)
-    return p1[:point] + p2[point:]
-
-def mutate(chromosome, rate=0.01):
-    return [gene if random.random() > rate else 1 - gene
-            for gene in chromosome]
-
-def ga(population, fitness_fn, generations=100):
-    for _ in range(generations):
-        scored = [(fitness_fn(ind), ind) for ind in population]
-        scored.sort(reverse=True)
-        selected = [ind for _, ind in scored[:len(population)//2]]
-        offspring = []
-        while len(offspring) < len(population):
-            p1, p2 = random.sample(selected, 2)
-            child = mutate(crossover(p1, p2))
-            offspring.append(child)
-        population = offspring
-    return max(population, key=fitness_fn)</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.19 Constraint Satisfaction Problems</h3>
-                <p>A <b>CSP</b> consists of:</p>
-                <ul>
-                    <li>A set of <b>variables</b> $X = \{X_1, ..., X_n\}$</li>
-                    <li>A set of <b>domains</b> $D = \{D_1, ..., D_n\}$</li>
-                    <li>A set of <b>constraints</b> $C = \{C_1, ..., C_m\}$</li>
-                </ul>
-                <p><b>Constraint Types:</b></p>
-                <ul>
-                    <li><b>Unary:</b> Involves one variable (e.g., $X_1 \neq 3$)</li>
-                    <li><b>Binary:</b> Involves two variables (e.g., $X_1 \neq X_2$)</li>
-                    <li><b>Higher-order:</b> Involves 3+ variables</li>
-                </ul>
-                <p><b>Examples:</b> 8-queens, map coloring, scheduling, Sudoku, crosswords</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.20 Constraint Propagation</h3>
-                <p><b>Arc Consistency (AC-3):</b> An arc $(X_i, X_j)$ is consistent if for every value in $D_i$, there is some value in $D_j$ that satisfies the binary constraint. AC-3 removes values from domains that cannot be part of any solution.</p>
-                <pre><code class="language-python">def ac3(csp):
-    queue = [(Xi, Xj) for Xi in csp.vars for Xj in csp.neighbors[Xi]]
-    while queue:
-        Xi, Xj = queue.pop()
-        if revise(csp, Xi, Xj):
-            if not csp.domains[Xi]:
-                return False
-            for Xk in csp.neighbors[Xi] - {Xj}:
-                queue.append((Xk, Xi))
-    return True
-
-def revise(csp, Xi, Xj):
-    revised = False
-    for x in set(csp.domains[Xi]):
-        if not any(csp.constraint(x, y) for y in csp.domains[Xj]):
-            csp.domains[Xi].remove(x)
-            revised = True
-    return revised</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.21 Backtracking Search</h3>
-                <p><b>Backtracking</b> is the basic algorithm for CSPs — assigns variables one at a time, backtracking when constraints are violated.</p>
-                <p><b>Variable Selection Heuristics:</b></p>
-                <ul>
-                    <li><b>MRV (Minimum Remaining Values):</b> Choose variable with fewest legal values</li>
-                    <li><b>Degree Heuristic:</b> Choose variable involved in most constraints on remaining vars</li>
-                </ul>
-                <p><b>Value Ordering Heuristic:</b></p>
-                <ul>
-                    <li><b>LCV (Least Constraining Value):</b> Choose value that rules out fewest choices for neighbors</li>
-                </ul>
-                <p><b>Forward Checking:</b> When $X$ is assigned, delete from neighbors' domains any value inconsistent with $X$'s assignment.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.22 Adversarial Search (Game Playing)</h3>
-                <p><b>Games</b> are adversarial problems where multiple agents have conflicting goals. AI games typically assume:</p>
-                <ul>
-                    <li>Two players (MAX and MIN)</li>
-                    <li>Zero-sum (one player's gain = other's loss)</li>
-                    <li>Perfect information (chess, checkers)</li>
-                    <li>Deterministic (no dice)</li>
-                </ul>
-                <div class="formula-card">
-                    <p><b>:</b></p>
-                    <p>$$(s) = \begin{cases} u(s) & \text{if terminal} \\ \max_{a} (Result(s,a)) & \text{if MAX's turn} \\ \min_{a} (Result(s,a)) & \text{if MIN's turn} \end{cases}$$</p>
-                </div>
-                <p>The recursion goes all the way to terminal states, computing utilities for leaves and propagating values up the tree.</p>
-            </div>
-
-            <div class="diagram-card">
-                <h3>2.23  Tree Example</h3>
-                <div class="mermaid">
-                graph TD
-                    A["A (MAX)"] --> B["B (MIN)"]
-                    A --> C["C (MIN)"]
-                    A --> D["D (MIN)"]
-                    B --> B1["3"]
-                    B --> B2["12"]
-                    B --> B3["8"]
-                    C --> C1["2"]
-                    C --> C2["4"]
-                    C --> C3["6"]
-                    D --> D1["14"]
-                    D --> D2["5"]
-                    D --> D3["2"]
-                </div>
-                <p><b>Result:</b> B = min(3,12,8) = 3, C = min(2,4,6) = 2, D = min(14,5,2) = 2</p>
-                <p>A = max(3, 2, 2) = 3 → choose path B</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.24 Alpha-Beta Pruning</h3>
-                <p>Alpha-Beta computes the same value as  but prunes branches that cannot influence the decision.</p>
-                <ul>
-                    <li><b>$\alpha$:</b> Value of best (highest) choice found for MAX so far</li>
-                    <li><b>$\beta$:</b> Value of best (lowest) choice found for MIN so far</li>
-                    <li>Prune when $\alpha \geq \beta$</li>
-                </ul>
-                <p><b>Properties:</b></p>
-                <ul>
-                    <li>With perfect ordering: $O(b^{d/2})$ — can search twice as deep</li>
-                    <li>With random ordering: $O(b^{3d/4})$</li>
-                </ul>
-                <p><b>Best ordering heuristics:</b></p>
-                <ul>
-                    <li>Try best moves first (using killer moves, history heuristic)</li>
-                    <li>Use iterative deepening to find good moves early</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.25 Iterative Deepening for Games</h3>
-                <p>Iterative Deepening A* (IDA*) combines A* with iterative deepening for game trees with limited time.</p>
-                <p>Strategy:</p>
-                <ol>
-                    <li>Search to depth 1, record best move and value</li>
-                    <li>Search to depth 2, if time permits</li>
-                    <li>Continue until time runs out</li>
-                    <li>Play best move found at deepest completed search</li>
-                </ol>
-                <p>This allows the program to always have a move ready, even when it cannot complete a deep search.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.26 Additional Game Refinements</h3>
-                <p><b>Transposition Tables:</b> Store hash of board states to recognize repeated positions.</p>
-                <p><b>Quiescence Search:</b> Extend search at "noisy" positions (captures, checks) to avoid horizon effect.</p>
-                <p><b>Move Ordering:</b> Try likely good moves first to maximize pruning.</p>
-                <p><b>Killer Moves:</b> Heuristic that tracks moves that caused beta cutoffs at a given depth.</p>
-                <p><b>Null-Move Pruning:</b> Skip a move to see if current position is still good — useful for pruning.</p>
-                <p><b>Late Move Reduction:</b> Search less deeply on late moves in the move list.</p>
-            </div>
-
-            <div class="tip-card">
-                <h3>2.27 Exam Tips — Unit 2</h3>
-                <ul>
-                    <li>Memorize complexity formulas: BFS $O(b^d)$, DFS $O(bm)$</li>
-                    <li>For 5-mark: always draw search tree diagrams</li>
-                    <li>A* $f(n) = g(n) + h(n)$ — admissible heuristic for optimality</li>
-                    <li>Hill Climbing: local maxima problem, use random restart</li>
-                    <li>Simulated Annealing: $P = e^{-\Delta E / T}$</li>
-                    <li>Alpha-Beta: prune when $\alpha \geq \beta$</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <h3>2.28 Unit 2 Summary</h3>
-                <ul>
-                    <li><b>Uninformed search:</b> BFS (optimal, memory-heavy), DFS (memory-efficient, incomplete), DLS, IDDFS, Bidirectional</li>
-                    <li><b>Heuristic search:</b> Greedy (fast, not optimal), A* (optimal if admissible heuristic), SMA* (memory-bounded)</li>
-                    <li><b>Local search:</b> Hill Climbing, Simulated Annealing, Beam Search, Genetic Algorithms — for optimization problems</li>
-                    <li><b>CSPs:</b> Backtracking + heuristics (MRV, LCV) + constraint propagation (AC-3)</li>
-                    <li><b>Adversarial search:</b>  + Alpha-Beta pruning + Iterative Deepening</li>
-                </ul>
-            </div>
-
-            <!-- ═══════════════ UNIT 3 ═══════════════ -->
-            <h2 class="section-title" id="unit-3">Unit 3: Knowledge &amp; Reasoning</h2>
-
-            <div class="concept-card">
-                <h3>3.1 Knowledge Representation (KR)</h3>
-                <p><b>Knowledge Representation</b> is the field of AI concerned with encoding knowledge about the world in a form that a computer system can use to solve complex tasks.</p>
-                <p>A good KR system should support:</p>
-                <ol>
-                    <li><b>Representational Adequacy:</b> Express all needed knowledge</li>
-                    <li><b>Inferential Adequacy:</b> Allow deriving new knowledge</li>
-                    <li><b>Inferential Efficiency:</b> Reason efficiently</li>
-                    <li><b>Acquisitional Efficiency:</b> Acquire new knowledge easily</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.2 Mapping Between Representations</h3>
-                <p>When designing KR, three levels of representation must be aligned:</p>
-                <ul>
-                    <li><b>Knowledge Level:</b> What is known (declarative)</li>
-                    <li><b>Logical Level:</b> How knowledge is encoded (sentences)</li>
-                    <li><b>Implementation Level:</b> How sentences are stored physically</li>
-                </ul>
-                <p>The mapping between levels must be efficient for the inference procedures used.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.3 Approaches to Knowledge Representation</h3>
-                <ol>
-                    <li><b>Simple Relational Knowledge:</b> Use tables/relations. Limited inference.</li>
-                    <li><b>Inheritable Knowledge:</b> Class hierarchy with inheritance (e.g., semantic networks, frames).</li>
-                    <li><b>Inferential Knowledge:</b> Use logic (predicate logic) — supports full inference.</li>
-                    <li><b>Procedural Knowledge:</b> Encode knowledge as procedures (IF-THEN rules).</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.4 Semantic Networks</h3>
-                <p>A <b>semantic network</b> is a graph where nodes represent concepts and edges represent relationships.</p>
-                <div class="diagram-card">
-                    <div class="mermaid">
-                    graph TD
-                        A[Animal] -->|is-a| B[Bird]
-                        B -->|is-a| C[Canary]
-                        C -->|has-property| D[yellow]
-                        C -->|has-property| E[sings]
-                        A -->|is-a| F[Dog]
-                        F -->|is-a| G[Rex]
-                        G -->|has-property| H[brown]
-                    </div>
-                </div>
-                <p><b>Features:</b> Inheritance, semantic distance, semantic similarity. Used in natural language understanding and knowledge graphs (e.g., WordNet, Google Knowledge Graph).</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.5 Frames</h3>
-                <p>A <b>frame</b> is a data structure representing a stereotypical situation with slots and fillers.</p>
-                <pre><code class="language-text">Frame: Bird
-  isa: Animal
-  has_part: wings
-  has_part: feathers
-  can_fly: yes
-  default_color: varies
-
-Frame: Canary (inherits from Bird)
-  isa: Bird
-  default_color: yellow
-  can_fly: yes
-
-Frame: Penguin (inherits from Bird)
-  isa: Bird
-  can_fly: no  # override
-  habitat: Antarctic</code></pre>
-                <p>Frames support <b>default values</b>, <b>inheritance</b>, and <b>exception handling</b> — unlike strict logic which requires everything explicitly.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.6 Production Rules</h3>
-                <p><b>Production rules</b> encode knowledge in IF-THEN format:</p>
-                <pre><code class="language-text">IF (patient has fever)
-AND (patient has cough)
-THEN (possible_diagnosis is infection)
-
-IF (infection = bacterial)
-AND (not allergic to penicillin)
-THEN (prescribe amoxicillin)</code></pre>
-                <p><b>Advantages:</b> Modular, easy to add/modify rules, transparent reasoning.</p>
-                <p><b>Limitations:</b> Scaling, conflict resolution, no generalization.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.7 Issues in Knowledge Representation</h3>
-                <ol>
-                    <li><b>Granularity:</b> What is a single fact vs. a derived fact?</li>
-                    <li><b>Defaults:</b> How to handle exceptions (most birds fly, but penguins don't)?</li>
-                    <li><b>Negation:</b> How to represent "not" cleanly?</li>
-                    <li><b>Disjunction:</b> How to express OR?</li>
-                    <li><b>Quantifiers:</b> How to represent "all" and "some"?</li>
-                    <li><b>Inference direction:</b> Forward (data-driven) vs Backward (goal-driven)?</li>
-                    <li><b>Belief Revision:</b> How to update knowledge when new info arrives?</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.8 Logic-Based Representation</h3>
-                <p><b>Propositional Logic:</b></p>
-                <ul>
-                    <li>Atomic propositions: $P$, $Q$, $R$</li>
-                    <li>Connectives: $\land, \lor, \neg, \to, \leftrightarrow$</li>
-                    <li>Truth values: true/false</li>
-                </ul>
-                <p><b>Predicate Logic (FOL):</b></p>
-                <ul>
-                    <li>Predicates: $\text{Bird}(x)$, $\text{Friend}(x, y)$</li>
-                    <li>Quantifiers: $\forall, \exists$</li>
-                    <li>Functions: $\text{FatherOf}(x)$</li>
-                </ul>
-            </div>
-
-            <div class="tip-card">
-                <h3>3.9 Exam Tips — Unit 3</h3>
-                <ul>
-                    <li>Know all 5 issues in KR (representational adequacy, etc.)</li>
-                    <li>Compare semantic networks vs frames vs logic</li>
-                    <li>Draw a frame inheritance diagram for 5-mark questions</li>
-                    <li>Be ready to compare 4 KR approaches</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <h3>3.10 Unit 3 Summary</h3>
-                <ul>
-                    <li>KR encodes knowledge for AI to reason about</li>
-                    <li>Five key requirements for any KR scheme</li>
-                    <li>Four main approaches: relational, inheritable, inferential (logic), procedural</li>
-                    <li>Issues: granularity, defaults, negation, quantifiers, belief revision</li>
-                    <li>Semantic networks and frames support inheritance; logic supports full deduction</li>
-                </ul>
-            </div>
-
-            <!-- ═══════════════ UNIT 4 ═══════════════ -->
-            <h2 class="section-title" id="unit-4">Unit 4: Using Predicate Logic &amp; Probabilistic Reasoning</h2>
-
-            <div class="concept-card">
-                <h3>4.1 First-Order Predicate Logic (FOL)</h3>
-                <p>FOL is the foundation of many KR and reasoning systems. It extends propositional logic with:</p>
-                <ul>
-                    <li><b>Constants:</b> Specific objects (e.g., $Ram$, $5$, $Bucharest$)</li>
-                    <li><b>Variables:</b> Stand for any object (e.g., $x$, $y$)</li>
-                    <li><b>Predicates:</b> Describe properties or relations (e.g., $Brother(x, y)$)</li>
-                    <li><b>Functions:</b> Map objects to objects (e.g., $Father(x)$)</li>
-                    <li><b>Quantifiers:</b> $\forall$ (all), $\exists$ (some)</li>
-                </ul>
-            </div>
-
-            <div class="example-card">
-                <h3>4.2 Representing Simple Facts in Logic</h3>
-                <pre><code class="language-text">Father(Ram, Shyam)
-Mother(Sita, Ram)
-Male(Ram)
-Female(Sita)
-Person(Ram)
-King(Ram)
-Person(Ram) → Mortal(Ram)
-∀x (Person(x) → ∃y (Father(y, x)))
-∀x (Student(x) → ∃y (Enrolled(x, y)))
-∀x ∀y (Father(x, y) → Parent(x, y))
-∀x (Parent(x, y) ∧ Male(x) → Father(x, y))</code></pre>
-                <p><b>Predicate Logic examples for the exam:</b></p>
-                <ol>
-                    <li><b>John is a student:</b> $Student(John)$</li>
-                    <li><b>John studies AI:</b> $Studies(John, AI)$</li>
-                    <li><b>Every student studies AI:</b> $\forall x (Student(x) \to Studies(x, AI))$</li>
-                    <li><b>Some students study AI:</b> $\exists x (Student(x) \land Studies(x, AI))$</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.3 Representing Instant and ISA Relationships</h3>
-                <p><b>Instant Relationship:</b> A specific individual is an instance of a class.</p>
-                <ul>
-                    <li>$King(John)$ — John is a king</li>
-                    <li>$Brother(John, Mary)$ — John is a brother of Mary</li>
-                </ul>
-                <p><b>ISA Relationship:</b> A class is a subclass of another class.</p>
-                <ul>
-                    <li>$\forall x (King(x) \to Person(x))$ — Every king is a person</li>
-                    <li>$\forall x (Elephant(x) \to Mammal(x))$ — Every elephant is a mammal</li>
-                </ul>
-                <p><b>Subsumption:</b> A specific concept is a subset of a more general concept.</p>
-                <ul>
-                    <li>$Elephant \subseteq Mammal$</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.4 Computable Functions and Predicates</h3>
-                <p><b>Functions</b> return a single value:</p>
-                <ul>
-                    <li>$FatherOf(John) = Bob$</li>
-                    <li>$Square(3) = 9$</li>
-                    <li>$Length(FatherOf(John))$ — composition</li>
-                </ul>
-                <p><b>Equality</b> $FatherOf(John) = FatherOf(Bob)$ — same person.</p>
-                <p><b>Predicates</b> return true/false. They can express:</p>
-                <ul>
-                    <li><b>Properties:</b> $Red(Car_1)$</li>
-                    <li><b>Relations:</b> $Greater(3, 2)$</li>
-                    <li><b>Membership:</b> $In(A, B)$</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.5 Resolution — Refutation Method</h3>
-                <p><b>Resolution</b> is a complete inference method for FOL. It works by refutation — to prove $G$, we assume $\neg G$ and derive a contradiction.</p>
-                <p><b>Resolution Rule (Propositional):</b> From $P \lor Q$ and $\neg P \lor R$, derive $Q \lor R$.</p>
-                <p><b>Resolution Rule (FOL):</b></p>
-                <ul>
-                    <li>From $P(x) \lor Q(x)$ and $\neg P(A) \lor R$, derive $Q(A) \lor R$</li>
-                    <li>Variables can be substituted via <b>unification</b></li>
-                </ul>
-                <p><b>Steps:</b></p>
-                <ol>
-                    <li>Convert KB to CNF (Conjunctive Normal Form)</li>
-                    <li>Negate the goal</li>
-                    <li>Apply resolution until empty clause $\Box$ is derived</li>
-                </ol>
-            </div>
-
-            <div class="example-card">
-                <h3>4.6 Resolution Example</h3>
-                <p><b>Given:</b></p>
-                <ol>
-                    <li>$\forall x (King(x) \to Person(x))$</li>
-                    <li>$King(John)$</li>
-                    <li><b>Goal:</b> $Person(John)$</li>
-                </ol>
-                <p><b>In CNF:</b></p>
-                <ol>
-                    <li>$\neg King(x) \lor Person(x)$</li>
-                    <li>$King(John)$</li>
-                    <li>$\neg Person(John)$ (negated goal)</li>
-                </ol>
-                <p><b>Resolution:</b></p>
-                <ul>
-                    <li>From (1) and (3): $\neg King(John)$</li>
-                    <li>From (2) and above: $\Box$ (empty clause — contradiction!)</li>
-                </ul>
-                <p><b>Therefore:</b> $Person(John)$ is proved.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.7 Unification</h3>
-                <p><b>Unification</b> finds a substitution $\theta$ that makes two logical expressions identical.</p>
-                <pre><code class="language-python">def unify(x, y, subst={}):
-    if subst is None: return None
-    if x == y: return subst
-    if is_variable(x):
-        return unify_var(x, y, subst)
-    if is_variable(y):
-        return unify_var(y, x, subst)
-    if is_compound(x) and is_compound(y):
-        return unify(x.args, y.args, unify(x.op, y.op, subst))
-    if isinstance(x, list) and isinstance(y, list):
-        if not x: return subst
-        head_subst = unify(x[0], y[0], subst)
-        return unify(x[1:], y[1:], head_subst)
-    return None</code></pre>
-                <p><b>Example:</b> Unify $Knows(John, x)$ with $Knows(y, Mary)$ → $\theta = \{x/Mary, y/John\}$</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.8 Natural Deduction</h3>
-                <p><b>Natural Deduction</b> uses inference rules mirroring human reasoning:</p>
-                <table style="width:100%;border-collapse:collapse;margin:1rem 0;">
-                    <tr style="background:#f1f5f9;"><th style="border:1px solid #ddd;padding:8px;">Rule</th><th style="border:1px solid #ddd;padding:8px;">Premises</th><th style="border:1px solid #ddd;padding:8px;">Conclusion</th></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Modus Ponens</td><td style="border:1px solid #ddd;padding:8px;">$P \to Q$, $P$</td><td style="border:1px solid #ddd;padding:8px;">$Q$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Modus Tollens</td><td style="border:1px solid #ddd;padding:8px;">$P \to Q$, $\neg Q$</td><td style="border:1px solid #ddd;padding:8px;">$\neg P$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">And Elimination</td><td style="border:1px solid #ddd;padding:8px;">$P \land Q$</td><td style="border:1px solid #ddd;padding:8px;">$P$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">And Introduction</td><td style="border:1px solid #ddd;padding:8px;">$P$, $Q$</td><td style="border:1px solid #ddd;padding:8px;">$P \land Q$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Or Introduction</td><td style="border:1px solid #ddd;padding:8px;">$P$</td><td style="border:1px solid #ddd;padding:8px;">$P \lor Q$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Universal Elim.</td><td style="border:1px solid #ddd;padding:8px;">$\forall x P(x)$</td><td style="border:1px solid #ddd;padding:8px;">$P(a)$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Existential Intro.</td><td style="border:1px solid #ddd;padding:8px;">$P(a)$</td><td style="border:1px solid #ddd;padding:8px;">$\exists x P(x)$</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Hypothetical Syllogism</td><td style="border:1px solid #ddd;padding:8px;">$P \to Q$, $Q \to R$</td><td style="border:1px solid #ddd;padding:8px;">$P \to R$</td></tr>
-                </table>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.9 Probabilistic Reasoning</h3>
-                <p>Real-world knowledge is often uncertain. Probability theory provides a mathematical framework for reasoning under uncertainty.</p>
-                <p><b>Bayes' Theorem:</b></p>
-                <div class="formula-card">
-                    <p>$$P(A|B) = \frac{P(B|A) \cdot P(A)}{P(B)}$$</p>
-                </div>
-                <p>where $P(A|B)$ is the posterior, $P(B|A)$ is the likelihood, $P(A)$ is the prior.</p>
-                <p><b>Example — Medical Diagnosis:</b></p>
-                <ul>
-                    <li>Disease prevalence: $P(D) = 0.001$</li>
-                    <li>Test sensitivity: $P(+|D) = 0.99$</li>
-                    <li>Test specificity: $P(-|\neg D) = 0.99$</li>
-                    <li>$P(D|+) = \frac{0.99 \times 0.001}{0.99 \times 0.001 + 0.01 \times 0.999} \approx 0.09$ (only 9%!)</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.10 Bayesian Networks</h3>
-                <p>A <b>Bayesian Network</b> is a directed acyclic graph representing probabilistic dependencies among variables.</p>
-                <p><b>Components:</b></p>
-                <ol>
-                    <li><b>Nodes:</b> Random variables</li>
-                    <li><b>Edges:</b> Direct dependencies</li>
-                    <li><b>CPT (Conditional Probability Table):</b> For each node, $P(X | Parents(X))$</li>
-                </ol>
-                <p><b>Joint Distribution:</b></p>
-                <div class="formula-card">
-                    <p>$$P(X_1, ..., X_n) = \prod_{i=1}^n P(X_i | Parents(X_i))$$</p>
-                </div>
-                <p><b>Inference:</b> Compute posterior probabilities given evidence — exact (enumeration, variable elimination) or approximate (MCMC, Gibbs sampling).</p>
-            </div>
-
-            <div class="example-card">
-                <h3>4.11 Bayesian Network Example — Medical Diagnosis</h3>
-                <div class="diagram-card">
-                    <div class="mermaid">
-                    graph TD
-                        A[Cold] --> C[Fever]
-                        B[Flu] --> C
-                        B --> D[BodyAche]
-                        A --> E[Cough]
-                        B --> E
-                    </div>
-                </div>
-                <p><b>Probabilities:</b></p>
-                <pre><code class="language-python">P(Cold) = 0.05
-P(Flu) = 0.02
-P(Fever | Cold, Flu) = {T,T: 0.95, T,F: 0.85, F,T: 0.90, F,F: 0.05}
-P(Cough | Cold, Flu) = {T,T: 0.95, T,F: 0.90, F,T: 0.85, F,F: 0.05}
-P(BodyAche | Flu) = {T: 0.7, F: 0.1}</code></pre>
-                <p>Given symptoms (Fever=T, Cough=T, BodyAche=T), compute $P(Cold | symptoms)$.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.12 Dempster-Shafer Theory</h3>
-                <p>Dempster-Shafer Theory handles uncertainty and ignorance more flexibly than Bayesian methods.</p>
-                <p><b>Key Concepts:</b></p>
-                <ul>
-                    <li><b>Frame of Discernment:</b> Set of mutually exclusive hypotheses $\Theta$</li>
-                    <li><b>Basic Probability Assignment (BPA):</b> $m: 2^\Theta \to [0,1]$ where $m(\emptyset) = 0$, $\sum_A m(A) = 1$</li>
-                    <li><b>Belief Function:</b> $Bel(A) = \sum_{B \subseteq A} m(B)$ — lower bound on belief</li>
-                    <li><b>Plausibility Function:</b> $Pl(A) = 1 - Bel(\neg A)$ — upper bound on belief</li>
-                </ul>
-                <p><b>Dempster's Rule of Combination:</b></p>
-                <div class="formula-card">
-                    <p>$$m_1 \oplus m_2 (Z) = \frac{1}{1 - K} \sum_{X \cap Y = Z} m_1(X) \cdot m_2(Y)$$</p>
-                    <p>where $K = \sum_{X \cap Y = \emptyset} m_1(X) \cdot m_2(Y)$ measures conflict.</p>
-                </div>
-                <p><b>Advantage over Bayes:</b> Can represent ignorance explicitly. A BPA can assign mass to $\Theta$ meaning "don't know yet."</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.13 Fuzzy Sets</h3>
-                <p>A <b>fuzzy set</b> $A$ over universe $U$ is defined by a membership function $\mu_A: U \to [0,1]$ that assigns each element a degree of membership.</p>
-                <p><b>Comparison with Classical Sets:</b></p>
-                <ul>
-                    <li><b>Crisp set:</b> $\mu_A(x) \in \{0, 1\}$</li>
-                    <li><b>Fuzzy set:</b> $\mu_A(x) \in [0, 1]$ (continuous)</li>
-                </ul>
-                <p><b>Example:</b></p>
-                <pre><code class="language-text">Let T = "Tall Person"
-μ_T(160cm) = 0.0
-μ_T(170cm) = 0.3
-μ_T(180cm) = 0.7
-μ_T(190cm) = 1.0</code></pre>
-                <p><b>Operations on Fuzzy Sets:</b></p>
-                <ul>
-                    <li>$\mu_{A \cap B}(x) = \min(\mu_A(x), \mu_B(x))$ — AND</li>
-                    <li>$\mu_{A \cup B}(x) = \max(\mu_A(x), \mu_B(x))$ — OR</li>
-                    <li>$\mu_{\neg A}(x) = 1 - \mu_A(x)$ — NOT</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.14 Fuzzy Logic and Fuzzy Inference</h3>
-                <p><b>Fuzzy Rules:</b> IF $X$ is $A$ AND $Y$ is $B$ THEN $Z$ is $C$.</p>
-                <p><b>Mamdani Inference (Fuzzy Logic System):</b></p>
-                <ol>
-                    <li><b>Fuzzification:</b> Convert crisp input to fuzzy values</li>
-                    <li><b>Rule Evaluation:</b> Apply fuzzy rules to get fuzzy output</li>
-                    <li><b>Aggregation:</b> Combine fuzzy outputs</li>
-                    <li><b>Defuzzification:</b> Convert fuzzy output back to crisp value (e.g., centroid method)</li>
-                </ol>
-                <p><b>Applications:</b></p>
-                <ul>
-                    <li>Air conditioners, washing machines (control systems)</li>
-                    <li>Automotive systems (ABS, traction control)</li>
-                    <li>Camera autofocus, image processing</li>
-                    <li>Stock market prediction, weather forecasting</li>
-                </ul>
-            </div>
-
-            <div class="tip-card">
-                <h3>4.15 Exam Tips — Unit 4</h3>
-                <ul>
-                    <li>For 1-mark: know definitions of Resolution, Bayes' Theorem, Fuzzy Sets</li>
-                    <li>For 5-mark: write down Bayes' formula with example computation</li>
-                    <li>For 15-mark: draw Bayesian Network diagram; explain CPTs</li>
-                    <li>Memorize Dempster's rule of combination</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <h3>4.16 Unit 4 Summary</h3>
-                <ul>
-                    <li>Predicate Logic represents facts with predicates, variables, quantifiers</li>
-                    <li>Resolution is a complete refutation method using CNF</li>
-                    <li>Natural Deduction mirrors human reasoning with inference rules</li>
-                    <li>Probabilistic Reasoning handles uncertainty via Bayes' theorem</li>
-                    <li>Bayesian Networks compactly represent joint distributions</li>
-                    <li>Dempster-Shafer handles ignorance explicitly</li>
-                    <li>Fuzzy Logic deals with degrees of truth via membership functions</li>
-                </ul>
-            </div>
-
-            <!-- ═══════════════ UNIT 5 ═══════════════ -->
-            <h2 class="section-title" id="unit-5">Unit 5: Natural Language Processing, Learning, &amp; Expert Systems</h2>
-
-            <div class="concept-card">
-                <h3>5.1 Introduction to NLP</h3>
-                <p><b>Natural Language Processing (NLP)</b> is the field of AI concerned with the interaction between computers and human (natural) languages.</p>
-                <p><b>Goals of NLP:</b></p>
-                <ol>
-                    <li><b>Understanding:</b> Interpret meaning from text/speech</li>
-                    <li><b>Generation:</b> Produce human-like text/speech</li>
-                    <li><b>Translation:</b> Convert between languages</li>
-                    <li><b>Information Extraction:</b> Pull structured data from text</li>
-                </ol>
-                <p><b>Challenges:</b> Ambiguity (lexical, syntactic, semantic, pragmatic), context dependence, world knowledge, idiom/sarcasm.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.2 Syntactic Processing</h3>
-                <p><b>Syntactic Processing</b> (Parsing) analyzes the grammatical structure of sentences.</p>
-                <p><b>Steps:</b></p>
-                <ol>
-                    <li><b>Morphological Analysis:</b> Identify word stems and affixes</li>
-                    <li><b>POS Tagging:</b> Mark words with parts of speech (noun, verb, etc.)</li>
-                    <li><b>Parsing:</b> Build parse tree using grammar rules</li>
-                </ol>
-                <p><b>Parse Tree Example — "The cat sat on the mat":</b></p>
-                <div class="diagram-card">
-                    <div class="mermaid">
-                    graph TD
-                        A[S] --> B[NP]
-                        A --> C[VP]
-                        B --> B1[Det: The]
-                        B --> B2[N: cat]
-                        C --> C1[V: sat]
-                        C --> C2[PP]
-                        C2 --> C3[P: on]
-                        C2 --> C4[NP]
-                        C4 --> C5[Det: the]
-                        C4 --> C6[N: mat]
-                    </div>
-                </div>
-                <pre><code class="language-python">import nltk
-nltk.download('punkt', 'averaged_perceptron_tagger')
-
-sentence = "The cat sat on the mat"
-tokens = nltk.word_tokenize(sentence)
-pos_tags = nltk.pos_tag(tokens)
-print(pos_tags)
-# [('The', 'DT'), ('cat', 'NN'), ('sat', 'VBD'),
-#  ('on', 'IN'), ('the', 'DT'), ('mat', 'NN')]</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.3 Semantic Analysis</h3>
-                <p><b>Semantic Analysis</b> determines the meaning of a sentence beyond its structure.</p>
-                <p><b>Key tasks:</b></p>
-                <ul>
-                    <li><b>Word Sense Disambiguation (WSD):</b> Choose correct meaning of polysemous words</li>
-                    <li><b>Named Entity Recognition (NER):</b> Identify names, places, dates</li>
-                    <li><b>Semantic Role Labeling:</b> Identify agent, action, object, instrument</li>
-                    <li><b>Coreference Resolution:</b> Determine which entities a pronoun refers to</li>
-                </ul>
-                <p><b>Example:</b> "John ate the apple" — Agent=John, Action=eat, Object=apple</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.4 Discourse and Pragmatic Processing</h3>
-                <p><b>Discourse Processing:</b> Analyzes relationships between sentences in a text.</p>
-                <ul>
-                    <li><b>Anaphora Resolution:</b> "John went home. <b>He</b> was tired." — "He" refers to John</li>
-                    <li><b>Discourse Structure:</b> Topic shifts, sub-topics</li>
-                </ul>
-                <p><b>Pragmatic Processing:</b> Understands intent and context.</p>
-                <ul>
-                    <li><b>Speech Acts:</b> Assertive, directive, commissive, expressive, declarative</li>
-                    <li><b>Implicature:</b> "Can you pass the salt?" — request, not question</li>
-                    <li><b>Deixis:</b> "this", "here", "now" — context-dependent</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.5 Forms of Learning</h3>
-                <p>Machine Learning has several paradigms:</p>
-                <ol>
-                    <li><b>Supervised Learning:</b> Learn mapping $f: X \to Y$ from labeled examples $(x_i, y_i)$. Examples: classification (SVM, decision tree), regression (linear, polynomial)</li>
-                    <li><b>Unsupervised Learning:</b> Find structure in unlabeled data. Examples: clustering (K-means, hierarchical), dimensionality reduction (PCA)</li>
-                    <li><b>Reinforcement Learning:</b> Learn through interaction, maximizing cumulative reward. Examples: Q-learning, policy gradient</li>
-                    <li><b>Semi-supervised Learning:</b> Combine labeled + unlabeled data</li>
-                    <li><b>Active Learning:</b> Query the user for labels on uncertain examples</li>
-                    <li><b>Online Learning:</b> Update model incrementally with each example</li>
-                    <li><b>Transfer Learning:</b> Apply knowledge from one domain to another</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.6 Inductive Learning</h3>
-                <p><b>Inductive Learning</b> infers general rules from specific examples.</p>
-                <p><b>Concept Learning:</b> Given examples of a concept (positive) and non-examples (negative), find a hypothesis that explains all positives and no negatives.</p>
-                <p><b>Candidate Elimination Algorithm:</b></p>
-                <ul>
-                    <li>Maintains <b>Specific boundary S</b> (most specific consistent hypothesis)</li>
-                    <li>Maintains <b>General boundary G</b> (most general consistent hypothesis)</li>
-                    <li>Updates S and G as each example is processed</li>
-                    <li>Converges when S == G or hypothesis is fully determined</li>
-                </ul>
-                <p><b>Version Space:</b> Set of all hypotheses consistent with the data. Lies between S and G.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.7 Decision Tree Learning</h3>
-                <p><b>Decision Tree</b> is a tree where each internal node tests an attribute, branches represent outcomes, leaves represent class labels.</p>
-                <p><b>ID3 Algorithm (Information Gain):</b></p>
-                <ol>
-                    <li>Compute entropy of current set</li>
-                    <li>For each attribute, compute information gain</li>
-                    <li>Choose attribute with highest gain as split</li>
-                    <li>Recurse on subsets</li>
-                </ol>
-                <div class="formula-card">
-                    <p>$$Entropy(S) = -\sum_{i=1}^c p_i \log_2 p_i$$</p>
-                    <p>$$Gain(S, A) = Entropy(S) - \sum_{v \in Values(A)} \frac{|S_v|}{|S|} Entropy(S_v)$$</p>
-                </div>
-                <p><b>Advantages:</b> Easy to interpret, handles categorical/numerical data.</p>
-                <p><b>Issues:</b> Overfitting, greedy choice (not global optimum), instability.</p>
-                <p><b>Pruning:</b> Reduced error pruning, rule post-pruning.</p>
-                <pre><code class="language-python">from sklearn.tree import DecisionTreeClassifier
-from sklearn.datasets import load_iris
-
-X, y = load_iris(return_X_y=True)
-clf = DecisionTreeClassifier(criterion='entropy', max_depth=3)
-clf.fit(X, y)
-print(f"Accuracy: {clf.score(X, y):.3f}")</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.8 Explanation-Based Learning (EBL)</h3>
-                <p><b>EBL</b> uses domain theory to explain why a specific example belongs to a concept, then generalizes the explanation into a reusable rule.</p>
-                <p><b>Algorithm:</b></p>
-                <ol>
-                    <li><b>Explanation:</b> Construct proof tree showing why example is classified positively</li>
-                    <li><b>Identification:</b> Determine sufficient conditions for the proof</li>
-                    <li><b>Generalization:</b> Replace specific constants with variables</li>
-                    <li><b>Compilation:</b> Add resulting rule to knowledge base</li>
-                </ol>
-                <p><b>Advantages:</b></p>
-                <ul>
-                    <li>Single example can yield useful general rule</li>
-                    <li>Speed-up learning by exploiting domain theory</li>
-                    <li>Rules are guaranteed to be correct (since they are derived from proof)</li>
-                </ul>
-                <p><b>Example:</b> From "Cup(X) ∧ Holds(X,Y) → LiftingPossible(X,Y)", generalize that any object X that is a cup and holds Y can lift Y.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.9 Learning Using Relevance Information</h3>
-                <p>Some features are more relevant than others for classification. Feature selection techniques:</p>
-                <ul>
-                    <li><b>Filter Methods:</b> Use statistical measures (chi-square, mutual information)</li>
-                    <li><b>Wrapper Methods:</b> Use model performance to evaluate subsets</li>
-                    <li><b>Embedded Methods:</b> Feature importance from model (e.g., tree-based importance)</li>
-                </ul>
-                <p><b>Mutual Information:</b></p>
-                <div class="formula-card">
-                    <p>$$I(X; Y) = \sum_{x,y} p(x,y) \log \frac{p(x,y)}{p(x)p(y)}$$</p>
-                </div>
-                <p>High $I(X; Y)$ means feature $X$ is highly relevant to target $Y$.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.10 Neural Network Learning</h3>
-                <p><b>Artificial Neural Networks (ANNs)</b> are computational models inspired by biological neurons.</p>
-                <p><b>Perceptron:</b></p>
-                <div class="formula-card">
-                    <p>$$y = f\left(\sum_{i=1}^n w_i x_i + b\right)$$</p>
-                    <p>where $f$ is an activation function (step, sigmoid, ReLU).</p>
-                </div>
-                <p><b>Backpropagation Algorithm:</b></p>
-                <ol>
-                    <li><b>Forward pass:</b> Compute output for given input</li>
-                    <li><b>Loss computation:</b> $E = \frac{1}{2}(y - \hat{y})^2$</li>
-                    <li><b>Backward pass:</b> Compute $\frac{\partial E}{\partial w}$ for each weight</li>
-                    <li><b>Weight update:</b> $w_{new} = w - \eta \frac{\partial E}{\partial w}$</li>
-                </ol>
-                <p><b>Multi-Layer Perceptron (MLP):</b> Input → Hidden Layers → Output, using non-linear activations.</p>
-                <pre><code class="language-python">import torch
-import torch.nn as nn
-
-class NeuralNet(nn.Module):
-    def __init__(self, input_size, hidden_size, num_classes):
-        super().__init__()
-        self.fc1 = nn.Linear(input_size, hidden_size)
-        self.relu = nn.ReLU()
-        self.fc2 = nn.Linear(hidden_size, num_classes)
-
-    def forward(self, x):
-        out = self.fc1(x)
-        out = self.relu(out)
-        out = self.fc2(out)
-        return out
-
-model = NeuralNet(4, 16, 3)
-criterion = nn.CrossEntropyLoss()
-optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-
-# Training loop
-for epoch in range(100):
-    outputs = model(X_train)
-    loss = criterion(outputs, y_train)
-    optimizer.zero_grad()
-    loss.backward()
-    optimizer.step()</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.11 Genetic Learning</h3>
-                <p><b>Genetic Learning</b> applies genetic algorithms to learn from examples:</p>
-                <ol>
-                    <li>Encode hypotheses as bit strings (chromosomes)</li>
-                    <li>Define fitness function based on accuracy on training data</li>
-                    <li>Apply selection, crossover, mutation</li>
-                    <li>Iterate to evolve best hypotheses</li>
-                </ol>
-                <p><b>Advantages:</b> Global search, parallelizable, handles complex fitness landscapes.</p>
-                <p><b>Disadvantages:</b> Slow convergence, parameter tuning, no guarantee of optimum.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.12 Expert Systems — Architecture</h3>
-                <p>An <b>Expert System</b> is a computer system that emulates the decision-making ability of a human expert.</p>
-                <div class="diagram-card">
-                    <div class="mermaid">
-                    graph TD
-                        U[User] -->|Query| UI[User Interface]
-                        UI <-->|Show reasoning| UI
-                        UI --> IE[Inference Engine]
-                        IE <--> KB[Knowledge Base]
-                        IE <--> WM[Working Memory]
-                        KB -->|IF-THEN Rules| KB
-                        WM -->|Facts| WM
-                        IE -->|Advice| UI
-                        UI -->|Answer| U
-                        KA[Knowledge Acquisition] -->|Update| KB
-                        KE[Knowledge Engineer] --> KA
-                    </div>
-                </div>
-                <p><b>Components:</b></p>
-                <ol>
-                    <li><b>Knowledge Base:</b> Domain rules and facts</li>
-                    <li><b>Inference Engine:</b> Forward/backward chaining to deduce conclusions</li>
-                    <li><b>Working Memory:</b> Current problem state</li>
-                    <li><b>Explanation Facility:</b> Justifies reasoning ("Why?" / "How?")</li>
-                    <li><b>Knowledge Acquisition Module:</b> Adds new knowledge</li>
-                    <li><b>User Interface:</b> Friendly interaction</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.13 Representing and Using Domain Knowledge</h3>
-                <p><b>Forward Chaining (Data-Driven):</b></p>
-                <ol>
-                    <li>Start with known facts in working memory</li>
-                    <li>Find rules whose antecedents match facts</li>
-                    <li>Add rule conclusions to working memory</li>
-                    <li>Repeat until goal is reached or no rules apply</li>
-                </ol>
-                <p><b>Backward Chaining (Goal-Driven):</b></p>
-                <ol>
-                    <li>Start with goal to be proven</li>
-                    <li>Find rules whose conclusions match the goal</li>
-                    <li>Recursively try to prove antecedents as subgoals</li>
-                    <li>Succeed when all antecedents are in working memory</li>
-                </ol>
-                <p><b>When to use:</b></p>
-                <ul>
-                    <li>Forward: Many possible conclusions, data is readily available</li>
-                    <li>Backward: One specific goal, data must be discovered</li>
-                </ul>
-                <pre><code class="language-python"># Example rules
-rules = [
-    {'if': {'fever', 'cough'}, 'then': 'infection'},
-    {'if': {'infection', 'high_wbc'}, 'then': 'bacterial'},
-    {'if': {'bacterial', 'not_allergic_penicillin'}, 'then': 'prescribe_amoxicillin'},
-    {'if': {'allergic_penicillin'}, 'then': 'prescribe_azithromycin'}
-]
-
-def forward_chain(facts):
-    changed = True
-    while changed:
-        changed = False
-        for rule in rules:
-            if rule['if'].issubset(facts) and rule['then'] not in facts:
-                facts.add(rule['then'])
-                changed = True
-    return facts</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.14 Expert System Shells</h3>
-                <p>An <b>Expert System Shell</b> is an expert system with the domain-specific knowledge removed. It provides the general framework — inference engine, explanation facility, user interface.</p>
-                <p><b>Popular Shells:</b></p>
-                <ul>
-                    <li><b>EMYCIN:</b> Based on MYCIN, medical diagnosis</li>
-                    <li><b>OPS5:</b> Production rule language by Carnegie Mellon</li>
-                    <li><b>CLIPS:</b> NASA-developed, C-based</li>
-                    <li><b>Jess:</b> Java-based, modern</li>
-                    <li><b>Prolog:</b> Logic programming language, often used for expert systems</li>
-                </ul>
-                <p><b>Advantages of Shells:</b> Reduces development time, separates reasoning from knowledge, provides tested infrastructure.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.15 Knowledge Acquisition</h3>
-                <p><b>Knowledge Acquisition</b> is the process of gathering and encoding knowledge from human experts.</p>
-                <p><b>Methods:</b></p>
-                <ol>
-                    <li><b>Interviews:</b> Structured, unstructured, or focused</li>
-                    <li><b>Protocol Analysis:</b> Expert thinks aloud while solving problem</li>
-                    <li><b>Observation:</b> Watch expert perform tasks</li>
-                    <li><b>Repertory Grid Analysis:</b> Elicit distinctions experts make</li>
-                    <li><b>Machine Learning:</b> Induce rules from data automatically</li>
-                </ol>
-                <p><b>Challenges:</b></p>
-                <ul>
-                    <li><b>Knowledge Bottleneck:</b> Experts have tacit knowledge hard to articulate</li>
-                    <li><b>Inconsistency:</b> Experts may give different answers for similar cases</li>
-                    <li><b>Rapport:</b> Requires collaboration with expert</li>
-                    <li><b>Verification:</b> Validating correctness of encoded rules</li>
-                </ul>
-            </div>
-
-            <div class="example-card">
-                <h3>5.16 Expert System Example — MYCIN</h3>
-                <p><b>MYCIN</b> was a medical expert system for diagnosing bacterial infections and recommending antibiotics.</p>
-                <p><b>Sample Rule:</b></p>
-                <pre><code class="language-text">IF the site of the culture is blood
-   AND the identity of the organism is bacteroides
-   AND the patient has a serious host-defense-compromise
-THEN there is suggestive evidence (0.7) that the category of organism is anaerobic</code></pre>
-                <p><b>Features:</b></p>
-                <ul>
-                    <li>Confidence factors (CF) instead of probabilities</li>
-                        <li>Backward chaining for diagnosis</li>
-                        <li>Explanation: WHY/HOW queries answered by tracing rule chain</li>
-                        <li>Knowledge in ~500 rules, achieved performance comparable to human experts</li>
-                    </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>5.17 Important Concepts Summary Table</h3>
-                <table style="width:100%;border-collapse:collapse;margin:1rem 0;">
-                    <tr style="background:#f1f5f9;"><th style="border:1px solid #ddd;padding:8px;">Concept</th><th style="border:1px solid #ddd;padding:8px;">Description</th></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">NLP Levels</td><td style="border:1px solid #ddd;padding:8px;">Morphology → Syntax → Semantics → Discourse → Pragmatics</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Supervised Learning</td><td style="border:1px solid #ddd;padding:8px;">Learn from labeled examples</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Unsupervised Learning</td><td style="border:1px solid #ddd;padding:8px;">Find patterns in unlabeled data</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Reinforcement Learning</td><td style="border:1px solid #ddd;padding:8px;">Learn from rewards/penalties</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Decision Tree</td><td style="border:1px solid #ddd;padding:8px;">Tree of attribute tests</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">EBL</td><td style="border:1px solid #ddd;padding:8px;">Generalize explanation</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Neural Net</td><td style="border:1px solid #ddd;padding:8px;">Layers of interconnected neurons</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Genetic Learning</td><td style="border:1px solid #ddd;padding:8px;">Evolution-based optimization</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Expert System</td><td style="border:1px solid #ddd;padding:8px;">Emulates expert reasoning</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Forward Chaining</td><td style="border:1px solid #ddd;padding:8px;">Data-driven inference</td></tr>
-                    <tr><td style="border:1px solid #ddd;padding:8px;">Backward Chaining</td><td style="border:1px solid #ddd;padding:8px;">Goal-driven inference</td></tr>
-                </table>
-            </div>
-
-            <div class="tip-card">
-                <h3>5.18 Exam Tips — Unit 5</h3>
-                <ul>
-                    <li>For 1-mark: know forms of learning (supervised/unsupervised/RL)</li>
-                    <li>For 5-mark: explain Decision Tree with entropy formula</li>
-                    <li>For 15-mark: explain Expert Systems with all components and example</li>
-                    <li>Key formula: $Entropy = -\sum p_i \log_2 p_i$</li>
-                    <li>Know MYCIN/EMYCIN as classic expert system examples</li>
-                    <li>Forward vs Backward chaining — when to use each</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <h3>5.19 Unit 5 Summary</h3>
-                <ul>
-                    <li><b>NLP</b> has 5 processing levels from morphology to pragmatics</li>
-                    <li><b>Machine Learning</b> comes in 7 forms (supervised, unsupervised, RL, etc.)</li>
-                    <li><b>Inductive Learning</b> uses Candidate Elimination to find hypothesis boundaries</li>
-                    <li><b>Decision Trees</b> use Information Gain for splitting</li>
-                    <li><b>EBL</b> generalizes single examples using domain theory</li>
-                    <li><b>Neural Networks</b> learn via backpropagation of error</li>
-                    <li><b>Genetic Learning</b> evolves populations of hypotheses</li>
-                    <li><b>Expert Systems</b> emulate human experts via rules and inference</li>
-                    <li><b>Forward/Backward chaining</b> are two main inference strategies</li>
-                </ul>
-            </div>
-
-            <!-- ═══════════════ KEY TERMS ═══════════════ -->
-            <h2 class="section-title">Key Terms Glossary</h2>
-
-            <div class="key-terms">
-                <h3>Important AI Terms (A-Z)</h3>
-                <ul>
-                    <li><b>Agent:</b> Entity that perceives and acts in an environment</li>
-                    <li><b>A* Search:</b> Best-first search using $f(n) = g(n) + h(n)$</li>
-                    <li><b>Bayesian Network:</b> DAG representing probabilistic dependencies</li>
-                    <li><b>Breadth-First Search (BFS):</b> Level-by-level exploration</li>
-                    <li><b>Constraint Satisfaction Problem (CSP):</b> Variables with domains and constraints</li>
-                    <li><b>Depth-First Search (DFS):</b> Deepest-first exploration</li>
-                    <li><b>Entropy:</b> Measure of uncertainty in a probability distribution</li>
-                    <li><b>Expert System:</b> Computer system emulating human expert reasoning</li>
-                    <li><b>First-Order Logic (FOL):</b> Logic with quantifiers, variables, predicates</li>
-                    <li><b>Fuzzy Logic:</b> Logic allowing degrees of truth in $[0,1]$</li>
-                    <li><b>Genetic Algorithm:</b> Evolutionary optimization technique</li>
-                    <li><b>Heuristic Function:</b> $h(n)$ estimates cost from $n$ to goal</li>
-                    <li><b>Hill Climbing:</b> Local search greedy improvement</li>
-                    <li><b>Intelligent Agent:</b> Autonomous perceiving-acting system</li>
-                    <li><b>Knowledge Representation:</b> Encoding knowledge for AI use</li>
-                    <li><b>Machine Learning:</b> Automatically improving from experience</li>
-                    <li><b>  Search:</b> Adversarial search for game playing</li>
-                    <li><b>Natural Language Processing (NLP):</b> AI for human language</li>
-                    <li><b>Neural Network:</b> Model inspired by biological neurons</li>
-                    <li><b>PEAS:</b> Performance, Environment, Actuators, Sensors</li>
-                    <li><b>Predicate Logic:</b> Logic over object properties and relations</li>
-                    <li><b>Production System:</b> Rule-based system with control strategy</li>
-                    <li><b>Resolution:</b> Refutation-based theorem proving</li>
-                    <li><b>Search Strategy:</b> Method for exploring state space</li>
-                    <li><b>Simulated Annealing:</b> Probabilistic local search with cooling</li>
-                    <li><b>State Space:</b> Graph of all reachable states</li>
-                    <li><b>Tic-Tac-Toe:</b> Classic AI game-tree example</li>
-                    <li><b>Utility Function:</b> Measures desirability of states</li>
-                </ul>
-            </div>
-
-            <!-- ═══════════════ FINAL SUMMARY ═══════════════ -->
-            <div class="summary-card" style="margin-top: 2rem;">
-                <h3>🎓 Course Summary — All 5 Units at a Glance</h3>
-                <ol>
-                    <li><b>Unit 1: Introduction</b> — AI basics, problems, intelligent agents, problem solving as search</li>
-                    <li><b>Unit 2: Search Techniques</b> — BFS/DFS, heuristic search, A*, local search, CSPs, adversarial search</li>
-                    <li><b>Unit 3: Knowledge & Reasoning</b> — KR approaches, semantic networks, frames, issues</li>
-                    <li><b>Unit 4: Predicate Logic</b> — FOL, resolution, probabilistic reasoning, Bayesian networks, fuzzy logic</li>
-                    <li><b>Unit 5: NLP, Learning & Expert Systems</b> — NLP levels, ML forms, decision trees, neural networks, expert systems</li>
-                </ol>
-                <p><b>Best Strategy for Exams:</b> Understand concepts deeply, memorize key formulas, practice algorithm steps with examples, and be able to draw diagrams (search trees, Bayesian networks, parse trees, etc.).</p>
-            </div>
-
-        </main>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <div class="sticky-header">
+    <h1>📚 Artificial Intelligence — Study Notes</h1>
+  </div>
+
+  <div class="toc">
+    <a href="#unit-1">Unit 1: Introduction</a>
+    <a href="#unit-2">Unit 2: Search &amp; Problem Solving</a>
+  </div>
+
+  <div class="container">
+    <div class="subject-card">
+      <h2>Artificial Intelligence</h2>
+      <p>
+        Artificial Intelligence (AI) is the branch of computer science that aims to create systems capable of performing tasks that typically require human intelligence. This subject covers intelligent agent design, problem-solving through search, knowledge representation, machine learning fundamentals, and modern AI applications. Master these concepts thoroughly as they form the foundation for advanced AI and ML coursework.
+      </p>
     </div>
+
+    <!-- ==================== UNIT 1 ==================== -->
+    <div class="unit-section" id="unit-1">
+      <div class="unit-header">
+        <div class="unit-number">1</div>
+        <div class="unit-header-text">
+          <h3>Introduction to AI &amp; Intelligent Agents</h3>
+          <p>What is AI, history, Turing test, agent types, PEAS framework</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>What is Artificial Intelligence?</h4>
+          <p>
+            <strong>Definition:</strong> AI is the simulation of human intelligence processes by computer systems, including learning, reasoning, and self-correction. John McCarthy coined the term in 1956 at the Dartmouth Conference.
+          </p>
+          <p>
+            <strong>Brief History of AI:</strong>
+          </p>
+          <ul>
+            <li><strong>1950s:</strong> Turing Test proposed by Alan Turing; Dartmouth Conference (1956) — birth of AI</li>
+            <li><strong>1960s:</strong> Early optimism; first AI programs (ELIZA, SHRDLU)</li>
+            <li><strong>1970s:</strong> Expert systems emerge; first AI winter due to over-promising</li>
+            <li><strong>1980s:</strong> Expert systems boom; PROLOG, LISP popular</li>
+            <li><strong>1990s:</strong> Machine learning gains ground; Deep Blue beats Kasparov (1997)</li>
+            <li><strong>2000s:</strong> Big data era; recommender systems, NLP advances</li>
+            <li><strong>2010s:</strong> Deep learning revolution; AlexNet (2012), AlphaGo (2016)</li>
+            <li><strong>2020s:</strong> Large Language Models (LLMs), generative AI, ChatGPT (2022)</li>
+          </ul>
+          <p>
+            <strong>Turing Test (1950):</strong> Proposed by Alan Turing in his paper "Computing Machinery and Intelligence." A human evaluator engages in natural language conversations with a human and a machine. If the evaluator cannot reliably tell which is which (≥30% success rate), the machine is said to have passed the test. It tests <em>behavioral equivalence</em> rather than true understanding.
+          </p>
+          <p>
+            <strong>Weak AI (Narrow AI) vs Strong AI (General AI):</strong>
+          </p>
+          <ul>
+            <li><strong>Weak/Narrow AI:</strong> Designed for specific tasks (e.g., Siri, Alexa, chess engines, face recognition). This is what exists today.</li>
+            <li><strong>Strong/Artificial General Intelligence (AGI):</strong> A machine with human-like general intelligence — can understand, learn, and apply knowledge across any domain. Does not yet exist.</li>
+            <li><strong>Super AI:</strong> Hypothetical AI that surpasses human intelligence across all domains.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Intelligent Agents</h4>
+          <p>
+            <strong>Agent:</strong> An entity that perceives its environment through sensors and acts upon that environment through actuators.
+          </p>
+          <p>
+            <strong>Environment:</strong> Everything the agent interacts with or that affects the agent's perceptions and actions.
+          </p>
+          <p>
+            <strong>PEAS Framework:</strong> A structured way to describe an agent by specifying:
+          </p>
+          <ul>
+            <li><strong>P — Performance measure:</strong> How success is judged (e.g., accuracy, speed, safety)</li>
+            <li><strong>E — Environment:</strong> The world the agent operates in</li>
+            <li><strong>A — Actuators:</strong> How the agent acts on the environment</li>
+            <li><strong>S — Sensors:</strong> How the agent perceives the environment</li>
+          </ul>
+          <p>
+            <strong>Example — Self-Driving Car:</strong><br>
+            Performance: Safe, efficient travel from A to B.<br>
+            Environment: Roads, traffic, pedestrians, weather.<br>
+            Actuators: Steering, acceleration, braking, signals.<br>
+            Sensors: Cameras, LiDAR, GPS, radar, odometry.
+          </p>
+          <p>
+            <strong>Types of Agents (based on rationality):</strong>
+          </p>
+          <ul>
+            <li><strong>Simple Reflex Agent:</strong> Acts only on current percept, ignores history. Uses condition-action rules (if-then). Example: Thermostat.</li>
+            <li><strong>Model-Based Reflex Agent:</strong> Maintains internal state (partial world model). Useful when environment is partially observable. Example: Robot with a map.</li>
+            <li><strong>Goal-Based Agent:</strong> Acts to achieve a specific goal. Requires search and planning. Example: Navigation system.</li>
+            <li><strong>Utility-Based Agent:</strong> Maximizes a utility function measuring "happiness." Chooses actions that lead to best expected outcomes. Example: Investment advisor AI.</li>
+            <li><strong>Learning Agent:</strong> Can improve performance over time by learning from experience. Has a learning element, critic, performance element, and problem generator. Example: Recommendation engines.</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Types of AI (by Capability):</strong><br>
+          1. <strong>Reactive Machines</strong> — No memory; react to current input only (e.g., IBM Deep Blue).<br>
+          2. <strong>Limited Memory</strong> — Use past data for decisions (e.g., self-driving cars, LLMs).<br>
+          3. <strong>Theory of Mind</strong> — Understand emotions, beliefs, thoughts of others (future AI).<br>
+          4. <strong>Self-Aware</strong> — Conscious, self-aware AI (hypothetical).
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is the Turing Test?</div>
+          <div class="q-answer">
+            The Turing Test is a test of a machine's ability to exhibit intelligent behavior equivalent to that of a human. Proposed by Alan Turing in 1950, it involves a human evaluator engaging in natural language conversations with both a human and a machine. If the evaluator cannot reliably distinguish the machine from the human (typically judged by ≥30% correct identification), the machine is said to have passed the test.
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Define AI in your own words.</div>
+          <div class="q-answer">
+            Artificial Intelligence is the field of computer science dedicated to creating systems that can perform tasks requiring human-like intelligence — such as learning from experience, understanding natural language, recognizing patterns, solving problems, and making decisions. AI systems range from narrow task-specific programs (like recommendation engines) to the theoretical goal of general artificial intelligence.
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain different types of AI agents with examples.</div>
+          <div class="q-answer">
+            <p><strong>1. Simple Reflex Agent:</strong> The most basic type. It acts only on the current percept using condition-action rules (if-then logic). It has no memory of past states and no concept of goals. Example: A thermostat that turns the heater on when temperature drops below 18°C and off when it rises above 22°C.</p>
+            <p><strong>2. Model-Based Reflex Agent:</strong> Maintains an internal state (partial world model) representing aspects of the environment that cannot be directly perceived. This allows better decision-making in partially observable environments. Example: A mobile robot that maintains an internal map of the room and tracks its own position.</p>
+            <p><strong>3. Goal-Based Agent:</strong> Has explicit goals and chooses actions that achieve those goals. Uses search and planning to determine the best sequence of actions. More flexible than reflex agents but may be less efficient. Example: A GPS navigation system that plans the shortest route to a destination.</p>
+            <p><strong>4. Utility-Based Agent:</strong> Goes beyond goal-based agents by using a utility function that maps states to a measure of "happiness" or desirability. This allows rational decisions when goals are conflicting or when there are multiple ways to achieve the same goal. Example: An AI investment advisor that maximizes expected returns while minimizing risk.</p>
+            <p><strong>5. Learning Agent:</strong> Can improve its performance over time through learning. It has four components: (a) Learning element — makes improvements, (b) Critic — evaluates performance, (c) Performance element — selects actions, (d) Problem generator — suggests new experiences. Example: Netflix's recommendation engine that improves suggestions based on user watch history.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is the PEAS framework? Describe it with an example.</div>
+          <div class="q-answer">
+            <p>The PEAS framework is a structured approach to describe and analyze intelligent agents by specifying four key components: <strong>P</strong>erformance measure, <strong>E</strong>nvironment, <strong>A</strong>ctuators, and <strong>S</strong>ensors.</p>
+            <p><strong>Components explained:</strong></p>
+            <ul>
+              <li><strong>Performance Measure:</strong> The criterion by which the agent's success is judged. It defines what is "good" for the agent. Examples: accuracy, speed, safety, profitability.</li>
+              <li><strong>Environment:</strong> The external world the agent operates in. It can be fully or partially observable, deterministic or stochastic, episodic or sequential, static or dynamic, discrete or continuous, and single-agent or multi-agent.</li>
+              <li><strong>Actuators:</strong> The mechanisms through which the agent acts on the environment. Examples: motors, speakers, display screens, robotic arms.</li>
+              <li><strong>Sensors:</strong> The mechanisms through which the agent perceives the environment. Examples: cameras, microphones, GPS, touch sensors.</li>
+            </ul>
+            <p><strong>Example — Online Medical Diagnosis Assistant:</strong></p>
+            <ul>
+              <li><strong>P (Performance):</strong> Minimize misdiagnosis rate; maximize speed of diagnosis; ensure patient safety.</li>
+              <li><strong>E (Environment):</strong> Patients, medical records, symptoms database, diagnostic literature.</li>
+              <li><strong>A (Actuators):</strong> Display diagnosis results, flag urgent cases, send alerts to doctors, recommend treatments.</li>
+              <li><strong>S (Sensors):</strong> Input forms for symptoms, lab report data, patient history, doctor feedback on diagnosis accuracy.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exam-tip">
+          <strong>💡 Exam Tip:</strong> Unit 1 PYQs often include the Turing Test (1 mark) and agent types (5 marks). The PEAS framework is also a favorite for 5-mark questions. Always use a concrete example when describing PEAS.
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Define the Turing Test. What are its limitations?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between weak AI and strong AI with examples.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain the PEAS framework with a suitable example of your choice.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 2 ==================== -->
+    <div class="unit-section" id="unit-2">
+      <div class="unit-header">
+        <div class="unit-number">2</div>
+        <div class="unit-header-text">
+          <h3>Search &amp; Problem Solving</h3>
+          <p>Problem formulation, uninformed search, informed search, heuristic search</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Problem Solving Agents</h4>
+          <p>
+            <strong>Problem Formulation:</strong> The process of defining a problem in terms of:
+          </p>
+          <ul>
+            <li><strong>Initial State:</strong> Where the agent starts</li>
+            <li><strong>Actions:</strong> Possible actions the agent can take (defined by an action function ACTIONS(s))</li>
+            <li><strong>Transition Model:</strong> Describes the result of each action (RESULT(s, a))</li>
+            <li><strong>Goal Test:</strong> Determines if the current state is a goal state</li>
+            <li><strong>Path Cost:</strong> A numeric cost assigned to each path (used for optimality)</li>
+          </ul>
+          <p>
+            <strong>Search Strategies:</strong> Algorithms that explore the state space to find a solution path from the initial state to a goal state. Search strategies can be evaluated along these dimensions:
+          </p>
+          <ul>
+            <li><strong>Completeness:</strong> Does it always find a solution if one exists?</li>
+            <li><strong>Optimality:</strong> Does it find the optimal (least-cost) solution?</li>
+            <li><strong>Time Complexity:</strong> How long does it take to find a solution?</li>
+            <li><strong>Space Complexity:</strong> How much memory does it need?</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Search Algorithms</h4>
+          <p><strong>Uninformed (Blind) Search:</strong> No additional information about the problem beyond the definition.</p>
+          <p>
+            <strong>1. Breadth-First Search (BFS):</strong> Explores all nodes at depth d before moving to depth d+1. Uses a FIFO queue. Guaranteed complete and optimal for uniform-cost problems. Time and space complexity: O(b^d), where b = branching factor, d = depth.
+          </p>
+          <p>
+            <strong>2. Depth-First Search (DFS):</strong> Explores as far as possible along each branch before backtracking. Uses a LIFO stack. Not guaranteed to find optimal solution. Complete only for finite state spaces. Time complexity: O(b^m), space: O(b*m), where m = max depth. Much more memory-efficient than BFS.
+          </p>
+          <p>
+            <strong>3. Uniform Cost Search (UCS):</strong> Expands the node with the lowest path cost g(n). BFS is a special case of UCS where all step costs are equal. Complete and optimal for positive step costs. Time complexity: O(b^(C/epsilon)), where C* is the optimal cost.
+          </p>
+          <p><strong>Informed (Heuristic) Search:</strong> Uses domain-specific knowledge (heuristic) to guide the search more efficiently toward the goal.</p>
+          <p>
+            <strong>4. Greedy Best-First Search:</strong> Expands the node closest to the goal according to a heuristic h(n). Fast but not optimal or complete. Can get stuck in dead ends.
+          </p>
+          <p>
+            <strong>5. A* Search:</strong> Uses evaluation function f(n) = g(n) + h(n), where g(n) is the actual cost from start to node n, and h(n) is the estimated cost from n to the goal. Optimal and complete if h(n) is admissible and consistent.
+          </p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Heuristic Search</h4>
+          <p>
+            <strong>Heuristic Function h(n):</strong> An estimate of the cheapest path from node n to a goal node. A good heuristic guides the search efficiently without sacrificing optimality.
+          </p>
+          <p>
+            <strong>Admissible Heuristic:</strong> A heuristic that never overestimates the true cost to reach the goal. Formally: h(n) ≤ h*(n) for all n, where h* is the true cost. Admissibility guarantees A* optimality.
+          </p>
+          <p>
+            <strong>Monotonicity (Consistency):</strong> A heuristic h is consistent if for every node n and every successor n', the estimated cost of reaching the goal from n is ≤ the step cost from n to n' plus the estimated cost from n' to the goal. Formally: h(n) ≤ c(n, a, n') + h(n'). Monotonicity implies admissibility.
+          </p>
+          <p>
+            <strong>Local Search Algorithms:</strong> Operate on a single current node and move to neighboring nodes:
+          </p>
+          <ul>
+            <li><strong>Hill Climbing:</strong> Greedily moves to the neighbor with the best value. Can get stuck in local maxima, plateaus, or ridges. Variants: stochastic hill climbing, first-choice hill climbing, random-restart hill climbing, simulated annealing.</li>
+            <li><strong>Simulated Annealing:</strong> Allows occasional "bad" moves (downhill steps) to escape local maxima, with probability decreasing over time. Inspired by metallurgical annealing. Temperature T starts high and gradually decreases.</li>
+            <li><strong>Genetic Algorithms:</strong> Population-based search inspired by evolution. Maintains a population of candidate solutions. Applies selection (fitness-based), crossover (combining solutions), and mutation (random changes) to evolve better solutions over generations.</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>BFS vs DFS vs A* — Quick Comparison:</strong><br>
+          <table>
+            <tr>
+              <th>Property</th>
+              <th>BFS</th>
+              <th>DFS</th>
+              <th>A*</th>
+            </tr>
+            <tr>
+              <td>Complete?</td>
+              <td>Yes (finite branching)</td>
+              <td>No (infinite paths)</td>
+              <td>Yes (finite branching, positive costs)</td>
+            </tr>
+            <tr>
+              <td>Optimal?</td>
+              <td>Yes (uniform cost)</td>
+              <td>No</td>
+              <td>Yes (with admissible heuristic)</td>
+            </tr>
+            <tr>
+              <td>Time</td>
+              <td>O(b^d)</td>
+              <td>O(b^m)</td>
+              <td>Exponential in worst case</td>
+            </tr>
+            <tr>
+              <td>Space</td>
+              <td>O(b^d)</td>
+              <td>O(b·m)</td>
+              <td>O(b^d) worst case</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is a heuristic function?</div>
+          <div class="q-answer">
+            A heuristic function h(n) is an estimate of the minimum cost from the current node n to the nearest goal node. It is a "rule of thumb" used in informed search algorithms to guide the search more efficiently toward the solution. A good heuristic should be admissible (never overestimate the true cost) and should be as close to the true cost as possible for efficiency.
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Difference between BFS and DFS.</div>
+          <div class="q-answer">
+            <strong>BFS (Breadth-First Search):</strong> Explores all nodes at the current depth level before moving to the next level. Uses a FIFO queue. Guaranteed to find the shortest path in unweighted graphs. Higher memory usage as it stores all frontier nodes. Complete and optimal for unit-cost problems.<br><br>
+            <strong>DFS (Depth-First Search):</strong> Explores as deep as possible along each branch before backtracking. Uses a LIFO stack. Does not guarantee shortest path. Lower memory usage (stores only one path at a time). Can get stuck in infinite loops. Not optimal but often faster to find a solution.
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain A* search algorithm with example.</div>
+          <div class="q-answer">
+            <p><strong>A* Search Algorithm</strong> is an informed search algorithm that finds the least-cost path from an initial node to a goal node. It combines the advantages of UCS (optimality) and Greedy Best-First (efficiency) by using the evaluation function:</p>
+            <p style="text-align:center;font-weight:bold;">f(n) = g(n) + h(n)</p>
+            <p>where g(n) = actual cost from start to node n, and h(n) = estimated cost from n to the goal.</p>
+            <p><strong>Algorithm Steps:</strong></p>
+            <ol>
+              <li>Initialize the OPEN list with the start node: f(start) = g(start) + h(start) = 0 + h(start).</li>
+              <li>While OPEN is not empty:
+                <ul>
+                  <li>Remove the node with lowest f-value from OPEN.</li>
+                  <li>If it is the goal, reconstruct and return the path.</li>
+                  <li>Expand the node: generate all successors.</li>
+                  <li>For each successor: compute g, h, f values. Add to OPEN if not already there, or update if a better path is found.</li>
+                </ul>
+              </li>
+              <li>If OPEN is empty, no path exists.</li>
+            </ol>
+            <p><strong>Example:</strong> Consider finding the shortest path from node A to node G in the following graph:</p>
+            <p>A → B (cost 2), A → C (cost 4), B → D (cost 3), B → E (cost 1), C → F (cost 5), D → G (cost 6), E → G (cost 8)</p>
+            <p>Heuristic estimates h: h(A)=6, h(B)=4, h(C)=5, h(D)=3, h(E)=7, h(F)=2, h(G)=0</p>
+            <table>
+              <tr><th>Step</th><th>Node</th><th>g(n)</th><th>h(n)</th><th>f(n)</th></tr>
+              <tr><td>1</td><td>A</td><td>0</td><td>6</td><td>6</td></tr>
+              <tr><td>2</td><td>B (via A)</td><td>2</td><td>4</td><td>6</td></tr>
+              <tr><td>3</td><td>C (via A)</td><td>4</td><td>5</td><td>9</td></tr>
+              <tr><td>4</td><td>E (via B)</td><td>3</td><td>7</td><td>10</td></tr>
+              <tr><td>5</td><td>D (via B)</td><td>5</td><td>3</td><td>8</td></tr>
+              <tr><td>6</td><td>G (via D)</td><td>11</td><td>0</td><td>11</td></tr>
+            </table>
+            <p>A* explores nodes in order of f-value: A → B → D → G, finding the optimal path A→B→D→G with total cost 11.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Compare and contrast different search strategies.</div>
+          <div class="q-answer">
+            <p><strong>Uninformed vs Informed Search:</strong></p>
+            <p>Uninformed search strategies (BFS, DFS, UCS) have no knowledge about the problem beyond its definition. They systematically explore the state space without any guidance toward the goal. Informed search strategies (Greedy Best-First, A*) use heuristic information to guide the search more efficiently.</p>
+            <p><strong>BFS vs DFS:</strong> BFS explores level by level (guarantees shortest path in unweighted graphs) but uses more memory (O(b^d)). DFS goes deep first (lower memory O(b·m)) but does not guarantee optimality. BFS is complete for finite branching factors; DFS is not.</p>
+            <p><strong>UCS vs A*:</strong> UCS expands based on actual path cost g(n). It guarantees optimality but can be inefficient because it doesn't use any estimate of remaining cost. A* uses f(n) = g(n) + h(n), combining actual cost with heuristic estimate. With an admissible heuristic, A* is both optimal and generally more efficient than UCS.</p>
+            <p><strong>Greedy Best-First vs A*:</strong> Greedy uses only h(n), making it very fast but neither optimal nor complete. A* uses g(n) + h(n), making it optimal (with admissible heuristic) and complete, though potentially slower in practice due to exploring more nodes.</p>
+            <p><strong>Local Search (Hill Climbing, Simulated Annealing, Genetic Algorithms):</strong> These are used for optimization problems where the path doesn't matter. They work on large or continuous spaces. Hill climbing is fast but prone to local maxima. Simulated annealing escapes local optima with probabilistic acceptance. Genetic algorithms maintain a population and use evolutionary operators, suitable for very large search spaces.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Solve a problem using A* algorithm. Show all steps.</div>
+          <div class="q-answer">
+            <p><strong>Problem:</strong> Find the shortest path from city <strong>S</strong> (Start) to city <strong>G</strong> (Goal) using A* search.</p>
+            <p><strong>Graph (nodes and edge costs):</strong></p>
+            <ul>
+              <li>S —A— (cost 3)</li>
+              <li>S —B— (cost 1)</li>
+              <li>A —C— (cost 2)</li>
+              <li>A —D— (cost 4)</li>
+              <li>B —D— (cost 5)</li>
+              <li>B —E— (cost 7)</li>
+              <li>C —G— (cost 8)</li>
+              <li>D —G— (cost 6)</li>
+              <li>E —G— (cost 3)</li>
+            </ul>
+            <p><strong>Heuristic Values (straight-line distance to G):</strong></p>
+            <ul>
+              <li>h(S) = 8, h(A) = 6, h(B) = 5, h(C) = 4, h(D) = 3, h(E) = 2, h(G) = 0</li>
+            </ul>
+
+            <p><strong>Step-by-Step A* Execution:</strong></p>
+            <table>
+              <tr>
+                <th>Step</th>
+                <th>Node Expanded</th>
+                <th>g(n)</th>
+                <th>h(n)</th>
+                <th>f(n)</th>
+                <th>Path from S</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>S (start)</td>
+                <td>0</td>
+                <td>8</td>
+                <td>8</td>
+                <td>S</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>B</td>
+                <td>1</td>
+                <td>5</td>
+                <td>6</td>
+                <td>S→B</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>A</td>
+                <td>3</td>
+                <td>6</td>
+                <td>9</td>
+                <td>S→A</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>D (via B)</td>
+                <td>1+5=6</td>
+                <td>3</td>
+                <td>9</td>
+                <td>S→B→D</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>E (via B)</td>
+                <td>1+7=8</td>
+                <td>2</td>
+                <td>10</td>
+                <td>S→B→E</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>C (via A)</td>
+                <td>3+2=5</td>
+                <td>4</td>
+                <td>9</td>
+                <td>S→A→C</td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>G (via C)</td>
+                <td>5+8=13</td>
+                <td>0</td>
+                <td>13</td>
+                <td>S→A→C→G</td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>G (via D)</td>
+                <td>6+6=12</td>
+                <td>0</td>
+                <td>12</td>
+                <td>S→B→D→G ✓ OPTIMAL</td>
+              </tr>
+            </table>
+
+            <p><strong>Conclusion:</strong> The algorithm terminates when the goal G is removed from the OPEN list. Since A* with admissible heuristic is optimal, the path <strong>S → B → D → G</strong> with total cost <strong>12</strong> is the shortest path. The path S→A→C→G has cost 13, confirming the optimality of A*.</p>
+
+            <p><strong>Node Expansion Order:</strong> S → B → A → D → E → C → G (goal)</p>
+          </div>
+        </div>
+
+        <div class="exam-tip">
+          <strong>💡 Exam Tip:</strong> Unit 2 PYQs frequently ask about the A* algorithm (15 marks) and search comparisons. Practice the A* step-by-step solution with at least 3 different graphs. Memorize the completeness and optimality conditions for each algorithm.
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> What is a heuristic function? Explain the properties of an admissible heuristic.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between BFS and DFS. Which one is preferred and why?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Solve the following problem using A* search algorithm. Show all intermediate steps with f-values.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Made with care for Semester 5 | AI Study Notes
+  </footer>
+
+  <a href="#top" class="back-to-top" id="backToTop">↑</a>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+
+      // Back to top visibility
+      var backToTop = document.getElementById('backToTop');
+      if (scrollTop > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll for TOC links
+    document.querySelectorAll('.toc a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

@@ -1,1229 +1,1263 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Constitution of India & IKT (MC-CS501) — Study Notes</title>
-    <meta name="description" content="Topic-wise study notes for MAKAUT Constitution of India (MC-CS501). Quick revision guide.">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../qa-styles.css">
-    <link rel="stylesheet" href="../../site.css">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        .notes-sidebar {
-            position: sticky;
-            top: 20px;
-        }
-        .notes-toc {
-            background: var(--card);
-            border-radius: 12px;
-            padding: 20px 24px;
-            border: 1px solid var(--border);
-            margin-bottom: 24px;
-        }
-        .notes-toc h3 {
-            margin: 0 0 12px 0;
-            font-size: 1rem;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        .notes-toc ol {
-            margin: 0;
-            padding-left: 20px;
-            line-height: 1.8;
-        }
-        .notes-toc ol li a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 0.9rem;
-        }
-        .notes-toc ol li a:hover {
-            color: var(--accent);
-        }
-        .module-section {
-            margin-bottom: 40px;
-        }
-        .module-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 2px solid var(--border);
-        }
-        .module-badge {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: #fff;
-            flex-shrink: 0;
-        }
-        .module-header h2 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-        .note-card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-bottom: 16px;
-        }
-        .note-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.05rem;
-            color: var(--accent);
-        }
-        .note-card h4 {
-            margin: 14px 0 6px 0;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-        .note-card p, .note-card li {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 0.93rem;
-        }
-        .note-card ul, .note-card ol {
-            margin: 6px 0;
-            padding-left: 20px;
-        }
-        .note-card code {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(217,70,239,0.08);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.88em;
-        }
-        .key-point {
-            background: rgba(217,70,239,0.06);
-            border-left: 3px solid #d946ef;
-            padding: 10px 14px;
-            margin: 10px 0;
-            border-radius: 0 8px 8px 0;
-            font-size: 0.9rem;
-        }
-        .key-point strong {
-            color: var(--accent);
-        }
-        .formula-box {
-            background: #faf5ff;
-            border: 1px solid #d8b4fe;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin: 10px 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.88rem;
-            text-align: center;
-            overflow-x: auto;
-        }
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 10px 0;
-            font-size: 0.88rem;
-        }
-        .comparison-table th {
-            background: var(--accent);
-            color: #fff;
-            padding: 8px 10px;
-            text-align: left;
-            font-weight: 600;
-        }
-        .comparison-table td {
-            padding: 7px 10px;
-            border-bottom: 1px solid var(--border);
-            vertical-align: top;
-        }
-        .comparison-table tr:nth-child(even) {
-            background: rgba(0,0,0,0.02);
-        }
-        .revistip {
-            background: #fff7ed;
-            border: 1px solid #fed7aa;
-            border-radius: 8px;
-            padding: 12px 16px;
-            margin: 12px 0;
-            font-size: 0.88rem;
-        }
-        .revistip::before {
-            content: "💡 Exam Tip: ";
-            font-weight: 700;
-            color: #c2410c;
-        }
-        .diagram-container {
-            text-align: center;
-            margin: 14px 0;
-        }
-        .diagram-caption {
-            font-size: 0.82rem;
-            color: var(--muted);
-            margin-top: 4px;
-        }
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-        .back-link:hover {
-            color: var(--accent);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constitution of India — Study Notes</title>
+  <style>
+    :root {
+      --primary: #dc2626;
+      --primary-light: #b91c1c;
+      --surface: #f8fafc;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-body: #334155;
+      --border: #e2e8f0;
+      --warning-bg: #fefce8;
+      --warning-border: #eab308;
+      --warning-text: #854d0e;
+      --pyq-bg: #fef2f2;
+      --pyq-border: #fecaca;
+      --pyq-text: #991b1b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #f1f5f9;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      z-index: 101;
+      transition: width 0.1s;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sticky-header h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .toc {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      position: sticky;
+      top: 52px;
+      z-index: 99;
+    }
+
+    .toc a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .toc a:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .subject-title {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .subject-meta {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject-card {
+      background: linear-gradient(135deg, #dc2626, #b91c1c);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .subject-card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .subject-card p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .unit-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .unit-header:hover {
+      border-color: var(--primary);
+    }
+
+    .unit-number {
+      background: #dc2626;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .unit-header-text h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .unit-header-text p {
+      margin: 0.2rem 0 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .unit-content {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.2rem;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .topic-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      color: #dc2626;
+    }
+
+    .topic-card p,
+    .topic-card li {
+      color: var(--text-body);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .topic-card ul {
+      padding-left: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .question-block {
+      background: white;
+      border-left: 3px solid #dc2626;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-block .q-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #dc2626;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .question-block .q-text {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .question-block .q-answer {
+      color: #475569;
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: #f3f4f6;
+      border-left: 3px solid var(--primary-light);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+    }
+
+    .exam-tip {
+      background: var(--warning-bg);
+      border-left: 3px solid var(--warning-border);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+      font-size: 0.85rem;
+    }
+
+    .exam-tip strong {
+      color: var(--warning-text);
+    }
+
+    .pyq-section {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .pyq-section h4 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pyq-item {
+      background: var(--pyq-bg);
+      border: 1px solid var(--pyq-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .pyq-item .year {
+      color: var(--pyq-text);
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #dc2626;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(220, 38, 38, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--surface);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      line-height: 1.5;
+    }
+
+    .code-block .keyword {
+      color: #c084fc;
+    }
+
+    .code-block .type {
+      color: #67e8f9;
+    }
+
+    .code-block .comment {
+      color: #94a3b8;
+    }
+  </style>
 </head>
 <body>
-<main class="sheet">
 
-    <a class="back" href="constitution_index.html">&larr; Constitution &amp; IKT</a>
+  <div class="progress-bar" id="progressBar"></div>
 
-    <header class="masthead">
-        <div class="masthead-text">
-            <p class="eyebrow">Semester 5 &middot; <span class="accent" style="color:#d946ef">MC-CS501</span></p>
-            <h1>Constitution of India & IKT — Study Notes</h1>
-            <p class="standfirst">Topic-wise quick revision guide for MAKAUT BTech 5th Semester. Covers the Indian Constitution, Fundamental Rights & Duties, DPSP, Union & State Government, Indian Knowledge Tradition, and Local Governance.</p>
-            <p class="paper-meta"><span>7 Modules</span><span>Mandatory Course</span></p>
-        </div>
-    </header>
+  <div class="sticky-header">
+    <h1>📚 Constitution of India — Study Notes</h1>
+  </div>
 
-    <div class="layout">
-        <aside class="sidebar" style="width: 240px; flex-shrink: 0;">
-            <nav class="notes-sidebar">
-                <div class="notes-toc">
-                    <h3>Quick Navigation</h3>
-                    <ol>
-                        <li><a href="#module-1">Constitution Overview</a></li>
-                        <li><a href="#module-2">Fundamental Rights &amp; Duties</a></li>
-                        <li><a href="#module-3">Directive Principles &amp; Writs</a></li>
-                        <li><a href="#module-4">Union Government</a></li>
-                        <li><a href="#module-5">State Government</a></li>
-                        <li><a href="#module-6">Indian Knowledge Tradition</a></li>
-                        <li><a href="#module-7">Local Governance</a></li>
-                    </ol>
-                    <p style="margin-top:14px; font-size:0.82rem; color: var(--muted);">
-                        <a href="#" style="color:#d946ef;">→ Practice Question Bank</a>
-                    </p>
-                </div>
-            </nav>
-        </aside>
+  <div class="toc">
+    <a href="#unit-1">Unit 1: Making of Constitution</a>
+    <a href="#unit-2">Unit 2: Fundamental Rights & Duties</a>
+    <a href="#unit-3">Unit 3: Directive Principles & Fundamental Duties</a>
+    <a href="#unit-4">Unit 4: Union & State Government</a>
+    <a href="#unit-5">Unit 5: Constitutional Bodies & Amendments</a>
+  </div>
 
-        <div class="content" style="flex:1; min-width:0;">
+  <div class="container" id="top">
 
-        <!-- ============================== MODULE 1 ============================== -->
-        <div class="module-section" id="module-1">
-            <div class="module-header">
-                <span class="module-badge" style="background:#d946ef">M1</span>
-                <h2>Constitution Overview</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>What is a Constitution?</h3>
-                <p>A <strong>Constitution</strong> is the supreme law of a country that defines the framework of governance, the fundamental political principles, and establishes the structure, procedures, powers, and duties of government institutions. It is the source of all other laws.</p>
-                <div class="key-point">
-                    <strong>Constituent Power:</strong> The power to frame and adopt a constitution rests with the people (popular sovereignty).<br>
-                    <strong>Constitutionalism:</strong> Government is limited by law and must operate within constitutional bounds.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Historical Background — Government of India Acts</h3>
-                <table class="comparison-table">
-                    <tr><th>Act</th><th>Year</th><th>Key Features</th></tr>
-                    <tr><td><strong>Govt. of India Act</strong></td><td>1858</td><td>Abolished East India Company's rule. Crown took over. Post of Viceroy created.</td></tr>
-                    <tr><td><strong>Indian Councils Act</strong></td><td>1909 (Morley-Minto)</td><td>Separate electorates for Muslims. Beginning of communal politics.</td></tr>
-                    <tr><td><strong>Govt. of India Act</strong></td><td>1919 (Montagu-Chelmsford)</td><td>Dyarchy at provinces. Bicameral legislature at centre. Separate provincial budgets.</td></tr>
-                    <tr><td><strong>Govt. of India Act</strong></td><td>1935</td><td>All-India Federation. Provincial autonomy. Federal scheme. Reserved subjects. Abolished dyarchy.</td></tr>
-                    <tr><td><strong>Indian Independence Act</strong></td><td>1947</td><td>Partition of India. Two dominions. Constituent Assemblies became sovereign.</td></tr>
-                </table>
-                <div class="revistip">The 1935 Act is the <strong>bedrock</strong> of the Indian Constitution — about 75% of it is borrowed from this Act.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>The Constituent Assembly</h3>
-                <ul>
-                    <li><strong>Formed:</strong> Based on Cabinet Mission Plan (1946).</li>
-                    <li><strong>Strength:</strong> 389 members (292 British Provinces + 93 Princely States + 4 Chief Commissioners' Provinces).</li>
-                    <li><strong>Indirectly elected</strong> by provincial legislatures using proportional representation with single transferable vote.</li>
-                    <li><strong>First meeting:</strong> 9 December 1946. <strong>Temp. Chairman:</strong> Dr. Sachchidananda Sinha. <strong>Permanent Chairman:</strong> Dr. Rajendra Prasad.</li>
-                    <li><strong>Objective Resolution</strong> moved by <strong>Jawaharlal Nehru</strong> on 13 Dec 1946; adopted on 22 Jan 1947.</li>
-                    <li><strong>Drafting Committee:</strong> 8 members, chaired by <strong>Dr. B.R. Ambedkar</strong> (29 Aug 1947).</li>
-                    <li><strong>Total sessions:</strong> 11 (last on 24 Jan 1950). <strong>Total days:</strong> 165.</li>
-                    <li><strong>Adopted:</strong> 26 November 1949. <strong>Enforced:</strong> 26 January 1950 (Republic Day).</li>
-                </ul>
-                <div class="diagram-container">
-                <div class="mermaid">
-                graph LR
-                    A["Cabinet Mission<br>Plan (1946)"] --> B["Constituent Assembly<br>Formed"]
-                    B --> C["First Meeting<br>9 Dec 1946"]
-                    C --> D["Objective Resolution<br>Nehru (13 Dec 1946)"]
-                    D --> E["Drafting Committee<br>Ambedkar (Aug 1947)"]
-                    E --> F["Adopted<br>26 Nov 1949"]
-                    F --> G["Enforced<br>26 Jan 1950"]
-                </div>
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Key Dates to Remember</h3>
-                <table class="comparison-table">
-                    <tr><th>Date</th><th>Event</th></tr>
-                    <tr><td>26 Nov 1949</td><td>Constitution adopted (signed by 284 members)</td></tr>
-                    <tr><td>26 Jan 1950</td><td>Constitution came into force — Republic Day</td></tr>
-                    <tr><td>2 Oct 1950</td><td>Patel became first Home Minister; planning began</td></tr>
-                    <tr><td>26 Jan 1950</td><td>Dr. Rajendra Prasad became first President</td></tr>
-                    <tr><td>1951</td><td>First Amendment (added 9th Schedule)</td></tr>
-                    <tr><td>1976</td><td>42nd Amendment — "Mini-Constitution" (Indira govt.)</td></tr>
-                </table>
-            </div>
-
-            <div class="note-card">
-                <h3>The Preamble</h3>
-                <p>The Preamble declares India to be a <strong>Sovereign Socialist Secular Democratic Republic</strong> and secures to all citizens Justice, Liberty, Equality, and Fraternity.</p>
-                <div class="key-point">
-                    <strong>Sovereignty</strong> — supreme power, no external authority.<br>
-                    <strong>Socialist</strong> (added by 42nd Amendment, 1976) — social & economic equality.<br>
-                    <strong>Secular</strong> (42nd Amendment, 1976) — no state religion.<br>
-                    <strong>Democratic</strong> — government by the people.<br>
-                    <strong>Republic</strong> — head of state elected, not hereditary.
-                </div>
-                <p><strong>Key words/philosophy:</strong> Justice (social, economic, political), Liberty (thought, expression, belief, faith), Equality (status and opportunity), Fraternity (dignity, unity).</p>
-                <p><strong>Sources of Preamble:</strong> U.S. (Sovereign, Democratic, Republic), U.S.S.R. (Socialist), France (Liberty, Equality, Fraternity — motto).</p>
-                <div class="revistip"><strong>Berubari Union Case (1960):</strong> Preamble is not a part of the Constitution. Overturned by <strong>LIC of India v. Consumer Education & Research Centre (1995)</strong> — Preamble is a part and can be amended under Article 368.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Sources of the Constitution</h3>
-                <ul>
-                    <li><strong>Government of India Act 1935</strong> — federal scheme, emergency, public service commissions, judiciary.</li>
-                    <li><strong>British Constitution</strong> — parliamentary form, rule of law, legislative procedure, single citizenship, cabinet system.</li>
-                    <li><strong>US Constitution</strong> — fundamental rights, judicial review, federalism, independence of judiciary, impeachment.</li>
-                    <li><strong>Irish Constitution</strong> — DPSP, method of presidential election, nomination of Rajya Sabha members.</li>
-                    <li><strong>Canadian Constitution</strong> — federation with strong centre, residuary powers with centre, appointment of state governors.</li>
-                    <li><strong>Australian Constitution</strong> — concurrent list, joint sitting of Parliament, freedom of trade.</li>
-                    <li><strong>South African Constitution</strong> — procedure for constitutional amendment, election of Rajya Sabha members.</li>
-                    <li><strong>German Constitution</strong> — suspension of fundamental rights during emergency.</li>
-                    <li><strong>Japanese Constitution</strong> — procedure established by law.</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Salient Features of the Constitution</h3>
-                <ol>
-                    <li><strong>Lengthiest written constitution</strong> — originally 395 Articles + 8 Schedules + 22 Parts; currently 470+ Articles, 12 Schedules, 25 Parts.</li>
-                    <li><strong>Blend of rigidity and flexibility</strong> — some provisions by special majority, others by simple majority.</li>
-                    <li><strong>Federal system with unitary bias</strong> — strong centre, three lists (Union, State, Concurrent).</li>
-                    <li><strong>Single citizenship</strong> (unlike US dual citizenship).</li>
-                    <li><strong>Independent judiciary</strong> — Supreme Court at apex with wide jurisdiction.</li>
-                    <li><strong>Fundamental Rights + DPSP + Fundamental Duties</strong> — unique combination.</li>
-                    <li><strong>Universal adult suffrage</strong> — every citizen 18+ has the right to vote.</li>
-                    <li><strong>Secular state</strong> — no official religion.</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- ============================== MODULE 2 ============================== -->
-        <div class="module-section" id="module-2">
-            <div class="module-header">
-                <span class="module-badge" style="background:#a21caf">M2</span>
-                <h2>Fundamental Rights & Duties</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>Overview — Six Fundamental Rights</h3>
-                <p>Part III (Articles 12–35). Originally 7 rights; Right to Property was removed by the 44th Amendment (1978) and made a legal right under Article 300A.</p>
-                <table class="comparison-table">
-                    <tr><th>#</th><th>Right</th><th>Articles</th></tr>
-                    <tr><td>1</td><td>Right to Equality</td><td>14–18</td></tr>
-                    <tr><td>2</td><td>Right to Freedom</td><td>19–22</td></tr>
-                    <tr><td>3</td><td>Right against Exploitation</td><td>23–24</td></tr>
-                    <tr><td>4</td><td>Right to Freedom of Religion</td><td>25–28</td></tr>
-                    <tr><td>5</td><td>Cultural &amp; Educational Rights</td><td>29–30</td></tr>
-                    <tr><td>6</td><td>Right to Constitutional Remedies</td><td>32</td></tr>
-                </table>
-                <div class="revistip">Dr. Ambedkar called Article 32 the <strong>"heart and soul of the Constitution"</strong> because it provides direct enforcement of Fundamental Rights.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Right to Equality (Articles 14–18)</h3>
-                <ul>
-                    <li><strong>Art. 14:</strong> Equality before law and equal protection of laws (borrowed from UK & US).</li>
-                    <li><strong>Art. 15:</strong> No discrimination on grounds of religion, race, caste, sex. State may make special provisions for women, children, SCs, STs.</li>
-                    <li><strong>Art. 16:</strong> Equal opportunity in public employment. Reservations for SC/ST/OBC/EWS in govt. jobs.</li>
-                    <li><strong>Art. 17:</strong> Abolishes untouchability — punishable offence.</li>
-                    <li><strong>Art. 18:</strong> Abolishes titles (except military/academic). <em>Rajya Sabha can be given titles</em> — Bharat Ratna, Padma awards (these are awards, not titles).</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Right to Freedom (Articles 19–22)</h3>
-                <ul>
-                    <li><strong>Art. 19:</strong> Six freedoms — (a) speech & expression, (b) assembly, (c) association, (d) movement, (e) residence, (f) profession. Only available to <strong>citizens</strong>.</li>
-                    <li><strong>Art. 19(1)(a):</strong> Freedom of speech — subject to reasonable restrictions (Art. 19(2)): sovereignty, integrity, security, public order, decency, morality, contempt, defamation, incitement.</li>
-                    <li><strong>Art. 20:</strong> Protection against conviction for offences — (i) ex-post-facto law, (ii) double jeopardy, (iii) self-incrimination.</li>
-                    <li><strong>Art. 21:</strong> Right to Life and Personal Liberty — "no person shall be deprived of his life or personal liberty except according to procedure established by law". Supreme Court has expanded this to include <strong>Right to Privacy (Puttaswamy 2017), Right to Education, Right to Clean Environment, Right to Livelihood, Right to Health</strong>.</li>
-                    <li><strong>Art. 21A:</strong> Right to free & compulsory education for children 6–14 (added by 86th Amendment).</li>
-                    <li><strong>Art. 22:</strong> Protection against arrest & detention — right to be informed of grounds, to consult & be defended by a lawyer, to be produced before a magistrate within 24 hours.</li>
-                </ul>
-                <div class="key-point">
-                    <strong>Maneka Gandhi v. Union of India (1978)</strong> expanded Art. 21: "procedure" must be "just, fair and reasonable", not arbitrary.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Right against Exploitation (Articles 23–24)</h3>
-                <ul>
-                    <li><strong>Art. 23:</strong> Prohibits traffic in human beings, forced labour (begar). Violation is punishable.</li>
-                    <li><strong>Art. 24:</strong> Prohibits employment of children below 14 years in factories, mines, hazardous employment.</li>
-                </ul>
-                <div class="revistip">Bonded Labour System (Abolition) Act, 1976 — passed to give effect to Art. 23.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Right to Freedom of Religion (Articles 25–28)</h3>
-                <ul>
-                    <li><strong>Art. 25:</strong> Freedom of conscience and free profession, practice, and propagation of religion. Subject to public order, morality, health, other fundamental rights.</li>
-                    <li><strong>Art. 26:</strong> Freedom to manage religious affairs — establish institutions, manage affairs, acquire property, administer.</li>
-                    <li><strong>Art. 27:</strong> No tax for promotion of any religion.</li>
-                    <li><strong>Art. 28:</strong> No religious instruction in state-funded educational institutions (exception allowed for institutions established under endowment/trust for religious purpose).</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Cultural &amp; Educational Rights (Articles 29–30)</h3>
-                <ul>
-                    <li><strong>Art. 29:</strong> Protects interests of minorities — right to conserve language, script, culture. Any section with distinct language/culture has right to establish & administer educational institutions.</li>
-                    <li><strong>Art. 30:</strong> Right of all minorities to establish and administer educational institutions. State cannot discriminate in grant of aid on the basis of religion/linguistic minority status.</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Right to Constitutional Remedies (Article 32)</h3>
-                <p>The <strong>dr. Ambedkar's "heart and soul"</strong> — guarantees the right to move the Supreme Court for enforcement of Fundamental Rights. SC can issue five writs.</p>
-                <ul>
-                    <li>Available only when Fundamental Right is violated (unlike Art. 226 — High Court writ jurisdiction is wider).</li>
-                    <li>Supreme Court is the <strong>guarantor</strong> of Fundamental Rights.</li>
-                    <li>Art. 32(2): SC can issue directions/orders/writs in the nature of habeas corpus, mandamus, prohibition, quo warranto, certiorari.</li>
-                    <li>Art. 32(3): Parliament can empower other courts to exercise these powers.</li>
-                </ul>
-                <div class="revistip"><strong>Art. 32 vs 226:</strong> Both can issue writs. Art. 32 — only for FR violation; Art. 226 — for any legal right (wider scope). SC under Art. 32; HC under Art. 226.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Fundamental Duties (Article 51A)</h3>
-                <p>Added by the <strong>42nd Amendment (1976)</strong> on recommendation of the <strong>Swaran Singh Committee (1976)</strong>. Originally 10 duties; 11th added by 86th Amendment (2002). They are <strong>non-justiciable</strong> — no court can enforce them directly, but Parliament may impose penalties for non-compliance.</p>
-                <ol>
-                    <li>Abide by the Constitution, respect national flag & anthem.</li>
-                    <li>Cherish noble ideals of freedom struggle.</li>
-                    <li>Uphold sovereignty, unity and integrity.</li>
-                    <li>Defend the country, render national service when called.</li>
-                    <li>Promote common brotherhood, renounce practices derogatory to women's dignity.</li>
-                    <li>Value and preserve rich heritage of composite culture.</li>
-                    <li>Protect natural environment (forests, lakes, rivers, wildlife), have compassion for living creatures.</li>
-                    <li>Develop scientific temper, humanism, spirit of inquiry and reform.</li>
-                    <li>Safeguard public property, abjure violence.</li>
-                    <li>Strive for excellence in all spheres.</li>
-                    <li>(Added 2002) Provide opportunities for education to child 6–14 years (parents/guardians).</li>
-                </ol>
-            </div>
-        </div>
-
-        <!-- ============================== MODULE 3 ============================== -->
-        <div class="module-section" id="module-3">
-            <div class="module-header">
-                <span class="module-badge" style="background:#7c3aed">M3</span>
-                <h2>Directive Principles &amp; Writs</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>Directive Principles of State Policy (DPSP)</h3>
-                <p>Part IV (Articles 36–51). Borrowed from the <strong>Irish Constitution</strong>. They are <strong>non-justiciable</strong> (not legally enforceable), but fundamental in governance.</p>
-                <div class="key-point">
-                    <strong>Art. 36:</strong> Definition of State — same as Art. 12.<br>
-                    <strong>Art. 37:</strong> Application of DPSP — fundamental in governance, duty of State to apply.<br>
-                    <strong>Art. 38:</strong> State to promote welfare of the people (social, economic, political justice).<br>
-                    <strong>Art. 39:</strong> Equal distribution of wealth, equal pay for equal work, prevention of concentration of wealth.<br>
-                    <strong>Art. 39A:</strong> Free legal aid (added by 42nd Amendment).<br>
-                    <strong>Art. 40:</strong> Organization of Village Panchayats.<br>
-                    <strong>Art. 41:</strong> Right to work, education, public assistance.<br>
-                    <strong>Art. 42:</strong> Just and humane conditions of work, maternity relief.<br>
-                    <strong>Art. 44:</strong> Uniform Civil Code (UCC).<br>
-                    <strong>Art. 45:</strong> Early childhood care (originally free & compulsory education for children; revised by 86th Amendment).<br>
-                    <strong>Art. 46:</strong> Promotion of education of SC/ST/weaker sections.<br>
-                    <strong>Art. 48:</strong> Organization of agriculture and animal husbandry; prohibition of cow slaughter.<br>
-                    <strong>Art. 48A:</strong> Protection of environment & wildlife (added by 42nd Amendment).<br>
-                    <strong>Art. 49:</strong> Protection of monuments and places of national importance.<br>
-                    <strong>Art. 50:</strong> Separation of judiciary from executive.<br>
-                    <strong>Art. 51:</strong> Promotion of international peace & security.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Classification of DPSP</h3>
-                <table class="comparison-table">
-                    <tr><th>Category</th><th>Examples</th></tr>
-                    <tr><td><strong>Socialistic Principles</strong></td><td>Art. 38, 39, 39A, 41, 42, 43, 47 — aim at social & economic equality, welfare state.</td></tr>
-                    <tr><td><strong>Gandhian Principles</strong></td><td>Art. 40 (Panchayats), 43 (Cottage Industries), 46 (SC/ST welfare), 48 (Cow slaughter prohibition).</td></tr>
-                    <tr><td><strong>Liberal-Intellectual Principles</strong></td><td>Art. 44 (UCC), 45 (Education), 48 (Scientific agriculture), 50 (Separation of judiciary), 51 (International peace).</td></tr>
-                </table>
-                <div class="revistip">If any DPSP conflicts with a Fundamental Right, the <strong>Fundamental Right prevails</strong> (Champakam Dorairajan v. State of Madras, 1951). However, Parliament can amend FR to implement DPSP (under Art. 368).</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Fundamental Rights vs DPSP</h3>
-                <table class="comparison-table">
-                    <tr><th>Aspect</th><th>Fundamental Rights (Part III)</th><th>DPSP (Part IV)</th></tr>
-                    <tr><td><strong>Source</strong></td><td>USA</td><td>Ireland</td></tr>
-                    <tr><td><strong>Nature</strong></td><td>Negative (restrict state action)</td><td>Positive (direct state action)</td></tr>
-                    <tr><td><strong>Justiciable</strong></td><td>Yes — enforceable by courts</td><td>No — not enforceable</td></tr>
-                    <tr><td><strong>Legal Status</strong></td><td>Legal rights (with few exceptions)</td><td>Obligations on State, not rights</td></tr>
-                    <tr><td><strong>Purpose</strong></td><td>Political democracy</td><td>Social & economic democracy</td></tr>
-                    <tr><td><strong>Priority</strong></td><td>Higher (precede DPSP)</td><td>Subordinate (after FR)</td></tr>
-                    <tr><td><strong>Suspension</strong></td><td>Yes — during emergency (Art. 358, 359)</td><td>Never suspended</td></tr>
-                </table>
-                <div class="revistip">The Minerva Mills case (1980) held that the harmony between FR and DPSP is the <strong>basic feature of the Constitution</strong>. FR cannot be totally subordinated to DPSP.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Writs — Five Types</h3>
-                <table class="comparison-table">
-                    <tr><th>Writ</th><th>Meaning</th><th>Against Whom</th><th>Purpose</th></tr>
-                    <tr><td><strong>Habeas Corpus</strong></td><td>"to have the body"</td><td>State / private individual (for illegal detention)</td><td>Release a person from illegal detention. Speedy remedy.</td></tr>
-                    <tr><td><strong>Mandamus</strong></td><td>"we command"</td><td>Public authority / inferior court / govt. official</td><td>Compel performance of a public duty. Not against private person or the President/Governor.</td></tr>
-                    <tr><td><strong>Prohibition</strong></td><td>"to forbid"</td><td>Inferior court / tribunal</td><td>Prevent an inferior court from exceeding jurisdiction. Issued only during pendency of proceedings.</td></tr>
-                    <tr><td><strong>Certiorari</strong></td><td>"to be certified"</td><td>Inferior court / tribunal / quasi-judicial body</td><td>Quash an order already passed by inferior court acting beyond jurisdiction.</td></tr>
-                    <tr><td><strong>Quo Warranto</strong></td><td>"by what authority"</td><td>Person holding public office</td><td>Question the authority of a person holding a public office. Used when office is created by statute.</td></tr>
-                </table>
-                <div class="key-point">
-                    <strong>Prohibition vs Certiorari:</strong> Both prevent excess of jurisdiction. Prohibition — <em>preventive</em>, before order is passed. Certiorari — <em>curative</em>, after order is passed.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Writ Jurisdiction</h3>
-                <ul>
-                    <li><strong>Art. 32:</strong> Supreme Court — for enforcement of Fundamental Rights only.</li>
-                    <li><strong>Art. 226:</strong> High Court — for Fundamental Rights <em>and</em> any other legal right. <strong>Wider scope.</strong></li>
-                    <li><strong>Art. 227:</strong> High Court supervisory jurisdiction over subordinate courts.</li>
-                </ul>
-                <div class="revistip">Writs are <strong>prerogative writs</strong>, not rights. They are issued at the discretion of the court.</div>
-            </div>
-        </div>
-
-        <!-- ============================== MODULE 4 ============================== -->
-        <div class="module-section" id="module-4">
-            <div class="module-header">
-                <span class="module-badge" style="background:#db2777">M4</span>
-                <h2>Union Government</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>The President (Articles 52–62)</h3>
-                <ul>
-                    <li><strong>Article 52:</strong> President of India is the head of state and head of the executive.</li>
-                    <li><strong>Article 54:</strong> Elected by an <strong>electoral college</strong> consisting of elected members of both Houses of Parliament + elected members of Legislative Assemblies of States + elected members of Legislative Assemblies of UTs (Delhi, Puducherry).</li>
-                    <li><strong>Article 61:</strong> Impeachment procedure — by either House on grounds of "violation of Constitution".</li>
-                    <li><strong>Article 62:</strong> Time of holding election to fill vacancy.</li>
-                    <li><strong>Term:</strong> 5 years, eligible for re-election.</li>
-                    <li><strong>Qualifications:</strong> Indian citizen, 35+ years, qualified to be Rajya Sabha member, not holding any office of profit.</li>
-                    <li><strong>Article 53:</strong> Executive power vests in President; exercised directly or through subordinate officers.</li>
-                    <li><strong>Veto Power:</strong> Absolute, Suspensive, Pocket (Art. 111).</li>
-                    <li><strong>Ordinance-making power:</strong> Art. 123 — when Parliament not in session. Must be approved by Parliament within 6 weeks of reassembly.</li>
-                </ul>
-                <div class="key-point">
-                    <strong>First President:</strong> Dr. Rajendra Prasad (1950–1962).<br>
-                    <strong>First (and only) Acting President:</strong> V.V. Giri (1969).<br>
-                    <strong>Shortest tenure:</strong> Dr. Rajendra Prasad served two terms.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Powers of the President</h3>
-                <table class="comparison-table">
-                    <tr><th>Type</th><th>Examples</th></tr>
-                    <tr><td><strong>Executive</strong></td><td>Appoints PM, Ministers, Governors, Judges; chairs defence forces; receives ambassadors.</td></tr>
-                    <tr><td><strong>Legislative</strong></td><td>Summons, prorogues Parliament; dissolves Lok Sabha; gives assent to bills; issues ordinances.</td></tr>
-                    <tr><td><strong>Judicial</strong></td><td>Appoints judges; pardons (Art. 72) — pardon, reprieve, respite, remission, commutation, suspension.</td></tr>
-                    <tr><td><strong>Financial</strong></td><td>Lays Annual Budget; no money bill can be introduced without recommendation.</td></tr>
-                    <tr><td><strong>Emergency</strong></td><td>National Emergency (Art. 352), President's Rule (Art. 356), Financial Emergency (Art. 360).</td></tr>
-                </table>
-                <div class="revistip">All executive actions of the President are expressed to be taken in the name of the Governor-General of India (Art. 77). President acts on the aid & advice of the Council of Ministers (Art. 74, 42nd Amendment) — advice is <strong>binding</strong>.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>The Vice President (Articles 63–71)</h3>
-                <ul>
-                    <li><strong>Article 63:</strong> Vice President of India.</li>
-                    <li><strong>Article 64:</strong> Ex-officio Chairman of Rajya Sabha.</li>
-                    <li><strong>Article 65:</strong> Acts as President when post is vacant or President unable to discharge duties.</li>
-                    <li>Elected by <strong>members of both Houses of Parliament</strong> (not state assemblies).</li>
-                    <li>No impeachment — only resignation or removal by Rajya Sabha passing a resolution (assented to by Lok Sabha).</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>The Prime Minister &amp; Council of Ministers</h3>
-                <ul>
-                    <li><strong>Article 75:</strong> Council of Ministers headed by PM to aid & advise President.</li>
-                    <li><strong>Article 78:</strong> Duties of PM — to communicate to President all decisions of the Council, furnish information, etc.</li>
-                    <li>PM is appointed by the President; other ministers by President on PM's advice.</li>
-                    <li>PM is the leader of the Lok Sabha (generally); Leader of the House.</li>
-                    <li>Council of Ministers collectively responsible to Lok Sabha (Art. 75(3)).</li>
-                </ul>
-                <div class="key-point">
-                    <strong>Three categories:</strong> Cabinet (senior, ~15–20 ministers), Minister of State (independent charge or assisting), Deputy Ministers.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Parliament</h3>
-                <p>The Indian Parliament consists of the President + two Houses (Lok Sabha and Rajya Sabha). The President is an integral part but does not sit in either House.</p>
-                <div class="diagram-container">
-                <div class="mermaid">
-                graph TD
-                    P["President of India<br>(Integral part)"] --> L["Lok Sabha<br>(House of the People)"]
-                    P --> R["Rajya Sabha<br>(Council of States)"]
-                </div>
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Lok Sabha vs Rajya Sabha</h3>
-                <table class="comparison-table">
-                    <tr><th>Feature</th><th>Lok Sabha</th><th>Rajya Sabha</th></tr>
-                    <tr><td><strong>Composition</strong></td><td>530 (states) + 20 (UTs) + 2 (Anglo-Indian, abolished via 104th Amendment) = 552 max</td><td>250 max — 12 nominated by President, 238 elected by state legislative assemblies</td></tr>
-                    <tr><td><strong>Term</strong></td><td>5 years (dissolvable earlier)</td><td>6 years (1/3 retire every 2 years — permanent body, not dissolvable)</td></tr>
-                    <tr><td><strong>Speaker</strong></td><td>Speaker + Deputy Speaker</td><td>Vice President is ex-officio Chairman; Deputy Chairman elected</td></tr>
-                    <tr><td><strong>Membership</strong></td><td>Min. age 25</td><td>Min. age 30</td></tr>
-                    <tr><td><strong>Quorum</strong></td><td>1/10 of total</td><td>1/10 of total</td></tr>
-                    <tr><td><strong>Money Bill</strong></td><td>Can originate</td><td>Cannot originate (only recommends)</td></tr>
-                    <tr><td><strong>Joint Sitting</strong></td><td>Yes (Art. 108)</td><td>Yes</td></tr>
-                    <tr><td><strong>Domination</strong></td><td>More powerful</td><td>Less powerful</td></tr>
-                </table>
-                <div class="revistip"><strong>Joint Sitting:</strong> Presided over by Speaker of Lok Sabha. Quorum = 1/10 of total members of both Houses.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Supreme Court of India (Articles 124–147)</h3>
-                <ul>
-                    <li><strong>Establishment:</strong> 28 January 1950 (inaugurated on Republic Day).</li>
-                    <li><strong>Composition:</strong> Chief Justice of India + 33 other judges (currently sanctioned strength; subject to Parliament's variation).</li>
-                    <li><strong>Appointment:</strong> Collegium system (since 1993) — recommendation by CJI + 4 senior-most judges; formally appointed by President. NJAC struck down (2015) as violating judicial independence.</li>
-                    <li><strong>Tenure:</strong> Till age 65.</li>
-                    <li><strong>Removal:</strong> By impeachment (procedure as in Parliament — 2/3 majority in each House).</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Jurisdiction of the Supreme Court</h3>
-                <table class="comparison-table">
-                    <tr><th>Jurisdiction</th><th>Description</th></tr>
-                    <tr><td><strong>Original</strong></td><td>Disputes between Union and States, between two or more States (Art. 131). Also writs (Art. 32).</td></tr>
-                    <tr><td><strong>Writ</strong></td><td>Art. 32 — for enforcement of Fundamental Rights.</td></tr>
-                    <tr><td><strong>Appellate</strong></td><td>Civil, criminal, constitutional appeals from HCs / tribunals.</td></tr>
-                    <tr><td><strong>Advisory</strong></td><td>Art. 143 — advice to President on legal matters (binding or not — President's discretion).</td></tr>
-                    <tr><td><strong>Review</strong></td><td>Art. 137 — power to review its own judgments.</td></tr>
-                    <tr><td><strong>Recusal</strong></td><td>Art. 141 — law declared by SC is binding on all courts.</td></tr>
-                </table>
-                <div class="revistip"><strong>Doctrine of Basic Structure</strong> (Kesavananda Bharati v. State of Kerala, 1973): Parliament cannot amend the Constitution in a way that destroys its basic structure.</div>
-            </div>
-        </div>
-
-        <!-- ============================== MODULE 5 ============================== -->
-        <div class="module-section" id="module-5">
-            <div class="module-header">
-                <span class="module-badge" style="background:#c2410c">M5</span>
-                <h2>State Government</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>The Governor (Articles 152–167)</h3>
-                <ul>
-                    <li><strong>Article 153:</strong> Governor for each State. By 7th Amendment, same person can be Governor of two or more states.</li>
-                    <li><strong>Article 155:</strong> Appointed by the President.</li>
-                    <li><strong>Article 156:</strong> Holds office during the pleasure of the President (normally 5 years).</li>
-                    <li><strong>Article 154:</strong> Executive power of State vested in Governor.</li>
-                    <li><strong>Article 161:</strong> Pardoning power — pardon, reprieve, respite, remission, commutation, suspension of sentence (for state offences).</li>
-                    <li><strong>Article 167:</strong> Duties of CM to furnish information.</li>
-                </ul>
-                <div class="key-point">
-                    Governor acts as <strong>constitutional head</strong> (like President at Union). Real executive power lies with CM & Council of Ministers.<br>
-                    Governor is <strong>appointed</strong>, not <strong>elected</strong> — thus differs from President.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Discretionary Powers of Governor</h3>
-                <ul>
-                    <li>Appointing CM when no clear majority.</li>
-                    <li>Dissolving State Legislative Assembly.</li>
-                    <li>Recommending President's Rule (Art. 356).</li>
-                    <li>Reserving bills for President's consideration (Art. 200).</li>
-                    <li>Reporting to President on breakdown of constitutional machinery.</li>
-                </ul>
-                <div class="revistip">Article 356 — President's Rule is also called <strong>"State Emergency"</strong> or <strong>"Constitutional Emergency"</strong>. Maximum duration: 1 year (extendable up to 3 years at 6-month intervals under specific conditions).</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Chief Minister (Articles 163–164)</h3>
-                <ul>
-                    <li>Appointed by the Governor.</li>
-                    <li>Leader of the party/coalition with majority in Legislative Assembly.</li>
-                    <li>Head of the Council of Ministers.</li>
-                    <li>Chief coordinator, head of planning, leader of Legislative Assembly.</li>
-                    <li>Holds office during Governor's pleasure (in effect during majority support).</li>
-                    <li>Council of Ministers collectively responsible to Legislative Assembly (Art. 164(2)).</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>State Legislature</h3>
-                <p>Some states have a bicameral legislature; some have unicameral.</p>
-                <div class="diagram-container">
-                <div class="mermaid">
-                graph TD
-                    G["Governor"] --> V["Vidhan Sabha<br>(Legislative Assembly)"]
-                    G --> P["Vidhan Parishad<br>(Legislative Council) - in some states"]
-                </div>
-                </div>
-                <table class="comparison-table">
-                    <tr><th>Feature</th><th>Vidhan Sabha (Legislative Assembly)</th><th>Vidhan Parishad (Legislative Council)</th></tr>
-                    <tr><td><strong>Existence</strong></td><td>All states</td><td>Only in 6 states currently (Bihar, Karnataka, Andhra Pradesh, Maharashtra, Telangana, UP)</td></tr>
-                    <tr><th><strong>Strength</strong></td><td>60–500 members (varies)</td><td>Max 1/3 of Assembly strength; min 40</td></tr>
-                    <tr><th><strong>Members</strong></td><td>Directly elected</td><td>1/3 nominated by Governor, 1/3 elected by local bodies, 1/3 by MLA's</td></tr>
-                    <tr><th><strong>Term</strong></td><td>5 years (dissolvable)</td><td>6 years (1/3 retire every 2 years)</td></tr>
-                    <tr><th><strong>Speaker</strong></td><td>Speaker + Deputy</td><td>Chairman + Deputy</td></tr>
-                    <tr><th><strong>Money Bill</strong></td><td>Can originate</td><td>Cannot originate</td></tr>
-                </table>
-                <div class="revistip">Creation/abolition of Vidhan Parishad requires a special majority resolution by the Vidhan Sabha (Art. 169).</div>
-            </div>
-
-            <div class="note-card">
-                <h3>High Court (Articles 214–231)</h3>
-                <ul>
-                    <li><strong>Art. 214:</strong> High Court for each state. By 7th Amendment, one HC can serve multiple states/UTs.</li>
-                    <li><strong>Composition:</strong> Chief Justice + other judges. Strength determined by President.</li>
-                    <li><strong>Appointment:</strong> Collegium system. Appointed by President.</li>
-                    <li><strong>Tenure:</strong> Till age 62.</li>
-                    <li><strong>Removal:</strong> By President after address by Parliament on ground of misbehaviour or incapacity.</li>
-                    <li><strong>Jurisdiction:</strong> Original (writs under Art. 226), Appellate (from subordinate courts), Supervisory (Art. 227), Advisory (to Governor).</li>
-                </ul>
-                <div class="key-point">
-                    <strong>Transfer of Judges:</strong> President, after consulting CJI, can transfer a HC judge to another HC.<br>
-                    <strong>First HC:</strong> Calcutta HC (1862).<br>
-                    <strong>Number of HCs:</strong> 25 (as of recent).<br>
-                    <strong>Article 226 vs Article 32:</strong> Art. 226 is <strong>wider</strong> — HC can issue writs for any legal right, not just FR.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Subordinate Courts</h3>
-                <ul>
-                    <li><strong>District Court:</strong> Highest court at district level. Judge appointed by Governor. Sessions judge handles criminal cases.</li>
-                    <li><strong>Subordinate Courts:</strong> Under District Court — Sub-Judge, Munsif Court, Civil Judge (Junior Division), Judicial Magistrate.</li>
-                    <li>Hierarchy: Civil Judge → District Judge → High Court → Supreme Court.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ============================== MODULE 6 ============================== -->
-        <div class="module-section" id="module-6">
-            <div class="module-header">
-                <span class="module-badge" style="background:#0891b2">M6</span>
-                <h2>Indian Knowledge Tradition (IKT)</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>Ancient Indian Education System — Gurukul</h3>
-                <p>The <strong>Gurukul</strong> system was an ancient Indian residential schooling system where students (<strong>shishya</strong>) lived with their guru (teacher) and learned various subjects.</p>
-                <ul>
-                    <li><strong>Guru-Shishya Parampara:</strong> Teacher-student tradition. Knowledge passed orally and through practice.</li>
-                    <li><strong>Subjects:</strong> Vedas, Upanishads, grammar (Vyakarana), logic, mathematics, medicine (Ayurveda), warfare, arts, philosophy, ethics (Dharma).</li>
-                    <li><strong>Methodology:</strong> Discussion (Samvad), debate (Vada), questioning, memorization, practical training.</li>
-                    <li><strong>Famous Centres:</strong> Takshashila (Taxila), Nalanda, Vikramshila, Kanchi, Vallabhi.</li>
-                    <li><strong>Values:</strong> Discipline, humility, reverence for nature, holistic development (physical, mental, spiritual).</li>
-                </ul>
-                <div class="diagram-container">
-                <div class="mermaid">
-                graph LR
-                    G["Guru<br>(Teacher)"] -->|teaches| S["Shishya<br>(Student)"]
-                    S -->|lives with| A["Ashram<br>(Residential School)"]
-                    A -->|learning| V["Vedas & Upanishads"]
-                    A -->|practical| P["Arts & Crafts"]
-                </div>
-                </div>
-                <div class="revistip">Takshashila (700 BCE) is often cited as the world's first university, attracting students from China, Greece, Persia.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Vedas and Upanishads</h3>
-                <table class="comparison-table">
-                    <tr><th>Veda</th><th>Content</th><th>Key Features</th></tr>
-                    <tr><td><strong>Rigveda</strong></td><td>Hymns to gods (Indra, Agni, Varuna)</td><td>Oldest, ~1500 BCE. 1028 hymns in 10 mandalas.</td></tr>
-                    <tr><td><strong>Yajurveda</strong></td><td>Sacrificial formulas</td><td>Liturgical manual for rituals.</td></tr>
-                    <tr><td><strong>Samaveda</strong></td><td>Melodies & chants</td><td>Source of Indian classical music. "Book of songs".</td></tr>
-                    <tr><td><strong>Atharvaveda</strong></td><td>Spells, healing, daily life</td><td>Knowledge of medicine, philosophy, magic.</td></tr>
-                </table>
-                <p><strong>Upanishads:</strong> Philosophical texts at the end of Vedas — explain inner/spiritual meaning. ~108 Upanishads. Major: Brihadaranyaka, Chandogya, Isha, Katha, Kena, Mandukya, Taittiriya, Aitareya.</p>
-                <p><strong>Vedangas (Limbs of Veda):</strong> Shiksha (phonetics), Kalpa (rituals), Vyakarana (grammar), Nirukta (etymology), Chanda (metrics), Jyotisha (astronomy).</p>
-            </div>
-
-            <div class="note-card">
-                <h3>Six Orthodox Philosophical Systems (Shad Darshanas)</h3>
-                <table class="comparison-table">
-                    <tr><th>Darshana</th><th>Founder</th><th>Key Idea</th></tr>
-                    <tr><td><strong>Samkhya</strong></td><td>Kapila</td><td>Dualism — Purusha (consciousness) + Prakriti (matter). 25 tattvas.</td></tr>
-                    <tr><td><strong>Yoga</strong></td><td>Patanjali (Yoga Sutras)</td><td>Practical application of Samkhya. Ashtanga Yoga — Eight limbs.</td></tr>
-                    <tr><td><strong>Nyaya</strong></td><td>Gautama (Aksapada)</td><td>Logic & epistemology. Four pramanas (pramana) — Pratyaksha, Anumana, Upamana, Shabda.</td></tr>
-                    <tr><td><strong>Vaisheshika</strong></td><td>Kanada</td><td>Atomism (Paramanu). Categories of reality.</td></tr>
-                    <tr><td><strong>Mimamsa</strong></td><td>Jaimini</td><td>Interpretation of rituals & Dharma. Purva Mimamsa.</td></tr>
-                    <tr><td><strong>Vedanta</strong></td><td>Badarayana</td><td>Essence of Vedas. Uttara Mimamsa. Advaita (Shankaracharya), Dvaita (Madhvacharya), Vishishtadvaita (Ramanujacharya).</td></tr>
-                </table>
-                <div class="key-point">
-                    <strong>Hetu-bhāṣā (Heterodox systems):</strong> Buddhism, Jainism, Charvaka — do not accept authority of Vedas.<br>
-                    <strong>Ashtanga Yoga (Patanjali):</strong> Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Indian Contribution to Mathematics</h3>
-                <ul>
-                    <li><strong>Zero (Shunya):</strong> Attributed to <strong>Aryabhata</strong> (5th century) or Brahmagupta (7th century).</li>
-                    <li><strong>Decimal system & place value:</strong> Indian innovation.</li>
-                    <li><strong>Aryabhata (476–550 CE):</strong> Calculated value of π (~3.1416), explained eclipses, Earth's rotation.</li>
-                    <li><strong>Brahmagupta:</strong> Operations with zero, negative numbers, quadratic equations.</li>
-                    <li><strong>Bhaskara II (12th century):</strong> Calculus concepts (Lilavati), trigonometric functions.</li>
-                    <li><strong>Madhava of Sangamagrama:</strong> Infinite series for π and trigonometric functions (before Newton).</li>
-                    <li><strong>Ramanujan (1887–1920):</strong> Number theory, infinite series, mathematical analysis.</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Indian Contribution to Science</h3>
-                <ul>
-                    <li><strong>Astronomy:</strong> Aryabhata's heliocentric theory, Surya Siddhanta, Pancha Siddhantika of Varahamihira.</li>
-                    <li><strong>Metallurgy:</strong> Iron Pillar of Delhi (rust-resistant), Wootz steel exported worldwide as "Damascus steel".</li>
-                    <li><strong>Shipbuilding:</strong> Stitched ship technology (Bhai-ka-Tanka), navigation by stars.</li>
-                    <li><strong>Agriculture:</strong> Crop rotation, irrigation techniques (Indus Valley), plough technology.</li>
-                    <li><strong>Civil Engineering:</strong> Stepwells (baoli), temple architecture, Indus Valley urban planning.</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Indian Contribution to Medicine (Ayurveda)</h3>
-                <ul>
-                    <li><strong>Ayurveda</strong> = "science of life" — Atharvaveda's upaveda.</li>
-                    <li><strong>Charaka Samhita</strong> (Charaka, 1st century CE): Internal medicine. Called "Father of Indian Medicine".</li>
-                    <li><strong>Sushruta Samhita</strong> (Sushruta, 6th century BCE): Surgery. Rhinoplasty (plastic surgery), cataract surgery. "Father of Surgery".</li>
-                    <li><strong>Dhanvantari:</strong> Considered the god of Ayurveda.</li>
-                    <li><strong>Tridosha theory:</strong> Vata, Pitta, Kapha.</li>
-                    <li><strong>Yoga & wellness:</strong> Patanjali's system, meditation, pranayama.</li>
-                </ul>
-                <div class="revistip">Sushruta described <strong>rhinoplasty (nose reconstruction)</strong> — the first plastic surgery in the world — thousands of years before modern practice.</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Languages &amp; Literature</h3>
-                <ul>
-                    <li><strong>Sanskrit</strong> — classical language, source of many Indian languages. Panini's <strong>Ashtadhyayi</strong> — first formal grammar (4th century BCE).</li>
-                    <li><strong>Pali</strong> — language of Buddhist scriptures.</li>
-                    <li><strong>Prakrit</strong> — language of Jain texts.</li>
-                    <li><strong>Tamil</strong> — Sangam literature (300 BCE–300 CE), Thirukkural, Silappatikaram.</li>
-                    <li><strong>Other classical languages:</strong> Telugu, Kannada, Malayalam, Odia — recognized by Sahitya Akademi.</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- ============================== MODULE 7 ============================== -->
-        <div class="module-section" id="module-7">
-            <div class="module-header">
-                <span class="module-badge" style="background:#059669">M7</span>
-                <h2>Local Governance</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>Panchayati Raj (73rd Amendment, 1992)</h3>
-                <p>The 73rd Constitutional Amendment (1992) gave Panchayati Raj Institutions (PRIs) <strong>constitutional status</strong>. Added Part IX (Articles 243–243O) and 11th Schedule (29 subjects).</p>
-                <ul>
-                    <li><strong>Three-tier system:</strong> Village (Gram Panchayat) → Block (Panchayat Samiti / Intermediate Panchayat) → District (Zilla Parishad).</li>
-                    <li><strong>Article 243D:</strong> All seats filled by direct election. Reservation of seats for SC/ST in proportion to population.</li>
-                    <li><strong>Article 243D(3):</strong> One-third of total seats reserved for women (not below). 50% reservation for women under 73rd & 74th Amendment.</li>
-                    <li><strong>Article 243E:</strong> Duration of Panchayat — 5 years; dissolution before expiry invokes fresh elections within 6 months.</li>
-                    <li><strong>Article 243F:</strong> Qualifications, disqualifications for membership — determined by State Election Commission.</li>
-                    <li><strong>Article 243H:</strong> Powers to levy taxes.</li>
-                    <li><strong>Article 243J:</strong> State Finance Commission every 5 years.</li>
-                </ul>
-                <div class="diagram-container">
-                <div class="mermaid">
-                graph TD
-                    V["Village Level<br>Gram Panchayat"]
-                    B["Block Level<br>Panchayat Samiti<br>(Intermediate / Janpad)"]
-                    D["District Level<br>Zilla Parishad"]
-                    V --> B --> D
-                </div>
-                </div>
-                <div class="key-point">
-                    <strong>11th Schedule (29 subjects):</strong> Agriculture, land improvement, minor irrigation, animal husbandry, fisheries, small-scale industries, drinking water, rural roads, housing, electrification, education, health, family welfare, women & child development, social welfare, welfare of weaker sections, public distribution system, etc.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Historical Background of Panchayati Raj</h3>
-                <ul>
-                    <li><strong>Mahatma Gandhi's vision:</strong> Village republics as base of Indian democracy.</li>
-                    <li><strong>Balwant Rai Mehta Committee (1957):</strong> Recommended three-tier Panchayati Raj system.</li>
-                    <li><strong>Rajasthan (1959):</strong> First state to implement Panchayati Raj (Nagaur district — Oct 2, 1959).</li>
-                    <li><strong>Ashok Mehta Committee (1977):</strong> Recommended two-tier system, district as basic unit.</li>
-                    <li><strong>73rd Amendment (1992):</strong> Gave constitutional status to Panchayats.</li>
-                    <li><strong>Article 40 (DPSP):</strong> Already directed state to organize Village Panchayats.</li>
-                </ul>
-                <div class="revistip">The 73rd Amendment is <strong>not applicable</strong> to: (a) Jammu & Kashmir (had its own provision), (b) States with population &lt; 20 lakh (exempted), (c) Scheduled Areas (Article 243M) — governed by PESA (1996).</div>
-            </div>
-
-            <div class="note-card">
-                <h3>Municipalities (74th Amendment, 1992)</h3>
-                <p>The 74th Constitutional Amendment (1992) gave Municipalities constitutional status. Added Part IX-A (Articles 243P–243ZG) and 12th Schedule (18 subjects).</p>
-                <ul>
-                    <li><strong>Three types:</strong> Nagar Panchayat (smaller area), Municipal Council (smaller urban area), Municipal Corporation (larger urban area).</li>
-                    <li><strong>Article 243Q:</strong> Constitution of municipalities in states.</li>
-                    <li><strong>Article 243R:</strong> Composition of municipalities — direct elections.</li>
-                    <li><strong>Article 243T:</strong> Duration — 5 years.</li>
-                    <li><strong>Article 243W:</strong> Power to impose taxes.</li>
-                    <li><strong>Article 243X:</strong> State Finance Commission.</li>
-                </ul>
-                <div class="key-point">
-                    <strong>12th Schedule (18 subjects):</strong> Urban planning, regulation of land use, roads & bridges, water supply, public health, sanitation, drainage, solid waste management, fire services, urban forestry, slum clearance, urban poverty alleviation, parks, gardens, cultural activities, etc.
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Panchayat vs Municipality</h3>
-                <table class="comparison-table">
-                    <tr><th>Aspect</th><th>Panchayati Raj (73rd Amend.)</th><th>Municipalities (74th Amend.)</th></tr>
-                    <tr><td><strong>Part</strong></td><td>Part IX</td><td>Part IX-A</td></tr>
-                    <tr><td><strong>Schedule</strong></td><td>11th Schedule (29 subjects)</td><td>12th Schedule (18 subjects)</td></tr>
-                    <tr><td><strong>Tiers</strong></td><td>Three-tier (Village, Block, District)</td><td>Single tier (with three categories by size)</td></tr>
-                    <tr><td><strong>Area</strong></td><td>Rural</td><td>Urban</td></tr>
-                    <tr><td><strong>Reservation</strong></td><td>SC/ST + Women (1/3 seats)</td><td>Same</td></tr>
-                    <tr><td><strong>Term</strong></td><td>5 years</td><td>5 years</td></tr>
-                    <tr><td><strong>Finance</strong></td><td>State Finance Commission (Art. 243-I)</td><td>State Finance Commission (Art. 243-X)</td></tr>
-                </table>
-            </div>
-
-            <div class="note-card">
-                <h3>Co-operative Societies (97th Amendment, 2011)</h3>
-                <ul>
-                    <li>Added Part IX-B and a new Schedule.</li>
-                    <li><strong>Article 19(1)(c):</strong> Right to form co-operative societies (added).</li>
-                    <li>Provides for incorporation, regulation, and democratic management of co-operative societies.</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Special Areas</h3>
-                <table class="comparison-table">
-                    <tr><th>Area</th><th>Provision</th></tr>
-                    <tr><td><strong>Scheduled Areas</strong></td><td>Governed by PESA, 1996 (Panchayat Extension to Scheduled Areas Act) — Article 243M exception. 5th Schedule Areas.</td></tr>
-                    <tr><td><strong>5th Schedule Areas</strong></td><td>Tribal areas — Governor has special powers. Tribal Advisory Councils.</td></tr>
-                    <tr><td><strong>6th Schedule Areas</strong></td><td>NE states (Assam, Meghalaya, Tripura, Mizoram) — Autonomous District Councils.</td></tr>
-                </table>
-            </div>
-        </div>
-
-        <!-- ============================== QUICK REFERENCE ============================== -->
-        <div class="module-section">
-            <div class="module-header">
-                <span class="module-badge" style="background:#555;color:#fff">⚡</span>
-                <h2>Last-Minute Revision Cheat Sheet</h2>
-            </div>
-
-            <div class="note-card">
-                <h3>10-Mark Must-Know Topics</h3>
-                <ol>
-                    <li>Historical background — Govt. of India Acts 1858, 1919, 1935</li>
-                    <li>Constituent Assembly formation, key members (Ambedkar, Rajendra Prasad, Nehru)</li>
-                    <li>Preamble — words, philosophy, significance</li>
-                    <li>Sources of the Constitution</li>
-                    <li>Six Fundamental Rights (Articles 12–35) — each with article numbers</li>
-                    <li>Right to Constitutional Remedies (Art. 32) — writs</li>
-                    <li>Five Writs — Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto</li>
-                    <li>Fundamental Duties (Art. 51A) — 11 duties</li>
-                    <li>DPSP — classification (Socialistic, Gandhian, Liberal-Intellectual)</li>
-                    <li>President — election, powers, veto</li>
-                    <li>Parliament — Lok Sabha vs Rajya Sabha comparison</li>
-                    <li>Supreme Court — jurisdiction</li>
-                    <li>Governor — appointment, discretionary powers</li>
-                    <li>Panchayati Raj — 73rd Amendment, three-tier system, 11th Schedule</li>
-                    <li>Municipalities — 74th Amendment, 12th Schedule</li>
-                </ol>
-            </div>
-
-            <div class="note-card">
-                <h3>5-Mark Short Notes Topics</h3>
-                <ol>
-                    <li>Preamble (key terms)</li>
-                    <li>Right to Equality (Art. 14–18)</li>
-                    <li>Right to Freedom (Art. 19–22)</li>
-                    <li>Right against Exploitation (Art. 23–24)</li>
-                    <li>Right to Freedom of Religion (Art. 25–28)</li>
-                    <li>Article 21 — Right to Life (expanded interpretations)</li>
-                    <li>Fundamental Duties — list 11 duties</li>
-                    <li>DPSP classification</li>
-                    <li>FR vs DPSP comparison</li>
-                    <li>Writs — five types with meanings</li>
-                    <li>Vice President — role</li>
-                    <li>Joint Sitting of Parliament (Art. 108)</li>
-                    <li>Vidhan Sabha vs Vidhan Parishad</li>
-                    <li>High Court — composition, jurisdiction</li>
-                    <li>Vedas and Upanishads</li>
-                    <li>Six Darshanas</li>
-                    <li>Ayurveda — Charaka &amp; Sushruta</li>
-                    <li>Gurukul system</li>
-                    <li>PESA Act, 1996</li>
-                    <li>State Finance Commission</li>
-                </ol>
-            </div>
-
-            <div class="note-card">
-                <h3>Common Exam Mistakes to Avoid</h3>
-                <ul>
-                    <li>Confusing <strong>Article 32</strong> (SC — only FR) with <strong>Article 226</strong> (HC — wider, any legal right).</li>
-                    <li>Forgetting Right to Property is <strong>no longer</strong> a Fundamental Right (44th Amendment, 1978).</li>
-                    <li>Mistaking 73rd Amendment year — 1992 (enacted), 1993 (came into force).</li>
-                    <li>Confusing 11th Schedule (29 subjects) with 12th Schedule (18 subjects).</li>
-                    <li>Writing "Preamble is not part of Constitution" without noting it was overturned by <strong>LIC v. Consumer Education (1995)</strong>.</li>
-                    <li>Confusing <strong>Prohibition</strong> (preventive) with <strong>Certiorari</strong> (curative).</li>
-                    <li>Forgetting the speaker presides over <strong>joint sitting</strong>, not the Vice President.</li>
-                    <li>Mixing up <strong>Rajya Sabha</strong> (perpetual body) with <strong>Lok Sabha</strong> (dissolvable).</li>
-                    <li>Confusing <strong>Panchayat Samiti</strong> (block level) with <strong>Gram Panchayat</strong> (village level).</li>
-                    <li>Writing "Charaka is father of Surgery" — Sushruta is the father of surgery; Charaka is father of medicine.</li>
-                    <li>Confusing "Socialist" and "Secular" as part of original Preamble — both added by <strong>42nd Amendment (1976)</strong>.</li>
-                    <li>Confusing <strong>Doctrine of Basic Structure</strong> (Kesavananda, 1973) with <strong>Minerva Mills</strong> (1980) — both are landmark cases.</li>
-                </ul>
-            </div>
-
-            <div class="note-card">
-                <h3>Landmark Cases to Remember</h3>
-                <table class="comparison-table">
-                    <tr><th>Case</th><th>Principle</th></tr>
-                    <tr><td><strong>Berubari Union (1960)</strong></td><td>Preamble not part of Constitution</td></tr>
-                    <tr><td><strong>Kesavananda Bharati (1973)</strong></td><td>Doctrine of Basic Structure</td></tr>
-                    <tr><td><strong>Minerva Mills (1980)</strong></td><td>Harmony between FR and DPSP is basic feature</td></tr>
-                    <tr><td><strong>Maneka Gandhi (1978)</strong></td><td>Expanded Art. 21 — procedure must be just, fair, reasonable</td></tr>
-                    <tr><td><strong>Puttaswamy (2017)</strong></td><td>Right to Privacy is a fundamental right under Art. 21</td></tr>
-                    <tr><td><strong>Champakam Dorairajan (1951)</strong></td><td>FR prevail over DPSP</td></tr>
-                    <tr><td><strong>LIC v. Consumer Education (1995)</strong></td><td>Preamble is part of Constitution; can be amended</td></tr>
-                    <tr><td><strong>S.R. Bommai (1994)</strong></td><td>Federalism is basic structure; President's Rule subject to judicial review</td></tr>
-                </table>
-            </div>
-        </div>
-
-        </div><!-- /.content -->
-    </div><!-- /.layout -->
-
-    <footer>
-        <span>Study Notes by <a href="../../index.html">Soumya Chakraborty</a></span>
-        <span class="colophon-note">Constitution of India &amp; IKT (MC-CS501) — MAKAUT BTech Sem 5</span>
-    </footer>
-
-</main>
-
-<!-- ============================== PRACTICE Q&A BANK ============================== -->
-<div style="max-width:1200px;margin:40px auto 0;padding:0 16px 60px;font-family:'Segoe UI',sans-serif;">
-
-    <div class="module-section" id="qa-bank">
-        <div class="module-header">
-            <span class="module-badge" style="background:#d946ef">Q&amp;A</span>
-            <h2>Practice Question Bank</h2>
-        </div>
-
-        <!-- ==================== 1-MARK QUESTIONS ==================== -->
-        <div class="note-card" style="margin-bottom:24px;">
-            <h3 style="color:#d946ef;">Group A — One Mark Questions</h3>
-            <div style="display:flex; flex-direction:column; gap:14px; margin-top:12px;">
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: What is the total number of Articles in the Indian Constitution as of today?</p>
-                  <div class="answer">470+ Articles (originally 395). It has been amended over 100 times.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Under which Article is the Right to Constitutional Remedies guaranteed?</p>
-                  <div class="answer">Article 32. Dr. Ambedkar called it the "heart and soul of the Constitution."</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Who was the Chairman of the Drafting Committee of the Constituent Assembly?</p>
-                  <div class="answer">Dr. B.R. Ambedkar, appointed on 29 August 1947.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Which Amendment added the words "Socialist" and "Secular" to the Preamble?</p>
-                  <div class="answer">The 42nd Amendment (1976) — called the "Mini-Constitution."</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Which Article abolishes untouchability?</p>
-                  <div class="answer">Article 17. Untouchability in any form is punishable by law.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Who moved the Objective Resolution in the Constituent Assembly and on what date?</p>
-                  <div class="answer">Jawaharlal Nehru moved it on 13 December 1946. It was adopted on 22 January 1947.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Which Article provides for the Right to Privacy?</p>
-                  <div class="answer">Article 21, as declared by the Supreme Court in K.S. Puttaswamy v. Union of India (2017).</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: What is the term of office of the President of India?</p>
-                  <div class="answer">5 years from the date of entering office. Eligible for re-election.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Name the five writs that can be issued by the Supreme Court under Article 32.</p>
-                  <div class="answer">Habeas Corpus, Mandamus, Prohibition, Certiorari, and Quo Warranto.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Which Amendment gave constitutional status to Panchayati Raj Institutions?</p>
-                  <div class="answer">The 73rd Constitutional Amendment Act, 1992 (came into force in 1993).</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: What is the minimum age required for membership of the Lok Sabha?</p>
-                  <div class="answer">25 years (Article 84).</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Which ancient Indian text is considered the world's first formal grammar?</p>
-                  <div class="answer">Panini's Ashtadhyayi (4th century BCE), composed in Sanskrit.</div>
-                </div>
-
-                <div class="qa-block" data-marks="1">
-                  <p class="question">Q: Who is known as the "Father of Indian Medicine"?</p>
-                  <div class="answer">Charaka — author of the Charaka Samhita (1st century CE).</div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ==================== 5-MARK QUESTIONS ==================== -->
-        <div class="note-card" style="margin-bottom:24px;">
-            <h3 style="color:#7c3aed;">Group B — Five Mark Questions</h3>
-            <div style="display:flex; flex-direction:column; gap:14px; margin-top:12px;">
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: Explain the concept of "Secularism" as embodied in the Indian Constitution. How is it different from the Western concept?</p>
-                  <div class="answer">
-                    <p>Indian Secularism means the State has no official religion and treats all religions with equal respect. The word "Secular" was inserted in the Preamble by the 42nd Amendment (1976). Under Articles 25-28, every citizen has the right to freely profess, practice, and propagate any religion. Article 27 prohibits the State from levying any tax for the promotion of any religion. Unlike the Western model which advocates a strict "wall of separation" between religion and State, Indian secularism allows the State to intervene in religious affairs for reform — abolishing untouchability, banning child marriage, allowing Dalits into temples. Key principles are: (i) Sarva Dharma Sambhava — equal respect for all religions, (ii) no state religion, (iii) freedom of conscience, (iv) prohibition on religious instruction in state-funded educational institutions.</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: Compare and contrast the Lok Sabha and the Rajya Sabha with reference to their composition, term, and powers.</p>
-                  <div class="answer">
-                    <p><strong>Composition:</strong> Lok Sabha has 543 elected members (max 552) with minimum age 25. Rajya Sabha has 250 members (max) — 12 nominated by President, 238 elected by state assemblies, minimum age 30. <strong>Term:</strong> Lok Sabha has a 5-year term and is dissolvable by the President. Rajya Sabha is a permanent body; one-third retire every 2 years and it cannot be dissolved. <strong>Money Bills:</strong> Can only originate in Lok Sabha. Rajya Sabha can only make recommendations within 14 days; Lok Sabha may accept or reject them. <strong>Speaker:</strong> Lok Sabha has a Speaker and Deputy Speaker. Rajya Sabha is presided over by the Vice President (ex-officio Chairman) and has a Deputy Chairman. <strong>Power:</strong> Lok Sabha is more powerful. In joint sittings (Art. 108), Lok Sabha's larger number usually determines the outcome. The Council of Ministers is collectively responsible only to the Lok Sabha (Art. 75(3)).</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: Classify the Directive Principles of State Policy with relevant article numbers and examples.</p>
-                  <div class="answer">
-                    <p>DPSP (Part IV, Articles 36-51) are classified into three categories. <strong>(1) Socialistic Principles</strong> — Art. 38 (promote welfare), Art. 39 (equal distribution of wealth), Art. 39A (free legal aid), Art. 41 (right to work), Art. 42 (maternity relief). <strong>(2) Gandhian Principles</strong> — Art. 40 (village panchayats), Art. 43 (cottage industries), Art. 46 (SC/ST welfare), Art. 48 (prohibition of cow slaughter). <strong>(3) Liberal-Intellectual Principles</strong> — Art. 44 (Uniform Civil Code), Art. 45 (early childhood care and education), Art. 48A (environment protection), Art. 50 (separation of judiciary from executive), Art. 51 (international peace). If DPSP conflicts with a Fundamental Right, the Fundamental Right prevails (Champakam Dorairajan, 1951). The Minerva Mills case (1980) held that harmony between FR and DPSP is a basic feature of the Constitution.</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: List and explain the Fundamental Duties under Article 51A. Why are they considered non-justiciable?</p>
-                  <div class="answer">
-                    <p>The Fundamental Duties (Art. 51A) were added by the 42nd Amendment (1976) on the recommendation of the Swaran Singh Committee. Originally 10 duties, the 11th was added by the 86th Amendment (2002): (1) abide by the Constitution, respect national flag and anthem; (2) cherish noble ideals of freedom struggle; (3) uphold sovereignty, unity, and integrity; (4) defend the country; (5) promote common brotherhood; (6) value and preserve composite culture; (7) protect natural environment; (8) develop scientific temper; (9) safeguard public property, abjure violence; (10) strive for excellence; (11) provide opportunities for education to children aged 6-14. They are non-justiciable because Art. 37 (applying to DPSP) equally applies to Fundamental Duties — no court can enforce them directly. However, Parliament may by law impose penalties for non-compliance. They serve as a moral reminder that rights and duties go hand in hand.</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: Describe the Panchayati Raj system introduced by the 73rd Constitutional Amendment. What are its key features?</p>
-                  <div class="answer">
-                    <p>The 73rd Amendment (1992) gave constitutional status to Panchayati Raj Institutions by adding Part IX (Articles 243-243O) and the 11th Schedule (29 subjects). <strong>Three-tier structure</strong> — Gram Panchayat at village level, Panchayat Samiti at block level, Zilla Parishad at district level. <strong>Art. 243D</strong> mandates direct elections for all seats and reservation for SCs/STs in proportion to population. <strong>Art. 243D(3)</strong> mandates one-third reservation for women. <strong>Art. 243E</strong> fixes the duration at 5 years. <strong>Art. 243H</strong> provides powers to levy taxes. <strong>Art. 243J</strong> establishes a State Finance Commission every 5 years. The 11th Schedule covers 29 subjects including agriculture, minor irrigation, drinking water, rural roads, housing, electrification, education, health, and public distribution system. The Amendment is not applicable to Scheduled Areas (governed by PESA, 1996).</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: What is the Doctrine of Basic Structure? Explain with reference to the Kesavananda Bharati case and its significance.</p>
-                  <div class="answer">
-                    <p>The <strong>Doctrine of Basic Structure</strong> holds that Parliament cannot amend the Constitution in a way that destroys or alters its basic structure. This was propounded by the Supreme Court in <strong>Kesavananda Bharati v. State of Kerala (1973)</strong> by a 7-6 majority. The Court held that Parliament's amending power under Art. 368 is not unlimited. The basic structure includes: supremacy of the Constitution, republican and democratic form of government, secular character, separation of powers, federal character, unity and integrity, sovereignty, free and fair elections, independence of judiciary, rule of law, and harmony between Fundamental Rights and DPSP. The doctrine was reinforced in <strong>Minerva Mills v. Union of India (1980)</strong>, which held that the balance between FR and DPSP is part of the basic structure. This doctrine serves as a judicial check against potential abuse of parliamentary power.</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="5">
-                  <p class="question">Q: Explain the significance of the Iron Pillar of Delhi as a testament to ancient Indian metallurgical knowledge.</p>
-                  <div class="answer">
-                    <p>The Iron Pillar of Delhi, located near the Qutub Minar, stands as a remarkable testament to ancient Indian metallurgical prowess. Erected around 400 CE during the Gupta period, the 7-meter tall pillar is made of wrought iron weighing approximately 6 tonnes and has not rusted for over 1,600 years despite Delhi's extreme climate. The secret lies in the composition of the iron — a high phosphorus content (about 0.25%) combined with low sulfur and manganese, which created a protective film of hydrogen phosphate on the surface, preventing corrosion. The pillar bears an inscription in Brahmi script mentioning a king named Chandra, believed to be Chandragupta II (Vikramaditya). This demonstrates that ancient Indian metallurgists had advanced knowledge of corrosion-resistant materials long before similar technology emerged in Europe. It remains one of the greatest metallurgical achievements in human history and a proud symbol of Indian Knowledge Tradition (IKT).</p>
-                  </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- ==================== 15-MARK QUESTIONS ==================== -->
-        <div class="note-card">
-            <h3 style="color:#059669;">Group C — Fifteen Mark Questions</h3>
-            <div style="display:flex; flex-direction:column; gap:18px; margin-top:12px;">
-
-                <div class="qa-block" data-marks="15">
-                  <p class="question">Q: Discuss the historical background leading to the making of the Indian Constitution. Explain in detail the role of the Constituent Assembly in drafting the Constitution.</p>
-                  <div class="answer">
-                    <p><strong>Historical Background:</strong> Before independence, India was governed by a series of British laws. The <strong>Government of India Act, 1858</strong> abolished the East India Company's rule and transferred power to the British Crown, creating the post of Viceroy. The <strong>Indian Councils Act, 1909</strong> (Morley-Minto) introduced separate electorates for Muslims. The <strong>Government of India Act, 1919</strong> (Montagu-Chelmsford) introduced dyarchy in provinces, bicameral legislature, and separate provincial budgets. The <strong>Government of India Act, 1935</strong> proposed an All-India Federation, provincial autonomy, and division of powers into three lists (Union, State, Concurrent) — about 75% of the Indian Constitution is borrowed from this Act. The <strong>Indian Independence Act, 1947</strong> provided for partition and declared Constituent Assemblies as sovereign bodies.</p>
-                    <p><strong>Constituent Assembly:</strong> Formed based on the Cabinet Mission Plan (1946) with 389 members. The first meeting was held on <strong>9 December 1946</strong>, with Dr. Sachchidananda Sinha as temporary Chairman. Dr. Rajendra Prasad became the permanent Chairman. On <strong>13 December 1946</strong>, Jawaharlal Nehru moved the historic "Objective Resolution," adopted on 22 January 1947. A <strong>Drafting Committee</strong> of 8 members was formed on 29 August 1947, chaired by <strong>Dr. B.R. Ambedkar</strong>, known as the "Father of the Indian Constitution." The Assembly met for 11 sessions over 165 days. The Constitution was adopted on <strong>26 November 1949</strong> (Constitution Day) and came into force on <strong>26 January 1950</strong> (Republic Day). The choice of 26 January was symbolic — it commemorated the declaration of Purna Swaraj in 1930. Key contributors included Jawaharlal Nehru, Sardar Patel, Rajendra Prasad, Maulana Abul Kalam Azad, and Alladi Krishnaswamy Iyer. Dr. Ambedkar, as Chairman of the Drafting Committee, guided the framing of the Constitution's 470+ Articles and 12 Schedules with extraordinary legal acumen and vision for social justice.</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="15">
-                  <p class="question">Q: Explain the Fundamental Rights under Part III of the Constitution. Discuss the significance of Article 21 and its judicial expansion.</p>
-                  <div class="answer">
-                    <p><strong>Fundamental Rights (Articles 12-35)</strong> are basic human rights enforceable by courts. Originally seven rights; Right to Property was removed by the 44th Amendment (1978) and made a legal right under Art. 300A. <strong>Six Fundamental Rights:</strong> (1) <strong>Right to Equality (Arts. 14-18):</strong> Art. 14 guarantees equality before law and equal protection of laws. Art. 15 prohibits discrimination on grounds of religion, race, caste, sex, or place of birth. Art. 16 guarantees equal opportunity in public employment. Art. 17 abolishes untouchability. Art. 18 abolishes titles. (2) <strong>Right to Freedom (Arts. 19-22):</strong> Art. 19 grants six freedoms — speech and expression, assembly, association, movement, residence, and profession. Art. 20 protects against ex-post-facto laws, double jeopardy, and self-incrimination. (3) <strong>Right against Exploitation (Arts. 23-24):</strong> Art. 23 prohibits human trafficking and forced labour. Art. 24 prohibits child labour below 14 in hazardous work. (4) <strong>Right to Freedom of Religion (Arts. 25-28):</strong> Freedom of conscience, profession, practice, and propagation of religion. (5) <strong>Cultural and Educational Rights (Arts. 29-30):</strong> Protects minority interests. (6) <strong>Right to Constitutional Remedies (Art. 32):</strong> Guarantees enforcement through five writs.</p>
-                    <p><strong>Article 21 — Judicial Expansion:</strong> Art. 21 states no person shall be deprived of life or personal liberty except according to procedure established by law. In <strong>Maneka Gandhi v. Union of India (1978)</strong>, the Supreme Court held the procedure must be "just, fair, and reasonable." In <strong>K.S. Puttaswamy v. Union of India (2017)</strong>, Right to Privacy was declared a fundamental right under Art. 21. Other expanded rights include: Right to Education (later Art. 21A), Right to Clean Environment, Right to Livelihood, Right to Health, Right to Speedy Trial, Right to Shelter, Right to Dignity, and Right to Die with Dignity (passive euthanasia — Common Cause v. Union of India, 2018). Dr. Ambedkar called Art. 32 the "heart and soul" of the Constitution, but the judicial expansion of Art. 21 makes it the most significant fundamental right today.</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="15">
-                  <p class="question">Q: Describe the Union Government under the Constitution — the President, Prime Minister, Parliament, and Supreme Court.</p>
-                  <div class="answer">
-                    <p><strong>The President (Articles 52-62):</strong> The President is the head of state and executive, elected by an electoral college of elected MPs and MLAs of all states and UTs. Term is 5 years, minimum age 35. Powers include: <strong>Executive</strong> (appoints PM, Ministers, Governors, Judges), <strong>Legislative</strong> (summons/prorogues Parliament, gives assent to bills, issues ordinances under Art. 123), <strong>Judicial</strong> (pardons under Art. 72 — pardon, reprieve, respite, remission, commutation, suspension), <strong>Financial</strong> (lays budget), and <strong>Emergency</strong> (Arts. 352, 356, 360). Veto power includes absolute, suspensive, and pocket veto. However, the President acts on the aid and advice of the Council of Ministers (Art. 74), which is binding.</p>
-                    <p><strong>The Prime Minister (Art. 75):</strong> The PM is appointed by the President (leader of majority party in Lok Sabha). Other ministers are appointed on PM's advice. The Council of Ministers is collectively responsible to the Lok Sabha. Three categories: Cabinet Ministers, Ministers of State, and Deputy ministers. The PM is the chief coordinator, leader of the House, and the primary link between the President and the government.</p>
-                    <p><strong>Parliament:</strong> Consists of President + two Houses. <strong>Lok Sabha</strong> (543 members, 25+ age, 5-year term, dissolvable, more powerful). <strong>Rajya Sabha</strong> (250 members, 30+ age, permanent body, one-third retire every 2 years). Joint sittings under Art. 108 are presided over by the Speaker of Lok Sabha. Money Bills can only originate in Lok Sabha.</p>
-                    <p><strong>Supreme Court (Articles 124-147):</strong> Established 28 January 1950. Composed of CJI + up to 33 judges. Judges appointed by Collegium system, serve till age 65. Removal by impeachment. Jurisdictions: <strong>Original</strong> (Art. 131 — Centre-State disputes), <strong>Appellate</strong> (from HCs), <strong>Advisory</strong> (Art. 143), <strong>Writ</strong> (Art. 32 for FR enforcement), and <strong>Review</strong> (Art. 137). Law declared by SC is binding on all courts (Art. 141).</p>
-                  </div>
-                </div>
-
-                <div class="qa-block" data-marks="15">
-                  <p class="question">Q: Discuss the Indian Knowledge Tradition comprehensively — covering the Gurukul system, Vedic literature, the six Darshanas, and India's contributions to science, mathematics, and medicine.</p>
-                  <div class="answer">
-                    <p><strong>Gurukul System:</strong> The ancient Indian residential schooling system was based on the Guru-Shishya Parampara, where students lived with their guru and learned through direct interaction. Subjects included the Vedas, Upanishads, grammar (Vyakarana), logic, mathematics, medicine (Ayurveda), warfare, arts, and philosophy. Famous centres included <strong>Takshashila (~700 BCE)</strong> — arguably the world's first university attracting students from China, Greece, and Persia — as well as Nalanda (5th century CE), Vikramshila, Kanchi, and Vallabhi. Teaching methods included discussion (Samvad), debate (Vada), and questioning. Values imparted were discipline, humility, reverence for nature, and holistic development.</p>
-                    <p><strong>Vedas and Upanishads:</strong> The four Vedas are: <strong>Rigveda</strong> (~1500 BCE, oldest, 1028 hymns), <strong>Yajurveda</strong> (sacrificial formulas), <strong>Samaveda</strong> (source of Indian classical music), and <strong>Atharvaveda</strong> (spells, healing, daily life). The ~108 Upanishads explore philosophical meanings of the Vedas. The Vedangas (limbs) are: Shiksha (phonetics), Kalpa (rituals), Vyakarana (grammar), Nirukta (etymology), Chanda (metrics), and Jyotisha (astronomy).</p>
-                    <p><strong>Six Darshanas:</strong> (1) <strong>Samkhya</strong> (Kapila) — dualism of Purusha (consciousness) and Prakriti (matter), 25 tattvas; (2) <strong>Yoga</strong> (Patanjali) — Ashtanga Yoga with 8 limbs: Yama, Niyama, Asana, Pranayama, Pratyahara, Dharana, Dhyana, Samadhi; (3) <strong>Nyaya</strong> (Gautama) — logic, four pramanas (Pratyaksha, Anumana, Upamana, Shabda); (4) <strong>Vaisheshika</strong> (Kanada) — atomism (Paramanu); (5) <strong>Mimamsa</strong> (Jaimini) — ritual interpretation; (6) <strong>Vedanta</strong> (Badarayana) — Advaita (Shankaracharya), Dvaita (Madhvacharya), Vishishtadvaita (Ramanujacharya).</p>
-                    <p><strong>Contributions to Science and Mathematics:</strong> India invented the decimal system and zero (Shunya). <strong>Aryabhata</strong> calculated pi (~3.1416), explained eclipses, and proposed Earth's rotation. <strong>Brahmagupta</strong> defined operations with zero. <strong>Bhaskara II</strong> worked on calculus. <strong>Madhava</strong> developed infinite series for pi. In medicine, <strong>Sushruta Samhita</strong> described rhinoplasty (first plastic surgery) and cataract surgery. <strong>Charaka Samhita</strong> is the foundational text of Ayurveda. The Iron Pillar of Delhi demonstrates rust-resistant metallurgy. <strong>Panini's Ashtadhyayi</strong> (4th century BCE) is the world's first formal grammar. <strong>Sangam Tamil literature</strong> (Thirukkural, Silappatikaram) represents one of the world's oldest literary traditions.</p>
-                  </div>
-                </div>
-
-            </div>
-        </div>
+    <div class="subject-card">
+      <h2>Constitution of India</h2>
+      <p>Comprehensive study guide covering the making of the Constitution, Fundamental Rights, Directive Principles, Union and State Government structures, Constitutional Bodies, and Amendment Procedures. Includes exam-focused questions and previous year questions.</p>
     </div>
 
-</div>
+    <!-- ==================== UNIT 1 ==================== -->
+    <div class="unit-section" id="unit-1">
+      <div class="unit-header">
+        <div class="unit-number">1</div>
+        <div class="unit-header-text">
+          <h3>Making of Constitution</h3>
+          <p>Constituent Assembly, Drafting Committee, enactment, features, and sources</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Constituent Assembly Formation</h4>
+          <p>The <strong>Constituent Assembly</strong> was formed in November 1946 under the Cabinet Mission Plan. It had 389 members (284 from British India, 93 from Princely States). Members were elected indirectly by the Provincial Legislative Assemblies using the single transferable vote system of proportional representation.</p>
+          <p>The first meeting was held on 9 December 1946, with Dr. Sachchidananda Sinha as the temporary Chairman. Dr. Rajendra Prasad was later elected as the permanent President of the Assembly.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Cabinet Mission Plan (1946)</h4>
+          <p>The <strong>Cabinet Mission Plan</strong> of March 1946 proposed a three-tier federation consisting of Provinces, Provincial Unions, and the Union of India. It recommended a Constituent Assembly with 389 members to frame the Constitution. The Mission also proposed a federal structure with a weak Centre (Union) having only three subjects: Foreign Affairs, Defence, and Communications. The plan provided for a Constituent Assembly to draft the Constitution and also proposed an interim government (cabinet).</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Objectives Resolution by Nehru</h4>
+          <p>The <strong>Objectives Resolution</strong> was moved by Jawaharlal Nehru on 13 November 1946. It declared India to be a Sovereign Democratic Republic and laid down the objectives for the Constitution, including justice, liberty, equality, and fraternity. This resolution was adopted on 22 January 1947 and later became the Preamble of the Constitution.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Drafting Committee</h4>
+          <p>The <strong>Drafting Committee</strong> was constituted on 29 August 1947 with Dr. B.R. Ambedkar as the Chairman. Other members included N. Muthuranga Mudaliar, Alladi Krishnaswami Iyer, K.M. Munshi, Mohammad Saadullah, B.L. Mitter, and D.P. Khaitan. The Drafting Committee prepared the draft of the Constitution, incorporating inputs from various committees and debates.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Enactment and Adoption</h4>
+          <p>The Constituent Assembly adopted the Constitution on <strong>26 November 1949</strong>. It came into effect on <strong>26 January 1950</strong> — chosen to commemorate the declaration of Purna Swaraj (complete independence) by the Indian National Congress in 1930. The date 26 January 1950 is celebrated as <strong>Republic Day</strong>. India became a Sovereign Democratic Republic on this day, replacing the Government of India Act, 1935.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Features of Indian Constitution</h4>
+          <ul>
+            <li><strong>Lengthiest written constitution:</strong> Originally had 395 Articles in 22 Parts and 8 Schedules. Now has 470+ Articles, 25 Parts, 12 Schedules (as of 2024).</li>
+            <li><strong>Federal with unitary bias:</strong> Division of powers between Centre and States (Union List, State List, Concurrent List), but Centre has overriding powers during emergencies. Strong Centre makes it quasi-federal.</li>
+            <li><strong>Parliamentary form of government:</strong> Based on the British model. The executive is responsible to the legislature. Prime Minister is the real executive head.</li>
+            <li><strong>Blend of rigidity and flexibility:</strong> Some amendments require simple majority (ordinary law), others require special majority (2/3 of present + 50% of total members). Some require ratification by states.</li>
+            <li><strong>Secular state:</strong> No state religion; equal treatment of all religions.</li>
+            <li><strong>Democratic republic:</strong> Government by elected representatives; head of state is elected (President).</li>
+            <li><strong>Universal adult franchise:</strong> Every citizen above 18 years has the right to vote.</li>
+            <li><strong>Independent judiciary:</strong> Separation of judiciary from executive; Supreme Court as the guardian of the Constitution.</li>
+            <li><strong>Single citizenship:</strong> Indians are citizens of India only, not of individual states.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Sources of Indian Constitution</h4>
+          <p>The Indian Constitution drew from various sources:</p>
+          <ul>
+            <li><strong>Government of India Act, 1935:</strong> Federal plan, emergency provisions, bicameral legislature, office of Governor — major structural source</li>
+            <li><strong>British Constitution:</strong> Parliamentary government, rule of law, single citizenship, writs, Speaker's powers</li>
+            <li><strong>US Constitution:</strong> Fundamental Rights, judicial review, impeachment of President, independence of judiciary</li>
+            <li><strong>Irish Constitution:</strong> Directive Principles of State Policy, election of President, procedure for amendment</li>
+            <li><strong>Canadian Constitution:</strong> Federal structure with a strong Centre, residual powers with Centre, appointment of Governors</li>
+            <li><strong>Australian Constitution:</strong> Concurrent List, amendment procedure, joint sitting of Parliament</li>
+            <li><strong>French Constitution:</strong> Republic, Liberty, Equality, Fraternity in the Preamble</li>
+            <li><strong>Soviet/Russian Constitution:</strong> Fundamental Duties, social, economic, and political justice</li>
+            <li><strong>South African Constitution:</strong> Procedure for amendment of the Constitution</li>
+            <li><strong>Japanese Constitution:</strong> Procedure established by law (Article 21)</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Fact:</strong> The Indian Constitution is the <strong>lengthiest written constitution</strong> in the world. It took 2 years, 11 months, and 18 days (total 165 days of debate) to complete. The Constituent Assembly held 11 sessions. Dr. B.R. Ambedkar is called the "Father of the Indian Constitution."
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Who is the father of Indian Constitution?</div>
+          <div class="q-answer">Dr. B.R. Ambedkar is known as the Father of the Indian Constitution. He was the Chairman of the Drafting Committee of the Constituent Assembly and played a pivotal role in framing the Constitution.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">When was Indian Constitution adopted?</div>
+          <div class="q-answer">The Indian Constitution was adopted on 26 November 1949 and came into effect on 26 January 1950. This date was chosen to commemorate the Purna Swaraj declaration of 1930. 26 January is celebrated as Republic Day in India.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain the formation of Constituent Assembly</div>
+          <div class="q-answer">
+            <p>The <strong>Constituent Assembly</strong> was formed in November 1946 under the Cabinet Mission Plan of March 1946. </p>
+            <ul>
+              <li>Total strength: 389 members — 284 from British India, 93 from Princely States.</li>
+              <li>Members were elected indirectly by Provincial Legislative Assemblies using single transferable vote and proportional representation.</li>
+              <li>The first meeting was on 9 December 1946 with Dr. Sachchidananda Sinha as temporary Chairman.</li>
+              <li>Dr. Rajendra Prasad was elected as the permanent President.</li>
+              <li>The Assembly functioned as the Sovereign body with powers to frame the Constitution.</li>
+              <li>After partition (August 1947), the total strength reduced to 299 (229 from India, 70 from Pakistan). Members from Pakistan left, leaving 284.</li>
+              <li>The Assembly held 11 sessions and took 2 years, 11 months, and 18 days to complete the Constitution.</li>
+              <li>Several committees were formed: Drafting Committee (Ambedkar), Union Powers Committee (Nehru), Provincial Constitution Committee (Patel), etc.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">List the salient features of Indian Constitution</div>
+          <div class="q-answer">
+            <p><strong>Salient features of the Indian Constitution:</strong></p>
+            <ol>
+              <li><strong>Lengthiest written constitution:</strong> Originally 395 Articles, 22 Parts, 8 Schedules. Currently 470+ Articles, 25 Parts, 12 Schedules.</li>
+              <li><strong>Federal system with unitary bias:</strong> Division of powers between Centre and States but Centre is stronger (emergency provisions, overriding powers). Called quasi-federal.</li>
+              <li><strong>Parliamentary form of government:</strong> Based on British model — executive responsible to Parliament. Prime Minister is the real head of government.</li>
+              <li><strong>Blend of rigidity and flexibility:</strong> Some amendments need simple majority, others special majority (2/3 present + 50% total), some also need state ratification.</li>
+              <li><strong>Secular state:</strong> No official religion; equal respect for all religions (42nd Amendment added "secular" word).</li>
+              <li><strong>Democratic republic:</strong> Government by elected representatives; President is the elected head of state.</li>
+              <li><strong>Universal adult franchise:</strong> Every citizen aged 18+ has voting rights regardless of caste, religion, gender.</li>
+              <li><strong>Independent judiciary:</strong> Separation of powers; Supreme Court as the guardian of the Constitution.</li>
+              <li><strong>Single citizenship:</strong> All Indians are citizens of India only, not of individual states.</li>
+              <li><strong>Fundamental Rights and Duties:</strong> Justiciable rights (FR) and non-justiciable duties (FD) for citizens.</li>
+              <li><strong>Directive Principles of State Policy:</strong> Non-justiciable guidelines for governance.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Discuss the making of Indian Constitution in detail. Explain the role of Constituent Assembly, drafting committee, and major sources. Also explain the salient features of the Constitution.</div>
+          <div class="q-answer">
+            <p><strong>MAKING OF THE INDIAN CONSTITUTION</strong></p>
+            <p><strong>Background and Constituent Assembly:</strong> The demand for a Constituent Assembly was raised by Indian leaders since the 1930s. The Cabinet Mission of 1946 (comprising Pethick-Lawrence, Cripps, and A.V. Alexander) proposed the formation of a Constituent Assembly of 389 members. Members were elected by Provincial Legislative Assemblies through single transferable vote system. The Constituent Assembly first met on 9 December 1946, with Dr. Sachchidananda Sinha as the temporary Chairman. After partition, the Assembly had 284 members. It held 11 sessions over 2 years, 11 months, and 18 days.</p>
+            <p><strong>Drafting Committee:</strong> On 29 August 1947, a Drafting Committee was formed with Dr. B.R. Ambedkar as Chairman and 7 other members: N. Muthuranga Mudaliar, Alladi Krishnaswami Iyer, K.M. Munshi, Mohammad Saadullah, B.L. Mitter, and D.P. Khaitan. The Committee prepared the draft of the Constitution incorporating debates from various other committees (Union Powers, Provincial Constitution, Fundamental Rights, etc.). Dr. Ambedkar's leadership was instrumental in resolving complex issues and debates.</p>
+            <p><strong>Objectives Resolution:</strong> Nehru moved the Objectives Resolution on 13 November 1946. It declared India to be a Sovereign Democratic Republic. This resolution, adopted on 22 January 1947, later became the basis for the Preamble.</p>
+            <p><strong>Sources of the Constitution:</strong> The framers borrowed from several sources: Government of India Act 1935 (federal plan, emergency), British Constitution (parliamentary government, rule of law), US Constitution (Fundamental Rights, judicial review), Irish Constitution (Directive Principles), Canadian Constitution (federal structure), Australian Constitution (Concurrent List), French Constitution (Liberty, Equality, Fraternity), Soviet Constitution (Fundamental Duties, social justice), and South African Constitution (amendment procedure).</p>
+            <p><strong>Adoption:</strong> The Constitution was adopted on 26 November 1949 and came into force on 26 January 1950. India became a Republic on this day. The Government of India Act, 1935 was repealed.</p>
+            <p><strong>SALIENT FEATURES</strong></p>
+            <ol>
+              <li><strong>Lengthiest written constitution:</strong> 470+ Articles, 25 Parts, 12 Schedules — the longest in the world.</li>
+              <li><strong>Federal with unitary bias:</strong> Federal structure (Union and State governments) but Centre has superior powers. During emergency, Centre can override states.</li>
+              <li><strong>Parliamentary government:</strong> Prime Minister-led executive responsible to Parliament. Based on British model.</li>
+              <li><strong>Blend of rigidity and flexibility:</strong> Can be amended by simple majority (ordinary law), special majority (most amendments), or special majority + state ratification.</li>
+              <li><strong>Secular state:</strong> No state religion; government treats all religions equally.</li>
+              <li><strong>Democratic republic:</strong> People elect representatives; President is elected head of state.</li>
+              <li><strong>Universal adult franchise:</strong> All citizens 18+ can vote.</li>
+              <li><strong>Independent judiciary:</strong> Supreme Court as guardian of the Constitution; separation of powers.</li>
+              <li><strong>Single citizenship:</strong> All are citizens of India, not of individual states.</li>
+              <li><strong>Fundamental Rights, DPSP, and Fundamental Duties:</strong> Comprehensive rights framework for citizens.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the composition and functioning of the Constituent Assembly. What were the major challenges it faced?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Discuss the role of Dr. B.R. Ambedkar as the Chairman of the Drafting Committee.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> List and explain the salient features of the Indian Constitution. How is it different from the US Constitution?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 2 ==================== -->
+    <div class="unit-section" id="unit-2">
+      <div class="unit-header">
+        <div class="unit-number">2</div>
+        <div class="unit-header-text">
+          <h3>Fundamental Rights & Duties</h3>
+          <p>Articles 12-35, six categories of rights, writs, Right to Education</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>What are Fundamental Rights? (Articles 12-35)</h4>
+          <p><strong>Fundamental Rights</strong> are the basic human rights guaranteed to all citizens by the Constitution. They are justiciable — a person can move the Supreme Court or High Court for their enforcement under <strong>Article 32</strong> (Dr. Ambedkar called it the "heart and soul of the Constitution"). Originally there were 7 Fundamental Rights. After the 44th Amendment (1978), the Right to Property was removed from the list of Fundamental Rights and made a legal right under <strong>Article 300-A</strong>.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Right to Equality (Articles 14-18)</h4>
+          <ul>
+            <li><strong>Article 14:</strong> Equality before law — all persons are equal in the eyes of law. No arbitrary discrimination.</li>
+            <li><strong>Article 15:</strong> Prohibition of discrimination on grounds of religion, race, caste, sex, or place of birth. Exceptions: women and children, Scheduled Castes/Tribes, socially and educationally backward classes.</li>
+            <li><strong>Article 16:</strong> Equality of opportunity in public employment. No discrimination in public employment. Reservations for backward classes.</li>
+            <li><strong>Article 17:</strong> Abolition of untouchability — untouchability is abolished and its practice is punishable by law.</li>
+            <li><strong>Article 18:</strong> Abolition of titles — no titles (except military and academic) to be conferred by the State.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Right to Freedom (Articles 19-22)</h4>
+          <ul>
+            <li><strong>Article 19:</strong> Six freedoms — (a) speech and expression, (b) assembly, (c) association, (d) movement, (e) residence, (f) profession.</li>
+            <li><strong>Article 20:</strong> Protection in respect of conviction — no ex post facto law, no double jeopardy, no self-incrimination.</li>
+            <li><strong>Article 21:</strong> Protection of life and personal liberty — no person shall be deprived of life or liberty except according to procedure established by law. This is the most important and widest article. Through judicial interpretation, many implied rights have been read into Article 21 (right to privacy, right to health, right to education, etc.).</li>
+            <li><strong>Article 21A:</strong> Right to Education — free and compulsory education for children aged 6-14 (added by 86th Amendment, 2002).</li>
+            <li><strong>Article 22:</strong> Protection against arrest and detention — rights of arrested persons (right to be informed of grounds, right to consult a lawyer, right to be produced before magistrate within 24 hours).</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Right against Exploitation (Articles 23-24)</h4>
+          <ul>
+            <li><strong>Article 23:</strong> Prohibition of traffic in human beings, forced labour, and child labour. Any contravention is punishable by law.</li>
+            <li><strong>Article 24:</strong> Prohibition of employment of children below 14 years in factories, mines, and any hazardous employment.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Right to Freedom of Religion (Articles 25-28)</h4>
+          <ul>
+            <li><strong>Article 25:</strong> Freedom of conscience and free profession, practice, and propagation of religion. Subject to public order, morality, and health.</li>
+            <li><strong>Article 26:</strong> Freedom to manage religious affairs — manage its own affairs, own property, establish/maintain religious institutions.</li>
+            <li><strong>Article 27:</strong> Freedom from payment of taxes for promotion of any particular religion.</li>
+            <li><strong>Article 28:</strong> Freedom from attending religious instruction in educational institutions.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Cultural and Educational Rights (Articles 29-30)</h4>
+          <ul>
+            <li><strong>Article 29:</strong> Protection of interests of minorities — any section of citizens residing in India having a distinct language, script, or culture has the right to conserve the same.</li>
+            <li><strong>Article 30:</strong> Right of minorities to establish and administer educational institutions — minorities (religious or linguistic) can establish and administer educational institutions of their choice.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Right to Constitutional Remedies (Article 32 — Writs)</h4>
+          <p><strong>Article 32</strong> guarantees the right to move the Supreme Court for the enforcement of Fundamental Rights through writs. The Supreme Court can issue five types of writs:</p>
+          <ul>
+            <li><strong>Habeas Corpus:</strong> "To have the body" — produced before court. Protects against illegal detention.</li>
+            <li><strong>Mandamus:</strong> "We command" — directs a public authority to perform a duty. Cannot be issued against private individuals or the President/Governor.</li>
+            <li><strong>Prohibition:</strong> Issued by a higher court to a lower court to prevent it from exceeding its jurisdiction.</li>
+            <li><strong>Certiorari:</strong> Issued by a higher court to quash the order of a lower court, tribunal, or quasi-judicial body acting in excess of jurisdiction.</li>
+            <li><strong>Quo Warranto:</strong> "By what authority?" — enquires into the legality of a person holding a public office.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Right to Property</h4>
+          <p>The <strong>Right to Property</strong> was originally a Fundamental Right under <strong>Article 19(1)(f)</strong> and <strong>Article 31</strong>. However, the <strong>44th Amendment Act, 1978</strong> removed it from the list of Fundamental Rights and made it a <strong>legal right</strong> under <strong>Article 300-A</strong>. Now it is not enforceable through the Supreme Court under Article 32, but the State cannot deprive a person of property except by authority of law.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Important:</strong> Only the Supreme Court and High Courts can issue writs under Article 32 and Article 226 respectively. High Courts have wider powers — they can issue writs not only for Fundamental Rights but also for any other purpose. Article 32 itself is a Fundamental Right — it cannot be suspended even during an emergency (except during armed rebellion per Article 359).
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What are Fundamental Rights?</div>
+          <div class="q-answer">Fundamental Rights are basic human rights guaranteed to all citizens by the Constitution (Articles 12-35). They are justiciable — enforceable by courts. Originally 7 in number, now 6 (Right to Property was removed by 44th Amendment). They include Right to Equality, Right to Freedom, Right against Exploitation, Right to Freedom of Religion, Cultural and Educational Rights, and Right to Constitutional Remedies.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Name the five types of writs</div>
+          <div class="q-answer">The five types of writs issued by the Supreme Court under Article 32 are: (1) <strong>Habeas Corpus</strong> (to produce a detained person), (2) <strong>Mandamus</strong> (command to do a duty), (3) <strong>Prohibition</strong> (stop a lower court from exceeding jurisdiction), (4) <strong>Certiorari</strong> (quash an order of lower court/tribunal), (5) <strong>Quo Warranto</strong> (question the authority of a person in public office).</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain Right to Equality in detail</div>
+          <div class="q-answer">
+            <p>The <strong>Right to Equality</strong> is enshrined in <strong>Articles 14-18</strong> of the Constitution:</p>
+            <ul>
+              <li><strong>Article 14:</strong> Equality before law — all persons are equal in the eyes of law. Prohibits arbitrary discrimination by the State. "Equality before law" means equal treatment in equal circumstances. "Equal protection of laws" means similar situations receive similar treatment.</li>
+              <li><strong>Article 15:</strong> Prohibits discrimination on grounds of religion, race, caste, sex, or place of birth. Allows special provisions for women, children, Scheduled Castes, Scheduled Tribes, and socially/educationally backward classes (SEBC).</li>
+              <li><strong>Article 16:</strong> Equality of opportunity in public employment. No discrimination in employment. Allows reservation for backward classes (up to 50% generally).</li>
+              <li><strong>Article 17:</strong> Abolition of untouchability — practice of untouchability is an offence punishable by law.</li>
+              <li><strong>Article 18:</strong> Abolition of titles — no titles (except military and academic) to be conferred. Title "Bharat Ratna" is not a title in the constitutional sense.</li>
+            </ul>
+            <p><strong>Exceptions:</strong> Reservation for SC/ST/OBC, special provisions for women and children, protection of backward tribes in Nagaland, etc.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What are writs? Explain different types</div>
+          <div class="q-answer">
+            <p><strong>Writs</strong> are written orders issued by the Supreme Court (under Article 32) and High Courts (under Article 226) to enforce Fundamental Rights and provide legal remedies. The five types are:</p>
+            <ol>
+              <li><strong>Habeas Corpus (You may have the body):</strong> The most powerful writ. It is issued to produce a detained person before the court and to free them if the detention is found illegal. It can be issued against both public and private authorities.</li>
+              <li><strong>Mandamus (We Command):</strong> A command to a public authority or lower court to perform a duty it is legally obligated to do. It cannot be issued against the President, Governor, or private individuals.</li>
+              <li><strong>Prohibition:</strong> Issued by a higher court to a lower court, tribunal, or quasi-judicial body to prevent it from exceeding its jurisdiction or acting contrary to rules of natural justice.</li>
+              <li><strong>Certiorari (To be certified):</strong> Issued by a higher court to quash the order or decision of a lower court, tribunal, or quasi-judicial body which has acted without or in excess of its jurisdiction.</li>
+              <li><strong>Quo Warranto (By what authority):</strong> Issued to enquire into the legality of a person holding a public office. It prevents unauthorized persons from holding public offices.</li>
+            </ol>
+            <p><strong>Note:</strong> High Courts under Article 226 can issue writs not only for Fundamental Rights but for any other purpose as well. The Supreme Court under Article 32 can issue writs only for the enforcement of Fundamental Rights.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain Fundamental Rights enshrined in Indian Constitution. Discuss Right to Equality, Right to Freedom, Right against Exploitation, Right to Freedom of Religion, and Right to Constitutional Remedies in detail.</div>
+          <div class="q-answer">
+            <p><strong>FUNDAMENTAL RIGHTS (Articles 12-35)</strong></p>
+            <p>Fundamental Rights are justiciable rights guaranteed by the Constitution to all citizens. They are enforceable by courts. Originally 7, now 6 (after removal of Right to Property).</p>
+            <p><strong>1. Right to Equality (Articles 14-18):</strong></p>
+            <ul>
+              <li><strong>Art. 14:</strong> Equality before law — all persons equal before law; no arbitrary discrimination.</li>
+              <li><strong>Art. 15:</strong> No discrimination on grounds of religion, race, caste, sex, or place of birth. Special provisions for women, SC/ST, and backward classes.</li>
+              <li><strong>Art. 16:</strong> Equality of opportunity in public employment. Reservations up to 50% for backward classes.</li>
+              <li><strong>Art. 17:</strong> Abolition of untouchability — punishable offence.</li>
+              <li><strong>Art. 18:</strong> Abolition of titles (except military and academic).</li>
+            </ul>
+            <p><strong>2. Right to Freedom (Articles 19-22):</strong></p>
+            <ul>
+              <li><strong>Art. 19:</strong> Six freedoms — speech &amp; expression, assembly, association, movement, residence, profession.</li>
+              <li><strong>Art. 20:</strong> Protection against conviction — no ex post facto law, no double jeopardy, no self-incrimination.</li>
+              <li><strong>Art. 21:</strong> Right to life and personal liberty — "procedure established by law." Broadly interpreted by courts (right to privacy, right to health, etc.).</li>
+              <li><strong>Art. 21A:</strong> Right to Education for children aged 6-14 (86th Amendment).</li>
+              <li><strong>Art. 22:</strong> Protection against arrest — right to know grounds of arrest, right to counsel, right to be produced before magistrate within 24 hours.</li>
+            </ul>
+            <p><strong>3. Right against Exploitation (Articles 23-24):</strong></p>
+            <ul>
+              <li><strong>Art. 23:</strong> Prohibits human trafficking, forced labour, bonded labour.</li>
+              <li><strong>Art. 24:</strong> Prohibits child labour below 14 years in hazardous employment.</li>
+            </ul>
+            <p><strong>4. Right to Freedom of Religion (Articles 25-28):</strong></p>
+            <ul>
+              <li><strong>Art. 25:</strong> Freedom of conscience and free profession, practice, and propagation of religion.</li>
+              <li><strong>Art. 26:</strong> Freedom to manage religious affairs.</li>
+              <li><strong>Art. 27:</strong> Freedom from taxes for promotion of any particular religion.</li>
+              <li><strong>Art. 28:</strong> Freedom from attending religious instruction.</li>
+            </ul>
+            <p><strong>5. Cultural and Educational Rights (Articles 29-30):</strong></p>
+            <ul>
+              <li><strong>Art. 29:</strong> Protection of language, script, and culture of minorities.</li>
+              <li><strong>Art. 30:</strong> Minorities can establish and administer educational institutions.</li>
+            </ul>
+            <p><strong>6. Right to Constitutional Remedies (Article 32):</strong></p>
+            <ul>
+              <li>The "heart and soul" of the Constitution (Dr. Ambedkar).</li>
+              <li>Allows citizens to move the Supreme Court directly for enforcement of Fundamental Rights.</li>
+              <li>Five writs: Habeas Corpus, Mandamus, Prohibition, Certiorari, Quo Warranto.</li>
+              <li>High Courts can issue writs under Article 226 for FR and other purposes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the Right to Equality under the Indian Constitution. What are the exceptions to Article 15?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Discuss Article 21 in detail. How has the Supreme Court expanded its scope through judicial interpretation?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain the writ jurisdiction of the Supreme Court and High Courts. Differentiate between Certiorari and Mandamus.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 3 ==================== -->
+    <div class="unit-section" id="unit-3">
+      <div class="unit-header">
+        <div class="unit-number">3</div>
+        <div class="unit-header-text">
+          <h3>Directive Principles & Fundamental Duties</h3>
+          <p>DPSP (Articles 36-51), categories, Fundamental Duties (51A), FR vs DPSP</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Directive Principles of State Policy (Articles 36-51)</h4>
+          <p><strong>Directive Principles of State Policy (DPSP)</strong> are guidelines for the State to govern the country. They are enshrined in <strong>Articles 36-51</strong> of Part IV of the Constitution. Unlike Fundamental Rights, DPSPs are <strong>non-justiciable</strong> — they cannot be enforced by courts. However, they are fundamental in the governance of the country and it is the duty of the State to apply these principles in making laws.</p>
+          <p>DPSPs are borrowed from the Irish Constitution and are based on the concept of a "Welfare State."</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Categories of Directive Principles</h4>
+          <p><strong>1. Socialist Principles:</strong> Aim at providing social and economic justice.</p>
+          <ul>
+            <li>Article 38: State to secure a social order for the promotion of welfare of the people.</li>
+            <li>Article 39: Secure adequate means of livelihood, equal pay for equal work, protection of children.</li>
+            <li>Article 39A: Provide free legal aid to ensure equal justice.</li>
+            <li>Article 42: Just and humane conditions of work, maternity relief.</li>
+            <li>Article 43: Living wage, decent standard of life for workers.</li>
+            <li>Article 43A: Right to participate in management of industries.</li>
+            <li>Article 47: Raise the level of nutrition and public health.</li>
+          </ul>
+          <p><strong>2. Gandhian Principles:</strong> Reflect Gandhian ideology.</p>
+          <ul>
+            <li>Article 40: Organisation of village panchayats.</li>
+            <li>Article 43B: Cooperative societies.</li>
+            <li>Article 44: Uniform Civil Code.</li>
+            <li>Article 46: Promotion of educational and economic interests of SC/ST and weaker sections.</li>
+            <li>Article 47: Prohibition of intoxicating drinks and drugs injurious to health.</li>
+            <li>Article 48: Organisation of agriculture and animal husbandry; prohibition of cow slaughter.</li>
+            <li>Article 50: Separation of judiciary from executive.</li>
+            <li>Article 51: Promotion of international peace and security.</li>
+          </ul>
+          <p><strong>3. Liberal-Intellectual Principles:</strong></p>
+          <ul>
+            <li>Article 44: Uniform Civil Code for all citizens.</li>
+            <li>Article 45: Provision for early childhood care and education (0-6 years).</li>
+            <li>Article 48A: Protection and improvement of environment, forests, wildlife.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Fundamental Duties (Article 51A)</h4>
+          <p><strong>Fundamental Duties</strong> were added by the <strong>42nd Amendment Act, 1976</strong> (Swaran Singh Committee) under <strong>Article 51A</strong>. Originally 10 duties, the 11th duty was added by the <strong>86th Amendment Act, 2002</strong> (Right to Education). Total: <strong>11 Fundamental Duties</strong>:</p>
+          <ol>
+            <li>To abide by the Constitution and respect its ideals and institutions.</li>
+            <li>To cherish and follow the noble ideals which inspired the national struggle for freedom.</li>
+            <li>To uphold and protect the sovereignty, unity, and integrity of India.</li>
+            <li>To defend the country and render national service when called upon.</li>
+            <li>To promote harmony and spirit of common brotherhood transcending religious, linguistic, regional, or sectional diversities.</li>
+            <li>To value and preserve the rich heritage of India's composite culture.</li>
+            <li>To protect and improve the natural environment including forests, lakes, rivers, and wildlife.</li>
+            <li>To develop scientific temper, humanism, and the spirit of inquiry and reform.</li>
+            <li>To safeguard public property and to abjure violence.</li>
+            <li>To strive towards excellence in all spheres of individual and collective activity.</li>
+            <li>To provide opportunities for education to one's child or ward between the age of 6 and 14 years (added by 86th Amendment).</li>
+          </ol>
+          <p>Fundamental Duties are <strong>non-justiciable</strong> — they cannot be enforced by courts. However, Parliament can make laws to give them effect.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Difference between Fundamental Rights and DPSP</h4>
+          <table>
+            <tr>
+              <th>Fundamental Rights</th>
+              <th>Directive Principles</th>
+            </tr>
+            <tr>
+              <td>Justiciable — enforceable by courts</td>
+              <td>Non-justiciable — not enforceable by courts</td>
+            </tr>
+            <tr>
+              <td>Negative in nature — prohibit State from doing certain acts</td>
+              <td>Positive in nature — direct State to do certain acts</td>
+            </tr>
+            <tr>
+              <td>Individualistic — protect individual rights</td>
+              <td>Socialistic — promote welfare of the community</td>
+            </tr>
+            <tr>
+              <td>Based on liberal philosophy</td>
+              <td>Based on socialist and Gandhian philosophy</td>
+            </tr>
+            <tr>
+              <td>Cannot be suspended during emergency (except Art. 20, 21)</td>
+              <td>Not suspended during emergency (Article 31C applies)</td>
+            </tr>
+            <tr>
+              <td>Costly — require funds for enforcement</td>
+              <td>Not costly — just policy guidelines</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="topic-card">
+          <h4>Conflict between FR and DPSP: Minerva Mills Case</h4>
+          <p>The relationship between Fundamental Rights and Directive Principles has been a subject of debate. The Supreme Court in the <strong>Minerva Mills v. Union of India (1980)</strong> case held that there is a harmony between FR and DPSP. Both are complementary — Fundamental Rights ensure individual liberty, while DPSPs ensure social and economic justice. The Court struck down the 42nd Amendment which had given DPSPs primacy over Fundamental Rights, stating that the Constitution balances both — one cannot be given absolute primacy over the other. The <strong>basic structure doctrine</strong> was reinforced.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Case:</strong> In <strong>Minerva Mills v. Union of India (1980)</strong>, the Supreme Court held that the Indian Constitution is founded on the bedrock of balance between Fundamental Rights and Directive Principles. Giving absolute primacy to one over the other would disturb the harmony of the Constitution. This case is a landmark in understanding the FR-DPSP relationship.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What are Directive Principles?</div>
+          <div class="q-answer">Directive Principles of State Policy (DPSP) are guidelines for the State in Part IV (Articles 36-51) of the Constitution. They are non-justiciable and borrowed from the Irish Constitution. They aim to establish a welfare state by providing social, economic, and political justice. They are positive in nature and not enforceable by courts.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">When were Fundamental Duties added?</div>
+          <div class="q-answer">Fundamental Duties were added by the <strong>42nd Amendment Act, 1976</strong> (Swaran Singh Committee) under <strong>Article 51A</strong>. Originally 10 duties, the 11th was added by the <strong>86th Amendment Act, 2002</strong> (Right to Education for children 6-14).</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain categories of Directive Principles</div>
+          <div class="q-answer">
+            <p>DPSPs are classified into three categories:</p>
+            <p><strong>1. Socialist Principles (Articles 38, 39, 39A, 42, 43, 43A, 47):</strong> Aim at providing social and economic justice. Article 38 directs the State to secure a social order for the welfare of all. Article 39 provides for adequate livelihood, equal pay for equal work, protection of children. Article 39A provides for free legal aid. Article 42 provides for maternity relief and just conditions of work. Article 43 provides for a living wage.</p>
+            <p><strong>2. Gandhian Principles (Articles 40, 43B, 44, 46, 47, 48, 50, 51):</strong> Reflect Gandhian ideology. Article 40: organisation of village panchayats. Article 44: Uniform Civil Code. Article 46: promotion of educational and economic interests of SC/ST. Article 47: prohibition of intoxicating drinks. Article 48: prohibition of cow slaughter. Article 50: separation of judiciary from executive.</p>
+            <p><strong>3. Liberal-Intellectual Principles (Articles 44, 45, 48A):</strong> Article 44: Uniform Civil Code. Article 45: early childhood care and education (0-6 years). Article 48A: protection and improvement of environment and forests.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What are Fundamental Duties?</div>
+          <div class="q-answer">
+            <p><strong>Fundamental Duties</strong> (Article 51A) are 11 moral obligations of every citizen, added by the 42nd Amendment (1976) and extended by the 86th Amendment (2002). They are non-justiciable:</p>
+            <ol>
+              <li>Abide by the Constitution and respect its ideals.</li>
+              <li>Cherish the noble ideals of the freedom struggle.</li>
+              <li>Uphold and protect the sovereignty, unity, and integrity of India.</li>
+              <li>Defend the country and render national service.</li>
+              <li>Promote harmony and spirit of common brotherhood.</li>
+              <li>Value and preserve the rich heritage of India's composite culture.</li>
+              <li>Protect and improve the natural environment.</li>
+              <li>Develop scientific temper and spirit of inquiry.</li>
+              <li>Safeguard public property and abjure violence.</li>
+              <li>Strive towards excellence in all spheres of activity.</li>
+              <li>Provide education to children aged 6-14 (added by 86th Amendment).</li>
+            </ol>
+            <p>Though not enforceable by courts, they serve as a reminder of civic duties and can be given effect through legislation.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain Directive Principles of State Policy and Fundamental Duties. Discuss their categories, importance, and the relationship between Fundamental Rights and DPSP. Reference important cases.</div>
+          <div class="q-answer">
+            <p><strong>DIRECTIVE PRINCIPLES OF STATE POLICY (DPSP)</strong></p>
+            <p>DPSPs (Articles 36-51) are non-justiciable guidelines for the State. Borrowed from the Irish Constitution, they aim to establish a welfare state.</p>
+            <p><strong>Categories:</strong></p>
+            <ul>
+              <li><strong>Socialist:</strong> Article 38 (social order), 39 (adequate livelihood, equal pay, child protection), 39A (free legal aid), 42 (maternity relief), 43 (living wage).</li>
+              <li><strong>Gandhian:</strong> Article 40 (village panchayats), 44 (Uniform Civil Code), 46 (SC/ST welfare), 47 (prohibition of intoxicants), 48 (cow protection, agriculture), 50 (separation of judiciary).</li>
+              <li><strong>Liberal:</strong> Article 44 (UCC), 45 (early childhood education), 48A (environment protection).</li>
+            </ul>
+            <p><strong>FUNDAMENTAL DUTIES (Article 51A)</strong></p>
+            <p>Added by 42nd Amendment (1976), extended by 86th Amendment (2002). 11 duties including abiding by the Constitution, cherishing freedom struggle ideals, upholding sovereignty, defending the country, promoting harmony, preserving culture, protecting the environment, developing scientific temper, safeguarding public property, striving for excellence, and providing education to children 6-14.</p>
+            <p><strong>RELATIONSHIP: FR vs DPSP</strong></p>
+            <p>Fundamental Rights are justiciable (enforceable), negative in nature, and protect individuals. DPSPs are non-justiciable, positive in nature, and promote social welfare. The Constitution makers intended both to be complementary.</p>
+            <p><strong>Key Cases:</strong></p>
+            <ul>
+              <li><strong>Champakam Dorairajan (1951):</strong> Held that FR and DPSP are not complementary — if they conflict, FR would prevail. Led to First Amendment (1951).</li>
+              <li><strong>Kesavananda Bharati (1973):</strong> FR and DPSP are complementary; neither is subordinate to the other.</li>
+              <li><strong>Minerva Mills (1980):</strong> Landmark case. Struck down 42nd Amendment which gave DPSP primacy over FR. Held that harmony between FR and DPSP is a basic feature of the Constitution. Absolute primacy of one over the other would destroy the Constitution's balance.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the various categories of Directive Principles of State Policy. How do they relate to Fundamental Rights?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Discuss the Minerva Mills case and its impact on the relationship between Fundamental Rights and DPSP.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain Fundamental Duties under Article 51A. Are they enforceable? Why were they added?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 4 ==================== -->
+    <div class="unit-section" id="unit-4">
+      <div class="unit-header">
+        <div class="unit-number">4</div>
+        <div class="unit-header-text">
+          <h3>Union & State Government</h3>
+          <p>President, PM, Parliament, Supreme Court, Governor, High Court, Judiciary</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>President of India</h4>
+          <p>The President is the <strong>head of state</strong> of India, elected indirectly by an electoral college consisting of elected members of both Houses of Parliament and elected members of Legislative Assemblies of States (and UTs).</p>
+          <ul>
+            <li><strong>Election:</strong> By proportional representation through single transferable vote.</li>
+            <li><strong>Tenure:</strong> 5 years. Eligible for re-election.</li>
+            <li><strong>Powers:</strong> Executive, Legislative, Financial, Judicial, Emergency (Article 352, 356, 360), Diplomatic (treaties, international agreements), Military (Supreme Commander of Armed Forces).</li>
+            <li><strong>Veto Powers:</strong> (1) Absolute veto (withhold assent), (2) Suspensive veto (return bill for reconsideration — except Money Bills), (3) Pocket veto (no action).</li>
+            <li><strong>Impeachment:</strong> Can be removed for "violation of Constitution" by Parliament (special majority in both Houses). Initiated in either House.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Vice-President and Prime Minister</h4>
+          <p><strong>Vice-President</strong> is elected by an electoral college of members of both Houses of Parliament. He is the ex-officio Chairman of Rajya Sabha. He acts as President during vacancies in the office of President.</p>
+          <p><strong>Prime Minister</strong> is the real executive head of the government. Leader of the majority party/coalition in Lok Sabha. Advises the President on appointments (Governors, CJI, CAG, etc.). Heads the Council of Ministers. Coordinates between various ministries. Represents India in international forums.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Parliament — Lok Sabha and Rajya Sabha</h4>
+          <p><strong>Parliament</strong> is the supreme legislative body of India, consisting of the President, Lok Sabha (House of the People), and Rajya Sabha (Council of States).</p>
+          <ul>
+            <li><strong>Lok Sabha:</strong> 543 elected members (max 552). Term: 5 years (can be dissolved). Speaker presides. Money Bills can only be introduced here. More powerful than Rajya Sabha.</li>
+            <li><strong>Rajya Sabha:</strong> 238 elected + 12 nominated members. Term: 6 years (1/3 retiring every 2 years). Vice-President is ex-officio Chairman. Cannot be dissolved. Deputy Chairman elected from members.</li>
+            <li><strong>Speaker:</strong> Elected by Lok Sabha members. Maintains discipline, decides on points of order, presides over debates. Deputy Speaker assists.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Supreme Court and Judiciary</h4>
+          <p><strong>Supreme Court</strong> is the highest court of India. Established on 28 January 1950. Consists of the Chief Justice of India and up to 33 other judges (currently).</p>
+          <ul>
+            <li><strong>Appointment:</strong> CJI appointed by President after consultation. Other judges appointed by President after consultation with CJI and senior judges (Collegium system).</li>
+            <li><strong>Tenure:</strong> Up to 65 years. Removal by impeachment (special majority in both Houses).</li>
+            <li><strong>Jurisdiction:</strong> Original (disputes between Centre and States), Appellate (from High Courts), Advisory (President can seek opinion), Writ jurisdiction (Article 32).</li>
+            <li><strong>Judicial Review:</strong> Power to declare laws unconstitutional if they violate the Constitution.</li>
+            <li><strong>Judicial Activism:</strong> Active role of judiciary in protecting rights — Public Interest Litigation (PIL), environmental activism, etc.</li>
+            <li><strong>PIL:</strong> Any person can file a petition on behalf of those who cannot, for protection of public rights. Introduced in the 1980s by Justice P.N. Bhagwati.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Governor, Chief Minister, State Legislature, and High Court</h4>
+          <p><strong>Governor</strong> is the head of state at the state level (Article 153). Appointed by the President for 5 years. Holds executive power of the State. Summons prorogues and dissolves State Legislature. Can reserve bills for President's assent. Can promulgate Ordinances.</p>
+          <p><strong>Chief Minister</strong> is the real executive head at the state level. Leader of the majority party/coalition in the Legislative Assembly. Heads the Council of Ministers. Advises the Governor.</p>
+          <p><strong>State Legislature:</strong> Most states have a unicameral legislature (Legislative Assembly). Some have bicameral (Legislative Assembly + Legislative Council). Members of Legislative Assembly (MLA) are directly elected.</p>
+          <p><strong>High Court:</strong> Highest judicial authority in a state. Consists of a Chief Justice and other judges. Judges are appointed by the President. High Courts have writ jurisdiction under Article 226. They can issue writs for Fundamental Rights AND for other purposes (wider than Supreme Court).</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Comparison:</strong> President is the head of state (ceremonial); Prime Minister is the head of government (real executive). Governor is the state-level head of state; Chief Minister is the state-level head of government. The real power lies with the PM at Centre and CM at State level.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Who appoints the Governor?</div>
+          <div class="q-answer">The Governor of a State is appointed by the <strong>President of India</strong> under Article 153. The Governor holds office during the pleasure of the President (normally for 5 years). The same person can be appointed as Governor of two or more states.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is the tenure of President?</div>
+          <div class="q-answer">The President of India holds office for a term of <strong>5 years</strong> from the date of entering office. The President is eligible for re-election. The President can resign by writing to the Vice-President, or can be removed by impeachment for "violation of the Constitution."</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain powers of President of India</div>
+          <div class="q-answer">
+            <p><strong>Powers of the President of India:</strong></p>
+            <ul>
+              <li><strong>Executive Powers:</strong> Supreme Commander of Armed Forces; appoints Prime Minister, Governors, CJI, judges, CAG, CEC, ambassadors. All executive actions are taken in the President's name.</li>
+              <li><strong>Legislative Powers:</strong> Summons, prorogues, and dissolves Lok Sabha. Addresses the first session after general elections and the first session of each year. Can promulgate Ordinances when Parliament is not in session. Assent to bills passed by Parliament (can withhold, return for reconsideration, or withhold finally for Money Bills).</li>
+              <li><strong>Financial Powers:</strong> Union Budget is presented in Parliament in President's name. Money Bills can only be introduced with President's recommendation. No demand for grant can be made except on President's recommendation.</li>
+              <li><strong>Judicial Powers:</strong> Appoints CJI and other judges. Can grant pardons, reprieves, respites, or remissions of punishment. Can consult the Supreme Court on questions of law or fact.</li>
+              <li><strong>Emergency Powers (Article 352, 356, 360):</strong> National Emergency (Article 352 — war, external aggression, armed rebellion), State Emergency/President's Rule (Article 356 — failure of constitutional machinery in State), Financial Emergency (Article 360 — financial stability threatened).</li>
+              <li><strong>Veto Powers:</strong> Absolute veto (withhold assent permanently), Suspensive veto (return bill for reconsideration — not for Money Bills), Pocket veto (no action, bill lapses).</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Discuss the structure of Indian Parliament</div>
+          <div class="q-answer">
+            <p><strong>Indian Parliament</strong> consists of three components: the President, Lok Sabha (House of the People), and Rajya Sabha (Council of States).</p>
+            <p><strong>Lok Sabha (Lower House):</strong> Maximum 552 members (530 from States, 20 from UTs, 2 nominated by President if Anglo-Indian community not adequately represented). Currently 543 elected members. Term: 5 years (can be dissolved earlier by President on advice of PM). Presided over by the Speaker (elected from among members). Deputy Speaker assists. Speaker's decisions are final and binding. More powerful than Rajya Sabha — Money Bills can only originate here.</p>
+            <p><strong>Rajya Sabha (Upper House):</strong> Maximum 250 members — 238 elected by State Legislative Assemblies (proportional representation), 12 nominated by President from fields of literature, science, art, and social service. Term: 6 years, 1/3 members retire every 2 years. Cannot be dissolved. Vice-President is ex-officio Chairman. Deputy Chairman elected from among members.</p>
+            <p><strong>Joint Sessions:</strong> If a bill is rejected by one House, or there is disagreement on amendments, a joint session can be called by the President. Since Lok Sabha has more members (543 vs 245), it usually prevails in joint sessions.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain the structure of Indian Parliamentary System. Discuss the powers and position of President, Prime Minister, Parliament (Lok Sabha and Rajya Sabha), and the role of Supreme Court.</div>
+          <div class="q-answer">
+            <p><strong>INDIAN PARLIAMENTARY SYSTEM</strong></p>
+            <p>India follows the Westminster model of parliamentary government, where the executive is responsible to the legislature.</p>
+            <p><strong>President:</strong> Head of State (nominal/ceremonial). Elected indirectly by an electoral college. Term: 5 years. Powers include: Executive (appoints PM, judges, governors), Legislative (summons/dissolves Parliament, assents to bills), Financial (budget in President's name), Emergency (National, State, Financial emergencies), and Veto powers. Acts on advice of Council of Ministers (except in certain situations).</p>
+            <p><strong>Prime Minister:</strong> Real executive head. Leader of majority party/coalition in Lok Sabha. Advises President on appointments. Heads Council of Ministers. Coordinates between ministries. Key decision-maker. The PM's position is secure as long as he enjoys the confidence of Lok Sabha.</p>
+            <p><strong>Council of Ministers:</strong> Cabinet Ministers (senior, head key ministries), Ministers of State (junior, may hold independent charge or assist cabinet ministers), Deputy Ministers. Collectively responsible to Lok Sabha.</p>
+            <p><strong>Lok Sabha:</strong> 543 elected members, 5-year term, Speaker presides. More powerful than Rajya Sabha. Controls the executive through question hour, debates, motions of no-confidence, and budgetary control.</p>
+            <p><strong>Rajya Sabha:</strong> 238 elected + 12 nominated, permanent body (not subject to dissolution). Represents states in the federal structure. Equal powers with Lok Sabha in most matters except Money Bills and no-confidence motion (Lok Sabha only).</p>
+            <p><strong>Supreme Court:</strong> Highest court, guardian of the Constitution. Original, appellate, and advisory jurisdiction. Judicial review power. PIL mechanism for public welfare. Independence ensured through security of tenure, fixed salary, and removal only by impeachment.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the powers of the President of India. Differentiate between absolute veto and suspensive veto.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Discuss the composition and powers of the Indian Parliament. Why is Lok Sabha considered more powerful than Rajya Sabha?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain the structure and jurisdiction of the Supreme Court. What is judicial review?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 5 ==================== -->
+    <div class="unit-section" id="unit-5">
+      <div class="unit-header">
+        <div class="unit-number">5</div>
+        <div class="unit-header-text">
+          <h3>Constitutional Bodies & Amendments</h3>
+          <p>Election Commission, CAG, UPSC, Finance Commission, Article 368, amendments, basic structure</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Constitutional Bodies</h4>
+          <p>These bodies are created by the Constitution and their composition, powers, and functions are defined by the Constitution:</p>
+          <ul>
+            <li><strong>Election Commission (Article 324):</strong> Conducts free and fair elections to Parliament, State Legislatures, and the offices of President and Vice-President. Consists of Chief Election Commissioner and other ECs. Appointed by the President. Independent authority — cannot be removed except by impeachment like a Supreme Court judge.</li>
+            <li><strong>Comptroller and Auditor General (CAG) (Article 148):</strong> Supreme audit institution of India. Audits the accounts of the Union and State governments and public sector undertakings. Appointed by the President. Can only be removed by impeachment. Responsible to the President/Parliament, not to the executive.</li>
+            <li><strong>Union Public Service Commission (UPSC) (Article 315):</strong> Conducts examinations for recruitment to All-India Services and Central Services. Chairman and members appointed by President. Independent body — removal only by impeachment.</li>
+            <li><strong>State Public Service Commission (SPSC) (Article 315):</strong> Similar to UPSC but at the state level. Conducts exams for State Services.</li>
+            <li><strong>Finance Commission (Article 280):</strong> constituted every 5 years to recommend the distribution of tax revenues between Centre and States. Chairman appointed by President.</li>
+            <li><strong>Attorney General of India (Article 76):</strong> Highest law officer of the country. Right of audience in all courts. Advises the Government of India on legal matters.</li>
+            <li><strong>Advocate General (Article 165):</strong> Highest law officer of a State. Advises the State Government on legal matters. Right of audience in State High Courts.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Constitutional Amendment Procedure (Article 368)</h4>
+          <p><strong>Article 368</strong> provides the procedure for amending the Constitution. Different types of amendments require different procedures:</p>
+          <ul>
+            <li><strong>Simple Majority:</strong> Certain provisions can be amended by a simple majority (like ordinary laws) — e.g., creation of new states, changes in representation, changes in salaries of judges.</li>
+            <li><strong>Special Majority:</strong> Most amendments require a special majority: (a) majority of total membership of each House, AND (b) 2/3 majority of members present and voting. This is the most common method.</li>
+            <li><strong>Special Majority + State Ratification:</strong> Amendments affecting federal provisions (election of President, distribution of powers, Supreme Court/High Courts, amendment of Constitution itself) require ratification by at least half of the State Legislatures in addition to the special majority in Parliament.</li>
+          </ul>
+          <p>The Constitution can be amended by Parliament alone (no role for states in most cases), which makes it relatively flexible compared to the US Constitution.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Important Constitutional Amendments</h4>
+          <ul>
+            <li><strong>1st Amendment (1951):</strong> Added Ninth Schedule to protect land reform laws from judicial review. Restricted freedom of speech (added restrictions on free speech).</li>
+            <li><strong>42nd Amendment (1976):</strong> Called "Mini Constitution." Added words "Socialist," "Secular," "Integrity" to Preamble. Added Part IV-A (Fundamental Duties — Article 51A). Added Article 31C to give DPSP primacy over FR. Made President bound by Cabinet's advice. Extended term of Lok Sabha from 5 to 6 years during emergency. Many provisions were later reversed by 44th Amendment.</li>
+            <li><strong>44th Amendment (1978):</strong> Reversed most 42nd Amendment provisions. Removed Right to Property from Fundamental Rights (made it a legal right under Article 300A). Restored 5-year term for Lok Sabha. Limited the scope of emergency provisions.</li>
+            <li><strong>73rd Amendment (1992):</strong> Granted constitutional status to Panchayati Raj institutions. Added Part IX (Articles 243-243O). Three-tier system of Panchayats (village, intermediate, district). 1/3rd reservation for women.</li>
+            <li><strong>74th Amendment (1992):</strong> Granted constitutional status to Municipalities. Added Part IX-A (Articles 243P-243ZG). Urban local self-government.</li>
+            <li><strong>86th Amendment (2002):</strong> Added Article 21A (Right to Education for children 6-14). Added Fundamental Duty (11th) about providing education to children.</li>
+            <li><strong>101st Amendment (2016):</strong> Introduced Goods and Services Tax (GST). Added Articles 246A, 269A, 279A.</li>
+            <li><strong>103rd Amendment (2019):</strong> Provided 10% reservation for Economically Weaker Sections (EWS) in educational institutions and public employment.</li>
+            <li><strong>104th Amendment (2020):</strong> Extended reservation for SC/ST in Lok Sabha and State Assemblies for another 10 years (till 2030).</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Basic Structure Doctrine — Kesavananda Bharati Case</h4>
+          <p>The <strong>Basic Structure Doctrine</strong> was established by the Supreme Court in <strong>Kesavananda Bharati v. State of Kerala (1973)</strong>. The Court held that Parliament cannot amend the "basic structure" or "essential features" of the Constitution. While Article 368 gives Parliament amending power, it cannot destroy the basic structure.</p>
+          <p><strong>Basic features identified by the Court include:</strong> Supremacy of the Constitution, Republican and Democratic form of Government, Secularism, Separation of powers between legislature, executive, and judiciary, Federal character of the Constitution, Unity and integrity of the Nation, Welfare state, Judicial review, Harmony between FR and DPSP, Parliamentary system, Free and fair elections, Limited power of Parliament to amend, Rule of law, and Principle of equality.</p>
+          <p>The 13-judge bench (largest ever) ruled 7-6. Parliament later attempted to override this decision through the 42nd Amendment (1976), but the <strong>Minerva Mills case (1980)</strong> reaffirmed the basic structure doctrine, striking down the clauses that attempted to negate it.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Landmark Case:</strong> <strong>Kesavananda Bharati (1973)</strong> — The Supreme Court held by a 7-6 majority that Parliament's amending power under Article 368 does not enable it to alter the "basic structure" of the Constitution. This doctrine has since been the cornerstone of constitutional law in India, protecting the Constitution from totalitarian amendments.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is Article 368?</div>
+          <div class="q-answer">Article 368 of the Constitution provides the procedure for amending the Constitution. It empowers Parliament to amend any provision of the Constitution by: (1) Simple majority, (2) Special majority (2/3 of present + majority of total members), or (3) Special majority + ratification by half of State Legislatures (for federal provisions).</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is CAG?</div>
+          <div class="q-answer">CAG (Comptroller and Auditor General) is the supreme audit institution of India, established under Article 148. The CAG audits the accounts of the Union and State governments and public sector undertakings. Appointed by the President, removable only by impeachment. Responsible to the President and Parliament — not to the executive.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain Constitutional amendment procedure</div>
+          <div class="q-answer">
+            <p><strong>Article 368</strong> provides for three methods of amendment:</p>
+            <ol>
+              <li><strong>Simple Majority:</strong> Some provisions can be amended by a simple majority of Parliament (like ordinary legislation). Examples: creation of new states, changes in Lok Sabha seats, changes in High Court boundaries, changes in salaries of judges.</li>
+              <li><strong>Special Majority:</strong> Most amendments require (a) majority of the total membership of each House AND (b) 2/3 majority of members present and voting in each House. Examples: Fundamental Rights, DPSP, amendment of Article 368 itself.</li>
+              <li><strong>Special Majority + State Ratification:</strong> Amendments affecting the federal structure require: (a) special majority in Parliament AND (b) ratification by at least half of the State Legislatures. Examples: election of President, extent of executive power of Union and States, Supreme Court/High Courts, amendment procedure itself, representation of States in Parliament.</li>
+            </ol>
+            <p>Notably, the Parliament alone can amend most provisions — states have a limited role. This makes the Indian Constitution more flexible than the US Constitution.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What are the major Constitutional Bodies?</div>
+          <div class="q-answer">
+            <p>Constitutional Bodies are created by the Constitution and their composition/powers are defined by the Constitution:</p>
+            <ul>
+              <li><strong>Election Commission (Art. 324):</strong> Conducts elections. Chief Election Commissioner + other ECs. Independent — removal by impeachment.</li>
+              <li><strong>CAG (Art. 148):</strong> Audits government accounts. Supreme audit authority. Removal by impeachment. Reports to President/Parliament.</li>
+              <li><strong>UPSC (Art. 315):</strong> Conducts exams for All-India and Central services. Chairman + members appointed by President.</li>
+              <li><strong>SPSC (Art. 315):</strong> Conducts exams for State services. Each state has its own SPSC.</li>
+              <li><strong>Finance Commission (Art. 280):</strong> Recommends tax revenue distribution between Centre and States. Constituted every 5 years.</li>
+              <li><strong>Attorney General (Art. 76):</strong> Highest law officer. Advises GoI. Right of audience in all courts.</li>
+              <li><strong>Advocate General (Art. 165):</strong> Highest law officer of a State. Advises State Government.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain Constitutional amendment procedure under Article 368. Discuss important Constitutional amendments (1st, 42nd, 44th, 73rd, 74th) and the basic structure doctrine established in Kesavananda Bharati case.</div>
+          <div class="q-answer">
+            <p><strong>ARTICLE 368 — AMENDMENT PROCEDURE</strong></p>
+            <p>The Constitution can be amended through three methods:</p>
+            <ol>
+              <li><strong>Simple majority of Parliament:</strong> For ordinary provisions (new states, parliamentary representation, etc.).</li>
+              <li><strong>Special majority of Parliament:</strong> Majority of total membership + 2/3 of present and voting. For most amendments including FR, DPSP, and Article 368.</li>
+              <li><strong>Special majority + State ratification:</strong> For federal provisions — requires ratification by at least half of State Legislatures in addition to special majority in Parliament.</li>
+            </ol>
+            <p><strong>IMPORTANT AMENDMENTS</strong></p>
+            <ul>
+              <li><strong>1st Amendment (1951):</strong> Added Ninth Schedule (laws placed beyond judicial review). Added restrictions on freedom of speech (Article 19(2)). Added Article 31A and 31B to protect agrarian reform laws.</li>
+              <li><strong>42nd Amendment (1976):</strong> "Mini Constitution" — added "Socialist," "Secular," "Integrity" to Preamble. Added Part IV-A (Fundamental Duties, Art. 51A). Made DPSP superior to FR (Article 31C). Extended Lok Sabha term from 5 to 6 years. Curtailed judicial review powers. Made President bound by Cabinet advice. Later reversed by 44th Amendment.</li>
+              <li><strong>44th Amendment (1978):</strong> Reversed 42nd Amendment provisions. Removed Right to Property from Fundamental Rights (became legal right under Art. 300A). Restored 5-year Lok Sabha term. Limited scope of National Emergency to "armed rebellion." Made elections a mandatory precondition for President's assumption of office after emergency.</li>
+              <li><strong>73rd Amendment (1992):</strong> Constitutional status to Panchayati Raj. Added Part IX (Articles 243-243O). Three-tier system, 1/3rd reservation for women, State Finance Commission.</li>
+              <li><strong>74th Amendment (1992):</strong> Constitutional status to Municipalities. Added Part IX-A. Urban local self-government. Similar provisions for municipalities as for panchayats.</li>
+            </ul>
+            <p><strong>KESAVANANDA BHARATI CASE (1973) — BASIC STRUCTURE DOCTRINE</strong></p>
+            <p>In this landmark 13-judge bench case (7-6 majority), the Supreme Court held that:</p>
+            <ul>
+              <li>Parliament's amending power under Article 368 does not include the power to destroy or alter the "basic structure" or "essential features" of the Constitution.</li>
+              <li>The Constitution has a "basic structure" which cannot be amended.</li>
+              <li>Judicial review is a basic feature — Parliament cannot take it away.</li>
+            </ul>
+            <p>Basic features include: Supremacy of the Constitution, Republican and Democratic form, Secularism, Separation of powers, Federalism, Rule of law, Judicial review, Harmony between FR and DPSP. This doctrine was later reaffirmed in Minerva Mills (1980), Waman Rao (1981), and other cases.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain Article 368 and the procedure for Constitutional amendment. What is the significance of the basic structure doctrine?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Discuss the 42nd Amendment Act, 1976. Why was it called the "Mini Constitution"? Which of its provisions were reversed by the 44th Amendment?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain the Kesavananda Bharati case and its significance in establishing the basic structure doctrine.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Made with care for Semester 5 | Constitution of India Study Notes
+  </footer>
+
+  <a href="#top" class="back-to-top" id="backToTop">↑</a>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+
+      // Back to top visibility
+      var backToTop = document.getElementById('backToTop');
+      if (scrollTop > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll for TOC links
+    document.querySelectorAll('.toc a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

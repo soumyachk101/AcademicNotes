@@ -1,566 +1,1408 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Management Principles — Comprehensive Study Notes</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme:'default', flowchart:{useMaxWidth:true, htmlLabels:true}});</script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="../../qa-styles.css">
-    <link rel="stylesheet" href="../../premium.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Management Study Notes — Semester 5</title>
+  <style>
+    :root {
+      --primary: #0891b2;
+      --primary-light: #0e7490;
+      --surface: #f8fafc;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-body: #334155;
+      --border: #e2e8f0;
+      --warning-bg: #fefce8;
+      --warning-border: #eab308;
+      --warning-text: #854d0e;
+      --pyq-bg: #f0fdfa;
+      --pyq-border: #99f6e4;
+      --pyq-text: #155e75;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #f1f5f9;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+      z-index: 101;
+      transition: width 0.1s;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sticky-header h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .toc {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      position: sticky;
+      top: 52px;
+      z-index: 99;
+    }
+
+    .toc a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .toc a:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .subject-title {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .subject-meta {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject-card {
+      background: linear-gradient(135deg, #0891b2, #0e7490);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .subject-card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .subject-card p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .unit-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .unit-header:hover {
+      border-color: var(--primary);
+    }
+
+    .unit-number {
+      background: #0891b2;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .unit-header-text h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .unit-header-text p {
+      margin: 0.2rem 0 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .unit-content {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.2rem;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .topic-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      color: #0891b2;
+    }
+
+    .topic-card p,
+    .topic-card li {
+      color: var(--text-body);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .topic-card ul {
+      padding-left: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .question-block {
+      background: white;
+      border-left: 3px solid #0891b2;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-block .q-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #0891b2;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .question-block .q-text {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .question-block .q-answer {
+      color: #475569;
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: #f3f4f6;
+      border-left: 3px solid var(--primary-light);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+    }
+
+    .exam-tip {
+      background: var(--warning-bg);
+      border-left: 3px solid var(--warning-border);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+      font-size: 0.85rem;
+    }
+
+    .exam-tip strong {
+      color: var(--warning-text);
+    }
+
+    .pyq-section {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .pyq-section h4 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pyq-item {
+      background: var(--pyq-bg);
+      border: 1px solid var(--pyq-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .pyq-item .year {
+      color: var(--pyq-text);
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0891b2;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(8, 145, 178, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--surface);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      line-height: 1.5;
+    }
+
+    .code-block .keyword {
+      color: #c084fc;
+    }
+
+    .code-block .type {
+      color: #67e8f9;
+    }
+
+    .code-block .comment {
+      color: #94a3b8;
+    }
+  </style>
 </head>
 <body>
-    <nav class="top-nav">
-        <a href="management_index.html">← Back to Management Index</a>
-        <span class="nav-title">Management Principles — Comprehensive Study Notes</span>
-        <a href="../index.html">Home</a>
-    </nav>
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="toc-box">
-                <h3>Study Notes Navigator</h3>
-                <ul>
-                    <li><a href="#unit-1">Unit 1: Introduction to Management</a></li>
-                    <li><a href="#unit-2">Unit 2: Planning</a></li>
-                    <li><a href="#unit-3">Unit 3: Organizing</a></li>
-                    <li><a href="#unit-4">Unit 4: Directing &amp; Controlling</a></li>
-                    <li><a href="#unit-5">Unit 5: Contemporary Issues</a></li>
-                </ul>
-            </div>
-        </aside>
-        <main class="content">
 
-            <h1 class="section-title">Management Principles — Comprehensive Study Notes</h1>
+  <div class="progress-bar" id="progressBar"></div>
 
-            <!-- ═══════════════ UNIT 1 ═══════════════ -->
-            <h2 class="section-title" id="unit-1">Unit 1: Introduction to Management</h2>
+  <div class="sticky-header">
+    <h1>📚 Management — Study Notes</h1>
+  </div>
 
-            <div class="concept-card">
-                <h3>1.1 Meaning, Nature, and Scope of Management</h3>
-                <p><b>Management</b> is the process of planning, organizing, staffing, directing, and controlling organizational resources (human, financial, physical, informational) to achieve stated goals effectively and efficiently.</p>
-                <p><b>Effectiveness</b> means doing the right tasks to achieve objectives. <b>Efficiency</b> means doing tasks correctly with minimum waste of resources.</p>
-                <p><b>Characteristics:</b> goal-oriented, continuous process, pervasive across all organizations, multidisciplinary, dynamic, intangible.</p>
-                <p><b>Scope:</b> applicable to all levels of management and all departments — production, finance, marketing, HR, R&amp;D.</p>
-                <div class="note-card">
-                    <b>Remember:</b> Management applies equally to profit and non-profit organizations. It is needed wherever people work together for common goals.
-                </div>
-            </div>
+  <div class="toc">
+    <a href="#unit-1">Unit 1: Introduction to Management</a>
+    <a href="#unit-2">Unit 2: Planning</a>
+    <a href="#unit-3">Unit 3: Organising &amp; Staffing</a>
+    <a href="#unit-4">Unit 4: Directing &amp; Leadership</a>
+    <a href="#unit-5">Unit 5: Controlling</a>
+    <a href="#unit-6">Unit 6: Financial Management</a>
+  </div>
 
-            <div class="diagram-card">
-                <h3>1.2 Functions of Management — Flowchart</h3>
-                <div class="mermaid">
-                graph TD
-                    A[Planning] --> B[Organizing]
-                    B --> C[Staffing]
-                    C --> D[Directing]
-                    D --> E[Controlling]
-                    E --> F[Coordination]
-                    F --> A
-                </div>
-            </div>
+  <div class="container" id="top">
 
-            <div class="concept-card">
-                <h3>1.3 Levels of Management</h3>
-                <ul>
-                    <li><b>Top Level:</b> Board of Directors, CEO. Sets vision, mission, strategy, policies.</li>
-                    <li><b>Middle Level:</b> Functional managers. Translates strategy into tactical plans, coordinates departments.</li>
-                    <li><b>Lower/Operational Level:</b> Supervisors, foremen. Direct supervision of workers, day-to-day operations.</li>
-                </ul>
-                <p>As we move down the hierarchy, the scope (number of activities) increases while the focus (specificity) decreases.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.4 Henry Mintzberg's Managerial Roles</h3>
-                <p>Three role categories with 10 roles:</p>
-                <ul>
-                    <li><b>Interpersonal:</b> Figurehead, Leader, Liaison.</li>
-                    <li><b>Informational:</b> Monitor, Disseminator, Spokesperson.</li>
-                    <li><b>Decisional:</b> Entrepreneur, Disturbance handler, Resource allocator, Negotiator.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.5 Managerial Skills</h3>
-                <ul>
-                    <li><b>Conceptual skills</b> — ability to see the organization as a whole (most needed at top level).</li>
-                    <li><b>Human skills</b> — ability to work with people (needed at all levels).</li>
-                    <li><b>Technical skills</b> — ability to use tools, procedures, techniques (most needed at lower level).</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>1.6 Classical Management Approach</h3>
-                <p><b>Scientific Management — F.W. Taylor:</b> "Father of Scientific Management." Used time-and-motion studies; proposed principles — science not rule of thumb, harmony not discord, cooperation not individualism, development of every person.</p>
-                <p><b>Administrative Management — Henri Fayol:</b> "Father of Administrative Management." Identified 14 principles of management and 6 activities of any business.</p>
-                <p><b>Bureaucratic Management — Max Weber:</b> "Father of Bureaucracy." Ideal type has hierarchy, formal rules, specialization, technical competence, career orientation.</p>
-            </div>
-
-            <div class="tip-card">
-                <b>Exam Tip:</b> Remember the founders: Taylor = Scientific; Fayol = Administrative; Weber = Bureaucratic; Elton Mayo = Hawthorne Studies (Behavioral).
-            </div>
-
-            <div class="concept-card">
-                <h3>1.7 Hawthorne Studies &amp; Behavioral Approach</h3>
-                <p>Elton Mayo's studies at Western Electric's Hawthorne plant (1924–1932) showed that social and psychological factors significantly influence worker productivity. Key findings:</p>
-                <ul>
-                    <li>Workers respond to attention and being valued (Hawthorne Effect).</li>
-                    <li>Informal groups affect productivity.</li>
-                    <li>Social needs are important motivators.</li>
-                </ul>
-                <p>This shifted management thinking toward the <b>human relations approach</b> and later to <b>behavioral science approach</b>.</p>
-            </div>
-
-            <div class="summary-card">
-                <b>Unit 1 Quick Summary:</b> Management = coordination of resources. Functions = POSDC. Levels = Top/Middle/Operational. Classical trio = Taylor, Fayol, Weber. Behavioral = Hawthorne Studies by Mayo.
-            </div>
-
-            <!-- ═══════════════ UNIT 2 ═══════════════ -->
-            <h2 class="section-title" id="unit-2">Unit 2: Planning</h2>
-
-            <div class="concept-card">
-                <h3>2.1 Importance of Planning</h3>
-                <ul>
-                    <li>Provides direction and clarity of action.</li>
-                    <li>Reduces uncertainty and risk.</li>
-                    <li>Sets standards for control.</li>
-                    <li>Encourages innovation and creativity.</li>
-                    <li>Facilitates coordination across departments.</li>
-                    <li>Helps in optimum use of resources.</li>
-                </ul>
-                <div class="note-card">
-                    <b>Note:</b> Planning is the foundation of management — all other functions depend on a sound plan.
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.2 Planning Process</h3>
-                <ol>
-                    <li>Setting objectives</li>
-                    <li>Developing premises (assumptions)</li>
-                    <li>Identifying alternatives</li>
-                    <li>Evaluating alternatives</li>
-                    <li>Selecting the best alternative</li>
-                    <li>Implementing the plan</li>
-                    <li>Follow-up &amp; feedback</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.3 Types of Plans</h3>
-                <p><b>Based on scope:</b></p>
-                <ul>
-                    <li><b>Strategic plans</b> — long-term (3–10 years), organization-wide.</li>
-                    <li><b>Tactical plans</b> — medium-term (1–3 years), departmental.</li>
-                    <li><b>Operational plans</b> — short-term (less than 1 year), day-to-day.</li>
-                </ul>
-                <p><b>Based on frequency of use:</b></p>
-                <ul>
-                    <li><b>Single-use plans</b> — for unique events (budgets, projects, programs).</li>
-                    <li><b>Standing plans</b> — used repeatedly (policies, procedures, rules, methods).</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.4 Decision Making — Meaning and Process</h3>
-                <p>A <b>decision</b> is a choice made between two or more alternatives to solve a problem or achieve an objective.</p>
-                <p><b>Decision-making process:</b> Identify problem → Diagnose → Develop alternatives → Evaluate → Choose → Implement → Follow-up.</p>
-                <p><b>Types:</b> Programmed vs Non-programmed; Strategic/Tactical/Operational; Certainty/Risk/Uncertainty conditions.</p>
-            </div>
-
-            <div class="diagram-card">
-                <h3>2.5 Decision Making Process — Flowchart</h3>
-                <div class="mermaid">
-                flowchart TD
-                    A[Identify Problem] --> B[Diagnose Problem]
-                    B --> C[Develop Alternatives]
-                    C --> D[Evaluate Alternatives]
-                    D --> E[Select Best Alternative]
-                    E --> F[Implement Decision]
-                    F --> G[Evaluate Results]
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>2.6 Tools and Techniques of Planning</h3>
-                <p><b>SWOT Analysis:</b></p>
-                <div class="diagram-card">
-                    <div class="mermaid">
-                    graph LR
-                        S[Strengths] --> STR[Internal Positive]
-                        W[Weaknesses] --> STR
-                        O[Opportunities] --> EXT[External Positive]
-                        T[Threats] --> EXT
-                    </div>
-                </div>
-                <p><b>PEST Analysis:</b></p>
-                <ul>
-                    <li><b>P</b>olitical factors — government policies, stability, regulations.</li>
-                    <li><b>E</b>conomic factors — growth, inflation, interest rates, exchange rates.</li>
-                    <li><b>S</b>ocial factors — demographics, culture, lifestyle, education.</li>
-                    <li><b>T</b>chnological factors — R&amp;D, automation, innovation, tech change.</li>
-                </ul>
-                <p><b>Porter's Five Forces:</b></p>
-                <ul>
-                    <li>Threat of new entrants</li>
-                    <li>Bargaining power of suppliers</li>
-                    <li>Bargaining power of buyers</li>
-                    <li>Threat of substitute products</li>
-                    <li>Rivalry among existing competitors</li>
-                </ul>
-            </div>
-
-            <div class="tip-card">
-                <b>Tip:</b> SWOT is for an organization's internal + external view; PEST focuses on macro-environment; Porter's Five Forces assesses industry competitiveness.
-            </div>
-
-            <div class="summary-card">
-                <b>Unit 2 Quick Summary:</b> Planning = foundation of management. Types: Strategic/Tactical/Operational; Single-use/Standing. SWOT + PEST + Porter's Five Forces are key analytical tools.
-            </div>
-
-            <!-- ═══════════════ UNIT 3 ═══════════════ -->
-            <h2 class="section-title" id="unit-3">Unit 3: Organizing</h2>
-
-            <div class="concept-card">
-                <h3>3.1 Importance of Organizing</h3>
-                <p>Organizing brings order to chaos by defining who does what, when, and how. It ensures resources are used effectively and responsibilities are clear.</p>
-                <ul>
-                    <li>Clarifies authority and responsibility.</li>
-                    <li>Specializes activities for efficiency.</li>
-                    <li>Enables coordination and integration.</li>
-                    <li>Creates a basis for control.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.2 Process of Organizing</h3>
-                <ol>
-                    <li>Identification of activities</li>
-                    <li>Grouping of activities (departmentation)</li>
-                    <li>Assignment of duties (job assignment)</li>
-                    <li>Delegation of authority</li>
-                    <li>Creation of reporting relationships</li>
-                </ol>
-            </div>
-
-            <div class="diagram-card">
-                <h3>3.3 Organizational Structures</h3>
-                <p><b>Functional Structure:</b></p>
-                <div class="mermaid">
-                graph TD
-                    CEO[CEO] --> M[Marketing Manager]
-                    CEO --> F[Finance Manager]
-                    CEO --> P[Production Manager]
-                    CEO --> H[HR Manager]
-                </div>
-                <p><b>Divisional Structure:</b></p>
-                <div class="mermaid">
-                graph TD
-                    CEO[CEO] --> D1[Division A]
-                    CEO --> D2[Division B]
-                    CEO --> D3[Division C]
-                </div>
-                <p><b>Matrix Structure:</b></p>
-                <div class="mermaid">
-                graph TD
-                    FM[Functional Manager] --> E1[Employee A]
-                    PM[Project Manager] --> E1
-                    FM --> E2[Employee B]
-                    PM --> E2
-                </div>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.4 Span of Control</h3>
-                <p>Number of subordinates a manager supervises.</p>
-                <ul>
-                    <li><b>Wide/Flat Span:</b> Many subordinates, fewer levels — suits when work is simple/routine.</li>
-                    <li><b>Narrow/Tall Span:</b> Few subordinates, more levels — suits complex/diverse work.</li>
-                </ul>
-                <p>Factors: Subordinate competence, similarity of tasks, geographic dispersion, complexity, supervisor's ability.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.5 Departmentalization</h3>
-                <ul>
-                    <li><b>Functional:</b> Marketing, Finance, Production.</li>
-                    <li><b>Divisional:</b> Product, Customer, Geography.</li>
-                    <li><b>Process:</b> Stages of production.</li>
-                    <li><b>Customer-based:</b> Different customer groups.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.6 Delegation of Authority</h3>
-                <p>Transfer of authority from superior to subordinate to perform specific tasks while accountability remains with the manager.</p>
-                <p><b>Elements:</b> Authority, Responsibility, Accountability. Cannot be delegated: Accountability.</p>
-                <p><b>Barriers to delegation:</b> fear of losing control, lack of trust, inadequate reward, fear of competition, lack of confidence in subordinates.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.7 Centralization vs Decentralization</h3>
-                <ul>
-                    <li><b>Centralization:</b> Decision authority concentrated at top.</li>
-                    <li><b>Decentralization:</b> Authority dispersed to lower levels.</li>
-                </ul>
-                <p><b>Pros of decentralization:</b> Quick decisions, develops managers, relieves top management burden, motivates subordinates.</p>
-                <p><b>Cons:</b> Coordination problems, costly training, may lack uniformity.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.8 Line, Staff, Matrix, and Committee Organizations</h3>
-                <ul>
-                    <li><b>Line:</b> Direct authority chain (production, sales).</li>
-                    <li><b>Staff:</b> Advisory specialists (HR, Legal, R&amp;D).</li>
-                    <li><b>Matrix:</b> Dual reporting (functional + project).</li>
-                    <li><b>Committee:</b> Group of experts advising on specific issues.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>3.9 Staffing Functions</h3>
-                <p><b>Human Resource Planning:</b> Forecasting future manpower needs.</p>
-                <p><b>Recruitment:</b> Internal (transfers, promotions) vs External (advertisements, campus, walk-ins, agencies).</p>
-                <p><b>Selection:</b> Screening, tests, interviews, references, medical exam, final selection.</p>
-                <p><b>Training &amp; Development:</b></p>
-                <ul>
-                    <li>On-the-job: coaching, mentoring, job rotation, apprenticeship.</li>
-                    <li>Off-the-job: lectures, case study, role-playing, simulation.</li>
-                </ul>
-                <p><b>Performance Appraisal Methods:</b></p>
-                <ul>
-                    <li>Traditional: Ranking, Graphic Rating Scale, Critical Incident, Forced Distribution.</li>
-                    <li>Modern: MBO, BARS, 360-degree feedback, Assessment Centre.</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <b>Unit 3 Quick Summary:</b> Organizing = structure + authority + staffing. Structures: Functional, Divisional, Matrix, Line &amp; Staff. Staffing covers HR planning → Recruitment → Selection → Training → Appraisal.
-            </div>
-
-            <!-- ═══════════════ UNIT 4 ═══════════════ -->
-            <h2 class="section-title" id="unit-4">Unit 4: Directing and Controlling</h2>
-
-            <div class="concept-card">
-                <h3>4.1 Directing — Meaning and Importance</h3>
-                <p><b>Directing</b> is the management function that guides, motivates, leads, and supervises subordinates to achieve organizational goals.</p>
-                <p><b>Importance:</b> Initiates action, integrates efforts, motivates employees, facilitates change, improves morale.</p>
-                <p><b>Principles of Directing:</b> Unity of command, harmony of objectives, supervision, effective communication, leadership, motivation.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.2 Motivation — Meaning &amp; Theories</h3>
-                <p><b>Motivation</b> is the internal drive that compels a person to act in a way that achieves desired goals.</p>
-                <p><b>Types of Motivation:</b></p>
-                <ul>
-                    <li><b>Intrinsic:</b> Internal rewards (achievement, recognition).</li>
-                    <li><b>Extrinsic:</b> External rewards (salary, bonuses, promotion).</li>
-                    <li><b>Positive:</b> Encouragement, rewards.</li>
-                    <li><b>Negative:</b> Penalties, fear.</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>4.3 Maslow's Hierarchy of Needs</h3>
-                <div class="mermaid">
-                graph BT
-                    A[Self-Actualization: Growth, fulfillment] --> B[Esteem: Status, respect]
-                    B --> C[Social: Love, belonging]
-                    C --> D[Safety: Security, stability]
-                    D --> E[Physiological: Food, shelter, sleep]
-                </div>
-                <p>A satisfied need no longer motivates; the lowest unsatisfied need drives behavior.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.4 Herzberg's Two-Factor Theory</h3>
-                <ul>
-                    <li><b>Hygiene Factors:</b> Salary, working conditions, policies, supervision. Prevent dissatisfaction but don't motivate.</li>
-                    <li><b>Motivation Factors:</b> Achievement, recognition, responsibility, growth. Drive satisfaction.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.5 McGregor's Theory X and Theory Y</h3>
-                <ul>
-                    <li><b>Theory X (Traditional):</b> People dislike work, avoid responsibility, must be controlled &amp; directed.</li>
-                    <li><b>Theory Y (Modern):</b> People like work, seek responsibility, are creative, can self-direct.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.6 Leadership — Meaning, Styles, Theories</h3>
-                <p><b>Leadership</b> is the ability to influence a group toward achieving goals.</p>
-                <p><b>Styles:</b> Autocratic, Democratic, Laissez-faire, Bureaucratic, Transformational, Transactional.</p>
-                <p><b>Theories:</b></p>
-                <ul>
-                    <li><b>Trait:</b> Leaders are born with certain qualities.</li>
-                    <li><b>Behavioral:</b> Ohio State (Initiating Structure + Consideration), Michigan (Production/Employee-oriented), Blake-Mouton Managerial Grid.</li>
-                    <li><b>Contingency:</b> Fiedler, Hersey-Blanchard (Situational), Path-Goal.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.7 Communication — Process, Types, Barriers</h3>
-                <p><b>Process:</b> Sender → Encoding → Message → Channel → Decoding → Receiver → Feedback. Noise distorts at any stage.</p>
-                <p><b>Types:</b> Formal/Informal; Upward/Downward/Horizontal/Diagonal; Verbal/Non-verbal; Written/Oral; Internal/External.</p>
-                <p><b>Barriers:</b> Semantic, Physical, Psychological, Cultural, Organizational, Personal.</p>
-                <p><b>Improving:</b> Active listening, clarity, proper channel, empathy, feedback, simple language.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.8 Controlling — Meaning, Importance, Process</h3>
-                <p><b>Controlling</b> is monitoring performance and taking corrective action to ensure plans are achieved.</p>
-                <p><b>Importance:</b> Ensures goal achievement, identifies deviations, improves efficiency, motivates employees, facilitates coordination.</p>
-                <p><b>Process:</b> Set standards → Measure actual performance → Compare → Find deviations → Analyze causes → Take corrective action.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.9 Types of Control</h3>
-                <ul>
-                    <li><b>Feedforward/Pre-control:</b> Anticipates problems before they occur.</li>
-                    <li><b>Concurrent/Real-time:</b> Monitors ongoing processes (quality checks).</li>
-                    <li><b>Feedback/Post-control:</b> Evaluates results after completion.</li>
-                </ul>
-                <p><b>Other classifications:</b> Financial/Non-financial, Internal/External, Strategic/Operational.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>4.10 Budgetary Control</h3>
-                <p><b>Budget</b> = quantitative statement of expected income &amp; expenditure.</p>
-                <p><b>Types:</b> Sales budget, production budget, cash budget, capital budget, master budget.</p>
-                <p><b>Steps:</b> Set objectives → Prepare budgets → Record actuals → Compare → Variance analysis → Corrective action.</p>
-                <p><b>Advantages:</b> Defines responsibility, aids planning, provides evaluation criteria.</p>
-                <p><b>Limitations:</b> Rigidity, ignores qualitative aspects, based on estimates.</p>
-            </div>
-
-            <div class="summary-card">
-                <b>Unit 4 Quick Summary:</b> Directing = leadership + motivation + communication. Maslow (needs), Herzberg (2-factor), McGregor (X-Y) are key theories. Controlling = standards → measure → compare → correct. Budgetary Control is a major tool.
-            </div>
-
-            <!-- ═══════════════ UNIT 5 ═══════════════ -->
-            <h2 class="section-title" id="unit-5">Unit 5: Contemporary Issues in Management</h2>
-
-            <div class="concept-card">
-                <h3>5.1 Corporate Governance &amp; Ethics</h3>
-                <p><b>Corporate Governance</b> is the system of rules, practices, and processes by which a company is directed and controlled, balancing interests of shareholders, management, customers, suppliers, and the community.</p>
-                <p><b>Principles (OECD):</b> Accountability, Transparency, Fairness, Responsibility, Independence.</p>
-                <p><b>Components:</b> Board of Directors, shareholders, management, auditors, regulators, stakeholders.</p>
-                <p><b>Business Ethics:</b> Application of ethical principles to business conduct. Includes honesty, integrity, fairness, sustainability, respect for stakeholders.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.2 Organizational Culture</h3>
-                <p><b>Organizational Culture</b> is the system of shared values, beliefs, norms, and artifacts that characterizes an organization.</p>
-                <p><b>Functions:</b> Provides identity, facilitates commitment, stabilizes social system, shapes behavior, serves as sense-making device.</p>
-                <p><b>Types (Cameron &amp; Quinn):</b></p>
-                <ul>
-                    <li><b>Clan Culture:</b> Family-like, friendly workplace.</li>
-                    <li><b>Adhocracy Culture:</b> Dynamic, innovative, risk-taking.</li>
-                    <li><b>Market Culture:</b> Results-oriented, competitive.</li>
-                    <li><b>Hierarchy Culture:</b> Structured, controlled, formalized.</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>5.3 Change Management Process</h3>
-                <div class="mermaid">
-                flowchart TD
-                    A[Recognize Need for Change] --> B[Diagnose Problem]
-                    B --> C[Plan Change Strategy]
-                    C --> D[Implement Change]
-                    D --> E[Evaluate Results]
-                    E --> F[Reinforce & Institutionalize]
-                </div>
-                <p><b>Types of Change:</b></p>
-                <ul>
-                    <li>Planned vs Unplanned</li>
-                    <li>Incremental vs Transformational/Strategic</li>
-                    <li>Technology change, Structure change, People change</li>
-                </ul>
-                <p><b>Forces of Change:</b></p>
-                <ul>
-                    <li><b>External:</b> Technology, market, competition, regulation, social.</li>
-                    <li><b>Internal:</b> Strategy, workforce, attitude, equipment.</li>
-                </ul>
-                <p><b>Resistance to Change:</b> Fear, habit, economic factors, security, selective information processing.</p>
-                <p><b>Overcoming Resistance:</b> Education &amp; communication, participation &amp; involvement, facilitation &amp; support, negotiation &amp; agreement, manipulation, coercion.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.4 Organizational Development (OD)</h3>
-                <p><b>OD</b> is a long-term, planned process of applying behavioral science principles to improve organizational effectiveness, health, and self-renewal.</p>
-                <p><b>Characteristics:</b> Planned change, system-wide, long-term, focuses on culture &amp; processes, uses behavioral science.</p>
-                <p><b>OD Interventions:</b></p>
-                <ul>
-                    <li><b>Human Process:</b> Sensitivity training (T-group), Survey feedback, Process consultation, Team building, Intergroup development.</li>
-                    <li><b>Techno-structural:</b> MBO, Job redesign, Work design, Quality circles.</li>
-                    <li><b>Human Resource Management:</b> Performance management, Career planning, Coaching, Mentoring.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.5 Conflict Management</h3>
-                <p><b>Conflict</b> is disagreement between individuals or groups due to incompatible goals, interests, or values.</p>
-                <p><b>Types:</b> Intrapersonal, Interpersonal, Intragroup, Intergroup, Inter-organizational.</p>
-                <p><b>Sources:</b> Communication breakdown, Structural issues, Personal differences, Incompatible goals, Scarce resources.</p>
-                <p><b>Resolution Techniques:</b></p>
-                <ul>
-                    <li><b>Conflict resolution methods:</b> Avoidance, Competition, Accommodation, Compromise, Collaboration.</li>
-                    <li><b>Conflict stimulation:</b> Sometimes managers create conflict to encourage innovation (devil's advocate).</li>
-                </ul>
-                <p><b>Effective Conflict Management:</b> Address root causes, focus on interests not positions, use objective criteria, encourage open communication.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.6 Stress Management</h3>
-                <p><b>Stress</b> is the body's reaction to any demand or threat. Can be positive (eustress) or negative (distress).</p>
-                <p><b>Sources of Stress (Organizational):</b> Work overload, role conflict, role ambiguity, time pressure, poor work conditions, lack of autonomy.</p>
-                <p><b>Individual Strategies:</b> Time management, relaxation techniques (yoga, meditation), exercise, balanced lifestyle, positive thinking.</p>
-                <p><b>Organizational Strategies:</b> Clear role definition, employee assistance programs, supportive supervision, job redesign, fair policies, flexible schedules.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>5.7 Knowledge Management (KM)</h3>
-                <p><b>Knowledge Management</b> is the process of capturing, storing, sharing, and effectively using organizational knowledge.</p>
-                <p><b>Types of Knowledge:</b></p>
-                <ul>
-                    <li><b>Tacit (implicit):</b> Personal, experience-based, hard to articulate.</li>
-                    <li><b>Explicit:</b> Documented, codified, easy to share.</li>
-                </ul>
-                <p><b>KM Process:</b> Create/Acquire → Store → Share → Apply.</p>
-                <p><b>Tools:</b> Knowledge repositories, communities of practice, mentoring programs, lessons-learned systems, expert directories, AI-based knowledge bases.</p>
-                <p><b>Benefits:</b> Better decision-making, innovation, avoids reinvention, faster problem solving, competitive edge.</p>
-            </div>
-
-            <div class="key-terms">
-                <h3>Key Terms</h3>
-                <ul>
-                    <li><b>Management:</b> Coordinated effort to achieve goals.</li>
-                    <li><b>Effectiveness vs Efficiency:</b> Doing the right things vs doing things right.</li>
-                    <li><b>POSDC:</b> Planning, Organizing, Staffing, Directing, Controlling.</li>
-                    <li><b>SWOT:</b> Strengths, Weaknesses, Opportunities, Threats.</li>
-                    <li><b>PEST:</b> Political, Economic, Social, Technological.</li>
-                    <li><b>Delegation:</b> Transfer of authority — accountability remains.</li>
-                    <li><b>Decentralization:</b> Dispersion of decision-making to lower levels.</li>
-                    <li><b>Hawthorne Effect:</b> Productivity increases due to attention.</li>
-                    <li><b>Two-factor Theory:</b> Hygiene + Motivation factors (Herzberg).</li>
-                    <li><b>Contingency Leadership:</b> Style depends on situation (Fiedler).</li>
-                    <li><b>Budgetary Control:</b> Controlling via budgets.</li>
-                    <li><b>Corporate Governance:</b> System of directing &amp; controlling firms.</li>
-                    <li><b>OD:</b> Planned process using behavioral science.</li>
-                    <li><b>Knowledge Management:</b> Capture-store-share-apply.</li>
-                </ul>
-            </div>
-
-            <div class="summary-card">
-                <b>Unit 5 Quick Summary:</b> Modern management covers governance, culture, change, OD, conflict, stress, and knowledge. Effective managers blend classical principles with contemporary practices to navigate complex environments.
-            </div>
-
-        </main>
+    <div class="subject-card">
+      <h2>Management</h2>
+      <p>Master the principles of management — from classical theories of Taylor, Fayol, and Weber to modern planning, organizing, directing, controlling, and financial management. This guide covers all 6 units with exam-focused questions and answers.</p>
     </div>
+
+    <!-- ==================== UNIT 1 ==================== -->
+    <div class="unit-section" id="unit-1">
+      <div class="unit-header">
+        <div class="unit-number">1</div>
+        <div class="unit-header-text">
+          <h3>Introduction to Management</h3>
+          <p>Foundations — definitions, levels, roles, skills, classical theories</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Definition and Importance of Management</h4>
+          <p><strong>Management</strong> is the process of planning, organizing, staffing, directing, and controlling the activities of an organization to achieve predetermined goals efficiently and effectively.</p>
+          <p>Importance of management:</p>
+          <ul>
+            <li>Achieves organizational goals efficiently</li>
+            <li>Optimal utilization of resources (men, money, materials, machines)</li>
+            <li>Reduces costs and increases productivity</li>
+            <li>Provides dynamic leadership and motivation</li>
+            <li>Promotes innovation and adaptability to change</li>
+            <li>Builds a healthy work environment and corporate image</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Levels of Management</h4>
+          <p><strong>Top Level:</strong> Board of Directors, CEOs, Presidents. Functions: strategic planning, policy making, overall direction, and external relations. Focus is on long-term goals.</p>
+          <p><strong>Middle Level:</strong> Department heads, branch managers. Functions: implementing top-level policies, coordinating departments, resource allocation. Focus is on tactical decisions.</p>
+          <p><strong>Lower Level (First-line/Supervisory):</strong> Supervisors, foremen. Functions: direct oversight of workers, day-to-day operations, quality control, grievance handling. Focus is on operational decisions.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Managerial Roles (Mintzberg) and Skills</h4>
+          <p><strong>Mintzberg's Managerial Roles:</strong></p>
+          <ul>
+            <li><strong>Interpersonal:</strong> Figurehead, Leader, Liaison</li>
+            <li><strong>Informational:</strong> Monitor, Disseminator, Spokesperson</li>
+            <li><strong>Decisional:</strong> Entrepreneur, Disturbance Handler, Resource Allocator, Negotiator</li>
+          </ul>
+          <p><strong>Managerial Skills (Katz):</strong></p>
+          <ul>
+            <li><strong>Technical skills:</strong> Ability to use tools, techniques, and procedures. Most important at lower levels.</li>
+            <li><strong>Human skills:</strong> Ability to work with and motivate people. Important at all levels.</li>
+            <li><strong>Conceptual skills:</strong> Ability to see the organization as a whole. Most important at top levels.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Management Functions</h4>
+          <p>The five core functions of management, originally proposed by Henri Fayol:</p>
+          <ul>
+            <li><strong>Planning:</strong> Deciding in advance what to do, how to do it, and when to do it.</li>
+            <li><strong>Organising:</strong> Arranging resources and tasks to achieve objectives.</li>
+            <li><strong>Staffing:</strong> Recruiting, selecting, training, and developing personnel.</li>
+            <li><strong>Directing:</strong> Guiding, leading, and motivating employees to perform tasks.</li>
+            <li><strong>Controlling:</strong> Monitoring performance and taking corrective action.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Classical Approaches — Taylor, Fayol, Weber</h4>
+          <p><strong>Scientific Management (F.W. Taylor):</strong> Taylor is known as the "Father of Scientific Management." He proposed applying scientific methods to management instead of rule-of-thumb methods. Key principles include: scientific selection and training of workers, harmony between management and workers, and equal division of work between managers and workers.</p>
+          <p><strong>Administrative Theory (Henri Fayol):</strong> Fayol developed 14 principles of management: Division of Work, Authority and Responsibility, Discipline, Unity of Command, Unity of Direction, Subordination of Individual Interest, Remuneration, Centralization, Scalar Chain, Order, Equity, Stability of Personnel, Initiative, Esprit de Corps.</p>
+          <p><strong>Bureaucratic Theory (Max Weber):</strong> Weber proposed an ideal bureaucratic model with characteristics like: hierarchy of authority, division of labor and specialization, formal selection, career orientation, formal rules and regulations, impersonality, and written documentation.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> Taylor focused on the "task" level (workers and efficiency), Fayol focused on the "manager" level (administration and principles), and Weber focused on the "organization" level (structure and authority). Together, they form the classical management school.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Define management.</div>
+          <div class="q-answer">Management is the process of planning, organizing, staffing, directing, and controlling the activities of an organization to achieve predetermined goals efficiently and effectively. It is a universal process applicable to all types of organizations.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">List levels of management.</div>
+          <div class="q-answer">The three levels of management are: (1) Top Level — strategic decisions, policy making, board of directors/CEO; (2) Middle Level — tactical decisions, department heads; (3) Lower Level (First-line) — operational decisions, supervisors/foremen.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain Fayol's principles of management.</div>
+          <div class="q-answer">
+            <p>Henri Fayol proposed 14 principles of management:</p>
+            <ul>
+              <li><strong>Division of Work:</strong> Work should be divided into specialized tasks for efficiency.</li>
+              <li><strong>Authority and Responsibility:</strong> Authority is the right to give orders; responsibility is the duty to perform. They go together.</li>
+              <li><strong>Discipline:</strong> Obedience and respect for agreements between the organization and employees.</li>
+              <li><strong>Unity of Command:</strong> Each employee should receive orders from only one superior.</li>
+              <li><strong>Unity of Direction:</strong> Each group of activities with the same objective should have one plan and one manager.</li>
+              <li><strong>Subordination of Individual Interest:</strong> Organizational interest takes priority over individual interest.</li>
+              <li><strong>Remuneration:</strong> Fair wages for fair work.</li>
+              <li><strong>Centralization:</strong> Balance between centralization and decentralization of authority.</li>
+              <li><strong>Scalar Chain:</strong> Chain of authority from top to bottom.</li>
+              <li><strong>Order:</strong> Right person at the right place and right thing at the right place.</li>
+              <li><strong>Equity:</strong> Kindness and justice in dealing with employees.</li>
+              <li><strong>Stability of Personnel:</strong> Low employee turnover ensures organizational efficiency.</li>
+              <li><strong>Initiative:</strong> Employees should be encouraged to take initiative.</li>
+              <li><strong>Esprit de Corps:</strong> Team spirit and harmony among employees.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain Mintzberg's managerial roles.</div>
+          <div class="q-answer">
+            <p>Henry Mintzberg identified 10 managerial roles grouped into three categories:</p>
+            <p><strong>Interpersonal Roles:</strong></p>
+            <ul>
+              <li><strong>Figurehead:</strong> Symbolic head; performs ceremonial and social duties.</li>
+              <li><strong>Leader:</strong> Directs and motivates subordinates; handles hiring, training, and appraisal.</li>
+              <li><strong>Liaison:</strong> Maintains contacts outside the organization for information and favors.</li>
+            </ul>
+            <p><strong>Informational Roles:</strong></p>
+            <ul>
+              <li><strong>Monitor:</strong> Seeks and receives information from various sources.</li>
+              <li><strong>Disseminator:</strong> Shares information with subordinates and others.</li>
+              <li><strong>Spokesperson:</strong> Represents the organization to outsiders.</li>
+            </ul>
+            <p><strong>Decisional Roles:</strong></p>
+            <ul>
+              <li><strong>Entrepreneur:</strong> Initiates change and improvement projects.</li>
+              <li><strong>Disturbance Handler:</strong> Deals with crises and conflicts.</li>
+              <li><strong>Resource Allocator:</strong> Decides where to allocate time, money, and personnel.</li>
+              <li><strong>Negotiator:</strong> Represents the organization in negotiations with other groups.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Define management and explain its importance. Discuss levels of management, managerial roles and skills. Also explain classical approaches (Taylor, Fayol, Weber).</div>
+          <div class="q-answer">
+            <p><strong>Definition:</strong> Management is the process of planning, organizing, staffing, directing, and controlling organizational activities to achieve goals efficiently and effectively. It is both an art and a science.</p>
+            <p><strong>Importance:</strong> Management helps achieve organizational goals, ensures optimal utilization of resources, reduces costs, promotes innovation, provides leadership, and builds a positive corporate culture.</p>
+            <p><strong>Levels of Management:</strong></p>
+            <ul>
+              <li><strong>Top Level:</strong> Strategic decisions, long-term planning, policy formulation (CEO, Board).</li>
+              <li><strong>Middle Level:</strong> Tactical decisions, departmental coordination (Department Heads).</li>
+              <li><strong>Lower Level:</strong> Day-to-day operations, direct supervision (Supervisors).</li>
+            </ul>
+            <p><strong>Managerial Roles (Mintzberg):</strong> Interpersonal (Figurehead, Leader, Liaison), Informational (Monitor, Disseminator, Spokesperson), Decisional (Entrepreneur, Disturbance Handler, Resource Allocator, Negotiator).</p>
+            <p><strong>Managerial Skills (Katz):</strong> Technical skills (lower level), Human skills (all levels), Conceptual skills (top level).</p>
+            <p><strong>Classical Approaches:</strong></p>
+            <ul>
+              <li><strong>Scientific Management (Taylor):</strong> Applied scientific methods to work processes. Key principles: scientific selection, standardization, functional foremanship, differential piece-rate system.</li>
+              <li><strong>Administrative Theory (Fayol):</strong> 14 principles of management including division of work, authority-responsibility, unity of command, scalar chain, esprit de corps.</li>
+              <li><strong>Bureaucratic Theory (Weber):</strong> Ideal bureaucracy with hierarchy, specialization, formal rules, impersonality, written records, and merit-based selection.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain Fayol's 14 principles of management with suitable examples for each.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between top, middle, and lower levels of management.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> What is scientific management? Explain Taylor's contribution to management theory.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2020]</span> Discuss Weber's bureaucratic theory of management. What are its limitations?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 2 ==================== -->
+    <div class="unit-section" id="unit-2">
+      <div class="unit-header">
+        <div class="unit-number">2</div>
+        <div class="unit-header-text">
+          <h3>Planning</h3>
+          <p>Setting direction — importance, process, types, decision making</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Importance of Planning</h4>
+          <p>Planning is the primary function of management that involves deciding in advance what is to be done, how it is to be done, and when it is to be done.</p>
+          <ul>
+            <li>Provides direction and purpose to the organization</li>
+            <li>Reduces uncertainty and risk by anticipating changes</li>
+            <li>Facilitates decision making by establishing standards</li>
+            <li>Promotes efficient utilization of resources</li>
+            <li>Sets the basis for controlling — standards are set during planning</li>
+            <li>Encourages innovation and creativity in managers</li>
+            <li>Helps in coordination among different departments</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Planning Process Steps</h4>
+          <p>The planning process follows these steps:</p>
+          <ul>
+            <li><strong>1. Setting objectives:</strong> Define clear, measurable goals for the organization.</li>
+            <li><strong>2. Developing premises:</strong> Make assumptions about the future environment (forecasting).</li>
+            <li><strong>3. Identifying alternatives:</strong> List all possible courses of action.</li>
+            <li><strong>4. Evaluating alternatives:</strong> Analyze pros and cons of each alternative.</li>
+            <li><strong>5. Selecting the best alternative:</strong> Choose the most feasible and profitable plan.</li>
+            <li><strong>6. Implementing the plan:</strong> Put the chosen plan into action.</li>
+            <li><strong>7. Follow-up action:</strong> Monitor progress and take corrective measures.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Types of Plans</h4>
+          <p>Plans can be classified based on scope, time, and use:</p>
+          <ul>
+            <li><strong>Strategic Plans:</strong> Long-term, organization-wide, set by top management. Define overall direction and long-range goals (3–5 years or more).</li>
+            <li><strong>Tactical Plans:</strong> Medium-term, department-specific, set by middle management. Translate strategy into action (1–3 years).</li>
+            <li><strong>Operational Plans:</strong> Short-term, specific tasks, set by lower management. Detailed instructions for daily activities (up to 1 year).</li>
+            <li><strong>Single-use Plans:</strong> Programs, budgets, projects — used once and then discarded.</li>
+            <li><strong>Standing Plans:</strong> Policies, procedures, rules, methods — used repeatedly.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Decision Making — Process, Types, Conditions, Techniques</h4>
+          <p><strong>Decision Making Process:</strong></p>
+          <ul>
+            <li>1. Identify the problem/opportunity</li>
+            <li>2. Gather relevant information</li>
+            <li>3. Identify alternatives</li>
+            <li>4. Evaluate alternatives (weigh pros and cons)</li>
+            <li>5. Choose the best alternative</li>
+            <li>6. Implement the decision</li>
+            <li>7. Evaluate the results</li>
+          </ul>
+          <p><strong>Types of Decisions:</strong></p>
+          <ul>
+            <li><strong>Programmed:</strong> Routine, repetitive, handled by established procedures.</li>
+            <li><strong>Non-programmed:</strong> New, unstructured, unique situations requiring creative solutions.</li>
+          </ul>
+          <p><strong>Decision Making Conditions:</strong></p>
+          <ul>
+            <li><strong>Certainty:</strong> Outcome of each alternative is known.</li>
+            <li><strong>Risk:</strong> Outcome is uncertain but probabilities can be estimated.</li>
+            <li><strong>Uncertainty:</strong> Neither outcome nor probabilities are known.</li>
+          </ul>
+          <p><strong>Decision Making Techniques:</strong></p>
+          <ul>
+            <li><strong>SWOT Analysis:</strong> Strengths, Weaknesses, Opportunities, Threats — internal and external analysis.</li>
+            <li><strong>PEST Analysis:</strong> Political, Economic, Social, Technological factors — external macro-environment analysis.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>MBO (Management by Objectives)</h4>
+          <p><strong>Management by Objectives (MBO)</strong> is a management approach developed by Peter Drucker. It is a process where managers and employees jointly set objectives, monitor performance, and reward results.</p>
+          <p>Key features:</p>
+          <ul>
+            <li>Objectives are jointly set by managers and subordinates.</li>
+            <li>Emphasis on self-control and self-direction by employees.</li>
+            <li>Performance is measured against set objectives.</li>
+            <li>Focus on results rather than activities.</li>
+          </ul>
+          <p>Benefits: Improved communication, better employee motivation, clear performance standards, and effective goal alignment.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> Planning is the first and most important function of management. It provides the foundation for all other functions. "If you fail to plan, you plan to fail." Plans set the standards that are later used in the controlling function.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is planning?</div>
+          <div class="q-answer">Planning is the primary management function that involves deciding in advance what is to be done, how it is to be done, when it is to be done, and by whom it is to be done. It bridges the gap between the present and the future, providing direction and reducing uncertainty.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is MBO?</div>
+          <div class="q-answer">MBO (Management by Objectives) is a management philosophy developed by Peter Drucker where managers and employees collaboratively set objectives, monitor progress, and evaluate results. It emphasizes goal-setting, self-control, and performance-based rewards rather than activity-based supervision.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain steps in planning process.</div>
+          <div class="q-answer">
+            <p><strong>Step 1 — Setting Objectives:</strong> Define clear, specific, and measurable goals for the organization. Objectives provide direction and serve as standards for evaluation.</p>
+            <p><strong>Step 2 — Developing Premises:</strong> Make assumptions about the future environment through forecasting. Premises include economic conditions, government policies, market trends, and competitor behavior.</p>
+            <p><strong>Step 3 — Identifying Alternatives:</strong> List all possible courses of action that can achieve the objectives.</p>
+            <p><strong>Step 4 — Evaluating Alternatives:</strong> Analyze each alternative based on feasibility, cost, risk, and expected return.</p>
+            <p><strong>Step 5 — Selecting the Best Alternative:</strong> Choose the most appropriate plan that maximizes benefits and minimizes risks.</p>
+            <p><strong>Step 6 — Implementing the Plan:</strong> Put the chosen plan into action by allocating resources and assigning responsibilities.</p>
+            <p><strong>Step 7 — Follow-up Action:</strong> Monitor progress, compare actual results with planned targets, and take corrective action if needed.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is decision making?</div>
+          <div class="q-answer">
+            <p><strong>Decision making</strong> is the process of choosing the best course of action from among several available alternatives to achieve organizational goals. It is the core of planning and permeates all management functions.</p>
+            <p>The decision making process involves: (1) Identifying the problem, (2) Gathering information, (3) Identifying alternatives, (4) Evaluating alternatives, (5) Selecting the best alternative, (6) Implementing the decision, and (7) Evaluating results.</p>
+            <p>Types of decisions: <strong>Programmed</strong> (routine, repetitive, handled by procedures) and <strong>Non-programmed</strong> (new, unstructured, requiring creative solutions).</p>
+            <p>Decision making conditions: <strong>Certainty</strong> (outcomes known), <strong>Risk</strong> (probabilities estimable), and <strong>Uncertainty</strong> (outcomes unknown).</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain planning in detail — its importance, process and types. Discuss decision making process, types of decisions and techniques like SWOT and MBO.</div>
+          <div class="q-answer">
+            <p><strong>Importance of Planning:</strong></p>
+            <ul>
+              <li>Provides direction and purpose to the organization</li>
+              <li>Reduces uncertainty and risk by anticipating changes</li>
+              <li>Facilitates effective decision making</li>
+              <li>Promotes efficient resource utilization</li>
+              <li>Sets standards for controlling</li>
+              <li>Encourages innovation and creativity</li>
+              <li>Improves coordination among departments</li>
+            </ul>
+            <p><strong>Planning Process:</strong> (1) Setting objectives, (2) Developing premises (forecasting), (3) Identifying alternatives, (4) Evaluating alternatives, (5) Selecting the best alternative, (6) Implementation, (7) Follow-up action.</p>
+            <p><strong>Types of Plans:</strong> Strategic (long-term, top management), Tactical (medium-term, middle management), Operational (short-term, lower management). Single-use plans (programs, budgets) and Standing plans (policies, procedures, rules).</p>
+            <p><strong>Decision Making Process:</strong> (1) Identify problem, (2) Gather information, (3) Identify alternatives, (4) Evaluate alternatives, (5) Select best alternative, (6) Implement, (7) Evaluate results.</p>
+            <p><strong>Types of Decisions:</strong> Programmed (routine, repetitive) and Non-programmed (unique, unstructured).</p>
+            <p><strong>SWOT Analysis:</strong> Evaluates internal Strengths and Weaknesses, and external Opportunities and Threats. Used for strategic planning.</p>
+            <p><strong>MBO:</strong> Management by Objectives involves setting specific measurable objectives jointly by managers and employees, monitoring performance against objectives, and rewarding results. It improves motivation and performance alignment.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the planning process in detail. Why is planning considered the primary function of management?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> What is SWOT analysis? How does it help in strategic planning? Explain with a suitable example.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Differentiate between programmed and non-programmed decisions. Give examples of each.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2020]</span> Explain Management by Objectives (MBO) and discuss its benefits and limitations.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 3 ==================== -->
+    <div class="unit-section" id="unit-3">
+      <div class="unit-header">
+        <div class="unit-number">3</div>
+        <div class="unit-header-text">
+          <h3>Organising &amp; Staffing</h3>
+          <p>Structure and people — organization design, departmentalization, staffing</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Organization Structure — Formal vs Informal</h4>
+          <p><strong>Formal Organization:</strong> The official structure created by management through the organization chart. It defines roles, responsibilities, reporting relationships, and authority. Communication flows through official channels. Rules and procedures are clearly defined.</p>
+          <p><strong>Informal Organization:</strong> The unofficial network of personal and social relationships that naturally develop among members. It is based on personal likes, prejudices, and interests. It can complement or conflict with the formal structure but often improves communication and morale.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Departmentalization and Span of Control</h4>
+          <p><strong>Departmentalization</strong> is the process of grouping activities into departments. Types:</p>
+          <ul>
+            <li><strong>Functional:</strong> Grouping by similar functions (production, marketing, finance). Most common.</li>
+            <li><strong>Product:</strong> Grouping by product lines (electronics division, clothing division).</li>
+            <li><strong>Geographic:</strong> Grouping by territory or region (north zone, south zone).</li>
+            <li><strong>Customer:</strong> Grouping by type of customers (retail, wholesale, government).</li>
+            <li><strong>Matrix:</strong> Dual reporting — employees report to both functional and project managers.</li>
+          </ul>
+          <p><strong>Span of Control:</strong> The number of subordinates that a manager can effectively supervise. A <strong>wide span</strong> leads to a flat structure (fewer levels, faster communication, less supervision). A <strong>narrow span</strong> leads to a tall structure (more levels, tighter control, more managers).</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Centralization, Decentralization, and Delegation</h4>
+          <p><strong>Centralization:</strong> Authority is concentrated at the top levels of management. Decisions are made by top management and communicated downward. Advantages: tight control, uniform policies. Disadvantages: slow decision making, burden on top managers.</p>
+          <p><strong>Decentralization:</strong> Authority is dispersed to lower levels of management. Decisions are made closer to the action. Advantages: faster decisions, empowerment of managers, better coordination. Disadvantages: risk of inconsistency, duplication of effort.</p>
+          <p><strong>Delegation of Authority:</strong> The process of transferring authority from a superior to a subordinate. It involves three elements:</p>
+          <ul>
+            <li><strong>Authority:</strong> The right to give orders and expect obedience. Flows downward.</li>
+            <li><strong>Responsibility:</strong> The obligation to perform assigned duties. Flows upward.</li>
+            <li><strong>Accountability:</strong> The answerability for the outcome. Cannot be delegated — the delegator remains accountable.</li>
+          </ul>
+          <p>Effective delegation requires: clear definition of tasks, matching authority with responsibility, and maintaining accountability at the top.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Staffing Process</h4>
+          <p><strong>Staffing</strong> is the process of recruiting, selecting, training, developing, and placing personnel in appropriate positions. It ensures the right people are in the right jobs.</p>
+          <p><strong>Steps in Staffing Process:</strong></p>
+          <ul>
+            <li><strong>1. Manpower Planning:</strong> Determine the number and type of employees needed.</li>
+            <li><strong>2. Recruitment:</strong> Attract a pool of candidates through advertisements, referrals, campus interviews, etc.</li>
+            <li><strong>3. Selection:</strong> Choose the best candidates through screening, tests, interviews, and reference checks.</li>
+            <li><strong>4. Placement and Orientation:</strong> Assign selected candidates to appropriate positions and introduce them to the organization.</li>
+            <li><strong>5. Training and Development:</strong> Enhance skills and knowledge through on-the-job training, off-the-job training, workshops, etc.</li>
+            <li><strong>6. Performance Appraisal:</strong> Evaluate employee performance against set standards.</li>
+            <li><strong>7. Promotion and Career Planning:</strong> Help employees grow within the organization.</li>
+          </ul>
+          <p><strong>Selection Methods:</strong> Written tests (aptitude, knowledge), interviews (structured, unstructured), assessment centers, background checks, and medical examinations.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> Delegation is essential for effective management. The principle "Authority equals Responsibility" means that when authority is delegated, the corresponding responsibility is also transferred. However, accountability always remains with the superior who delegates. A manager can delegate authority but cannot delegate accountability.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is span of control?</div>
+          <div class="q-answer">Span of control (span of management) refers to the number of subordinates that a manager can effectively supervise and manage. A wide span results in a flat organizational structure with fewer management levels, while a narrow span creates a tall structure with more levels. The optimal span depends on factors like the nature of work, employee competence, and management philosophy.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Difference between centralization and decentralization.</div>
+          <div class="q-answer">
+            <p><strong>Centralization:</strong> Authority is concentrated at top management levels. Decisions are made centrally and communicated downward. Results in tight control but slower decisions and burden on top management.</p>
+            <p><strong>Decentralization:</strong> Authority is dispersed to lower levels. Decisions are made closer to where action occurs. Results in faster decisions, empowerment, and better local responsiveness, but risk of inconsistency.</p>
+            <p>Most organizations use a balance of both depending on the situation.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain different types of organization structures.</div>
+          <div class="q-answer">
+            <p><strong>Functional Structure:</strong> Groups activities by functions (marketing, production, finance, HR). Advantages: specialization, efficiency, clear career paths. Disadvantages: functional silos, poor cross-functional coordination.</p>
+            <p><strong>Divisional Structure (Product/Geographic/Customer):</strong> Each division is self-contained with its own functional departments. Advantages: accountability, flexibility, focus on product/market. Disadvantages: duplication of resources, higher cost.</p>
+            <p><strong>Matrix Structure:</strong> Employees report to both functional and project managers (dual reporting). Advantages: efficient resource use, flexibility, balanced focus. Disadvantages: dual authority confusion, power struggles, high complexity.</p>
+            <p><strong>Line and Staff Structure:</strong> Line managers have direct authority; staff specialists provide advice and support. Advantages: specialized expertise, relief for line managers. Disadvantages: conflict between line and staff, staff may be ignored.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is delegation of authority?</div>
+          <div class="q-answer">
+            <p><strong>Delegation of authority</strong> is the process by which a superior transfers a portion of their authority to a subordinate to accomplish specific tasks. It involves three elements:</p>
+            <ul>
+              <li><strong>Authority:</strong> The right to command and take action. Flows from top to bottom.</li>
+              <li><strong>Responsibility:</strong> The duty to perform assigned tasks. Flows from bottom to top.</li>
+              <li><strong>Accountability:</strong> Being answerable for results. Always remains with the superior who delegates — cannot be passed on.</li>
+            </ul>
+            <p>Effective delegation requires: defining the task clearly, matching authority with responsibility, creating accountability, and providing necessary resources and support.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain organizing and staffing functions. Discuss organization structures, departmentalization, span of control, delegation of authority. Also explain the staffing process including recruitment, selection and training.</div>
+          <div class="q-answer">
+            <p><strong>Organizing:</strong> The process of arranging resources and tasks to implement plans. It creates the structure through which goals are achieved. Steps: identify activities, group activities (departmentalization), assign duties, establish reporting relationships, and allocate resources.</p>
+            <p><strong>Departmentalization:</strong> Functional (by function), Product (by product line), Geographic (by region), Customer (by customer type), Matrix (dual reporting).</p>
+            <p><strong>Span of Control:</strong> Number of subordinates per manager. Wide span = flat structure, narrow span = tall structure.</p>
+            <p><strong>Delegation of Authority:</strong> Transferring authority from superior to subordinate. Elements: Authority (right to command), Responsibility (obligation to perform), Accountability (answerability — cannot be delegated).</p>
+            <p><strong>Centralization vs Decentralization:</strong> Centralization concentrates authority at top levels; decentralization disperses it to lower levels.</p>
+            <p><strong>Staffing Process:</strong></p>
+            <ul>
+              <li><strong>Manpower Planning:</strong> Determine workforce needs.</li>
+              <li><strong>Recruitment:</strong> Attract candidates through ads, referrals, agencies.</li>
+              <li><strong>Selection:</strong> Screen, test, interview, and select the best candidates.</li>
+              <li><strong>Placement &amp; Orientation:</strong> Assign to appropriate positions.</li>
+              <li><strong>Training:</strong> On-the-job (coaching, job rotation) and off-the-job (classroom, simulations).</li>
+              <li><strong>Development:</strong> Career planning, management development programs.</li>
+              <li><strong>Performance Appraisal:</strong> Evaluate and provide feedback.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the matrix organization structure. What are its advantages and disadvantages?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between authority, responsibility, and accountability. Explain delegation of authority.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain the staffing process in detail. What is the importance of training and development?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2020]</span> Compare functional and divisional organization structures with suitable examples.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 4 ==================== -->
+    <div class="unit-section" id="unit-4">
+      <div class="unit-header">
+        <div class="unit-number">4</div>
+        <div class="unit-header-text">
+          <h3>Directing &amp; Leadership</h3>
+          <p>Guiding people — leadership, motivation, communication, supervision</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Meaning and Principles of Directing</h4>
+          <p><strong>Directing</strong> is the management function that involves guiding, leading, and supervising employees to achieve organizational objectives. It is the action-oriented function that translates plans into action. Directing includes leadership, motivation, communication, and supervision.</p>
+          <p>Principles of directing:</p>
+          <ul>
+            <li><strong>Maximum individual contribution:</strong> Motivate employees to give their best.</li>
+            <li><strong>Harmony of objectives:</strong> Align individual goals with organizational goals.</li>
+            <li><strong>Efficiency of direction:</strong> Use appropriate leadership style and communication methods.</li>
+            <li><strong>Use of informal organization:</strong> Leverage informal groups for better communication.</li>
+            <li><strong>Follow-through:</strong> Monitor and guide continuously, not just at the beginning.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Leadership — Definition and Styles</h4>
+          <p><strong>Leadership</strong> is the ability to influence and guide individuals or groups toward achieving goals. A leader inspires, motivates, and directs followers. Leadership is different from management — managers have authority by position, while leaders have influence by personal qualities.</p>
+          <p><strong>Leadership Styles:</strong></p>
+          <ul>
+            <li><strong>Autocratic (Authoritarian):</strong> Leader makes decisions alone, gives orders, expects obedience. Suitable for emergencies or unskilled workers. Disadvantages: low morale, dependency.</li>
+            <li><strong>Democratic (Participative):</strong> Leader involves subordinates in decision making. Encourages participation and feedback. Higher satisfaction and commitment but slower decisions.</li>
+            <li><strong>Laissez-faire (Free-rein):</strong> Leader gives complete freedom to subordinates to make decisions. Suitable for highly skilled, self-motivated teams. Risk: lack of direction and coordination.</li>
+            <li><strong>Situational (Contingency):</strong> Leader adapts style based on the situation, follower maturity, and task requirements. No single best style — it depends on the context.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Motivation Theories</h4>
+          <p><strong>Maslow's Hierarchy of Needs:</strong> Abraham Maslow proposed a five-level hierarchy of human needs, arranged in a pyramid from basic to advanced:</p>
+          <ul>
+            <li><strong>Physiological needs:</strong> Food, shelter, clothing, sleep.</li>
+            <li><strong>Safety needs:</strong> Job security, insurance, safe working conditions.</li>
+            <li><strong>Social needs (Belongingness):</strong> Friendship, acceptance, belonging to a group.</li>
+            <li><strong>Esteem needs:</strong> Recognition, status, self-respect, achievement.</li>
+            <li><strong>Self-actualization:</strong> Realizing one's full potential, personal growth.</li>
+          </ul>
+          <p>Lower-level needs must be satisfied before higher-level needs become motivators.</p>
+          <p><strong>Herzberg's Two-Factor Theory:</strong> Factors affecting job satisfaction are of two types:</p>
+          <ul>
+            <li><strong>Hygiene (Maintenance) Factors:</strong> Salary, working conditions, company policies, job security. Their absence causes dissatisfaction but their presence doesn't necessarily motivate.</li>
+            <li><strong>Motivator (Growth) Factors:</strong> Achievement, recognition, responsibility, advancement, the work itself. Their presence creates satisfaction and motivation.</li>
+          </ul>
+          <p><strong>McGregor's Theory X and Theory Y:</strong></p>
+          <ul>
+            <li><strong>Theory X:</strong> Employees are inherently lazy, avoid work, need close supervision, and are motivated by money and fear.</li>
+            <li><strong>Theory Y:</strong> Employees are self-motivated, enjoy work, seek responsibility, and are motivated by self-fulfillment and growth.</li>
+          </ul>
+          <p><strong>McClelland's Theory of Needs:</strong> Three primary needs drive motivation:</p>
+          <ul>
+            <li><strong>Need for Achievement (nAch):</strong> Drive to excel and achieve goals.</li>
+            <li><strong>Need for Power (nPow):</strong> Desire to influence and control others.</li>
+            <li><strong>Need for Affiliation (nAff):</strong> Desire for friendly relationships and belonging.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Communication — Process, Types, Barriers, Grapevine</h4>
+          <p><strong>Communication Process:</strong> Sender encodes a message, selects a channel, transmits the message, receiver decodes it, and feedback is sent back. Noise (distortions) can interfere at any stage.</p>
+          <p><strong>Types of Communication:</strong></p>
+          <ul>
+            <li><strong>Formal:</strong> Through official channels (reports, meetings, memos).</li>
+            <li><strong>Informal (Grapevine):</strong> Spontaneous, personal, unofficial communication network. Fast but may spread rumors.</li>
+            <li><strong>Verbal:</strong> Oral (face-to-face, telephone, presentations) or Written (letters, emails, reports).</li>
+            <li><strong>Non-verbal:</strong> Body language, gestures, facial expressions, tone of voice.</li>
+          </ul>
+          <p><strong>Barriers to Communication:</strong> Physical (noise, distance), Semantic (language, jargon, different meanings), Psychological (emotions, attitudes, perception), Organizational (hierarchy, rules), and Personal (prejudices, stereotypes).</p>
+          <p><strong>Grapevine:</strong> The informal communication network. Characteristics: spontaneous, fast, flexible, and often unofficial. Types: Single strand, Gossip chain, Probability chain, Cluster chain. Advantages: quick feedback, builds morale. Disadvantages: rumors, distortion of facts.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> Motivation is the driving force that energizes, directs, and sustains behavior. No single motivation theory applies to all situations. Effective managers use a combination of theories and adapt their approach based on individual and situational factors.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is directing?</div>
+          <div class="q-answer">Directing is the management function that involves guiding, leading, motivating, and supervising employees to achieve organizational objectives. It translates plans into action by influencing human behavior. Directing includes leadership, motivation, communication, and supervision, and it is a continuous, pervasive function performed at all management levels.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is motivation?</div>
+          <div class="q-answer">Motivation is the psychological process that energizes, directs, and sustains human behavior toward achieving goals. It is the driving force that compels employees to put in effort. Motivation can be intrinsic (internal satisfaction, achievement) or extrinsic (money, rewards, promotions).</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain leadership styles.</div>
+          <div class="q-answer">
+            <p><strong>Autocratic (Authoritarian) Style:</strong> Leader makes decisions alone without consulting subordinates. Orders are given and expected to be followed. Advantages: quick decisions, clear direction. Disadvantages: low morale, no creativity, high dependency.</p>
+            <p><strong>Democratic (Participative) Style:</strong> Leader involves subordinates in decision making, seeks their opinions and suggestions. Advantages: higher satisfaction, better ideas, commitment. Disadvantages: slower decisions, may lead to confusion.</p>
+            <p><strong>Laissez-faire (Free-rein) Style:</strong> Leader gives complete freedom to subordinates. They decide and act independently. Advantages: high creativity, self-motivation. Disadvantages: lack of direction, possible chaos with unskilled teams.</p>
+            <p><strong>Situational Style:</strong> Leader adapts their style based on the situation, follower competence, and task requirements. No single best approach — flexibility is key.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Discuss Maslow's hierarchy of needs.</div>
+          <div class="q-answer">
+            <p>Maslow's hierarchy arranges human needs in a five-level pyramid. Lower needs must be satisfied before higher needs become motivators:</p>
+            <ul>
+              <li><strong>Level 1 — Physiological:</strong> Food, water, shelter, clothing, sleep. These are the most basic survival needs.</li>
+              <li><strong>Level 2 — Safety/Security:</strong> Physical safety, job security, financial security, safe working conditions.</li>
+              <li><strong>Level 3 — Social (Belongingness and Love):</strong> Friendship, acceptance, belonging to a group, social interaction.</li>
+              <li><strong>Level 4 — Esteem:</strong> Self-respect, recognition, status, achievement, responsibility.</li>
+              <li><strong>Level 5 — Self-actualization:</strong> Realizing one's full potential, personal growth, creativity, self-fulfillment.</li>
+            </ul>
+            <p>In management, this theory suggests that managers should first satisfy lower-level needs (fair salary, job security) before expecting higher-level motivators (challenging work, recognition) to be effective.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain directing and leadership. Discuss different leadership styles, motivation theories (Maslow, Herzberg, McGregor, McClelland). Also explain communication process and barriers.</div>
+          <div class="q-answer">
+            <p><strong>Directing:</strong> The action function of management that guides, leads, and motivates employees. It involves leadership, motivation, communication, and supervision. Principles include maximum individual contribution, harmony of objectives, and follow-through.</p>
+            <p><strong>Leadership Styles:</strong> Autocratic (quick decisions, low morale), Democratic (participation, higher commitment), Laissez-faire (complete freedom, high creativity), Situational (adapts to context).</p>
+            <p><strong>Motivation Theories:</strong></p>
+            <ul>
+              <li><strong>Maslow:</strong> Five-level hierarchy — Physiological, Safety, Social, Esteem, Self-actualization.</li>
+              <li><strong>Herzberg:</strong> Two factors — Hygiene factors (salary, conditions — prevent dissatisfaction) and Motivators (achievement, recognition — create satisfaction).</li>
+              <li><strong>McGregor:</strong> Theory X (people are lazy, need control) vs Theory Y (people are self-motivated, seek responsibility).</li>
+              <li><strong>McClelland:</strong> Need for Achievement (nAch), Need for Power (nPow), Need for Affiliation (nAff).</li>
+            </ul>
+            <p><strong>Communication Process:</strong> Sender encodes message → Channel transmission → Receiver decodes message → Feedback. Barriers: Physical (noise), Semantic (language), Psychological (emotions), Organizational (hierarchy).</p>
+            <p><strong>Grapevine:</strong> Informal communication network. Advantages: fast, builds relationships. Disadvantages: rumor distortion, unreliable information.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Compare and contrast Maslow's hierarchy of needs with Herzberg's two-factor theory.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> What are the different leadership styles? Which style is most effective and why?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain the communication process and discuss the major barriers to effective communication.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2020]</span> Discuss Theory X and Theory Y. How do they influence management approach?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 5 ==================== -->
+    <div class="unit-section" id="unit-5">
+      <div class="unit-header">
+        <div class="unit-number">5</div>
+        <div class="unit-header-text">
+          <h3>Controlling</h3>
+          <p>Ensuring results — control process, types, budgets, PERT, CPM, appraisal</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Meaning and Importance of Controlling</h4>
+          <p><strong>Controlling</strong> is the management function of measuring performance against established standards and taking corrective action when deviations occur. It ensures that organizational goals are achieved efficiently.</p>
+          <p>Importance of controlling:</p>
+          <ul>
+            <li>Accomplishes organizational goals by ensuring activities stay on track</li>
+            <li>Judges accuracy of standards and updates them as needed</li>
+            <li>Makes efficient use of resources by minimizing waste</li>
+            <li>Improves employee motivation by setting clear performance standards</li>
+            <li>Ensures discipline and order in the organization</li>
+            <li>Facilitates coordination by linking all departments to common goals</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Control Process and Types of Control</h4>
+          <p><strong>Steps in the Control Process:</strong></p>
+          <ul>
+            <li><strong>1. Setting Performance Standards:</strong> Establish measurable criteria against which performance will be judged (quantitative: time, cost, quality; qualitative: employee satisfaction).</li>
+            <li><strong>2. Measuring Actual Performance:</strong> Collect data on actual performance through observation, reports, and information systems.</li>
+            <li><strong>3. Comparing Performance with Standards:</strong> Identify deviations between actual performance and standards.</li>
+            <li><strong>4. Taking Corrective Action:</strong> Analyze deviations, determine causes, and implement corrective measures.</li>
+          </ul>
+          <p><strong>Types of Control:</strong></p>
+          <ul>
+            <li><strong>Feedforward Control:</strong> Anticipates problems before they occur. Examples: preventive maintenance, quality inspection of raw materials, training before deployment.</li>
+            <li><strong>Concurrent (Steering) Control:</strong> Monitors ongoing activities in real-time. Examples: supervision, real-time quality checks, dashboard monitoring.</li>
+            <li><strong>Feedback Control:</strong> Evaluates results after the activity is completed. Examples: annual financial audit, customer satisfaction survey, product quality testing after production.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Budgetary Control and Budgeting Process</h4>
+          <p><strong>Budgetary Control:</strong> A technique of control that uses budgets as a tool for planning and controlling. A budget is a financial plan expressed in numerical terms for a future period.</p>
+          <p><strong>Types of Budgets:</strong> Sales budget, production budget, cash budget, capital expenditure budget, master budget (comprehensive plan combining all budgets).</p>
+          <p><strong>Budgeting Process:</strong></p>
+          <ul>
+            <li>1. Determine the budgeting period (annual, quarterly).</li>
+            <li>2. Establish budget centers (departments/units).</li>
+            <li>3. Prepare preliminary budgets (bottom-up approach).</li>
+            <li>4. Negotiate and finalize budgets (top-down + bottom-up).</li>
+            <li>5. Issue budget guidelines to all units.</li>
+            <li>6. Compare actual performance with budget periodically.</li>
+            <li>7. Take corrective action for variances.</li>
+          </ul>
+          <p><strong>Responsibility Accounting:</strong> A system where costs and revenues are collected and reported by areas of responsibility (cost centers, profit centers, investment centers). Each manager is accountable only for the costs and revenues under their control.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Project Scheduling — PERT, CPM, Gantt Chart</h4>
+          <p><strong>PERT (Program Evaluation and Review Technique):</strong> A network analysis technique used for planning and controlling complex projects. It uses three time estimates for each activity: optimistic (to), most likely (tm), and pessimistic (tp). Expected time = (to + 4tm + tp) / 6. PERT focuses on time and handles uncertainty.</p>
+          <p><strong>CPM (Critical Path Method):</strong> A deterministic technique for project scheduling. It uses a single time estimate per activity and focuses on both time and cost. Critical path is the longest path through the network — any delay in critical path activities delays the entire project.</p>
+          <p><strong>Steps in PERT/CPM:</strong> (1) List all activities, (2) Determine activity sequence, (3) Draw the network diagram, (4) Estimate time for each activity, (5) Identify the critical path, (6) Update and monitor progress.</p>
+          <p><strong>Gantt Chart:</strong> A bar chart that visually represents the project schedule. Each bar shows the start and finish dates of an activity. It is simple to use but doesn't show interdependencies between activities like PERT/CPM does.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Management Audit and Performance Appraisal</h4>
+          <p><strong>Management Audit:</strong> A comprehensive and systematic evaluation of management functions and performance. It examines whether management is effective in achieving organizational goals. Areas covered: organization structure, policies, procedures, leadership, communication, and control systems. Conducted by internal or external auditors.</p>
+          <p><strong>Performance Appraisal:</strong> The systematic evaluation of employee performance against established standards. Methods include:</p>
+          <ul>
+            <li><strong>Graphic Rating Scale:</strong> Rate employees on traits like dependability, initiative.</li>
+            <li><strong>Forced Distribution:</strong> Force ratings into a bell curve distribution.</li>
+            <li><strong>360-Degree Feedback:</strong> Collect feedback from supervisors, peers, subordinates, and self.</li>
+            <li><strong>Management by Objectives (MBO):</strong> Evaluate based on achievement of pre-set objectives.</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> PERT and CPM are both project management techniques. PERT uses probabilistic time estimates (3 estimates) and is best for research/development projects where time is uncertain. CPM uses deterministic single estimates and focuses on cost-time trade-offs. Both identify the critical path — the longest sequence of dependent activities that determines the minimum project duration.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is controlling?</div>
+          <div class="q-answer">Controlling is the management function that compares actual performance with established standards and takes corrective action when deviations are found. It ensures that organizational activities are aligned with plans and goals. Controlling closes the management cycle by providing feedback for future planning.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is budgetary control?</div>
+          <div class="q-answer">Budgetary control is a management technique that uses budgets (financial plans expressed in numerical terms) to plan and control organizational activities. It involves preparing budgets, comparing actual results with budgeted figures, identifying variances, and taking corrective action. It helps in coordination, efficiency, and performance evaluation.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain the control process.</div>
+          <div class="q-answer">
+            <p><strong>Step 1 — Setting Performance Standards:</strong> Establish measurable criteria for evaluating performance. Standards should be clear, achievable, and aligned with organizational goals. They can be quantitative (output, cost, time) or qualitative (employee morale, quality).</p>
+            <p><strong>Step 2 — Measuring Actual Performance:</strong> Collect accurate data on actual performance using reports, personal observation, and information systems. Measurement should be timely and relevant.</p>
+            <p><strong>Step 3 — Comparing Performance with Standards:</strong> Compare actual results against the established standards to identify deviations. Deviation within acceptable limits is tolerated; significant deviations require investigation.</p>
+            <p><strong>Step 4 — Taking Corrective Action:</strong> Analyze the causes of deviations and implement corrective measures. If standards are unrealistic, they should be revised. If performance is below standard, training or process changes may be needed.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is PERT/CPM?</div>
+          <div class="q-answer">
+            <p><strong>PERT (Program Evaluation and Review Technique):</strong> A network-based project scheduling tool that uses three time estimates (optimistic, most likely, pessimistic) for each activity. It calculates expected time and variance, making it suitable for projects with uncertainty (R&D, construction). Formula: Expected time = (to + 4tm + tp) / 6.</p>
+            <p><strong>CPM (Critical Path Method):</strong> A network-based technique that uses a single deterministic time estimate per activity. It focuses on time-cost trade-offs. The critical path is the longest sequence of dependent activities — any delay on it delays the entire project.</p>
+            <p>Both techniques help managers plan, schedule, monitor, and control complex projects by identifying the critical path, earliest/latest start/finish times, and slack time for non-critical activities.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain controlling function. Discuss control process, types of control, budgetary control, responsibility accounting, and project scheduling using PERT/CPM and Gantt charts.</div>
+          <div class="q-answer">
+            <p><strong>Controlling Function:</strong> Ensures actual performance aligns with planned objectives. It measures, compares, and corrects. It closes the management loop by providing feedback for future planning.</p>
+            <p><strong>Control Process:</strong> (1) Set performance standards, (2) Measure actual performance, (3) Compare with standards, (4) Take corrective action.</p>
+            <p><strong>Types of Control:</strong></p>
+            <ul>
+              <li><strong>Feedforward:</strong> Prevents problems before they occur (preventive maintenance).</li>
+              <li><strong>Concurrent:</strong> Monitors ongoing activities in real-time (supervision, dashboards).</li>
+              <li><strong>Feedback:</strong> Evaluates results after completion (audits, quality testing).</li>
+            </ul>
+            <p><strong>Budgetary Control:</strong> Uses budgets as planning and control tools. Types: sales, production, cash, capital expenditure, master budget. Budgeting process: determine period, establish budget centers, prepare preliminary budgets, negotiate, issue guidelines, compare actual vs budget, take corrective action.</p>
+            <p><strong>Responsibility Accounting:</strong> Assigns costs and revenues to responsibility centers (cost centers, profit centers, investment centers). Managers are evaluated on factors within their control.</p>
+            <p><strong>PERT/CPM:</strong> Network techniques for project scheduling. PERT uses 3 time estimates for uncertainty; CPM uses single estimates and focuses on cost-time optimization. Both identify the critical path (longest dependent sequence determining project duration).</p>
+            <p><strong>Gantt Chart:</strong> Visual bar chart showing activity schedules, start/finish dates, and progress. Simple to use but less effective for complex interdependencies compared to PERT/CPM.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the control process in detail. Why is controlling called a feedback function?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> What is PERT? How does it differ from CPM? Explain with a network diagram example.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain budgetary control. What is the importance of responsibility accounting?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2020]</span> Compare feedforward, concurrent, and feedback controls with suitable examples.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 6 ==================== -->
+    <div class="unit-section" id="unit-6">
+      <div class="unit-header">
+        <div class="unit-number">6</div>
+        <div class="unit-header-text">
+          <h3>Financial Management</h3>
+          <p>Money matters — objectives, time value, capital budgeting, cost of capital</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Definition and Objectives of Financial Management</h4>
+          <p><strong>Financial Management</strong> is the management of the acquisition, allocation, and utilization of financial resources to achieve organizational objectives efficiently. It deals with investment decisions, financing decisions, and dividend decisions.</p>
+          <p><strong>Objectives of Financial Management:</strong></p>
+          <ul>
+            <li><strong>Profit maximization:</strong> Primary traditional objective — maximize profits per share.</li>
+            <li><strong>Wealth maximization:</strong> Modern objective — maximize shareholders' wealth (net present value of decisions).</li>
+            <li><strong>Proper cash flow management:</strong> Ensure sufficient liquidity for operations.</li>
+            <li><strong>Optimal capital structure:</strong> Balance between debt and equity to minimize cost of capital.</li>
+            <li><strong>Efficient utilization of resources:</strong> Avoid wastage of financial resources.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Time Value of Money (TVM)</h4>
+          <p><strong>Time Value of Money</strong> is the concept that a rupee today is worth more than a rupee tomorrow because of its earning potential. Money can earn interest, so it is more valuable the sooner it is received.</p>
+          <p>Key formulas:</p>
+          <ul>
+            <li><strong>Future Value (FV):</strong> FV = PV &times; (1 + r)^n</li>
+            <li><strong>Present Value (PV):</strong> PV = FV / (1 + r)^n</li>
+            <li><strong>Annuity Future Value:</strong> FV = P &times; [(1 + r)^n - 1] / r</li>
+            <li><strong>Annuity Present Value:</strong> PV = P &times; [1 - (1 + r)^-n] / r</li>
+          </ul>
+          <p>Where: PV = Present Value, FV = Future Value, r = interest rate per period, n = number of periods, P = periodic payment.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Capital Budgeting Techniques</h4>
+          <p><strong>Capital Budgeting</strong> is the process of evaluating and selecting long-term investments. Key techniques:</p>
+          <p><strong>Net Present Value (NPV):</strong> NPV = Present Value of Cash Inflows - Present Value of Cash Outflows. Accept project if NPV &gt; 0. Advantage: considers time value of money and all cash flows.</p>
+          <p><strong>Internal Rate of Return (IRR):</strong> The discount rate at which NPV = 0. Accept project if IRR &gt; required rate of return. Advantage: expressed as a percentage, easy to compare with hurdle rate.</p>
+          <p><strong>Payback Period:</strong> Time required to recover the initial investment from cash inflows. Simple but ignores time value of money and cash flows beyond payback.</p>
+          <p><strong>Discounted Payback Period:</strong> Like payback but considers time value of money.</p>
+          <p><strong>Profitability Index (PI):</strong> PI = PV of future cash flows / Initial Investment. PI &gt; 1 means accept.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Cost of Capital, Leverage, Working Capital, and Dividend Policy</h4>
+          <p><strong>Cost of Capital:</strong> The minimum rate of return a company must earn on its investments to satisfy investors. It is the weighted average of the cost of each source of capital (debt, equity, preferred stock).</p>
+          <ul>
+            <li><strong>Cost of Debt:</strong> Interest rate adjusted for tax shield: Kd = Interest &times; (1 - Tax Rate) / Net Proceeds</li>
+            <li><strong>Cost of Equity:</strong> Ke = D1/P0 + g (Dividend Growth Model) or Ke = Rf + Beta &times; (Rm - Rf) (CAPM)</li>
+            <li><strong>WACC (Weighted Average Cost of Capital):</strong> WACC = (E/V &times; Ke) + (D/V &times; Kd &times; (1-T)) where E = equity, D = debt, V = total capital</li>
+          </ul>
+          <p><strong>Leverage:</strong></p>
+          <ul>
+            <li><strong>Operating Leverage:</strong> Use of fixed operating costs. DOL = Contribution / EBIT. Higher fixed costs = higher operating leverage.</li>
+            <li><strong>Financial Leverage:</strong> Use of debt financing. DFL = EBIT / EBT. Higher debt = higher financial leverage and risk.</li>
+            <li><strong>Combined Leverage:</strong> DCL = DOL &times; DFL</li>
+          </ul>
+          <p><strong>Working Capital Management:</strong> Management of short-term assets and liabilities. Components: current assets (cash, inventory, receivables) and current liabilities (payables, short-term debt). Objective: maintain liquidity while maximizing returns.</p>
+          <p><strong>Dividend Policy:</strong> Decisions about distributing profits to shareholders. Policies: stable dividend, regular dividend plus extra, no dividend (retain earnings). Factors affecting dividend: profitability, cash position, legal constraints, shareholder preferences.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Financial Statements and Ratios</h4>
+          <p><strong>Financial Statements:</strong></p>
+          <ul>
+            <li><strong>Income Statement (Profit &amp; Loss):</strong> Shows revenues, expenses, and net profit over a period.</li>
+            <li><strong>Balance Sheet:</strong> Snapshot of assets, liabilities, and equity at a point in time. Assets = Liabilities + Equity.</li>
+            <li><strong>Cash Flow Statement:</strong> Shows cash inflows and outflows from operating, investing, and financing activities.</li>
+          </ul>
+          <p><strong>Financial Ratios:</strong></p>
+          <ul>
+            <li><strong>Liquidity Ratios:</strong> Current Ratio (Current Assets / Current Liabilities), Quick Ratio (Quick Assets / Current Liabilities).</li>
+            <li><strong>Profitability Ratios:</strong> Net Profit Ratio, Return on Investment (ROI), Earnings Per Share (EPS).</li>
+            <li><strong>Solvency Ratios:</strong> Debt-Equity Ratio, Interest Coverage Ratio.</li>
+            <li><strong>Activity Ratios:</strong> Inventory Turnover, Debtors Turnover, Total Asset Turnover.</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> NPV is generally considered the best capital budgeting technique because it accounts for the time value of money and considers all cash flows over the project's life. IRR can give misleading results with non-conventional cash flows or mutually exclusive projects. Payback period is simple but ignores profitability and time value.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is financial management?</div>
+          <div class="q-answer">Financial management is the management of the acquisition, allocation, and utilization of financial resources to achieve organizational objectives. It involves three key decisions: investment decisions (where to invest), financing decisions (how to raise funds), and dividend decisions (how much to distribute vs retain).</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is NPV?</div>
+          <div class="q-answer">NPV (Net Present Value) is a capital budgeting technique that calculates the difference between the present value of cash inflows and the present value of cash outflows over a project's life. Formula: NPV = (Cash Inflow1 / (1+r)^1) + ... - Initial Investment. Accept the project if NPV &gt; 0.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain objectives of financial management.</div>
+          <div class="q-answer">
+            <p><strong>Profit Maximization:</strong> The traditional objective. Aims to maximize profits per share. Advantages: efficient resource use, societal welfare. Disadvantages: vague (what profit measure?), ignores risk and time value of money.</p>
+            <p><strong>Wealth Maximization:</strong> The modern objective. Aims to maximize shareholders' wealth (the market value of equity). Considers risk, time value of money, and quality of earnings. Superior to profit maximization.</p>
+            <p><strong>Other Objectives:</strong></p>
+            <ul>
+              <li>Proper cash flow management — ensure sufficient liquidity.</li>
+              <li>Optimal capital structure — balance debt and equity to minimize WACC.</li>
+              <li>Efficient resource utilization — avoid wastage of funds.</li>
+              <li>Investment in worthwhile projects — maximize return on investment.</li>
+              <li>Long-term survival and growth of the organization.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is time value of money?</div>
+          <div class="q-answer">
+            <p><strong>Time Value of Money (TVM)</strong> is the principle that a sum of money available today is worth more than the same sum in the future, because money can earn interest or returns over time. A rupee today has greater purchasing power than a rupee tomorrow.</p>
+            <p>Key concepts:</p>
+            <ul>
+              <li><strong>Present Value (PV):</strong> The current worth of a future sum. PV = FV / (1 + r)^n</li>
+              <li><strong>Future Value (FV):</strong> The value of a present sum at a future date. FV = PV &times; (1 + r)^n</li>
+              <li><strong>Annuity:</strong> A series of equal payments over time.</li>
+              <li><strong>Compounding:</strong> Earning interest on interest (used for FV).</li>
+              <li><strong>Discounting:</strong> Converting future amounts to present value (used for PV).</li>
+            </ul>
+            <p>TVM is fundamental to capital budgeting, valuation, and all financial decisions.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain financial management functions and objectives. Discuss time value of money, capital budgeting techniques (NPV, IRR, Payback), and cost of capital.</div>
+          <div class="q-answer">
+            <p><strong>Financial Management Functions:</strong></p>
+            <ul>
+              <li><strong>Investment Decisions:</strong> Allocate funds to long-term assets (capital budgeting) and short-term assets (working capital).</li>
+              <li><strong>Financing Decisions:</strong> Decide the optimal mix of debt and equity to minimize cost of capital.</li>
+              <li><strong>Dividend Decisions:</strong> Determine how much profit to distribute as dividends vs retain for growth.</li>
+              <li><strong>Liquidity Management:</strong> Ensure sufficient cash flow for day-to-day operations.</li>
+            </ul>
+            <p><strong>Objectives:</strong> Profit maximization (traditional), Wealth maximization (modern), efficient resource use, optimal capital structure, maintaining liquidity.</p>
+            <p><strong>Time Value of Money:</strong> PV = FV / (1+r)^n, FV = PV &times; (1+r)^n. Discounting converts future values to present; compounding grows present values to future.</p>
+            <p><strong>Capital Budgeting Techniques:</strong></p>
+            <ul>
+              <li><strong>NPV:</strong> NPV = PV(inflows) - PV(outflows). Accept if NPV &gt; 0. Best method.</li>
+              <li><strong>IRR:</strong> Rate where NPV = 0. Accept if IRR &gt; required return.</li>
+              <li><strong>Payback:</strong> Years to recover initial investment. Simple but ignores time value.</li>
+            </ul>
+            <p><strong>Cost of Capital:</strong> WACC = weighted average of cost of each source. Cost of debt = interest &times; (1-T). Cost of equity (dividend growth model) = D1/P0 + g. Lower WACC means higher firm value.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> What is NPV? Explain the NPV method of capital budgeting with a numerical example.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Explain the concept of time value of money. Calculate the future value of Rs. 10,000 invested at 10% for 5 years.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Differentiate between NPV and IRR. When do they give conflicting results?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2020]</span> Explain capital budgeting. What are the different techniques used for investment decisions?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Made with care for Semester 5 | Management Study Notes
+  </footer>
+
+  <a href="#top" class="back-to-top" id="backToTop">&#8593;</a>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+
+      // Back to top visibility
+      var backToTop = document.getElementById('backToTop');
+      if (scrollTop > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll for TOC links
+    document.querySelectorAll('.toc a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

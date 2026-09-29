@@ -1,612 +1,1423 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Software Engineering (PCC-CS505) — Study Notes</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true, theme: 'default', flowchart: { useMaxWidth: true, htmlLabels: true, rankSpacing: 80, nodeSpacing: 50 }});</script>
-    <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="stylesheet" href="../../qa-styles.css">
-    <link rel="stylesheet" href="../../premium.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Software Engineering Study Notes — Semester 5</title>
+  <style>
+    :root {
+      --primary: #ec4899;
+      --primary-light: #db2777;
+      --surface: #f8fafc;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-body: #334155;
+      --border: #e2e8f0;
+      --warning-bg: #fefce8;
+      --warning-border: #eab308;
+      --warning-text: #854d0e;
+      --pyq-bg: #fdf2f8;
+      --pyq-border: #fbcfe8;
+      --pyq-text: #9d174d;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #f1f5f9;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      z-index: 101;
+      transition: width 0.1s;
+    }
+
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .sticky-header h1 {
+      font-size: 1.1rem;
+      margin: 0;
+      color: var(--primary);
+    }
+
+    .toc {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      position: sticky;
+      top: 52px;
+      z-index: 99;
+    }
+
+    .toc a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .toc a:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .subject-title {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .subject-meta {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject-card {
+      background: linear-gradient(135deg, #ec4899, #db2777);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .subject-card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .subject-card p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .unit-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .unit-header:hover {
+      border-color: var(--primary);
+    }
+
+    .unit-number {
+      background: #ec4899;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .unit-header-text h3 {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text);
+    }
+
+    .unit-header-text p {
+      margin: 0.2rem 0 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .unit-content {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.2rem;
+    }
+
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
+    }
+
+    .topic-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
+      color: #ec4899;
+    }
+
+    .topic-card p,
+    .topic-card li {
+      color: var(--text-body);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .topic-card ul {
+      padding-left: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .question-block {
+      background: white;
+      border-left: 3px solid #ec4899;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-block .q-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #ec4899;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .question-block .q-text {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .question-block .q-answer {
+      color: #475569;
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: #f3f4f6;
+      border-left: 3px solid var(--primary-light);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+    }
+
+    .exam-tip {
+      background: var(--warning-bg);
+      border-left: 3px solid var(--warning-border);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+      font-size: 0.85rem;
+    }
+
+    .exam-tip strong {
+      color: var(--warning-text);
+    }
+
+    .pyq-section {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .pyq-section h4 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pyq-item {
+      background: var(--pyq-bg);
+      border: 1px solid var(--pyq-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .pyq-item .year {
+      color: var(--pyq-text);
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ec4899;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(236, 72, 153, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--surface);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      line-height: 1.5;
+    }
+
+    .code-block .keyword {
+      color: #f9a8d4;
+    }
+
+    .code-block .type {
+      color: #67e8f9;
+    }
+
+    .code-block .comment {
+      color: #94a3b8;
+    }
+  </style>
 </head>
 <body>
-    <nav class="top-nav">
-        <a href="se_index.html">← Back to Software Engineering Index</a>
-        <span class="nav-title">Software Engineering (PCC-CS505) — Study Notes</span>
-        <a href="../index.html">Home</a>
-    </nav>
-    <div class="layout">
-        <aside class="sidebar">
-            <div class="toc-box">
-                <h3>Table of Contents</h3>
-                <ul>
-                    <li><a href="#unit-1"><b>Unit 1</b><br/>Software Process Models &amp; Project Management</a></li>
-                    <li><a href="#unit-2"><b>Unit 2</b><br/>Requirement Analysis &amp; Specification</a></li>
-                    <li><a href="#unit-3"><b>Unit 3</b><br/>Software Design &amp; Testing</a></li>
-                    <li><a href="#unit-4"><b>Unit 4</b><br/>Software Quality &amp; Maintenance</a></li>
-                    <li><a href="#formulas"><b>Formula Sheet</b></a></li>
-                    <li><a href="#key-terms"><b>Key Terms</b></a></li>
-                </ul>
-            </div>
-        </aside>
 
-        <main class="content">
+  <div class="progress-bar" id="progressBar"></div>
 
-            <h1 class="section-title" id="unit-1">Unit 1 — Software Process Models &amp; Project Management</h1>
+  <div class="sticky-header">
+    <h1>📚 Software Engineering — Study Notes</h1>
+  </div>
 
-            <div class="concept-card">
-                <h3>What is Software Engineering?</h3>
-                <p>Software Engineering is the application of engineering principles to the design, development, testing, and maintenance of software. The goal is to produce reliable, cost-effective software on time. Three core forces act on every software project: <b>customer requirements</b>, <b>time/budget constraints</b>, and <b>technical quality</b>.</p>
-            </div>
+  <div class="toc">
+    <a href="#unit-1">Unit 1: Introduction to SE</a>
+    <a href="#unit-2">Unit 2: SDLC Models</a>
+    <a href="#unit-3">Unit 3: Requirements & Design</a>
+    <a href="#unit-4">Unit 4: Testing & Maintenance</a>
+    <a href="#unit-5">Unit 5: Project Management</a>
+  </div>
 
-            <div class="diagram-card">
-                <h3>Software Process Model Comparison</h3>
-<div class="mermaid">
-flowchart BT
-    W[Waterfall - Sequential, fixed reqs] --> I[Iterative - Refinement cycles]
-    I --> INC[Incremental - Functional slices]
-    INC --> S[Spiral - Risk-driven loops]
-    S --> A[Agile - Customer-collaborative]
-    A --> CBD[Component-Based - Reusable parts]
-    CBD --> FM[Formal Methods - Math-based]
-    FM --> XP[eXtreme Programming]
-    XP --> SCR[Scrum]
-</div>
-            </div>
+  <div class="container" id="top">
 
-            <div class="note-card">
-                <h3>The Generic Process Model (Pressman)</h3>
-                <p>Five framework activities that every project uses, regardless of model choice:</p>
-                <ol>
-                    <li><b>Communication</b> — Understand stakeholder needs.</li>
-                    <li><b>Planning</b> — Scope, resources, schedule, risks.</li>
-                    <li><b>Modeling</b> — Analysis &amp; design (UML models).</li>
-                    <li><b>Construction</b> — Coding &amp; testing.</li>
-                    <li><b>Deployment</b> — Delivery to users, feedback.</li>
-                </ol>
-                <p><b>Umbrella activities</b> run across all five: project tracking, risk management, QA, configuration management, and reviews.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>Waterfall Model</h3>
-                <p>Linear sequential phases: Feasibility → Requirements → Design → Coding → Testing → Deployment → Maintenance. Each phase is completed and baselined before the next begins. <b>Best when</b> requirements are well understood and stable; <b>unsuitable</b> when requirements change frequently.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>Iterative vs Incremental Model</h3>
-                <p><b>Iterative</b>: The entire system is repeatedly refined through cycles — each cycle produces a more complete version. <b>Incremental</b>: The system is built piece by piece — each increment delivers a new, usable set of features.</p>
-                <p>In practice, Iterative-Incremental combines both: each iteration delivers an increment.</p>
-            </div>
-
-            <div class="diagram-card">
-                <h3>Spiral Model — Risk-Driven Development</h3>
-<div class="mermaid">
-flowchart TD
-    D[Determine Objectives] --> RA[Identify &amp; Resolve Risks]
-    RA --> ED[Develop &amp; Test]
-    ED --> PE[Plan Next Cycle]
-    PE --> D
-</div>
-            </div>
-
-            <div class="concept-card">
-                <h3>Agile Manifesto Values</h3>
-                <div class="summary-card">
-                    <p><b>Individuals &amp; interactions</b> over processes &amp; tools<br/>
-                    <b>Working software</b> over comprehensive documentation<br/>
-                    <b>Customer collaboration</b> over contract negotiation<br/>
-                    <b>Responding to change</b> over following a plan</p>
-                </div>
-                <p>12 Agile Principles: early delivery, welcome changing requirements, daily business-developer collaboration, face-to-face conversation, working software as primary measure, sustainable pace, technical excellence, simplicity, self-organising teams, regular reflection.</p>
-            </div>
-
-            <div class="tip-card">
-                <h3>Agile vs Plan-Driven</h3>
-                <p><b>Plan-driven</b> (waterfall) assumes predictable processes and change is costly. <b>Agile</b> embraces change as a source of value. Hybrid approaches (Agile-Waterfall, ScrumBan) are increasingly common.</p>
-            </div>
-
-            <div class="note-card">
-                <h3>Scrum Framework</h3>
-                <p><b>Roles:</b> Product Owner (prioritises backlog), Scrum Master (facilitator, impediment remover), Development Team (self-organising, 3–9 members).</p>
-                <p><b>Events:</b> Sprint (1–4 weeks), Sprint Planning, Daily Standup (15 min), Sprint Review, Sprint Retrospective, Backlog Refinement.</p>
-                <p><b>Artefacts:</b> Product Backlog, Sprint Backlog, Product Increment, Burn-down Chart.</p>
-            </div>
-
-            <div class="diagram-card">
-                <h3>Scrum Sprint Flow</h3>
-<div class="mermaid">
-flowchart TD
-    PB[Product Backlog] --> SP[Sprint Planning]
-    SP --> SB[Sprint Backlog]
-    SB --> DS[Daily Scrum 15 min]
-    DS --> DEV[Development Sprint]
-    DEV --> SR[Sprint Review]
-    SR --> SRET[Retrospective]
-    SRET -->|New backlog| PB
-</div>
-            </div>
-
-            <div class="concept-card">
-                <h3>RUP Phases</h3>
-                <p><b>Inception:</b> Scope, feasibility, use-case model outline.<br/>
-                <b>Elaboration:</b> Refine requirements, establish architecture baseline.<br/>
-                <b>Construction:</b> Iterative implementation, continuous testing.<br/>
-                <b>Transition:</b> Beta releases, user training, deployment.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>Software Project Management</h3>
-                <p><b>Project Planning:</b> Scope → WBS → Gantt/PERT → resource allocation.<br/>
-                <b>Cost Estimation:</b> COCOMO, Function Points, Expert Judgment.<br/>
-                <b>Metrics:</b> LOC, FP, Cyclomatic Complexity, Defect Density.<br/>
-                <b>Scheduling:</b> PERT, Gantt charts, CPM (Critical Path Method).<br/>
-                <b>Tracking:</b> Earned Value Management (EVM), burn-down charts.</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>COCOMO — Basic Formula</h3>
-                <p>\[ E = a \times (KLOC)^b \]</p>
-                <p>\[ T_{dev} = c \times (E)^d \]</p>
-                <p>\[ SS = \frac{E}{T_{dev}} \]</p>
-                <p><b>Where:</b> E = Effort (person-months), Tdev = Duration (months), SS = Avg staffing, KLOC = size.</p>
-                <table border="1" style="border-collapse: collapse; width: 100%;">
-                    <tr style="background-color: #f3e8ff;"><th>Mode</th><th>a</th><th>b</th><th>c</th><th>d</th><th>Project Size</th></tr>
-                    <tr><td><b>Organic</b></td><td>2.4</td><td>1.05</td><td>2.5</td><td>0.38</td><td>Small, familiar (2–50 KLOC)</td></tr>
-                    <tr><td><b>Semi-Detached</b></td><td>3.0</td><td>1.12</td><td>2.5</td><td>0.35</td><td>Medium, mixed (50–300 KLOC)</td></tr>
-                    <tr><td><b>Embedded</b></td><td>3.6</td><td>1.20</td><td>2.5</td><td>0.32</td><td>Large, complex (&gt;300 KLOC)</td></tr>
-                </table>
-                <p><b>Example:</b> Organic project, 20 KLOC: \(E = 2.4 \times 20^{1.05} \approx 55.7\) PM, \(T_{dev} = 2.5 \times 55.7^{0.38} \approx 11.95\) months, \(SS = 55.7/11.95 \approx 5\) engineers.</p>
-            </div>
-
-            <div class="tip-card">
-                <h3>Key Takeaway for Unit 1</h3>
-                <p>Choose the process model based on project characteristics: use <b>Waterfall</b> for stable requirements, <b>Spiral</b> for high-risk projects, <b>Agile</b> for changing requirements, and <b>CBD</b> when reusable components are available.</p>
-            </div>
-
-            <h1 class="section-title" id="unit-2">Unit 2 — Requirement Analysis &amp; Specification</h1>
-
-            <div class="concept-card">
-                <h3>Requirements Engineering Process</h3>
-                <div class="diagram-card">
-<div class="mermaid">
-flowchart LR
-    E[Elicitation] --> A[Analysis]
-    A --> N[Negotiation]
-    N --> V[Validation]
-    V --> S[Specification]
-    S --> M[Management]
-    M -.->|Change| E
-</div>
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Elicitation Techniques</h3>
-                <ul>
-                    <li><b>Interviews</b> — Structured, open-ended, closed questions.</li>
-                    <li><b>Workshops / JAD</b> — Facilitated group sessions.</li>
-                    <li><b>Surveys / Questionnaires</b> — Broad stakeholder coverage.</li>
-                    <li><b>Observation (Ethnography)</b> — Watch real work practice.</li>
-                    <li><b>Prototyping</b> — Build a throwaway or evolutionary prototype.</li>
-                    <li><b>Brainstorming</b> — Free-form idea generation.</li>
-                    <li><b>Use-Case Driven</b> — Identify actors, scenarios, goals.</li>
-                </ul>
-            </div>
-
-            <div class="tip-card">
-                <h3>Elicitation Pitfalls</h3>
-                <p>Customers may not know what they want until they see it. Hidden requirements come from tacit knowledge. Always prototype and validate early. Watch for ambiguity, incompleteness, inconsistency, and wishful thinking in requirements.</p>
-            </div>
-
-            <div class="diagram-card">
-                <h3>SRS Document Structure (IEEE 830)</h3>
-<div class="mermaid">
-mindmap
-  root((SRS))
-    1 Introduction
-      Purpose Scope Glossary References
-    2 Overall Description
-      Product Perspective
-      Product Functions
-      Constraints Assumptions
-    3 Functional Requirements
-      Inputs Processing Logic
-      Error Handling
-    4 Non-Functional
-      Performance Security
-      Usability Reliability
-    5 Appendices
-</div>
-            </div>
-
-            <div class="concept-card">
-                <h3>Functional vs Non-Functional Requirements</h3>
-                <table border="1" style="border-collapse: collapse; width: 100%;">
-                    <tr style="background-color: #f3e8ff;"><th>Type</th><th>Description</th><th>Example</th></tr>
-                    <tr><td><b>Functional</b></td><td>What the system does (features, functions)</td><td>"User can reset password via email."</td></tr>
-                    <tr><td><b>Performance</b></td><td>Speed, throughput, capacity</td><td>"Page loads in under 2 seconds."</td></tr>
-                    <tr><td><b>Security</b></td><td>Authentication, authorisation</td><td>"Encrypt data at rest using AES-256."</td></tr>
-                    <tr><td><b>Usability</b></td><td>Ease of use, accessibility</td><td>"WCAG 2.1 AA compliant."</td></tr>
-                    <tr><td><b>Reliability</b></td><td>Uptime, fault tolerance</td><td>"99.95% availability."</td></tr>
-                    <tr><td><b>Maintainability</b></td><td>Ease of modification</td><td>"Code coverage ≥ 80%."</td></tr>
-                </table>
-            </div>
-
-            <div class="diagram-card">
-                <h3>Requirement Traceability Matrix</h3>
-<div class="mermaid">
-flowchart LR
-    SRC[Stakeholder Need] --> R[REQ-001]
-    R --> D[Design Class]
-    D --> C[Source Code]
-    C --> T[Test Cases]
-    T -.->|Backward trace| R
-    R -.->|Forward trace| T
-</div>
-                <p><b>Forward traceability</b> ensures every requirement is implemented and tested. <b>Backward traceability</b> ensures every artefact traces to a valid requirement — prevents gold-plating and scope creep.</p>
-            </div>
-
-            <h1 class="section-title" id="unit-3">Unit 3 — Software Design &amp; Testing</h1>
-
-            <div class="concept-card">
-                <h3>Software Design Concepts</h3>
-                <ul>
-                    <li><b>Abstraction:</b> Expose only essential features; hide complexity.</li>
-                    <li><b>Refinement:</b> Top-down decomposition of a problem into smaller, more manageable pieces.</li>
-                    <li><b>Modularity:</b> Decompose into cohesive, loosely-coupled modules.</li>
-                    <li><b>Software Architecture:</b> High-level organisation and component interaction.</li>
-                    <li><b>Control Hierarchy:</b> Calling structure of the modules.</li>
-                    <li><b>Structural Partitioning:</b> Horizontal (layers) and vertical (tasks) partitioning.</li>
-                    <li><b>Information Hiding:</b> Each module hides its implementation details behind an interface.</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>Software Testing Levels</h3>
-<div class="mermaid">
-flowchart BT
-    U[Unit Testing] --> I[Integration Testing]
-    I --> S[System Testing]
-    S --> A[Acceptance Testing]
-    A -.->|Feedback| U
-</div>
-                <p><b>Unit:</b> Individual functions/classes in isolation.<br/>
-                <b>Integration:</b> Interface correctness between combined modules.<br/>
-                <b>System:</b> Full system compliance with SRS on production-like environment.<br/>
-                <b>Acceptance:</b> User-driven alpha (in-house) and beta (customer-site) testing.</p>
-            </div>
-
-            <div class="code-card">
-                <h3>JUnit 5 Unit Test Example</h3>
-<pre><code class="language-java">import org.junit.jupiter.api.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-class CalculatorTest {
-
-    @Test
-    void testAddition() {
-        assertEquals(5, Calculator.add(2, 3));
-        assertEquals(-1, Calculator.add(-2, 1));
-    }
-
-    @Test
-    void testDivisionByZero() {
-        ArithmeticException ex = assertThrows(
-            ArithmeticException.class,
-            () -> Calculator.divide(10, 0)
-        );
-        assertEquals("/ by zero", ex.getMessage());
-    }
-
-    @Test
-    void testEdgeCases() {
-        assertEquals(0, Calculator.add(0, 0));
-        assertEquals(Integer.MAX_VALUE, Calculator.add(0, Integer.MAX_VALUE));
-    }
-}</code></pre>
-                <p>Good unit tests cover: <b>happy path</b>, <b>edge cases</b>, and <b>error paths</b>. Use parameterised tests for multiple inputs.</p>
-            </div>
-
-            <div class="concept-card">
-                <h3>Design Patterns (Gang of Four)</h3>
-                <table border="1" style="border-collapse: collapse; width: 100%;">
-                    <tr style="background-color: #f3e8ff;"><th>Category</th><th>Pattern</th><th>Intent</th></tr>
-                    <tr><td rowspan="5"><b>Creational</b></td><td>Singleton</td><td>One instance per JVM</td></tr>
-                    <tr><td>Factory</td><td>Create objects without specifying concrete classes</td></tr>
-                    <tr><td>Abstract Factory</td><td>Families of related objects</td></tr>
-                    <tr><td>Builder</td><td>Step-by-step complex object construction</td></tr>
-                    <tr><td>Prototype</td><td>Clone existing objects</td></tr>
-                    <tr><td rowspan="5"><b>Structural</b></td><td>Adapter</td><td>Convert interface to another</td></tr>
-                    <tr><td>Decorator</td><td>Add responsibilities dynamically</td></tr>
-                    <tr><td>Facade</td><td>Simplify a complex subsystem</td></tr>
-                    <tr><td>Composite</td><td>Tree structures uniformly</td></tr>
-                    <tr><td>Proxy</td><td>Control access to another object</td></tr>
-                    <tr><td rowspan="5"><b>Behavioural</b></td><td>Observer</td><td>Notify dependents of state changes</td></tr>
-                    <tr><td>Strategy</td><td>Interchangeable algorithms</td></tr>
-                    <tr><td>Command</td><td>Encapsulate request as object</td></tr>
-                    <tr><td>State</td><td>Object changes behaviour with state</td></tr>
-                    <tr><td>Iterator</td><td>Sequential access without exposing internals</td></tr>
-                </table>
-            </div>
-
-            <div class="code-card">
-                <h3>Observer Pattern in Java</h3>
-<pre><code class="language-java">import java.util.*;
-
-interface Observer {
-    void update(String message);
-}
-
-class Subject {
-    private final List&lt;Observer&gt; observers = new ArrayList&lt;&gt;();
-
-    void subscribe(Observer o) { observers.add(o); }
-    void unsubscribe(Observer o) { observers.remove(o); }
-
-    void notifyObservers(String msg) {
-        for (Observer o : observers) o.update(msg);
-    }
-}
-
-class EmailNotifier implements Observer {
-    private String email;
-    EmailNotifier(String email) { this.email = email; }
-    public void update(String msg) {
-        System.out.println("Email to " + email + ": " + msg);
-    }
-}
-
-class SMSNotifier implements Observer {
-    private String phone;
-    SMSNotifier(String phone) { this.phone = phone; }
-    public void update(String msg) {
-        System.out.println("SMS to " + phone + ": " + msg);
-    }
-}</code></pre>
-            </div>
-
-            <div class="concept-card">
-                <h3>Architectural Styles</h3>
-                <ul>
-                    <li><b>Layered (N-Tier):</b> Presentation → Business Logic → Data Access → Database.</li>
-                    <li><b>Client-Server:</b> Thin/fat clients communicate with a central server.</li>
-                    <li><b>Pipe-and-Filter:</b> Data flows through a chain of filters (compilers, Unix pipelines).</li>
-                    <li><b>Repository (Shared Data):</b> Central data store + independent agents (blackboard for AI).</li>
-                    <li><b>Event-Driven:</b> Components react to events posted on a bus (Kafka, RabbitMQ).</li>
-                    <li><b>Microservices:</b> Independently deployable services communicating via APIs; each owns its data store.</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>Microservices Architecture</h3>
-<div class="mermaid">
-flowchart LR
-    U[User/Client] --> G[API Gateway]
-    G --> A[Auth Service]
-    G --> O[Order Service]
-    G --> P[Payment Service]
-    G --> N[Notification Service]
-    A --> DB1[(Auth DB)]
-    O --> DB2[(Order DB)]
-    P --> DB3[(Payment DB)]
-</div>
-            </div>
-
-            <div class="concept-card">
-                <h3>User Interface Design Principles</h3>
-                <p><b>Shneiderman's Golden Rules:</b></p>
-                <ol>
-                    <li>Place the user in control (undo, shortcuts, flexible interaction).</li>
-                    <li>Reduce the user's memory load (recognise over recall).</li>
-                    <li>Make the interface consistent (uniform terminology, actions, layout).</li>
-                </ol>
-                <p><b>Nielsen's 10 Usability Heuristics:</b> Visibility, Real-world mapping, User control, Consistency, Error prevention, Recognition over recall, Flexibility, Minimalist design, Helpful error messages, Help system.</p>
-            </div>
-
-            <div class="tip-card">
-                <h3>UI Design Checklist</h3>
-                <p>Consistent navigation? Error messages helpful? Feedback on every action? Accessible (keyboard, screen reader)? Responsive across devices? Adequate contrast ratio? Labels descriptive? Login/signup clear? Search prominent? Loading states visible?</p>
-            </div>
-
-            <h1 class="section-title" id="unit-4">Unit 4 — Software Quality &amp; Maintenance</h1>
-
-            <div class="concept-card">
-                <h3>Software Quality Assurance (SQA)</h3>
-                <p>SQA is a <b>planned, systematic set of activities</b> ensuring that processes and products conform to standards and requirements. Activities: Audits, Formal Technical Reviews (FTRs), Testing, Configuration Audits, Process &amp; Product Quality Reviews.</p>
-            </div>
-
-            <div class="note-card">
-                <h3>Formal Technical Reviews (FTRs)</h3>
-                <ul>
-                    <li><b>Walkthroughs:</b> Author-led, open-ended, primarily to find defects and improve understanding.</li>
-                    <li><b>Inspections:</b> Formal process (7 steps), 5 roles: Moderator, Recorder, Reader, Author, Reviewer — most effective for defect removal.</li>
-                    <li><b>Code Reviews:</b> Peer-level review focusing on code quality, standards, efficiency.</li>
-                </ul>
-            </div>
-
-            <div class="concept-card">
-                <h3>Software Quality Concepts</h3>
-                <div class="summary-card">
-                    <p><b>McCall's Quality Model:</b></p>
-                    <p><b>Product Operation:</b> Correctness, Reliability, Efficiency, Integrity, Usability.</p>
-                    <p><b>Product Revision:</b> Maintainability, Flexibility, Testability.</p>
-                    <p><b>Product Transition:</b> Portability, Reusability, Interoperability.</p>
-                </div>
-            </div>
-
-            <div class="diagram-card">
-                <h3>SEI CMM — Five Maturity Levels</h3>
-<div class="mermaid">
-flowchart BT
-    L1[Level 1: Initial] --> L2
-    L2[Level 2: Repeatable<br/>Project tracking, SCM, SQA] --> L3
-    L3[Level 3: Defined<br/>Org-standardised processes] --> L4
-    L4[Level 4: Managed<br/>Quantitative controls] --> L5
-    L5[Level 5: Optimising<br/>Continuous improvement]
-</div>
-                <table border="1" style="border-collapse: collapse; width: 100%;">
-                    <tr style="background-color: #f3e8ff;"><th>Level</th><th>Focus</th><th>Key KPAs</th></tr>
-                    <tr><td>1 Initial</td><td>Ad-hoc, heroic effort</td><td>None</td></tr>
-                    <tr><td>2 Repeatable</td><td>Project-level discipline</td><td>PM, SCM, SQA, RM</td></tr>
-                    <tr><td>3 Defined</td><td>Organisation-wide standards</td><td>Org PM, Training, PEI</td></tr>
-                    <tr><td>4 Managed</td><td>Measurable quality</td><td>QPM, OPP</td></tr>
-                    <tr><td>5 Optimising</td><td>Continuous innovation</td><td>CAR, OPM</td></tr>
-                </table>
-            </div>
-
-            <div class="tip-card">
-                <h3>CMM vs CMMI Quick Comparison</h3>
-                <table border="1" style="border-collapse: collapse; width: 100%;">
-                    <tr style="background-color: #f3e8ff;"><th>Aspect</th><th>CMM</th><th>CMMI</th></tr>
-                    <tr><td>Scope</td><td>Software only</td><td>Software + Systems + Services</td></tr>
-                    <tr><td>Levels</td><td>5 maturity levels</td><td>5 maturity + 6 capability levels</td></tr>
-                    <tr><td>Status</td><td>Deprecated</td><td>Current (ISACA)</td></tr>
-                </table>
-            </div>
-
-            <div class="concept-card">
-                <h3>Software Configuration Management (SCM)</h3>
-                <p>SCM ensures the integrity of software artefacts throughout their lifecycle. Key activities:</p>
-                <ol>
-                    <li><b>Configuration Identification</b> — Name and catalogue CI.</li>
-                    <li><b>Version Control</b> — Branch, merge, tag.</li>
-                    <li><b>Baseline Management</b> — Formal freeze points.</li>
-                    <li><b>Change Control</b> — CCB approves modifications.</li>
-                    <li><b>Configuration Audit</b> — Verify conformance.</li>
-                    <li><b>Release Management</b> — Package, distribute.</li>
-                </ol>
-            </div>
-
-            <div class="concept-card">
-                <h3>Software Reliability</h3>
-                <p>Reliability is the probability of failure-free operation for a specified time.</p>
-                <div class="formula-card">
-                    <p>\[ MTBF = MTTF + MTTR \]</p>
-                    <p>\[ \text{Availability} = \frac{MTTF}{MTBF} \]</p>
-                    <p>\[ \text{Failure Rate} \lambda = \frac{1}{MTTF} \]</p>
-                    <p>\[ R(t) = e^{-\lambda t} \]</p>
-                </div>
-            </div>
-
-            <div class="note-card">
-                <h3>Software Maintenance</h3>
-                <ul>
-                    <li><b>Corrective:</b> Fix bugs.</li>
-                    <li><b>Adaptive:</b> Adapt to new environment.</li>
-                    <li><b>Perfective:</b> New features, performance improvements.</li>
-                    <li><b>Preventive:</b> Refactor to prevent future degradation.</li>
-                </ul>
-            </div>
-
-            <div class="diagram-card">
-                <h3>Software Re-engineering Process</h3>
-<div class="mermaid">
-flowchart LR
-    LEG[Legacy System] --> INV[Inventory Analysis]
-    INV --> DRS[Document Restructuring]
-    DRS --> RE[Reverse Engineering]
-    RE --> CR[Code Restructuring]
-    CR --> DR[Data Restructuring]
-    DR --> FE[Forward Engineering]
-    FE --> MOD[Modern System]
-</div>
-            </div>
-
-            <div class="concept-card">
-                <h3>ISO 9000 &amp; SEI CMM</h3>
-                <p><b>ISO 9000</b> is an international quality-management standard. ISO 9001:2015 focuses on process approach, risk-based thinking, Plan-Do-Check-Act (PDCA) cycle.</p>
-                <p><b>SEI CMM</b> is a maturity framework specifically for software. Organisations are assessed against Key Process Areas (KPAs) and receive a maturity level from 1 to 5.</p>
-            </div>
-
-            <h1 class="section-title" id="formulas">Formula Sheet</h1>
-
-            <div class="formula-card">
-                <h3>COCOMO — Basic</h3>
-                <p>\[ E = a \times (KLOC)^b \qquad T_{dev} = c \times E^d \qquad SS = \frac{E}{T_{dev}} \]</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>COCOMO-II Maintenance</h3>
-                <p>\[ AT = \frac{\text{Added} + \text{Modified}}{\text{Original Size}} \]</p>
-                <p>\[ AD = AT \times AAF \qquad E_{maintenance} = 2.4 \times (AD)^{1.05} \]</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>Software Reliability</h3>
-                <p>\[ MTBF = MTTF + MTTR \]</p>
-                <p>\[ \text{Availability} = \frac{MTTF}{MTBF} \]</p>
-                <p>\[ \lambda = \frac{1}{MTTF} \qquad R(t) = e^{-\lambda t} \]</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>Function Points</h3>
-                <p>\[ UFP = \sum (Count_i \times Weight_i) \]</p>
-                <p>\[ VAF = 0.65 + (0.01 \times \Sigma F_i) \]</p>
-                <p>\[ FP = UFP \times VAF \]</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>Cyclomatic Complexity</h3>
-                <p>\[ CC = E - N + 2P \]</p>
-                <p>E = edges, N = nodes, P = connected components. This equals the number of linearly-independent paths, giving the minimum test cases needed for path coverage.</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>Halstead Complexity Measures</h3>
-                <p>\[ N = \eta_1 + \eta_2 \qquad n = n_1 + n_2 \]</p>
-                <p>\[ V = N \times \log_2 n \qquad D = \frac{n_1}{2} \times \frac{n_2}{n_1} \]</p>
-                <p>\[ E = V \times D \qquad T = \frac{E}{S} \]</p>
-            </div>
-
-            <div class="formula-card">
-                <h3>Earned Value Management (EVM)</h3>
-                <p>\[ PV = \text{Planned Value (BCWS)} \]</p>
-                <p>\[ EV = \text{Earned Value (BCWP)} \]</p>
-                <p>\[ AC = \text{Actual Cost (ACWP)} \]</p>
-                <p>\[ SV = EV - PV \qquad CV = EV - AC \]</p>
-                <p>\[ SPI = \frac{EV}{PV} \qquad CPI = \frac{EV}{AC} \]</p>
-                <p>\[ EAC = \frac{BAC}{CPI} \qquad ETC = EAC - AC \]</p>
-            </div>
-
-            <h1 class="section-title" id="key-terms">Key Terms — Quick Reference</h1>
-
-            <div class="summary-card">
-                <table border="1" style="border-collapse: collapse; width: 100%;">
-                    <tr style="background-color: #f3e8ff;"><th>Term</th><th>Definition</th></tr>
-                    <tr><td><b>Agile</b></td><td>Iterative approach emphasising collaboration and flexibility.</td></tr>
-                    <tr><td><b>COCOMO</b></td><td>Algorithmic cost estimation model (Boehm).</td></tr>
-                    <tr><td><b>DDD</b></td><td>Domain-Driven Design — aligns software with domain model.</td></tr>
-                    <tr><td><b>DFD</b></td><td>Data Flow Diagram — data movement through a system.</td></tr>
-                    <tr><td><b>ERD</b></td><td>Entity-Relationship Diagram — data model.</td></tr>
-                    <tr><td><b>FTR</b></td><td>Formal Technical Review — peer defect detection.</td></tr>
-                    <tr><td><b>FP</b></td><td>Function Point — size metric independent of language.</td></tr>
-                    <tr><td><b>ISO 9000</b></td><td>Quality management standards family.</td></tr>
-                    <tr><td><b>KPA</b></td><td>Key Process Area — CMM process focus area.</td></tr>
-                    <tr><td><b>KLOC</b></td><td>Thousand Lines of Code — traditional size metric.</td></tr>
-                    <tr><td><b>RUP</b></td><td>Rational Unified Process — iterative framework.</td></tr>
-                    <tr><td><b>SRS</b></td><td>Software Requirements Specification document.</td></tr>
-                    <tr><td><b>RTM</b></td><td>Requirements Traceability Matrix.</td></tr>
-                    <tr><td><b>SCM</b></td><td>Software Configuration Management.</td></tr>
-                    <tr><td><b>SQA</b></td><td>Software Quality Assurance.</td></tr>
-                    <tr><td><b>SEI CMM</b></td><td>5-level process maturity framework.</td></tr>
-                    <tr><td><b>Use Case</b></td><td>Description of a functional interaction between actor and system.</td></tr>
-                    <tr><td><b>UML</b></td><td>Unified Modelling Language.</td></tr>
-                    <tr><td><b>WBS</b></td><td>Work Breakdown Structure.</td></tr>
-                    <tr><td><b>XP</b></td><td>Extreme Programming — Agile practice (pair programming, TDD).</td></tr>
-                </table>
-            </div>
-
-            <div class="summary-card" style="margin-top: 2rem;">
-                <h3>Quick Exam Recap</h3>
-                <p><b>Unit 1:</b> Process models, Agile/Scrum, COCOMO, Project Management.<br/>
-                <b>Unit 2:</b> Requirements engineering, SRS, FURPS+, RTM, elicitation.<br/>
-                <b>Unit 3:</b> Design concepts, patterns, architectural styles, testing levels, BVA, Equivalence.<br/>
-                <b>Unit 4:</b> SQA, SCM, ISO 9000, SEI CMM, maintenance types, re-engineering.</p>
-            </div>
-
-        </main>
+    <div class="subject-card">
+      <h2>Software Engineering</h2>
+      <p>Master the principles, processes, and practices of software engineering — SDLC models, requirements, design, testing, maintenance, and project management. This guide covers all 5 units with exam-focused questions and answers.</p>
     </div>
+
+    <!-- ==================== UNIT 1 ==================== -->
+    <div class="unit-section" id="unit-1">
+      <div class="unit-header">
+        <div class="unit-number">1</div>
+        <div class="unit-header-text">
+          <h3>Introduction to SE</h3>
+          <p>What is software, software crisis, myths, CMMI levels</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>What is Software?</h4>
+          <p><strong>Software</strong> is a collection of programs, documentation, and data that perform specific tasks on computer systems. It is a logical system element rather than a physical one — it is intangible and not constrained by physical laws.</p>
+          <p>Software consists of:</p>
+          <ul>
+            <li><strong>Programs</strong> — instructions that perform tasks when executed.</li>
+            <li><strong>Documentation</strong> — manuals, design specs, user guides.</li>
+            <li><strong>Data</strong> — structured information used by programs.</li>
+          </ul>
+          <p>Software does not wear out but it does deteriorate due to changes in environment, bugs discovered over time, and performance degradation.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Crisis</h4>
+          <p>The <strong>software crisis</strong> refers to the difficulties encountered in developing large, complex software systems within schedule and budget. It emerged in the late 1960s when the cost of software exceeded hardware costs and projects routinely failed.</p>
+          <p>Symptoms of the software crisis:</p>
+          <ul>
+            <li>Projects running over budget and behind schedule.</li>
+            <li>Software is inefficient, unreliable, and hard to maintain.</li>
+            <li>Requirements are not clearly defined or keep changing.</li>
+            <li>Code quality is poor with many defects.</li>
+            <li>Difficulty in measuring progress and productivity.</li>
+          </ul>
+          <p>The response was the emergence of <strong>software engineering</strong> as a discipline applying systematic, disciplined approaches to software development.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Engineering Definition</h4>
+          <p>According to IEEE: <strong>"Software engineering is the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software; that is, the application of engineering to software."</strong></p>
+          <p>Software engineering combines principles from computer science, engineering, project management, and quality assurance to build reliable, efficient software on time and within budget.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Generic vs Custom Software</h4>
+          <p><strong>Generic (off-the-shelf) software:</strong> Developed for the mass market. Examples: MS Word, Photoshop, Android. Lower cost per unit, but may not perfectly fit any one user's needs.</p>
+          <p><strong>Custom (bespoke) software:</strong> Developed for a specific customer to meet exact requirements. Higher cost, perfect fit, but limited market. Examples: banking systems, airline reservation.</p>
+          <p>Generic products have predictable, stable requirements; bespoke products have unique, evolving requirements.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Characteristics</h4>
+          <ul>
+            <li><strong>Intangible</strong> — cannot be physically touched or seen.</li>
+            <li><strong>Not constrained by physical laws</strong> — unlike hardware, doesn't wear out.</li>
+            <li><strong>Custom-built</strong> — each project is different from the previous.</li>
+            <li><strong>Complex</strong> — large systems have many interacting components.</li>
+            <li><strong>Flexible</strong> — easy to change, but changes can introduce new bugs.</li>
+            <li><strong>No manufacturing step</strong> — only development, then replication at near-zero cost.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Myths</h4>
+          <p>Myths are false beliefs held by managers and practitioners that lead to poor practices.</p>
+          <ul>
+            <li><strong>Management myths:</strong> "We already have a book of standards — that should be enough." "If we're behind, add more programmers." "If we outsource, we can relax."</li>
+            <li><strong>Customer myths:</strong> "A general statement of requirements is enough." "Software is flexible, so changes can be done easily anytime."</li>
+            <li><strong>Practitioner myths:</strong> "Once we write the program and it works, our job is done." "Until the program runs, there is no way to assess quality." "The only deliverable for a successful project is a working program."</li>
+          </ul>
+          <p>These myths lead to broken schedules, poor quality, and unsatisfied customers.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Process Framework</h4>
+          <p>A <strong>process framework</strong> provides structure for software development. Five activities form the core:</p>
+          <ul>
+            <li><strong>Communication</strong> — collaborate with stakeholders to understand requirements.</li>
+            <li><strong>Planning</strong> — define work schedule, resources, and tasks.</li>
+            <li><strong>Modeling</strong> — create models to better understand requirements and design.</li>
+            <li><strong>Construction</strong> — code generation and testing.</li>
+            <li><strong>Deployment</strong> — deliver software to the customer for evaluation.</li>
+          </ul>
+          <p>Umbrella activities (applied throughout): project tracking, risk management, quality assurance, configuration management, technical reviews.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>CMMI (Capability Maturity Model Integration)</h4>
+          <p>CMMI is a process improvement framework developed by SEI (Software Engineering Institute). It assesses the maturity of an organization's software processes in five levels:</p>
+          <table>
+            <tr><th>Level</th><th>Name</th><th>Description</th></tr>
+            <tr><td>1 — Initial</td><td>Ad hoc, chaotic</td><td>Success depends on individual effort</td></tr>
+            <tr><td>2 — Repeatable</td><td>Basic project management</td><td>Track cost, schedule, and functionality</td></tr>
+            <tr><td>3 — Defined</td><td>Process is documented and standardized</td><td>Proactive process management</td></tr>
+            <tr><td>4 — Managed</td><td>Quantitative process control</td><td>Measured and controlled using data</td></tr>
+            <tr><td>5 — Optimizing</td><td>Continuous improvement</td><td>Focus on incremental improvements using feedback</td></tr>
+          </table>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> CMMI is a maturity model — moving from Level 1 to Level 5 represents growing process discipline. Each level builds on the previous one; you cannot skip levels. Higher levels improve predictability, productivity, and quality.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For the 15-mark question on SE definition, always cover: definition (IEEE), characteristics (intangible, complex, flexible, custom-built), myths (at least one from each category), why SE is needed, and CMMI levels in a table.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is software engineering?</div>
+          <div class="q-answer">Software engineering is the disciplined application of engineering principles to the design, development, testing, and maintenance of software. As per IEEE, it is a systematic, disciplined, and quantifiable approach to software development, operation, and maintenance.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is software crisis?</div>
+          <div class="q-answer">The software crisis refers to the set of problems encountered in developing large-scale software — projects running over budget, behind schedule, with poor quality and unmet requirements. It led to the formal establishment of software engineering as a discipline.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain software myths.</div>
+          <div class="q-answer">
+            <p>Software myths are false beliefs that lead to poor practices in software development:</p>
+            <p><strong>Management myths:</strong> (1) Standards and procedures are enough on their own. (2) Adding more programmers to a late project delays it further (Brooks's Law). (3) Outsourcing eliminates management problems.</p>
+            <p><strong>Customer myths:</strong> (1) A general statement of requirements is enough. (2) Software is flexible, so changes can be made anytime — but late changes are expensive.</p>
+            <p><strong>Practitioner myths:</strong> (1) Once the program works, the job is done — ignoring documentation and maintenance. (2) Quality is only assessed after running. (3) The only deliverable is working code.</p>
+            <p>These myths cause schedule slippage, low quality, and customer dissatisfaction.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is CMMI? Explain its levels.</div>
+          <div class="q-answer">
+            <p><strong>CMMI (Capability Maturity Model Integration)</strong> is a process improvement framework developed by the SEI. It helps organizations improve software maturity through five levels:</p>
+            <p><strong>Level 1 — Initial:</strong> Process is unpredictable, chaotic. Success depends on individual competence.</p>
+            <p><strong>Level 2 — Repeatable:</strong> Basic project management is in place. Track cost, schedule, and functionality. Past successes can be repeated.</p>
+            <p><strong>Level 3 — Defined:</strong> Process is well-characterized, documented, and standardized across the organization. Proactive management.</p>
+            <p><strong>Level 4 — Managed:</strong> Process is measured and controlled using quantitative data. Statistical and predictable performance.</p>
+            <p><strong>Level 5 — Optimizing:</strong> Focus on continuous process improvement using feedback from earlier levels.</p>
+            <p>Each level is a foundation for the next; skipping is not allowed.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Define software engineering. Discuss software characteristics, myths, and the need for software engineering. Also explain CMMI levels.</div>
+          <div class="q-answer">
+            <p><strong>Definition:</strong> Per IEEE, software engineering is the application of a systematic, disciplined, quantifiable approach to the development, operation, and maintenance of software.</p>
+            <p><strong>Software Characteristics:</strong></p>
+            <ul>
+              <li><strong>Intangible</strong> — cannot be physically touched.</li>
+              <li><strong>Not constrained by physical laws</strong> — does not wear out like hardware.</li>
+              <li><strong>Custom-built</strong> — each project is unique; no two are exactly the same.</li>
+              <li><strong>Complex</strong> — large systems have many interacting components.</li>
+              <li><strong>Flexible</strong> — easy to modify, but changes can introduce defects.</li>
+              <li><strong>No manufacturing</strong> — once developed, copies are made cheaply.</li>
+            </ul>
+            <p><strong>Software Myths:</strong></p>
+            <ul>
+              <li><strong>Management myths:</strong> Standards alone suffice; adding programmers speeds up late projects (Brooks's Law).</li>
+              <li><strong>Customer myths:</strong> General requirements are enough; software is flexible so changes are easy.</li>
+              <li><strong>Practitioner myths:</strong> Job ends when program runs; quality assessment waits until execution.</li>
+            </ul>
+            <p><strong>Need for SE:</strong> Without disciplined engineering, software projects fail — exceed budget, miss deadlines, contain defects, and don't meet customer needs. SE brings predictability, quality, and maintainability.</p>
+            <p><strong>CMMI Levels:</strong></p>
+            <table>
+              <tr><th>Level</th><th>Name</th><th>Key Feature</th></tr>
+              <tr><td>1</td><td>Initial</td><td>Ad hoc, chaotic</td></tr>
+              <tr><td>2</td><td>Repeatable</td><td>Basic project tracking</td></tr>
+              <tr><td>3</td><td>Defined</td><td>Standardized process</td></tr>
+              <tr><td>4</td><td>Managed</td><td>Quantitative control</td></tr>
+              <tr><td>5</td><td>Optimizing</td><td>Continuous improvement</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Define software engineering. Explain any five characteristics of software.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> What is CMMI? Explain its five maturity levels with neat diagram.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Differentiate between generic and custom software. Why did the software crisis emerge?
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 2 ==================== -->
+    <div class="unit-section" id="unit-2">
+      <div class="unit-header">
+        <div class="unit-number">2</div>
+        <div class="unit-header-text">
+          <h3>SDLC Models</h3>
+          <p>Waterfall, Spiral, V-Model, Incremental, RAD, Agile methodologies</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>What is SDLC?</h4>
+          <p><strong>SDLC (Software Development Life Cycle)</strong> is a framework that defines the process of building software from initial planning through deployment and maintenance. It provides a structured approach consisting of phases like requirement analysis, design, coding, testing, deployment, and maintenance.</p>
+          <p>An <strong>SDLC model</strong> is a representation of the process — choosing the right model depends on project requirements, complexity, team size, and customer involvement.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Waterfall Model</h4>
+          <p>The <strong>Waterfall model</strong> is a linear, sequential approach where each phase must be completed before the next begins. Phases: Requirements → Design → Implementation → Verification → Maintenance.</p>
+          <p><strong>Advantages:</strong> Simple, easy to manage; works well for small projects with clear requirements; documentation at each stage.</p>
+          <p><strong>Disadvantages:</strong> No working software until late in the cycle; difficult to accommodate changes; high risk and uncertainty.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Iterative Model</h4>
+          <p>The <strong>Iterative model</strong> starts with a small subset of requirements, builds an initial version, and progressively enhances it through repeated cycles. Each iteration produces a working version with added features.</p>
+          <p><strong>Advantages:</strong> Early working version; easier to handle risks; customer feedback after each iteration.</p>
+          <p><strong>Disadvantages:</strong> Requires more resources; iterative design may lead to architectural rework.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Spiral Model</h4>
+          <p>The <strong>Spiral model</strong> combines iterative development with risk analysis. Each cycle has four phases: Planning → Risk Analysis → Engineering → Evaluation. Each loop produces a more refined version.</p>
+          <p><strong>Advantages:</strong> Strong risk management; suitable for large, complex projects; accommodates changes.</p>
+          <p><strong>Disadvantages:</strong> Expensive; needs expertise in risk analysis; may not suit small projects.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>V-Model</h4>
+          <p>The <strong>V-Model</strong> (Verification and Validation Model) is an extension of the waterfall where each development phase has a corresponding testing phase. The shape forms a V — verification on the left going down, validation on the right going up.</p>
+          <p><strong>Advantages:</strong> Emphasizes testing; defects found early; works well for safety-critical systems.</p>
+          <p><strong>Disadvantages:</strong> Rigid and expensive; not suitable for changing requirements.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Incremental Model</h4>
+          <p>The <strong>Incremental model</strong> delivers the system in increments (chunks). Each increment adds new functionality to the existing core. The first increment is the basic version with limited features, and subsequent increments add features.</p>
+          <p><strong>Advantages:</strong> Early delivery of partial functionality; easier to test and debug; customer feedback after each increment.</p>
+          <p><strong>Disadvantages:</strong> Requires good upfront planning; total cost may exceed single delivery.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>RAD (Rapid Application Development)</h4>
+          <p><strong>RAD</strong> is an incremental model with very short development cycles (typically 60–90 days). It emphasizes component-based construction and reuse. It uses prototyping, workshops, and user involvement heavily.</p>
+          <p><strong>Advantages:</strong> Fast delivery; high user involvement; reduced risk through feedback.</p>
+          <p><strong>Disadvantages:</strong> Requires highly skilled teams; not suitable for large, complex projects.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Agile Methodology</h4>
+          <p><strong>Agile</strong> is an iterative approach focused on collaboration, customer feedback, and rapid delivery. It breaks work into small increments (sprints) with minimal planning. The Agile Manifesto values: individuals over processes, working software over docs, customer collaboration over contracts, responding to change over following a plan.</p>
+          <p>Popular Agile frameworks:</p>
+          <ul>
+            <li><strong>Scrum:</strong> Uses sprints (2–4 weeks), daily stand-ups, product backlog, and roles like Scrum Master and Product Owner.</li>
+            <li><strong>Extreme Programming (XP):</strong> Emphasizes engineering excellence — pair programming, TDD, continuous integration, frequent releases.</li>
+          </ul>
+          <p><strong>Advantages:</strong> Adaptive to change; early delivery; high customer satisfaction.</p>
+          <p><strong>Disadvantages:</strong> Requires experienced team; less predictable scope; can lack documentation.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Prototyping Model</h4>
+          <p>The <strong>Prototyping model</strong> builds a working prototype (mock-up) of the system, lets the user evaluate it, and then refines it based on feedback until an acceptable version is built. Useful when requirements are unclear.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>When to Use Which Model</h4>
+          <table>
+            <tr><th>Model</th><th>Best Suited For</th></tr>
+            <tr><td>Waterfall</td><td>Small, well-understood projects</td></tr>
+            <tr><td>Incremental</td><td>Projects with clear initial requirements</td></tr>
+            <tr><td>Spiral</td><td>Large, complex, high-risk projects</td></tr>
+            <tr><td>V-Model</td><td>Safety-critical, regulated systems</td></tr>
+            <tr><td>RAD</td><td>Time-constrained, component-based projects</td></tr>
+            <tr><td>Agile</td><td>Dynamic requirements, customer-driven projects</td></tr>
+            <tr><td>Prototyping</td><td>Unclear or evolving requirements</td></tr>
+          </table>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> All SDLC models balance scope, time, cost, and quality. Choose based on requirements clarity, project size, customer involvement, and risk. Modern projects often combine models (e.g., agile with sprint-based delivery).
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For SDLC comparison questions, create a comparison table covering phases, when to use, advantages, and disadvantages. Memorize the diagrams: waterfall (cascade), spiral (concentric circles with quadrants), V-model (V shape).
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is SDLC?</div>
+          <div class="q-answer">SDLC (Software Development Life Cycle) is a structured framework that defines the phases involved in developing software — from initial planning and requirements gathering through design, coding, testing, deployment, and maintenance.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Name SDLC models.</div>
+          <div class="q-answer">Common SDLC models include: Waterfall, Iterative, Spiral, V-Model, Incremental, RAD (Rapid Application Development), Agile (Scrum, XP), and Prototyping.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Compare Waterfall and Spiral model.</div>
+          <div class="q-answer">
+            <table>
+              <tr><th>Aspect</th><th>Waterfall</th><th>Spiral</th></tr>
+              <tr><td>Approach</td><td>Linear, sequential</td><td>Iterative with risk analysis</td></tr>
+              <tr><td>Phases</td><td>Fixed phases in order</td><td>Repeated cycles, each with 4 phases</td></tr>
+              <tr><td>Risk handling</td><td>No explicit risk phase</td><td>Risk analysis is core focus</td></tr>
+              <tr><td>Customer feedback</td><td>Late, after completion</td><td>Early and continuous</td></tr>
+              <tr><td>Change handling</td><td>Difficult</td><td>Accommodates changes easily</td></tr>
+              <tr><td>Best for</td><td>Small, clear projects</td><td>Large, complex, risky projects</td></tr>
+              <tr><td>Cost</td><td>Lower upfront</td><td>Higher due to repeated cycles</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain Agile methodology.</div>
+          <div class="q-answer">
+            <p><strong>Agile</strong> is an iterative, incremental software development methodology based on the Agile Manifesto (2001). It values:</p>
+            <ul>
+              <li>Individuals and interactions over processes and tools.</li>
+              <li>Working software over comprehensive documentation.</li>
+              <li>Customer collaboration over contract negotiation.</li>
+              <li>Responding to change over following a plan.</li>
+            </ul>
+            <p><strong>Scrum Framework:</strong> Work is divided into sprints (2–4 weeks). Key roles: Product Owner (prioritizes backlog), Scrum Master (facilitator), Development Team. Ceremonies: sprint planning, daily stand-up, sprint review, retrospective.</p>
+            <p><strong>Extreme Programming (XP):</strong> Pair programming, test-driven development (TDD), continuous integration, refactoring, frequent small releases.</p>
+            <p><strong>Benefits:</strong> Faster ROI, adaptability, higher customer satisfaction, reduced risk. <strong>Drawbacks:</strong> Needs experienced team; scope creep risk; less documentation.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain different SDLC models in detail. Compare Waterfall, Spiral, and Agile models with their advantages and disadvantages.</div>
+          <div class="q-answer">
+            <p><strong>1. Waterfall Model:</strong> Linear and sequential — Requirements → Design → Implementation → Testing → Maintenance. Each phase must complete before the next. Simple but inflexible; suited for small, well-defined projects.</p>
+            <p><strong>2. Incremental Model:</strong> System is delivered in increments — each adds new functionality to the core. Early partial delivery with feedback.</p>
+            <p><strong>3. Spiral Model:</strong> Combines iterative development with risk analysis. Four phases per cycle: Planning, Risk Analysis, Engineering, Evaluation. Strong risk handling; expensive for small projects.</p>
+            <p><strong>4. V-Model:</strong> Extension of waterfall where each development phase has a corresponding testing phase. Excellent for safety-critical systems.</p>
+            <p><strong>5. RAD:</strong> Short development cycles (60–90 days) using prototypes. Heavy user involvement.</p>
+            <p><strong>6. Agile:</strong> Iterative with short cycles, customer collaboration, adaptive to change. Frameworks: Scrum, XP.</p>
+            <p><strong>Comparison:</strong></p>
+            <table>
+              <tr><th>Aspect</th><th>Waterfall</th><th>Spiral</th><th>Agile</th></tr>
+              <tr><td>Structure</td><td>Linear</td><td>Cyclical</td><td>Iterative sprints</td></tr>
+              <tr><td>Risk handling</td><td>None</td><td>Central focus</td><td>Adaptive</td></tr>
+              <tr><td>Customer involvement</td><td>Initial + end</td><td>Each cycle</td><td>Continuous</td></tr>
+              <tr><td>Documentation</td><td>Extensive</td><td>Moderate</td><td>Minimal</td></tr>
+              <tr><td>Change handling</td><td>Rigid</td><td>Moderate</td><td>Highly flexible</td></tr>
+              <tr><td>Best for</td><td>Small clear projects</td><td>Complex, risky projects</td><td>Dynamic, evolving projects</td></tr>
+              <tr><td>Delivery</td><td>At end</td><td>Each cycle</td><td>Each sprint</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Explain the Waterfall model with its phases. State any two advantages and disadvantages.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Compare Spiral and Agile models with suitable diagrams.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> What is the Agile Manifesto? Explain the Scrum framework in detail.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 3 ==================== -->
+    <div class="unit-section" id="unit-3">
+      <div class="unit-header">
+        <div class="unit-number">3</div>
+        <div class="unit-header-text">
+          <h3>Requirements & Design</h3>
+          <p>Requirement engineering, SRS, coupling, cohesion, UML diagrams</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Requirement Engineering Process</h4>
+          <p><strong>Requirement Engineering (RE)</strong> is the systematic process of developing requirements through four sub-activities:</p>
+          <ul>
+            <li><strong>Elicitation (Inception):</strong> Discover requirements from stakeholders, identify risks, and define scope. Techniques: interviews, questionnaires, observation, workshops.</li>
+            <li><strong>Analysis (Negotiation):</strong> Refine and prioritize requirements, resolve conflicts between stakeholders, and determine feasibility.</li>
+            <li><strong>Specification:</strong> Document requirements formally in an SRS (Software Requirements Specification) document.</li>
+            <li><strong>Validation:</strong> Review, inspect, and validate that requirements correctly represent the system and are testable.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Functional vs Non-Functional Requirements</h4>
+          <p><strong>Functional requirements</strong> describe what the system does — features, functions, and behavior. Example: "The system shall allow users to reset their password."</p>
+          <p><strong>Non-functional requirements</strong> describe how the system performs — quality attributes like:</p>
+          <ul>
+            <li><strong>Performance</strong> — response time, throughput.</li>
+            <li><strong>Reliability</strong> — uptime, fault tolerance.</li>
+            <li><strong>Usability</strong> — ease of learning, user-friendliness.</li>
+            <li><strong>Security</strong> — authentication, authorization.</li>
+            <li><strong>Maintainability</strong> — ease of modification.</li>
+            <li><strong>Portability</strong> — ability to run on different platforms.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>SRS Document Characteristics</h4>
+          <p><strong>SRS (Software Requirements Specification)</strong> is a complete document describing the intended behavior and constraints of the system.</p>
+          <p>Characteristics of a good SRS (per IEEE standard 830):</p>
+          <ul>
+            <li><strong>Correct</strong> — accurately reflects requirements.</li>
+            <li><strong>Unambiguous</strong> — only one interpretation possible.</li>
+            <li><strong>Complete</strong> — covers all significant requirements.</li>
+            <li><strong>Consistent</strong> — no conflicting requirements.</li>
+            <li><strong>Ranked for importance and stability</strong> — priorities clearly identified.</li>
+            <li><strong>Verifiable</strong> — testable and demonstrable.</li>
+            <li><strong>Modifiable</strong> — easy to change without losing consistency.</li>
+            <li><strong>Traceable</strong> — origin and evolution trackable.</li>
+          </ul>
+          <p><strong>SRS Components (per IEEE 830):</strong> Introduction, Overall Description, Specific Requirements, Appendices.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Design Concepts</h4>
+          <p><strong>Modularity</strong> — dividing the software into smaller, manageable modules. Each module performs a specific function. Benefits: easier maintenance, testing, debugging, and parallel development.</p>
+          <p><strong>Coupling</strong> — degree of interdependence between modules. <strong>Goal: LOW coupling.</strong> Types (from worst to best): content, common, control, stamp, data, message coupling.</p>
+          <p><strong>Cohesion</strong> — degree to which elements within a module belong together. <strong>Goal: HIGH cohesion.</strong> Types (from worst to best): coincidental, logical, temporal, procedural, communicational, sequential, functional.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Architectural Design</h4>
+          <p><strong>Software architecture</strong> is the high-level structure of the software system — how components are organized and interact. Architectural styles include:</p>
+          <ul>
+            <li><strong>Layered (n-tier):</strong> Presentation → Business Logic → Data Layer.</li>
+            <li><strong>Client-Server:</strong> Clients request services from a central server.</li>
+            <li><strong>Microservices:</strong> Small, independent services communicating via APIs.</li>
+            <li><strong>Pipe-and-Filter:</strong> Data flows through a series of transformations.</li>
+            <li><strong>MVC (Model-View-Controller):</strong> Separates data, UI, and control logic.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Function-Oriented vs Object-Oriented Design</h4>
+          <p><strong>Function-Oriented Design (FOD):</strong> Decomposes the system into a hierarchy of functions. Uses DFDs (Data Flow Diagrams). Top-down approach. Examples: structured design, Jackson Structured Programming.</p>
+          <p><strong>Object-Oriented Design (OOD):</strong> Decomposes the system into objects that combine data and behavior. Uses UML diagrams. Bottom-up approach. Examples: Booch, Rumbaugh, Jacobson methods.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>UML Diagrams</h4>
+          <p><strong>UML (Unified Modeling Language)</strong> is a standard visual language for specifying, visualizing, constructing, and documenting software systems.</p>
+          <p><strong>Common UML Diagrams:</strong></p>
+          <ul>
+            <li><strong>Use Case Diagram:</strong> Shows actors and their interactions with the system. Captures functional requirements.</li>
+            <li><strong>Class Diagram:</strong> Shows classes, attributes, methods, and relationships (association, inheritance, aggregation).</li>
+            <li><strong>Sequence Diagram:</strong> Shows object interactions in time order — emphasizes message passing.</li>
+            <li><strong>Activity Diagram:</strong> Shows workflows and business processes — like flowcharts with parallel support.</li>
+            <li><strong>State Chart Diagram:</strong> Shows states and transitions of an object during its lifecycle.</li>
+            <li><strong>Component Diagram:</strong> Shows software components and their dependencies.</li>
+            <li><strong>Deployment Diagram:</strong> Shows physical architecture — hardware nodes and software deployment.</li>
+          </ul>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> A well-designed system has <strong>high cohesion</strong> (elements within a module work together) and <strong>low coupling</strong> (modules are independent). This makes the system easier to maintain, test, and reuse.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For UML questions, practice drawing neat diagrams with proper notation — stick figures for actors, rectangles for use cases, classes with three compartments, arrows for messages in sequence diagrams.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is SRS?</div>
+          <div class="q-answer">SRS (Software Requirements Specification) is a formal document that describes the complete behavior and constraints of the system to be developed. It serves as the contract between the customer and the developer and forms the basis for design and testing.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is cohesion?</div>
+          <div class="q-answer">Cohesion is a measure of how strongly the elements (functions, data) within a single module belong together. High cohesion means the module focuses on a single well-defined task. It is one of the key design quality attributes — we always aim for HIGH cohesion.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain coupling and cohesion.</div>
+          <div class="q-answer">
+            <p><strong>Coupling</strong> measures the degree of interdependence between modules. Lower coupling is better.</p>
+            <ul>
+              <li><strong>Data coupling (best):</strong> Modules share only data via parameters.</li>
+              <li><strong>Stamp coupling:</strong> Modules share a data structure but use only part of it.</li>
+              <li><strong>Control coupling:</strong> One module controls the logic of another by passing control information.</li>
+              <li><strong>Content coupling (worst):</strong> One module directly references another's internal code.</li>
+            </ul>
+            <p><strong>Cohesion</strong> measures how strongly elements within a module belong together. Higher cohesion is better.</p>
+            <ul>
+              <li><strong>Functional (best):</strong> All elements contribute to a single well-defined function.</li>
+              <li><strong>Sequential:</strong> Output of one element is input of the next.</li>
+              <li><strong>Communicational:</strong> Elements operate on the same data.</li>
+              <li><strong>Coincidental (worst):</strong> Elements are grouped arbitrarily with no meaningful relationship.</li>
+            </ul>
+            <p>Best design: <strong>low coupling + high cohesion</strong>.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What are UML diagrams? List types.</div>
+          <div class="q-answer">
+            <p><strong>UML (Unified Modeling Language)</strong> is a standardized visual language used to model software systems. It provides a set of diagrams for different views of a system.</p>
+            <p><strong>Types of UML Diagrams:</strong></p>
+            <ul>
+              <li><strong>Structural Diagrams:</strong> Class, Object, Component, Deployment, Package, Composite Structure.</li>
+              <li><strong>Behavioral Diagrams:</strong> Use Case, Activity, Sequence, State Machine, Communication, Interaction Overview, Timing.</li>
+            </ul>
+            <p><strong>Most commonly used:</strong></p>
+            <ul>
+              <li><strong>Use Case Diagram:</strong> Actors and system interactions (functional view).</li>
+              <li><strong>Class Diagram:</strong> Static structure — classes, attributes, methods, relationships.</li>
+              <li><strong>Sequence Diagram:</strong> Object interactions in time sequence.</li>
+              <li><strong>Activity Diagram:</strong> Workflows and business processes.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain software requirement engineering process. Discuss SRS document characteristics and its components. Explain different UML diagrams used in software design.</div>
+          <div class="q-answer">
+            <p><strong>Requirement Engineering Process (4 activities):</strong></p>
+            <ol>
+              <li><strong>Elicitation:</strong> Discover requirements from stakeholders via interviews, observation, workshops. Identify risks and scope.</li>
+              <li><strong>Analysis:</strong> Refine, prioritize, and resolve conflicts. Assess feasibility.</li>
+              <li><strong>Specification:</strong> Document formally in SRS.</li>
+              <li><strong>Validation:</strong> Review and verify requirements are correct, complete, and testable.</li>
+            </ol>
+            <p><strong>SRS Characteristics (per IEEE 830):</strong> Correct, Unambiguous, Complete, Consistent, Ranked for importance/stability, Verifiable, Modifiable, Traceable.</p>
+            <p><strong>SRS Components:</strong></p>
+            <ul>
+              <li><strong>Section 1: Introduction</strong> — Purpose, scope, definitions, references, overview.</li>
+              <li><strong>Section 2: Overall Description</strong> — Product perspective, functions, user characteristics, constraints, assumptions.</li>
+              <li><strong>Section 3: Specific Requirements</strong> — Functional, non-functional, interface requirements (functional decomposed by feature).</li>
+              <li><strong>Appendices</strong> — Glossary, references, index.</li>
+            </ul>
+            <p><strong>UML Diagrams in Design:</strong></p>
+            <ul>
+              <li><strong>Use Case Diagram:</strong> Shows actors (users) and their interactions with the system. Captures functional requirements from user's perspective.</li>
+              <li><strong>Class Diagram:</strong> Static structure of the system — classes, attributes, operations, and relationships (association, inheritance, aggregation, composition, dependency).</li>
+              <li><strong>Sequence Diagram:</strong> Shows object interactions in time sequence — emphasizes the order of message passing.</li>
+              <li><strong>Activity Diagram:</strong> Shows workflows, business processes, parallel activities — useful for modeling complex logic.</li>
+              <li><strong>State Chart Diagram:</strong> Models the dynamic behavior of an object through its states and transitions.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> List and explain any four characteristics of a good SRS document.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between coupling and cohesion. List their types with a neat diagram.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Draw a use case diagram and class diagram for an ATM system.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 4 ==================== -->
+    <div class="unit-section" id="unit-4">
+      <div class="unit-header">
+        <div class="unit-number">4</div>
+        <div class="unit-header-text">
+          <h3>Testing & Maintenance</h3>
+          <p>V&V, test strategies, debugging, maintenance types, reverse engineering</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Testing Fundamentals</h4>
+          <p><strong>Software testing</strong> is the process of evaluating a system to find defects and ensure it meets requirements. Goals: discover defects, gain confidence in quality, prevent future bugs, and validate functionality.</p>
+          <p>Key principles of testing:</p>
+          <ul>
+            <li>Testing shows the presence of defects, not their absence.</li>
+            <li>Exhaustive testing is impossible — prioritize with risk and resources.</li>
+            <li>Early testing saves time and money.</li>
+            <li>Defects cluster in a few modules (Pareto principle).</li>
+            <li>Test should be tailored to the application.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Verification vs Validation (V&V)</h4>
+          <p><strong>Verification:</strong> "Are we building the product right?" Confirms the software correctly implements specified functions. Involves reviews, walkthroughs, inspections. Static testing — no code execution.</p>
+          <p><strong>Validation:</strong> "Are we building the right product?" Confirms the software meets the user's actual needs. Involves actual testing. Dynamic testing — code is executed.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Testing Strategies</h4>
+          <ul>
+            <li><strong>Unit Testing:</strong> Tests individual modules in isolation. Performed by developers. Uses stubs and drivers.</li>
+            <li><strong>Integration Testing:</strong> Tests interaction between integrated modules. Approaches: top-down, bottom-up, sandwich.</li>
+            <li><strong>System Testing:</strong> Tests the complete system against requirements. Includes performance, security, usability tests.</li>
+            <li><strong>Acceptance Testing:</strong> Final test by end-users to determine if system is ready for delivery. Includes alpha (in-house) and gamma (in real environment).</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Black-Box vs White-Box Testing</h4>
+          <p><strong>Black-Box Testing:</strong> Tests functionality without knowledge of internal code. Tester provides inputs and checks outputs. Techniques: equivalence partitioning, boundary value analysis, decision tables.</p>
+          <p><strong>White-Box Testing:</strong> Tests internal structure of code. Tester examines paths, branches, conditions. Techniques: statement coverage, branch coverage, path coverage, condition testing.</p>
+          <p><strong>Grey-Box Testing:</strong> Combines both — partial knowledge of internals with black-box testing.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Regression Testing</h4>
+          <p><strong>Regression testing</strong> is re-running existing tests after a code change (bug fix, new feature) to ensure the change has not broken existing functionality. It is a critical part of any maintenance cycle.</p>
+          <p>Strategy: maintain a regression test suite, automate where possible, run after every change.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Test Cases and Debugging</h4>
+          <p>A <strong>test case</strong> specifies: preconditions, inputs, test procedure, expected outputs, and postconditions. Well-designed test cases expose defects efficiently.</p>
+          <p><strong>Debugging</strong> is the process of finding and fixing the cause of a defect after testing has identified a failure. Strategies: brute force, backtracking, cause elimination, program slicing, using debugging tools (breakpoints, watchers).</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Software Maintenance Types</h4>
+          <p>Maintenance refers to changes made after delivery to fix faults, improve performance, or adapt to changes.</p>
+          <ul>
+            <li><strong>Corrective Maintenance:</strong> Fixing bugs and defects discovered after deployment.</li>
+            <li><strong>Adaptive Maintenance:</strong> Adapting software to changes in environment (OS, hardware, regulations, business rules).</li>
+            <li><strong>Perfective Maintenance:</strong> Adding new features or improving performance based on user requests.</li>
+            <li><strong>Preventive Maintenance:</strong> Refactoring code to prevent future problems — improving maintainability.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Reverse Engineering and Re-engineering</h4>
+          <p><strong>Reverse Engineering:</strong> Analyzing an existing system to identify its components and their interrelationships, often to understand legacy systems. No change to the system — purely a knowledge extraction process.</p>
+          <p><strong>Re-engineering:</strong> Improving the internal structure of an existing system without changing its external behavior. Includes reverse engineering + restructuring + forward engineering. Goal: improve maintainability and extend life.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> Maintenance accounts for over 60% of the total cost of software. Preventive maintenance reduces future corrective work. Automated regression testing is essential for ongoing maintenance.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> When asked to differentiate verification and validation, remember the mnemonics: "Verification = Specs vs Product" (static), "Validation = User needs vs Product" (dynamic). A common trick: verification is internal; validation is external.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is verification?</div>
+          <div class="q-answer">Verification is the process of evaluating software to determine whether the products of a given development phase satisfy the conditions imposed at the start of that phase. It answers the question: "Are we building the product right?" It is static testing (reviews, inspections).</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">Difference between verification and validation.</div>
+          <div class="q-answer">
+            <p><strong>Verification:</strong> "Are we building the product right?" Checks against specifications. Static — reviews, walkthroughs, inspections.</p>
+            <p><strong>Validation:</strong> "Are we building the right product?" Checks against user needs. Dynamic — actual execution of tests.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain black-box and white-box testing.</div>
+          <div class="q-answer">
+            <p><strong>Black-Box Testing:</strong></p>
+            <ul>
+              <li>Tests functionality without knowledge of internal code.</li>
+              <li>Focuses on inputs and outputs only.</li>
+              <li>Performed by testers, not developers.</li>
+              <li>Techniques: equivalence partitioning, boundary value analysis, decision tables.</li>
+              <li>Validates software meets requirements.</li>
+            </ul>
+            <p><strong>White-Box Testing:</strong></p>
+            <ul>
+              <li>Tests internal structure and logic of code.</li>
+              <li>Requires knowledge of code, paths, and conditions.</li>
+              <li>Performed by developers.</li>
+              <li>Techniques: statement coverage, branch coverage, path coverage, condition testing.</li>
+              <li>Validates internal correctness.</li>
+            </ul>
+            <p><strong>Grey-box testing</strong> combines both — limited knowledge of internals with black-box testing approach.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What are types of software maintenance?</div>
+          <div class="q-answer">
+            <p>Software maintenance is the modification of software after delivery. Four types:</p>
+            <ol>
+              <li><strong>Corrective:</strong> Fixing bugs and defects found after deployment. Reactive.</li>
+              <li><strong>Adaptive:</strong> Adapting software to environmental changes — new OS, hardware, regulations, business rules.</li>
+              <li><strong>Perfective:</strong> Adding new features or improving performance/usability based on user requests.</li>
+              <li><strong>Preventive:</strong> Refactoring and improving code to prevent future bugs and improve maintainability.</li>
+            </ol>
+            <p>Maintenance accounts for the largest portion of total software cost (60-80%).</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain software testing in detail. Discuss different testing strategies, black-box and white-box testing techniques. Also explain types of software maintenance.</div>
+          <div class="q-answer">
+            <p><strong>Software Testing:</strong> Process of evaluating software to find defects and verify it meets requirements.</p>
+            <p><strong>Testing Strategies:</strong></p>
+            <ul>
+              <li><strong>Unit Testing:</strong> Tests individual modules in isolation using stubs and drivers.</li>
+              <li><strong>Integration Testing:</strong> Tests combined modules — top-down, bottom-up, or sandwich approach.</li>
+              <li><strong>System Testing:</strong> Tests the entire integrated system against requirements — performance, security, load testing.</li>
+              <li><strong>Acceptance Testing:</strong> Final test by users — alpha (in-house) and beta (real users).</li>
+            </ul>
+            <p><strong>Verification & Validation:</strong> Verification (static — reviews) checks "are we building it right?" Validation (dynamic — execution) checks "are we building the right thing?"</p>
+            <p><strong>Black-Box Techniques:</strong></p>
+            <ul>
+              <li><strong>Equivalence Partitioning:</strong> Divide inputs into classes that behave the same — test one from each class.</li>
+              <li><strong>Boundary Value Analysis:</strong> Test at edges — min, min+1, max-1, max.</li>
+              <li><strong>Decision Tables:</strong> Test combinations of inputs and their associated actions.</li>
+              <li><strong>Cause-Effect Graphing:</strong> Map causes (inputs) to effects (outputs).</li>
+            </ul>
+            <p><strong>White-Box Techniques:</strong></p>
+            <ul>
+              <li><strong>Statement Coverage:</strong> Execute every statement at least once.</li>
+              <li><strong>Branch Coverage:</strong> Test both true and false branches.</li>
+              <li><strong>Path Coverage:</strong> Test all independent paths through code.</li>
+              <li><strong>Condition Coverage:</strong> Test all combinations of Boolean sub-conditions.</li>
+            </ul>
+            <p><strong>Regression Testing:</strong> Re-run existing tests after code changes to ensure no breakage.</p>
+            <p><strong>Maintenance Types:</strong></p>
+            <ul>
+              <li><strong>Corrective:</strong> Fix bugs (40-50% of maintenance).</li>
+              <li><strong>Adaptive:</strong> Adapt to environment changes (25-30%).</li>
+              <li><strong>Perfective:</strong> Add features / improve performance (20-25%).</li>
+              <li><strong>Preventive:</strong> Refactor to prevent future issues.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Differentiate between verification and validation with examples.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Explain unit testing, integration testing, and system testing with their objectives.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> What are the four types of software maintenance? Explain each with an example.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 5 ==================== -->
+    <div class="unit-section" id="unit-5">
+      <div class="unit-header">
+        <div class="unit-number">5</div>
+        <div class="unit-header-text">
+          <h3>Project Management</h3>
+          <p>Planning, estimation, COCOMO, risk management, PERT/CPM</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Project Planning</h4>
+          <p><strong>Project planning</strong> sets the foundation for a successful software project. It defines scope, identifies tasks, estimates resources and time, and produces a roadmap.</p>
+          <p>Key elements of a software project plan:</p>
+          <ul>
+            <li><strong>Scope</strong> — what will be built.</li>
+            <li><strong>Objectives</strong> — measurable goals.</li>
+            <li><strong>Schedule</strong> — timeline of activities.</li>
+            <li><strong>Resources</strong> — people, hardware, software.</li>
+            <li><strong>Estimation</strong> — cost and effort.</li>
+            <li><strong>Risks</strong> — potential problems and mitigations.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Project Size Estimation — LOC & FP</h4>
+          <p><strong>LOC (Lines of Code):</strong> Measures size by counting source code lines. Simple but language-dependent; harder to estimate early in the project.</p>
+          <p><strong>FP (Function Points):</strong> Measures size by functionality delivered to the user, independent of programming language. Components:</p>
+          <ul>
+            <li><strong>External Inputs (EI)</strong> — user inputs.</li>
+            <li><strong>External Outputs (EO)</strong> — outputs to user.</li>
+            <li><strong>External Inquiries (EQ)</strong> — interactive queries.</li>
+            <li><strong>Internal Logical Files (ILF)</strong> — data maintained within system.</li>
+            <li><strong>External Interface Files (EIF)</strong> — referenced data in other systems.</li>
+          </ul>
+          <p>FP = unadjusted FP × complexity adjustment factor. Better than LOC for early estimation.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>COCOMO Model</h4>
+          <p><strong>COCOMO (Constructive Cost Model)</strong> is a procedural cost estimation model by Barry Boehm (1981). Uses basic size (KLOC — thousands of lines of code) to estimate effort, schedule, and cost.</p>
+          <p>Three levels of COCOMO:</p>
+          <ul>
+            <li><strong>Basic:</strong> Quick estimate using project size only. Formula: Effort = a × (KLOC)^b (in person-months).</li>
+            <li><strong>Intermediate:</strong> Considers 15 cost drivers (product, hardware, personnel, project attributes).</li>
+            <li><strong>Detailed:</strong> Extension of intermediate with phase-by-phase estimation.</li>
+          </ul>
+          <p>Project modes:</p>
+          <table>
+            <tr><th>Mode</th><th>a</th><th>b</th><th>Example</th></tr>
+            <tr><td>Organic</td><td>2.4</td><td>1.05</td><td>Small team, familiar environment</td></tr>
+            <tr><td>Semi-detached</td><td>3.0</td><td>1.12</td><td>Medium team, mixed experience</td></tr>
+            <tr><td>Embedded</td><td>3.6</td><td>1.20</td><td>Complex, tight constraints</td></tr>
+          </table>
+        </div>
+
+        <div class="topic-card">
+          <h4>Putnam Model</h4>
+          <p>The <strong>Putnam model</strong> is based on the Norden/Rayleigh curve. Effort = (Size / (Productivity × Time^(4/3))) × (Time factor). It emphasizes manpower buildup over time and is used for large projects.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Risk Management</h4>
+          <p><strong>Risk</strong> is a potential problem that may or may not occur. <strong>Risk management</strong> is the systematic process of identifying, analyzing, and responding to risks.</p>
+          <p><strong>Types of Risks:</strong></p>
+          <ul>
+            <li><strong>Project risks:</strong> Affect schedule, budget, resources (e.g., staff turnover).</li>
+            <li><strong>Product risks:</strong> Affect quality and performance (e.g., incorrect algorithms).</li>
+            <li><strong>Business risks:</strong> Affect the organization (e.g., changing market).</li>
+            <li><strong>Technical risks:</strong> Related to technology (e.g., unreliable third-party components).</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Risk Management Process</h4>
+          <ul>
+            <li><strong>Risk Identification:</strong> List potential risks. Techniques: brainstorming, checklists, expert judgment, Delphi method.</li>
+            <li><strong>Risk Analysis (Projection):</strong> Estimate probability and impact. Categorize as low/medium/high. Use Risk Exposure = Probability × Impact.</li>
+            <li><strong>Risk Mitigation:</strong> Develop strategies — avoid, transfer, accept, or mitigate. Create contingency plans for high-risk items.</li>
+            <li><strong>Risk Monitoring:</strong> Continuously track risks and update the risk profile throughout the project.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Project Scheduling — Gantt Chart</h4>
+          <p>A <strong>Gantt chart</strong> is a horizontal bar chart that shows tasks along the y-axis and time on the x-axis. Bars represent the duration and start/end of each task. Useful for visualizing task dependencies and progress.</p>
+          <p><strong>Advantages:</strong> Easy to read, shows progress visually, helps in resource allocation.</p>
+          <p><strong>Disadvantages:</strong> Hard to show complex dependencies; doesn't show critical path.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>PERT and CPM</h4>
+          <p><strong>PERT (Program Evaluation Review Technique):</strong> Three-time estimate method using optimistic (t_o), pessimistic (t_p), and most likely (t_m) times. Expected time: t_e = (t_o + 4t_m + t_p) / 6. Variance = ((t_p - t_o) / 6)^2. Useful when activity durations are uncertain.</p>
+          <p><strong>CPM (Critical Path Method):</strong> Identifies the longest path through the project network — the critical path. Tasks on the critical path have zero slack; any delay delays the project. Uses deterministic time estimates.</p>
+          <p>Both use network diagrams with nodes (events) and arrows (activities) to model dependencies.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Staffing and Quality Assurance</h4>
+          <p><strong>Staffing:</strong> Choosing the right people, organizing them into effective teams. The W5HH principle (Why, What, When, Who, How, How much) helps plan staffing.</p>
+          <p><strong>Software Quality Assurance (SQA):</strong> Systematic set of activities that ensure software processes and products conform to requirements, standards, and procedures. Includes technical reviews, software testing, process monitoring, and process improvement.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>ISO 9000 and Six Sigma</h4>
+          <p><strong>ISO 9000:</strong> International quality management standard. Defines requirements for quality systems. For software, ISO 9001 specifies requirements for design, development, production, installation, and service.</p>
+          <p><strong>Six Sigma:</strong> Quality management philosophy targeting 3.4 defects per million opportunities (DPMO). Uses DMAIC cycle: Define, Measure, Analyze, Improve, Control. Originally from Motorola, widely used in software quality.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> Effective project management requires balancing the <strong>iron triangle</strong>: scope, schedule, and cost. Quality is at the center. Changing one affects the others.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For COCOMO problems, remember the formulas:
+          <br><strong>Effort (E)</strong> = a × (KLOC)^b (in person-months)
+          <br><strong>Development Time (D)</strong> = c × (E)^d (in months)
+          <br>Memorize the a, b, c, d constants for organic, semi-detached, and embedded modes.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is COCOMO?</div>
+          <div class="q-answer">COCOMO (Constructive Cost Model) is a procedural software cost estimation model developed by Barry Boehm in 1981. It uses project size (KLOC) to estimate effort, development time, and cost. It has three levels: Basic, Intermediate, and Detailed.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is function point?</div>
+          <div class="q-answer">A Function Point (FP) is a unit of measurement for software size based on the functionality delivered to the user. It is independent of programming language. Function points are computed from five components: External Inputs, External Outputs, External Inquiries, Internal Logical Files, and External Interface Files.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain COCOMO model.</div>
+          <div class="q-answer">
+            <p><strong>COCOMO (Constructive Cost Model)</strong> is a procedural cost estimation model proposed by Barry Boehm.</p>
+            <p><strong>Three Levels:</strong></p>
+            <ul>
+              <li><strong>Basic:</strong> Uses project size (KLOC) only. Effort = a × (KLOC)^b person-months.</li>
+              <li><strong>Intermediate:</strong> Adds 15 cost drivers for accurate estimation.</li>
+              <li><strong>Detailed:</strong> Adds phase-by-phase estimates based on intermediate model.</li>
+            </ul>
+            <p><strong>Three Modes (for Basic COCOMO):</strong></p>
+            <table>
+              <tr><th>Mode</th><th>a</th><th>b</th><th>When</th></tr>
+              <tr><td>Organic</td><td>2.4</td><td>1.05</td><td>Small team, familiar environment</td></tr>
+              <tr><td>Semi-detached</td><td>3.0</td><td>1.12</td><td>Medium team, mixed experience</td></tr>
+              <tr><td>Embedded</td><td>3.6</td><td>1.20</td><td>Complex constraints, tight hardware</td></tr>
+            </table>
+            <p><strong>Derived:</strong> Development Time (D) = c × E^d. Average Staff Size = E / D.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is risk management?</div>
+          <div class="q-answer">
+            <p><strong>Risk management</strong> is a systematic process to identify, analyze, and respond to project risks.</p>
+            <p><strong>Process:</strong></p>
+            <ol>
+              <li><strong>Risk Identification:</strong> Brainstorm potential risks. Techniques: checklists, Delphi, expert judgment.</li>
+              <li><strong>Risk Analysis (Projection):</strong> Assess probability and impact. Risk Exposure = Probability × Impact.</li>
+              <li><strong>Risk Mitigation:</strong> Develop strategies — avoid, transfer, accept, mitigate. Build contingency plans.</li>
+              <li><strong>Risk Monitoring & Management:</strong> Continuously track and update risk profile throughout the project.</li>
+            </ol>
+            <p><strong>Risk Types:</strong> Project risks (schedule, budget), Product risks (quality), Business risks (market), Technical risks (technology).</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain software project management. Discuss project size estimation techniques (LOC, FP), COCOMO model, risk management process, and project scheduling using PERT/CPM.</div>
+          <div class="q-answer">
+            <p><strong>Software Project Management:</strong> Planning, organizing, directing, and controlling resources to achieve defined objectives.</p>
+            <p><strong>Size Estimation — LOC:</strong></p>
+            <ul>
+              <li>Lines of code — counts source lines.</li>
+              <li>Pros: easy to count after coding.</li>
+              <li>Cons: language-dependent, hard to estimate early.</li>
+            </ul>
+            <p><strong>Size Estimation — Function Points:</strong></p>
+            <ul>
+              <li>Measures user-visible functionality.</li>
+              <li>Five components: EI, EO, EQ, ILF, EIF.</li>
+              <li>Each rated as low/avg/high complexity.</li>
+              <li>FP = unadjusted FP × value adjustment factor (based on 14 general system characteristics).</li>
+              <li>Better for early estimation, language-independent.</li>
+            </ul>
+            <p><strong>COCOMO Model:</strong></p>
+            <ul>
+              <li>Basic formula: Effort (E) = a × (KLOC)^b person-months.</li>
+              <li>Three levels: Basic, Intermediate, Detailed.</li>
+              <li>Three project modes: Organic (small, familiar), Semi-detached (medium), Embedded (tight constraints).</li>
+              <li>Intermediate level adds 15 cost drivers (product reliability, database size, analyst capability, etc.).</li>
+              <li>Development Time D = c × E^d months.</li>
+            </ul>
+            <p><strong>Risk Management Process:</strong></p>
+            <ul>
+              <li><strong>Identification:</strong> List all potential risks (project, product, business, technical).</li>
+              <li><strong>Analysis:</strong> Estimate probability and impact. Risk Exposure = P × I.</li>
+              <li><strong>Mitigation:</strong> Strategies — avoid, transfer (insurance), accept, mitigate. Create contingency plans.</li>
+              <li><strong>Monitoring:</strong> Continuously review and update the risk profile.</li>
+            </ul>
+            <p><strong>PERT/CPM Scheduling:</strong></p>
+            <ul>
+              <li><strong>PERT:</strong> Three-time estimate — optimistic (t_o), most likely (t_m), pessimistic (t_p). Expected time t_e = (t_o + 4t_m + t_p) / 6. Variance = ((t_p - t_o) / 6)^2. Probability of meeting deadline uses the Z formula.</li>
+              <li><strong>CPM:</strong> Deterministic time estimates. Identifies the critical path (longest path) — these tasks have zero slack and determine the minimum project duration.</li>
+              <li><strong>Network diagrams:</strong> Nodes = events, Arrows = activities. Forward pass and backward pass compute ES, EF, LS, LF, and slack.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> What is COCOMO? Explain its three levels with suitable formulas.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between PERT and CPM. Explain the critical path method with an example.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> What is Function Point Analysis? List the five components used in its calculation.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    Made with care for Semester 5 | Software Engineering Study Notes
+  </footer>
+
+  <a href="#top" class="back-to-top" id="backToTop">↑</a>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+
+      // Back to top visibility
+      var backToTop = document.getElementById('backToTop');
+      if (scrollTop > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll for TOC links
+    document.querySelectorAll('.toc a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
 </body>
 </html>

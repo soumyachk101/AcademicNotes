@@ -3,1851 +3,1492 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Compiler Design — Study Notes | Semester 5</title>
-  <link rel="stylesheet" href="../../qa-styles.css">
-  <link rel="stylesheet" href="../../premium.css">
-  <link rel="stylesheet" href="../../site.css">
+  <title>Compiler Design Study Notes — Semester 5</title>
   <style>
     :root {
-      --primary-color: #4f46e5;
-      --primary: #4f46e5;
-      --primary-light: #eef2ff;
-      --primary-dark: #3730a3;
-      --primary-glow: rgba(79, 70, 229, 0.15);
-      --accent: #6366f1;
-      --accent-light: #e0e7ff;
-      --text-primary: #1e1b4b;
-      --text-secondary: #4338ca;
-      --bg-gradient: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%);
-      --module-bg: #fafaff;
-      --border-subtle: #e0e7ff;
+      --primary: #6366f1;
+      --primary-light: #4f46e5;
+      --surface: #f8fafc;
+      --text: #1e293b;
+      --text-secondary: #64748b;
+      --text-body: #334155;
+      --border: #e2e8f0;
+      --warning-bg: #fefce8;
+      --warning-border: #eab308;
+      --warning-text: #854d0e;
+      --pyq-bg: #f5f3ff;
+      --pyq-border: #ddd6fe;
+      --pyq-text: #5b21b6;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
-      font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, #f5f3ff 0%, #eef2ff 30%, #fafaff 100%);
-      color: var(--text-primary);
-      line-height: 1.7;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* ── Page Header ─────────────────────────── */
-    .page-header {
-      background: var(--bg-gradient);
-      border-bottom: 3px solid var(--primary-color);
-      padding: 2.5rem 2rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .page-header::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle at 30% 50%, rgba(79,70,229,0.06) 0%, transparent 50%),
-                  radial-gradient(circle at 70% 50%, rgba(99,102,241,0.06) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .back-link {
-      display: inline-block;
-      margin-bottom: 1rem;
-      color: var(--primary-color);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 0.4rem 1rem;
-      border: 2px solid var(--primary-color);
-      border-radius: 50px;
-      transition: all 0.3s ease;
-      position: relative;
-      z-index: 1;
-    }
-
-    .back-link:hover {
-      background: var(--primary-color);
-      color: #fff;
-      transform: translateX(-4px);
-      box-shadow: 0 4px 15px rgba(79,70,229,0.3);
-    }
-
-    .page-header h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      margin: 0 0 0.5rem;
-      letter-spacing: -0.02em;
-      position: relative;
-      z-index: 1;
-    }
-
-    .page-header .subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      margin: 0 0 0.3rem;
-      font-weight: 500;
-      position: relative;
-      z-index: 1;
-    }
-
-    .page-header .tagline {
-      font-size: 0.95rem;
-      color: #6366f1;
-      margin: 0;
-      opacity: 0.8;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* ── Legend ──────────────────────────────── */
-    .legend {
-      display: flex;
-      justify-content: center;
-      gap: 0.75rem;
-      margin-top: 1.2rem;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-
-    .legend .badge {
-      display: inline-block;
-      padding: 0.35rem 1rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      letter-spacing: 0.03em;
-    }
-
-    .badge-1m  { background: #dbeafe; color: #1e40af; border: 2px solid #93c5fd; }
-    .badge-5m  { background: #fef3c7; color: #92400e; border: 2px solid #fcd34d; }
-    .badge-15m { background: #fce7f3; color: #9d174d; border: 2px solid #f9a8d4; }
-
-    /* ── Layout ──────────────────────────────── */
-    .qa-container {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 0 1.5rem 3rem;
-    }
-
-    /* ── Module ──────────────────────────────── */
-    .module {
-      background: var(--module-bg);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 2rem 2rem 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 20px var(--primary-glow);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .module::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 5px;
-      background: var(--primary-color);
-      border-radius: 16px 0 0 16px;
-    }
-
-    .module-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid var(--border-subtle);
-    }
-
-    .module-number {
-      background: var(--primary-color);
-      color: #fff;
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      box-shadow: 0 4px 12px rgba(79,70,229,0.3);
-    }
-
-    .module-title-group { flex: 1; }
-
-    .module-title {
-      font-size: 1.35rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin: 0;
-    }
-
-    .module-topics {
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-      margin: 0.3rem 0 0;
-      opacity: 0.85;
-    }
-
-    /* ── Exam Tip ────────────────────────────── */
-    .exam-tip {
-      background: linear-gradient(135deg, #fef9c3 0%, #fef3c7 100%);
-      border: 1.5px solid #fcd34d;
-      border-left: 4px solid #f59e0b;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 1.5rem;
-      display: flex;
-      gap: 0.75rem;
-      align-items: flex-start;
-    }
-
-    .exam-tip-icon {
-      font-size: 1.4rem;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-
-    .exam-tip-text {
-      font-size: 0.92rem;
-      color: #78350f;
-      margin: 0;
-      line-height: 1.6;
-    }
-
-    .exam-tip-text strong { color: #92400e; }
-
-    /* ── Q&A Item ────────────────────────────── */
-    .qa-item {
-      background: #fff;
-      border: 1px solid var(--border-subtle);
-      border-left: 4px solid var(--primary-color);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(79,70,229,0.06);
-    }
-
-    .qa-item:hover {
-      box-shadow: 0 6px 20px rgba(79,70,229,0.15);
-      transform: translateY(-2px);
-    }
-
-    .qa-item .question {
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.75rem;
-      display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
-      flex-wrap: wrap;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .qa-item .answer {
-      color: #374151;
-      font-size: 0.95rem;
-      line-height: 1.75;
-      padding-left: 0;
-    }
-
-    .qa-item .answer ul,
-    .qa-item .answer ol {
-      margin: 0.5rem 0;
-      padding-left: 1.5rem;
-    }
-
-    .qa-item .answer li {
-      margin-bottom: 0.4rem;
-    }
-
-    .qa-item .answer p {
-      margin: 0.5rem 0;
-    }
-
-    .qa-item .answer code {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
       background: #f1f5f9;
-      padding: 0.15rem 0.4rem;
-      border-radius: 4px;
-      font-size: 0.88em;
-      color: var(--primary-dark);
-      font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
-    }
-
-    .qa-item .answer pre {
-      background: #1e1b4b;
-      color: #e0e7ff;
-      padding: 1rem 1.25rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin: 0.75rem 0;
-      font-size: 0.85rem;
+      color: var(--text);
       line-height: 1.6;
     }
 
-    .qa-item .answer pre code {
-      background: none;
-      padding: 0;
-      color: inherit;
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      z-index: 101;
+      transition: width 0.1s;
     }
 
-    /* ── Badge Row ───────────────────────────── */
-    .badge-row {
+    .sticky-header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0.8rem 1.5rem;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 0.5rem;
-      margin: 1.5rem 0 0.75rem;
     }
 
-    .badge-row .badge {
-      padding: 0.3rem 0.9rem;
-      border-radius: 50px;
-      font-weight: 700;
-      font-size: 0.82rem;
-    }
-
-    /* ── PYQ Badge ───────────────────────────── */
-    .pyq-badge {
-      display: inline-block;
-      background: #fce7f3;
-      color: #9d174d;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 0.15rem 0.55rem;
-      border-radius: 50px;
-      border: 1.5px solid #f9a8d4;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      vertical-align: middle;
-      margin-left: 0.35rem;
-    }
-
-    .pyq-marker .question { color: #831843; }
-
-    /* ── PYQ Section ─────────────────────────── */
-    .pyq-section {
-      margin-top: 1.5rem;
-      padding-top: 1.25rem;
-      border-top: 2px dashed var(--border-subtle);
-    }
-
-    .pyq-section-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin: 0 0 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .pyq-section-title::before {
-      content: '📋';
+    .sticky-header h1 {
       font-size: 1.1rem;
-    }
-
-    .pyq-list {
-      list-style: none;
-      padding: 0;
       margin: 0;
+      color: var(--primary);
     }
 
-    .pyq-list li {
-      padding: 0.55rem 1rem;
-      margin-bottom: 0.4rem;
-      background: #f5f3ff;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      color: #4c1d95;
-      border-left: 3px solid var(--accent);
+    .toc {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 1.5rem;
       display: flex;
-      align-items: flex-start;
-      gap: 0.5rem;
+      gap: 1rem;
+      overflow-x: auto;
+      position: sticky;
+      top: 52px;
+      z-index: 99;
     }
 
-    .pyq-list li::before {
-      content: '▸';
-      color: var(--primary-color);
+    .toc a {
+      text-decoration: none;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      white-space: nowrap;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    .toc a:hover {
+      background: #f1f5f9;
+      color: var(--primary);
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem;
+    }
+
+    .subject-title {
+      font-size: 1.8rem;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .subject-meta {
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .subject-card {
+      background: linear-gradient(135deg, #6366f1, #4f46e5);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 12px;
+      margin-bottom: 2rem;
+    }
+
+    .subject-card h2 {
+      margin-top: 0;
+      font-size: 1.3rem;
+    }
+
+    .subject-card p {
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .unit-section {
+      margin-bottom: 2.5rem;
+    }
+
+    .unit-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+      cursor: pointer;
+      padding: 0.8rem;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .unit-header:hover {
+      border-color: var(--primary);
+    }
+
+    .unit-number {
+      background: #6366f1;
+      color: white;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-weight: bold;
+      font-size: 0.85rem;
       flex-shrink: 0;
     }
 
-    /* ── Quick Revision ──────────────────────── */
-    .quick-revision {
-      margin-top: 1.25rem;
-      background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
-      border: 1.5px solid #86efac;
-      border-left: 4px solid #16a34a;
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
-    }
-
-    .quick-revision-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: #14532d;
-      margin: 0 0 0.6rem;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .quick-revision ul {
+    .unit-header-text h3 {
       margin: 0;
-      padding-left: 1.25rem;
+      font-size: 1.05rem;
+      color: var(--text);
     }
 
-    .quick-revision li {
-      margin-bottom: 0.3rem;
-      font-size: 0.88rem;
-      color: #166534;
+    .unit-header-text p {
+      margin: 0.2rem 0 0;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
     }
 
-    .quick-revision li strong {
-      color: #14532d;
+    .unit-content {
+      background: white;
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+      padding: 1.2rem;
     }
 
-    /* ── Summary Module ──────────────────────── */
-    .summary-section {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent) 100%);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-      color: #fff;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(79,70,229,0.25);
+    .topic-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      margin-bottom: 0.8rem;
     }
 
-    .summary-section h2 {
-      margin: 0 0 1rem;
-      font-size: 1.5rem;
-    }
-
-    .summary-section p {
-      opacity: 0.9;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-
-    .summary-section .legend {
-      margin-top: 1.5rem;
-    }
-
-    .summary-section .legend .badge {
-      background: rgba(255,255,255,0.2);
-      color: #fff;
-      border: 2px solid rgba(255,255,255,0.4);
-    }
-
-    /* ── Divider ─────────────────────────────── */
-    .section-divider {
-      text-align: center;
-      margin: 2rem 0 1.5rem;
-      position: relative;
-    }
-
-    .section-divider::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
-      opacity: 0.3;
-    }
-
-    .section-divider span {
-      background: #f5f3ff;
-      padding: 0 1.5rem;
-      position: relative;
-      color: var(--primary-color);
-      font-weight: 700;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-    }
-
-    /* ── Footer ──────────────────────────────── */
-    .page-footer {
-      text-align: center;
-      padding: 2rem;
+    .topic-card h4 {
+      margin: 0 0 0.5rem;
+      font-size: 0.95rem;
       color: #6366f1;
-      font-size: 0.85rem;
-      opacity: 0.7;
-      border-top: 1px solid var(--border-subtle);
     }
 
-    /* ── Responsive ──────────────────────────── */
-    @media (max-width: 768px) {
-      .page-header h1 { font-size: 1.8rem; }
-      .module { padding: 1.25rem; }
-      .module::before { width: 4px; }
-      .qa-container { padding: 0 1rem 2rem; }
-      .qa-item { padding: 1rem; }
+    .topic-card p,
+    .topic-card li {
+      color: var(--text-body);
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .topic-card ul {
+      padding-left: 1.2rem;
+      margin: 0.3rem 0;
+    }
+
+    .question-block {
+      background: white;
+      border-left: 3px solid #6366f1;
+      padding: 0.8rem 1rem;
+      margin-bottom: 0.6rem;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .question-block .q-label {
+      font-size: 0.75rem;
+      font-weight: bold;
+      color: #6366f1;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+
+    .question-block .q-text {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .question-block .q-answer {
+      color: #475569;
+      line-height: 1.65;
+      font-size: 0.9rem;
+    }
+
+    .highlight-box {
+      background: #f3f4f6;
+      border-left: 3px solid var(--primary-light);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+    }
+
+    .exam-tip {
+      background: var(--warning-bg);
+      border-left: 3px solid var(--warning-border);
+      padding: 0.7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.6rem 0;
+      font-size: 0.85rem;
+    }
+
+    .exam-tip strong {
+      color: var(--warning-text);
+    }
+
+    .pyq-section {
+      margin-top: 1rem;
+      padding-top: 0.8rem;
+      border-top: 1px dashed var(--border);
+    }
+
+    .pyq-section h4 {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .pyq-item {
+      background: var(--pyq-bg);
+      border: 1px solid var(--pyq-border);
+      border-radius: 6px;
+      padding: 0.5rem 0.8rem;
+      margin-bottom: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .pyq-item .year {
+      color: var(--pyq-text);
+      font-weight: bold;
+      font-size: 0.75rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #94a3b8;
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+      margin-top: 2rem;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #6366f1;
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 1.2rem;
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 0.5rem 0;
+    }
+
+    table th,
+    table td {
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.7rem;
+      text-align: left;
+    }
+
+    table th {
+      background: var(--surface);
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      padding: 1rem;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      margin: 0.5rem 0;
+      line-height: 1.5;
+    }
+
+    .code-block .keyword {
+      color: #c084fc;
+    }
+
+    .code-block .type {
+      color: #67e8f9;
+    }
+
+    .code-block .comment {
+      color: #94a3b8;
     }
   </style>
 </head>
 <body>
 
-  <!-- ═══════════════ PAGE HEADER ═══════════════ -->
-  <div class="page-header">
-    <a href="../index.html" class="back-link">← Back to Semester 5</a>
-    <h1>Compiler Design</h1>
-    <p class="subtitle">Semester 5 · MAKAUT · Study Notes</p>
-    <p class="tagline">PEC-CS506B · All Modules (1–6) · Q&A Format</p>
-    <div class="legend">
-      <span class="badge badge-1m">1 Mark</span>
-      <span class="badge badge-5m">5 Marks</span>
-      <span class="badge badge-15m">15 Marks</span>
-    </div>
+  <div class="progress-bar" id="progressBar"></div>
+
+  <div class="sticky-header">
+    <h1>📚 Compiler Design — Study Notes</h1>
   </div>
 
-  <div class="qa-container">
+  <div class="toc">
+    <a href="#unit-1">Unit 1: Introduction</a>
+    <a href="#unit-2">Unit 2: Lexical Analysis</a>
+    <a href="#unit-3">Unit 3: Syntax Analysis</a>
+    <a href="#unit-4">Unit 4: Semantic Analysis &amp; IR</a>
+    <a href="#unit-5">Unit 5: Code Optimization &amp; Generation</a>
+  </div>
 
-    <!-- ═══════════════ MODULE 1 ═══════════════ -->
-    <div class="module">
-      <div class="module-header">
-        <div class="module-number">1</div>
-        <div class="module-title-group">
-          <h2 class="module-title">Introduction &amp; Lexical Analysis</h2>
-          <p class="module-topics">Compiler structure · Lexical analysis · Regular expressions · Finite automata · Lex tool</p>
+  <div class="container" id="top">
+
+    <div class="subject-card">
+      <h2>Compiler Design</h2>
+      <p>Master the fundamentals of compiler construction — phases of compilation, lexical analysis, parsing techniques, semantic analysis, intermediate representations, optimization, and code generation. This guide covers all 5 units with exam-focused questions and answers.</p>
+    </div>
+
+    <!-- ==================== UNIT 1 ==================== -->
+    <div class="unit-section" id="unit-1">
+      <div class="unit-header">
+        <div class="unit-number">1</div>
+        <div class="unit-header-text">
+          <h3>Introduction</h3>
+          <p>Compiler phases, interpreter, symbol table, pass structure</p>
         </div>
       </div>
+      <div class="unit-content">
 
-      <div class="exam-tip">
-        <span class="exam-tip-icon">💡</span>
-        <p class="exam-tip-text"><strong>Exam Tip:</strong> Module 1 is foundational. Questions on compiler phases, lexical analyzer role, regular expressions, NFA/DFA, and Thompson's construction appear <strong>every year</strong>. Draw diagrams for NFA/DFA — they carry marks in 5M and 15M questions.</p>
-      </div>
-
-      <!-- 1M Questions -->
-      <div class="badge-row"><span class="badge badge-1m">1M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> Define: token, pattern, and lexeme.</div>
-        <div class="answer">
+        <div class="topic-card">
+          <h4>Compiler vs Interpreter</h4>
+          <p>A <strong>compiler</strong> translates the entire source program into an equivalent target program (machine code) before execution. An <strong>interpreter</strong> translates and executes the source program statement-by-statement, one at a time.</p>
+          <p>Key differences:</p>
           <ul>
-            <li><strong>Lexeme:</strong> A character sequence forming a syntactic unit (e.g., "sum", "+", "123").</li>
-            <li><strong>Token:</strong> A pair: token name + optional attribute value (e.g., &lt;id, pointer&gt;).</li>
-            <li><strong>Pattern:</strong> Rule describing the set of lexemes for a token (usually a regular expression).</li>
+            <li><strong>Execution speed:</strong> Compiled programs run faster; interpreted programs are slower since translation happens at runtime.</li>
+            <li><strong>Translation time:</strong> Compilers take longer upfront but produce standalone executables; interpreters start executing immediately.</li>
+            <li><strong>Error detection:</strong> Compilers report all errors after full scan; interpreters stop at the first error.</li>
+            <li><strong>Output:</strong> Compilers produce a separate target program; interpreters produce no separate output.</li>
           </ul>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What are the three groups of compiler phases?</div>
-        <div class="answer">
+        <div class="topic-card">
+          <h4>Phases of a Compiler</h4>
+          <p>A compiler operates in well-defined phases that transform source code into target code:</p>
           <ul>
-            <li><strong>Front End:</strong> Lexical, syntax, semantic analysis, IR generation — language-dependent, machine-independent.</li>
-            <li><strong>Middle End:</strong> Optimization on IR — machine-independent.</li>
-            <li><strong>Back End:</strong> Target code generation — machine-dependent.</li>
+            <li><strong>Lexical Analysis:</strong> Reads the source character stream and groups characters into lexemes, producing tokens.</li>
+            <li><strong>Syntax Analysis:</strong> Checks the token stream against grammar rules, producing a parse tree.</li>
+            <li><strong>Semantic Analysis:</strong> Verifies type rules, scope, and meaning. Performs type checking.</li>
+            <li><strong>Intermediate Code Generation:</strong> Produces an intermediate representation (e.g., three-address code).</li>
+            <li><strong>Code Optimization:</strong> Improves intermediate code for speed, memory, or power efficiency.</li>
+            <li><strong>Code Generation:</strong> Translates optimized IR into target machine code with register allocation.</li>
+          </ul>
+          <p>The <strong>Symbol Table</strong> is a data structure used by all phases to store information about identifiers (names, types, scopes, memory locations).</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Symbol Table</h4>
+          <p>The <strong>symbol table</strong> is a critical data structure maintained throughout compilation. It stores entries for every identifier (variable, function, class, etc.) with attributes such as:</p>
+          <ul>
+            <li><strong>Name:</strong> The identifier string</li>
+            <li><strong>Type:</strong> Integer, float, array, function, etc.</li>
+            <li><strong>Scope:</strong> Where the identifier is visible</li>
+            <li><strong>Memory location:</strong> Where the value will be stored</li>
+            <li><strong>Size:</strong> Memory footprint</li>
+            <li><strong>Parameters:</strong> For functions, parameter list</li>
+          </ul>
+          <p>Operations: <strong>insert</strong> (add new identifier), <strong>lookup</strong> (find identifier), <strong>delete</strong> (remove when scope ends). Implemented using hash tables or search trees for efficiency.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Cross-Compiler and Bootstrap</h4>
+          <p>A <strong>cross-compiler</strong> is a compiler that runs on one platform (host) but produces executable code for a different platform (target). Used when the target machine doesn't have its own compiler, or for embedded systems.</p>
+          <p><strong>Bootstrapping</strong> is the process of writing a compiler for a new language using the language itself. Steps:</p>
+          <ul>
+            <li>Write a minimal compiler for a subset of language L in an existing language (say C). This compiler can compile itself.</li>
+            <li>Use this compiler to compile an extended compiler that supports more features.</li>
+            <li>Iterate until the full compiler for L is built. This is how compilers like GCC were developed.</li>
           </ul>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is the role of a lexical analyzer?</div>
-        <div class="answer">
-          <p>The lexical analyzer (scanner) is the first compiler phase. It reads the source program character by character, groups characters into tokens (lexemes), removes whitespace/comments, reports lexical errors, and creates symbol table entries for identifiers.</p>
+        <div class="topic-card">
+          <h4>Lexical and Syntax Analyzers</h4>
+          <p>The <strong>lexical analyzer</strong> (lexer/scanner) is the first phase. It reads input characters, groups them into lexemes, and produces tokens. Each token has a token name and an optional attribute value. It removes whitespace and comments.</p>
+          <p>The <strong>syntax analyzer</strong> (parser) takes the token stream from the lexer and constructs a parse tree (or AST) based on grammar rules. It checks syntactic structure and reports syntax errors.</p>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a sentinel in input buffering?</div>
-        <div class="answer">
-          <p>A sentinel is a special character (e.g., EOF marker) placed at the end of the input buffer. It eliminates the need for a boundary check at every character, because the scanner only needs to check whether it has hit the sentinel to know it must reload the buffer.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> Name the tool used for generating a lexical analyzer.</div>
-        <div class="answer">
-          <p><strong>Lex</strong> (Unix) or <strong>Flex</strong> (Fast Lexical Analyzer Generator). The programmer specifies token patterns as regular expressions; the tool generates C code for the scanner.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What are regular expressions? Give examples.</div>
-        <div class="answer">
-          <p>Regular expressions are algebraic notations used to describe patterns of character sequences (languages of tokens). Examples: <code>[a-zA-Z][a-zA-Z0-9]*</code> for identifiers, <code>[0-9]+</code> for integers, <code>[a-zA-Z][a-zA-Z0-9_]*</code> for keywords.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a symbol table?</div>
-        <div class="answer">
-          <p>A symbol table is a data structure maintained throughout all compiler phases. It stores information about identifiers — name, type, scope, storage location, and other attributes. It supports operations like insert, lookup, and delete.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a finite automaton (FA)?</div>
-        <div class="answer">
-          <p>A finite automaton is a mathematical model with a finite set of states, input alphabet, transition function, start state, and accept states. It accepts a string if processing it ends in an accept state. FA is the theoretical foundation of lexical analyzers.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is the difference between NFA and DFA?</div>
-        <div class="answer">
-          <p><strong>NFA:</strong> Can have multiple transitions on the same input and epsilon (ε) transitions. <strong>DFA:</strong> Exactly one transition per input symbol from any state, no ε-transitions. Every DFA is an NFA, but not vice versa.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is ε-closure in NFA-to-DFA conversion?</div>
-        <div class="answer">
-          <p>The ε-closure of a state is the set of all states reachable from it via zero or more ε-transitions. It is used in the subset construction algorithm to convert an NFA to a DFA.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-1m">1M</span> What is peephole optimization? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>Peephole optimization examines a small window ("peephole") of target instructions and replaces them with equivalent but faster/shorter sequences. Applied after code generation. Examples: removing redundant push/pop, strength reduction (y*2 → y&lt;&lt;1).</p>
-        </div>
-      </div>
-
-      <!-- 5M Questions -->
-      <div class="badge-row"><span class="badge badge-5m">5M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain the phases of a compiler with a brief description of each. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>1. Lexical Analysis:</strong> Reads source characters, groups into tokens, removes whitespace/comments. Output: token stream.</p>
-          <p><strong>2. Syntax Analysis:</strong> Checks grammar using a CFG, builds a parse tree. Output: parse tree.</p>
-          <p><strong>3. Semantic Analysis:</strong> Type checking, scope resolution. Uses SDD to traverse the parse tree.</p>
-          <p><strong>4. Intermediate Code Generation:</strong> Produces platform-independent IR (e.g., three-address code).</p>
-          <p><strong>5. Code Optimization:</strong> Improves IR for efficiency — constant folding, CSE, dead code elimination, loop optimization.</p>
-          <p><strong>6. Code Generation:</strong> Translates optimized IR to target machine code. Handles register allocation and instruction selection.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> Describe input buffering and the sentinel technique in lexical analysis.</div>
-        <div class="answer">
-          <p>The input is read in large chunks into a buffer (two halves: BUFFER1 and BUFFER2). Two pointers — <code>lexemeBegin</code> and <code>forward</code> — advance through the buffer. A sentinel (special EOF character) is appended at the end of each buffer half. This eliminates the boundary check per character — the scanner simply checks if <code>forward</code> has hit the sentinel.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain Thompson's construction for converting a regular expression to an NFA. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>Thompson's construction builds an NFA from a regular expression recursively:</p>
+        <div class="topic-card">
+          <h4>Pass Structure</h4>
+          <p>A <strong>pass</strong> refers to one complete scan of the source program (or its intermediate representation). A compiler may be:</p>
           <ul>
-            <li>For symbol <code>a</code>: two states with a transition on <code>a</code>.</li>
-            <li>For <code>r | s</code>: new start with ε-transitions to both NFA roots.</li>
-            <li>For <code>rs</code>: ε-transition from <em>r</em>'s accept to <em>s</em>'s start.</li>
-            <li>For <code>r*</code>: new start with ε to first state of <em>r</em> and ε to accept; loop back from accept state to first state of <em>r</em>.</li>
-            <li>For <code>r+</code> (one or more): like <code>r*</code> but requires at least one occurrence.</li>
-            <li>For <code>r?</code> (zero or one): ε-transition to both <em>r</em> and the accept state.</li>
+            <li><strong>Single-pass:</strong> Compiles in one go. Faster but limited optimization.</li>
+            <li><strong>Multi-pass:</strong> Performs multiple scans. Allows better optimization but slower compilation.</li>
           </ul>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What is constant folding and constant propagation?</div>
-        <div class="answer">
-          <p><strong>Constant Folding:</strong> Evaluating constant expressions at compile time. Example: <code>3 + 5</code> replaced with <code>8</code>. <strong>Constant Propagation:</strong> Replacing a variable that always holds the same constant value with that constant. Example: if <code>x = 5</code> and <code>x</code> is never modified, replace all uses of <code>x</code> with <code>5</code>.</p>
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> The Analysis-Synthesis model divides compilation into front-end (lexical, syntax, semantic analysis → IR generation) and back-end (optimization → target code). The middle represents the IR. This separation allows retargeting the compiler to new architectures by only modifying the back-end.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> Always draw the block diagram showing all 6 phases plus the symbol table. Mention the input and output of each phase for full marks.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is a compiler?</div>
+          <div class="q-answer">A compiler is a system software program that translates source code written in a high-level programming language into a target language (machine code or another language). The entire source program is translated first before execution, producing a standalone executable that can be run multiple times without recompilation.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">List phases of compiler.</div>
+          <div class="q-answer">The six phases are: (1) Lexical Analysis, (2) Syntax Analysis, (3) Semantic Analysis, (4) Intermediate Code Generation, (5) Code Optimization, and (6) Code Generation. The Symbol Table and Error Handler support all phases.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain different phases of compiler.</div>
+          <div class="q-answer">
+            <p>Each phase transforms the source program from one representation to the next:</p>
+            <ul>
+              <li><strong>Lexical Analysis:</strong> Source → Tokens. Identifies lexemes and classifies them (keyword, identifier, operator).</li>
+              <li><strong>Syntax Analysis:</strong> Tokens → Parse Tree. Checks grammar conformance and builds hierarchical structure.</li>
+              <li><strong>Semantic Analysis:</strong> Parse Tree → Annotated Tree. Performs type checking, scope resolution, and ensures semantic validity.</li>
+              <li><strong>Intermediate Code Generation:</strong> Annotated Tree → Three-Address Code. Produces machine-independent intermediate representation.</li>
+              <li><strong>Code Optimization:</strong> IR → Optimized IR. Applies transformations to improve runtime, memory, or power.</li>
+              <li><strong>Code Generation:</strong> Optimized IR → Target Code. Translates IR into assembly/machine code, allocating registers.</li>
+            </ul>
+            <p>Symbol table is accessed/modified by all phases; error handler reports issues at each stage.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Differentiate compiler and interpreter.</div>
+          <div class="q-answer">
+            <table>
+              <tr><th>Aspect</th><th>Compiler</th><th>Interpreter</th></tr>
+              <tr><td>Translation</td><td>Entire program at once</td><td>One statement at a time</td></tr>
+              <tr><td>Execution Speed</td><td>Faster (pre-translated)</td><td>Slower (runtime translation)</td></tr>
+              <tr><td>Output</td><td>Standalone executable</td><td>No separate output</td></tr>
+              <tr><td>Memory</td><td>More (stores object code)</td><td>Less</td></tr>
+              <tr><td>Error Detection</td><td>All errors reported after full scan</td><td>Stops at first error</td></tr>
+              <tr><td>Examples</td><td>C, C++, Java (to bytecode)</td><td>Python, Ruby, JavaScript</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain the phases of a compiler in detail with a block diagram. Discuss the role of each phase and the symbol table.</div>
+          <div class="q-answer">
+            <p>A compiler processes source code through six logical phases, supported by two auxiliary components — the <strong>Symbol Table</strong> and the <strong>Error Handler</strong>.</p>
+            <div class="code-block">Source  → [Lexical Analyzer]      → Tokens
+Tokens   → [Syntax Analyzer]        → Parse Tree
+Tree     → [Semantic Analyzer]      → Annotated Tree
+Tree     → [Intermediate Code Gen]  → Three-Address Code
+TAC      → [Code Optimizer]         → Optimized IR
+IR       → [Code Generator]         → Target Code
+
+(Symbol Table &amp; Error Handler interact with ALL phases)</div>
+            <p><strong>1. Lexical Analyzer (Scanner):</strong> Reads source characters, removes whitespace/comments, and groups characters into lexemes. Outputs a stream of tokens &lt;token-name, attribute-value&gt;. Example: <code>int x = 10;</code> becomes <code>&lt;INT, -&gt;, &lt;ID, "x"&gt;, &lt;ASSIGN, -&gt;, &lt;NUM, 10&gt;, &lt;SEMI, -&gt;</code>.</p>
+            <p><strong>2. Syntax Analyzer (Parser):</strong> Uses grammar rules (context-free grammar) to verify syntactic structure. Builds a parse tree where internal nodes are non-terminals and leaves are tokens. Reports syntax errors.</p>
+            <p><strong>3. Semantic Analyzer:</strong> Performs type checking, verifies operator-operand compatibility, checks scope rules, and adds semantic information to the parse tree. Reports type-mismatch errors.</p>
+            <p><strong>4. Intermediate Code Generator:</strong> Produces a machine-independent intermediate representation, typically three-address code (TAC) with at most one operator per instruction. Example: <code>x = a + b * c</code> becomes <code>t1 = b * c; t2 = a + t1; x = t2</code>.</p>
+            <p><strong>5. Code Optimizer:</strong> Applies transformations to improve the IR — constant folding, dead code elimination, common subexpression elimination, loop optimizations. Output is semantically equivalent but more efficient IR.</p>
+            <p><strong>6. Code Generator:</strong> Translates optimized IR into target machine code. Performs instruction selection, register allocation, and memory addressing. Final output is assembly or machine code.</p>
+            <p><strong>Symbol Table Role:</strong> Stores identifier attributes (name, type, scope, memory address). Inserted during lexical analysis, updated during semantic analysis, and consulted during code generation for memory allocation.</p>
+            <p><strong>Error Handler:</strong> Detects, reports, and recovers from errors in any phase. Aims to continue compilation to find as many errors as possible in one pass.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> List all six phases of a compiler with their inputs and outputs. What is the role of the symbol table?
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Differentiate between compiler and interpreter with at least five points.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> What is bootstrapping? Explain the steps to bootstrap a compiler.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 2 ==================== -->
+    <div class="unit-section" id="unit-2">
+      <div class="unit-header">
+        <div class="unit-number">2</div>
+        <div class="unit-header-text">
+          <h3>Lexical Analysis</h3>
+          <p>Tokens, regular expressions, finite automata, NFA, DFA, Lex</p>
         </div>
       </div>
+      <div class="unit-content">
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What is common subexpression elimination (CSE)?</div>
-        <div class="answer">
-          <p>CSE replaces multiple evaluations of the same expression with a single computation that stores the result in a temporary variable. Example: if <code>a = b + c</code> appears twice, compute once and reuse. CSE can be local (within a basic block) or global (across basic blocks).</p>
+        <div class="topic-card">
+          <h4>Tokens, Lexemes, and Patterns</h4>
+          <p>The lexical analyzer works with three core concepts:</p>
+          <ul>
+            <li><strong>Token:</strong> A pair consisting of a token name and an optional attribute value. Example: <code>&lt;identifier, "x"&gt;</code>. Token names: id, num, +, *, etc.</li>
+            <li><strong>Lexeme:</strong> The actual character sequence matched by a token. For example, the lexeme "counter" is matched by the token <code>id</code>.</li>
+            <li><strong>Pattern:</strong> A rule that describes the set of lexemes that match a token. Usually expressed as a regular expression. Example: pattern for identifier = letter (letter | digit)*</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Lexical Errors</h4>
+          <p>Lexical errors occur when the input cannot be matched by any token pattern. Common examples:</p>
+          <ul>
+            <li>Invalid characters (e.g., <code>@</code> in C)</li>
+            <li>Unterminated string literals</li>
+            <li>Malformed numeric constants</li>
+            <li>Identifier too long</li>
+          </ul>
+          <p>Recovery strategies: skip the offending character, insert a missing character, replace with a valid one, or delete a character.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Regular Expressions</h4>
+          <p>A <strong>regular expression (RE)</strong> defines a set of strings over an alphabet. Rules:</p>
+          <ul>
+            <li><strong>ε</strong> (epsilon) is a regular expression denoting {ε}</li>
+            <li><strong>a</strong> for any symbol a in the alphabet denotes {a}</li>
+            <li><strong>(r)|(s)</strong> — union: either r or s</li>
+            <li><strong>(r)(s)</strong> — concatenation: r followed by s</li>
+            <li><strong>(r)*</strong> — Kleene closure: zero or more occurrences of r</li>
+            <li><strong>(r)+</strong> — one or more r</li>
+          </ul>
+          <p>Example: identifier = letter (letter | digit)*</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Finite Automata — NFA and DFA</h4>
+          <p>A <strong>finite automaton (FA)</strong> is a recognizer for regular expressions. It has 5 components: states (Q), input alphabet (Σ), transition function (δ), start state (q0), and accept states (F).</p>
+          <ul>
+            <li><strong>NFA (Nondeterministic FA):</strong> Can have multiple transitions for the same input symbol, including ε-transitions. A string is accepted if ANY computation accepts it.</li>
+            <li><strong>DFA (Deterministic FA):</strong> Exactly one transition per input symbol from each state. No ε-transitions. Faster to simulate than NFA.</li>
+          </ul>
+          <p>Every NFA can be converted to an equivalent DFA; both recognize the same language. NFA is easier to construct from RE; DFA is easier to implement.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>RE to NFA — Thompson's Construction</h4>
+          <p><strong>Thompson's construction</strong> builds an NFA from a regular expression by combining smaller NFAs. Rules:</p>
+          <ul>
+            <li>For symbol <strong>a</strong>: create a 2-state NFA with a-transition.</li>
+            <li>For <strong>r|s</strong> (union): add new start state with ε-transitions to sub-NFAs; merge accept states with ε to new accept.</li>
+            <li>For <strong>rs</strong> (concatenation): connect accept of r to start of s with ε.</li>
+            <li>For <strong>r*</strong> (closure): add new start with ε to r's start and accept; loop back from r's accept to its start.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>NFA to DFA — Subset Construction</h4>
+          <p>The <strong>subset construction</strong> algorithm converts an NFA to an equivalent DFA:</p>
+          <ul>
+            <li>Each DFA state represents a set of NFA states (subset).</li>
+            <li>Start state of DFA = ε-closure of NFA's start state.</li>
+            <li>For each DFA state and input symbol a, the next DFA state = ε-closure of all NFA states reachable by a from any NFA state in the current subset.</li>
+            <li>A DFA state is accepting if its subset contains any NFA accepting state.</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Lex Tool</h4>
+          <p><strong>Lex</strong> is a tool that automatically generates a lexical analyzer from a specification of tokens described using regular expressions. The Lex program consists of three sections:</p>
+          <ul>
+            <li><strong>Declarations</strong>: Variable declarations, regex definitions</li>
+            <li><strong>Translation rules</strong>: Pattern {Action} pairs</li>
+            <li><strong>Auxiliary functions</strong>: User-defined helper code in C</li>
+          </ul>
+          <p>Lex converts the specification into a C program that uses the generated DFA. <strong>Flex</strong> is the GNU version.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> RE → NFA (Thompson's) → DFA (Subset Construction) → Minimized DFA (Hopcroft's). This pipeline is the heart of every modern lexer. The minimized DFA has the minimum number of states and is used for token recognition.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> Always show every state of the DFA construction table for full marks. Mark accepting states clearly with double circles or 'F'.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is a token?</div>
+          <div class="q-answer">A token is a pair consisting of a token name and an optional attribute value, produced by the lexical analyzer. Example: <code>&lt;id, "x"&gt;</code>. Tokens are the input to the syntax analyzer.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is DFA?</div>
+          <div class="q-answer">A DFA (Deterministic Finite Automaton) is a finite state machine where, for each state and input symbol, there is exactly one transition. DFAs have no ε-transitions. They are efficient to simulate and are equivalent in power to NFAs.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain NFA to DFA conversion with example.</div>
+          <div class="q-answer">
+            <p>Convert NFA to DFA using subset construction:</p>
+            <ul>
+              <li><strong>Step 1:</strong> Start state of DFA = ε-closure of NFA start.</li>
+              <li><strong>Step 2:</strong> For each unmarked DFA state S and input symbol a, compute move(S, a) and take its ε-closure. This is a new DFA state.</li>
+              <li><strong>Step 3:</strong> Repeat until no new states.</li>
+              <li><strong>Step 4:</strong> DFA accepting states = those whose subset contains any NFA accepting state.</li>
+            </ul>
+            <p><strong>Example:</strong> Convert RE <code>(a|b)*</code> via NFA → DFA.</p>
+            <p>The resulting DFA has two states: S0 = ε-closure({start}) = {start, s1, s2, s3} and S1 (after reading 'a' or 'b') = same as S0. So the DFA is essentially a single accepting state with self-loops on 'a' and 'b'.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What are regular expressions in compiler?</div>
+          <div class="q-answer">
+            <p>Regular expressions are used to formally specify token patterns in the lexical analysis phase. They define a finite language over an alphabet Σ.</p>
+            <p><strong>Rules:</strong></p>
+            <ul>
+              <li>ε is an RE denoting {ε}</li>
+              <li>For each a ∈ Σ, a is an RE denoting {a}</li>
+              <li>If r and s are REs, then r|s, rs, r*, (r) are REs</li>
+            </ul>
+            <p><strong>Examples:</strong></p>
+            <ul>
+              <li>Identifier: <code>letter (letter | digit)*</code></li>
+              <li>Number: <code>digit+ (. digit+)? (E (+|-)? digit+)?</code></li>
+              <li>Keywords: <code>if | while | return</code></li>
+            </ul>
+            <p>REs are equivalent in power to finite automata.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain lexical analysis phase. Discuss tokens, patterns, lexemes. Convert a given regular expression to NFA and then to DFA with example.</div>
+          <div class="q-answer">
+            <p>The <strong>lexical analyzer (scanner)</strong> is the first phase of compilation. It reads the input character stream, identifies groups of characters (lexemes) corresponding to tokens, removes whitespace and comments, and produces a token stream.</p>
+            <p><strong>Tokens, Lexemes, Patterns:</strong></p>
+            <ul>
+              <li><strong>Token:</strong> A symbolic name representing a category (id, +,-, num)</li>
+              <li><strong>Pattern:</strong> Rule describing what characters form the token (RE)</li>
+              <li><strong>Lexeme:</strong> Actual character sequence matched</li>
+            </ul>
+            <p>Example: <code>position = initial + rate * 60</code> → lexemes: <code>position</code>, <code>=</code>, <code>initial</code>, <code>+</code>, <code>rate</code>, <code>*</code>, <code>60</code>. Tokens: <code>id</code>, <code>assign</code>, <code>id</code>, <code>+</code>, <code>id</code>, <code>*</code>, <code>num</code>.</p>
+            <p><strong>Conversion Example: RE = (a|b)*abb</strong></p>
+            <p><strong>Step 1: RE to NFA (Thompson's Construction):</strong></p>
+            <div class="code-block">NFA states: 0..14
+Transitions:
+  0 →ε→ 1, 7
+  1 →ε→ 2, 4
+  2 →a→ 3
+  3 →ε→ 6
+  4 →b→ 5
+  5 →ε→ 6
+  6 →ε→ 1, 7
+  7 →a→ 8
+  8 →b→ 9
+  9 →b→ 10
+
+Start: 0, Accept: 10</div>
+            <p><strong>Step 2: NFA to DFA (Subset Construction):</strong></p>
+            <ul>
+              <li>A = ε-closure(0) = {0,1,2,4,7}</li>
+              <li>B = move(A, a) = {3,8}; ε-closure = {3,8,1,2,4,7} = {1,2,3,4,7,8}</li>
+              <li>C = move(A, b) = {5}; ε-closure = {5,6,1,2,4,7}</li>
+              <li>D = move(B, b) = {5,9}; ε-closure = {5,6,9,1,2,4,7}</li>
+              <li>E = move(B, a) = {3,8}; ε-closure = {1,2,3,4,7,8} = B</li>
+              <li>F = move(C, b) = {5,9}; ε-closure = {1,2,4,5,6,7,9} = D</li>
+              <li>G = move(D, b) = {5,10}; ε-closure = {1,2,4,5,6,7,10}</li>
+              <li>H = move(D, a) = {3,8}; ε-closure = B</li>
+              <li>I = move(G, b) = {5,10}; ε-closure = G</li>
+              <li>J = move(G, a) = {3,8}; ε-closure = B</li>
+            </ul>
+            <p><strong>DFA Transition Table:</strong></p>
+            <table>
+              <tr><th>State</th><th>a</th><th>b</th></tr>
+              <tr><td>A</td><td>B</td><td>C</td></tr>
+              <tr><td>B</td><td>B</td><td>D</td></tr>
+              <tr><td>C</td><td>B</td><td>D</td></tr>
+              <tr><td>D</td><td>B</td><td>G</td></tr>
+              <tr><td>G</td><td>B</td><td>I</td></tr>
+              <tr><td>I</td><td>B</td><td>I</td></tr>
+            </table>
+            <p>Accepting state: I. This DFA accepts exactly strings ending in "abb".</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Convert the regular expression (a|b)*abb to NFA using Thompson's construction and then to DFA.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> What are tokens, lexemes, and patterns? Explain with example.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Differentiate between NFA and DFA. Explain subset construction algorithm.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 3 ==================== -->
+    <div class="unit-section" id="unit-3">
+      <div class="unit-header">
+        <div class="unit-number">3</div>
+        <div class="unit-header-text">
+          <h3>Syntax Analysis</h3>
+          <p>Context-free grammar, parsing techniques, LL(1), LR parsers, YACC</p>
         </div>
       </div>
+      <div class="unit-content">
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> Differentiate between a compiler and an interpreter.</div>
-        <div class="answer">
+        <div class="topic-card">
+          <h4>Context-Free Grammar (CFG)</h4>
+          <p>A <strong>context-free grammar</strong> is a 4-tuple G = (V, T, P, S):</p>
+          <ul>
+            <li><strong>V</strong>: Set of non-terminals (variables)</li>
+            <li><strong>T</strong>: Set of terminals (tokens)</li>
+            <li><strong>P</strong>: Set of productions (rules) of form A → γ where A ∈ V</li>
+            <li><strong>S</strong>: Start symbol (S ∈ V)</li>
+          </ul>
+          <p>CFGs describe the syntactic structure of programming languages. Example: <code>E → E + T | T; T → T * F | F; F → ( E ) | id</code></p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Parse Tree and Ambiguity</h4>
+          <p>A <strong>parse tree</strong> (derivation tree) is a graphical representation of a derivation. The root is the start symbol; internal nodes are non-terminals; leaves are terminals. The yield of the tree (concatenation of leaves) gives the derived string.</p>
+          <p>A grammar is <strong>ambiguous</strong> if there exists a string with two or more distinct parse trees (or two distinct leftmost derivations). Example: <code>E → E + E | E * E | id</code> is ambiguous because <code>id + id * id</code> has two parse trees (different evaluation orders).</p>
+          <p>Ambiguity is resolved by:</p>
+          <ul>
+            <li>Rewriting grammar to enforce precedence and associativity</li>
+            <li>Adding parenthesization rules</li>
+            <li>Using unambiguous grammars</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Left Recursion and Left Factoring</h4>
+          <p>A grammar is <strong>left-recursive</strong> if it has a production of the form A → Aα. Top-down parsers cannot handle left recursion. It is eliminated as:</p>
+          <p>A → Aα | β becomes: A → βA'; A' → αA' | ε</p>
+          <p><strong>Left factoring</strong> removes common prefixes from productions to enable predictive parsing:</p>
+          <p>If A → αβ1 | αβ2, rewrite as: A → αA'; A' → β1 | β2</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Top-Down Parsing</h4>
+          <p>Top-down parsers build the parse tree from the root downward. Types:</p>
+          <ul>
+            <li><strong>Recursive Descent Parsing:</strong> Each non-terminal has a procedure that tries each production. Backtracking may occur. Simple but inefficient.</li>
+            <li><strong>Predictive Parsing (LL(1)):</strong> Non-backtracking top-down parser. Uses a parsing table indexed by (non-terminal, lookahead token). Requires LL(1) grammar.</li>
+          </ul>
+          <p><strong>LL(1):</strong> First 'L' = Left-to-right scan; second 'L' = Leftmost derivation; '1' = one lookahead symbol.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Bottom-Up Parsing (LR Parsers)</h4>
+          <p>Bottom-up parsers build the parse tree from leaves upward using reduction. Types:</p>
+          <ul>
+            <li><strong>LR(0):</strong> No lookahead. Simple but may have reduce/reduce conflicts.</li>
+            <li><strong>SLR (Simple LR):</strong> Uses FOLLOW sets to resolve conflicts. Slightly more powerful than LR(0).</li>
+            <li><strong>CLR (Canonical LR):</strong> Uses LR(1) items. Most powerful but large tables.</li>
+            <li><strong>LALR (Lookahead LR):</strong> Merges CLR states with same core. Smaller tables, used in YACC.</li>
+          </ul>
+          <p>LR(k): Left-to-right scan, Rightmost derivation in reverse, k lookahead tokens.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Shift-Reduce Parsing</h4>
+          <p>LR parsing uses a stack with state symbols and grammar symbols. Two actions:</p>
+          <ul>
+            <li><strong>Shift:</strong> Push current input symbol and next state onto stack.</li>
+            <li><strong>Reduce:</strong> Pop the right-hand side of a production and push the left-hand side (with goto state).</li>
+          </ul>
+          <p>The parser uses a parsing table with ACTION (shift/reduce/accept/error) and GOTO (state transitions) entries. Conflicts (shift-reduce or reduce-reduce) make a grammar non-LR.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>YACC Tool</h4>
+          <p><strong>YACC (Yet Another Compiler Compiler)</strong> is a tool that generates a LALR parser from a grammar specification. A YACC program has three sections:</p>
+          <ul>
+            <li><strong>Declarations:</strong> C declarations, token definitions (%token, %type)</li>
+            <li><strong>Translation rules:</strong> Grammar productions with semantic actions</li>
+            <li><strong>Auxiliary functions:</strong> User code in C</li>
+          </ul>
+          <p>YACC resolves shift-reduce conflicts by preferring shift. Output is a C program that calls yylex() to get tokens.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>First and Follow Sets</h4>
+          <p><strong>FIRST(α):</strong> Set of terminals that begin strings derivable from α. Rules:</p>
+          <ul>
+            <li>If X is terminal, FIRST(X) = {X}</li>
+            <li>If X → ε is a production, add ε to FIRST(X)</li>
+            <li>If X → Y1Y2...Yn, add FIRST(Y1) - {ε} to FIRST(X); if ε ∈ FIRST(Y1), add FIRST(Y2), etc.</li>
+          </ul>
+          <p><strong>FOLLOW(A):</strong> Set of terminals that can appear immediately after A in some sentential form. Includes $ (end marker). Rules:</p>
+          <ul>
+            <li>$ ∈ FOLLOW(S) where S is start symbol</li>
+            <li>If A → αBβ, then FIRST(β) - {ε} ⊆ FOLLOW(B)</li>
+            <li>If A → αB or A → αBβ where ε ∈ FIRST(β), then FOLLOW(A) ⊆ FOLLOW(B)</li>
+          </ul>
+          <p>FIRST and FOLLOW sets are used to build LL(1) and SLR parsing tables.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> LL parsers (top-down) build the parse tree from root to leaves and use leftmost derivations. LR parsers (bottom-up) build from leaves to root and trace rightmost derivations in reverse. LR parsers are more powerful — they can handle a larger class of grammars.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For parsing questions, always compute FIRST and FOLLOW sets first, then construct the parsing table, then trace a string to show acceptance or rejection.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is parse tree?</div>
+          <div class="q-answer">A parse tree is a hierarchical graphical representation of a derivation in a context-free grammar. The root is the start symbol; each internal node is a non-terminal and its children represent the right-hand side of a production; leaves are terminals. The yield of leaves gives the derived string.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is left recursion?</div>
+          <div class="q-answer">A grammar has left recursion if a non-terminal A has a derivation that begins with A itself. Direct left recursion: A → Aα | β. Indirect left recursion: A → Bα, B → Aβ. Top-down parsers cannot handle left-recursive grammars; it must be eliminated first.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain top-down parsing.</div>
+          <div class="q-answer">
+            <p><strong>Top-down parsing</strong> starts from the start symbol and tries to derive the input string by applying productions. The parser builds the parse tree from root to leaves.</p>
+            <ul>
+              <li><strong>Recursive Descent:</strong> Each non-terminal has a procedure. On a non-terminal A, try each production A → α; if input doesn't match, backtrack and try next production.</li>
+              <li><strong>Predictive Parsing:</strong> Non-backtracking. Uses LL(1) parsing table. At each step, based on current non-terminal and lookahead token, the table specifies which production to apply.</li>
+            </ul>
+            <p><strong>Requirements:</strong> Grammar must have no left recursion (eliminate first) and no common prefixes (left factor).</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is LL(1) grammar?</div>
+          <div class="q-answer">
+            <p>A grammar is <strong>LL(1)</strong> if its parsing table has no multiple entries (no ambiguity). LL(1) means the parser:</p>
+            <ul>
+              <li>Scans input Left-to-right</li>
+              <li>Constructs Leftmost derivation</li>
+              <li>Uses 1 lookahead symbol</li>
+            </ul>
+            <p><strong>Condition for LL(1):</strong> For any non-terminal A with productions A → α | β, we need FIRST(α) ∩ FIRST(β) = ∅, and if ε ∈ FIRST(α), then FIRST(β) ∩ FOLLOW(A) = ∅.</p>
+            <p>LL(1) grammars enable efficient predictive parsing using a parsing table indexed by (A, a).</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain syntax analysis. Discuss top-down and bottom-up parsing techniques with examples. Eliminate left recursion and left factoring from a given grammar and construct LL(1) parser.</div>
+          <div class="q-answer">
+            <p><strong>Syntax Analysis</strong> verifies the syntactic structure of the source program using grammar rules. It produces a parse tree.</p>
+            <p><strong>Top-Down Parsing:</strong> Starts from root. Recursive descent tries each production with backtracking. Predictive parsing uses LL(1) table — single lookahead, no backtracking.</p>
+            <p><strong>Bottom-Up Parsing:</strong> Starts from input and reduces to start symbol. Uses LR parsing tables. Variants: LR(0), SLR, CLR, LALR. More powerful than top-down but complex tables.</p>
+            <p><strong>Example: Given Grammar</strong></p>
+            <div class="code-block">S → A b | a
+A → A a | b</div>
+            <p><strong>Step 1: Eliminate Left Recursion</strong></p>
+            <div class="code-block">A is left-recursive.
+Replace A → A a | b with:
+  A → b A'
+  A' → a A' | ε
+
+Result:
+  S → A b | a
+  A → b A'
+  A' → a A' | ε</div>
+            <p><strong>Step 2: Compute FIRST and FOLLOW</strong></p>
+            <table>
+              <tr><th>Non-Terminal</th><th>FIRST</th><th>FOLLOW</th></tr>
+              <tr><td>S</td><td>{a, b}</td><td>{$}</td></tr>
+              <tr><td>A</td><td>{b}</td><td>{b}</td></tr>
+              <tr><td>A'</td><td>{a, ε}</td><td>{b}</td></tr>
+            </table>
+            <p><strong>Step 3: Construct LL(1) Parsing Table</strong></p>
+            <table>
+              <tr><th></th><th>a</th><th>b</th><th>$</th></tr>
+              <tr><td>S</td><td>S → a</td><td>S → A b</td><td></td></tr>
+              <tr><td>A</td><td></td><td>A → b A'</td><td></td></tr>
+              <tr><td>A'</td><td>A' → a A'</td><td>A' → ε</td><td></td></tr>
+            </table>
+            <p><strong>Step 4: Parse string "b a b" (sentence: A b after expansion)</strong></p>
+            <p>Trace the parsing table to show input is accepted when stack empties to $.</p>
+            <p><strong>Conclusion:</strong> The grammar after left recursion elimination is LL(1) since the parsing table has no multiple entries.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Compute FIRST and FOLLOW sets for the given grammar. Construct LL(1) parsing table.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Eliminate left recursion from the given grammar and construct LL(1) parser.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Compare top-down and bottom-up parsing. Explain SLR parser construction.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ==================== UNIT 4 ==================== -->
+    <div class="unit-section" id="unit-4">
+      <div class="unit-header">
+        <div class="unit-number">4</div>
+        <div class="unit-header-text">
+          <h3>Semantic Analysis &amp; IR</h3>
+          <p>Type checking, syntax-directed translation, three-address code, representations</p>
+        </div>
+      </div>
+      <div class="unit-content">
+
+        <div class="topic-card">
+          <h4>Type Checking</h4>
+          <p><strong>Type checking</strong> is the main activity of semantic analysis. It verifies that the type of each construct matches its expected use. The compiler uses the symbol table to look up declared types and applies type rules.</p>
+          <p>Examples of checks:</p>
+          <ul>
+            <li>Operands of arithmetic operators must be numeric</li>
+            <li>Subscript of an array must be an integer</li>
+            <li>Function arguments must match parameter types</li>
+            <li>Return type must match function declaration</li>
+          </ul>
+          <p>Type conversions (coercion) may be applied automatically: integer → float, int → long.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Type Systems</h4>
+          <p>A <strong>type system</strong> is a set of rules that assigns types to program constructs. Types classify values (integer, real, character, boolean, pointer, etc.).</p>
+          <p>Properties:</p>
+          <ul>
+            <li><strong>Static typing:</strong> Types checked at compile time (C, Java, C++)</li>
+            <li><strong>Dynamic typing:</strong> Types checked at runtime (Python, JavaScript)</li>
+            <li><strong>Strong typing:</strong> Strict type rules, fewer implicit coercions</li>
+            <li><strong>Weak typing:</strong> More implicit conversions</li>
+          </ul>
+        </div>
+
+        <div class="topic-card">
+          <h4>Symbol Table Operations</h4>
+          <p>The symbol table supports these operations during semantic analysis:</p>
+          <ul>
+            <li><strong>insert(name, attributes):</strong> Add a new identifier entry</li>
+            <li><strong>lookup(name):</strong> Find the entry for an identifier</li>
+            <li><strong>delete(name):</strong> Remove entry when scope ends</li>
+          </ul>
+          <p>Symbol tables can be <strong>linear list</strong> (slow, O(n)), <strong>binary search tree</strong> (O(log n)), or <strong>hash table</strong> (O(1) average). Each scope has its own table; nested scopes are managed with a stack of tables.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Three-Address Code (TAC)</h4>
+          <p><strong>Three-address code (TAC)</strong> is an intermediate representation where each instruction has at most three operands: <code>x = y op z</code>. The instruction format limits operations to one binary operator.</p>
+          <p>Common TAC forms:</p>
+          <ul>
+            <li><strong>Assignment:</strong> x = y op z  (e.g., t1 = a + b)</li>
+            <li><strong>Unary:</strong> x = op y  (e.g., t2 = -t1)</li>
+            <li><strong>Copy:</strong> x = y</li>
+            <li><strong>Jump:</strong> goto L</li>
+            <li><strong>Conditional:</strong> if x goto L; ifFalse x goto L</li>
+            <li><strong>Procedure call:</strong> param x; call p, n</li>
+            <li><strong>Index:</strong> x = y[i]; x[i] = y</li>
+            <li><strong>Address:</strong> x = &amp;y; x = *y; *x = y</li>
+          </ul>
+          <p>Example: <code>x = a + b * c</code> becomes <code>t1 = b * c; t2 = a + t1; x = t2</code></p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Representations of TAC</h4>
+          <p>TAC can be implemented in three ways:</p>
+          <ul>
+            <li><strong>Quadruples:</strong> Each instruction has 4 fields: (op, arg1, arg2, result). Easy to optimize. Result is a temporary variable.</li>
+            <li><strong>Triples:</strong> Each instruction has 3 fields: (op, arg1, arg2). References other instructions by position number. Compact but harder to optimize.</li>
+            <li><strong>Indirect Triples:</strong> A list of pointers to triples. Easier to reorder instructions than pure triples.</li>
+          </ul>
+          <p>Example: <code>t1 = a + b; t2 = c + d; x = t1 * t2</code></p>
           <table>
-            <tr><th>Compiler</th><th>Interpreter</th></tr>
-            <tr><td>Translates entire program to machine code before execution</td><td>Translates and executes line by line</td></tr>
-            <tr><td>Faster execution after compilation</td><td>Slower execution</td></tr>
-            <tr><td>Errors reported after full compilation</td><td>Errors reported immediately at line of error</td></tr>
-            <tr><td>Output: object code / executable</td><td>No intermediate object code produced</td></tr>
-            <tr><td>Examples: GCC, javac</td><td>Examples: Python, Ruby</td></tr>
+              <tr><th>Quadruples</th><th>Triples</th></tr>
+              <tr><td>(+, a, b, t1)</td><td>(+, a, b)</td></tr>
+              <tr><td>(+, c, d, t2)</td><td>(+, c, d)</td></tr>
+              <tr><td>(*, t1, t2, x)</td><td>(*, (0), (1))</td></tr>
           </table>
         </div>
-      </div>
 
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Describe input buffering with the two-buffer scheme and sentinel technique. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>Input is read in chunks into two buffers. <code>lexemeBegin</code> marks the start of the current lexeme and <code>forward</code> scans forward to find the end. Both buffers end with a sentinel (EOF character) so the scanner can detect the end of a buffer without an explicit boundary check on every character. When the sentinel is reached, the next half-buffer is loaded.</p>
+        <div class="topic-card">
+          <h4>Syntax-Directed Translation (SDT)</h4>
+          <p><strong>Syntax-directed translation</strong> attaches semantic actions (code fragments) to grammar productions. Actions are executed when the production is used in parsing, generating intermediate code or updating the symbol table.</p>
+          <p>Example for expression evaluation:</p>
+          <div class="code-block">E → E1 + T   { E.place = newtemp();
+                emit(E1.place '+' T.place '→' E.place); }
+E → T         { E.place = T.place; }
+T → id        { T.place = id.place; }</div>
         </div>
-      </div>
 
-      <!-- 15M Questions -->
-      <div class="badge-row"><span class="badge badge-15m">15M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Discuss the various phases of a compiler in detail with a neat diagram. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>A compiler has 6 phases organized as a linear pipeline:</p>
-          <p><strong>1. Lexical Analysis:</strong> Reads source code character-by-character, groups them into tokens (lexemes), removes whitespace/comments, reports lexical errors, and populates the symbol table. Tools: Lex/Flex.</p>
-          <p><strong>2. Syntax Analysis (Parsing):</strong> Takes the token stream and checks if it conforms to the grammar of the language. Builds a parse tree / syntax tree. Uses a context-free grammar (CFG). Output: parse tree.</p>
-          <p><strong>3. Semantic Analysis:</strong> Checks the <em>meaning</em> of the construct — type checking, scope resolution, ensuring operands have compatible types. Uses syntax-directed translation (SDT) / syntax-directed definitions (SDD) to decorate the parse tree. Output: decorated syntax tree.</p>
-          <p><strong>4. Intermediate Code Generation:</strong> Translates the decorated syntax tree into a platform-independent intermediate representation. Three-address code (TAC) is the most common IR. Other forms: DAG, P-code, quadruples.</p>
-          <p><strong>5. Code Optimization:</strong> Improves the IR for efficiency. Techniques: constant folding, constant propagation, CSE, dead code elimination, loop optimization, peephole optimization.</p>
-          <p><strong>6. Code Generation:</strong> Translates the optimized IR into target machine code. Handles register allocation and instruction selection. Produces the final relocatable machine code.</p>
-          <pre><code>Source Code
-    ↓
-[Lexical Analyzer] → Token Stream + Symbol Table
-    ↓
-[Syntax Analyzer] → Parse Tree
-    ↓
-[Semantic Analyzer] → Decorated Syntax Tree
-    ↓
-[IR Generator] → Intermediate Code (3AC)
-    ↓
-[Optimizer] → Optimized IR
-    ↓
-[Code Generator] → Target Machine Code</code></pre>
+        <div class="topic-card">
+          <h4>S-Attributed and L-Attributed Definitions</h4>
+          <p><strong>S-attributed definitions:</strong> Use only synthesized attributes — attributes computed from children to parent. Can be evaluated during bottom-up parsing.</p>
+          <p><strong>L-attributed definitions:</strong> Allow synthesized plus inherited attributes that flow from left to right (parent to children, or left siblings to right siblings). Can be evaluated during top-down parsing.</p>
+          <p>Every S-attributed definition is L-attributed, but not vice versa. L-attributed covers a larger class including type checking.</p>
         </div>
-      </div>
 
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain regular expressions, finite automata, and their role in lexical analysis. Also discuss the conversion from regular expression to NFA using Thompson's construction. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Regular Expressions:</strong> Algebraic notations for describing token patterns. Operators: union (<code>|</code>), concatenation, closure (<code>*</code>), plus (<code>+</code>), optional (<code>?</code>). Example: <code>[a-z][a-z0-9]*</code> matches identifiers.</p>
-          <p><strong>Finite Automata (FA):</strong> A 5-tuple (Q, Σ, δ, q₀, F) — set of states, alphabet, transition function, start state, accept states. FA recognizes patterns. Two types:</p>
-          <ul>
-            <li><strong>NFA:</strong> Multiple transitions per symbol, ε-transitions allowed.</li>
-            <li><strong>DFA:</strong> Exactly one transition per symbol, no ε-transitions.</li>
-          </ul>
-          <p><strong>Thompson's Construction:</strong> Recursively builds an NFA from a regex:
-          <br>• <code>a</code> → 2 states, transition on a
-          <br>• <code>r|s</code> → new start, ε to both roots
-          <br>• <code>rs</code> → ε from r's accept to s's start
-          <br>• <code>r*</code> → loop with ε-transitions
-          <br>• <code>r+</code> → like r* but must consume at least one
-          <br>• <code>r?</code> → ε to r and ε to accept
-          </p>
-          <p>The resulting NFA is then converted to DFA via <strong>subset construction</strong> using ε-closure, and the DFA is minimized.</p>
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> TAC bridges the gap between high-level source and low-level target code. It is machine-independent and easy to optimize. The choice of representation (quadruples/triples) affects how easily optimizations can be applied.
         </div>
-      </div>
 
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain the differences between compiler, interpreter, and assembler. Also explain the different phases of compiler with a diagram. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <table>
-            <tr><th>Compiler</th><th>Interpreter</th><th>Assembler</th></tr>
-            <tr><td>Converts entire source to machine code first</td><td>Executes line by line without full translation</td><td>Converts assembly code to machine code</td></tr>
-            <tr><td>Slower translation, faster execution</td><td>Faster translation, slower execution</td><td>1:1 translation of assembly to machine code</td></tr>
-            <tr><td>Produces .exe/.o files</td><td>No intermediate file</td><td>Produces object code</td></tr>
-            <tr><td>All errors shown after full scan</td><td>Stops at first error</td><td>Syntax errors in assembly reported</td></tr>
-          </table>
-          <p><strong>Phases:</strong> (1) Lexical Analysis → (2) Syntax Analysis → (3) Semantic Analysis → (4) IR Generation → (5) Optimization → (6) Code Generation. Each phase transforms the output of the previous phase.</p>
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For TAC questions, always convert arithmetic expressions step-by-step using temporaries. For representation questions, show both quadruples and triples side by side for the same expression.
         </div>
-      </div>
 
-      <!-- Previous Year Questions -->
-      <div class="pyq-section">
-        <p class="pyq-section-title">Previous Year Questions</p>
-        <ul class="pyq-list">
-          <li>Explain phases of a compiler with a neat diagram.</li>
-          <li>Describe input buffering and the sentinel technique.</li>
-          <li>Convert the regular expression (a|b)*abb to an NFA using Thompson's construction.</li>
-          <li>Discuss Lex/Flex and how token specifications are written.</li>
-          <li>Difference between compiler and interpreter.</li>
-          <li>What is the role of a lexical analyzer? What is a sentinel?</li>
-        </ul>
-      </div>
-
-      <!-- Quick Revision -->
-      <div class="quick-revision">
-        <p class="quick-revision-title">⚡ Quick Revision</p>
-        <ul>
-          <li><strong>Compiler phases:</strong> Lexical → Syntax → Semantic → IR → Optimization → Code Gen</li>
-          <li><strong>Lexeme</strong> is the actual string; <strong>Token</strong> is the (name, attribute) pair</li>
-          <li><strong>Lex/Flex</strong> generates a scanner from RE specifications</li>
-          <li><strong>NFA → DFA</strong>: Subset construction using ε-closure; then minimize DFA</li>
-          <li><strong>RE operators:</strong> | (union), · (concat), * (closure), + (one+), ? (optional)</li>
-          <li><strong>Sentinel</strong> eliminates per-character boundary checks in input buffering</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ═══════════════ MODULE 2 ═══════════════ -->
-    <div class="module">
-      <div class="module-header">
-        <div class="module-number">2</div>
-        <div class="module-title-group">
-          <h2 class="module-title">Syntax Analysis (Parsing)</h2>
-          <p class="module-topics">Context-free grammar · Top-down parsing · LL(1) · Bottom-up parsing · SLR, CLR, LALR</p>
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is three-address code?</div>
+          <div class="q-answer">Three-address code (TAC) is an intermediate representation in which each instruction contains at most three operands — typically in the form <code>x = y op z</code>. It uses temporary variables to break complex expressions into simple steps, making it machine-independent and easy to optimize.</div>
         </div>
-      </div>
 
-      <div class="exam-tip">
-        <span class="exam-tip-icon">💡</span>
-        <p class="exam-tip-text"><strong>Exam Tip:</strong> Parsing is the <strong>most important</strong> module for exams. LL(1) parsing table construction and SLR/CLR/LALR parse table questions are asked every year. Practice constructing FIRST, FOLLOW, and parsing tables from given grammars.</p>
-      </div>
-
-      <!-- 1M Questions -->
-      <div class="badge-row"><span class="badge badge-1m">1M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a context-free grammar (CFG)?</div>
-        <div class="answer">
-          <p>A CFG is a 4-tuple G = (V, T, P, S) where V is the set of variables (non-terminals), T is the set of terminals, P is the set of productions, and S is the start symbol. CFGs can express nested, recursive constructs that regular expressions cannot.</p>
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is type checking?</div>
+          <div class="q-answer">Type checking is the process of verifying that operands and operators are type-compatible according to language rules. It is performed during semantic analysis using the symbol table. The type checker enforces type rules like "addition requires numeric operands" and reports type errors.</div>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a parse tree?</div>
-        <div class="answer">
-          <p>A parse tree is a tree-structured representation of how a string is derived from a grammar. Interior nodes are non-terminals, leaves are terminals or ε. The root is the start symbol. It shows the hierarchical syntactic structure.</p>
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain three-address code representations.</div>
+          <div class="q-answer">
+            <p>Three-address code is represented in three main ways:</p>
+            <ul>
+              <li><strong>Quadruples:</strong> 4 fields per instruction: <code>(op, arg1, arg2, result)</code>. Most common. Result field allows simple register allocation.</li>
+              <li><strong>Triples:</strong> 3 fields per instruction: <code>(op, arg1, arg2)</code>. Replaces explicit temporaries with positions in the instruction list. Compact but instructions are referenced by index.</li>
+              <li><strong>Indirect Triples:</strong> List of pointers to triples. Separation allows easier reordering during optimization.</li>
+            </ul>
+            <p><strong>Example:</strong> <code>a = b + c * d - e</code></p>
+            <p><strong>Triples:</strong></p>
+            <div class="code-block">(0):  *, c, d
+(1):  +, b, (0)
+(2):  -, (1), e
+(3):  =, (2), a</div>
+            <p><strong>Quadruples:</strong></p>
+            <div class="code-block">(0): *,  c,  d,  t1
+(1): +,  b,  t1, t2
+(2): -,  t2, e,  t3
+(3): =,  t3, _,  a</div>
+            <p>Quadruples are easier for optimization since each temporary has a name.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is left recursion? How do you eliminate it?</div>
-        <div class="answer">
-          <p>A production A → Aα has left recursion. It causes immediate left-recursion in top-down parsers. Eliminate by rewriting:
-          <br>A → Aα₁ | Aα₂ | ... | Aβ₁ | Aβ₂ | ... | γ
-          <br>becomes:
-          <br>A → β₁A' | β₂A' | ... ; A' → α₁A' | α₂A' | ... | ε
-          </p>
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is syntax-directed translation?</div>
+          <div class="q-answer">
+            <p><strong>Syntax-directed translation (SDT)</strong> is a technique where semantic actions are attached to grammar productions. The actions are executed in a specific order during parsing to compute attributes, update the symbol table, generate intermediate code, or report errors.</p>
+            <p>An SDT consists of:</p>
+            <ul>
+              <li>A context-free grammar</li>
+              <li>A set of attributes associated with grammar symbols</li>
+              <li>Semantic rules attached to productions</li>
+            </ul>
+            <p>Two main attribute types: <strong>synthesized</strong> (computed from children) and <strong>inherited</strong> (computed from parent/siblings). S-attributed grammars use only synthesized attributes; L-attributed grammars allow inherited attributes flowing left-to-right.</p>
+          </div>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is left factoring?</div>
-        <div class="answer">
-          <p>Left factoring rewrites productions with common prefixes to make them suitable for top-down parsing. For A → αβ | αγ, rewrite as A → αA' ; A' → β | γ.</p>
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain semantic analysis and intermediate code generation. Discuss syntax-directed translation, three-address code, and its representations (quadruples, triples, indirect triples) with examples.</div>
+          <div class="q-answer">
+            <p><strong>Semantic Analysis</strong> is performed after syntax analysis. It checks type compatibility, scope rules, and semantic correctness. It uses the symbol table to look up declared types and verifies that operations are applied to appropriate types.</p>
+            <p>Key activities:</p>
+            <ul>
+              <li><strong>Type checking:</strong> Verify operand types match operator requirements</li>
+              <li><strong>Type conversion:</strong> Insert implicit conversions where allowed</li>
+              <li><strong>Overload resolution:</strong> Choose correct function based on argument types</li>
+              <li><strong>Constant folding:</strong> Evaluate constant expressions at compile time</li>
+            </ul>
+            <p><strong>Intermediate Code Generation</strong> produces a machine-independent representation (typically TAC) using syntax-directed translation.</p>
+            <p><strong>SDT Example for Expression Translation:</strong></p>
+            <div class="code-block">E → E1 + T
+    { E.place = newtemp();
+      emit(E1.place, '+', T.place, '=', E.place); }
+E → T
+    { E.place = T.place; }
+T → num
+    { T.place = num.value; }</div>
+            <p><strong>Generate TAC for: x = (a + b) * (c - d)</strong></p>
+            <div class="code-block">t1 = a + b
+t2 = c - d
+t3 = t1 * t2
+x = t3</div>
+            <p><strong>Quadruples:</strong></p>
+            <table>
+              <tr><th>#</th><th>op</th><th>arg1</th><th>arg2</th><th>result</th></tr>
+              <tr><td>0</td><td>+</td><td>a</td><td>b</td><td>t1</td></tr>
+              <tr><td>1</td><td>-</td><td>c</td><td>d</td><td>t2</td></tr>
+              <tr><td>2</td><td>*</td><td>t1</td><td>t2</td><td>t3</td></tr>
+              <tr><td>3</td><td>=</td><td>t3</td><td>-</td><td>x</td></tr>
+            </table>
+            <p><strong>Triples:</strong></p>
+            <table>
+              <tr><th>#</th><th>op</th><th>arg1</th><th>arg2</th></tr>
+              <tr><td>0</td><td>+</td><td>a</td><td>b</td></tr>
+              <tr><td>1</td><td>-</td><td>c</td><td>d</td></tr>
+              <tr><td>2</td><td>*</td><td>(0)</td><td>(1)</td></tr>
+              <tr><td>3</td><td>=</td><td>(2)</td><td>x</td></tr>
+            </table>
+            <p><strong>Indirect Triples:</strong> An additional list of pointers <code>[0, 1, 2, 3]</code> references the triples in the order of execution. The triples themselves can be stored in any order; the pointer list controls execution. This makes reordering (for optimization) easy without rewriting the triples.</p>
+            <p><strong>Comparison:</strong></p>
+            <ul>
+              <li>Quadruples: explicit names, easy optimization, more space</li>
+              <li>Triples: compact, references by position, harder to optimize</li>
+              <li>Indirect triples: flexibility of pointers + compactness</li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-1m">1M</span> What is FIRST and FOLLOW in parsing? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>FIRST(α):</strong> Set of terminals that can begin strings derived from α. If α ⇒ ε, then ε ∈ FIRST(α).</p>
-          <p><strong>FOLLOW(A):</strong> Set of terminals that can appear immediately to the right of A in some sentential form. If A is the start symbol, $ ∈ FOLLOW(A).</p>
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Generate three-address code for the given expression. Show quadruples and triples.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> What is syntax-directed translation? Explain S-attributed and L-attributed definitions.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> Explain different representations of three-address code with example.
+          </div>
         </div>
-      </div>
 
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is the difference between top-down and bottom-up parsing?</div>
-        <div class="answer">
-          <p><strong>Top-down:</strong> Starts from the start symbol, expands productions to match the input string (leftmost derivation). Examples: Recursive Descent, LL(1). <strong>Bottom-up:</strong> Starts from the input string, reduces to the start symbol (rightmost derivation in reverse). Examples: SLR, CLR, LALR, LR.</p>
-        </div>
-      </div>
-
-      <!-- 5M Questions -->
-      <div class="badge-row"><span class="badge badge-5m">5M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> What is an LL(1) parser? How do you construct an LL(1) parsing table? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>LL(1)</strong> means: L = left-to-right scan, L = leftmost derivation, (1) = 1 token lookahead. An LL(1) parser uses a parsing table M[A, a] which gives the production to apply when non-terminal A is at the top of the stack and the next input token is a.</p>
-          <p><strong>Construction steps:</strong></p>
-          <ol>
-            <li>Eliminate left recursion from the grammar.</li>
-            <li>Left factor the grammar.</li>
-            <li>Compute FIRST and FOLLOW for all non-terminals.</li>
-            <li>For each production A → α:
-              <ul>
-                <li>For each terminal a in FIRST(α), add A → α to M[A, a].</li>
-                <li>If ε ∈ FIRST(α), for each terminal b in FOLLOW(A), add A → α to M[A, b].</li>
-                <li>If ε ∈ FIRST(α) and $ ∈ FOLLOW(A), add A → α to M[A, $].</li>
-              </ul>
-            </li>
-          </ol>
-          <p>The grammar is LL(1) iff no table entry has more than one production.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain the concept of a shift-reduce parser. What are handle pruning and viable prefixes? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Shift-reduce parsing</strong> is a bottom-up parsing technique. It performs four actions:</p>
-          <ul>
-            <li><strong>Shift:</strong> Move the next input token onto the stack.</li>
-            <li><strong>Reduce:</strong> Apply a production in reverse (reduce RHS to LHS on the stack).</li>
-            <li><strong>Accept:</strong> Input is successfully parsed.</li>
-            <li><strong>Error:</strong> Unrecoverable syntax error found.</li>
-          </ul>
-          <p>A <strong>handle</strong> is a substring that matches the RHS of a production and whose reduction represents one step of a rightmost derivation. <strong>Handle pruning</strong> is the process of identifying and reducing handles in a rightmost derivation.</p>
-          <p>A <strong>viable prefix</strong> is a prefix of a right-sentential form that does not extend past the rightmost handle. The set of viable prefixes is a regular language and can be recognized by an LR parser's stack.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What is operator precedence parsing?</div>
-        <div class="answer">
-          <p>Operator precedence parsing is a simple bottom-up parsing technique for expression grammars. It uses three precedence relations between terminal pairs: <code>&lt;</code> (lower precedence), <code>=</code> (equal precedence), <code>&gt;</code> (higher precedence). The parser uses a stack and a precedence table to decide when to shift or reduce. It cannot handle ambiguous grammars with adjacent non-terminals.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> What is LALR parsing? How does it differ from CLR parsing? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>CLR (Canonical LR):</strong> Uses canonical LR(1) items (production + 1 lookahead token). Constructs the full set of LR(1) states. Produces the largest and most precise parse tables but is very large.</p>
-          <p><strong>LALR (Look-Ahead LR):</strong> Merges CLR states with the same LR(0) core but different lookahead sets. This produces smaller tables than CLR while detecting more errors than SLR. The construction: build the LR(1) states, merge those with identical cores, then construct the parse table.</p>
-          <p>Key difference: CLR has distinct entries for different lookahead sets; LALR merges them, so fewer states but may have reduce-reduce conflicts.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain recursive descent parsing.</div>
-        <div class="answer">
-          <p>Recursive descent parsing is a top-down technique where each non-terminal is implemented as a function. The parser reads tokens from the input and uses recursive function calls to match productions. It requires the grammar to be free of left recursion and to be left-factored. If a choice is ambiguous, a backtracking recursive descent parser can try alternatives, but standard predictive parsers use only FIRST/FOLLOW to choose.</p>
-        </div>
-      </div>
-
-      <!-- 15M Questions -->
-      <div class="badge-row"><span class="badge badge-15m">15M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Construct an LL(1) parsing table for a given grammar. Explain the algorithm. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Example grammar:</strong></p>
-          <pre><code>E  → T E'
-E' → + T E' | ε
-T  → id</code></pre>
-          <p><strong>FIRST sets:</strong></p>
-          <pre><code>FIRST(E)  = { id }
-FIRST(E') = { +, ε }
-FIRST(T)  = { id }</code></pre>
-          <p><strong>FOLLOW sets:</strong></p>
-          <pre><code>FOLLOW(E)  = { $ }
-FOLLOW(E') = { $, + }
-FOLLOW(T)  = { +, $ }</code></pre>
-          <p><strong>LL(1) Parsing Table:</strong></p>
-          <table>
-            <tr><th>Non-terminal</th><th>id</th><th>+</th><th>$</th></tr>
-            <tr><td>E</td><td>E → T E'</td><td></td><td></td></tr>
-            <tr><td>E'</td><td>E' → ε</td><td>E' → + T E'</td><td>E' → ε</td></tr>
-            <tr><td>T</td><td>T → id</td><td></td><td></td></tr>
-          </table>
-          <p>The grammar is LL(1) since no cell has more than one entry.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain SLR, CLR, and LALR parsers in detail. Compare them. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>SLR (Simple LR):</strong></p>
-          <ul>
-            <li>Uses LR(0) items (production dot + no lookahead).</li>
-            <li>FOLLOW of LHS is used to decide reduce actions.</li>
-            <li>Smallest tables, but may have false reduce-reduce conflicts.</li>
-            <li>May reject some valid grammars that CLR/LALR can handle.</li>
-          </ul>
-          <p><strong>CLR (Canonical LR):</strong></p>
-          <ul>
-            <li>Uses LR(1) items (production dot + 1 lookahead token).</li>
-            <li>Most powerful — handles the widest class of grammars.</li>
-            <li>Largest tables (most states).</li>
-            <li>No spurious conflicts.</li>
-          </ul>
-          <p><strong>LALR (Look-Ahead LR):</strong></p>
-          <ul>
-            <li>Merges CLR states with the same LR(0) core.</li>
-            <li>Table size ≈ SLR size but more powerful.</li>
-            <li>May have reduce-reduce conflicts (rare with well-designed grammars).</li>
-            <li>Most commonly used in practice (Yacc/Bison use LALR).</li>
-          </ul>
-          <table>
-            <tr><th>Feature</th><th>SLR</th><th>CLR</th><th>LALR</th></tr>
-            <tr><td>Power</th><td>Least</td><td>Most</td><td>Medium</td></tr>
-            <tr><th>Table Size</th><th>Smallest</th><th>Largest</th><th>Medium</th></tr>
-            <tr><th>Item type</th><th>LR(0)</th><th>LR(1)</th><th>Merged LR(1)</th></tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> What is an LR parser? Describe the LR parsing algorithm and the construction of SLR parse tables. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>LR Parser:</strong> A bottom-up parser that reads input Left-to-right and constructs a Rightmost derivation (in reverse). It uses a stack of states and a parsing table with ACTION and GOTO sub-tables.</p>
-          <p><strong>Algorithm:</strong></p>
-          <ol>
-            <li>Initialize stack with state s₀ and input buffer with the string + $.</li>
-            <li>Let s = top of stack, a = next input token.</li>
-            <li>Consult ACTION[s, a]:
-              <ul>
-                <li><strong>shift s':</strong> push a, then s' onto stack.</li>
-                <li><strong>reduce A → β:</strong> pop 2×|β| symbols, push goto[s, A].</li>
-                <li><strong>accept:</strong> parsing successful.</li>
-                <li><strong>error:</strong> syntax error.</li>
-              </ul>
-            </li>
-          </ol>
-          <p><strong>SLR Table Construction:</strong></p>
-          <ol>
-            <li>Augment grammar: add S' → S.</li>
-            <li>Construct LR(0) items (states).</li>
-            <li>Build DFA on LR(0) items (states = item sets).</li>
-            <li>For each state i and terminal a: if item [A → α·aβ] in Iᵢ and goto(Iᵢ, a) = Iⱼ, set ACTION[i,a] = shift j.</li>
-            <li>For each state i and item [A → α·] in Iᵢ: for each a in FOLLOW(A), set ACTION[i,a] = reduce A → α. If A = S', set ACTION[i,$] = accept.</li>
-            <li>GOTO[i, A] = j where goto(Iᵢ, A) = Iⱼ.</li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> What is syntax-directed translation? Explain synthesized and inherited attributes with examples. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Syntax-Directed Translation (SDT):</strong> Associates semantic rules with grammar productions. These rules compute attribute values as the parse tree is traversed. A syntax-directed definition (SDD) specifies semantic rules for each production.</p>
-          <p><strong>Synthesized Attributes:</strong> Values computed from children's attribute values (bottom-up). Example: in a expression E → E₁ + T, the value of E is synthesized from E₁.val and T.val.</p>
-          <p><strong>Inherited Attributes:</strong> Values passed down from parent or siblings (top-down). Example: in D → T L, the type from T is inherited by L (the identifier list) to check all identifiers have that type.</p>
-          <pre><code>Example: Type checking with inherited attributes
-D → T L          { L.inh = T.type }
-T → int          { T.type = integer }
-T → real         { T.type = real }
-L → id           { addType(id.entry, L.inh) }
-L → L₁, id       { L.inh = L₁.inh; addType(id.entry, L.inh) }</code></pre>
-        </div>
-      </div>
-
-      <!-- Previous Year Questions -->
-      <div class="pyq-section">
-        <p class="pyq-section-title">Previous Year Questions</p>
-        <ul class="pyq-list">
-          <li>Construct LL(1) parsing table for the given grammar and show the parsing steps.</li>
-          <li>Remove left recursion and left factor a given grammar.</li>
-          <li>Explain SLR, CLR, and LALR parsers with a comparison table.</li>
-          <li>Construct SLR parse table for a given grammar.</li>
-          <li>What is handle pruning? Explain shift-reduce parsing.</li>
-          <li>Explain syntax-directed translation with synthesized and inherited attributes.</li>
-          <li>Compute FIRST and FOLLOW sets for a given grammar.</li>
-          <li>What is operator precedence parsing? Give the operator precedence parsing algorithm.</li>
-        </ul>
-      </div>
-
-      <!-- Quick Revision -->
-      <div class="quick-revision">
-        <p class="quick-revision-title">⚡ Quick Revision</p>
-        <ul>
-          <li><strong>LL(1):</strong> Top-down, predictive, uses stack + parsing table</li>
-          <li><strong>FIRST(α):</strong> Set of terminals α can begin with</li>
-          <li><strong>FOLLOW(A):</strong> Set of terminals that can follow A</li>
-          <li><strong>LR parsers:</strong> Bottom-up, shift-reduce, handle pruning</li>
-          <li><strong>SLR &lt; LALR &lt; CLR</strong> in power; CLR has largest tables</li>
-          <li><strong>SDT:</strong> Semantic rules with synthesized (bottom-up) and inherited (top-down) attributes</li>
-          <li><strong>Left recursion elimination:</strong> A → Aα|β becomes A → βA', A' → αA'|ε</li>
-        </ul>
       </div>
     </div>
 
-    <!-- ═══════════════ MODULE 3 ═══════════════ -->
-    <div class="module">
-      <div class="module-header">
-        <div class="module-number">3</div>
-        <div class="module-title-group">
-          <h2 class="module-title">Semantic Analysis &amp; Intermediate Code</h2>
-          <p class="module-topics">Syntax-directed definitions · Three-address code · Quadruples &amp; triples · Type checking</p>
+    <!-- ==================== UNIT 5 ==================== -->
+    <div class="unit-section" id="unit-5">
+      <div class="unit-header">
+        <div class="unit-number">5</div>
+        <div class="unit-header-text">
+          <h3>Code Optimization &amp; Generation</h3>
+          <p>Basic blocks, DAG, peephole optimization, code generation, register allocation</p>
         </div>
       </div>
+      <div class="unit-content">
 
-      <div class="exam-tip">
-        <span class="exam-tip-icon">💡</span>
-        <p class="exam-tip-text"><strong>Exam Tip:</strong> SDD/ SDT questions are common in 5M. Three-address code generation from an SDD is a standard 15M question. Practice converting infix expressions to TAC using SDD rules.</p>
-      </div>
-
-      <!-- 1M Questions -->
-      <div class="badge-row"><span class="badge badge-1m">1M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is semantic analysis?</div>
-        <div class="answer">
-          <p>Semantic analysis is the third compiler phase. It checks the <em>meaning</em> of the source program — type checking, scope resolution, ensuring operands have compatible types, and verifying that declarations exist before use. It uses syntax-directed definitions (SDD) to traverse the parse tree.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is three-address code (TAC)?</div>
-        <div class="answer">
-          <p>Three-address code is an intermediate representation where each instruction has at most one operator. Format: <code>A = B op C</code>. Examples: <code>t1 = a + b</code>, <code>t2 = t1 * c</code>, <code>a = t2</code>. It simplifies code generation by breaking complex expressions into simple atomic operations.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a quadruple?</div>
-        <div class="answer">
-          <p>A quadruple is a 4-tuple representation of a TAC instruction: <code>(op, arg1, arg2, result)</code>. For example, <code>(+, a, b, t1)</code> represents <code>t1 = a + b</code>. Quadruples are stored in an array and can be reordered easily for optimization.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a triple?</div>
-        <div class="answer">
-          <p>A triple is a 3-tuple <code>(op, arg1, arg2)</code> where positions refer to instruction numbers rather than temporary variable names. This avoids the need for a result field. Triples are used when doing code optimization because reordering doesn't require updating temporary name references.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is an indirect triple?</div>
-        <div class="answer">
-          <p>An indirect triple uses an array of pointers to triples. It allows instructions to be reordered more easily than direct triples because you simply reorder the pointer array rather than the triples themselves. Useful for optimization phases.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a syntax-directed definition (SDD)?</div>
-        <div class="answer">
-          <p>An SDD is a CFG augmented with semantic rules and/or actions. Each production has associated semantic rules that compute attribute values. Attributes can be <strong>synthesized</strong> (computed bottom-up) or <strong>inherited</strong> (passed top-down). SDDs are used to implement semantic analysis and IR generation.</p>
-        </div>
-      </div>
-
-      <!-- 5M Questions -->
-      <div class="badge-row"><span class="badge badge-5m">5M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain synthesized and inherited attributes with examples. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Synthesized Attributes:</strong> Computed from the children's attribute values, flowing bottom-up the parse tree.</p>
-          <pre><code>E → E₁ + T    { E.val = E₁.val + T.val }
-T → num        { T.val = num.value }</code></pre>
-          <p>Here, <code>E.val</code> is synthesized from <code>E₁.val</code> and <code>T.val</code>.</p>
-          <p><strong>Inherited Attributes:</strong> Passed down from parent or siblings, flowing top-down.</p>
-          <pre><code>D → T L        { L.inh = T.type }
-T → int         { T.type = 'integer' }
-L → id          { addType(id, L.inh) }
-L → L₁, id      { L.inh = L₁.inh; addType(id, L.inh) }</code></pre>
-          <p>Here, <code>L.inh</code> inherits the type from <code>T.type</code>, passing it down the identifier list.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Generate three-address code for the expression: a = b * (-c) + b * (-c) using SDD. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>Using the SDD for expressions:</p>
-          <pre><code>Grammar &amp; SDD:
-E → E₁ + T     { E.code = E₁.code || T.code || gen('add', E₁.place, T.place, E.place) }
-E → T          { E.code = T.code; E.place = T.place }
-T → ( E )      { T.code = E.code; T.place = E.place }
-T → id         { T.code = ''; T.place = id.name }
-T → - T₁       { T.code = T₁.code || gen('uminus', T₁.place, '-', T.place) }</code></pre>
-          <p><strong>Generated TAC:</strong></p>
-          <pre><code>t1 = uminus c
-t2 = b * t1
-t3 = uminus c
-t4 = b * t3
-a  = t2 + t4</code></pre>
-          <p>After CSE optimization: <code>t1 = uminus c; t2 = b * t1; a = t2 + t2</code></p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What are the different types of intermediate code representations?</div>
-        <div class="answer">
-          <p><strong>1. Three-Address Code (TAC):</strong> x = y op z — most common, easy to generate and optimize.</p>
-          <p><strong>2. Quadruples:</strong> (op, arg1, arg2, result) — fixed 4-field structure.</p>
-          <p><strong>3. Triples:</strong> (op, arg1, arg2) — uses instruction positions, not temp names.</p>
-          <p><strong>4. Indirect Triples:</strong> Array of pointers to triples for easy reordering.</p>
-          <p><strong>5. Postfix (Polish) Notation:</strong> op arg1 arg2 — stack-based, easy to evaluate.</p>
-          <p><strong>6. Abstract Syntax Tree (AST):</strong> Tree representation where interior nodes are operators and leaves are operands.</p>
-          <p><strong>7. DAG (Directed Acyclic Graph):</strong> Like AST but shares common subexpression nodes.</p>
-        </div>
-      </div>
-
-      <!-- 15M Questions -->
-      <div class="badge-row"><span class="badge badge-15m">15M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain syntax-directed translation (SDT). Generate three-address code for a given expression using SDD. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>SDT</strong> is the implementation of an SDD — it associates semantic actions with grammar productions. These actions generate intermediate code, perform type checking, or build symbol table entries.</p>
-          <p><strong>SDD for expressions:</strong></p>
-          <pre><code>E → E₁ + T     { E.place = newTemp();
-                    gen(E.place, '=', E₁.place, '+', T.place) }
-E → E₁ - T     { E.place = newTemp();
-                    gen(E.place, '=', E₁.place, '-', T.place) }
-E → T          { E.place = T.place }
-T → ( E )      { T.place = E.place }
-T → id         { T.place = id.place }</code></pre>
-          <p><strong>Example:</strong> For input <code>a = b + c * d</code>, TAC generated:</p>
-          <pre><code>t1 = c * d
-t2 = b + t1
-a  = t2</code></pre>
-          <p>The SDD rules are applied during a depth-first traversal of the parse tree (S-attributed: all synthesized attributes; L-attributed: synthesized + inherited along parse tree edges).</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Describe three-address code and its different representations (quadruples, triples, indirect triples) with examples. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Three-Address Code (TAC):</strong> Each instruction does one operation and stores the result. Example: <code>t1 = a + b; t2 = t1 * c; d = t2</code>.</p>
-          <p><strong>Quadruples:</strong> 4 fields: (op, arg1, arg2, result).</p>
-          <pre><code>Op      Arg1   Arg2   Result
-+        a      b      t1
-*        t1     c      t2
-=        t2     -      d</code></pre>
-          <p><strong>Triples:</strong> 3 fields: (op, arg1, arg2). Result field replaced by position of instruction.</p>
-          <pre><code>#    Op    Arg1   Arg2
-(0)  +     a      b
-(1)  *     (0)    c
-(2)  =     (1)    d</code></pre>
-          <p><strong>Indirect Triples:</strong> Pointer array to triples — allows reordering without changing triple references.</p>
-          <pre><code>Pointer array: [0, 1, 2]
-Triples: ( +, a, b ), ( *, (0), c ), ( =, (1), d )</code></pre>
-          <p><strong>Comparison:</strong></p>
-          <table>
-            <tr><th>Feature</th><th>Quadruples</th><th>Triples</th><th>Indirect Triples</th></tr>
-            <tr><td>Result storage</th><td>Named field</td><td>Implicit (position)</td><td>Implicit (via pointer)</td></tr>
-            <tr><td>Reordering</td><td>Update names</td><td>Update references</td><td>Reorder pointer array only</td></tr>
-            <tr><td>Space</td><td>More</td><td>Less</td><td>More (pointer array)</td></tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> What is type checking in semantic analysis? Explain type expressions and type equivalence. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Type Checking:</strong> Verifies that operands in an expression have compatible types. Done during semantic analysis using an SDD that propagates type information up the parse tree.</p>
-          <p><strong>Type Expressions:</strong> Recursively defined:
-          <br>• Basic types: integer, real, boolean, char
-          <br>• Array type: array(type, lower, upper)
-          <br>• Record type: record(name₁: type₁, name₂: type₂, ...)
-          <br>• Function type: (type₁, type₂, ...) → return_type
-          <br>• Pointer type: ↑type</p>
-          <p><strong>Type Equivalence:</strong></p>
-          <p><em>Name equivalence:</em> Two types are equivalent if they have the same type name. Strict and unambiguous.</p>
-          <p><em>Structural equivalence:</em> Two types are equivalent if they have the same structure (same components with equivalent types). More flexible.</p>
-          <p><strong>Type Conversion:</strong> If operands are not equivalent, the compiler may insert type conversion operators. Example: <code>int + float</code> → convert int to float first.</p>
-        </div>
-      </div>
-
-      <!-- Previous Year Questions -->
-      <div class="pyq-section">
-        <p class="pyq-section-title">Previous Year Questions</p>
-        <ul class="pyq-list">
-          <li>Explain syntax-directed translation with synthesized and inherited attributes.</li>
-          <li>Generate three-address code for a given expression using SDD.</li>
-          <li>What are quadruples, triples, and indirect triples? Explain with examples.</li>
-          <li>Explain type checking and type equivalence in semantic analysis.</li>
-          <li>Describe the different types of intermediate code representations.</li>
-          <li>What is a DAG for expressions? How does it help in optimization?</li>
-        </ul>
-      </div>
-
-      <!-- Quick Revision -->
-      <div class="quick-revision">
-        <p class="quick-revision-title">⚡ Quick Revision</p>
-        <ul>
-          <li><strong>SDD:</strong> CFG + semantic rules; enables semantic analysis and IR generation</li>
-          <li><strong>Synthesized:</strong> Bottom-up (children → parent); <strong>Inherited:</strong> Top-down (parent/sibling → child)</li>
-          <li><strong>TAC:</strong> x = y op z — one operation per instruction</li>
-          <li><strong>Quadruple:</strong> (op, arg1, arg2, result)</li>
-          <li><strong>Triple:</strong> (op, arg1, arg2) — result implied by position</li>
-          <li><strong>Type equivalence:</strong> Name-based (strict) or structural (flexible)</li>
-          <li><strong>Type conversion:</strong> Automatic insertion of conversion operators for mixed-type expressions</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ═══════════════ MODULE 4 ═══════════════ -->
-    <div class="module">
-      <div class="module-header">
-        <div class="module-number">4</div>
-        <div class="module-title-group">
-          <h2 class="module-title">Code Optimization</h2>
-          <p class="module-topics">Optimization basics · Peephole optimization · Data flow analysis · Loops · DAGs</p>
-        </div>
-      </div>
-
-      <div class="exam-tip">
-        <span class="exam-tip-icon">💡</span>
-        <p class="exam-tip-text"><strong>Exam Tip:</strong> Optimization is a favorite for 15M questions. Draw DAGs for expression optimization. Questions on constant folding, CSE, loop optimization, and peephole optimization appear very frequently.</p>
-      </div>
-
-      <!-- 1M Questions -->
-      <div class="badge-row"><span class="badge badge-1m">1M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is code optimization?</div>
-        <div class="answer">
-          <p>Code optimization is the process of improving the intermediate code so that it runs faster or uses less space, without changing the output of the program. It is machine-independent and performed on the IR. Types: local (within a basic block), global (across basic blocks), loop optimization, peephole optimization.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a basic block?</div>
-        <div class="answer">
-          <p>A basic block is a sequence of consecutive statements where control enters at the beginning and leaves at the end without any jumps or branching (except at the end). Basic blocks are the fundamental units for optimization and data flow analysis.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a leader in basic block construction?</div>
-        <div class="answer">
-          <p>A leader is the first statement of a basic block. A statement is a leader if: (1) It is the first statement of the program, (2) It is the target of a conditional or unconditional goto, or (3) It immediately follows a conditional or unconditional goto.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-1m">1M</span> What is peephole optimization? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>Peephole optimization examines a small window ("peephole") of target instructions and replaces them with equivalent but faster/shorter sequences. Applied after code generation. Examples: removing redundant push/pop, strength reduction (y*2 → y&lt;&lt;1).</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is dead code elimination?</div>
-        <div class="answer">
-          <p>Dead code elimination removes code that computes values that are never used. A statement is dead if its result is never used and it has no side effects. Example: <code>x = 5; y = 10;</code> where x is never read — the first assignment is dead.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is loop optimization?</div>
-        <div class="answer">
-          <p>Loop optimization targets loops since they consume most execution time. Techniques include: loop invariant code motion (moving invariant computations outside the loop), induction variable elimination, strength reduction (replacing expensive ops with cheaper ones), and loop unrolling.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is DAG in code optimization?</div>
-        <div class="answer">
-          <p>A DAG (Directed Acyclic Graph) represents expressions where common subexpressions share nodes. Leaves are identifiers/constants, interior nodes are operators. A DAG identifies common subexpressions and eliminates them. It also supports constant folding.</p>
-        </div>
-      </div>
-
-      <!-- 5M Questions -->
-      <div class="badge-row"><span class="badge badge-5m">5M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What is constant folding and constant propagation?</div>
-        <div class="answer">
-          <p><strong>Constant Folding:</strong> Evaluating constant expressions at compile time. Example: <code>3 + 5</code> replaced with <code>8</code>. <strong>Constant Propagation:</strong> Replacing a variable that always holds the same constant value with that constant. Example: if <code>x = 5</code> and <code>x</code> is never modified, replace all uses of <code>x</code> with <code>5</code>.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What is common subexpression elimination (CSE)?</div>
-        <div class="answer">
-          <p>CSE replaces multiple evaluations of the same expression with a single computation that stores the result in a temporary variable. Example: if <code>a = b + c</code> appears twice, compute once and reuse. CSE can be local (within a basic block) or global (across basic blocks).</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Construct a DAG for a given sequence of statements and show optimized code. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Example statements:</strong></p>
-          <pre><code>(1) a = b + c
-(2) b = a - d
-(3) c = b + c
-(4) e = b + c
-(5) a = e + d</code></pre>
-          <p><strong>DAG construction:</strong></p>
+        <div class="topic-card">
+          <h4>Basic Blocks</h4>
+          <p>A <strong>basic block</strong> is a maximal sequence of consecutive three-address instructions where:</p>
           <ul>
-            <li>Node 1: <code>+</code> with children b, c → labeled a</li>
-            <li>Node 2: <code>-</code> with children Node 1, d → labeled b</li>
-            <li>Node 3: <code>+</code> with children Node 2, c → labeled c (b + c, new value)</li>
-            <li>Node 4: <code>+</code> with children Node 2, c → labeled e (same as Node 3 — common subexpression!)</li>
-            <li>Node 5: <code>+</code> with children Node 4, d → labeled a</li>
+            <li>Control can only enter at the first instruction (leader)</li>
+            <li>Control leaves only at the last instruction (without halting or branching except at the end)</li>
           </ul>
-          <p><strong>Optimized code:</strong></p>
-          <pre><code>t1 = b + c
-t2 = t1 - d
-t3 = t2 + c     -- used by both c and e
-a  = t3 + d</code></pre>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain loop optimization techniques: loop invariant code motion and induction variable elimination. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Loop Invariant Code Motion:</strong> Statements whose values don't change within a loop are moved outside the loop body, so they're computed only once instead of on every iteration.</p>
-          <pre><code>for i = 1 to 100:
-    x = a * b + c    -- a, b, c don't change in loop
-    arr[i] = x
-
-After optimization:
-t = a * b + c       -- moved outside loop
-for i = 1 to 100:
-    arr[i] = t</code></pre>
-          <p><strong>Induction Variable Elimination:</strong> Variables that change by a constant amount each iteration can be replaced. If <code>j = 4*i</code> where <code>i</code> increments by 1, replace uses of <code>j</code> with <code>4*i</code> and eliminate <code>j</code>.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> What is copy propagation and dead code elimination?</div>
-        <div class="answer">
-          <p><strong>Copy Propagation:</strong> Replaces uses of a variable with the value it was copied from. If <code>a = b</code>, replace all subsequent uses of <code>a</code> with <code>b</code>.</p>
-          <pre><code>Before: a = b + c; x = a * d
-After:  x = (b + c) * d   -- may reveal more optimization</code></pre>
-          <p><strong>Dead Code Elimination:</strong> Removes unreachable or unused code. Example: after constant propagation reveals <code>x = 5</code> but x is never used — remove the assignment.</p>
-        </div>
-      </div>
-
-      <!-- 15M Questions -->
-      <div class="badge-row"><span class="badge badge-15m">15M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain peephole optimization. List and describe various peephole optimization techniques with examples. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Peephole Optimization:</strong> Examines a small sliding window ("peephole") of target instructions and replaces patterns with more efficient equivalents. Applied after code generation.</p>
-          <p><strong>Techniques:</strong></p>
+          <p><strong>Algorithm to identify leaders:</strong></p>
           <ol>
-            <li><strong>Redundant instruction elimination:</strong> Remove unnecessary instructions.
-              <br>e.g., <code>MOV R0, R0</code> → removed
-            </li>
-            <li><strong>Unreachable code elimination:</strong> Remove code after an unconditional jump.
-              <br>e.g., <code>JMP L2; MOV R0, 5; L2: MOV R1, 6</code> → remove MOV R0,5
-            </li>
-            <li><strong>Algebraic simplifications:</strong> Replace with simpler equivalent.
-              <br>e.g., <code>x = x + 0</code> → removed; <code>x = x * 1</code> → removed
-            </li>
-            <li><strong>Strength reduction:</strong> Replace expensive ops with cheaper ones.
-              <br>e.g., <code>x * 2</code> → <code>x &lt;&lt; 1</code>; <code>x / 4</code> → <code>x &gt;&gt; 2</code>
-            </li>
-            <li><strong>Eliminating jump to jump:</strong>
-              <br>e.g., <code>JMP L1; L1: JMP L2</code> → <code>JMP L2</code>
-            </li>
-            <li><strong>Eliminating stack operations:</strong>
-              <br>e.g., <code>PUSH R1; POP R1</code> → removed
-            </li>
-            <li><strong>Procedure call reduction:</strong>
-              <br>e.g., <code>CALL p; RET</code> → <code>JMP p</code>
-            </li>
+            <li>The first instruction of the IR is a leader.</li>
+            <li>The target of a conditional or unconditional jump is a leader.</li>
+            <li>The instruction immediately following a conditional or unconditional jump is a leader.</li>
           </ol>
+          <p>A basic block extends from a leader to the next leader (or end of program).</p>
         </div>
-      </div>
 
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain DAG-based code optimization. How does a DAG help in common subexpression elimination and dead code elimination? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>DAG (Directed Acyclic Graph):</strong> Each node represents a computation (operator), and leaves represent identifiers or constants. Nodes are shared when they represent the same computation (common subexpression).</p>
-          <p><strong>Construction algorithm:</strong></p>
-          <ol>
-            <li>For each statement, check if an identical node already exists.</li>
-            <li>If found, reuse it (CSE).</li>
-            <li>If the node's computed value is no longer needed, mark it as dead.</li>
-          </ol>
-          <p><strong>Example:</strong></p>
-          <pre><code>Statements:
-a = b + c
-b = a - d
-c = b + c     -- b+c is same as original, so reuse node
-e = b + c     -- same computation, reuse node again
-a = e + d</code></pre>
-          <p><strong>DAG:</strong></p>
-          <pre><code>   (+) ← b, c → labeled a
-      |
-   (-) ← (+), d → labeled b, e
-      |
-   (+) ← (-), c → labeled c
-      |
-   (+) ← (+), d → labeled a (new)</code></pre>
-          <p>Nodes for <code>b+c</code> are shared — that's CSE. If a computed value is never used, its node can be removed — that's dead code elimination.</p>
+        <div class="topic-card">
+          <h4>Flow Graphs</h4>
+          <p>A <strong>flow graph</strong> is a directed graph where each node represents a basic block and edges represent control flow. An edge from block B1 to B2 means control may flow from B1 to B2 (either fall-through or jump).</p>
+          <p>The entry block has no predecessors; the exit block represents all exit statements (return, halt).</p>
+          <p>Flow graphs enable analysis of loops, dominators, and optimization opportunities across blocks.</p>
         </div>
-      </div>
 
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain data flow analysis. Describe reaching definitions, live variable analysis, and available expressions analysis. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Data Flow Analysis:</strong> A framework for collecting information about how data flows through a program. It analyzes the flow of data across basic blocks.</p>
-          <p><strong>Reaching Definitions:</strong> A definition <code>d</code> (assignment) <em>reaches</em> point <code>p</code> if there is a path from <code>d</code> to <code>p</code> where <code>d</code> is not killed (redefined) along the path. Used for constant propagation and dead code elimination.</p>
-          <p><strong>Live Variable Analysis:</strong> A variable <code>x</code> is <em>live</em> at point <code>p</code> if its value at <code>p</code> may be used before being redefined. Used for register allocation (dead variable elimination).</p>
-          <p><strong>Available Expressions:</strong> An expression <code>x op y</code> is <em>available</em> at point <code>p</code> if on every path from the entry to <code>p</code>, the expression has been computed and neither <code>x</code> nor <code>y</code> has been redefined since. Used for common subexpression elimination.</p>
-          <p>All use iterative algorithms with IN/OUT sets propagated along the control flow graph until convergence.</p>
-        </div>
-      </div>
-
-      <!-- Previous Year Questions -->
-      <div class="pyq-section">
-        <p class="pyq-section-title">Previous Year Questions</p>
-        <ul class="pyq-list">
-          <li>What is peephole optimization? Explain various techniques with examples.</li>
-          <li>Construct a DAG for given statements and generate optimized code.</li>
-          <li>Explain loop optimization: loop invariant code motion and induction variable elimination.</li>
-          <li>What is constant folding and constant propagation? Give examples.</li>
-          <li>What is a basic block? How do you construct basic blocks from a program?</li>
-          <li>Explain data flow analysis — reaching definitions, live variable analysis.</li>
-          <li>What is copy propagation and dead code elimination?</li>
-          <li>What is strength reduction? Give examples.</li>
-        </ul>
-      </div>
-
-      <!-- Quick Revision -->
-      <div class="quick-revision">
-        <p class="quick-revision-title">⚡ Quick Revision</p>
-        <ul>
-          <li><strong>Optimization:</strong> Improve IR without changing program output</li>
-          <li><strong>Basic block:</strong> Sequential code with single entry and single exit</li>
-          <li><strong>Leader:</strong> First statement, jump target, or statement after a jump</li>
-          <li><strong>DAG:</strong> Shares common subexpression nodes; enables CSE + dead code elimination</li>
-          <li><strong>Peephole:</strong> Local optimization on a small window of instructions</li>
-          <li><strong>Loop optimization:</strong> Invariant code motion, induction variable elimination, strength reduction</li>
-          <li><strong>Data flow:</strong> Reaching definitions, live variables, available expressions</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ═══════════════ MODULE 5 ═══════════════ -->
-    <div class="module">
-      <div class="module-header">
-        <div class="module-number">5</div>
-        <div class="module-title-group">
-          <h2 class="module-title">Code Generation</h2>
-          <p class="module-topics">Code generation issues · Register allocation · Target machine · DAG-based generation · Peephole</p>
-        </div>
-      </div>
-
-      <div class="exam-tip">
-        <span class="exam-tip-icon">💡</span>
-        <p class="exam-tip-text"><strong>Exam Tip:</strong> Register allocation (graph coloring) is a guaranteed 5M or 15M question. Code generation from TAC using a descriptor-based approach is also frequently tested. Know the different addressing modes well.</p>
-      </div>
-
-      <!-- 1M Questions -->
-      <div class="badge-row"><span class="badge badge-1m">1M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is code generation in a compiler?</div>
-        <div class="answer">
-          <p>Code generation is the final compiler phase that translates the optimized intermediate representation into the target machine's instruction set. It must handle instruction selection, register allocation, and instruction ordering while ensuring correctness and efficiency.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is register allocation?</div>
-        <div class="answer">
-          <p>Register allocation assigns program variables to CPU registers (limited resource). The goal is to keep frequently used variables in registers, minimizing memory accesses. Graph coloring is a popular technique: build an interference graph, color with k colors (k = available registers).</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is an activation record (AR)?</div>
-        <div class="answer">
-          <p>An activation record (AR or stack frame) is a block of memory allocated on the call stack when a function is called. It contains: return address, dynamic link (pointer to caller's AR), parameters, local variables, saved registers, and return value. Size determined by ARD (activation record descriptor).</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What are the different addressing modes?</div>
-        <div class="answer">
-          <p><strong>Immediate:</strong> Operand is in the instruction itself. <strong>Register:</strong> Operand is in a register. <strong>Direct/Absolute:</strong> Address of operand is in instruction. <strong>Indirect:</strong> Instruction gives address of memory location containing operand address. <strong>Register Indirect:</strong> Register contains address of operand. <strong>Displacement/Indexed:</strong> Base + displacement, e.g., base(reg) or indexed addressing.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a descriptor in code generation?</div>
-        <div class="answer">
-          <p>A descriptor tracks information about variables. A <strong>address descriptor</strong> tells where the current value of a name is (register, memory address, or both). A <strong>register descriptor</strong> tracks which variable is currently stored in a given register. These are used to make optimal code generation decisions for TAC instructions.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a register descriptor? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>A register descriptor tracks, for each register, which variable name currently has its value in that register (if any). When generating code for an instruction <code>x = y op z</code>, the descriptor tells whether y and z are already in registers, avoiding unnecessary load instructions.</p>
-        </div>
-      </div>
-
-      <!-- 5M Questions -->
-      <div class="badge-row"><span class="badge badge-5m">5M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> What issues must a code generator handle when generating target code from three-address code? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>1. Input format:</strong> TAC in a linear representation (quadruples/triples).</p>
-          <p><strong>2. Instruction selection:</strong> Choosing target machine instructions for TAC ops. Straightforward but must consider addressing modes.</p>
-          <p><strong>3. Register allocation:</strong> Deciding which variables stay in registers and which go to memory. Graph coloring or heuristic approaches.</p>
-          <p><strong>4. Ordering of evaluation:</strong> Order of evaluating operands affects register pressure.</p>
-          <p><strong>5. Descriptor management:</strong> Maintaining address and register descriptors to generate optimal loads/stores.</p>
-          <p><strong>6. Control flow:</strong> Proper handling of jumps, conditionals, and procedure calls.</p>
-          <p><strong>7. Procedure calls/returns:</strong> Parameter passing, saving/restoring registers, managing AR.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain register allocation using graph coloring. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Graph coloring approach:</strong></p>
-          <ol>
-            <li>Build an <strong>interference graph</strong>: each node is a variable; an edge exists between two nodes if their live ranges overlap (they are simultaneously live).</li>
-            <li>Simplify: repeatedly remove a node with fewer than k neighbors (k = available registers).</li>
-            <li>If all nodes are removed, the graph is k-colorable — assign colors (registers) during backtracking.</li>
-            <li>If stuck (node has ≥ k neighbors), spill a variable to memory.</li>
-            <li>Insert load/store instructions for spilled variables.</li>
-          </ol>
-          <p><strong>Example:</strong> If R0–R3 are available (k=4) and a variable has ≤ 3 interfering variables, it can be assigned a register.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-5m">5M</span> Describe the different activation record (AR) schemes: static allocation, stack allocation, and dynamic allocation.</div>
-        <div class="answer">
-          <p><strong>Static Allocation:</strong> Names bound to fixed storage locations at compile time. Simple but cannot support recursion or dynamic data structures.</p>
-          <p><strong>Stack Allocation:</strong> ARs are allocated/deallocated in LIFO order on a call stack. Supports recursion. Used in most modern languages (C, Pascal, Java). The <em>sp</em> (stack pointer) points to the top of the stack; <em>fp</em> (frame pointer) points to a fixed position in the current AR.</p>
-          <p><strong>Dynamic Allocation:</strong> Memory allocated at runtime from a heap. Used for dynamically sized data (linked lists, arrays whose size is known only at runtime). The heap pointer grows in the opposite direction from the stack.</p>
-        </div>
-      </div>
-
-      <!-- 15M Questions -->
-      <div class="badge-row"><span class="badge badge-15m">15M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain code generation from three-address code using address and register descriptors. Generate target code for given TAC statements. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Descriptors:</strong></p>
-          <p><em>Address Descriptor (AD[x]):</em> Where is the current value of x? (Register R, Memory address M, or both).</p>
-          <p><em>Register Descriptor (RD[R]):</em> Which variable's value is currently in register R?</p>
-          <p><strong>Algorithm:</strong></p>
-          <pre><code>For each TAC statement:
-1. Ensure source operands are in registers.
-   If y not in register: gen('LD R, y')
-   If z not in register: gen('LD R, z')
-2. Generate the operation: gen('OP R, y, z, x')
-3. Update AD[x] = {R} (or {R, M} if also in memory)
-4. Update RD[R] = x</code></pre>
-          <p><strong>Example:</strong> TAC: <code>t1 = a + b; t2 = t1 * c; a = t2</code></p>
-          <p><em>Assuming R1, R2 available:</em></p>
-          <pre><code>LD   R1, a        -- AD[a] = {R1}; RD[R1] = a
-ADD  R1, b        -- AD[b] = {R1}; RD[R1] = t1
-MUL  R1, c        -- AD[c] updated; RD[R1] = t2
-ST   a, R1        -- store t2 into a
-                    AD[a] = {a, R1}</code></pre>
-          <p>This minimizes memory accesses by keeping values in registers as long as possible.</p>
-        </div>
-      </div>
-
-      <!-- Previous Year Questions -->
-      <div class="pyq-section">
-        <p class="pyq-section-title">Previous Year Questions</p>
-        <ul class="pyq-list">
-          <li>Explain register allocation using graph coloring technique.</li>
-          <li>Describe the activation record (AR) structure with a diagram.</li>
-          <li>Explain code generation from TAC using address and register descriptors.</li>
-          <li>What is a register descriptor and address descriptor?</li>
-          <li>Explain different addressing modes with examples.</li>
-          <li>What issues must a code generator handle? Explain in detail.</li>
-          <li>Describe the different activation record schemes.</li>
-        </ul>
-      </div>
-
-      <!-- Quick Revision -->
-      <div class="quick-revision">
-        <p class="quick-revision-title">⚡ Quick Revision</p>
-        <ul>
-          <li><strong>Code generation:</strong> TAC → target machine code</li>
-          <li><strong>Register allocation:</strong> Graph coloring — interference graph + k-coloring</li>
-          <li><strong>Address descriptor:</strong> Where is the current value of a name?</li>
-          <li><strong>Register descriptor:</strong> Which variable is in a given register?</li>
-          <li><strong>Activation record:</strong> Stack frame — parameters, locals, return address, dynamic link</li>
-          <li><strong>Addressing modes:</strong> Immediate, register, direct, indirect, register indirect, displacement</li>
-          <li><strong>Peephole optimization</strong applied after code generation to clean up target code</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- ═══════════════ MODULE 6 ═══════════════ -->
-    <div class="module">
-      <div class="module-header">
-        <div class="module-number">6</div>
-        <div class="module-title-group">
-          <h2 class="module-title">Runtime &amp; Advanced Topics</h2>
-          <p class="module-topics">Symbol table organization · Hashing · Scoping · Garbage collection · Storage organization</p>
-        </div>
-      </div>
-
-      <div class="exam-tip">
-        <span class="exam-tip-icon">💡</span>
-        <p class="exam-tip-text"><strong>Exam Tip:</strong> Runtime topics are short-answer favorites (1M and 5M). Symbol table implementation (hashing, trees) and garbage collection are frequently asked. Know block-structured language scoping well.</p>
-      </div>
-
-      <!-- 1M Questions -->
-      <div class="badge-row"><span class="badge badge-1m">1M</span></div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a symbol table? What operations does it support?</div>
-        <div class="answer">
-          <p>A symbol table is a data structure used by the compiler to store information about identifiers — name, type, scope, storage class, and other attributes. Core operations: <strong>insert</strong> (add a new entry), <strong>lookup</strong> (find an entry by name), and <strong>delete</strong> (remove an entry, e.g., when a scope ends).</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is garbage collection?</div>
-        <div class="answer">
-          <p>Garbage collection (GC) is an automatic memory management technique that reclaims memory occupied by objects that are no longer reachable (no longer referenced by any live variable). The collector identifies garbage objects and frees their memory. Common algorithms: mark-and-sweep, reference counting, generational GC.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is scope in a programming language?</div>
-        <div class="answer">
-          <p>Scope is the region of the program where a particular identifier binding is valid. In block-structured languages, each block creates a new scope. An identifier declared in an inner block <em>shadows</em> one with the same name in an outer block. Scoping rules determine which declaration applies at each use of an identifier.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-1m">1M</span> What is a mark-and-sweep garbage collector? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>Mark-and-sweep GC operates in two phases: (1) <strong>Mark phase:</strong> Starting from root references (globals, stack, registers), recursively mark all reachable objects. (2) <strong>Sweep phase:</strong> Scan all heap memory; unmarked objects are garbage and their memory is reclaimed.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is storage organization in a compiler?</div>
-        <div class="answer">
-          <p>The runtime memory is typically organized as: <strong>Code segment</strong> (machine instructions), <strong>Static/Data segment</strong> (global/static variables), <strong>Heap</strong> (dynamically allocated memory), <strong>Stack</strong> (activation records for procedure calls). The stack grows downward and heap grows upward, meeting in the middle.</p>
-        </div>
-      </div>
-
-      <div class="qa-item">
-        <div class="question"><span class="badge badge-1m">1M</span> What is the difference between static and dynamic scoping?</div>
-        <div class="answer">
-          <p><strong>Static (lexical) scoping:</strong> Scope is determined by the program text. An identifier's binding is determined by its position in the source code. Most modern languages (C, Java, Python) use static scoping. <strong>Dynamic scoping:</strong> Scope is determined by the sequence of function calls at runtime. Used in some older languages like early Lisp.</p>
-        </div>
-      </div>
-
-      <!-- 5M Questions -->
-      <div class="badge-row"><span class="badge badge-5m">5M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain symbol table organization using different data structures. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>1. Linear List (Unordered):</strong> Simple array or linked list. Insert O(1), but lookup O(n). Only practical for small tables.</p>
-          <p><strong>2. Sorted List / Binary Search Tree:</strong> Keeps entries sorted by name. Lookup O(log n). Can use self-balancing trees (AVL, red-black) to guarantee O(log n).</p>
-          <p><strong>3. Hash Table:</strong> Uses a hash function h(name) to map names to table indices. Average lookup O(1). Collisions handled by chaining (linked list at each bucket) or open addressing (linear/quadratic probing).</p>
-          <p><strong>4. Self-Organizing List:</strong> Reorders on access — recently accessed items move to front. Good if there's temporal locality.</p>
-          <p><strong>Block-structured languages:</strong> Use a <strong>stack of symbol tables</strong> — push a new scope's table on entry, pop on exit. Lookup searches from top (innermost) scope downward.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain hashing for symbol table organization. What are the collision handling techniques? <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Hashing:</strong> A hash function maps an identifier name to an integer index. The identifier is stored at table[h(name)].</p>
-          <p><strong>Hash function:</strong> Typically sums the character codes: <code>h(name) = Σ cᵢ mod table_size</code>. A better approach multiplies each character by a position-dependent constant before summing.</p>
-          <p><strong>Collision handling:</strong></p>
-          <ol>
-            <li><strong>Chaining (Open hashing):</strong> Each table slot holds a linked list of identifiers that hash to the same index. Simple, handles arbitrary load factor.</li>
-            <li><strong>Open Addressing (Closed hashing):</strong> All identifiers stored directly in the table. On collision, probe for next empty slot:
-              <ul>
-                <li><strong>Linear probing:</strong> Try h, h+1, h+2, ... (clustering problem)</li>
-                <li><strong>Quadratic probing:</strong> Try h, h+1², h+2², ...</li>
-                <li><strong>Double hashing:</strong> Use a second hash function to determine probe sequence.</li>
-              </ul>
-            </li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Describe the runtime storage organization — stack, heap, and static areas. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Static Area (Data Segment):</strong> Stores global and static variables. Size known at compile time. Fixed addresses throughout execution.</p>
-          <p><strong>Stack (Activation Records):</strong> Used for procedure/function calls. Each call creates an AR on top of the stack. Contains:</p>
+        <div class="topic-card">
+          <h4>Directed Acyclic Graph (DAG)</h4>
+          <p>A <strong>DAG for a basic block</strong> represents the computation structure. Each node represents a computation or value:</p>
           <ul>
-            <li>Actual parameters</li>
-            <li>Return address</li>
-            <li>Dynamic link (pointer to caller's AR)</li>
-            <li>Saved registers and status</li>
-            <li>Local variables</li>
-            <li>Return value</li>
+            <li>Leaf nodes: operands (variable names or constants) with labels</li>
+            <li>Interior nodes: operators with two children (operands)</li>
+            <li>A node may have multiple labels (if multiple variables hold same value)</li>
           </ul>
-          <p><strong>Heap:</strong> Used for dynamically allocated data (new, malloc). Grows upward from the other end of memory. Managed by the runtime system / garbage collector.</p>
-          <p>Stack and heap grow toward each other; an overflow condition occurs if they meet.</p>
-        </div>
-      </div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-5m">5M</span> Explain block-structured languages and how scope is managed in symbol tables. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p>In block-structured languages (e.g., Algol, Pascal), each block { ... } creates a new scope. Variables declared in an inner block are local to that block and shadow outer declarations.</p>
-          <p><strong>Symbol table management:</strong></p>
-          <ul>
-            <li>On block entry: push a new symbol table onto a stack.</li>
-            <li>New declarations are inserted into the top table.</li>
-            <li>On lookup: search from the top (innermost scope) downward.</li>
-            <li>On block exit: pop the top table from the stack.</li>
-          </ul>
-          <p>This ensures correct resolution of identifiers according to static (lexical) scoping rules. Each identifier maps to its most closely enclosing declaration.</p>
-        </div>
-      </div>
-
-      <!-- 15M Questions -->
-      <div class="badge-row"><span class="badge badge-15m">15M</span></div>
-
-      <div class="qa-item pyq-marker">
-        <div class="question"><span class="badge badge-15m">15M</span> Explain garbage collection. Describe mark-and-sweep and reference counting algorithms in detail. <span class="pyq-badge">PYQ</span></div>
-        <div class="answer">
-          <p><strong>Garbage Collection (GC):</strong> Automatically reclaims heap memory occupied by objects no longer accessible by the program. Prevents memory leaks and dangling pointer errors.</p>
-          <p><strong>Mark-and-Sweep:</strong></p>
+          <p><strong>DAG Construction:</strong></p>
           <ol>
-            <li><strong>Mark phase:</strong> Starting from root references (globals, stack, registers), recursively visit and mark all reachable objects.</li>
-            <li><strong>Sweep phase:</strong> Scan the entire heap; unmarked objects are garbage — add them to the free list. Unmark all marked objects for the next cycle.</li>
+            <li>If node exists for the operand, reuse it.</li>
+            <li>If the operation already exists, attach new labels to it.</li>
+            <li>Otherwise, create a new node.</li>
           </ol>
-          <p><em>Advantages:</em> Handles cyclic structures correctly. <em>Disadvantages:</em> Pauses program execution; requires free pointer to distinguish used from free memory.</p>
-          <p><strong>Reference Counting:</strong></p>
-          <ul>
-            <li>Each object stores a count of references to it.</li>
-            <li>When a reference is created/destroyed, the count is incremented/decremented.</li>
-            <li>When count reaches 0, the object is immediately freed.</li>
-          </ul>
-          <p><em>Advantages:</em> Incremental, no pauses. <em>Disadvantages:</em> Cannot handle circular references (A → B → A keeps both alive forever); overhead of maintaining counts on every reference update.</p>
-          <p><strong>Generational GC:</strong> Heap divided into generations. Young objects collected frequently (minor GC), old objects collected rarely (major GC). Based on the <em>generational hypothesis</em> — most objects die young.</p>
+          <p>DAGs identify <strong>common subexpressions</strong> automatically — same node means same value.</p>
         </div>
-      </div>
 
-      <!-- Previous Year Questions -->
-      <div class="pyq-section">
-        <p class="pyq-section-title">Previous Year Questions</p>
-        <ul class="pyq-list">
-          <li>Explain symbol table organization using different data structures.</li>
-          <li>What is hashing for symbol table? Explain collision handling techniques.</li>
-          <li>Describe mark-and-sweep garbage collection algorithm.</li>
-          <li>Explain reference counting garbage collection. What are its limitations?</li>
-          <li>Describe the runtime storage organization: stack, heap, and static areas.</li>
-          <li>Explain block-structured languages and scope management in symbol tables.</li>
-          <li>What is static vs dynamic scoping? Explain with examples.</li>
-          <li>Describe the activation record (AR) structure and its contents.</li>
-        </ul>
-      </div>
+        <div class="topic-card">
+          <h4>Local vs Global Optimization</h4>
+          <p><strong>Local optimization</strong> applies to a single basic block. Examples:</p>
+          <ul>
+              <li>Common subexpression elimination</li>
+              <li>Dead code elimination</li>
+              <li>Constant folding</li>
+              <li>Strength reduction (x*2 → x+x)</li>
+            </ul>
+          <p><strong>Global optimization</strong> applies across basic blocks using flow graph analysis. Examples:</p>
+          <ul>
+              <li>Loop-invariant code motion (hoist computations out of loops)</li>
+              <li>Global common subexpression elimination</li>
+              <li>Induction variable elimination</li>
+              <li>Data flow analysis</li>
+            </ul>
+          <p>Local optimizations are simpler; global ones require control flow and data flow analysis.</p>
+        </div>
 
-      <!-- Quick Revision -->
-      <div class="quick-revision">
-        <p class="quick-revision-title">⚡ Quick Revision</p>
-        <ul>
-          <li><strong>Symbol table:</strong> Stores identifier info; supports insert, lookup, delete</li>
-          <li><strong>Hashing:</strong> O(1) average lookup; chaining vs. open addressing</li>
-          <li><strong>Block-structured scoping:</strong> Stack of symbol tables; push on entry, pop on exit</li>
-          <li><strong>Static scoping:</strong> Determined by source code position (most languages)</li>
-          <li><strong>Dynamic scoping:</strong> Determined by call sequence at runtime</li>
-          <li><strong>GC algorithms:</strong> Mark-and-sweep, reference counting, generational</li>
-          <li><strong>Runtime memory:</strong> Code + Static + Stack (AR) + Heap</li>
-        </ul>
-      </div>
-    </div>
+        <div class="topic-card">
+          <h4>Peephole Optimization</h4>
+          <p><strong>Peephole optimization</strong> examines a small sliding window (peephole) of instructions and replaces them with more efficient sequences. Applied to target/assembly code.</p>
+          <p><strong>Common transformations:</strong></p>
+          <ul>
+            <li><strong>Redundant loads/stores:</strong> Remove <code>STORE a; LOAD a</code> if a is unchanged</li>
+            <li><strong>Unreachable code:</strong> Remove code after unconditional jumps</li>
+            <li><strong>Strength reduction:</strong> Replace expensive ops with cheaper ones (x*2 → x+x)</li>
+            <li><strong>Constant folding:</strong> Evaluate constant expressions at compile time</li>
+            <li><strong>Algebraic simplification:</strong> x+0 → x; x*1 → x; x*0 → 0</li>
+            <li><strong>Use of machine idioms:</strong> Generate special instruction sequences</li>
+          </ul>
+          <p>Peephole optimization is simple, fast, and effective at the assembly level.</p>
+        </div>
 
-    <!-- ═══════════════ SUMMARY ═══════════════ -->
-    <div class="summary-section">
-      <h2>🎓 All 6 Modules Completed</h2>
-      <p>You've covered the complete Compiler Design (PEC-CS506B) curriculum — from lexical analysis through runtime systems. Focus on Modules 2 (Parsing) and 4 (Optimization) for the highest exam weightage.</p>
-      <div class="legend">
-        <span class="badge badge-1m">1 Mark — Definitions &amp; Short Answers</span>
-        <span class="badge badge-5m">5 Marks — Explanations &amp; Comparisons</span>
-        <span class="badge badge-15m">15 Marks — Diagrams, Algorithms &amp; Derivations</span>
+        <div class="topic-card">
+          <h4>Code Generation</h4>
+          <p><strong>Code generation</strong> is the final phase that translates optimized IR into target machine code. The main tasks are:</p>
+          <ul>
+            <li><strong>Instruction selection:</strong> Choose appropriate machine instructions for each IR operation</li>
+            <li><strong>Register allocation:</strong> Decide which variables reside in registers at each point</li>
+            <li><strong>Instruction scheduling:</strong> Reorder instructions to avoid pipeline stalls</li>
+          </ul>
+          <p>The code generator must respect the calling convention, register usage, and instruction set of the target architecture.</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Register Allocation</h4>
+          <p><strong>Register allocation</strong> assigns a (typically small) number of physical registers to a (possibly large) number of temporaries. The goal is to keep frequently used values in registers to minimize memory accesses.</p>
+          <p>Two approaches:</p>
+          <ul>
+            <li><strong>Local register allocation:</strong> Within a single basic block using graph coloring or next-use analysis</li>
+            <li><strong>Global register allocation:</strong> Across the entire procedure using data flow analysis</li>
+          </ul>
+          <p>The <strong>graph coloring</strong> algorithm models register allocation as coloring an interference graph (edges between variables that cannot share a register) with K colors (where K = number of registers).</p>
+        </div>
+
+        <div class="topic-card">
+          <h4>Instruction Selection and Target Machine</h4>
+          <p><strong>Instruction selection</strong> maps IR operations to target machine instructions. The naive approach uses a fixed mapping; a better approach uses <strong>tree pattern matching</strong> with tiling or dynamic programming (BURS, BURG).</p>
+          <p><strong>Target machine considerations:</strong></p>
+          <ul>
+            <li>Instruction set architecture (CISC vs RISC)</li>
+            <li>Number and types of registers</li>
+            <li>Addressing modes supported</li>
+            <li>Cost of each instruction (cycles)</li>
+            <li>Calling conventions</li>
+          </ul>
+          <p>The code generator produces either assembly code (further assembled/linked) or relocatable machine code directly.</p>
+        </div>
+
+        <div class="highlight-box">
+          <strong>Key Concept:</strong> A good code generator produces correct, efficient target code. The main bottlenecks are: instruction selection (how to compile each IR op), register allocation (which variables go in limited registers), and instruction scheduling (avoid pipeline stalls). Modern compilers like GCC use multiple optimization passes.
+        </div>
+
+        <div class="exam-tip">
+          <strong>Exam Tip:</strong> For DAG questions, always draw the DAG first, then derive optimized code from it. Always identify common subexpressions and dead code explicitly.
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is peephole optimization?</div>
+          <div class="q-answer">Peephole optimization is a local code optimization technique that examines a small sliding window of consecutive instructions (the "peephole") and replaces inefficient instruction sequences with more efficient ones. Common optimizations include redundant load/store removal, strength reduction, and constant folding.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">1 Mark</div>
+          <div class="q-text">What is DAG?</div>
+          <div class="q-answer">A Directed Acyclic Graph (DAG) is a graphical representation of a basic block used in code optimization. Each node represents a computation (operator) or operand. Leaves are operands; interior nodes are operations. DAGs automatically identify common subexpressions — identical subexpressions become the same node.</div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">Explain code optimization techniques.</div>
+          <div class="q-answer">
+            <p>Code optimization techniques improve intermediate or target code without changing its semantics:</p>
+            <ul>
+              <li><strong>Constant folding:</strong> Evaluate constant expressions at compile time (<code>2 + 3</code> → <code>5</code>)</li>
+              <li><strong>Common subexpression elimination:</strong> Compute once, reuse (<code>a = b*c; d = b*c</code> → <code>t = b*c; a = t; d = t</code>)</li>
+              <li><strong>Dead code elimination:</strong> Remove code whose results are never used</li>
+              <li><strong>Strength reduction:</strong> Replace expensive ops with cheaper ones (<code>x*2</code> → <code>x+x</code>)</li>
+              <li><strong>Loop-invariant code motion:</strong> Hoist loop-invariant computations outside loops</li>
+              <li><strong>Copy propagation:</strong> Replace copies with original variables</li>
+              <li><strong>Peephole optimization:</strong> Improve small instruction sequences</li>
+              <li><strong>Induction variable elimination:</strong> Replace induction variables with simpler forms</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">5 Marks</div>
+          <div class="q-text">What is basic block?</div>
+          <div class="q-answer">
+            <p>A <strong>basic block</strong> is a sequence of consecutive instructions in which:</p>
+            <ul>
+              <li>Control flow enters only at the first instruction</li>
+              <li>Control flow exits only at the last instruction</li>
+              <li>No internal jumps or branch targets within the block</li>
+            </ul>
+            <p><strong>Identifying leaders</strong> (first instructions of basic blocks):</p>
+            <ol>
+              <li>First instruction of the entire program</li>
+              <li>Target of any jump instruction (conditional or unconditional)</li>
+              <li>Instruction immediately following a jump</li>
+            </ol>
+            <p>Each basic block extends from a leader to just before the next leader (or program end). Basic blocks are the unit of local optimization.</p>
+          </div>
+        </div>
+
+        <div class="question-block">
+          <div class="q-label">15 Marks</div>
+          <div class="q-text">Explain code optimization and code generation. Discuss basic blocks, flow graphs, DAG, peephole optimization, and code generation algorithm with register allocation.</div>
+          <div class="q-answer">
+            <p><strong>Code Optimization</strong> transforms IR to produce equivalent but more efficient code. Key concepts:</p>
+            <p><strong>Basic Blocks:</strong> Identify leaders using the algorithm above; group consecutive instructions from one leader to the next.</p>
+            <p><strong>Flow Graph:</strong> Construct a graph G = (N, E) where N = basic blocks and E = control flow edges. Useful for global analysis and dominator computation.</p>
+            <p><strong>DAG Example for basic block:</strong></p>
+            <div class="code-block">t1 = a + b
+t2 = c + d
+t3 = t1 * t2
+t4 = a + b
+x = t3 - t4</div>
+            <p>The DAG identifies that <code>t1</code> and <code>t4</code> compute the same value (a+b), so it can be reused:</p>
+            <div class="code-block">Optimized:
+t1 = a + b
+t2 = c + d
+t3 = t1 * t2
+x = t3 - t1</div>
+            <p><strong>Peephole Optimization Examples:</strong></p>
+            <ul>
+              <li>STORE R1, a; LOAD R1, a → (remove both if a is dead)</li>
+              <li>MOV R1, R2; MOV R2, R1 → MOV R1, R2 (one instruction enough)</li>
+              <li>MUL R, 2 → SHL R, 1 (strength reduction)</li>
+              <li>goto L1; ... L1: ... → (remove unreachable code)</li>
+            </ul>
+            <p><strong>Code Generation Algorithm:</strong> For each IR instruction, the generator selects target code and performs register allocation.</p>
+            <p><strong>Register Allocation Algorithm (Next-Use):</strong></p>
+            <ol>
+              <li>For each instruction, determine next use of each operand by scanning forward.</li>
+              <li>For a three-address op x = y + z:</li>
+              <li>If y is not in register, load it. If z is in register (and y will not be needed after), use it.</li>
+              <li>Choose a register R for result: prefer a register holding x; else a register with the farthest next use; else spill to memory.</li>
+              <li>Issue target instructions, using register R.</li>
+            </ol>
+            <p><strong>Example Code Generation</strong> for <code>t = a - b</code>:</p>
+            <div class="code-block">MOV R1, a     ; load a
+SUB R1, b     ; R1 = a - b
+MOV t, R1     ; store result</div>
+            <p><strong>Register Allocation by Graph Coloring:</strong></p>
+            <ol>
+              <li>Build interference graph (nodes = temporaries; edge if both live simultaneously)</li>
+              <li>Try to color with K colors (K = number of registers)</li>
+              <li>If a node cannot be colored, spill it to memory and retry</li>
+            </ol>
+            <p><strong>Target Machine Considerations:</strong></p>
+            <ul>
+              <li>Instruction set and addressing modes</li>
+              <li>Register count and special-purpose registers</li>
+              <li>Calling conventions (ABI)</li>
+              <li>Pipeline hazards (avoid stalls by reordering)</li>
+            </ul>
+            <p>Modern compilers like GCC use multiple passes, profile-guided optimization, and link-time optimization for highest performance.</p>
+          </div>
+        </div>
+
+        <div class="pyq-section">
+          <h4>📋 Previous Year Questions</h4>
+          <div class="pyq-item">
+            <span class="year">[2023]</span> Construct the DAG for the given basic block and derive optimized code.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2022]</span> Explain peephole optimization with suitable examples.
+          </div>
+          <div class="pyq-item">
+            <span class="year">[2021]</span> What is a basic block? Identify basic blocks and construct the flow graph for the given code.
+          </div>
+        </div>
+
       </div>
     </div>
 
   </div>
 
-  <!-- ═══════════════ FOOTER ═══════════════ -->
-  <div class="page-footer">
-    <p>Compiler Design (PEC-CS506B) — Semester 5 Study Notes · MAKAUT</p>
-    <p style="margin-top:0.3rem;opacity:0.6;">All 6 Modules · Q&amp;A Format · PYQ Sections · Quick Revision Boxes</p>
-  </div>
+  <footer>
+    Made with care for Semester 5 | Compiler Design Study Notes
+  </footer>
+
+  <a href="#top" class="back-to-top" id="backToTop">↑</a>
+
+  <script>
+    // Progress bar
+    window.addEventListener('scroll', function() {
+      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      var scrollPercent = (scrollTop / scrollHeight) * 100;
+      document.getElementById('progressBar').style.width = scrollPercent + '%';
+
+      // Back to top visibility
+      var backToTop = document.getElementById('backToTop');
+      if (scrollTop > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    });
+
+    // Smooth scroll for TOC links
+    document.querySelectorAll('.toc a').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>

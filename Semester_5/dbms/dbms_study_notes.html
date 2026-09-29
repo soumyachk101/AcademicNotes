@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+<html lang="en" style="--primary: #ec4899; --bg-desk: #fdf2f8; --bg-paper: #fffbfc; --text-main: #1e293b; --text-muted: #64748b; --border-light: #fbcfe8; --p-accent: #ec4899;">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database Management Systems (PEC-CS505B) — Semester 5 Study Notes</title>
+<meta name="description" content="DBMS study notes for MAKAUT Semester 5 PEC-CS505B — complete Q&A with 1-mark, 5-mark, and 15-mark questions covering ER model, SQL, normalization, transactions, indexing, and advanced topics.">
+<link rel="stylesheet" href="../../qa-styles.css">
+<link rel="stylesheet" href="../../premium.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- PAGE HEADER                                                   -->
+<!-- ============================================================ -->
+<div class="page-header">
+  <a href="../index.html" class="back-link">&larr; Back to Semester 5</a>
+  <h1>Database Management Systems</h1>
+  <p class="subtitle">PEC-CS505B &mdash; Semester 5, MAKAUT</p>
+  <p class="tagline">Complete Study Notes with Mark-Distribution Questions &amp; Answers</p>
+  <div class="legend">
+    <span class="badge badge-1m">1 Mark</span>
+    <span class="badge badge-5m">5 Marks</span>
+    <span class="badge badge-15m">15 Marks</span>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- MAIN LAYOUT                                                   -->
+<!-- ============================================================ -->
+<main class="layout">
+
+<!-- SIDEBAR / TOC -->
+<aside class="sidebar">
+  <div class="toc-box">
+    <h3>On this page</h3>
+    <ul>
+      <li><a href="#module-1">Module 1 &mdash; Intro &amp; ER Model</a></li>
+      <li><a href="#module-2">Module 2 &mdash; Relational Model &amp; SQL</a></li>
+      <li><a href="#module-3">Module 3 &mdash; Normalization</a></li>
+      <li><a href="#module-4">Module 4 &mdash; Transaction Management</a></li>
+      <li><a href="#module-5">Module 5 &mdash; Indexing &amp; Hashing</a></li>
+      <li><a href="#module-6">Module 6 &mdash; Advanced Topics</a></li>
+    </ul>
+  </div>
+</aside>
+
+<!-- CONTENT -->
+<article class="content">
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULE 1 — Introduction & ER Model                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="module-1" class="section-title">Module 1 &mdash; Introduction &amp; ER Model</section>
+
+<div class="exam-tip">
+  <strong>Exam Tip:</strong> ER model and keys are the most frequently asked topics from this module. Always draw a labelled ER diagram for 15M questions. Know the difference between entity types and entity sets.
+</div>
+
+<!-- Q1 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a Database Management System (DBMS)?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A DBMS is a software system that allows users to define, create, maintain, and control access to a database. It acts as an interface between the user and the database, managing data storage, retrieval, and security efficiently.</p>
+  </div>
+</div>
+
+<!-- Q2 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a data model?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A data model is a conceptual framework that describes how data is organised, stored, and manipulated in a database. It defines the logical structure of the database, the relationships between data items, and the constraints that govern the data. Examples: Relational, Hierarchical, Network, Object-oriented.</p>
+  </div>
+</div>
+
+<!-- Q3 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is an ER diagram?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> An Entity-Relationship (ER) diagram is a visual representation of the entity-relationship model. It uses rectangles (entities), ellipses (attributes), diamonds (relationships), and lines to show how entities relate to each other in a database schema.</p>
+  </div>
+</div>
+
+<!-- Q4 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is an entity?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> An entity is a real-world object or concept that is distinguishable from other objects and can be represented in a database. For example, Student, Employee, Book are entities. An entity set is a collection of similar entities.</p>
+  </div>
+</div>
+
+<!-- Q5 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is an attribute?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> An attribute is a property or characteristic that describes an entity. For example, a Student entity may have attributes: Roll_No, Name, Age, Department. Attributes can be simple, composite, single-valued, multi-valued, or derived.</p>
+  </div>
+</div>
+
+<!-- Q6 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>What are the advantages of DBMS over a file system?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <ol>
+      <li><strong>Data Redundancy Control:</strong> Eliminates duplicate data by centralised storage.</li>
+      <li><strong>Data Consistency:</strong> Redundant-free data ensures consistency across the system.</li>
+      <li><strong>Data Sharing:</strong> Multiple users can access the same data concurrently.</li>
+      <li><strong>Data Integrity:</strong> Enforces constraints and validation rules on data.</li>
+      <li><strong>Data Security:</strong> Provides authentication, authorisation, and encryption.</li>
+      <li><strong>Data Independence:</strong> Separation of logical and physical data levels.</li>
+      <li><strong>Backup and Recovery:</strong> Automatic mechanisms for crash recovery.</li>
+      <li><strong>Concurrent Access:</strong> Manages simultaneous data access by multiple users.</li>
+    </ol>
+  </div>
+</div>
+
+<!-- Q7 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain the components of the ER model.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <ul>
+      <li><strong>Entity:</strong> A real-world object distinguishable from others (e.g., Student, Course). Represented by a rectangle in an ER diagram.</li>
+      <li><strong>Attribute:</strong> Properties describing an entity (e.g., Name, Age). Represented by an ellipse.</li>
+      <li><strong>Relationship:</strong> An association between two or more entities (e.g., "enrolls"). Represented by a diamond.</li>
+      <li><strong>Entity Type:</strong> A category of entities sharing the same attributes (e.g., type "Student").</li>
+      <li><strong>Entity Set:</strong> A collection of all entities of a particular type at a point in time.</li>
+      <li><strong>Relationship Set:</strong> A set of similar relationships.</li>
+      <li><strong>Mapping Cardinality:</strong> Describes how entities of one set relate to entities of another (1:1, 1:N, M:N).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q8 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain entity types and relationship types.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <p><strong>Entity Types:</strong></p>
+    <ul>
+      <li><strong>Strong Entity Type:</strong> Exists independently (has its own key). E.g., Student, Employee.</li>
+      <li><strong>Weak Entity Type:</strong> Cannot exist without a strong entity (depends on it for identification). E.g., Dependent of an Employee.</li>
+    </ul>
+    <p><strong>Relationship Types:</strong></p>
+    <ul>
+      <li><strong>Binary Relationship:</strong> Between two entity types (most common).</li>
+      <li><strong>Recursive (Unary) Relationship:</strong> Entity relates to itself.</li>
+      <li><strong>Ternary Relationship:</strong> Involves three entity types simultaneously.</li>
+      <li><strong>n-ary Relationship:</strong> Generalisation involving n entity types.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q9 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain the different types of keys in DBMS.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <ul>
+      <li><strong>Super Key:</strong> A set of attributes that uniquely identifies a tuple. May contain extra attributes. (Minimal &amp; non-minimal both).</li>
+      <li><strong>Candidate Key:</strong> A minimal super key (no proper subset can uniquely identify a tuple). A table can have multiple candidate keys.</li>
+      <li><strong>Primary Key:</strong> One candidate key chosen by the DBMS designer to uniquely identify tuples. Cannot be NULL.</li>
+      <li><strong>Alternate Key:</strong> Candidate keys not chosen as the primary key.</li>
+      <li><strong>Foreign Key:</strong> An attribute in one relation that refers to the primary key of another relation. Establishes referential integrity.</li>
+      <li><strong>Composite Key:</strong> A key consisting of two or more attributes.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Previous Year Question — ER Model -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Very Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-15m">15M</span>
+      <span>Explain the ER model with a suitable example and diagram.</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Answer:</strong></p>
+      <p>The ER (Entity-Relationship) model is a high-level data model used for describing the data requirements of an organisation. It provides a conceptual view of the database.</p>
+      <p><strong>Example &mdash; University Database:</strong></p>
+      <p><strong>Entities:</strong> Student, Course, Instructor, Department<br>
+      <strong>Attributes:</strong><br>
+      &nbsp;&nbsp;Student: Roll_No (key), Name, Age, Class<br>
+      &nbsp;&nbsp;Course: Course_ID (key), Title, Credits<br>
+      &nbsp;&nbsp;Instructor: Emp_ID (key), Name, Dept<br>
+      <strong>Relationships:</strong><br>
+      &nbsp;&nbsp;Student <em>enrolls in</em> Course (M:N)<br>
+      &nbsp;&nbsp;Instructor <em>teaches</em> Course (1:N)<br>
+      &nbsp;&nbsp;Department <em>offers</em> Course (1:N)<br>
+      &nbsp;&nbsp;Student <em>belongs to</em> Department (N:1)</p>
+      <div class="diagram-container">
+        <svg viewBox="0 0 600 340" xmlns="http://www.w3.org/2000/svg" style="max-width: 560px;">
+          <!-- Entity: Student -->
+          <rect x="20" y="40" width="140" height="60" rx="6" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+          <text x="90" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#831843">STUDENT</text>
+          <text x="90" y="83" text-anchor="middle" font-size="11" fill="#9d174d">Roll_No, Name, Age</text>
+
+          <!-- Entity: Course -->
+          <rect x="20" y="200" width="140" height="60" rx="6" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+          <text x="90" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#831843">COURSE</text>
+          <text x="90" y="243" text-anchor="middle" font-size="11" fill="#9d174d">Course_ID, Title, Credits</text>
+
+          <!-- Entity: Instructor -->
+          <rect x="420" y="200" width="140" height="60" rx="6" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+          <text x="490" y="225" text-anchor="middle" font-size="13" font-weight="700" fill="#831843">INSTRUCTOR</text>
+          <text x="490" y="243" text-anchor="middle" font-size="11" fill="#9d174d">Emp_ID, Name, Dept</text>
+
+          <!-- Entity: Department -->
+          <rect x="420" y="40" width="140" height="60" rx="6" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+          <text x="490" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#831843">DEPARTMENT</text>
+          <text x="490" y="83" text-anchor="middle" font-size="11" fill="#9d174d">Dept_ID, Dname</text>
+
+          <!-- Relationship: Enrolls -->
+          <polygon points="290,65 320,45 320,85" fill="#fbcfe8" stroke="#be185d" stroke-width="1.5"/>
+          <text x="330" y="68" font-size="11" font-weight="600" fill="#831843">enrolls</text>
+
+          <!-- Relationship: Offers -->
+          <polygon points="290,295 320,275 320,315" fill="#fbcfe8" stroke="#be185d" stroke-width="1.5"/>
+          <text x="330" y="290" font-size="11" font-weight="600" fill="#831843">offers</text>
+
+          <!-- Relationship: Teaches -->
+          <polygon points="290,245 320,225 320,265" fill="#fbcfe8" stroke="#be185d" stroke-width="1.5"/>
+          <text x="330" y="248" font-size="11" font-weight="600" fill="#831843">teaches</text>
+
+          <!-- Relationship: Belongs to -->
+          <polygon points="290,155 320,135 320,175" fill="#fbcfe8" stroke="#be185d" stroke-width="1.5"/>
+          <text x="330" y="158" font-size="11" font-weight="600" fill="#831843">belongs to</text>
+
+          <!-- Lines -->
+          <line x1="160" y1="70" x2="290" y2="65" stroke="#be185d" stroke-width="1.2"/>
+          <line x1="160" y1="230" x2="290" y2="245" stroke="#be185d" stroke-width="1.2"/>
+          <line x1="560" y1="230" x2="320" y2="245" stroke="#be185d" stroke-width="1.2"/>
+          <line x1="560" y1="70" x2="320" y2="65" stroke="#be185d" stroke-width="1.2"/>
+
+          <!-- Department to Course line -->
+          <line x1="560" y1="260" x2="320" y2="295" stroke="#be185d" stroke-width="1.2"/>
+
+          <!-- Student to Department line (vertical) -->
+          <line x1="490" y1="100" x2="490" y2="130" stroke="#be185d" stroke-width="1.2"/>
+          <line x1="90" y1="130" x2="90" y2="200" stroke="#be185d" stroke-width="1.2"/>
+
+          <!-- Cardinality labels -->
+          <text x="220" y="55" font-size="10" fill="#9d174d">M</text>
+          <text x="265" y="55" font-size="10" fill="#9d174d">N</text>
+          <text x="220" y="215" font-size="10" fill="#9d174d">1</text>
+          <text x="265" y="235" font-size="10" fill="#9d174d">N</text>
+        </svg>
+        <p class="diagram-caption">ER Diagram for a University Database</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PYQ — Keys -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-5m">5M</span>
+      <span>Explain various keys used in DBMS.</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Answer:</strong></p>
+      <table>
+        <thead>
+          <tr><th>Key Type</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Super Key</strong></td><td>Minimal or non-minimal set of attributes that uniquely identifies a tuple.</td></tr>
+          <tr><td><strong>Candidate Key</strong></td><td>Minimal super key &mdash; no proper subset can uniquely identify a tuple.</td></tr>
+          <tr><td><strong>Primary Key</strong></td><td>The candidate key chosen by the designer. Cannot be NULL or duplicate.</td></tr>
+          <tr><td><strong>Alternate Key</strong></td><td>Candidate keys not selected as primary key.</td></tr>
+          <tr><td><strong>Foreign Key</strong></td><td>Attribute referencing primary key of another relation. Enforces referential integrity.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Revision — Module 1 -->
+<div class="quick-revision">
+  <div class="qr-title">Quick Revision &mdash; Module 1</div>
+  <ul>
+    <li><strong>DBMS</strong> = software for managing databases (storage, retrieval, security).</li>
+    <li><strong>Entity</strong> = real-world distinguishable object. <strong>Attribute</strong> = property of an entity.</li>
+    <li><strong>ER Diagram</strong> uses rectangles (entities), ellipses (attributes), diamonds (relationships).</li>
+    <li><strong>Entity types:</strong> Strong (independent) and Weak (dependent on strong entity).</li>
+    <li><strong>Cardinality:</strong> 1:1 (one-to-one), 1:N (one-to-many), M:N (many-to-many).</li>
+    <li><strong>Keys:</strong> Super &rarr; Candidate &rarr; Primary. Foreign key links two relations.</li>
+    <li><strong>DBMS advantages:</strong> No redundancy, consistency, sharing, security, integrity, recovery.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULE 2 — Relational Model & SQL                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="module-2" class="section-title">Module 2 &mdash; Relational Model &amp; SQL</section>
+
+<div class="exam-tip">
+  <strong>Exam Tip:</strong> SQL joins are the #1 most frequent topic. Practice writing JOIN queries with 3+ tables. GROUP BY and HAVING are also very common in 15M questions. Know the difference between DDL and DML commands by heart.
+</div>
+
+<!-- Q10 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a relation in the relational model?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A relation is a two-dimensional table that represents an entity set or relationship set. It consists of rows (tuples) and columns (attributes). Each relation has a unique name, and all values in a column are of the same data type.</p>
+  </div>
+</div>
+
+<!-- Q11 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a tuple?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A tuple is a single row in a relation (table). It represents a single record of an entity and contains values for each attribute. Each tuple is uniquely identified by its primary key.</p>
+  </div>
+</div>
+
+<!-- Q12 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is cardinality in the relational model?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Cardinality refers to the number of tuples (rows) in a relation. The cardinality of a relation R is the number of tuples in R. It is also used to describe the mapping between entities in a relationship (1:1, 1:N, M:N).</p>
+  </div>
+</div>
+
+<!-- Q13 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is DDL?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> DDL (Data Definition Language) is a set of SQL commands used to define and modify the database schema. It deals with the structure of the database rather than the data itself. Commands: CREATE, ALTER, DROP, TRUNCATE, RENAME.</p>
+  </div>
+</div>
+
+<!-- Q14 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is DML?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> DML (Data Manipulation Language) is a set of SQL commands used to manipulate the data stored in the database. It deals with querying, inserting, updating, and deleting data. Commands: SELECT, INSERT, UPDATE, DELETE.</p>
+  </div>
+</div>
+
+<!-- Q15 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain the relational model with its features.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> The relational model, proposed by E.F. Codd in 1970, represents data as tables (relations). Key features:</p>
+    <ul>
+      <li><strong>Relation (Table):</strong> A named, two-dimensional table with rows and columns.</li>
+      <li><strong>Attribute (Column):</strong> Each column has a unique name and data type.</li>
+      <li><strong>Tuple (Row):</strong> Each row is a unique record.</li>
+      <li><strong>Domain:</strong> The set of permissible values for an attribute.</li>
+      <li><strong>Degree:</strong> Number of attributes (columns) in a relation.</li>
+      <li><strong>Cardinality:</strong> Number of tuples (rows) in a relation.</li>
+      <li><strong>Keys:</strong> Super key, Candidate key, Primary key, Foreign key.</li>
+      <li><strong>Integrity Constraints:</strong> Entity integrity (PK not NULL), Referential integrity (FK references PK), Domain integrity.</li>
+      <li><strong>Relational Algebra:</strong> Theoretical foundation &mdash; SELECT, PROJECT, UNION, SET DIFFERENCE, CARTESIAN PRODUCT, RENAME.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q16 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain SQL DDL commands with examples.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <div class="code-block">
+CREATE TABLE Student (<br>
+&nbsp;&nbsp;Roll_No INT PRIMARY KEY,<br>
+&nbsp;&nbsp;Name VARCHAR(50) NOT NULL,<br>
+&nbsp;&nbsp;Age INT CHECK(Age &gt;= 18),<br>
+&nbsp;&nbsp;Dept VARCHAR(30)<br>
+);<br><br>
+ALTER TABLE Student ADD COLUMN Email VARCHAR(100);<br><br>
+DROP TABLE Student;<br><br>
+TRUNCATE TABLE Student;
+    </div>
+    <ul>
+      <li><strong>CREATE:</strong> Creates a new table/database.</li>
+      <li><strong>ALTER:</strong> Modifies existing table structure (add/drop/modify column).</li>
+      <li><strong>DROP:</strong> Deletes a table and its data permanently.</li>
+      <li><strong>TRUNCATE:</strong> Removes all rows but keeps the table structure.</li>
+      <li><strong>RENAME:</strong> Renames a table or column.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q17 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain SQL DML commands with examples.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <div class="code-block">
+-- SELECT: Retrieve data<br>
+SELECT Name, Age FROM Student WHERE Dept = 'CSE';<br><br>
+-- INSERT: Add new row<br>
+INSERT INTO Student VALUES (101, 'Amit', 20, 'CSE');<br><br>
+-- UPDATE: Modify existing data<br>
+UPDATE Student SET Age = 21 WHERE Roll_No = 101;<br><br>
+-- DELETE: Remove rows<br>
+DELETE FROM Student WHERE Roll_No = 101;
+    </div>
+    <ul>
+      <li><strong>SELECT:</strong> Retrieves data from one or more tables. Supports WHERE, GROUP BY, HAVING, ORDER BY, JOIN.</li>
+      <li><strong>INSERT:</strong> Adds new rows into a table.</li>
+      <li><strong>UPDATE:</strong> Modifies existing rows based on a condition.</li>
+      <li><strong>DELETE:</strong> Removes rows from a table based on a condition.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q18 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain SQL Joins with examples.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Joins combine rows from two or more tables based on a related column.</p>
+    <ul>
+      <li><strong>INNER JOIN:</strong> Returns rows with matching values in both tables.</li>
+      <li><strong>LEFT JOIN:</strong> Returns all rows from the left table + matched rows from the right (NULL if no match).</li>
+      <li><strong>RIGHT JOIN:</strong> Returns all rows from the right table + matched rows from the left.</li>
+      <li><strong>FULL JOIN:</strong> Returns rows when there is a match in either table.</li>
+      <li><strong>CROSS JOIN:</strong> Cartesian product of both tables (every row paired with every row).</li>
+      <li><strong>SELF JOIN:</strong> A table joined with itself.</li>
+    </ul>
+    <div class="code-block">
+SELECT S.Name, C.Title<br>
+FROM Student S INNER JOIN Enrollment E ON S.Roll_No = E.Roll_No<br>
+&nbsp;&nbsp;&nbsp;&nbsp;INNER JOIN Course C ON E.Course_ID = C.Course_ID;<br><br>
+SELECT S.Name, C.Title<br>
+FROM Student S LEFT JOIN Enrollment E ON S.Roll_No = E.Roll_No<br>
+&nbsp;&nbsp;&nbsp;&nbsp;LEFT JOIN Course C ON E.Course_ID = C.Course_ID;
+    </div>
+  </div>
+</div>
+
+<!-- Previous Year Question — SQL Joins -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Very Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-15m">15M</span>
+      <span>Write SQL queries for the following scenarios with JOINs, GROUP BY, and HAVING clauses.</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Scenario:</strong> Find the names of students who have enrolled in more than 3 courses and have an average grade above 7.0.</p>
+      <p><strong>Tables:</strong></p>
+      <ul>
+        <li><strong>Student</strong> (Roll_No, Name, Dept)</li>
+        <li><strong>Enrollment</strong> (Roll_No, Course_ID, Grade)</li>
+        <li><strong>Course</strong> (Course_ID, Title, Credits)</li>
+      </ul>
+      <div class="code-block">
+SELECT S.Name, COUNT(E.Course_ID) AS Courses,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AVG(E.Grade) AS AvgGrade<br>
+FROM Student S<br>
+JOIN Enrollment E ON S.Roll_No = E.Roll_No<br>
+GROUP BY S.Roll_No, S.Name<br>
+HAVING COUNT(E.Course_ID) &gt; 3<br>
+&nbsp;&nbsp;&nbsp;&nbsp;AND AVG(E.Grade) &gt; 7.0;<br><br>
+-- Find department-wise student count using GROUP BY<br>
+SELECT Dept, COUNT(*) AS TotalStudents<br>
+FROM Student<br>
+GROUP BY Dept<br>
+ORDER BY TotalStudents DESC;<br><br>
+-- Find students who scored the highest grade in each course<br>
+SELECT C.Title, S.Name, E.Grade<br>
+FROM Course C<br>
+JOIN Enrollment E ON C.Course_ID = E.Course_ID<br>
+JOIN Student S ON E.Roll_No = S.Roll_No<br>
+WHERE E.Grade = (<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SELECT MAX(Grade) FROM Enrollment WHERE Course_ID = C.Course_ID<br>
+);
+      </div>
+      <p><strong>Key Points:</strong></p>
+      <ul>
+        <li><strong>GROUP BY</strong> groups rows with the same values in specified columns.</li>
+        <li><strong>HAVING</strong> filters groups after GROUP BY (WHERE filters before grouping).</li>
+        <li><strong>INNER JOIN</strong> returns only matching rows from both tables.</li>
+        <li>Use <strong>Aliases</strong> (S, E, C) to make queries readable.</li>
+        <li><strong>ORDER BY</strong> sorts the final result set.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Revision — Module 2 -->
+<div class="quick-revision">
+  <div class="qr-title">Quick Revision &mdash; Module 2</div>
+  <ul>
+    <li><strong>Relation</strong> = table, <strong>Tuple</strong> = row, <strong>Attribute</strong> = column.</li>
+    <li><strong>DDL:</strong> CREATE, ALTER, DROP, TRUNCATE. <strong>DML:</strong> SELECT, INSERT, UPDATE, DELETE.</li>
+    <li><strong>Keys:</strong> Super &rarr; Candidate &rarr; Primary &rarr; Alternate &rarr; Foreign.</li>
+    <li><strong>INNER JOIN:</strong> matching rows only. <strong>LEFT JOIN:</strong> all left + matching right.</li>
+    <li><strong>GROUP BY</strong> groups rows; <strong>HAVING</strong> filters groups; <strong>WHERE</strong> filters individual rows.</li>
+    <li><strong>Integrity Constraints:</strong> Entity (PK not NULL), Referential (FK must reference existing PK), Domain.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULE 3 — Normalization                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="module-3" class="section-title">Module 3 &mdash; Normalization</section>
+
+<div class="exam-tip">
+  <strong>Exam Tip:</strong> Normalization is a guaranteed question. Always use a concrete example table to show decomposition step-by-step. Know the definition of functional dependency and how to identify partial and transitive dependencies. Practice converting a table from 0NF through 3NF/BCNF.
+</div>
+
+<!-- Q25 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is normalization?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Normalization is the process of organising data in a database to reduce redundancy and improve data integrity. It involves decomposing a large table into smaller, well-structured tables and defining relationships between them. The main normal forms are 1NF, 2NF, 3NF, and BCNF.</p>
+  </div>
+</div>
+
+<!-- Q26 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is First Normal Form (1NF)?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A table is in 1NF if:</p>
+    <ul>
+      <li>It has no repeating groups or multi-valued attributes.</li>
+      <li>Each column contains atomic (indivisible) values.</li>
+      <li>Each row is unique (no duplicate rows).</li>
+      <li>Each column has a unique name.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q27 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is Second Normal Form (2NF)?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A table is in 2NF if:</p>
+    <ul>
+      <li>It is already in 1NF.</li>
+      <li>No partial dependency exists &mdash; i.e., no non-prime attribute is partially dependent on a composite primary key (a non-prime attribute must depend on the entire key, not just part of it).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q28 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is Third Normal Form (3NF)?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A table is in 3NF if:</p>
+    <ul>
+      <li>It is already in 2NF.</li>
+      <li>No transitive dependency exists for non-prime attributes &mdash; i.e., a non-prime attribute does not depend on another non-prime attribute.</li>
+      <li>Every non-prime attribute must be directly dependent on the primary key (not through another non-prime attribute).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q29 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is Boyce-Codd Normal Form (BCNF)?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A table is in BCNF if:</p>
+    <ul>
+      <li>For every non-trivial functional dependency X &rarr; Y, X must be a super key.</li>
+      <li>BCNF is stricter than 3NF. Every BCNF table is in 3NF, but not every 3NF table is in BCNF.</li>
+      <li>It eliminates anomalies not handled by 3NF.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q30 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain normalization forms (1NF, 2NF, 3NF, BCNF) with definitions.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <table>
+      <thead>
+        <tr><th>Normal Form</th><th>Requirements</th><th>Removes</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1NF</strong></td>
+          <td>Atomic values only, no repeating groups</td>
+          <td>Repeating groups, multi-valued attributes</td>
+        </tr>
+        <tr>
+          <td><strong>2NF</strong></td>
+          <td>1NF + no partial dependency on composite key</td>
+          <td>Partial dependencies</td>
+        </tr>
+        <tr>
+          <td><strong>3NF</strong></td>
+          <td>2NF + no transitive dependency (non-prime &rarr; non-prime)</td>
+          <td>Transitive dependencies</td>
+        </tr>
+        <tr>
+          <td><strong>BCNF</strong></td>
+          <td>For every FD X &rarr; Y, X must be a super key</td>
+          <td>All remaining anomalies</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Q31 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>What are functional dependencies? Explain with examples.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A functional dependency (FD) X &rarr; Y means that for any two tuples with the same X value, they must also have the same Y value. X is the determinant; Y is functionally dependent on X.</p>
+    <p><strong>Example:</strong> In a Student table, Roll_No &rarr; Name, Roll_No &rarr; Dept. So Roll_No determines both Name and Dept.</p>
+    <p><strong>Properties (Armstrong's Axioms):</strong></p>
+    <ul>
+      <li><strong>Reflexivity:</strong> If Y &sube; X, then X &rarr; Y.</li>
+      <li><strong>Augmentation:</strong> If X &rarr; Y, then XZ &rarr; YZ.</li>
+      <li><strong>Transitivity:</strong> If X &rarr; Y and Y &rarr; Z, then X &rarr; Z.</li>
+    </ul>
+    <p><strong>Types:</strong></p>
+    <ul>
+      <li><strong>Trivial FD:</strong> Y &sube; X (e.g., Roll_No, Name &rarr; Roll_No).</li>
+      <li><strong>Non-trivial FD:</strong> Y is not a subset of X (e.g., Roll_No &rarr; Name).</li>
+      <li><strong>Fully functional dependency:</strong> X &rarr; Y where removing any attribute from X breaks the dependency.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q32 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>What is decomposition? Explain its properties.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Decomposition is the process of splitting a relation into smaller relations. It is used in normalization to eliminate redundancy and anomalies.</p>
+    <p><strong>Properties:</strong></p>
+    <ul>
+      <li><strong>Lossless Join:</strong> The natural join of the decomposed relations must produce exactly the original relation (no spurious tuples).</li>
+      <li><strong>Dependency Preservation:</strong> All functional dependencies from the original relation should be enforceable by checking the individual decomposed relations (without computing the join).</li>
+    </ul>
+    <p>A good decomposition satisfies both lossless join and dependency preservation properties.</p>
+  </div>
+</div>
+
+<!-- Previous Year Question — Normalization with example -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Very Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-15m">15M</span>
+      <span>Explain normalization with an example. Convert the following table to 1NF, 2NF, and 3NF.</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Original Table (Unnormalised):</strong></p>
+      <table>
+        <thead>
+          <tr><th>Student_ID</th><th>Student_Name</th><th>Course_ID</th><th>Course_Name</th><th>Instructor</th><th>Instructor_Office</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S101</td><td>Amit</td><td>C1, C2</td><td>DBMS, ML</td><td>Dr. Singh, Dr. Patel</td><td>R201, R305</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Step 1 &mdash; Convert to 1NF</strong> (Remove multi-valued attributes):</p>
+      <table>
+        <thead>
+          <tr><th>Student_ID</th><th>Student_Name</th><th>Course_ID</th><th>Course_Name</th><th>Instructor</th><th>Instructor_Office</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>S101</td><td>Amit</td><td>C1</td><td>DBMS</td><td>Dr. Singh</td><td>R201</td></tr>
+          <tr><td>S101</td><td>Amit</td><td>C2</td><td>ML</td><td>Dr. Patel</td><td>R305</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Step 2 &mdash; Convert to 2NF</strong> (Remove partial dependency): Primary key = (Student_ID, Course_ID). Course_Name depends only on Course_ID (partial), so separate Course table.</p>
+      <p><strong>Student(Student_ID, Student_Name)</strong></p>
+      <p><strong>Course(Course_ID, Course_Name, Instructor, Instructor_Office)</strong></p>
+      <p><strong>Enrollment(Student_ID, Course_ID)</strong></p>
+      <p><strong>Step 3 &mdash; Convert to 3NF</strong> (Remove transitive dependency): In Course, Instructor_Office depends on Instructor (non-prime &rarr; non-prime).</p>
+      <p><strong>Course(Course_ID, Course_Name, Instructor)</strong></p>
+      <p><strong>Instructor(Instructor, Instructor_Office)</strong></p>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Revision — Module 3 -->
+<div class="quick-revision">
+  <div class="qr-title">Quick Revision &mdash; Module 3</div>
+  <ul>
+    <li><strong>Normalization:</strong> Process of organising data to reduce redundancy.</li>
+    <li><strong>1NF:</strong> Atomic values, no repeating groups.</li>
+    <li><strong>2NF:</strong> 1NF + no partial dependency on composite key.</li>
+    <li><strong>3NF:</strong> 2NF + no transitive dependency (non-prime &rarr; non-prime).</li>
+    <li><strong>BCNF:</strong> Every determinant must be a super key. Stricter than 3NF.</li>
+    <li><strong>Functional Dependency:</strong> X &rarr; Y means X uniquely determines Y.</li>
+    <li><strong>Decomposition:</strong> Lossless join + dependency preservation = good decomposition.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULE 4 — Transaction Management                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="module-4" class="section-title">Module 4 &mdash; Transaction Management</section>
+
+<div class="exam-tip">
+  <strong>Exam Tip:</strong> ACID properties are almost always asked. Always give an example for each property. Concurrency control and serializability are important for 15M. Understand the difference between locking and timestamp protocols.
+</div>
+
+<!-- Q37 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a transaction?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A transaction is a sequence of database operations (read/write) that forms a single logical unit of work. A transaction must be atomic &mdash; either all its operations are completed successfully, or none are applied.</p>
+  </div>
+</div>
+
+<!-- Q38 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is ACID?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> ACID stands for Atomicity, Consistency, Isolation, and Durability. These are the four key properties that ensure reliable transaction processing in a DBMS.</p>
+  </div>
+</div>
+
+<!-- Q39 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a commit?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A commit is a SQL command that permanently saves all changes made by a transaction to the database. After a COMMIT, the changes cannot be rolled back. It signals the successful end of a transaction.</p>
+  </div>
+</div>
+
+<!-- Q40 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a rollback?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A rollback (or ROLLBACK) undoes all changes made by the current transaction since the last COMMIT. It restores the database to its previous consistent state. Rollback occurs automatically on error or manually via ROLLBACK command.</p>
+  </div>
+</div>
+
+<!-- Q41 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is serializability?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Serializability is the concurrency control property that ensures the result of concurrently executing transactions is equivalent to some serial (sequential) execution of those transactions. It prevents anomalies like lost updates, dirty reads, and non-repeatable reads.</p>
+  </div>
+</div>
+
+<!-- Q42 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain the ACID properties of a transaction with examples.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <ul>
+      <li><strong>Atomicity:</strong> A transaction is an all-or-nothing unit. Either all operations complete, or none do. Example: Bank transfer &mdash; if the debit succeeds but credit fails, the debit is rolled back.</li>
+      <li><strong>Consistency:</strong> A transaction brings the database from one consistent state to another. Integrity constraints must be maintained. Example: Account balance cannot go negative if there is a constraint.</li>
+      <li><strong>Isolation:</strong> Concurrent transactions execute independently. The result is as if they ran sequentially. Example: Two users checking the same bank balance get the same value.</li>
+      <li><strong>Durability:</strong> Once committed, changes persist even if the system crashes. Example: After a COMMIT on a transfer, the updated balances survive a power failure.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q43 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain the states of a transaction.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <ul>
+      <li><strong>Active:</strong> Transaction is executing. Reads/writes are being performed.</li>
+      <li><strong>Partially Committed:</strong> Last operation has been executed but changes are not yet saved to disk.</li>
+      <li><strong>Failed:</strong> Normal execution cannot proceed due to an error or integrity violation.</li>
+      <li><strong>Aborted:</strong> Transaction has been rolled back. The database is restored to its consistent state before the transaction.</li>
+      <li><strong>Committed:</strong> Transaction has completed successfully and changes are permanently saved.</li>
+    </ul>
+    <p><strong>Transaction State Diagram:</strong> Active &rarr; Partially Committed &rarr; Committed OR Active &rarr; Failed &rarr; Aborted (then may restart).</p>
+  </div>
+</div>
+
+<!-- Q44 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain concurrency control and its need.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Concurrency control manages simultaneous execution of transactions to ensure serializability and prevent anomalies.</p>
+    <p><strong>Need:</strong> Without concurrency control, concurrent transactions can cause:</p>
+    <ul>
+      <li><strong>Lost Update:</strong> Two transactions update the same data; the second update overwrites the first.</li>
+      <li><strong>Dirty Read:</strong> A transaction reads uncommitted data that may later be rolled back.</li>
+      <li><strong>Non-repeatable Read:</strong> Same data read twice in a transaction yields different values.</li>
+      <li><strong>Phantom Read:</strong> New rows appear in a re-executed query within the same transaction.</li>
+    </ul>
+    <p><strong>Methods:</strong> Locking protocols, Timestamp ordering, Optimistic concurrency control, Multiversion concurrency control (MVCC).</p>
+  </div>
+</div>
+
+<!-- Previous Year Question — ACID -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Very Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-15m">15M</span>
+      <span>Explain ACID properties with real-world examples. How does a DBMS ensure these properties?</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Answer:</strong></p>
+      <p><strong>Atomicity:</strong> Guaranteed by the <strong>transaction log</strong> and <strong>undo/rollback</strong> mechanism. The DBMS logs all changes. If a transaction fails, the log is used to undo partial changes.</p>
+      <p><strong>Consistency:</strong> Enforced by <strong>integrity constraints</strong> (primary key, foreign key, check constraints). The DBMS checks these before and after each transaction.</p>
+      <p><strong>Isolation:</strong> Achieved through <strong>concurrency control mechanisms</strong> like locking and timestamp ordering. Each transaction appears to execute in isolation from others.</p>
+      <p><strong>Durability:</strong> Ensured by the <strong>write-ahead log (WAL)</strong> protocol. Before actual data is written to disk, the log record is written. On recovery, the log is replayed.</p>
+      <p><strong>Real-world Example &mdash; Bank Transfer:</strong></p>
+      <div class="code-block">
+BEGIN TRANSACTION;<br>
+-- Atomicity: Both operations must succeed or both must fail<br>
+UPDATE Account SET Balance = Balance - 500 WHERE Acc_No = 'A001';  -- Debit<br>
+UPDATE Account SET Balance = Balance + 500 WHERE Acc_No = 'A002';  -- Credit<br>
+-- If either fails, ROLLBACK is issued<br>
+COMMIT;  -- Durability: changes now permanently saved
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Revision — Module 4 -->
+<div class="quick-revision">
+  <div class="qr-title">Quick Revision &mdash; Module 4</div>
+  <ul>
+    <li><strong>Transaction:</strong> A logical unit of work (all-or-nothing).</li>
+    <li><strong>ACID:</strong> Atomicity, Consistency, Isolation, Durability.</li>
+    <li><strong>States:</strong> Active &rarr; Partially Committed &rarr; Committed / Failed &rarr; Aborted.</li>
+    <li><strong>Concurrency anomalies:</strong> Lost update, dirty read, non-repeatable read, phantom read.</li>
+    <li><strong>Concurrency control:</strong> Locking, Timestamp ordering, MVCC.</li>
+    <li><strong>Deadlock:</strong> Two transactions waiting for each other's resources. Resolved by victim selection.</li>
+    <li><strong>Serializability:</strong> Concurrent execution equivalent to some serial execution.</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULE 5 — Indexing & Hashing                               -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="module-5" class="section-title">Module 5 &mdash; Indexing &amp; Hashing</section>
+
+<div class="exam-tip">
+  <strong>Exam Tip:</strong> B+ tree indexing is a very frequent topic. Be able to draw a B+ tree and explain search, insertion, and deletion operations. Know the difference between primary, secondary, and clustering indexes. Compare indexing vs sequential search clearly.
+</div>
+
+<!-- Q49 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is indexing?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Indexing is a technique used to speed up data retrieval operations in a database. An index is a data structure (like B+ tree or hash table) that stores a mapping between search key values and the location of corresponding data records, reducing the need for full table scans.</p>
+  </div>
+</div>
+
+<!-- Q50 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a B+ tree?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A B+ tree is a balanced tree data structure used for indexing in databases. It keeps all data records at leaf nodes, and internal nodes store only keys for navigation. All leaf nodes are at the same level, ensuring O(log n) search time.</p>
+  </div>
+</div>
+
+<!-- Q51 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is hashing?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Hashing is a technique for direct access to records using a hash function. A hash function converts a search key into a bucket address, allowing O(1) average-case search. Hashing is used in hash file organisations and hash indexes.</p>
+  </div>
+</div>
+
+<!-- Q52 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a primary index?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A primary index is an index built on the primary key of a relation. It is always dense (one index entry per search key) and the data file is ordered by the primary key. There can be at most one primary index per table.</p>
+  </div>
+</div>
+
+<!-- Q53 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain different types of indexes in DBMS.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <ul>
+      <li><strong>Primary Index:</strong> Built on primary key. Ordered file. Sparse (only some keys indexed) with dense index entry at block level.</li>
+      <li><strong>Secondary (Non-clustering) Index:</strong> Built on non-key attributes. Data file may not be ordered. Dense index (every key value has an entry).</li>
+      <li><strong>Clustering Index:</strong> Built on non-key attributes when records with the same value are stored together. Data file is ordered on the clustering key.</li>
+      <li><strong>Unique Index:</strong> Ensures that the index key appears only once in the column (no duplicates).</li>
+      <li><strong>Composite Index:</strong> Index on multiple columns (useful for multi-column WHERE clauses).</li>
+      <li><strong>Bitmap Index:</strong> Uses bit arrays for each distinct value. Effective for low-cardinality columns (gender, status).</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Q54 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain the structure of a B+ tree with an example.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A B+ tree of order n (max n pointers per node):</p>
+    <ul>
+      <li><strong>Root:</strong> May have between 2 and n children.</li>
+      <li><strong>Internal Nodes:</strong> Store only keys and pointers to child nodes. Each key acts as a separator.</li>
+      <li><strong>Leaf Nodes:</strong> Store (key, record pointer) pairs. All leaf nodes are at the same depth. Linked together for range queries.</li>
+      <li><strong>Search:</strong> Start at root, follow pointers using binary search at each internal node. Complexity: O(log n).</li>
+      <li><strong>Insert:</strong> Navigate to appropriate leaf; insert key. If overflow, split node and propagate middle key up.</li>
+      <li><strong>Delete:</strong> Navigate to leaf; remove key. If underflow, borrow or merge nodes.</li>
+    </ul>
+    <div class="diagram-container">
+      <svg viewBox="0 0 620 240" xmlns="http://www.w3.org/2000/svg" style="max-width: 580px;">
+        <!-- Root -->
+        <rect x="220" y="10" width="160" height="44" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+        <text x="300" y="37" text-anchor="middle" font-size="13" font-weight="700" fill="#831843">15 | 30 | 45</text>
+
+        <!-- Level 2 nodes -->
+        <rect x="60" y="90" width="110" height="44" rx="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/>
+        <text x="115" y="112" text-anchor="middle" font-size="12" font-weight="600" fill="#831843">5 | 10</text>
+
+        <rect x="245" y="90" width="110" height="44" rx="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/>
+        <text x="300" y="112" text-anchor="middle" font-size="12" font-weight="600" fill="#831843">20 | 25</text>
+
+        <rect x="430" y="90" width="110" height="44" rx="8" fill="#fdf2f8" stroke="#ec4899" stroke-width="1.5"/>
+        <text x="485" y="112" text-anchor="middle" font-size="12" font-weight="600" fill="#831843">35 | 40</text>
+
+        <!-- Leaf level -->
+        <rect x="10" y="175" width="90" height="44" rx="6" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+        <text x="55" y="197" text-anchor="middle" font-size="11" fill="#831843">1, 2, 3, 4, 5</text>
+
+        <rect x="105" y="175" width="90" height="44" rx="6" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+        <text x="150" y="197" text-anchor="middle" font-size="11" fill="#831843">6, 7, 8, 9, 10</text>
+
+        <rect x="245" y="175" width="90" height="44" rx="6" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+        <text x="290" y="197" text-anchor="middle" font-size="11" fill="#831843">11,15,20</text>
+
+        <rect x="340" y="175" width="90" height="44" rx="6" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+        <text x="385" y="197" text-anchor="middle" font-size="11" fill="#831843">21,25,29</text>
+
+        <rect x="430" y="175" width="90" height="44" rx="6" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+        <text x="485" y="197" text-anchor="middle" font-size="11" fill="#831843">31,35,39</text>
+
+        <rect x="525" y="175" width="90" height="44" rx="6" fill="#fff" stroke="#f9a8d4" stroke-width="1.5"/>
+        <text x="580" y="197" text-anchor="middle" font-size="11" fill="#831843">41,50,55</text>
+
+        <!-- Root to Level 2 lines -->
+        <line x1="255" y1="54" x2="135" y2="90" stroke="#f9a8d4" stroke-width="1.2"/>
+        <line x1="300" y1="54" x2="300" y2="90" stroke="#f9a8d4" stroke-width="1.2"/>
+        <line x1="345" y1="54" x2="485" y2="90" stroke="#f9a8d4" stroke-width="1.2"/>
+
+        <!-- Level 2 to Leaf lines -->
+        <line x1="100" y1="134" x2="55" y2="175" stroke="#f9a8d4" stroke-width="1"/>
+        <line x1="130" y1="134" x2="150" y2="175" stroke="#f9a8d4" stroke-width="1"/>
+
+        <line x1="280" y1="134" x2="290" y2="175" stroke="#f9a8d4" stroke-width="1"/>
+        <line x1="320" y1="134" x2="385" y2="175" stroke="#f9a8d4" stroke-width="1"/>
+
+        <line x1="460" y1="134" x2="485" y2="175" stroke="#f9a8d4" stroke-width="1"/>
+        <line x1="490" y1="134" x2="580" y2="175" stroke="#f9a8d4" stroke-width="1"/>
+
+        <!-- Leaf linked list arrow -->
+        <line x1="100" y1="197" x2="105" y2="197" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <line x1="195" y1="197" x2="245" y2="197" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <line x1="335" y1="197" x2="340" y2="197" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <line x1="430" y1="197" x2="430" y2="197" stroke="#ec4899" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+        <line x1="615" y1="197" x2="615" y2="197" stroke="none"/>
+
+        <defs>
+          <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+            <path d="M0,1 L5,3 L0,5" fill="none" stroke="#ec4899" stroke-width="1"/>
+          </marker>
+        </defs>
+      </svg>
+      <p class="diagram-caption">B+ Tree Structure &mdash; Internal nodes guide search, leaf nodes store actual data pointers and are linked for range queries</p>
+    </div>
+  </div>
+</div>
+
+<!-- Previous Year Question — B+ Tree -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-15m">15M</span>
+      <span>Explain B+ tree indexing with a suitable example. How is it different from a B tree?</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Answer:</strong></p>
+      <p><strong>B+ Tree Definition:</strong> A B+ tree is a balanced tree where all leaf nodes are at the same level and contain actual data pointers. Internal nodes store only keys for navigation.</p>
+      <p><strong>Operations:</strong></p>
+      <ul>
+        <li><strong>Search:</strong> Start at root, traverse to leaf using binary search at each level. O(log n) time.</li>
+        <li><strong>Insert:</strong> Navigate to correct leaf, insert key. If overflow (n+1 keys), split leaf into two and propagate middle key to parent.</li>
+        <li><strong>Delete:</strong> Remove key from leaf. If underflow, merge or redistribute keys with sibling.</li>
+      </ul>
+      <p><strong>B+ Tree vs B Tree:</strong></p>
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>B+ Tree</th><th>B Tree</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Data pointers</td><td>Only at leaf nodes</td><td>At both internal &amp; leaf nodes</td></tr>
+          <tr><td>Search efficiency</td><td>All keys in leaves (faster range)</td><td>Keys may not be at leaves</td></tr>
+          <tr><td>Leaf linking</td><td>Yes (singly linked)</td><td>No</td></tr>
+          <tr><td>Range queries</td><td>Efficient (linked leaves)</td><td>Inefficient (in-order traversal needed)</td></tr>
+          <tr><td>Height</td><td>Shorter (more keys per node)</td><td>Comparatively taller</td></tr>
+        </tbody>
+      </table>
+      <p><strong>Why B+ Tree in DBMS?</strong> Most DBMS (Oracle, MySQL InnoDB, PostgreSQL) use B+ trees for primary and secondary indexes because of efficient range queries and balanced structure.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Revision — Module 5 -->
+<div class="quick-revision">
+  <div class="qr-title">Quick Revision &mdash; Module 5</div>
+  <ul>
+    <li><strong>Indexing:</strong> Data structure for fast data retrieval. Reduces table scan cost.</li>
+    <li><strong>Primary Index:</strong> On primary key. Sparse + ordered file.</li>
+    <li><strong>Secondary Index:</strong> On non-key attributes. Dense.</li>
+    <li><strong>Clustering Index:</strong> On non-key attribute where records with same value stored together.</li>
+    <li><strong>B+ Tree:</strong> All data at leaves, leaves linked, internal nodes are navigation guides.</li>
+    <li><strong>Hashing:</strong> Direct access via hash function. O(1) average. Used in static and dynamic hashing.</li>
+    <li><strong>Index vs Sequential:</strong> Index search is O(log n) vs sequential O(n).</li>
+  </ul>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- MODULE 6 — Advanced Topics                                 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section id="module-6" class="section-title">Module 6 &mdash; Advanced Topics</section>
+
+<div class="exam-tip">
+  <strong>Exam Tip:</strong> Data warehouse and OLAP are frequently asked. Draw the data warehouse architecture diagram. NoSQL is an emerging topic &mdash; know the four main types (document, key-value, columnar, graph). Data mart vs data warehouse is a common comparison question.
+</div>
+
+<!-- Q61 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a data warehouse?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A data warehouse is a centralised repository that integrates data from multiple heterogeneous sources for analytical reporting and decision support. It uses ETL (Extract, Transform, Load) processes, stores historical data, and supports OLAP operations.</p>
+  </div>
+</div>
+
+<!-- Q62 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is OLAP?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> OLAP (Online Analytical Processing) is a technology for performing multidimensional analysis of data from a data warehouse. It enables complex queries for business intelligence, supporting operations like roll-up, drill-down, slice, dice, and pivot.</p>
+  </div>
+</div>
+
+<!-- Q63 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is data mining?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> Data mining is the process of discovering patterns, correlations, trends, and knowledge from large volumes of data using techniques from statistics, machine learning, and AI. It is the analysis step of the KDD (Knowledge Discovery in Databases) process.</p>
+  </div>
+</div>
+
+<!-- Q64 — 1M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-1m">1M</span>
+    <span>What is a distributed database?</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> A distributed database stores data across multiple geographically dispersed sites connected by a network. It provides local autonomy, reliability, and improved performance. Data can be fragmented (horizontal, vertical, mixed) and replicated across sites.</p>
+  </div>
+</div>
+
+<!-- Q65 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain data warehouse architecture and its components.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong></p>
+    <p><strong>Three-Tier Architecture:</strong></p>
+    <ul>
+      <li><strong>Bottom Tier (Data Source Layer):</strong> Operational databases, external data sources, legacy systems. Data is extracted using ETL tools.</li>
+      <li><strong>Middle Tier (Data Warehouse Server):</strong> Relational DBMS or OLAP server. Data is cleaned, transformed, and loaded here. Uses a dimensional model (star/snowflake schema) with fact and dimension tables.</li>
+      <li><strong>Top Tier (Front-End Tools):</strong> Query and reporting tools, analysis tools, data mining tools, dashboards. Users interact with this layer.</li>
+    </ul>
+    <p><strong>ETL Process:</strong></p>
+    <ul>
+      <li><strong>Extract:</strong> Read data from source systems.</li>
+      <li><strong>Transform:</strong> Clean, filter, aggregate, and standardise data.</li>
+      <li><strong>Load:</strong> Write transformed data into the warehouse.</li>
+    </ul>
+    <p><strong>Characteristics of Data Warehouse:</strong> Subject-oriented, Integrated, Time-variant, Non-volatile.</p>
+  </div>
+</div>
+
+<!-- Q66 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>Explain OLAP operations with examples.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> OLAP operates on multidimensional data cubes. A data cube has dimensions (e.g., Time, Product, Region) and measures (e.g., Sales).</p>
+    <ul>
+      <li><strong>Roll-up (Drill-up):</strong> Aggregate data to a higher level (e.g., city sales &rarr; country sales). Reduces dimension detail.</li>
+      <li><strong>Drill-down:</strong> Navigate to finer detail (e.g., year sales &rarr; month sales). Increases dimension detail.</li>
+      <li><strong>Slice:</strong> Select one dimension value (e.g., Sales where Product = 'Laptop'). Creates a sub-cube.</li>
+      <li><strong>Dice:</strong> Select multiple dimension values (e.g., Sales for Q1 AND Region = 'North').</li>
+      <li><strong>Pivot (Rotate):</strong> Reorient the cube view (e.g., swap rows and columns in a report).</li>
+    </ul>
+    <p><strong>OLAP Types:</strong> MOLAP (Multidimensional), ROLAP (Relational), HOLAP (Hybrid).</p>
+  </div>
+</div>
+
+<!-- Q67 — 5M -->
+<div class="qa-item">
+  <div class="qa-question">
+    <span class="q-badge badge-5m">5M</span>
+    <span>What is NoSQL? Explain different types of NoSQL databases.</span>
+  </div>
+  <div class="qa-answer">
+    <p><strong>Answer:</strong> NoSQL (Not only SQL) databases are non-relational databases designed for large-scale, distributed data storage. They do not use the traditional table-based relational model.</p>
+    <p><strong>Types:</strong></p>
+    <ul>
+      <li><strong>Document Databases:</strong> Store data as JSON/BSON documents (e.g., MongoDB, CouchDB). Flexible schema.</li>
+      <li><strong>Key-Value Stores:</strong> Simple key-value pairs (e.g., Redis, DynamoDB). Very fast lookups.</li>
+      <li><strong>Columnar (Wide-column) Stores:</strong> Store data in column families (e.g., Cassandra, HBase). Efficient for large-scale analytics.</li>
+      <li><strong>Graph Databases:</strong> Store data as nodes and edges (e.g., Neo4j, Amazon Neptune). Ideal for relationship-heavy data.</li>
+    </ul>
+    <p><strong>When to use NoSQL?</strong> Large volumes of unstructured/semi-structured data, horizontal scaling, agile development with flexible schemas, high throughput requirements.</p>
+  </div>
+</div>
+
+<!-- Previous Year Question — Data Warehouse -->
+<div class="pyq-section">
+  <div class="pyq-label">Previous Year Questions (Frequent)</div>
+  <div class="qa-item">
+    <div class="qa-question">
+      <span class="q-badge badge-15m">15M</span>
+      <span>Explain data warehouse with its architecture. How is it different from a data mart?</span>
+    </div>
+    <div class="qa-answer">
+      <p><strong>Answer:</strong></p>
+      <p><strong>Data Warehouse:</strong> A centralised, subject-oriented, integrated, time-variant, and non-volatile collection of data used for decision support.</p>
+      <p><strong>Architecture Components:</strong></p>
+      <ol>
+        <li><strong>Data Sources:</strong> Operational systems, external feeds, flat files.</li>
+        <li><strong>Data Staging Area:</strong> Raw data landing zone for ETL processing.</li>
+        <li><strong>ETL Process:</strong> Extract, transform, clean, load into warehouse.</li>
+        <li><strong>Data Warehouse Database:</strong> Core storage (relational or columnar). Star/Snowflake schema.</li>
+        <li><strong>OLAP Server:</strong> Multidimensional processing for analysis.</li>
+        <li><strong>Front-end Tools:</strong> Reporting, dashboards, data mining.</li>
+      </ol>
+      <p><strong>Data Warehouse vs Data Mart:</strong></p>
+      <table>
+        <thead>
+          <tr><th>Aspect</th><th>Data Warehouse</th><th>Data Mart</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Scope</td><td>Enterprise-wide (all departments)</td><td>Department-specific (subset)</td></tr>
+          <tr><td>Size</td><td>Large (petabytes)</td><td>Small to medium</td></tr>
+          <tr><td>Cost</td><td>High</td><td>Lower</td></tr>
+          <tr><td>Data Sources</td><td>Multiple heterogeneous sources</td><td>Few sources, often one DW</td></tr>
+          <tr><td>Implementation Time</td><td>Long (months/years)</td><td>Short (weeks/months)</td></tr>
+          <tr><td>Schema</td><td>Normalized (3NF) or dimensional</td><td>Dimensional (star schema)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Revision — Module 6 -->
+<div class="quick-revision">
+  <div class="qr-title">Quick Revision &mdash; Module 6</div>
+  <ul>
+    <li><strong>Data Warehouse:</strong> Subject-oriented, integrated, time-variant, non-volatile. For decision support.</li>
+    <li><strong>OLAP Operations:</strong> Roll-up, Drill-down, Slice, Dice, Pivot.</li>
+    <li><strong>ETL:</strong> Extract, Transform, Load.</li>
+    <li><strong>Star Schema:</strong> Central fact table surrounded by dimension tables.</li>
+    <li><strong>Snowflake Schema:</strong> Normalised dimension tables in a star schema.</li>
+    <li><strong>Data Mart:</strong> Subset of a DW, department-specific, easier and faster to build.</li>
+    <li><strong>NoSQL:</strong> Document (MongoDB), Key-Value (Redis), Columnar (Cassandra), Graph (Neo4j).</li>
+    <li><strong>Data Mining:</strong> Classification, Clustering, Association rules, Regression.</li>
+  </ul>
+</div>
+
+</article>
+</main>
+
+<!-- Footer -->
+<footer style="text-align:center; padding: 2rem; color: var(--text-muted, #64748b); font-size: 0.85rem;">
+  <p>Database Management Systems (PEC-CS505B) &mdash; Semester 5 Study Notes</p>
+  <p style="margin-top: 0.3rem;">Generated for MAKAUT examination preparation</p>
+</footer>
+
+</body>
+</html>
