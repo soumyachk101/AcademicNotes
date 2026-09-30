@@ -1,1733 +1,1554 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Artificial Intelligence — Study Notes (PEC-CS501B)</title>
-<meta name="description" content="Comprehensive AI study notes for MAKAUT B.Tech CSE Semester 5. Covers intelligent agents, search, knowledge representation, reasoning, ML basics, NLP, expert systems with 1-mark, 5-mark, 15-mark questions and PYQs.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../../site.css">
-<style>
-/* ---------- Study-notes specific styles (minimal, academic) ---------- */
-:root {
- --c: #8b5cf6;
- --c-soft: color-mix(in srgb, #8b5cf6 8%, transparent);
- --c-line: color-mix(in srgb, #8b5cf6 22%, transparent);
-}
-.sheet { --accent: #8b5cf6; }
-
-.notes-body {
- font-size: 0.98rem;
- line-height: 1.7;
- color: var(--ink);
- max-width: 78ch;
-}
-
-.notes-body h3 {
- font-family: var(--display);
- font-size: 1.15rem;
- font-weight: 700;
- letter-spacing: -0.018em;
- color: var(--ink-strong);
- margin: 1.6rem 0 0.7rem;
- padding-top: 0.4rem;
-}
-
-.notes-body h4 {
- font-family: var(--util);
- font-size: 0.78rem;
- font-weight: 700;
- letter-spacing: 0.12em;
- text-transform: uppercase;
- color: var(--ink-muted);
- margin: 1.3rem 0 0.5rem;
-}
-
-.notes-body p { margin: 0.6rem 0; text-wrap: pretty; }
-.notes-body ul, .notes-body ol { margin: 0.5rem 0 0.9rem 1.4rem; }
-.notes-body li { margin: 0.25rem 0; }
-.notes-body strong { color: var(--ink-strong); font-weight: 600; }
-.notes-body em { color: var(--ink-muted); font-style: italic; }
-
-.notes-body code, .notes-body .mono {
- font-family: var(--util);
- font-size: 0.88em;
- background: var(--wash);
- padding: 0.1em 0.35em;
- border-radius: 4px;
- color: var(--ink-strong);
-}
-
-/* Definition box — thin purple rule */
-.defn {
- margin: 1.1rem 0;
- padding: 0.95rem 1.1rem;
- border-left: 3px solid var(--c);
- background: var(--c-soft);
- border-radius: 0 8px 8px 0;
-}
-.defn p { margin: 0.35rem 0; }
-.defn-label {
- display: inline-block;
- font-family: var(--util);
- font-size: 0.7rem;
- font-weight: 700;
- letter-spacing: 0.14em;
- text-transform: uppercase;
- color: var(--c);
- margin-bottom: 0.25rem;
-}
-
-/* Algorithm box — looks like a typeset pseudocode block */
-.algo {
- margin: 1.1rem 0;
- padding: 0.95rem 1.1rem;
- border: 1px solid var(--c-line);
- border-radius: 8px;
- background: color-mix(in srgb, #8b5cf6 3%, #fefdfb);
- font-family: var(--util);
- font-size: 0.86rem;
- line-height: 1.55;
- white-space: pre-wrap;
- color: var(--ink-strong);
-}
-.algo-label {
- display: inline-block;
- font-family: var(--util);
- font-size: 0.68rem;
- font-weight: 700;
- letter-spacing: 0.14em;
- text-transform: uppercase;
- color: var(--c);
- margin-bottom: 0.4rem;
-}
-
-/* Question block — small card, grouped by marks */
-.qblock {
- margin: 0.5rem 0 0.9rem;
- padding: 0.95rem 1.1rem;
- background: #ffffff;
- border: 1px solid var(--rule-soft);
- border-radius: 10px;
- box-shadow: var(--lift-1);
-}
-.qblock .qhead {
- display: flex;
- align-items: baseline;
- gap: 0.7rem;
- margin-bottom: 0.5rem;
-}
-.qblock .qmark {
- font-family: var(--util);
- font-size: 0.7rem;
- font-weight: 700;
- letter-spacing: 0.1em;
- padding: 0.18rem 0.5rem;
- border-radius: 5px;
- background: var(--c-soft);
- color: var(--c);
- white-space: nowrap;
-}
-.qblock .qid {
- font-family: var(--util);
- font-size: 0.72rem;
- color: var(--ink-muted);
- letter-spacing: 0.04em;
-}
-.qblock .qtext {
- font-weight: 600;
- color: var(--ink-strong);
- margin-bottom: 0.55rem;
- line-height: 1.5;
-}
-.qblock .qans {
- color: var(--ink);
- line-height: 1.65;
-}
-.qblock .qans p { margin: 0.35rem 0; }
-.qblock .qans ul, .qblock .qans ol { margin: 0.35rem 0 0.5rem 1.3rem; }
-
-/* Marks rail — groups sections */
-.marks-rail {
- display: flex;
- flex-wrap: wrap;
- gap: 0.5rem;
- margin: 1rem 0 0.5rem;
- font-family: var(--util);
- font-size: 0.74rem;
-}
-.marks-pill {
- padding: 0.32rem 0.7rem;
- border-radius: 999px;
- background: var(--c-soft);
- color: var(--c);
- font-weight: 700;
- letter-spacing: 0.06em;
-}
-
-/* PYQ tag */
-.pyq-tag {
- display: inline-block;
- font-family: var(--util);
- font-size: 0.66rem;
- font-weight: 700;
- letter-spacing: 0.08em;
- padding: 0.18rem 0.5rem;
- border-radius: 5px;
- background: #fef3c7;
- color: #92400e;
- margin-left: 0.5rem;
- vertical-align: middle;
-}
-
-/* Exam-tip callout */
-.tip {
- margin: 1.2rem 0;
- padding: 1rem 1.15rem;
- border-left: 3px solid #f59e0b;
- background: #fffbeb;
- border-radius: 0 8px 8px 0;
-}
-.tip-label {
- display: inline-block;
- font-family: var(--util);
- font-size: 0.68rem;
- font-weight: 700;
- letter-spacing: 0.14em;
- text-transform: uppercase;
- color: #92400e;
- margin-bottom: 0.3rem;
-}
-.tip p { margin: 0.3rem 0; }
-
-/* Comparison table */
-.ctable {
- width: 100%;
- border-collapse: collapse;
- margin: 1rem 0;
- font-size: 0.9rem;
-}
-.ctable th, .ctable td {
- text-align: left;
- padding: 0.55rem 0.7rem;
- border-bottom: 1px solid var(--rule-soft);
- vertical-align: top;
-}
-.ctable th {
- font-family: var(--util);
- font-size: 0.72rem;
- font-weight: 700;
- letter-spacing: 0.1em;
- text-transform: uppercase;
- color: var(--c);
- background: var(--c-soft);
-}
-.ctable tr:nth-child(even) td { background: var(--wash); }
-
-/* Formula box */
-.formula {
- margin: 1rem 0;
- padding: 0.85rem 1.1rem;
- border: 1px dashed var(--c-line);
- border-radius: 8px;
- background: color-mix(in srgb, #8b5cf6 3%, #fefdfb);
- font-family: var(--util);
- font-size: 0.95rem;
- text-align: center;
- color: var(--ink-strong);
-}
-
-/* Inline diagram with SVG */
-.diagram {
- margin: 1.2rem auto;
- text-align: center;
-}
-.diagram svg { max-width: 100%; height: auto; }
-.diagram-caption {
- display: block;
- margin-top: 0.5rem;
- font-family: var(--util);
- font-size: 0.72rem;
- letter-spacing: 0.04em;
- color: var(--ink-muted);
-}
-
-/* TOC at the top */
-.toc {
- margin: 2rem 0 0;
- padding: 1.4rem 1.5rem;
- border: 1px solid var(--c-line);
- border-radius: 12px;
- background: var(--c-soft);
-}
-.toc h3 {
- margin: 0 0 0.7rem;
- font-family: var(--util);
- font-size: 0.78rem;
- font-weight: 700;
- letter-spacing: 0.16em;
- text-transform: uppercase;
- color: var(--c);
-}
-.toc ul {
- list-style: none;
- padding: 0;
- margin: 0;
- display: grid;
- grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
- gap: 0.35rem 1.2rem;
-}
-.toc a {
- display: block;
- padding: 0.3rem 0;
- color: var(--ink);
- text-decoration: none;
- font-size: 0.92rem;
- border-bottom: 1px dashed transparent;
- transition: border-color 180ms;
-}
-.toc a:hover { border-bottom-color: var(--c); color: var(--c); }
-.toc .unit-num {
- font-family: var(--util);
- font-size: 0.7rem;
- color: var(--c);
- font-weight: 700;
- margin-right: 0.4rem;
-}
-
-/* Unit title bar — strong accent */
-.unit-title {
- display: flex;
- align-items: baseline;
- gap: 1rem;
- margin: 0 0 1.2rem;
-}
-.unit-num {
- font-family: var(--util);
- font-size: 0.78rem;
- font-weight: 700;
- letter-spacing: 0.16em;
- text-transform: uppercase;
- color: var(--c);
- padding: 0.3rem 0.7rem;
- border: 1px solid var(--c-line);
- border-radius: 6px;
- background: var(--c-soft);
-}
-.unit-name {
- font-family: var(--display);
- font-size: 1.4rem;
- font-weight: 700;
- letter-spacing: -0.02em;
- color: var(--ink-strong);
-}
-
-/* Lists cleaner inside notes-body */
-.notes-body ul li::marker { color: var(--c); }
-
-@media (max-width: 640px) {
- .toc ul { grid-template-columns: 1fr; }
- .unit-title { flex-direction: column; gap: 0.4rem; }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Study Notes — Semester 5</title>
+  <link rel="stylesheet" href="../../site.css">
+  <style>
+    /* Per-page accent override */
+    .sheet { --c: #8b5cf6; }
+  </style>
 </head>
 <body>
-<main class="sheet">
+  <div class="sheet has-toc">
 
- <a class="back" href="ai_index.html">&larr; All AI resources</a>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <a class="topbar__brand" href="../index.html">
+        <span class="topbar__logo">5</span>
+        <div>
+          <div class="topbar__title">Semester 5</div>
+          <div class="topbar__sub">MAKAUT · B.Tech CSE</div>
+        </div>
+      </a>
+      <div class="topbar__actions">
+        <a class="topbar__chip topbar__chip--accent" href="ai_index.html">← AI Index</a>
+      </div>
+    </div>
 
- <header class="masthead">
- <div class="masthead-text">
- <p class="eyebrow">Semester 5 &middot; <span class="accent" style="color:#8b5cf6">PEC-CS501B</span> &middot; Study Notes</p>
- <h1>Artificial Intelligence</h1>
- <p class="standfirst">Intelligent agents, uninformed &amp; informed search, game playing with alpha-beta, knowledge representation, predicate logic, reasoning under uncertainty, expert systems, and an introduction to machine learning, NLP, and modern generative AI.</p>
- <p class="paper-meta">
- <span>Paper <b>100 marks</b></span>
- <span>Syllabus <b>MAKAUT 2020</b></span>
- <span>Units <b>7</b></span>
- <span>Updated <b>Nov 2025</b></span>
- </p>
- </div>
- </header>
+    <!-- SIDEBAR TOC (sticky) -->
+    <nav class="toc" id="toc">
+      <div class="toc__label">On this page</div>
+      <ul class="toc__list">
+        <li class="toc__group">
+          <span class="toc__group-label">Units</span>
+          <ul class="toc__list">
+            <li class="toc__item"><a href="#unit1"><span class="toc__no">01</span>Introduction to AI</a></li>
+            <li class="toc__item"><a href="#unit2"><span class="toc__no">02</span>Uninformed Search</a></li>
+            <li class="toc__item"><a href="#unit3"><span class="toc__no">03</span>Informed Search</a></li>
+            <li class="toc__item"><a href="#unit4"><span class="toc__no">04</span>Knowledge Representation</a></li>
+            <li class="toc__item"><a href="#unit5"><span class="toc__no">05</span>Machine Learning</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="toc__foot">
+        <div class="toc__progress" style="--p:0%"></div>
+        <div class="toc__progress-label"><span>Reading</span><span>0%</span></div>
+      </div>
+    </nav>
 
- <dl class="figures">
- <div class="figure"><dt>Units</dt><dd>7</dd></div>
- <div class="figure"><dt>1-mark Qs</dt><dd>32+</dd></div>
- <div class="figure"><dt>5-mark Qs</dt><dd>24+</dd></div>
- <div class="figure"><dt>15-mark Qs</dt><dd>14+</dd></div>
- </dl>
+    <!-- MAIN CONTENT -->
+    <div class="content">
 
- <!-- ═══════════════ TOC ═══════════════ -->
- <nav class="toc">
- <h3>Quick Navigation</h3>
- <ul>
- <li><a href="#unit1"><span class="unit-num">U1</span>Intelligent Agents</a></li>
- <li><a href="#unit2"><span class="unit-num">U2</span>Problem Solving &amp; Search</a></li>
- <li><a href="#unit3"><span class="unit-num">U3</span>Adversarial Search &amp; Games</a></li>
- <li><a href="#unit4"><span class="unit-num">U4</span>Knowledge &amp; Reasoning</a></li>
- <li><a href="#unit5"><span class="unit-num">U5</span>Uncertainty &amp; Expert Systems</a></li>
- <li><a href="#unit6"><span class="unit-num">U6</span>Machine Learning Basics</a></li>
- <li><a href="#unit7"><span class="unit-num">U7</span>NLP &amp; Modern AI</a></li>
- <li><a href="#pyq">PYQs &amp; Exam Tips</a></li>
- </ul>
- </nav>
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero__eyebrow">SEMESTER 5 · ARTIFICIAL INTELLIGENCE</div>
+        <h1 class="hero__title">Artificial Intelligence <em>Study Notes</em></h1>
+        <p class="hero__lead">Exam-focused coverage of all 5 units — agents, search strategies, knowledge representation, and machine learning.</p>
+        <div class="hero__tags">
+          <span class="tag">5 Units</span>
+          <span class="tag">1M + 5M + 15M</span>
+          <span class="tag">PYQs Marked</span>
+          <span class="tag--soft">MAKAUT Pattern</span>
+        </div>
+        <div class="hero__stats">
+          <dl class="hero__stat">
+            <dt>1-Mark Qs</dt>
+            <dd>30+</dd>
+            <small>Quick definitions</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>5-Mark Qs</dt>
+            <dd>18+</dd>
+            <small>Explanations</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>15-Mark Qs</dt>
+            <dd>10+</dd>
+            <small>Detailed answers</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>PYQs</dt>
+            <dd>2021–24</dd>
+            <small>Previous years</small>
+          </dl>
+        </div>
+      </div>
 
- <!-- ═══════════════ UNIT 1 ═══════════════ -->
- <div class="band" id="unit1">
- <h2>Unit 1 &middot; Introduction to AI &amp; Intelligent Agents</h2>
- <span class="band-note">Foundations &middot; PEAS &middot; Agent types</span>
- </div>
+      <!-- ═══════════════ UNIT 1 ═══════════════ -->
+      <div class="unit" id="unit1">
+        <div class="unit__head">
+          <span class="unit__no">01</span>
+          <div>
+            <h2 class="unit__title">Introduction to AI &amp; Problem Solving</h2>
+            <p class="unit__sub">Agents · PEAS · State Space · Problem Formulation</p>
+          </div>
+        </div>
 
- <div class="notes-body">
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Artificial Intelligence</strong> is the design and study of systems that perceive their environment and take actions that maximise the probability of achieving their goals. [Rich &amp; Knight]</p>
+        </div>
 
- <div class="unit-title"><span class="unit-num">U1</span><span class="unit-name">Core concepts</span></div>
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p>An <strong>AI agent</strong> is anything that perceives its environment through sensors and acts upon that environment through actuators. [Russell &amp; Norvig]</p>
+        </div>
 
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Artificial Intelligence (AI)</strong> is the branch of computer science devoted to creating systems that perform tasks which, when done by humans, require intelligence &mdash; learning, reasoning, problem solving, perception and language understanding (Rich &amp; Knight, 2010).</p>
- </div>
+        <div class="subhead"><span class="subhead__title">1-mark Questions</span> <span class="qa__marks">1M</span></div>
 
- <p>AI is conventionally grouped into four categories by capability:</p>
- <ul>
- <li><strong>Reactive Machines</strong> &mdash; respond only to current percepts; no memory. Example: Deep Blue.</li>
- <li><strong>Limited Memory</strong> &mdash; use recent percepts plus stored knowledge. Example: self-driving cars.</li>
- <li><strong>Theory of Mind</strong> &mdash; understand that others have beliefs and intentions (still research).</li>
- <li><strong>Self-Aware AI</strong> &mdash; hypothetical systems aware of their own internal state.</li>
- </ul>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q1</span>
+          </div>
+          <div class="qa__q">Define <strong>Artificial Intelligence</strong>.</div>
+          <div class="qa__a"><p>AI is the branch of computer science concerned with making computers behave like humans — reasoning, learning, and problem-solving. [2023]</p></div>
+        </div>
 
- <h3>1-mark Questions</h3>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q2</span>
+          </div>
+          <div class="qa__q">What is an <strong>agent</strong> in AI?</div>
+          <div class="qa__a"><p>An agent is anything that can perceive its environment through sensors and act through actuators. [2021]</p></div>
+        </div>
 
- <div class="marks-rail"><span class="marks-pill">1 mark</span><span class="marks-pill">Definitions</span></div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q3</span>
+          </div>
+          <div class="qa__q">What does <strong>PEAS</strong> stand for?</div>
+          <div class="qa__a"><p>Performance measure, Environment, Actuators, Sensors.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q1</span></div>
- <div class="qtext">Define <strong>Artificial Intelligence</strong>.</div>
- <div class="qans"><p>The branch of computer science that aims to build systems capable of performing tasks that ordinarily require human intelligence &mdash; reasoning, learning, perception and decision making.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q4</span>
+          </div>
+          <div class="qa__q">What is the <strong>Turing Test</strong>?</div>
+          <div class="qa__a"><p>A test proposed by Alan Turing (1950) where a human interrogator chats with both a human and a machine. If the interrogator cannot reliably tell the machine apart, the machine is said to exhibit intelligent behaviour.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q2</span></div>
- <div class="qtext">What is an <strong>intelligent agent</strong>?</div>
- <div class="qans"><p>Anything that perceives its environment through <em>sensors</em> and acts upon it through <em>actuators</em> to achieve a goal. Formally: <code>Agent = Architecture + Agent Program</code>.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q5</span>
+          </div>
+          <div class="qa__q">What is the <strong>Dartmouth Conference</strong>?</div>
+          <div class="qa__a"><p>The 1956 summer workshop at Dartmouth College, co-organised by John McCarthy, Marvin Minsky, Claude Shannon and Nathaniel Rochester. It coined the term "Artificial Intelligence" and marked the birth of AI as a field.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q3</span></div>
- <div class="qtext">What does <strong>PEAS</strong> stand for?</div>
- <div class="qans"><p><strong>P</strong>erformance measure, <strong>E</strong>nvironment, <strong>A</strong>ctuators, <strong>S</strong>ensors. It is a standard descriptor for an agent&rsquo;s task environment.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q6</span>
+          </div>
+          <div class="qa__q">Differentiate <strong>rational</strong> vs <strong>omniscient</strong> agent.</div>
+          <div class="qa__a"><p>A rational agent does the right thing given its percept sequence. An omniscient agent would know the actual outcome of every action — an unrealistic ideal. Rationality ≠ omniscience.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q4</span></div>
- <div class="qtext">Define <strong>rational agent</strong>.</div>
- <div class="qans"><p>An agent that selects the action that maximises its expected performance measure, given its percept history and built-in knowledge.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q7</span>
+          </div>
+          <div class="qa__q">What is a <strong>state space</strong>?</div>
+          <div class="qa__a"><p>The set of all possible states reachable from the initial state by any sequence of actions. Represented as a graph where nodes are states and edges are actions.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q5</span></div>
- <div class="qtext">Distinguish between <strong>agent function</strong> and <strong>agent program</strong>.</div>
- <div class="qans"><p>The <em>agent function</em> maps the entire percept history to an action <code>f : P* &rarr; A</code> (abstract mapping). The <em>agent program</em> is the concrete implementation that runs on the physical agent.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q8</span>
+          </div>
+          <div class="qa__q">What is <strong>problem formulation</strong>?</div>
+          <div class="qa__a"><p>The process of defining precisely: (1) initial state, (2) actions/ successor function, (3) goal test, and (4) path cost. This converts a real-world problem into a formal search problem.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q6</span></div>
- <div class="qtext">What is <strong>autonomy</strong> in an agent?</div>
- <div class="qans"><p>The agent&rsquo;s ability to act on its own percepts rather than relying on prior knowledge supplied by the designer. More autonomous agents learn from experience.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U1 / Q9</span>
+          </div>
+          <div class="qa__q">Name the four <strong>types of agents</strong> based on degree of perception.</div>
+          <div class="qa__a"><p>(1) Simple reflex agent, (2) Model-based reflex agent, (3) Goal-based agent, (4) Utility-based agent.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q7</span></div>
- <div class="qtext">Name two <strong>properties of task environments</strong>.</div>
- <div class="qans"><p>Fully / partially observable; deterministic / stochastic; episodic / sequential; static / dynamic; discrete / continuous; single-agent / multi-agent.</p></div>
- </div>
+        <div class="subhead"><span class="subhead__title">5-mark Questions</span> <span class="qa__marks">5M</span></div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U1 / Q8</span></div>
- <div class="qtext">Give an example of a <strong>multi-agent</strong> environment.</div>
- <div class="qans"><p>Football &mdash; teammates coordinate to score while opponents counter; partial observability, stochastic and dynamic.</p></div>
- </div>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U1 / Q1</span>
+          </div>
+          <div class="qa__q">Describe the <strong>PEAS framework</strong> for (a) Vacuum Cleaner Robot, (b) Chess-Playing Program, (c) Self-Driving Car.</div>
+          <div class="qa__a">
+          <table class="t">
+          <tr><th>Agent</th><th>Performance</th><th>Environment</th><th>Actuators</th><th>Sensors</th></tr>
+          <tr><td>Vacuum Robot</td><td>Cleanliness, time, energy</td><td>Room, furniture, dirt</td><td>Brush, wheels, vacuum</td><td>Camera, dirt sensor, bumper</td></tr>
+          <tr><td>Chess Player</td><td>Win rate, game length</td><td>Board, opponent, clock</td><td>Screen/move notation</td><td>Board state, clock display</td></tr>
+          <tr><td>Self-Driving Car</td><td>Safety, speed, comfort</td><td>Road, traffic, weather</td><td>Steering, throttle, brake</td><td>Camera, LIDAR, GPS, radar</td></tr>
+          </table>
+          </div>
+        </div>
 
- <h3>5-mark Questions</h3>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U1 / Q2</span>
+          </div>
+          <div class="qa__q">Explain the <strong>four types of AI agents</strong> with examples.</div>
+          <div class="qa__a">
+          <p><strong>(1) Simple Reflex Agent:</strong> Acts only on current percept, ignoring history. Uses condition-action rules. Example: a thermostat that turns heat ON when T &lt; 20&deg;C.</p>
+          <p><strong>(2) Model-Based Reflex Agent:</strong> Maintains an internal model of the world (current state). Updates the model using percept history. Example: a robot with a map of the room.</p>
+          <p><strong>(3) Goal-Based Agent:</strong> Has explicit goals and chooses actions to achieve them. Needs search/planning. Example: a navigation app choosing route to destination.</p>
+          <p><strong>(4) Utility-Based Agent:</strong> Uses a utility function to rank outcomes. Chooses actions that maximise expected utility. Example: stock trading bot balancing profit vs risk.</p>
+          </div>
+        </div>
 
- <div class="marks-rail"><span class="marks-pill">5 marks</span><span class="marks-pill">Explain</span></div>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U1 / Q3</span>
+          </div>
+          <div class="qa__q">What are the <strong>properties of environment</strong>? Classify a typical environment.</div>
+          <div class="qa__a">
+          <p>Environments are classified along several dimensions:</p>
+          <ul>
+            <li><strong>Fully vs Partially Observable:</strong> Does the agent have access to the complete state?</li>
+            <li><strong>Single vs Multi-agent:</strong> One agent or multiple competing agents?</li>
+            <li><strong>Deterministic vs Stochastic:</strong> Is the next state fully determined by current state + action?</li>
+            <li><strong>Episodic vs Sequential:</strong> Are decisions independent episodes or does each affect the future?</li>
+            <li><strong>Static vs Dynamic:</strong> Does the environment change while the agent deliberates?</li>
+            <li><strong>Discrete vs Continuous:</strong> Are states/time/actions countable?</li>
+            <li><strong>Known vs Unknown:</strong> Are the rules/outcomes known to the designer?</li>
+          </ul>
+          <p>Chess is: fully observable, multi-agent, deterministic, sequential, static, discrete, known.</p>
+          </div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U1 / Q1</span></div>
- <div class="qtext">Explain the <strong>PEAS framework</strong> with a taxi-driver example.</div>
- <div class="qans">
- <table class="ctable">
- <tr><th>Component</th><th>Taxi driver</th></tr>
- <tr><td>Performance</td><td>Safe trip, fast, legal, comfortable, profit</td></tr>
- <tr><td>Environment</td><td>Roads, traffic, pedestrians, weather, customers</td></tr>
- <tr><td>Actuators</td><td>Steering, accelerator, brake, signal, horn, display</td></tr>
- <tr><td>Sensors</td><td>Cameras, GPS, speedometer, odometer, microphone, sonar</td></tr>
- </table>
- <p>This kind of structured description is called a <em>task environment</em> and is the first step in designing any agent.</p>
- </div>
- </div>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U1 / Q4</span>
+          </div>
+          <div class="qa__q">Discuss the <strong>history of AI</strong> with major milestones.</div>
+          <div class="qa__a">
+          <ul>
+            <li><strong>1943:</strong> McCulloch &amp; Pitts — first computational model of neurons.</li>
+            <li><strong>1950:</strong> Turing publishes "Computing Machinery and Intelligence" and proposes the Turing Test.</li>
+            <li><strong>1956:</strong> Dartmouth Conference — "Artificial Intelligence" term coined. Birth of AI.</li>
+            <li><strong>1959:</strong> Arthur Samuel's checkers program — first self-learning program.</li>
+            <li><strong>1966:</strong> ELIZA — first chatbot by Joseph Weizenbaum.</li>
+            <li><strong>1969:</strong> Shakey the Robot — first general-purpose mobile robot at SRI.</li>
+            <li><strong>1974–80 (First AI Winter):</strong> Funding cut, limitations exposed.</li>
+            <li><strong>1997:</strong> Deep Blue defeats Garry Kasparov at chess.</li>
+            <li><strong>2011:</strong> Watson wins Jeopardy!</li>
+            <li><strong>2016:</strong> AlphaGo defeats Lee Sedol at Go.</li>
+            <li><strong>2022–present:</strong> Large Language Models (GPT, Claude, etc.) — generative AI revolution.</li>
+          </ul>
+          </div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U1 / Q2</span></div>
- <div class="qtext">Compare the four basic kinds of agent programs.</div>
- <div class="qans">
- <ul>
- <li><strong>Simple reflex</strong> &mdash; condition-action rules; works only if environment is fully observable.</li>
- <li><strong>Model-based reflex</strong> &mdash; maintains internal state to handle partial observability.</li>
- <li><strong>Goal-based</strong> &mdash; uses goal information to choose actions that lead to desired states.</li>
- <li><strong>Utility-based</strong> &mdash; uses a utility function to choose among conflicting goals.</li>
- </ul>
- <p>Learning agents extend any of these by improving all four components from experience.</p>
- </div>
- </div>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U1 / Q5</span>
+          </div>
+          <div class="qa__q">What is <strong>problem solving</strong> in AI? Explain with the 8-queen problem.</div>
+          <div class="qa__a">
+          <p>Problem solving in AI means finding a sequence of actions that transforms the world from an initial state to a goal state.</p>
+          <p><strong>8-Queen Problem formulation:</strong></p>
+          <ul>
+            <li><em>Initial state:</em> Empty board.</li>
+            <li><em>Actions:</em> Place a queen in any unattacked square of the first non-empty row.</li>
+            <li><em>Goal test:</em> 8 queens placed, none attacking each other.</li>
+            <li><em>Path cost:</em> Number of queens placed (each costs 1).</li>
+          </ul>
+          <p>State space size is 64! / (56! · 8!) &asymp; 4.4 &times; 10<sup>9</sup> — a constraint satisfaction approach is preferred over general search.</p>
+          </div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U1 / Q3</span></div>
- <div class="qtext">Classify the <strong>crossword-puzzle problem</strong> using the environment taxonomy.</div>
- <div class="qans">
- <ul>
- <li>Observable: <em>Fully</em> &mdash; all letters visible.</li>
- <li>Agents: <em>Single</em>.</li>
- <li>Deterministic: <em>Deterministic</em> &mdash; letters stay where placed.</li>
- <li>Episodic: <em>Sequential</em> &mdash; each letter affects later moves.</li>
- <li>Static: <em>Static</em> &mdash; nothing changes while the agent thinks.</li>
- <li>Discrete: <em>Discrete</em>.</li>
- <li>Known: <em>Known</em> &mdash; rules are given.</li>
- </ul>
- </div>
- </div>
+        <div class="subhead"><span class="subhead__title">15-mark Questions</span> <span class="qa__marks">15M</span></div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U1 / Q4</span></div>
- <div class="qtext">Describe the <strong>structure of a learning agent</strong>.</div>
- <div class="qans">
- <p>A learning agent has four conceptual components:</p>
- <ul>
- <li><strong>Performance element</strong> &mdash; chooses actions given percepts (the &ldquo;body&rdquo;).</li>
- <li><strong>Critic</strong> &mdash; compares actual outcomes to a fixed standard of performance.</li>
- <li><strong>Learning element</strong> &mdash; modifies the performance element using feedback from the critic.</li>
- <li><strong>Problem generator</strong> &mdash; suggests exploratory actions that lead to informative new experiences.</li>
- </ul>
- <p>The interaction closes the loop &mdash; experience shapes future behaviour.</p>
- </div>
- </div>
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U1 / Q1</span>
+            <span class="qa__pyq">PYQ [2023]</span>
+          </div>
+          <div class="qa__q">Explain the <strong>Turing Test</strong>. Discuss its strengths and limitations as a test for machine intelligence.</div>
+          <div class="qa__a">
+          <p><strong>The Turing Test (1950):</strong> Alan Turing proposed an "Imitation Game." A human interrogator communicates via text with two hidden entities — one human, one machine. If the interrogator cannot reliably distinguish the machine from the human (more than 30% of the time over 5 minutes), the machine is said to have passed.</p>
+          <p><strong>Strength:</strong></p>
+          <ul>
+            <li>Practical, behaviour-based — focuses on what a system does, not how it thinks.</li>
+            <li>Subjective bias avoided — the interrogator does not know which is which.</li>
+            <li>Applicable to any behaviour (text, speech, image).</li>
+          </ul>
+          <p><strong>Limitations:</strong></p>
+          <ul>
+            <li>Does not measure understanding or consciousness — only behavioural mimicry.</li>
+            <li>Anthropocentric — designed around human-level interaction.</li>
+            <li>Can be "gamed" by ELIZA-style tricks (evasion, keyword matching).</li>
+            <li>Does not distinguish between simulating intelligence and actually being intelligent.</li>
+            <li>Chinese Room argument (Searle, 1980): syntax is not semantics.</li>
+          </ul>
+          <p>Modern view: The Turing Test is a useful benchmark for conversational AI, but not a definitive test of general intelligence.</p>
+          </div>
+        </div>
 
- <h3>15-mark Questions</h3>
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U1 / Q2</span>
+            <span class="qa__pyq">PYQ [2022]</span>
+          </div>
+          <div class="qa__q">Describe in detail the <strong>types of AI agents</strong> (simple reflex, model-based, goal-based, utility-based) with suitable examples and diagrams.</div>
+          <div class="qa__a">
+          <p><strong>(1) Simple Reflex Agent</strong> — acts only on the current percept.</p>
+          <pre>function SIMPLE-REFLEX-AGENT(percept) returns action
+  static: rules, a set of condition-action rules
+  rule &larr; RULE-MATCH(percept, rules)
+  action &larr; rule.ACTION
+  return action</pre>
+          <p>Example: A vacuum cleaner that turns RIGHT when it bumps into a wall.</p>
+          <p><strong>(2) Model-Based Reflex Agent</strong> — maintains internal state.</p>
+          <pre>function MODEL-BASED-AGENT(percept) returns action
+  static: model, rules
+  model &larr; UPDATE-MODEL(model, action, percept)
+  state &larr; MODEL-STATE(model, action, percept)
+  rule &larr; RULE-MATCH(state, rules)
+  action &larr; rule.ACTION
+  return action</pre>
+          <p>Example: A robot that remembers which rooms it has cleaned using a map.</p>
+          <p><strong>(3) Goal-Based Agent</strong> — has explicit goals and reasons about future.</p>
+          <pre>function GOAL-BASED-AGENT(percept) returns action
+  goals &larr; INFER-GOALS(percept)
+  state &larr; UPDATE-STATE(percept)
+  action &larr; FIND-ACTION(goals, state)
+  return action</pre>
+          <p>Example: A taxi driver navigating to a destination — the goal is the destination address.</p>
+          <p><strong>(4) Utility-Based Agent</strong> — maximises expected utility.</p>
+          <pre>function UTILITY-BASED-AGENT(percept) returns action
+  state &larr; UPDATE-STATE(percept)
+  action &larr; argmax<sub>a in ACTIONS(state)</sub> EXPECTED-UTILITY(a, state)
+  return action</pre>
+          <p>Example: A medical diagnosis system choosing treatments ranked by expected patient quality-of-life.</p>
+          </div>
+        </div>
 
- <div class="marks-rail"><span class="marks-pill">15 marks</span><span class="marks-pill">Long answer</span></div>
+        <div class="exam-tip"><strong>Exam Tip:</strong> Always draw the agent function diagram showing percept → agent function → action for each type. The Turing Test and Dartmouth Conference are very frequently asked in 1-mark and 5-mark questions.</div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U1 / Q1</span><span class="pyq-tag">PYQ [2023]</span></div>
- <div class="qtext">Define AI. Discuss the <strong>history and evolution of AI</strong> as a discipline.</div>
- <div class="qans">
- <p><strong>What is AI?</strong> The effort to make machines exhibit behaviour that, if exhibited by humans, we would call intelligent. It spans reasoning, learning, perception, planning, communication and physical action.</p>
- <p><strong>Key milestones:</strong></p>
- <ul>
- <li><strong>1943</strong> &mdash; McCulloch &amp; Pitts propose the first artificial neuron model.</li>
- <li><strong>1950</strong> &mdash; Turing proposes the <em>Imitation Game</em> (Turing Test).</li>
- <li><strong>1956</strong> &mdash; Dartmouth workshop; the term &ldquo;Artificial Intelligence&rdquo; is coined by John McCarthy.</li>
- <li><strong>1958</strong> &mdash; McCarthy invents Lisp, the dominant AI language for decades.</li>
- <li><strong>1969</strong> &mdash; Minsky &amp; Papert&rsquo;s <em>Perceptrons</em> highlights limits of simple neural networks; first AI winter begins.</li>
- <li><strong>1980s</strong> &mdash; Expert systems boom (XCON, MYCIN); renewed funding.</li>
- <li><strong>1987</strong> &mdash; Expert systems collapse; second AI winter.</li>
- <li><strong>1997</strong> &mdash; Deep Blue defeats Kasparov.</li>
- <li><strong>2006</strong> &mdash; Hinton popularises &ldquo;deep learning&rdquo;; neural nets return.</li>
- <li><strong>2011</strong> &mdash; IBM Watson wins <em>Jeopardy!</em></li>
- <li><strong>2012</strong> &mdash; AlexNet halves ImageNet error; CNN era begins.</li>
- <li><strong>2016&ndash;17</strong> &mdash; AlphaGo defeats Lee Sedol and Ke Jie.</li>
- <li><strong>2017</strong> &mdash; Transformer architecture introduced (&ldquo;Attention is all you need&rdquo;).</li>
- <li><strong>2020&ndash;25</strong> &mdash; GPT-3, ChatGPT, GPT-4, Claude and the rise of Generative AI / LLM agents.</li>
- </ul>
- </div>
- </div>
+      </div><!-- /unit -->
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U1 / Q2</span></div>
- <div class="qtext">Discuss the <strong>structure of intelligent agents</strong>. Explain with a diagram how a rational agent works.</div>
- <div class="qans">
+      <!-- ═══════════════ UNIT 2 ═══════════════ -->
+      <div class="unit" id="unit2">
+        <div class="unit__head">
+          <span class="unit__no">02</span>
+          <div>
+            <h2 class="unit__title">Uninformed Search Strategies</h2>
+            <p class="unit__sub">BFS · DFS · UCS · DLS · IDDFS · Bidirectional</p>
+          </div>
+        </div>
 
- <div class="diagram">
- <svg viewBox="0 0 600 200" width="600" height="200" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" font-size="13">
- <defs>
- <marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#1e293b"/></marker>
- </defs>
- <!-- environment -->
- <rect x="20" y="60" width="130" height="80" rx="10" fill="#f1f5f9" stroke="#1e293b" stroke-width="1.2"/>
- <text x="85" y="105" text-anchor="middle" fill="#1e293b" font-weight="600">Environment</text>
- <!-- agent -->
- <rect x="230" y="20" width="160" height="160" rx="12" fill="#8b5cf6" fill-opacity="0.08" stroke="#8b5cf6" stroke-width="1.6"/>
- <text x="310" y="45" text-anchor="middle" fill="#8b5cf6" font-weight="700">AGENT</text>
- <rect x="248" y="60" width="125" height="40" rx="6" fill="#fff" stroke="#8b5cf6"/>
- <text x="310" y="78" text-anchor="middle" fill="#1e293b" font-weight="600">Sensors</text>
- <text x="310" y="94" text-anchor="middle" fill="#57687e" font-size="11">Percepts</text>
- <rect x="248" y="120" width="125" height="40" rx="6" fill="#fff" stroke="#8b5cf6"/>
- <text x="310" y="138" text-anchor="middle" fill="#1e293b" font-weight="600">Actuators</text>
- <text x="310" y="154" text-anchor="middle" fill="#57687e" font-size="11">Actions</text>
- <!-- percept arrow -->
- <line x1="150" y1="80" x2="245" y2="80" stroke="#1e293b" stroke-width="1.4" marker-end="url(#arr)"/>
- <text x="197" y="73" text-anchor="middle" fill="#57687e" font-size="11">Percept</text>
- <!-- action arrow -->
- <line x1="245" y1="140" x2="155" y2="120" stroke="#1e293b" stroke-width="1.4" marker-end="url(#arr)"/>
- <text x="197" y="158" text-anchor="middle" fill="#57687e" font-size="11">Action</text>
- <!-- arrows between sensors and actuators -->
- <line x1="310" y1="105" x2="310" y2="115" stroke="#8b5cf6" stroke-width="1.4"/>
- <!-- agent program in centre -->
- <rect x="450" y="80" width="130" height="60" rx="8" fill="#fefdfb" stroke="#8b5cf6" stroke-dasharray="4 3"/>
- <text x="515" y="105" text-anchor="middle" fill="#1e293b" font-weight="600">Agent =</text>
- <text x="515" y="123" text-anchor="middle" fill="#57687e" font-size="12">Arch + Program</text>
- <line x1="395" y1="110" x2="447" y2="110" stroke="#8b5cf6" stroke-dasharray="3 3" stroke-width="1.2"/>
- </svg>
- <span class="diagram-caption">Figure 1.1 &mdash; The agent&ndash;environment interaction loop</span>
- </div>
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Uninformed (Blind) Search</strong> strategies have no additional information about the problem beyond the problem definition. They explore the state space systematically without any heuristic guidance.</p>
+        </div>
 
- <p>An agent continuously perceives through sensors, decides on an action, and executes it via actuators. Internally the agent program takes percepts and returns actions; the architecture is the physical computing device.</p>
- <p><strong>Agent types in increasing generality:</strong></p>
- <ol>
- <li><strong>Simple reflex</strong> &mdash; direct percept &rarr; action mapping (rules).</li>
- <li><strong>Model-based reflex</strong> &mdash; tracks how the world evolves using an internal model.</li>
- <li><strong>Goal-based</strong> &mdash; selects actions that move toward an explicit goal.</li>
- <li><strong>Utility-based</strong> &mdash; maximises a utility function over states.</li>
- <li><strong>Learning</strong> &mdash; all of the above plus a learning element that improves with experience.</li>
- </ol>
- </div>
- </div>
+        <div class="subhead"><span class="subhead__title">1-mark Questions</span> <span class="qa__marks">1M</span></div>
 
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q1</span>
+          </div>
+          <div class="qa__q">What is <strong>Breadth-First Search (BFS)</strong>?</div>
+          <div class="qa__a"><p>A search strategy that expands the shallowest node first. Uses a FIFO queue. It is complete and optimal for uniform step cost.</p></div>
+        </div>
 
- <!-- ═══════════════ UNIT 2 ═══════════════ -->
- <div class="band" id="unit2">
- <h2>Unit 2 &middot; Problem Solving &amp; Search</h2>
- <span class="band-note">Uninformed &middot; Informed &middot; Heuristics</span>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q2</span>
+          </div>
+          <div class="qa__q">What is <strong>Depth-First Search (DFS)</strong>?</div>
+          <div class="qa__a"><p>A search strategy that expands the deepest node first. Uses a LIFO stack. Not complete for infinite spaces and not optimal.</p></div>
+        </div>
 
- <div class="notes-body">
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q3</span>
+          </div>
+          <div class="qa__q">What is <strong>Uniform Cost Search (UCS)</strong>?</div>
+          <div class="qa__a"><p>UCS expands the node with the smallest path cost g(n). It generalises BFS to non-uniform step costs and is always optimal.</p></div>
+        </div>
 
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Search</strong> is the process of exploring a problem&rsquo;s state space to find a sequence of actions that leads from an initial state to a goal state.</p>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q4</span>
+          </div>
+          <div class="qa__q">What is <strong>Depth-Limited Search (DLS)</strong>?</div>
+          <div class="qa__a"><p>DFS with a predefined depth limit l. If the goal is deeper than l, DLS fails. Problem: choosing the right limit l.</p></div>
+        </div>
 
- <p>A <strong>search problem</strong> is defined by:</p>
- <ul>
- <li>The initial state.</li>
- <li>A successor function <code>S(x) = { (action, state) }</code>.</li>
- <li>A goal test.</li>
- <li>A path cost function <code>g(n)</code>.</li>
- </ul>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q5</span>
+          </div>
+          <div class="qa__q">What is <strong>Iterative Deepening DFS (IDDFS)</strong>?</div>
+          <div class="qa__a"><p>It performs DFS with increasing depth limits: 0, 1, 2, ... until the goal is found. Combines BFS's completeness with DFS's low memory.</p></div>
+        </div>
 
- <h3>1-mark Questions</h3>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q6</span>
+          </div>
+          <div class="qa__q">What is <strong>Bidirectional Search</strong>?</div>
+          <div class="qa__a"><p>Search that simultaneously runs forward from the initial state and backward from the goal state, meeting in the middle. Effective branching factor becomes &radic;b.</p></div>
+        </div>
 
- <div class="marks-rail"><span class="marks-pill">1 mark</span></div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q7</span>
+          </div>
+          <div class="qa__q">What is the <strong>time and space complexity</strong> of BFS?</div>
+          <div class="qa__a"><p>Time: O(b<sup>d</sup>), Space: O(b<sup>d</sup>), where b = branching factor and d = depth of shallowest goal.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q1</span></div>
- <div class="qtext">What is <strong>state space</strong>?</div>
- <div class="qans"><p>The graph whose nodes are all reachable configurations of the world and whose edges are the actions that move between them.</p></div>
- </div>
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U2 / Q8</span>
+          </div>
+          <div class="qa__q">What is the main <strong>disadvantage</strong> of DFS?</div>
+          <div class="qa__a"><p>DFS is not complete (can loop in infinite paths) and not optimal. It can get stuck in deep, irrelevant branches.</p></div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q2</span></div>
- <div class="qtext">Differentiate between <strong>uninformed</strong> and <strong>informed</strong> search.</div>
- <div class="qans"><p>Uninformed (blind) search uses only the problem definition. Informed search additionally uses a heuristic <code>h(n)</code> to estimate the cost from <em>n</em> to the goal.</p></div>
- </div>
+        <div class="subhead"><span class="subhead__title">5-mark Questions</span> <span class="qa__marks">5M</span></div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q3</span></div>
- <div class="qtext">What is a <strong>heuristic function</strong>?</div>
- <div class="qans"><p>A function <code>h(n)</code> that estimates the cheapest cost from node <em>n</em> to a goal. It is problem-specific and admissible if it never overestimates.</p></div>
- </div>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U2 / Q1</span>
+          </div>
+          <div class="qa__q">Compare all <strong>uninformed search strategies</strong> in a comparison table.</div>
+          <div class="qa__a">
+          <table class="t">
+          <tr><th>Algorithm</th><th>Data Structure</th><th>Complete?</th><th>Optimal?</th><th>Time Complexity</th><th>Space Complexity</th></tr>
+          <tr><td>BFS</td><td>Queue (FIFO)</td><td>Yes (finite b)</td><td>Yes (unit cost)</td><td>O(b<sup>d</sup>)</td><td>O(b<sup>d</sup>)</td></tr>
+          <tr><td>DFS</td><td>Stack (LIFO)</td><td>No (infinite paths)</td><td>No</td><td>O(b<sup>m</sup>)</td><td>O(bm)</td></tr>
+          <tr><td>UCS</td><td>Priority Queue</td><td>Yes</td><td>Yes</td><td>O(b<sup>1+C*/&epsilon;</sup>)</td><td>O(b<sup>1+C*/&epsilon;</sup>)</td></tr>
+          <tr><td>DLS</td><td>Stack</td><td>No (if l &lt; d)</td><td>No</td><td>O(b<sup>l</sup>)</td><td>O(bl)</td></tr>
+          <tr><td>IDDFS</td><td>Stack</td><td>Yes</td><td>Yes (unit cost)</td><td>O(b<sup>d</sup>)</td><td>O(bd)</td></tr>
+          <tr><td>Bidirectional</td><td>Two queues</td><td>Yes</td><td>Yes</td><td>O(b<sup>d/2</sup>)</td><td>O(b<sup>d/2</sup>)</td></tr>
+          </table>
+          <p>Here <em>b</em> = branching factor, <em>d</em> = depth of shallowest goal, <em>m</em> = max depth of tree, C* = optimal cost, &epsilon; = minimum non-zero step cost.</p>
+          </div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q4</span></div>
- <div class="qtext">Name two <strong>uninformed search</strong> strategies.</div>
- <div class="qans"><p>Breadth-First Search (BFS), Depth-First Search (DFS), Uniform-Cost Search, Depth-Limited Search, Iterative Deepening DFS (IDDFS).</p></div>
- </div>
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U2 / Q2</span>
+          </div>
+          <div class="qa__q">Explain <strong>Iterative Deepening DFS (IDDFS)</strong>. Why is it preferred over BFS?</div>
+          <div class="qa__a">
+          <p>IDDFS performs repeated depth-limited DFS with increasing limits: depth 0, 1, 2, ..., d.</p>
+          <p><strong>Algorithm:</strong></p>
+          <pre>function IDDFS(problem) returns solution
+  for depth = 0 to &infin;:
+    result &larr; DLS(problem, depth)
+    if result &ne; cutoff: return result</pre>
+          <p><strong>Why preferred over BFS:</strong></p>
+          <ul>
+            <li>Space complexity: O(bd) vs O(b<sup>d</sup>) for BFS — a huge saving for large b, d.</li>
+            <li>Complete for finite branching factor.</li>
+            <li>Optimal for unit step costs.</li>
+            <li>The overhead of revisiting nodes is small (&lt; 11% for b=10).</li>
+            <li>Time complexity is asymptotically the same as BFS: O(b<sup>d</sup>).</li>
+          </ul>
+          </div>
+        </div>
 
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q5</span></div>
- <div class="qtext">Define <strong>admissibility</strong> of a heuristic.</div>
- <div class="qans"><p>A heuristic is admissible if <code>h(n) &le; h*(n)</code> for every node n &mdash; it never overestimates the true cost to a goal.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q6</span></div>
- <div class="qtext">What is <strong>iterative deepening DFS</strong>?</div>
- <div class="qans"><p>It performs DFS with depth limits 0, 1, 2, &hellip; until the goal is found. Combines BFS&rsquo;s completeness with DFS&rsquo;s low memory.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q7</span></div>
- <div class="qtext">Define <strong>consistent (monotone) heuristic</strong>.</div>
- <div class="qans"><p>A heuristic h is consistent if <code>h(n) &le; cost(n, n') + h(n')</code> for every successor n&rsquo; of n. Consistent implies admissible.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U2 / Q8</span></div>
- <div class="qtext">What is the <strong>8-puzzle</strong>?</div>
- <div class="qans"><p>A sliding-tile puzzle on a 3&times;3 board with one blank. State space &asymp; 9!/2 = 181,440 reachable states.</p></div>
- </div>
-
- <h3>5-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">5 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U2 / Q1</span></div>
- <div class="qtext">Compare <strong>BFS, DFS, UCS</strong> with respect to completeness, optimality and complexity.</div>
- <div class="qans">
- <table class="ctable">
- <tr><th>Algorithm</th><th>Complete?</th><th>Optimal?</th><th>Time</th><th>Space</th></tr>
- <tr><td>BFS</td><td>Yes (finite b)</td><td>Yes (uniform step cost)</td><td>O(b<sup>d</sup>)</td><td>O(b<sup>d</sup>)</td></tr>
- <tr><td>DFS</td><td>No (infinite spaces)</td><td>No</td><td>O(b<sup>m</sup>)</td><td>O(bm)</td></tr>
- <tr><td>UCS</td><td>Yes</td><td>Yes (cost)</td><td>O(b<sup>1 + C*/&epsilon;</sup>)</td><td>O(b<sup>1 + C*/&epsilon;</sup>)</td></tr>
- </table>
- <p><em>b</em> = branching factor, <em>d</em> = depth of shallowest goal, <em>m</em> = max depth, C* = optimal cost, &epsilon; = minimum step cost.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U2 / Q2</span></div>
- <div class="qtext">Explain <strong>Hill Climbing</strong>. What are its limitations?</div>
- <div class="qans">
- <p>Hill climbing is a local search that repeatedly moves to the neighbour with the highest value (steepest ascent). It uses no memory of past states beyond the current one.</p>
- <p><strong>Variants:</strong></p>
- <ul>
- <li>Steepest-ascent hill climbing &mdash; picks the best neighbour.</li>
- <li>First-choice hill climbing &mdash; picks the first improving neighbour (faster when many neighbours).</li>
- <li>Random-restart hill climbing &mdash; tries multiple random starts and keeps the best.</li>
- </ul>
- <p><strong>Limitations:</strong></p>
- <ul>
- <li>Local maxima &mdash; stuck at a peak that is not the global best.</li>
- <li>Ridges &mdash; sequence of local maxima makes greedy ascent hard.</li>
- <li>Plateaux &mdash; flat regions where no neighbour is better; sideways move may help but risks loops.</li>
- </ul>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U2 / Q3</span></div>
- <div class="qtext">Describe the <strong>A* algorithm</strong>. When is A* optimal?</div>
- <div class="qans">
- <p>A* expands nodes in order of <code>f(n) = g(n) + h(n)</code>, where g is the cost so far and h is the heuristic estimate to the goal. It combines the completeness of UCS with the heuristic guidance of greedy search.</p>
- <p><strong>A* is optimal if:</strong></p>
- <ul>
- <li>h is admissible (never overestimates), and</li>
- <li>the cost of any node is bounded below by a positive constant (no zero-cost steps).</li>
- </ul>
- <p><strong>A* is optimally efficient:</strong> among all optimal algorithms, no other expands fewer nodes than A*.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U2 / Q4</span></div>
- <div class="qtext">What are <strong>local search and metaheuristic</strong> algorithms? List any three.</div>
- <div class="qans">
- <p>Local search algorithms keep only the current state (constant memory) and try to improve it. They are suitable for problems where the path is irrelevant (e.g., 8-queens, scheduling, VLSI layout).</p>
- <ul>
- <li><strong>Hill climbing</strong> &mdash; greedy ascent.</li>
- <li><strong>Simulated annealing</strong> &mdash; accepts worse moves with probability <code>e<sup>&minus;&Delta;E/T</sup></code>; T is gradually cooled.</li>
- <li><strong>Local beam search</strong> &mdash; keeps <em>k</em> states; can be stochastic (randomised restarts shared).</li>
- <li><strong>Genetic algorithms</strong> &mdash; population-based; selection, crossover, mutation.</li>
- </ul>
- </div>
- </div>
-
- <h3>15-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">15 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U2 / Q1</span><span class="pyq-tag">PYQ [2022]</span></div>
- <div class="qtext">Explain the <strong>A* search algorithm</strong>. Show how it works on the Romania map from Arad to Bucharest.</div>
- <div class="qans">
-
- <div class="algo"><span class="algo-label">Algorithm A* Search</span>function A*-SEARCH(problem, h) returns a solution or failure
-  node &larr; a node with STATE = problem.INITIAL, PATH-COST = 0
-  frontier &larr; a priority queue ordered by f = g + h, containing node
-  reached &larr; a table mapping STATE &rarr; node, initially {problem.INITIAL : node}
-  while not frontier.is_empty():
-  node &larr; POP(frontier)   // lowest f
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U2 / Q3</span>
+          </div>
+          <div class="qa__q">Explain <strong>BFS and DFS</strong> with their algorithm and properties. [2021]</div>
+          <div class="qa__a">
+          <p><strong>BFS Algorithm:</strong></p>
+          <pre>function BFS(problem) returns solution
+  node &larr; NODE(problem.INITIAL)
   if problem.IS-GOAL(node.STATE): return node
-  for each child in EXPAND(node, problem):
-  s &larr; child.STATE
-  if s not in reached or child.PATH-COST &lt; reached[s].PATH-COST:
-  reached[s] &larr; child
-  add child to frontier
-  return failure</div>
-
- <p><strong>Romania map distances (straight-line heuristic to Bucharest):</strong></p>
- <table class="ctable">
- <tr><th>City</th><th>h(SLD)</th></tr>
- <tr><td>Arad</td><td>366</td></tr>
- <tr><td>Sibiu</td><td>253</td></tr>
- <tr><td>Fagaras</td><td>176</td></tr>
- <tr><td>Pitesti</td><td>100</td></tr>
- <tr><td>Bucharest</td><td>0</td></tr>
- </table>
- <p>A* expands: Arad (f=366) &rarr; Sibiu (f=393) &rarr; Rimnicu Vilcea (f=413) &rarr; Pitesti (f=415) &rarr; Bucharest (f=418). The optimal path Arad &rarr; Sibiu &rarr; Rimnicu Vilcea &rarr; Pitesti &rarr; Bucharest has cost 418.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U2 / Q2</span><span class="pyq-tag">PYQ [2023]</span></div>
- <div class="qtext">Solve the following graph using <strong>BFS, DFS, UCS and A*</strong>. Start at S, goal G. Edge costs shown.</div>
- <div class="qans">
-
- <div class="diagram">
- <svg viewBox="0 0 600 200" width="600" height="200" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="13">
- <defs><marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1e293b"/></marker></defs>
- <!-- nodes -->
- <g fill="#fff" stroke="#8b5cf6" stroke-width="1.6">
- <circle cx="50" cy="100" r="22"/><text x="50" y="105" text-anchor="middle" fill="#1e293b" font-weight="700">S</text>
- <circle cx="180" cy="50" r="22"/><text x="180" y="55" text-anchor="middle" fill="#1e293b" font-weight="700">A</text>
- <circle cx="180" cy="150" r="22"/><text x="180" y="155" text-anchor="middle" fill="#1e293b" font-weight="700">B</text>
- <circle cx="330" cy="50" r="22"/><text x="330" y="55" text-anchor="middle" fill="#1e293b" font-weight="700">C</text>
- <circle cx="330" cy="150" r="22"/><text x="330" y="155" text-anchor="middle" fill="#1e293b" font-weight="700">D</text>
- <circle cx="480" cy="100" r="22"/><text x="480" y="105" text-anchor="middle" fill="#1e293b" font-weight="700">G</text>
- </g>
- <!-- edges -->
- <g stroke="#1e293b" stroke-width="1.4" fill="none" marker-end="url(#arr2)">
- <line x1="72" y1="100" x2="158" y2="50"/><line x1="72" y1="100" x2="158" y2="150"/>
- <line x1="202" y1="50" x2="308" y2="50"/><line x1="202" y1="150" x2="308" y2="150"/>
- <line x1="352" y1="50" x2="458" y2="100"/><line x1="352" y1="150" x2="458" y2="100"/>
- </g>
- <!-- edge labels -->
- <g font-family="JetBrains Mono, monospace" font-size="11" fill="#57687e">
- <text x="105" y="68">1</text><text x="105" y="135">4</text>
- <text x="245" y="42">2</text><text x="245" y="165">3</text>
- <text x="395" y="68">5</text><text x="395" y="148">2</text>
- </g>
- </svg>
- <span class="diagram-caption">Figure 2.1 &mdash; Sample graph S &rarr; G</span>
- </div>
-
- <p><strong>BFS</strong> (level order): S &rarr; A (1), B (4) &rarr; C (3), D (7) &rarr; G via C (8) or D (9). <em>Path: S&ndash;A&ndash;C&ndash;G = 1+2+5 = 8</em>.</p>
- <p><strong>DFS</strong> (deeper first): S&ndash;A&ndash;C&ndash;G = <em>cost 8</em>. (Would be lucky to find G quickly.)</p>
- <p><strong>UCS</strong> (lowest g first): S(0), A(1), B(4), C(3), D(7), G via C(8). <em>Optimal cost 8</em>.</p>
- <p><strong>A*</strong> with heuristic h(A)=3, h(B)=2, h(C)=1, h(D)=1, h(G)=0:</p>
- <ul>
- <li>Expand S: f(A)=1+3=4, f(B)=4+2=6. &rarr; pop A.</li>
- <li>From A: f(C)=3+1=4, f(D)=5+1=6. &rarr; pop C.</li>
- <li>From C: f(G)=8+0=8. &rarr; pop G. Goal.</li>
- </ul>
- <p>A* explores fewer nodes than UCS by following the heuristic.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U2 / Q3</span></div>
- <div class="qtext">Discuss <strong>constraint satisfaction problems (CSP)</strong> with backtracking and forward checking.</div>
- <div class="qans">
- <p>A CSP is defined by a set of variables X, domains D for each variable, and a set of constraints C. The goal is to find an assignment that satisfies every constraint. Examples include map colouring, the 8-queens problem, and Sudoku.</p>
- <p><strong>Backtracking search</strong> assigns variables one at a time and backtracks when a constraint is violated. Improvements include:</p>
- <ul>
- <li><em>Variable ordering (MRV)</em> &mdash; choose the variable with the fewest remaining values.</li>
- <li><em>Degree heuristic</em> &mdash; tie-break by most constraints on remaining variables.</li>
- <li><em>Least-constraining-value</em> &mdash; try values that rule out the fewest choices for neighbours first.</li>
- </ul>
- <p><strong>Forward checking</strong> keeps track of remaining legal values for unassigned variables. When a value is assigned to <em>X</em>, prune the domains of neighbours that conflict with it. If any domain becomes empty, backtrack immediately.</p>
- <p><strong>Arc consistency (AC-3)</strong> further strengthens this: a variable Xi is arc-consistent with Xj if every value in Di has some value in Dj that satisfies the binary constraint. AC-3 is run after each assignment and propagates pruning through the constraint graph.</p>
- </div>
- </div>
-
- </div>
-
- <!-- ═══════════════ UNIT 3 ═══════════════ -->
- <div class="band" id="unit3">
- <h2>Unit 3 &middot; Adversarial Search &amp; Games</h2>
- <span class="band-note"> &middot; &alpha;-&beta; pruning</span>
- </div>
-
- <div class="notes-body">
-
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Game playing</strong> is a special kind of search in which we plan against an adversary. The opponent introduces uncertainty about future states because we do not control its moves.</p>
- </div>
-
- <p>A game is defined by:</p>
- <ul>
- <li>Initial position, legal moves in each position.</li>
- <li>A terminal test &mdash; is the game over?</li>
- <li>A utility (payoff) function &mdash; outcome value at terminal positions.</li>
- </ul>
-
- <h3>1-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">1 mark</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U3 / Q1</span></div>
- <div class="qtext">What is the <strong> algorithm</strong>?</div>
- <div class="qans"><p>A recursive algorithm that chooses the move with the best worst-case outcome, assuming the opponent plays optimally. The MAX player picks the action with maximum utility; the MIN player picks the minimum.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U3 / Q2</span></div>
- <div class="qtext">What is <strong>alpha-beta pruning</strong>?</div>
- <div class="qans"><p>An optimisation of  that prunes branches that cannot influence the final decision. <em>&alpha;</em> = best value MAX can guarantee; <em>&beta;</em> = best value MIN can guarantee.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U3 / Q3</span></div>
- <div class="qtext">Define <strong>zero-sum game</strong>.</div>
- <div class="qans"><p>A game in which the total payoff is constant; one player&rsquo;s gain is the other&rsquo;s loss. Chess, tic-tac-toe and Go are zero-sum.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U3 / Q4</span></div>
- <div class="qtext">What is a <strong>utility function</strong> in a game?</div>
- <div class="qans"><p>The function that assigns a numerical score to each terminal state from MAX&rsquo;s perspective. For chess typically win=+1, loss=-1, draw=0.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U3 / Q5</span></div>
- <div class="qtext">State the <strong>optimal branching factor</strong> of alpha-beta with perfect ordering.</div>
- <div class="qans"><p><code>b<sup>&radic;d</sup></code> instead of <em>b<sup>d</sup></em> &mdash; you can search twice as deep with the same resources.</p></div>
- </div>
-
- <h3>5-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">5 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U3 / Q1</span></div>
- <div class="qtext">Explain the <strong> algorithm</strong> with pseudocode.</div>
- <div class="qans">
-
- <div class="algo"><span class="algo-label">Algorithm </span>function (state, depth, player) returns an action
-  if TERMINAL-TEST(state): return utility(state)
-  if player = MAX:
-    v &larr; -&infin;
-    for each a in ACTIONS(state):
-      v &larr; max(v, MIN-VALUE(RESULT(state, a), depth+1, MIN))
-    return v
-  else (player = MIN):
-    v &larr; +&infin;
-    for each a in ACTIONS(state):
-      v &larr; min(v, MAX-VALUE(RESULT(state, a), depth+1, MAX))
-    return v</div>
-
- <p>The recursion backs up values from leaves to the root. MAX picks the action with maximum backed-up value; MIN picks the minimum.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U3 / Q2</span></div>
- <div class="qtext">How does <strong>alpha-beta pruning</strong> work? Show the cutoff condition.</div>
- <div class="qans">
- <p>&alpha;-&beta; tracks two bounds while traversing the tree:</p>
- <ul>
- <li><strong>&alpha;</strong> &mdash; the best value that MAX can guarantee so far on the path to the root.</li>
- <li><strong>&beta;</strong> &mdash; the best value that MIN can guarantee so far on the path to the root.</li>
- </ul>
- <p><strong>Cutoff condition:</strong> prune the branch when <code>&alpha; &ge; &beta;</code>. The returned value is still correct because the pruned subtree cannot improve on what MAX/MIN already has.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U3 / Q3</span></div>
- <div class="qtext">Why is <strong>node ordering</strong> important in alpha-beta search?</div>
- <div class="qans">
- <p>With perfect ordering &alpha;-&beta; examines roughly <code>b<sup>d/2</sup></code> nodes &mdash; effective branching factor &radic;b. With random ordering it is <code>b<sup>3d/4</sup></sup></code>. In the worst case (reverse ordering) it is no better than plain . Hence, in practice, we use iterative deepening plus move ordering (best move first from previous iteration or from a transposition table) to maximise pruning.</p>
- </div>
- </div>
-
- <h3>15-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">15 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U3 / Q1</span><span class="pyq-tag">PYQ [2023]</span></div>
- <div class="qtext">Apply the <strong> algorithm with alpha-beta pruning</strong> on the following game tree. Leaf nodes show the utility values for MAX.</div>
- <div class="qans">
-
- <div class="diagram">
- <svg viewBox="0 0 600 280" width="600" height="280" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="12">
- <defs><marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1e293b"/></marker></defs>
- <!-- level 0 -->
- <circle cx="50" cy="130" r="18" fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-width="1.6"/>
- <text x="50" y="135" text-anchor="middle" font-weight="700">MAX</text>
- <!-- level 1 -->
- <circle cx="200" cy="60" r="16" fill="#fff" stroke="#1e293b"/><text x="200" y="64" text-anchor="middle">MIN</text>
- <circle cx="200" cy="130" r="16" fill="#fff" stroke="#1e293b"/><text x="200" y="134" text-anchor="middle">MIN</text>
- <circle cx="200" cy="200" r="16" fill="#fff" stroke="#1e293b"/><text x="200" y="204" text-anchor="middle">MIN</text>
- <!-- level 2 -->
- <circle cx="370" cy="30" r="14" fill="#fff" stroke="#1e293b"/><text x="370" y="34" text-anchor="middle">MAX</text>
- <circle cx="370" cy="90" r="14" fill="#fff" stroke="#1e293b"/><text x="370" y="94" text-anchor="middle">MAX</text>
- <circle cx="370" cy="150" r="14" fill="#fff" stroke="#1e293b"/><text x="370" y="154" text-anchor="middle">MAX</text>
- <circle cx="370" cy="210" r="14" fill="#fff" stroke="#1e293b"/><text x="370" y="214" text-anchor="middle">MAX</text>
- <!-- leaves -->
- <g fill="#fefdfb" stroke="#1e293b">
- <rect x="510" y="10" width="40" height="22" rx="4"/><text x="530" y="25" text-anchor="middle">3</text>
- <rect x="510" y="40" width="40" height="22" rx="4"/><text x="530" y="55" text-anchor="middle">12</text>
- <rect x="510" y="70" width="40" height="22" rx="4"/><text x="530" y="85" text-anchor="middle">2</text>
- <rect x="510" y="100" width="40" height="22" rx="4"/><text x="530" y="115" text-anchor="middle">4</text>
- <rect x="510" y="130" width="40" height="22" rx="4"/><text x="530" y="145" text-anchor="middle">2</text>
- <rect x="510" y="160" width="40" height="22" rx="4"/><text x="530" y="175" text-anchor="middle">4</text>
- <rect x="510" y="190" width="40" height="22" rx="4"/><text x="530" y="205" text-anchor="middle">9</text>
- <rect x="510" y="220" width="40" height="22" rx="4"/><text x="530" y="235" text-anchor="middle">14</text>
- </g>
- <!-- edges -->
- <g stroke="#1e293b" stroke-width="1.2" fill="none">
- <line x1="68" y1="120" x2="184" y2="65"/>
- <line x1="68" y1="130" x2="184" y2="130"/>
- <line x1="68" y1="140" x2="184" y2="200"/>
- <line x1="216" y1="60" x2="356" y2="32"/>
- <line x1="216" y1="65" x2="356" y2="92"/>
- <line x1="216" y1="130" x2="356" y2="152"/>
- <line x1="216" y1="200" x2="356" y2="212"/>
- </g>
- <!-- leaves edges -->
- <g stroke="#1e293b" stroke-width="1" fill="none">
- <line x1="384" y1="30" x2="510" y2="20"/><line x1="384" y1="30" x2="510" y2="50"/>
- <line x1="384" y1="90" x2="510" y2="80"/><line x1="384" y1="90" x2="510" y2="110"/>
- <line x1="384" y1="150" x2="510" y2="140"/><line x1="384" y1="150" x2="510" y2="170"/>
- <line x1="384" y1="210" x2="510" y2="200"/><line x1="384" y1="210" x2="510" y2="230"/>
- </g>
- </svg>
- <span class="diagram-caption">Figure 3.1 &mdash; Game tree for &alpha;-&beta; example</span>
- </div>
-
- <p><strong>Step-by-step with &alpha;-&beta;:</strong></p>
- <ul>
- <li>Leftmost MAX node (depth 2) sees 3, 12 &rarr; max = 12. Parent MIN gets &beta; = 12.</li>
- <li>Next leaf 2 &rarr; &alpha; (root) = 2; back up, parent MIN = min(&infin;, 2, 4) = 2 (after 3,12,2,4 it sees &alpha; = 4 at max layer below, MIN picks 2).</li>
- <li>Now &alpha; at root = 2. The next MIN child evaluates its first leaf 2; max layer gets &alpha; = 2, but MIN already has &beta; = 2 from previous sibling &rarr; prune remaining leaves of this MIN node.</li>
- <li>Rightmost MAX sub-tree (leaves 9, 14) is examined. MAX picks 14; rightmost MIN = 14.</li>
- <li>Root MAX picks max(2, 2, 14) = <strong>14</strong>; <strong>chosen branch: rightmost</strong>.</li>
- </ul>
- <p><strong>Without pruning:</strong> 8 leaves examined. <strong>With &alpha;-&beta;:</strong> only 5 leaves evaluated; the rest are pruned.</p>
- </div>
- </div>
-
- </div>
-
- <!-- ═══════════════ UNIT 4 ═══════════════ -->
- <div class="band" id="unit4">
- <h2>Unit 4 &middot; Knowledge Representation &amp; Reasoning</h2>
- <span class="band-note">Logic &middot; Propositional &middot; FOL</span>
- </div>
-
- <div class="notes-body">
-
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Knowledge representation</strong> is the study of how to encode knowledge about the world in a form that a computer can use to solve complex tasks such as diagnosis, planning and natural-language understanding.</p>
- </div>
-
- <h3>1-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">1 mark</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q1</span></div>
- <div class="qtext">What is a <strong>proposition</strong>?</div>
- <div class="qans"><p>A declarative statement that is either true or false (e.g., &ldquo;The sky is blue&rdquo;).</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q2</span></div>
- <div class="qtext">Define <strong>First-Order Logic (FOL)</strong>.</div>
- <div class="qans"><p>A representation language that extends propositional logic with objects, relations, functions, variables, and quantifiers (&forall;, &exist;).</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q3</span></div>
- <div class="qtext">What is the difference between <strong>&forall; and &exist;</strong>?</div>
- <div class="qans"><p><strong>&forall;x</strong> means &ldquo;for all x&rdquo; (universal). <strong>&exist;x</strong> means &ldquo;there exists some x&rdquo; (existential).</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q4</span></div>
- <div class="qtext">State <strong>Modus Ponens</strong>.</div>
- <div class="qans"><p>If <em>P &rarr; Q</em> and <em>P</em>, then <em>Q</em>. The fundamental inference rule of propositional logic.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q5</span></div>
- <div class="qtext">Define a <strong>semantic network</strong>.</div>
- <div class="qans"><p>A directed graph whose nodes represent objects or concepts and whose edges represent binary relations between them. Useful for representing hierarchical categories.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q6</span></div>
- <div class="qtext">What is a <strong>frame</strong> in knowledge representation?</div>
- <div class="qans"><p>A data structure for representing a stereotyped situation (e.g., a &ldquo;lecture&rdquo; frame has slots <em>speaker</em>, <em>topic</em>, <em>time</em>). Frames inherit from more general frames.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q7</span></div>
- <div class="qtext">What is <strong>inference</strong>?</div>
- <div class="qans"><p>The process of deriving new sentences (conclusions) from existing sentences (premises) using logical rules.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U4 / Q8</span></div>
- <div class="qtext">Differentiate <strong>sound</strong> and <strong>complete</strong> inference.</div>
- <div class="qans"><p><em>Sound</em> &mdash; only derives entailed sentences. <em>Complete</em> &mdash; derives every sentence that is entailed.</p></div>
- </div>
-
- <h3>5-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">5 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U4 / Q1</span></div>
- <div class="qtext">Explain the <strong>forward chaining</strong> algorithm for propositional logic.</div>
- <div class="qans">
-
- <div class="algo"><span class="algo-label">Algorithm Forward Chaining</span>function PL-FORWARD-CHAINING(KB) returns nothing
-  loop:
-  if no new sentence can be added to KB: return
-  for each rule (p1 &and; p2 &and; ... &rarr; q) in KB:
-    if every pi is in KB and q is not:
-      add q to KB</div>
-
- <p>Forward chaining is <em>data-driven</em>: it fires any rule whose antecedents are known, producing new facts until no more can be inferred. It is sound but not complete in the propositional case (cannot infer goals whose antecedents are not yet known).</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U4 / Q2</span></div>
- <div class="qtext">Differentiate between <strong>forward</strong> and <strong>backward chaining</strong>.</div>
- <div class="qans">
- <table class="ctable">
- <tr><th>Aspect</th><th>Forward</th><th>Backward</th></tr>
- <tr><td>Direction</td><td>Data &rarr; conclusions</td><td>Hypothesis &rarr; supporting data</td></tr>
- <tr><td>Triggered by</td><td>New facts</td><td>A query / goal</td></tr>
- <tr><td>Use case</td><td>Monitoring, planning</td><td>Diagnostic, query answering</td></tr>
- <tr><td>Implementation</td><td>AND-OR graph forward</td><td>AND-OR graph backward</td></tr>
- </table>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U4 / Q3</span></div>
- <div class="qtext">Translate the following into FOL: &ldquo;Every student reads some book. Every book has an author.&rdquo;</div>
- <div class="qans">
- <p>Let <code>Student(x)</code>, <code>Book(x)</code>, <code>Reads(x, y)</code>, <code>Author(x, y)</code>.</p>
- <ul>
- <li>&forall;x (Student(x) &rarr; &exist;y (Book(y) &and; Reads(x, y)))</li>
- <li>&forall;x (Book(x) &rarr; &exist;y (Author(y, x)))</li>
- </ul>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U4 / Q4</span></div>
- <div class="qtext">Describe <strong>semantic networks and frames</strong>.</div>
- <div class="qans">
- <p><strong>Semantic network</strong> &mdash; nodes are concepts; edges are relations such as <em>is-a</em>, <em>has-part</em>, <em>instance-of</em>. They allow inheritance: a &ldquo;robin&rdquo; inherits properties from &ldquo;bird&rdquo;.</p>
- <p><strong>Frame</strong> &mdash; a structured object with <em>slots</em> (attributes) and <em>fillers</em> (values). Frames support <em>default reasoning</em>: a slot may have a default value used unless overridden (e.g., a bird normally flies).</p>
- </div>
- </div>
-
- <h3>15-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">15 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U4 / Q1</span><span class="pyq-tag">PYQ [2022]</span></div>
- <div class="qtext">Explain <strong>resolution in first-order logic</strong>. Demonstrate with a simple example.</div>
- <div class="qans">
- <p>Resolution is a sound and complete inference rule for FOL once the knowledge base is in <em>conjunctive normal form (CNF)</em>. It unifies complementary literals from two clauses and yields their resolvent.</p>
- <ol>
- <li>Convert every sentence to CNF &mdash; eliminate implications, move negations inward using De Morgan and quantifier duality, standardise variables apart, drop universal quantifiers, distribute &or; over &and;.</li>
- <li>Convert to <em>clausal form</em> and rename so no variable appears in both clauses.</li>
- <li>Apply <strong>unification</strong> to find substitutions that make complementary literals identical.</li>
- <li>Resolve: from clauses <em>(A &or; &not;B)</em> and <em>(B &or; C)</em> infer <em>(A &or; C)</em>.</li>
- </ol>
- <p><strong>Example:</strong></p>
- <p>KB: &not;Cat(x) &or; Mammal(x); Cat(Felix); &forall;x Mammal(x) &rarr; Pet(x); &forall;x Pet(x) &rarr; Warm(x).</p>
- <ul>
- <li>CNF: 1) &not;Cat(x) &or; Mammal(x); 2) Cat(Felix); 3) &not;Mammal(x) &or; Pet(x); 4) &not;Pet(x) &or; Warm(x).</li>
- <li>Resolve 1 &amp; 2 with {x/Felix} &rarr; Mammal(Felix).</li>
- <li>Resolve with 3 &rarr; Pet(Felix).</li>
- <li>Resolve with 4 &rarr; Warm(Felix). Goal proved.</li>
- </ul>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U4 / Q2</span></div>
- <div class="qtext">Discuss the <strong>Wumpus World</strong> as a knowledge representation problem.</div>
- <div class="qans">
- <p>The Wumpus World is a 4&times;4 grid cave. The agent must find gold while avoiding pits (B) and the Wumpus (W). Squares adjacent to a pit emit <em>breeze</em>; adjacent to the Wumpus emit <em>stench</em>; the gold square glitters.</p>
- <p>Each cell is represented by propositions <code>P<sub>i,j</sub></code> (pit), <code>W<sub>i,j</sub></code> (wumpus), <code>B<sub>i,j</sub></code> (breeze), <code>S<sub>i,j</sub></code> (stench).</p>
- <p><strong>Sample axioms:</strong></p>
- <ul>
- <li>B<sub>1,1</sub> &harr; = (P<sub>1,2</sub> &or; P<sub>2,1</sub>)</li>
- <li>S<sub>1,1</sub> &harr; = W<sub>1,2</sub> &or; W<sub>2,1</sub></li>
- <li>&not;P<sub>1,1</sub>, &not;W<sub>1,1</sub>, &not;P<sub>2,2</sub> &hellip;</li>
- </ul>
- <p>The agent uses logical inference to determine which squares are provably safe (no pit &amp; no wumpus). The world illustrates how propositional reasoning can produce a complete plan from a small axiom set.</p>
- </div>
- </div>
-
- </div>
-
- <!-- ═══════════════ UNIT 5 ═══════════════ -->
- <div class="band" id="unit5">
- <h2>Unit 5 &middot; Uncertainty, Fuzzy Logic &amp; Expert Systems</h2>
- <span class="band-note">Bayes &middot; Rule-based systems</span>
- </div>
-
- <div class="notes-body">
-
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Uncertainty</strong> arises when an agent does not know the true state of the world. Probabilistic reasoning quantifies degrees of belief.</p>
- </div>
-
- <h3>1-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">1 mark</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U5 / Q1</span></div>
- <div class="qtext">State <strong>Bayes&rsquo; theorem</strong>.</div>
- <div class="qans"><p><code>P(A|B) = P(B|A) &middot; P(A) / P(B)</code> &mdash; relates posterior to prior and likelihood.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U5 / Q2</span></div>
- <div class="qtext">What is a <strong>prior probability</strong>?</div>
- <div class="qans"><p>The probability of a hypothesis before observing any evidence, written <code>P(H)</code>.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U5 / Q3</span></div>
- <div class="qtext">Define <strong>fuzzy logic</strong>.</div>
- <div class="qans"><p>A generalisation of Boolean logic in which truth values range in [0, 1] instead of {0, 1}. Useful for vague concepts like &ldquo;warm&rdquo; or &ldquo;tall&rdquo;.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U5 / Q4</span></div>
- <div class="qtext">What is a <strong>membership function</strong>?</div>
- <div class="qans"><p>In fuzzy sets, a function <code>&mu;(x) &isin; [0,1]</code> that gives the degree to which <em>x</em> belongs to a fuzzy set.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U5 / Q5</span></div>
- <div class="qtext">Define an <strong>expert system</strong>.</div>
- <div class="qans"><p>A computer system that emulates the decision-making of a human expert in a specific domain, using a knowledge base and an inference engine.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U5 / Q6</span></div>
- <div class="qtext">Name one <strong>expert system</strong> shell.</div>
- <div class="qans"><p>CLIPS, Jess, Prolog, EMYCIN, MYCIN (early medical system).</p></div>
- </div>
-
- <h3>5-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">5 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U5 / Q1</span></div>
- <div class="qtext">Explain the <strong>architecture of an expert system</strong> with a diagram.</div>
- <div class="qans">
-
- <div class="diagram">
- <svg viewBox="0 0 600 200" width="600" height="200" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" font-size="12">
- <rect x="20" y="60" width="170" height="80" rx="8" fill="#8b5cf6" fill-opacity="0.06" stroke="#8b5cf6" stroke-width="1.6"/>
- <text x="105" y="90" text-anchor="middle" fill="#8b5cf6" font-weight="700">Knowledge Base</text>
- <text x="105" y="108" text-anchor="middle" fill="#57687e" font-size="11">Facts + Rules</text>
- <text x="105" y="126" text-anchor="middle" fill="#57687e" font-size="11">(domain expertise)</text>
-
- <rect x="230" y="60" width="170" height="80" rx="8" fill="#fff" stroke="#1e293b" stroke-width="1.4"/>
- <text x="315" y="90" text-anchor="middle" fill="#1e293b" font-weight="700">Inference Engine</text>
- <text x="315" y="108" text-anchor="middle" fill="#57687e" font-size="11">Forward / Backward</text>
- <text x="315" y="126" text-anchor="middle" fill="#57687e" font-size="11">reasoning</text>
-
- <rect x="440" y="20" width="140" height="60" rx="8" fill="#fff" stroke="#1e293b"/>
- <text x="510" y="48" text-anchor="middle" fill="#1e293b" font-weight="600">User Interface</text>
- <text x="510" y="65" text-anchor="middle" fill="#57687e" font-size="11">Q &amp; A, explanations</text>
-
- <rect x="440" y="120" width="140" height="60" rx="8" fill="#fff" stroke="#1e293b"/>
- <text x="510" y="148" text-anchor="middle" fill="#1e293b" font-weight="600">Explanation Facility</text>
- <text x="510" y="165" text-anchor="middle" fill="#57687e" font-size="11">Why / How</text>
-
- <line x1="190" y1="100" x2="230" y2="100" stroke="#1e293b" stroke-width="1.2"/>
- <line x1="400" y1="80" x2="440" y2="60" stroke="#1e293b" stroke-width="1.2"/>
- <line x1="400" y1="120" x2="440" y2="140" stroke="#1e293b" stroke-width="1.2"/>
-
- <text x="25" y="40" font-family="JetBrains Mono, monospace" font-size="11" fill="#57687e">User query / facts</text>
- <line x1="25" y1="45" x2="240" y2="65" stroke="#57687e" stroke-dasharray="3 3"/>
- </svg>
- <span class="diagram-caption">Figure 5.1 &mdash; Components of an expert system</span>
- </div>
-
- <p>Core components:</p>
- <ul>
- <li><strong>Knowledge base</strong> &mdash; domain facts and IF&ndash;THEN rules.</li>
- <li><strong>Inference engine</strong> &mdash; applies rules to deduce new facts.</li>
- <li><strong>Working memory</strong> &mdash; current state of facts.</li>
- <li><strong>User interface</strong> &mdash; collects inputs and presents conclusions.</li>
- <li><strong>Explanation facility</strong> &mdash; answers &ldquo;why&rdquo; and &ldquo;how&rdquo;.</li>
- <li><strong>Knowledge-acquisition module</strong> &mdash; helps experts encode rules.</li>
- </ul>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U5 / Q2</span></div>
- <div class="qtext">Explain <strong>Bayesian inference</strong> with a small example.</div>
- <div class="qans">
- <p><strong>Problem:</strong> A disease affects 1% of the population. A test has 99% true-positive and 5% false-positive rates. A patient tests positive. What is the probability they have the disease?</p>
- <ul>
- <li>P(D) = 0.01, P(&not;D) = 0.99</li>
- <li>P(+|D) = 0.99, P(+|&not;D) = 0.05</li>
- <li>P(+) = P(+|D) P(D) + P(+|&not;D) P(&not;D) = 0.99&middot;0.01 + 0.05&middot;0.99 = 0.0594</li>
- <li>P(D|+) = 0.99 &middot; 0.01 / 0.0594 &asymp; <strong>0.167</strong></li>
- </ul>
- <p>Even with a positive test, the probability of disease is only ~17% because the disease is rare.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U5 / Q3</span></div>
- <div class="qtext">Describe <strong>fuzzy inference with defuzzification</strong>.</div>
- <div class="qans">
- <ol>
- <li><strong>Fuzzify</strong> the crisp inputs using membership functions.</li>
- <li><strong>Apply rules</strong> (IF&ndash;THEN with fuzzy antecedents &rarr; fuzzy consequents).</li>
- <li><strong>Aggregate</strong> the consequent fuzzy sets.</li>
- <li><strong>Defuzzify</strong> to obtain a crisp output. Common method: <em>centroid</em> of the aggregated set.</li>
- </ol>
- <p>Example: an air conditioner control uses fuzzy rules &mdash; IF temp is high AND humidity is high THEN fan speed is high.</p>
- </div>
- </div>
-
- <h3>15-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">15 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U5 / Q1</span><span class="pyq-tag">PYQ [2021]</span></div>
- <div class="qtext">Discuss the <strong>Bayesian network</strong> approach to reasoning under uncertainty. Show inference in the &ldquo;Earthquake&rdquo; network.</div>
- <div class="qans">
- <p>A Bayesian network is a directed acyclic graph (DAG) where each node represents a random variable and each edge a direct probabilistic dependence. Each node has a conditional probability table <code>P(X<sub>i</sub> | Parents(X<sub>i</sub>))</code>.</p>
- <p>The joint distribution factors as:</p>
- <div class="formula">P(X<sub>1</sub>, X<sub>2</sub>, &hellip;, X<sub>n</sub>) = &prod;<sub>i=1..n</sub> P(X<sub>i</sub> | Parents(X<sub>i</sub>))</div>
- <p><strong>Earthquake example (Russell &amp; Norvig):</strong></p>
- <ul>
- <li>Variables: Burglary (B), Earthquake (E), Alarm (A), JohnCalls (J), MaryCalls (M).</li>
- <li>Edges: B &rarr; A; E &rarr; A; A &rarr; J; A &rarr; M.</li>
- </ul>
- <p><strong>Exact inference</strong> enumerates all assignments consistent with evidence. For P(A | j, m, &not;b, &not;e):</p>
- <ol>
- <li>Sum over A: P(A|j,m,&not;b,&not;e) = &alpha; P(j|A) P(m|A) P(A|&not;b,&not;e).</li>
- <li>P(j|A) P(m|A) P(A|&not;b,&not;e) for A = true: 0.90 &middot; 0.70 &middot; 0.001 = 0.00063.</li>
- <li>For A = false: 0.05 &middot; 0.01 &middot; 0.999 = 0.0004995.</li>
- <li>After normalisation: P(A=j,m|&not;b,&not;e) &approx; 0.558.</li>
- </ol>
- <p><strong>Approximate inference</strong> (variational methods, MCMC, Gibbs sampling) scales to large networks.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U5 / Q2</span></div>
- <div class="qtext">Explain <strong>rule-based and fuzzy expert systems</strong>. Compare them.</div>
- <div class="qans">
- <p><strong>Rule-based (crisp):</strong> rules are IF&ndash;THEN statements with crisp conditions. Example (MYCIN):</p>
- <ul>
- <li>IF stain = gram-positive AND morphology = coccus THEN bacteria = streptococcus (0.7).</li>
- </ul>
- <p><strong>Fuzzy:</strong> conditions and consequents use fuzzy sets and degrees of membership. Rules may use hedge words:</p>
- <ul>
- <li>IF temperature is <em>hot</em> AND humidity is <em>high</em> THEN fan speed is <em>very fast</em>.</li>
- </ul>
- <table class="ctable">
- <tr><th>Aspect</th><th>Rule-based</th><th>Fuzzy</th></tr>
- <tr><td>Truth values</td><td>0 or 1</td><td>[0, 1]</td></tr>
- <tr><td>Inputs</td><td>Crisp</td><td>Linguistic / crisp</td></tr>
- <tr><td>Uncertainty</td><td>Confidence factors</td><td>Membership grades</td></tr>
- <tr><td>Best for</td><td>Categorical diagnosis</td><td>Continuous control (AC, washer)</td></tr>
- <tr><td>Drawback</td><td>Rigid, brittle boundary</td><td>Hard to verify mathematically</td></tr>
- </table>
- </div>
- </div>
-
- </div>
-
- <!-- ═══════════════ UNIT 6 ═══════════════ -->
- <div class="band" id="unit6">
- <h2>Unit 6 &middot; Machine Learning Basics</h2>
- <span class="band-note">Supervised &middot; Unsupervised &middot; Neural nets</span>
- </div>
-
- <div class="notes-body">
-
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Machine learning</strong> is the study of algorithms that improve their behaviour at a task by observing data, without being explicitly programmed for every case (Mitchell, 1997).</p>
- </div>
-
- <h3>1-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">1 mark</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U6 / Q1</span></div>
- <div class="qtext">Differentiate <strong>supervised</strong> and <strong>unsupervised</strong> learning.</div>
- <div class="qans"><p><em>Supervised</em> learns from labelled input-output pairs (e.g., classification, regression). <em>Unsupervised</em> learns patterns from unlabelled data (e.g., clustering, dimensionality reduction).</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U6 / Q2</span></div>
- <div class="qtext">What is <strong>overfitting</strong>?</div>
- <div class="qans"><p>When a model fits the training data so closely that it captures noise and fails to generalise to unseen test data.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U6 / Q3</span></div>
- <div class="qtext">State the <strong>perceptron learning rule</strong>.</div>
- <div class="qans"><p><code>w<sub>i</sub> &larr; w<sub>i</sub> + &alpha; (t &minus; o) x<sub>i</sub></code>, where <em>t</em> is target, <em>o</em> is output, and &alpha; is the learning rate.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U6 / Q4</span></div>
- <div class="qtext">Define a <strong>neural network</strong>.</div>
- <div class="qans"><p>A computational model loosely inspired by biological neurons, organised in layers: input, hidden, and output. Each neuron applies a weighted sum followed by a non-linear activation.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U6 / Q5</span></div>
- <div class="qtext">What is <strong>decision tree</strong> learning?</div>
- <div class="qans"><p>A supervised method that learns a tree where each internal node tests an attribute, each branch is an outcome, and each leaf is a class label. ID3, C4.5 and CART are classic algorithms.</p></div>
- </div>
-
- <h3>5-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">5 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U6 / Q1</span></div>
- <div class="qtext">Explain the <strong>k-Nearest Neighbour</strong> algorithm.</div>
- <div class="qans">
- <p>k-NN is an instance-based lazy learner. For a new instance <em>x</em>:</p>
- <ol>
- <li>Compute the distance to every training example (usually Euclidean).</li>
- <li>Take the <em>k</em> closest examples.</li>
- <li>Output the majority class (classification) or the mean value (regression).</li>
- </ol>
- <p>Pros: no training, simple. Cons: slow at query time, sensitive to irrelevant features and to the choice of <em>k</em>.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U6 / Q2</span></div>
- <div class="qtext">Describe the <strong>Naive Bayes</strong> classifier.</div>
- <div class="qans">
- <p>Naive Bayes assumes features are conditionally independent given the class. By Bayes' theorem:</p>
- <div class="formula">P(c|x) &prop; P(c) &prod;<sub>i</sub> P(x<sub>i</sub> | c)</div>
- <p>Predict the class with the maximum posterior. Parameters are estimated by counting occurrences in the training data (with Laplace smoothing to avoid zero probabilities). It is surprisingly strong for text classification.</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U6 / Q3</span></div>
- <div class="qtext">Compare <strong>k-Means and hierarchical clustering</strong>.</div>
- <div class="qans">
- <table class="ctable">
- <tr><th>Aspect</th><th>k-Means</th><th>Hierarchical (agglomerative)</th></tr>
- <tr><td>Number of clusters</td><td>Must be specified</td><td>Chosen post-hoc by cutting dendrogram</td></tr>
- <tr><td>Time complexity</td><td>O(n k d i)</td><td>O(n<sup>3</sup>) naive / O(n<sup>2</sup>) optimised</td></tr>
- <tr><td>Output</td><td>Flat partition</td><td>Dendrogram tree</td></tr>
- <tr><td>Best for</td><td>Large spherical clusters</td><td>Small data, irregular shapes</td></tr>
- </table>
- </div>
- </div>
-
- <h3>15-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">15 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U6 / Q1</span></div>
- <div class="qtext">Discuss <strong>artificial neural networks</strong>: the perceptron, multi-layer feed-forward, and backpropagation.</div>
- <div class="qans">
- <p><strong>Perceptron (Rosenblatt 1958).</strong> A linear threshold unit computes <code>o = step(w &middot; x + b)</code>. Learning rule: <code>w<sub>i</sub> &larr; w<sub>i</sub> + &alpha; (t &minus; o) x<sub>i</sub></code>. Perceptrons can represent only linearly separable functions (XOR is the famous counter-example).</p>
-
- <div class="diagram">
- <svg viewBox="0 0 600 180" width="600" height="180" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" font-size="12">
- <!-- input layer -->
- <g fill="#fff" stroke="#8b5cf6" stroke-width="1.4">
- <circle cx="80" cy="50" r="18"/><text x="80" y="54" text-anchor="middle">x&#8321;</text>
- <circle cx="80" cy="110" r="18"/><text x="80" y="114" text-anchor="middle">x&#8322;</text>
- <circle cx="80" cy="170" r="18"/><text x="80" y="174" text-anchor="middle">x&#8323;</text>
- </g>
- <!-- hidden -->
- <g fill="#8b5cf6" fill-opacity="0.15" stroke="#8b5cf6" stroke-width="1.4">
- <circle cx="300" cy="50" r="18"/><text x="300" y="54" text-anchor="middle">h&#8321;</text>
- <circle cx="300" cy="110" r="18"/><text x="300" y="114" text-anchor="middle">h&#8322;</text>
- <circle cx="300" cy="170" r="18"/><text x="300" y="174" text-anchor="middle">h&#8323;</text>
- </g>
- <!-- output -->
- <g fill="#8b5cf6" stroke="#8b5cf6" stroke-width="1.6">
- <circle cx="520" cy="110" r="22"/><text x="520" y="115" text-anchor="middle" fill="#fff" font-weight="700">y</text>
- </g>
- <!-- edges -->
- <g stroke="#57687e" stroke-width="0.8">
- <line x1="98" y1="50" x2="282" y2="50"/><line x1="98" y1="50" x2="282" y2="110"/><line x1="98" y1="50" x2="282" y2="170"/>
- <line x1="98" y1="110" x2="282" y2="50"/><line x1="98" y1="110" x2="282" y2="110"/><line x1="98" y1="110" x2="282" y2="170"/>
- <line x1="98" y1="170" x2="282" y2="50"/><line x1="98" y1="170" x2="282" y2="110"/><line x1="98" y1="170" x2="282" y2="170"/>
- </g>
- <g stroke="#57687e" stroke-width="0.8">
- <line x1="318" y1="50" x2="498" y2="110"/><line x1="318" y1="110" x2="498" y2="110"/><line x1="318" y1="170" x2="498" y2="110"/>
- </g>
- <!-- labels -->
- <text x="80" y="15" text-anchor="middle" font-size="11" fill="#57687e" font-family="JetBrains Mono">Input</text>
- <text x="300" y="15" text-anchor="middle" font-size="11" fill="#57687e" font-family="JetBrains Mono">Hidden</text>
- <text x="520" y="70" text-anchor="middle" font-size="11" fill="#57687e" font-family="JetBrains Mono">Output</text>
- </svg>
- <span class="diagram-caption">Figure 6.1 &mdash; Multi-layer feed-forward neural network</span>
- </div>
-
- <p><strong>Multi-layer feed-forward networks.</strong> One or more hidden layers with non-linear activations (sigmoid, tanh, ReLU) overcome the XOR limit.</p>
- <p><strong>Backpropagation.</strong> Computes the gradient of the loss L with respect to every weight using the chain rule. Two passes:</p>
- <ol>
- <li><em>Forward pass</em> &mdash; compute activations.</li>
- <li><em>Backward pass</em> &mdash; propagate the error from output to input, computing <code>&delta;<sub>i</sub> = (t<sub>i</sub> &minus; o<sub>i</sub>) f'(net<sub>i</sub>)</code>.</li>
- </ol>
- <p>Update rule: <code>w<sub>ij</sub> &larr; w<sub>ij</sub> + &alpha; &delta;<sub>i</sub> o<sub>j</sub></code>. Stochastic gradient descent, momentum, Adam, and batch normalisation are modern refinements.</p>
- </div>
- </div>
-
- </div>
-
- <!-- ═══════════════ UNIT 7 ═══════════════ -->
- <div class="band" id="unit7">
- <h2>Unit 7 &middot; NLP, Modern AI &amp; Generative Models</h2>
- <span class="band-note">LLMs &middot; Transformers &middot; GenAI trends</span>
- </div>
-
- <div class="notes-body">
-
- <div class="defn">
- <span class="defn-label">Definition</span>
- <p><strong>Natural language processing (NLP)</strong> is the branch of AI concerned with the interaction between computers and human (natural) languages, in both written and spoken form.</p>
- </div>
-
- <h3>1-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">1 mark</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U7 / Q1</span></div>
- <div class="qtext">What is <strong>tokenisation</strong>?</div>
- <div class="qans"><p>Splitting raw text into smaller units &mdash; words, sub-words or characters &mdash; for downstream processing.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U7 / Q2</span></div>
- <div class="qtext">Define <strong>stemming</strong>.</div>
- <div class="qans"><p>Reducing a word to its morphological root by chopping off suffixes (e.g., &ldquo;running&rdquo; &rarr; &ldquo;run&rdquo;). Crude but fast.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U7 / Q3</span></div>
- <div class="qtext">What is a <strong>large language model (LLM)</strong>?</div>
- <div class="qans"><p>A transformer neural network trained on massive text corpora to predict the next token, capable of generating fluent text, answering questions and reasoning.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U7 / Q4</span></div>
- <div class="qtext">Define <strong>self-attention</strong>.</div>
- <div class="qans"><p>A mechanism that computes each token&rsquo;s representation as a weighted sum of all other tokens in the sequence, with weights learned from the data.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">1M</span><span class="qid">U7 / Q5</span></div>
- <div class="qtext">What is <strong>prompt engineering</strong>?</div>
- <div class="qans"><p>Crafting the input to an LLM to elicit useful, accurate outputs. Techniques include few-shot examples, chain-of-thought and role assignment.</p></div>
- </div>
-
- <h3>5-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">5 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U7 / Q1</span></div>
- <div class="qtext">Explain the stages of <strong>natural language processing</strong>.</div>
- <div class="qans">
- <ol>
- <li><strong>Morphological analysis</strong> &mdash; identify parts of words (stems, affixes).</li>
- <li><strong>Syntactic analysis (parsing)</strong> &mdash; build a parse tree (constituency or dependency).</li>
- <li><strong>Semantic analysis</strong> &mdash; extract meaning; word-sense disambiguation.</li>
- <li><strong>Discourse analysis</strong> &mdash; resolve pronouns, sentence relations.</li>
- <li><strong>Pragmatic analysis</strong> &mdash; infer speaker intent.</li>
- </ol>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U7 / Q2</span></div>
- <div class="qtext">Describe the <strong>transformer architecture</strong> in brief.</div>
- <div class="qans">
- <p>The transformer (Vaswani et al., 2017) replaces recurrence and convolution with self-attention. An encoder stack and a decoder stack are made of identical blocks containing:</p>
- <ul>
- <li><strong>Multi-head self-attention</strong> &mdash; captures different relationships in parallel subspaces.</li>
- <li><strong>Position-wise feed-forward network</strong> &mdash; two linear layers with ReLU.</li>
- <li><strong>Residual connections</strong> and <strong>layer normalisation</strong>.</li>
- </ul>
- <p>Positional encodings inject order information. The decoder additionally attends to the encoder output (cross-attention).</p>
- </div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">U7 / Q3</span></div>
- <div class="qtext">What is <strong>RAG</strong> (Retrieval-Augmented Generation)?</div>
- <div class="qans">
- <p>RAG grounds an LLM&rsquo;s answer in external documents. At query time:</p>
- <ol>
- <li>The query is embedded and used to retrieve relevant passages from a vector store.</li>
- <li>The passages are appended to the prompt as context.</li>
- <li>The LLM produces an answer that cites the supplied passages.</li>
- </ol>
- <p>RAG reduces hallucinations, keeps knowledge fresh without retraining, and is the dominant pattern for production chatbots.</p>
- </div>
- </div>
-
- <h3>15-mark Questions</h3>
-
- <div class="marks-rail"><span class="marks-pill">15 marks</span></div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">U7 / Q1</span></div>
- <div class="qtext">Discuss the <strong>evolution and impact of Generative AI</strong> (2020&ndash;2025).</div>
- <div class="qans">
- <p><strong>Timeline of generative AI:</strong></p>
- <ul>
- <li><strong>2017</strong> &mdash; Transformer architecture proposed.</li>
- <li><strong>2018</strong> &mdash; BERT (Google) and GPT-1 (OpenAI) introduce pre-training + fine-tuning.</li>
- <li><strong>2020</strong> &mdash; GPT-3 (175B parameters) demonstrates few-shot learning.</li>
- <li><strong>2021</strong> &mdash; DALL-E and Stable Diffusion popularise diffusion-based image generation.</li>
- <li><strong>2022</strong> &mdash; ChatGPT reaches 100M users in two months &mdash; fastest consumer product adoption ever.</li>
- <li><strong>2023</strong> &mdash; GPT-4, Claude 3, Gemini, Llama 2 &mdash; multimodal models enter the mainstream.</li>
- <li><strong>2024</strong> &mdash; Agentic AI (Claude 3.5 Sonnet, OpenAI o1) &mdash; models that plan and use tools.</li>
- <li><strong>2025</strong> &mdash; Reasoning-focused and open-source models (Llama 4, DeepSeek-R1, Claude 4.5 family) continue to close the gap.</li>
- </ul>
- <p><strong>Key concepts:</strong></p>
- <ul>
- <li><em>Foundation models</em> &mdash; large pre-trained backbones adapted to many tasks.</li>
- <li><em>RLHF / RLAIF</em> &mdash; aligning outputs with human preferences.</li>
- <li><em>Tool use and agents</em> &mdash; LLMs that call APIs and execute multi-step plans.</li>
- <li><em>Multimodality</em> &mdash; jointly processing text, images, audio, video.</li>
- </ul>
- <p><strong>Impact and risks:</strong> productivity boost in software and knowledge work; concerns about hallucination, copyright, bias, deepfakes, energy use and labour displacement. Safety research (Constitutional AI, red-teaming) and policy (EU AI Act, India&rsquo;s Digital India AI framework) are evolving in parallel.</p>
- </div>
- </div>
-
- </div>
-
- <!-- ═══════════════ PYQs ═══════════════ -->
- <div class="band" id="pyq">
- <h2>Previous Year Questions &amp; Exam Tips</h2>
- <span class="band-note">PYQs &middot; High-yield areas</span>
- </div>
-
- <div class="notes-body">
-
- <h3>Selected Previous Year Questions (MAKAUT style)</h3>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">2M</span><span class="qid">PYQ [2023]</span></div>
- <div class="qtext">Define AI and name its branches.</div>
- <div class="qans"><p>AI is the simulation of human intelligence in machines. Branches: Machine Learning, NLP, Computer Vision, Robotics, Expert Systems, Planning, Speech Recognition.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">PYQ [2023]</span></div>
- <div class="qtext">Explain BFS and DFS. State their time and space complexities.</div>
- <div class="qans"><p><strong>BFS</strong> explores level by level using a FIFO queue &mdash; complete, optimal for uniform step cost; complexity O(b<sup>d</sup>) time and space.</p>
- <p><strong>DFS</strong> explores depth-first using a LIFO stack &mdash; not complete in infinite spaces, not optimal; complexity O(b<sup>m</sup>) time, O(bm) space.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">PYQ [2022]</span></div>
- <div class="qtext">Differentiate between informed and uninformed search. Give one example of each.</div>
- <div class="qans"><p><em>Uninformed</em> &mdash; uses only the problem definition. Example: BFS, DFS, UCS. <em>Informed</em> &mdash; uses heuristic <code>h(n)</code>. Example: A*, greedy best-first.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">5M</span><span class="qid">PYQ [2021]</span></div>
- <div class="qtext">Write a short note on the <strong>Tic-Tac-Toe</strong> problem as an AI application.</div>
- <div class="qans"><p>Tic-tac-toe is a zero-sum game with at most 9! = 362,880 game-tree paths. With perfect play from both sides it always ends in a draw.  with alpha-beta pruning easily finds optimal moves; it is the canonical illustration of adversarial search.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">PYQ [2023]</span></div>
- <div class="qtext">Explain <strong>A* algorithm</strong>. Discuss admissibility, monotonicity and optimality of A* with examples.</div>
- <div class="qans"><p>A* uses <code>f(n) = g(n) + h(n)</code>. A* is admissible (finds an optimal solution) if h is admissible. A* is optimally efficient (no other optimal algorithm expands fewer nodes). Monotonicity (h(n) &le; cost(n, n') + h(n')) implies that the first time a node is expanded its f value is the optimal one. With consistent h, A* also has the &ldquo;no reopening&rdquo; property.</p></div>
- </div>
-
- <div class="qblock">
- <div class="qhead"><span class="qmark">15M</span><span class="qid">PYQ [2022]</span></div>
- <div class="qtext">Explain <strong>unification and resolution</strong> in predicate logic with an example.</div>
- <div class="qans"><p>Unification finds a substitution <em>&theta;</em> that makes two logical expressions identical. The Unify algorithm (Robinson) is used. Resolution is the corresponding inference rule. Example: from &forall;x (Cat(x) &rarr; Animal(x)) and Cat(Felix), resolve to Animal(Felix).</p></div>
- </div>
-
- <h3>Exam Tips &amp; Strategy</h3>
-
- <div class="tip">
- <span class="tip-label">Strategy</span>
- <p>1. <strong>Cover the full syllabus</strong> &mdash; MAKAUT paper has Group A (30 &times; 1 mark), Group B (any 5 &times; 5 marks = 25), Group C (any 3 &times; 15 marks = 45).</p>
- <p>2. <strong>Define-then-explain</strong> &mdash; for every 5-mark and 15-mark answer, begin with a crisp definition and a diagram where applicable.</p>
- <p>3. <strong>Draw diagrams for search trees, neural networks and Bayesian networks</strong> &mdash; they earn easy marks.</p>
- <p>4. <strong>Show the algorithm in pseudocode</strong> for any search / learning / game algorithm &mdash; it demonstrates understanding.</p>
- <p>5. <strong>End with a real-world example or application</strong> &mdash; examiners reward context.</p>
- </div>
-
- <div class="tip">
- <span class="tip-label">High-yield topics</span>
- <p><strong>Algorithms that appear almost every year:</strong></p>
- <ul>
- <li>A* with heuristic, admissibility proof &mdash; very common.</li>
- <li> with alpha-beta pruning on a small tree &mdash; almost guaranteed.</li>
- <li>Resolution in FOL with Wumpus / family example.</li>
- <li>Bayesian network inference for the Earthquake network.</li>
- <li>Comparison table between search algorithms.</li>
- </ul>
- </div>
-
- <div class="tip">
- <span class="tip-label">Common mistakes to avoid</span>
- <ul>
- <li>Confusing <em>completeness</em> (will find a solution if one exists) with <em>optimality</em> (will find the best one).</li>
- <li>Forgetting the conditioning event when applying Bayes&rsquo; theorem.</li>
- <li>Stating that perceptrons <em>can</em> solve XOR &mdash; they cannot, unless you add a hidden layer.</li>
- <li>Writing &alpha;-&beta; values without explaining when the cutoff fires.</li>
- <li>Leaving out the CNF steps when answering resolution questions.</li>
- </ul>
- </div>
-
- <h3>Key Definitions Recap</h3>
-
- <div class="defn">
- <span class="defn-label">Quick definitions</span>
- <p><strong>AI</strong> &mdash; making machines exhibit intelligent behaviour.</p>
- <p><strong>Agent</strong> &mdash; Architecture + Agent program.</p>
- <p><strong>PEAS</strong> &mdash; Performance, Environment, Actuators, Sensors.</p>
- <p><strong>Heuristic</strong> &mdash; <code>h(n)</code>; admissible if never overestimates.</p>
- <p><strong>Alpha-beta cutoff</strong> &mdash; prune when <code>&alpha; &ge; &beta;</code>.</p>
- <p><strong>Bayes</strong> &mdash; <code>P(A|B) = P(B|A)P(A) / P(B)</code>.</p>
- <p><strong>Resolution</strong> &mdash; inference rule for CNF clauses.</p>
- <p><strong>LLM</strong> &mdash; transformer trained to predict the next token.</p>
- </div>
-
- </div>
-
- <!-- ═══════════════ FOOTER ═══════════════ -->
- <footer>
- <span>Compiled for MAKAUT Semester 5 &middot; PEC-CS501B</span>
- <span class="colophon-note">Last updated November 2025 &middot; <a href="ai_index.html">AI index</a></span>
- </footer>
-
-</main>
+  frontier &larr; FIFOQueue([node])
+  reached &larr; {problem.INITIAL}
+  while not frontier.EMPTY?:
+    node &larr; POP(frontier)
+    for child in EXPAND(node, problem):
+      s &larr; child.STATE
+      if problem.IS-GOAL(s): return child
+      if s not in reached:
+        reached.ADD(s)
+        PUSH(frontier, child)
+  return failure</pre>
+          <p><strong>DFS Algorithm (recursive):</strong></p>
+          <pre>function DFS(problem, limit) returns solution/failure/cutoff
+  node &larr; NODE(problem.INITIAL)
+  return RECURSIVE-DLS(node, problem, limit)
+
+function RECURSIVE-DLS(node, problem, limit) returns solution/failure/cutoff
+  if problem.IS-GOAL(node.STATE): return node
+  else if limit = 0: return cutoff
+  else:
+    cutoff_occurred? &larr; false
+    for child in EXPAND(node, problem):
+      result &larr; RECURSIVE-DLS(child, problem, limit-1)
+      if result = cutoff: cutoff_occurred? &larr; true
+      else if result &ne; failure: return result
+    if cutoff_occurred?: return cutoff else return failure</pre>
+          <p><strong>Properties:</strong></p>
+          <ul>
+            <li>BFS: Complete, Optimal (unit cost), Time O(b<sup>d</sup>), Space O(b<sup>d</sup>).</li>
+            <li>DFS: Not complete, Not optimal, Time O(b<sup>m</sup>), Space O(bm).</li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">15-mark Questions</span> <span class="qa__marks">15M</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U2 / Q1</span>
+            <span class="qa__pyq">PYQ [2022]</span>
+          </div>
+          <div class="qa__q">Solve the given search problem using <strong>BFS and DFS</strong>. Start at A, goal is G. Show the node expansion order with tree diagrams.</div>
+          <div class="qa__a">
+          <p><strong>Problem graph:</strong></p>
+          <div class="diagram">
+          <svg viewBox="0 0 560 210" width="560" height="210" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="13">
+          <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1e293b"/></marker></defs>
+          <g fill="#fff" stroke="#2563eb" stroke-width="1.6">
+            <circle cx="60" cy="105" r="20"/><text x="60" y="110" text-anchor="middle" fill="#1e293b" font-weight="700">A</text>
+            <circle cx="190" cy="50" r="20"/><text x="190" y="55" text-anchor="middle" fill="#1e293b" font-weight="700">B</text>
+            <circle cx="190" cy="160" r="20"/><text x="190" y="165" text-anchor="middle" fill="#1e293b" font-weight="700">C</text>
+            <circle cx="330" cy="50" r="20"/><text x="330" y="55" text-anchor="middle" fill="#1e293b" font-weight="700">D</text>
+            <circle cx="330" cy="160" r="20"/><text x="330" y="165" text-anchor="middle" fill="#1e293b" font-weight="700">E</text>
+            <circle cx="480" cy="105" r="20"/><text x="480" y="110" text-anchor="middle" fill="#1e293b" font-weight="700">G</text>
+          </g>
+          <g stroke="#1e293b" stroke-width="1.4" fill="none" marker-end="url(#arr)">
+            <line x1="80" y1="95" x2="170" y2="55"/>
+            <line x1="80" y1="115" x2="170" y2="155"/>
+            <line x1="210" y1="50" x2="310" y2="50"/>
+            <line x1="210" y1="160" x2="310" y2="160"/>
+            <line x1="350" y1="50" x2="460" y2="105"/>
+            <line x1="350" y1="160" x2="460" y2="115"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#57687e">
+            <text x="120" y="68">2</text><text x="120" y="135">4</text>
+            <text x="255" y="42">3</text><text x="255" y="168">1</text>
+            <text x="405" y="78">5</text><text x="405" y="140">2</text>
+          </g>
+          </svg>
+          <span class="diagram-caption">Figure 2.1 — Problem Graph</span>
+          </div>
+
+          <p><strong>BFS (Queue-based, level by level):</strong></p>
+          <pre>Frontier evolution:
+  [A]
+  [B, C]          ← expand A
+  [C, D, E]       ← expand B
+  [D, E, G, G]    ← expand C → D, E added; D expands → G
+  [G, G]          ← goal reached: path A-B-D-G cost=10</pre>
+
+          <p><strong>DFS (Stack-based, deepest first):</strong></p>
+          <pre>Stack evolution:
+  [A]
+  [B, C]          ← expand A
+  [D, E, C]       ← expand B
+  [G, E, C]       ← expand D
+  [E, C]          ← expand G → GOAL! path A-B-D-G cost=10</pre>
+
+          <p>Both BFS and DFS find the same path here: A &rarr; B &rarr; D &rarr; G with cost 2+3+5 = <strong>10</strong>. However, BFS explores all nodes at depth 2 before depth 3, while DFS dives deep immediately. In a different graph, DFS could find a different (possibly non-optimal) path first.</p>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U2 / Q2</span>
+            <span class="qa__pyq">PYQ [2023]</span>
+          </div>
+          <div class="qa__q">Apply <strong>Uniform Cost Search (UCS)</strong> to find the optimal path from Arad to Bucharest using the Romanian map. Show all node expansions. [2023]</div>
+          <div class="qa__a">
+          <p><strong>Romania Road Map (selected cities &amp; distances in km):</strong></p>
+          <table class="t">
+          <tr><th>From</th><th>To</th><th>Distance</th></tr>
+          <tr><td>Arad</td><td>Sibiu</td><td>140</td></tr>
+          <tr><td>Arad</td><td>Timisoara</td><td>118</td></tr>
+          <tr><td>Arad</td><td>Zerind</td><td>75</td></tr>
+          <tr><td>Sibiu</td><td>Fagaras</td><td>99</td></tr>
+          <tr><td>Sibiu</td><td>Rimnicu Vilcea</td><td>80</td></tr>
+          <tr><td>Fagaras</td><td>Bucharest</td><td>211</td></tr>
+          <tr><td>Rimnicu Vilcea</td><td>Pitesti</td><td>97</td></tr>
+          <tr><td>Pitesti</td><td>Bucharest</td><td>101</td></tr>
+          <tr><td>Timisoara</td><td>Lugoj</td><td>111</td></tr>
+          <tr><td>Lugoj</td><td>Mehadia</td><td>70</td></tr>
+          <tr><td>Mehadia</td><td>Drobeta</td><td>75</td></tr>
+          <tr><td>Drobeta</td><td>Craiova</td><td>120</td></tr>
+          <tr><td>Craiova</td><td>Pitesti</td><td>138</td></tr>
+          </table>
+
+          <p><strong>UCS Expansion Order (lowest path cost first):</strong></p>
+          <pre>Step 1: Expand Arad        path cost = 0
+  Frontier: Zerind(75), Sibiu(140), Timisoara(118)
+
+Step 2: Expand Zerind      path cost = 75
+  Frontier: Timisoara(118), Sibiu(140), Oradea(71+152=223)
+
+Step 3: Expand Timisoara   path cost = 118
+  Frontier: Sibiu(140), Lugoj(118+111=229), ...
+
+Step 4: Expand Sibiu       path cost = 140
+  Frontier: Rimnicu Vilcea(140+80=220), Fagaras(140+99=239), ...
+
+Step 5: Expand Rimnicu Vilcea  path cost = 220
+  Frontier: Pitesti(220+97=317), ...
+
+Step 6: Expand Pitesti     path cost = 317
+  Frontier: Bucharest(317+101=418), Craiova(317+138=455)
+
+Step 7: Expand Bucharest   path cost = 418  ← GOAL!</pre>
+
+          <p><strong>Optimal Path:</strong> Arad &rarr; Sibiu &rarr; Rimnicu Vilcea &rarr; Pitesti &rarr; Bucharest<br>
+          <strong>Optimal Cost:</strong> 140 + 80 + 97 + 101 = <strong>418 km</strong></p>
+          </div>
+        </div>
+
+        <div class="exam-tip"><strong>Exam Tip:</strong> BFS vs DFS comparison, IDDFS explanation, and BFS/DFS tree diagram questions are frequently asked. Remember: BFS = Queue (FIFO), DFS = Stack (LIFO). IDDFS combines the best of both.</div>
+
+      </div><!-- /unit -->
+
+      <!-- ═══════════════ UNIT 3 ═══════════════ -->
+      <div class="unit" id="unit3">
+        <div class="unit__head">
+          <span class="unit__no">03</span>
+          <div>
+            <h2 class="unit__title">Informed (Heuristic) Search</h2>
+            <p class="unit__sub">Heuristics · A* · AO* · Hill Climbing · CSP · Genetic Algorithms</p>
+          </div>
+        </div>
+
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Informed Search</strong> uses problem-specific knowledge (a heuristic function h(n)) to find solutions more efficiently than uninformed search.</p>
+        </div>
+
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p>A <strong>heuristic function</strong> h(n) estimates the cheapest cost from node n to a goal. It is <strong>admissible</strong> if it never overestimates the true cost: h(n) &le; h*(n) for all n.</p>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">1-mark Questions</span> <span class="qa__marks">1M</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q1</span>
+          </div>
+          <div class="qa__q">What is a <strong>heuristic function</strong> h(n)?</div>
+          <div class="qa__a"><p>A function that estimates the cost from node n to the goal. It guides search towards promising regions of the state space.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q2</span>
+          </div>
+          <div class="qa__q">What is an <strong>admissible heuristic</strong>?</div>
+          <div class="qa__a"><p>A heuristic that never overestimates the true cost to reach the goal: h(n) &le; h*(n). Admissibility guarantees optimality of A*.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q3</span>
+          </div>
+          <div class="qa__q">What is the <strong>A* evaluation function</strong>?</div>
+          <div class="qa__a"><p>f(n) = g(n) + h(n), where g(n) is the actual cost from start to n, and h(n) is the estimated cost from n to the goal.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q4</span>
+          </div>
+          <div class="qa__q">What is <strong>simulated annealing</strong>?</div>
+          <div class="qa__a"><p>A metaheuristic that sometimes accepts worse moves with probability e^(-&Delta;E/T), where T is temperature that slowly cools. Helps escape local optima.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q5</span>
+          </div>
+          <div class="qa__q">What is a <strong>Constraint Satisfaction Problem (CSP)</strong>?</div>
+          <div class="qa__a"><p>A problem defined by variables X with domains D and constraints C. The goal is to find an assignment where all constraints are satisfied.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q6</span>
+          </div>
+          <div class="qa__q">What is <strong>crossover</strong> in Genetic Algorithms?</div>
+          <div class="qa__a"><p>An operator that combines two parent chromosomes to produce offspring. Common types: single-point, two-point, and uniform crossover.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q7</span>
+          </div>
+          <div class="qa__q">What is the <strong>AO* algorithm</strong> used for?</div>
+          <div class="qa__a"><p>AO* finds optimal solutions in AND-OR graphs by propagating cost values from goal nodes backward, choosing the minimum-cost subgraph.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U3 / Q8</span>
+          </div>
+          <div class="qa__q">Define <strong>fitness function</strong> in Genetic Algorithms.</div>
+          <div class="qa__a"><p>A function that evaluates how good a solution (chromosome) is. Higher fitness → higher chance of being selected for reproduction.</p></div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">5-mark Questions</span> <span class="qa__marks">5M</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U3 / Q1</span>
+          </div>
+          <div class="qa__q">Explain the <strong>A* search algorithm</strong>. Prove that it is optimal when h is admissible.</div>
+          <div class="qa__a">
+          <p><strong>Algorithm:</strong></p>
+          <pre>function A*(problem, h) returns solution
+  node &larr; NODE(problem.INITIAL)
+  frontier &larr; PriorityQueue ordered by f = g+h, containing node
+  reached &larr; {problem.INITIAL: node}
+  while not frontier.EMPTY?:
+    node &larr; POP(frontier)
+    if problem.GOAL?(node.STATE): return node
+    for child in EXPAND(node, problem):
+      s &larr; child.STATE
+      if s not in reached or child.PATH-COST < reached[s].PATH-COST:
+        reached[s] &larr; child
+        ADD(frontier, child)
+  return failure</pre>
+          <p><strong>Proof of Optimality:</strong></p>
+          <ol>
+            <li>Let G be an optimal goal node with cost C*.</li>
+            <li>A* expands nodes in order of increasing f.</li>
+            <li>Since h is admissible, for every node n on the optimal path, f(n) = g(n) + h(n) &le; g(n) + h*(n) = g(n) + (C* - g(n)) = C*.</li>
+            <li>Thus no node on the optimal path has f &gt; C*.</li>
+            <li>When A* selects a goal node G for expansion, its f(G) = g(G) &le; C* (since h(G)=0 and h is admissible).</li>
+            <li>Therefore g(G) = C*, i.e., the solution is optimal.</li>
+          </ol>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U3 / Q2</span>
+          </div>
+          <div class="qa__q">Describe the <strong>variants of hill climbing</strong> (simple, steepest-ascent, first-choice, random-restart, simulated annealing).</div>
+          <div class="qa__a">
+          <p><strong>(1) Simple Hill Climbing:</strong> Pick any neighbour better than current. Move to it. Stop when no neighbour is better. Fast but very basic.</p>
+          <p><strong>(2) Steepest-Ascent Hill Climbing:</strong> Examine ALL neighbours and move to the best one. More thorough than simple HC.</p>
+          <p><strong>(3) First-Choice Hill Climbing:</strong> Randomly generate successors until one is better than current. Efficient when many neighbours exist.</p>
+          <p><strong>(4) Random-Restart Hill Climbing:</strong> Run hill climbing from many random initial states; keep the best result. Probabilistically complete.</p>
+          <p><strong>(5) Simulated Annealing:</strong> Occasionally accept worse moves with probability P = e^(-&Delta;E/T), where T starts high and decreases. Escapes local optima.</p>
+          <p><strong>Limitations of all variants:</strong></p>
+          <ul>
+            <li>Local maxima — stuck at a peak lower than the global maximum.</li>
+            <li>Ridges — sequence of local maxima makes progress zigzag and slow.</li>
+            <li>Plateaux — flat area where no neighbour is better.</li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U3 / Q3</span>
+          </div>
+          <div class="qa__q">Explain <strong>Genetic Algorithms</strong> with the main operators: selection, crossover, mutation.</div>
+          <div class="qa__a">
+          <p>Genetic Algorithms (GAs) are population-based search algorithms inspired by natural evolution. They work on a population of candidate solutions (chromosomes).</p>
+          <p><strong>1. Selection:</strong> Choose fitter individuals for reproduction. Common methods:</p>
+          <ul>
+            <li><em>Roulette Wheel Selection:</em> probability proportional to fitness.</li>
+            <li><em>Tournament Selection:</em> pick k individuals at random; the best wins.</li>
+            <li><em>Rank Selection:</em> rank individuals by fitness; probability based on rank.</li>
+          </ul>
+          <p><strong>2. Crossover:</strong> Combine two parents to produce offspring. Single-point crossover: pick a crossover point and swap tails.</p>
+          <pre>Parent 1:  11001 | 101    →   11001 011
+Parent 2:  10110 | 011    →   10110 101
+                  ↑ crossover point (after position 5)</pre>
+          <p><strong>3. Mutation:</strong> Randomly flip a bit in a chromosome with low probability (e.g., 0.01). Maintains genetic diversity and prevents premature convergence.</p>
+          <p><strong>4. Fitness Function:</strong> Evaluates each chromosome. Problem-specific. Higher fitness → higher survival probability.</p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U3 / Q4</span>
+          </div>
+          <div class="qa__q">What is a <strong>CSP</strong>? Explain backtracking search and forward checking with an example.</div>
+          <div class="qa__a">
+          <p>A CSP has: variables X = {X1, ..., Xn}, domains D = {D1, ..., Dn}, and constraints C specifying allowed value combinations.</p>
+          <p><strong>Backtracking Search:</strong> Assign variables one at a time. If a constraint is violated, backtrack to the last decision point and try a different value.</p>
+          <p><strong>Example — Map Colouring (Australia):</strong> Variables: WA, NT, Q, NSW, V, SA, T. Domain: {Red, Green, Blue}. Constraint: adjacent regions must have different colours.</p>
+          <p><strong>Forward Checking:</strong> When a variable Xi is assigned value vi, prune the domain of each unassigned neighbour Xj by removing values inconsistent with vi. If any domain becomes empty, backtrack immediately.</p>
+          </div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">15-mark Questions</span> <span class="qa__marks">15M</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U3 / Q1</span>
+          </div>
+          <div class="qa__q">Explain the <strong>A* algorithm</strong>. Apply it to find the shortest path from node S to node G in the graph below. Show f(n), g(n), h(n) for each node at every step.</div>
+          <div class="qa__a">
+          <p><strong>Graph:</strong></p>
+          <div class="diagram">
+          <svg viewBox="0 0 600 200" width="600" height="200" xmlns="http://www.w3.org/2000/svg" font-family="JetBrains Mono, monospace" font-size="13">
+          <defs><marker id="arr3" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#1e293b"/></marker></defs>
+          <g fill="#fff" stroke="#2563eb" stroke-width="1.6">
+            <circle cx="50" cy="100" r="20"/><text x="50" y="105" text-anchor="middle" fill="#1e293b" font-weight="700">S</text>
+            <circle cx="170" cy="45" r="20"/><text x="170" y="50" text-anchor="middle" fill="#1e293b" font-weight="700">A</text>
+            <circle cx="170" cy="155" r="20"/><text x="170" y="160" text-anchor="middle" fill="#1e293b" font-weight="700">B</text>
+            <circle cx="320" cy="45" r="20"/><text x="320" y="50" text-anchor="middle" fill="#1e293b" font-weight="700">C</text>
+            <circle cx="320" cy="155" r="20"/><text x="320" y="160" text-anchor="middle" fill="#1e293b" font-weight="700">D</text>
+            <circle cx="500" cy="100" r="20"/><text x="500" y="105" text-anchor="middle" fill="#1e293b" font-weight="700">G</text>
+          </g>
+          <g stroke="#1e293b" stroke-width="1.4" fill="none" marker-end="url(#arr3)">
+            <line x1="70" y1="90" x2="150" y2="55"/>
+            <line x1="70" y1="110" x2="150" y2="145"/>
+            <line x1="190" y1="50" x2="300" y2="50"/>
+            <line x1="190" y1="150" x2="300" y2="150"/>
+            <line x1="340" y1="50" x2="480" y2="100"/>
+            <line x1="340" y1="150" x2="480" y2="110"/>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="11" fill="#57687e">
+            <text x="105" y="68">g=1</text><text x="105" y="132">g=4</text>
+            <text x="242" y="42">g=3</text><text x="242" y="168">g=5</text>
+            <text x="410" y="72">g=8</text><text x="410" y="135">g=6</text>
+          </g>
+          <g font-family="JetBrains Mono, monospace" font-size="10" fill="#2563eb">
+            <text x="50" y="30">h=6</text><text x="170" y="20">h=4</text>
+            <text x="170" y="180">h=3</text><text x="320" y="20">h=2</text>
+            <text x="320" y="180">h=1</text><text x="500" y="80">h=0</text>
+          </g>
+          </svg>
+          <span class="diagram-caption">Figure 3.1 — A* Example Graph (g = edge cost, h = heuristic)</span>
+          </div>
+
+          <p><strong>A* Step-by-Step:</strong></p>
+          <pre>Step 1: Expand S
+  g(S)=0,  h(S)=6,  f(S)=0+6=6
+  Children: A(g=1, f=1+4=5),  B(g=4, f=4+3=7)
+  Frontier sorted: A(5), B(7)
+
+Step 2: Expand A (lowest f=5)
+  Children: C(g=1+3=4, f=4+2=6), D(g=1+7=8, f=8+1=9)
+  Frontier sorted: C(6), B(7), D(9)
+
+Step 3: Expand C (lowest f=6)
+  Children: G(g=4+8=12, f=12+0=12)
+  Frontier sorted: B(7), D(9), G(12)
+
+Step 4: Expand B (lowest f=7)
+  Children: D(g=4+5=9 → worse than existing 8, skip), G(g=4+6=10, f=10+0=10)
+  Frontier sorted: D(9), G(10), G(12)
+
+Step 5: Expand D (lowest f=9)
+  Children: G(g=8+2=10 → same as existing, skip)
+  Frontier sorted: G(10), G(12)
+
+Step 6: Expand G (lowest f=10) ← GOAL!
+  Path: S → A → B → G, total cost = 10</pre>
+
+          <p>A* explores 5 nodes (S, A, C, B, D) before reaching the goal. The optimal path cost is <strong>10</strong> via S &rarr; A &rarr; B &rarr; G.</p>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U3 / Q2</span>
+            <span class="qa__pyq">PYQ [2023]</span>
+          </div>
+          <div class="qa__q">Explain <strong>Genetic Algorithms</strong> in detail. Apply a GA to maximise f(x) = x&sup2; for x &isin; [0, 31], with population size 4, crossover rate 0.7, mutation rate 0.01. Show 3 generations.</div>
+          <div class="qa__a">
+          <p><strong>GA Framework:</strong></p>
+          <ol>
+            <li><em>Initialise:</em> Create random population of chromosomes.</li>
+            <li><em>Evaluate:</em> Compute fitness of each chromosome.</li>
+            <li><em>Select:</em> Choose parents proportionally to fitness.</li>
+            <li><em>Crossover:</em> With probability Pc, recombine pairs.</li>
+            <li><em>Mutate:</em> With probability Pm, flip random bits.</li>
+            <li><em>Replace:</em> Form new population; repeat from step 2.</li>
+            <li><em>Terminate:</em> After fixed generations or convergence.</li>
+          </ol>
+          <p><strong>Application to maximise f(x) = x&sup2; (x &isin; [0, 31]):</strong></p>
+          <p>Represent x as 5-bit binary: 0 = 00000, 31 = 11111. f(x) = x&sup2; is the fitness.</p>
+          <p><em>Generation 0 (random):</em></p>
+          <table class="t">
+          <tr><th>Chromosome</th><th>x (decimal)</th><th>Fitness = x&sup2;</th></tr>
+          <tr><td>01101</td><td>13</td><td>169</td></tr>
+          <tr><td>11000</td><td>24</td><td>576</td></tr>
+          <tr><td>01011</td><td>11</td><td>121</td></tr>
+          <tr><td>10010</td><td>18</td><td>324</td></tr>
+          </table>
+          <p>Total fitness = 169+576+121+324 = 1190. Selection probabilities: 14.2%, 48.4%, 10.2%, 27.2%.</p>
+          <p><em>Selection (roulette wheel):</em> Select 11000 (f=576) and 10010 (f=324) as parents.</p>
+          <p><em>Crossover (Pc=0.7, crossover at bit 2):</em></p>
+          <pre>P1: 11 | 000  →  11000 (x=24)
+P2: 10 | 010  →  10010 (x=18)
+Offspring:  11 | 010  = 11010 (x=26, f=676)
+             10 | 000  = 10000 (x=16, f=256)</pre>
+          <p><em>Mutation (Pm=0.01, flip bit 4 of offspring2):</em> 10000 &rarr; 10001 (x=17, f=289)</p>
+          <p><em>Generation 1:</em> {11010(x=26,f=676), 10001(x=17,f=289), 01101(x=13,f=169), 11000(x=24,f=576)}</p>
+          <p>Repeating this process, the population converges toward x=31 (11111, f=961).</p>
+          </div>
+        </div>
+
+        <div class="exam-tip"><strong>Exam Tip:</strong> A* with a numerical example and proof of optimality is a guaranteed 15-mark question. GA with 2-3 generations is also very common. Always show f(n)=g(n)+h(n) table at each step.</div>
+
+      </div><!-- /unit -->
+
+      <!-- ═══════════════ UNIT 4 ═══════════════ -->
+      <div class="unit" id="unit4">
+        <div class="unit__head">
+          <span class="unit__no">04</span>
+          <div>
+            <h2 class="unit__title">Knowledge Representation &amp; Reasoning</h2>
+            <p class="unit__sub">Logic · FOL · Unification · Resolution · Expert Systems · Frames</p>
+          </div>
+        </div>
+
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Knowledge Representation (KR)</strong> is the study of how knowledge about the world can be expressed and stored in a form that a computer system can use to solve complex tasks.</p>
+        </div>
+
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Propositional Logic (PL)</strong> is the simplest logic where statements are either true or false. It uses atomic propositions combined with connectives: &and; (AND), &or; (OR), &not; (NOT), &rarr; (IMPLIES), &harr; (IFF).</p>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">1-mark Questions</span> <span class="qa__marks">1M</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q1</span>
+          </div>
+          <div class="qa__q">What are the <strong>methods of knowledge representation</strong>?</div>
+          <div class="qa__a"><p>Logical representation (propositional, predicate), Semantic networks, Frames/Scripts, Production rules, Conceptual dependencies.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q2</span>
+          </div>
+          <div class="qa__q">What is a <strong>production rule</strong>?</div>
+          <div class="qa__a"><p>A rule of the form IF (condition) THEN (action). Used in expert systems and rule-based systems. Also called IF-THEN rules.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q3</span>
+          </div>
+          <div class="qa__q">What is a <strong>semantic network</strong>?</div>
+          <div class="qa__a"><p>A graph where nodes represent objects/concepts and labelled edges represent relationships between them. Example: IS-A, HAS-A links.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q4</span>
+          </div>
+          <div class="qa__q">What is a <strong>frame</strong> in AI?</div>
+          <div class="qa__a"><p>A data structure for representing stereotypical situations. Contains slots with default values and procedural attachments (if-needed, if-added).</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q5</span>
+          </div>
+          <div class="qa__q">Define <strong>First-Order Logic (FOL)</strong>.</div>
+          <div class="qa__a"><p>FOL (predicate logic) extends propositional logic with quantifiers (&forall;, &exist;), variables, predicates, and functions. It can express statements about objects and their relationships.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q6</span>
+          </div>
+          <div class="qa__q">What is <strong>unification</strong>?</div>
+          <div class="qa__a"><p>The process of finding a substitution that makes two logical expressions identical. It is the basic matching mechanism for resolution and logical inference.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q7</span>
+          </div>
+          <div class="qa__q">What is the <strong>resolution principle</strong>?</div>
+          <div class="qa__a"><p>A complete inference rule for FOL. Given two clauses containing complementary literals, derive a new clause (resolvent) by removing the complementary pair and merging the rest.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U4 / Q8</span>
+          </div>
+          <div class="qa__q">What is an <strong>expert system</strong>?</div>
+          <div class="qa__a"><p>A program that encodes the knowledge of a human expert in a specific domain and uses inference rules to solve problems like the expert would.</p></div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">5-mark Questions</span> <span class="qa__marks">5M</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U4 / Q1</span>
+          </div>
+          <div class="qa__q">Explain <strong>forward chaining</strong> and <strong>backward chaining</strong> in rule-based systems. [2022]</div>
+          <div class="qa__a">
+          <p><strong>Forward Chaining (Data-driven):</strong> Starts from known facts and applies rules forward until a goal is reached. Bottom-up reasoning. Used in OPS5, CLIPS.</p>
+          <pre>R1: IF rainy THEN wet
+R2: IF wet AND cold THEN slippery
+Facts: rainy, cold
+→ Apply R1: wet (inferred)
+→ Apply R2: slippery (GOAL reached)</pre>
+          <p><strong>Backward Chaining (Goal-driven):</strong> Starts from the goal and works backward, finding rules that could prove the goal, then proving their antecedents. Top-down reasoning. Used in Prolog, MYCIN.</p>
+          <pre>Goal: slippery
+→ Need: wet AND cold
+→ Prove wet: use R1 → need rainy (TRUE)
+→ Prove cold: (TRUE)
+→ Goal proved ✓</pre>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U4 / Q2</span>
+          </div>
+          <div class="qa__q">Describe the <strong>architecture and components</strong> of an expert system.</div>
+          <div class="qa__a">
+          <p><strong>Components:</strong></p>
+          <ul>
+            <li><strong>Knowledge Base:</strong> Stores domain knowledge as facts and rules. The most critical component.</li>
+            <li><strong>Inference Engine:</strong> Applies reasoning (forward/backward chaining) to derive conclusions from the knowledge base.</li>
+            <li><strong>Explanation Facility:</strong> Answers "why" and "how" questions from the user, making the reasoning transparent.</li>
+            <li><strong>User Interface:</strong> Allows users to input queries and view results in natural language or structured form.</li>
+            <li><strong>Knowledge Acquisition Module:</strong> Helps experts add or modify rules in the knowledge base.</li>
+          </ul>
+          <p><strong>Types:</strong></p>
+          <ul>
+            <li><em>Rule-based:</em> MYCIN (medical diagnosis), DENDRAL (chemical analysis).</li>
+            <li><em>Frame-based:</em> Uses frames/schemas with slots and default values.</li>
+          </ul>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U4 / Q3</span>
+          </div>
+          <div class="qa__q">Explain <strong>unification</strong> with an example. What is the most general unifier (MGU)?</div>
+          <div class="qa__a">
+          <p>Unification finds the most general substitution that makes two expressions identical.</p>
+          <p><strong>Algorithm:</strong></p>
+          <pre>function UNIFY(x, y, &theta;) returns substitution
+  if &theta; = failure: return failure
+  else if x = y: return &theta;
+  else if VARIABLE?(x): return UNIFY-VAR(x, y, &theta;)
+  else if VARIABLE?(y): return UNIFY-VAR(y, x, &theta;)
+  else if COMPOUND?(x) and COMPOUND?(y):
+    return UNIFY(x.ARGS, y.ARGS, UNIFY(x.OP, y.OP, &theta;))
+  else if LIST?(x) and LIST?(y):
+    return UNIFY(x.REST, y.REST, UNIFY(x.FIRST, y.FIRST, &theta;))
+  else: return failure</pre>
+          <p><strong>Example:</strong> Unify P(x, f(y)) and P(A, f(B))</p>
+          <pre>Step 1: unify P with P → &theta; = {}
+Step 2: unify x with A → &theta; = {x/A}
+Step 3: unify f(y) with f(B) → unify y with B → &theta; = {x/A, y/B}
+MGU = {x/A, y/B}</pre>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U4 / Q4</span>
+          </div>
+          <div class="qa__q">Compare <strong>propositional logic</strong> and <strong>predicate logic (FOL)</strong>.</div>
+          <div class="qa__a">
+          <table class="t">
+          <tr><th>Feature</th><th>Propositional Logic</th><th>Predicate Logic (FOL)</th></tr>
+          <tr><td>Basic unit</td><td>Atomic proposition (P, Q, R)</td><td>Predicate with arguments (P(x), Loves(John, Mary))</td></tr>
+          <tr><td>Variables</td><td>No variables</td><td>Supports variables (x, y)</td></tr>
+          <tr><td>Quantifiers</td><td>None</td><td>&forall; (for all), &exist; (exists)</td></tr>
+          <tr><td>Expressiveness</td><td>Limited — only true/false statements</td><td>High — objects, relations, functions</td></tr>
+          <tr><td>Complexity</td><td>SAT is NP-complete</td><td>Entailment is semi-decidable</td></tr>
+          <tr><td>Example</td><td>P &rarr; Q</td><td>&forall;x (Student(x) &rarr; &exist;y Studies(x, y))</td></tr>
+          </table>
+          </div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">15-mark Questions</span> <span class="qa__marks">15M</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U4 / Q1</span>
+            <span class="qa__pyq">PYQ [2023]</span>
+          </div>
+          <div class="qa__q">Perform <strong>inference using propositional logic</strong>. Given the knowledge base below, prove "C" using resolution.</div>
+          <div class="qa__a">
+          <p><strong>Knowledge Base:</strong></p>
+          <ol>
+            <li>A &rarr; B</li>
+            <li>B &rarr; C</li>
+            <li>A</li>
+          </ol>
+          <p><strong>Goal:</strong> Prove C</p>
+          <p><strong>Method 1: Forward Chaining</strong></p>
+          <pre>1. A is TRUE (given).
+2. A → B, A is TRUE → B is TRUE (Modus Ponens).
+3. B → C, B is TRUE → C is TRUE (Modus Ponens).
+∴ C is proved. ✓</pre>
+          <p><strong>Method 2: Resolution</strong></p>
+          <pre>Step 1: Convert KB to CNF:
+  (A → B)       ≡  (¬A ∨ B)           ... Clauses: {¬A, B}
+  (B → C)       ≡  (¬B ∨ C)           ... Clauses: {¬B, C}
+  A                              ... Clause:  {A}
+
+Step 2: Negate the goal: ¬C
+
+Step 3: Add to clause set: {¬C}
+
+Step 4: Resolve:
+  Resolve {A} and {¬A, B} → {B}
+  Resolve {B} and {¬B, C} → {C}
+  Resolve {C} and {¬C} → {} (empty clause)
+
+Step 5: Empty clause derived → contradiction → Goal C is TRUE. ✓</pre>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U4 / Q2</span>
+            <span class="qa__pyq">PYQ [2022]</span>
+          </div>
+          <div class="qa__q">Explain <strong>resolution with unification</strong> in FOL. Prove: "Socrates is mortal" from: All men are mortal; Socrates is a man.</div>
+          <div class="qa__a">
+          <p><strong>Step 1: Encode in FOL</strong></p>
+          <pre>(1) ∀x (Man(x) → Mortal(x))
+(2) Man(Socrates)
+Goal: Mortal(Socrates)</pre>
+          <p><strong>Step 2: Convert to CNF (Skolemisation)</strong></p>
+          <pre>(1) ∀x (¬Man(x) ∨ Mortal(x))    → Clause: {¬Man(x), Mortal(x)}
+(2) Man(Socrates)               → Clause: {Man(Socrates)}</pre>
+          <p><strong>Step 3: Negate the goal</strong></p>
+          <pre>¬Mortal(Socrates)               → Clause: {¬Mortal(Socrates)}</pre>
+          <p><strong>Step 4: Apply Resolution with Unification</strong></p>
+          <pre>Clause set:  {¬Man(x), Mortal(x)}
+              {Man(Socrates)}
+              {¬Mortal(Socrates)}
+
+Resolve {Man(Socrates)} and {¬Man(x), Mortal(x)}:
+  Unify: x = Socrates (MGU = {x/Socrates})
+  Resolvent: {Mortal(Socrates)}
+
+Resolve {Mortal(Socrates)} and {¬Mortal(Socrates)}:
+  Unify: Mortal(Socrates) with Mortal(Socrates) (MGU = {})
+  Resolvent: {}  (EMPTY CLAUSE) → Contradiction!
+
+∴ ¬Mortal(Socrates) is FALSE → Mortal(Socrates) is TRUE. ✓</pre>
+          </div>
+        </div>
+
+        <div class="exam-tip"><strong>Exam Tip:</strong> Resolution proof (convert to CNF, negate goal, resolve until empty clause) is a very common 15-mark question. Practice with at least 3 examples. Always show the MGU explicitly.</div>
+
+      </div><!-- /unit -->
+
+      <!-- ═══════════════ UNIT 5 ═══════════════ -->
+      <div class="unit" id="unit5">
+        <div class="unit__head">
+          <span class="unit__no">05</span>
+          <div>
+            <h2 class="unit__title">Uncertainty &amp; Machine Learning Basics</h2>
+            <p class="unit__sub">Probability · Bayes' Theorem · Fuzzy Logic · Decision Trees · Backpropagation</p>
+          </div>
+        </div>
+
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Uncertainty</strong> in AI arises because an agent's knowledge of the world is incomplete, the environment is stochastic, or outcomes are unpredictable. Probability theory and fuzzy logic are two major frameworks for handling uncertainty.</p>
+        </div>
+
+        <div class="defn">
+          <span class="defn-label">Definition</span>
+          <p><strong>Bayes' Theorem:</strong> P(H|E) = [P(E|H) &times; P(H)] / P(E), where P(H) = prior probability, P(E|H) = likelihood, P(H|E) = posterior probability.</p>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">1-mark Questions</span> <span class="qa__marks">1M</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q1</span>
+          </div>
+          <div class="qa__q">State <strong>Bayes' Theorem</strong>.</div>
+          <div class="qa__a"><p>P(H|E) = P(E|H) &times; P(H) / P(E), where H = hypothesis, E = evidence.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q2</span>
+          </div>
+          <div class="qa__q">What is a <strong>Bayesian Network</strong>?</div>
+          <div class="qa__a"><p>A directed acyclic graph where nodes represent random variables and edges represent conditional dependencies. Used for probabilistic reasoning.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q3</span>
+          </div>
+          <div class="qa__q">What is <strong>fuzzy logic</strong>?</div>
+          <div class="qa__a"><p>A form of many-valued logic where truth values range from 0 (false) to 1 (true) rather than just 0 or 1. Handles partial membership and reasoning with uncertainty.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q4</span>
+          </div>
+          <div class="qa__q">What is a <strong>membership function</strong> in fuzzy logic?</div>
+          <div class="qa__a"><p>A function &mu;(x) &isin; [0,1] that defines the degree of membership of element x in a fuzzy set. Example: &mu;<sub>tall</sub>(180) = 0.8 means 180cm is 80% tall.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q5</span>
+          </div>
+          <div class="qa__q">What is a <strong>decision tree</strong>?</div>
+          <div class="qa__a"><p>A tree structure where internal nodes test attributes, branches represent outcomes, and leaf nodes represent class labels. Used for classification in ML.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q6</span>
+          </div>
+          <div class="qa__q">What is <strong>entropy</strong> in ID3 algorithm?</div>
+          <div class="qa__a"><p>Entropy(S) = -&Sigma; p<sub>i</sub> log&shy;&#8322;(p<sub>i</sub>), where p<sub>i</sub> is the proportion of samples in class i. It measures impurity/uncertainty in a dataset.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q7</span>
+          </div>
+          <div class="qa__q">What is <strong>information gain</strong>?</div>
+          <div class="qa__a"><p>Gain(S, A) = Entropy(S) - &Sigma; (|S<sub>v</sub>|/|S|) &times; Entropy(S<sub>v</sub>). It measures the reduction in entropy when splitting on attribute A. ID3 selects the attribute with highest gain.</p></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__id">U5 / Q8</span>
+          </div>
+          <div class="qa__q">What is <strong>backpropagation</strong>?</div>
+          <div class="qa__a"><p>An algorithm for training neural networks. It computes the gradient of the loss function with respect to each weight using the chain rule, then updates weights via gradient descent.</p></div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">5-mark Questions</span> <span class="qa__marks">5M</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U5 / Q1</span>
+          </div>
+          <div class="qa__q">Explain <strong>Bayes' Theorem</strong> with a worked numerical example. [2021]</div>
+          <div class="qa__a">
+          <p><strong>Bayes' Theorem:</strong> P(H|E) = P(E|H) &times; P(H) / P(E)</p>
+          <p>Where P(E) = P(E|H)&times;P(H) + P(E|&not;H)&times;P(&not;H)</p>
+          <p><strong>Example — Medical Diagnosis:</strong></p>
+          <p>Disease D occurs in 1% of population: P(D) = 0.01, P(&not;D) = 0.99.<br>
+          Test T is 95% accurate: P(T+|D) = 0.95, P(T+|&not;D) = 0.05.<br>
+          A person tests positive. What is P(D|T+)?</p>
+          <pre>P(D|T+) = P(T+|D) × P(D) / P(T+)
+P(T+) = P(T+|D)×P(D) + P(T+|¬D)×P(¬D)
+      = 0.95×0.01 + 0.05×0.99
+      = 0.0095 + 0.0495 = 0.059
+
+P(D|T+) = 0.95 × 0.01 / 0.059
+         = 0.0095 / 0.059
+         ≈ 0.161 (16.1%)</pre>
+          <p>Despite a positive test, the probability of disease is only ~16% because the disease is rare (base rate fallacy).</p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U5 / Q2</span>
+          </div>
+          <div class="qa__q">Explain <strong>fuzzy logic</strong>. What are membership functions and fuzzy rules?</div>
+          <div class="qa__a">
+          <p><strong>Fuzzy Logic</strong> extends Boolean logic to handle partial truth values between 0 (completely false) and 1 (completely true).</p>
+          <p><strong>Membership Function:</strong> Maps an input value to a degree of membership in a fuzzy set.</p>
+          <pre>Example: Temperature "Hot" with triangular membership:
+
+        1.0 ──┐
+             │＼
+             │ ＼
+        0.5 ─┼──＼────
+             │    ＼
+        0.0 ─┴─────＼──
+             25    30  35  (°C)
+
+μ_hot(28°C) ≈ 0.6,  μ_hot(32°C) ≈ 0.4</pre>
+          <p><strong>Fuzzy Rules:</strong> IF-THEN rules with fuzzy conditions and fuzzy conclusions.</p>
+          <pre>R1: IF temperature is HOT  THEN fan_speed is HIGH
+R2: IF temperature is WARM THEN fan_speed is MEDIUM
+R3: IF temperature is COOL  THEN fan_speed is LOW</pre>
+          <p><strong>Fuzzy Inference Steps:</strong> Fuzzification &rarr; Rule evaluation &rarr; Aggregation &rarr; Defuzzification.</p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U5 / Q3</span>
+          </div>
+          <div class="qa__q">Explain <strong>Decision Tree</strong> learning. What is entropy and information gain?</div>
+          <div class="qa__a">
+          <p><strong>Decision Tree</strong> is a flowchart-like structure for classification. Each internal node tests an attribute, each branch represents an outcome, and each leaf assigns a class.</p>
+          <p><strong>ID3 Algorithm (Iterative Dichotomiser 3):</strong></p>
+          <ol>
+            <li>Compute entropy of the target variable for the current dataset.</li>
+            <li>For each attribute A, compute information gain.</li>
+            <li>Select the attribute with the highest gain as the splitting node.</li>
+            <li>Recursively repeat for each branch until all instances are classified or no attributes remain.</li>
+          </ol>
+          <p><strong>Entropy:</strong> Entropy(S) = -&Sigma; p<sub>i</sub> &times; log&shy;&#8322;(p<sub>i</sub>) — measures impurity.</p>
+          <p><strong>Information Gain:</strong> Gain(S, A) = Entropy(S) - &Sigma; (|S<sub>v</sub>|/|S|) &times; Entropy(S<sub>v</sub>)</p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__id">U5 / Q4</span>
+          </div>
+          <div class="qa__q">Compare <strong>supervised, unsupervised, and reinforcement learning</strong>.</div>
+          <div class="qa__a">
+          <table class="t">
+          <tr><th>Feature</th><th>Supervised</th><th>Unsupervised</th><th>Reinforcement</th></tr>
+          <tr><td>Training data</td><td>Labeled (input + output)</td><td>Unlabeled (input only)</td><td>No explicit data; agent learns from rewards</td></tr>
+          <tr><td>Goal</td><td>Predict output for new inputs</td><td>Find hidden patterns/clusters</td><td>Maximise cumulative reward</td></tr>
+          <tr><td>Feedback</td><td>Direct (correct answer given)</td><td>None</td><td>Delayed (reward signal)</td></tr>
+          <tr><td>Examples</td><td>Classification, Regression</td><td>Clustering, Dimensionality reduction</td><td>Game playing, Robotics</td></tr>
+          <tr><td>Algorithms</td><td>Decision Tree, SVM, Neural Nets</td><td>K-Means, PCA, Autoencoders</td><td>Q-Learning, SARSA, Policy Gradients</td></tr>
+          </table>
+          </div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">15-mark Questions</span> <span class="qa__marks">15M</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U5 / Q1</span>
+            <span class="qa__pyq">PYQ [2023]</span>
+          </div>
+          <div class="qa__q">Apply the <strong>ID3 algorithm</strong> to construct a decision tree for the following dataset. Show entropy and information gain calculations at each step.</div>
+          <div class="qa__a">
+          <p><strong>Dataset — Play Tennis:</strong></p>
+          <table class="t">
+          <tr><th>Day</th><th>Outlook</th><th>Temp</th><th>Humidity</th><th>Wind</th><th>Play</th></tr>
+          <tr><td>1</td><td>Sunny</td><td>Hot</td><td>High</td><td>Weak</td><td>No</td></tr>
+          <tr><td>2</td><td>Sunny</td><td>Hot</td><td>High</td><td>Strong</td><td>No</td></tr>
+          <tr><td>3</td><td>Overcast</td><td>Hot</td><td>High</td><td>Weak</td><td>Yes</td></tr>
+          <tr><td>4</td><td>Rain</td><td>Mild</td><td>High</td><td>Weak</td><td>Yes</td></tr>
+          <tr><td>5</td><td>Rain</td><td>Cool</td><td>Normal</td><td>Weak</td><td>Yes</td></tr>
+          <tr><td>6</td><td>Rain</td><td>Cool</td><td>Normal</td><td>Strong</td><td>No</td></tr>
+          <tr><td>7</td><td>Overcast</td><td>Cool</td><td>Normal</td><td>Strong</td><td>Yes</td></tr>
+          <tr><td>8</td><td>Sunny</td><td>Mild</td><td>High</td><td>Weak</td><td>No</td></tr>
+          <tr><td>9</td><td>Sunny</td><td>Cool</td><td>Normal</td><td>Weak</td><td>Yes</td></tr>
+          <tr><td>10</td><td>Rain</td><td>Mild</td><td>Normal</td><td>Weak</td><td>Yes</td></tr>
+          <tr><td>11</td><td>Sunny</td><td>Mild</td><td>Normal</td><td>Strong</td><td>Yes</td></tr>
+          <tr><td>12</td><td>Overcast</td><td>Mild</td><td>High</td><td>Strong</td><td>Yes</td></tr>
+          <tr><td>13</td><td>Overcast</td><td>Hot</td><td>Normal</td><td>Weak</td><td>Yes</td></tr>
+          <tr><td>14</td><td>Rain</td><td>Mild</td><td>High</td><td>Strong</td><td>No</td></tr>
+          </table>
+
+          <p><strong>Step 1: Compute Entropy of entire dataset (S):</strong></p>
+          <pre>Total = 14,  Yes = 9,  No = 5
+Entropy(S) = -(9/14)log₂(9/14) - (5/14)log₂(5/14)
+           = -(0.643 × -0.637) - (0.357 × -1.485)
+           = 0.409 + 0.530 = 0.940</pre>
+
+          <p><strong>Step 2: Compute Gain for each attribute:</strong></p>
+
+          <p><em>Gain(S, Outlook):</em></p>
+          <pre>Sunny(5): Yes=2, No=3 → Entropy = -(2/5)log₂(2/5) - (3/5)log₂(3/5) = 0.971
+Overcast(4): Yes=4, No=0 → Entropy = 0.0
+Rain(5): Yes=3, No=2 → Entropy = -(3/5)log₂(3/5) - (2/5)log₂(2/5) = 0.971
+
+Gain(Outlook) = 0.940 - [(5/14)×0.971 + (4/14)×0 + (5/14)×0.971]
+             = 0.940 - [0.347 + 0 + 0.347]
+             = 0.940 - 0.694 = 0.246</pre>
+
+          <p><em>Gain(S, Humidity):</em></p>
+          <pre>High(7): Yes=3, No=4 → Entropy = 0.985
+Normal(7): Yes=6, No=1 → Entropy = 0.592
+
+Gain(Humidity) = 0.940 - [(7/14)×0.985 + (7/14)×0.592]
+               = 0.940 - [0.492 + 0.296]
+               = 0.940 - 0.788 = 0.152</pre>
+
+          <p><em>Gain(S, Wind):</em></p>
+          <pre>Weak(8): Yes=6, No=2 → Entropy = 0.811
+Strong(6): Yes=3, No=3 → Entropy = 1.000
+
+Gain(Wind) = 0.940 - [(8/14)×0.811 + (6/14)×1.000]
+            = 0.940 - [0.464 + 0.429]
+            = 0.940 - 0.893 = 0.047</pre>
+
+          <p><strong>Step 3: Root node = Outlook (highest gain = 0.246)</strong></p>
+          <p><strong>Step 4: For Outlook=Overcast (pure node):</strong> Leaf → Play = Yes</p>
+          <p><strong>Step 5: For Outlook=Sunny (5 samples):</strong> Gain(Humidity) = 0.971 - [(3/5)×0 + (2/5)×0] = 0.971, Gain(Wind) = 0.971 - [(2/5)×0 + (3/5)×0] = 0.971</p>
+          <p>Pick Humidity (or Wind): Humidity → Leaf Normal=Yes, Leaf High=No</p>
+          <p><strong>Step 6: For Outlook=Rain (5 samples):</strong> Gain(Wind) = 0.971 - [(2/5)×0 + (3/5)×0] = 0.971</p>
+          <p>Pick Wind: Weak → Yes, Strong → No</p>
+
+          <p><strong>Final Decision Tree:</strong></p>
+          <pre>         [Outlook]
+         /    |    \
+    Sunny  Overcast  Rain
+      |       |       |
+   [Humidity] Yes   [Wind]
+   /      \          /   \
+ High    Normal  Weak   Strong
+  |        |       |       |
+  No      Yes     Yes     No</pre>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__id">U5 / Q2</span>
+            <span class="qa__pyq">PYQ [2022]</span>
+          </div>
+          <div class="qa__q">Explain <strong>backpropagation</strong> in a neural network. Derive the weight update rule for a 2-layer network.</div>
+          <div class="qa__a">
+          <p><strong>Backpropagation</strong> is an algorithm for computing gradients in a feedforward neural network. It applies the chain rule of calculus layer by layer, from the output back to the input.</p>
+          <p><strong>Network: 2 inputs, 1 hidden layer (2 neurons), 1 output</strong></p>
+          <pre>  x1 ──→ h1 ──→ y
+    ↘  ↗     ↘  ↗
+  x2 ──→ h2 ──→</pre>
+          <p><strong>Forward Pass:</strong></p>
+          <pre>z_h = w1·x1 + w2·x2 + b_h     (hidden pre-activation)
+h   = σ(z_h)                       (hidden activation)
+
+z_o = w3·h + b_o                 (output pre-activation)
+ŷ   = σ(z_o)                       (predicted output)</pre>
+          <p><strong>Loss:</strong> L = (1/2) &times; (y - ŷ)&sup2; (MSE)</p>
+          <p><strong>Backward Pass (gradient computation):</strong></p>
+          <pre>δ_o = (ŷ - y) × σ'(z_o)           (output error signal)
+
+∂L/∂w3 = δ_o × h                  (gradient for output weights)
+∂L/∂b_o = δ_o                     (gradient for output bias)
+
+δ_h = (δ_o × w3) × σ'(z_h)        (hidden error signal)
+
+∂L/∂w1 = δ_h × x1                 (gradient for hidden weights)
+∂L/∂w2 = δ_h × x2
+∂L/∂b_h = δ_h</pre>
+          <p><strong>Weight Update Rule (gradient descent):</strong></p>
+          <pre>w_new = w_old - η × ∂L/∂w</pre>
+          <p>Where &eta; (eta) is the learning rate (typically 0.01 to 0.1).</p>
+          <p><strong>Complete Algorithm:</strong></p>
+          <pre>1. Initialise all weights and biases randomly.
+2. For each epoch:
+   a. Forward pass: compute predictions ŷ for all training samples.
+   b. Compute loss L.
+   c. Backward pass: compute ∂L/∂w for each weight using chain rule.
+   d. Update: w ← w - η × ∂L/∂w
+3. Repeat until loss converges.</pre>
+          <p><strong>Key insight:</strong> The chain rule allows gradients to propagate backward through the network: &part;L/&part;w = (&part;L/&part;ŷ) &times; (&part;ŷ/&part;z) &times; (&part;z/&part;w).</p>
+          </div>
+        </div>
+
+        <div class="exam-tip"><strong>Exam Tip:</strong> Decision tree with entropy/gain calculations is almost always a 15-mark question. Backpropagation derivation and Bayes' theorem numerical problems are also very common. Always show the step-by-step math.</div>
+
+      </div><!-- /unit -->
+
+    </div><!-- /content -->
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <div class="foot__brand">AI · Semester 5 · MAKAUT B.Tech CSE</div>
+      <div>Covers Units 1–5 · Exam-Focused</div>
+    </div>
+
+  </div><!-- /sheet -->
 </body>
 </html>

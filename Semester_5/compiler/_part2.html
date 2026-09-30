@@ -1,0 +1,407 @@
+<td>High-level language</td><td>Assembly language</td></tr>
+              <tr><td>Output</td><td>Machine code / object file</td><td>Direct execution</td><td>Machine code / object file</td></tr>
+              <tr><td>Translation</td><td>Complete before execution</td><td>Simultaneous (line-by-line)</td><td>Complete (one-to-one)</td></tr>
+              <tr><td>Execution</td><td>After compilation</td><td>During translation</td><td>Object file executes separately</td></tr>
+              <tr><td>Speed</td><td>Fast</td><td>Slow</td><td>Fastest</td></tr>
+              <tr><td>Error reporting</td><td>After full scan</td><td>Line-by-line</td><td>After assembly</td></tr>
+              <tr><td>Examples</td><td>GCC, javac, g++</td><td>CPython, Ruby MRI</td><td>NASM, MASM, GAS</td></tr>
+            </tbody>
+          </table>
+          <p><strong>Why compilation is necessary:</strong></p>
+          <ol>
+            <li><strong>Efficiency:</strong> Compiled code runs faster than interpreted code because translation happens once.</li>
+            <li><strong>Error detection:</strong> Compilers catch syntax and semantic errors before execution, saving debugging time.</li>
+            <li><strong>Optimization:</strong> Compilers perform sophisticated transformations for speed and size.</li>
+            <li><strong>Portability:</strong> Same source code can be compiled for different machines with different target compilers.</li>
+            <li><strong>Abstraction:</strong> Programmers can write in human-readable high-level languages instead of binary machine code.</li>
+          </ol>
+        </p>
+      </div>
+    </div>
+
+    <!-- EXAM TIPS -->
+    <div class="figure">
+      <h3>Unit 1 — Exam Tips</h3>
+      <ul>
+        <li>Compiler vs Interpreter is almost always a 5-mark question — memorize the comparison table.</li>
+        <li>Phases of compiler is a guaranteed 5 or 15-mark question — memorize the order, output of each phase.</li>
+        <li>Cross-compiler, bootstrapper, preprocessor — 1-mark definition questions are very common.</li>
+        <li>Draw the compiler structure diagram in 15-mark answers — it carries marks even if explanation is brief.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ==================== UNIT 2 ==================== -->
+  <section id="unit2" class="subject">
+    <header class="subject__head">
+      <span class="subject__no">02</span>
+      <div>
+        <h2 class="subject__title">Lexical Analysis</h2>
+        <p class="subject__sub">Role of Lexical Analyzer · Input Buffering · Tokens · Regular Expressions · Finite Automata · DFA · NFA · Lex Tool</p>
+      </div>
+    </header>
+
+    <div class="figure">
+      <h3>2.1 Key Definitions</h3>
+      <p><strong>Lexical Analysis:</strong> The first phase of compilation. Reads source characters, groups them into tokens, removes whitespace/comments.</p>
+      <p><strong>Token:</strong> A pair &lt;token-name, attribute-value&gt; produced by the lexer. Examples: &lt;ID, pointer&gt;, &lt;NUM, 42&gt;, &lt;IF, –&gt;.</p>
+      <p><strong>Pattern:</strong> The rule describing the form of lexemes for a token. Described by a regular expression.</p>
+      <p><strong>Lexeme:</strong> The actual character sequence matching a pattern. E.g., "count" is a lexeme matching the identifier pattern.</p>
+      <p><strong>Input Buffering:</strong> Technique to efficiently read source characters. Uses a buffer divided into two halves with sentinel markers. Uses lexemeBegin and forward pointers.</p>
+      <p><strong>Sentinel:</strong> A special character (NUL or EOF) at the end of each buffer half to avoid boundary checks.</p>
+      <p><strong>Lexeme specification:</strong> Rules defining what constitutes a valid token (using regular expressions).</p>
+      <p><strong>Lexeme recognition:</strong> The process of matching input against specifications.</p>
+    </div>
+
+    <div class="figure">
+      <h3>2.2 Regular Expressions (RE)</h3>
+      <p>Regular expressions describe patterns of strings. Operations:</p>
+      <ul>
+        <li><strong>Union:</strong> r | s (match r OR s)</li>
+        <li><strong>Concatenation:</strong> rs (r followed by s)</li>
+        <li><strong>Kleene Closure:</strong> r* (zero or more r)</li>
+        <li><strong>Positive Closure:</strong> r+ (one or more r)</li>
+        <li><strong>Optional:</strong> r? (zero or one r)</li>
+      </ul>
+      <p><strong>Precedence (highest → lowest):</strong> * (closure) → concatenation → | (union)</p>
+      <p><strong>Common RE examples:</strong></p>
+      <ul>
+        <li>Identifier: letter (letter | digit)*</li>
+        <li>Integer: digit+</li>
+        <li>Real number: digit+ . digit* ( . digit+ )?</li>
+        <li>Binary number: (0|1)+</li>
+        <li>Strings: " (any char except ")* "</li>
+      </ul>
+    </div>
+
+    <div class="figure">
+      <h3>2.3 Finite Automata</h3>
+      <p><strong>NFA (Nondeterministic Finite Automaton):</strong> Can have multiple next states for a given input; allows ε-transitions.</p>
+      <p><strong>DFA (Deterministic Finite Automaton):</strong> Exactly one next state for each input symbol; no ε-transitions.</p>
+      <p><strong>Transition Diagram:</strong> Circles = states, arrows = transitions, double circle = accepting state.</p>
+      <table class="grid">
+        <thead><tr><th>Property</th><th>NFA</th><th>DFA</th></tr></thead>
+        <tbody>
+          <tr><td>Next state for input</td><td>Multiple (or none)</td><td>Exactly one</td></tr>
+          <tr><td>ε-transitions</td><td>Allowed</td><td>Not allowed</td></tr>
+          <tr><td>Size</td><td>Usually smaller</td><td>Can be exponentially larger</td></tr>
+          <tr><td>Implementation</td><td>Difficult (backtracking)</td><td>Easy (direct table lookup)</td></tr>
+          <tr><td>Construction</td><td>Direct from RE (Thompson's)</td><td>Subset construction from NFA</td></tr>
+          <tr><td>Speed of simulation</td><td>Slower</td><td>Faster</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="figure">
+      <h3>2.4 DFA Minimisation (Table-filling Algorithm)</h3>
+      <ol>
+        <li>Eliminate unreachable states from the start state.</li>
+        <li>Mark distinguishable pairs: any pair where one is final and the other is not.</li>
+        <li>For each unmarked pair (p,q), mark it if for some input 'a', the pair (δ(p,a), δ(q,a)) is already marked.</li>
+        <li>Repeat step 3 until no more marks are added.</li>
+        <li>Unmarked pairs are equivalent; merge them.</li>
+      </ol>
+    </div>
+
+    <div class="figure">
+      <h3>2.5 Lex Tool</h3>
+      <p><strong>Lex (Flex)</strong> generates a lexical analyzer from specifications. A .l file contains:</p>
+      <ul>
+        <li><strong>Declarations:</strong> Definitions, %{ C code %}</li>
+        <li><strong>Translation rules:</strong> Pattern { Action }</li>
+        <li><strong>Auxiliary functions:</strong> Supporting C code</li>
+      </ul>
+      <p>Lex generates a C file with function <code>yylex()</code> that reads input and returns tokens.</p>
+    </div>
+
+    <!-- 1-MARK QUESTIONS -->
+    <div class="qa-group">
+      <h3 class="qa-group__title">1-Mark Questions</h3>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">What is a token? Give examples.</p>
+        <p class="qa__a">A token is a pair &lt;token-name, attribute-value&gt;. Examples: &lt;ID, "count"&gt;, &lt;NUM, 42&gt;, &lt;IF, –&gt;, &lt;PLUS, +&gt;.</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">Differentiate lexeme and pattern. [2023]</p>
+        <p class="qa__a"><strong>Pattern:</strong> The rule that describes a set of lexemes (e.g., identifier pattern). <strong>Lexeme:</strong> A specific character sequence that matches a pattern (e.g., "count" is a lexeme matching the identifier pattern).</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">What is input buffering in a lexical analyzer? [2023]</p>
+        <p class="qa__a">Input buffering reads source characters in large blocks (buffers) to reduce I/O operations. Uses two halves with a sentinel character at the end of each half to avoid boundary checks.</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">What is a sentinel in input buffering?</p>
+        <p class="qa__a">A sentinel is a special character (NUL or EOF) placed at the end of each buffer half. It signals buffer end without requiring an explicit boundary check on every character read.</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">What is a DFA?</p>
+        <p class="qa__a">A DFA (Deterministic Finite Automaton) is a finite state machine where for each state and input symbol there is exactly one next state. It has no ε-transitions.</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">What is an NFA?</p>
+        <p class="qa__a">An NFA (Nondeterministic Finite Automaton) is a finite state machine where for a state and input symbol, there can be multiple next states (or none). It allows ε-transitions.</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">What is the Kleene closure?</p>
+        <p class="qa__a">The Kleene closure of a regular expression r, written r*, denotes zero or more concatenations of r.</p>
+      </div>
+
+      <div class="qa qa--1m">
+        <span class="qa__tag">1 Mark</span>
+        <p class="qa__q">Write the RE for identifiers in C.</p>
+        <p class="qa__a">(letter | _)(letter | digit | _)* — an identifier starts with a letter or underscore, followed by any combination of letters, digits, underscores.</p>
+      </div>
+    </div>
+
+    <!-- 5-MARK QUESTIONS -->
+    <div class="qa-group">
+      <h3 class="qa-group__title">5-Mark Questions</h3>
+
+      <div class="qa qa--5m">
+        <span class="qa__tag">5 Marks</span>
+        <p class="qa__q">Explain the role of a lexical analyzer. What are tokens, patterns and lexemes? [2023]</p>
+        <p class="qa__a">
+          <p><strong>Role of Lexical Analyzer (Scanner/Tokenizer):</strong></p>
+          <ol>
+            <li>Reads source program characters from left to right.</li>
+            <li>Groups characters into lexemes, identifies token type for each.</li>
+            <li>Produces a stream of tokens as output to the syntax analyzer.</li>
+            <li>Removes whitespace, comments, and other ignorable characters.</li>
+            <li>Enters identifiers into the symbol table.</li>
+            <li>Reports lexical errors (illegal characters, unmatched strings).</li>
+          </ol>
+          <p><strong>Terminology:</strong></p>
+          <ul>
+            <li><strong>Token:</strong> A pair &lt;token-name, attribute-value&gt;. E.g., &lt;id, 1&gt; where 1 is the symbol table entry.</li>
+            <li><strong>Pattern:</strong> A rule describing the set of lexemes that match a token. E.g., the pattern for identifier is "letter followed by letters or digits".</li>
+            <li><strong>Lexeme:</strong> The actual sequence of characters matched by a pattern. E.g., "counter", "x1", "temp_value".</li>
+          </ul>
+          <p><strong>Example:</strong> For source <code>count = 5 + 3;</code>, the tokens produced are: &lt;ID, "count"&gt;, &lt;ASSIGN, &gt;, &lt;NUM, 5&gt;, &lt;PLUS, &gt;, &lt;NUM, 3&gt;, &lt;SEMI, &gt;.</p>
+        </p>
+      </div>
+
+      <div class="qa qa--5m">
+        <span class="qa__tag">5 Marks</span>
+        <p class="qa__q">Explain input buffering in lexical analysis. Why are sentinels used? [2023]</p>
+        <p class="qa__a">
+          <p>Reading source one character at a time is inefficient due to many I/O calls. <strong>Input buffering</strong> reads a large block of source into memory at once.</p>
+          <p><strong>Buffer Pairs with Sentinels:</strong> The buffer is divided into two halves of size N (e.g., 4096 bytes). Two pointers are used:</p>
+          <ul>
+            <li><strong>lexemeBegin:</strong> marks the start of the current lexeme.</li>
+            <li><strong>forward:</strong> scans ahead to find the end of the lexeme.</li>
+          </ul>
+          <p>When forward reaches the end of a half, the other half is loaded with the next chunk of input. A <strong>sentinel</strong> (NUL '\0' or EOF) is placed at the boundary so that the scanner can check for end-of-buffer with one comparison instead of two.</p>
+          <pre class="ascii-diagram">
+  lexemeBegin →  forward →
+  ┌──────────┬──────────┐
+  │    H1    │    H2    │  '\0' EOF
+  └──────────┴──────────┘
+          </pre>
+          <p><strong>Advantage:</strong> One test per character instead of two (test for character + test for buffer end).</p>
+        </p>
+      </div>
+
+      <div class="qa qa--5m">
+        <span class="qa__tag">5 Marks</span>
+        <p class="qa__q">Differentiate NFA and DFA with a comparison table. [2022]</p>
+        <p class="qa__a">
+          <table class="grid">
+            <thead><tr><th>Property</th><th>NFA</th><th>DFA</th></tr></thead>
+            <tbody>
+              <tr><td>Definition</td><td>Non-deterministic finite automaton</td><td>Deterministic finite automaton</td></tr>
+              <tr><td>Next state</td><td>Multiple possible next states</td><td>Exactly one next state</td></tr>
+              <tr><td>ε-transitions</td><td>Allowed</td><td>Not allowed</td></tr>
+              <tr><td>Construction</td><td>Direct from RE (Thompson's)</td><td>Subset construction from NFA</td></tr>
+              <tr><td>Size</td><td>Smaller (linear in RE size)</td><td>Can be exponential (2^n states)</td></tr>
+              <tr><td>Implementation</td><td>Difficult (backtracking required)</td><td>Easy (direct table lookup)</td></tr>
+              <tr><td>Simulation</td><td>Slower</td><td>Faster (O(n) per string)</td></tr>
+              <tr><td>Acceptance</td><td>If any path accepts</td><td>If reached final state</td></tr>
+            </tbody>
+          </table>
+        </p>
+      </div>
+
+      <div class="qa qa--5m">
+        <span class="qa__tag">5 Marks</span>
+        <p class="qa__q">Explain the DFA minimization algorithm with an example. [2021]</p>
+        <p class="qa__a">
+          <p><strong>Table-Filling Algorithm:</strong></p>
+          <ol>
+            <li>Draw a table of all pairs of states (p, q) where p &lt; q.</li>
+            <li>Mark all pairs where one state is accepting and the other is not — these are distinguishable.</li>
+            <li>For each unmarked pair (p,q) and each input symbol 'a', check the pair (δ(p,a), δ(q,a)). If that pair is marked, mark (p,q) too.</li>
+            <li>Repeat step 3 iteratively until no new pairs are marked.</li>
+            <li>Unmarked pairs are equivalent and can be merged.</li>
+          </ol>
+          <p><strong>Example:</strong> Consider DFA for "ends with 01":</p>
+          <pre class="ascii-diagram">
+  States: A (start), B (read 0), C (read 01) [final]
+  Transitions:
+    A --0--> B    A --1--> A
+    B --0--> B    B --1--> C
+    C --0--> B    C --1--> A
+          </pre>
+          <p>Apply algorithm: Pairs (A,B) — same behavior → equivalent. Merge into one state. Result: 2-state DFA.</p>
+        </p>
+      </div>
+
+      <div class="qa qa--5m">
+        <span class="qa__tag">5 Marks</span>
+        <p class="qa__q">Explain regular expressions and their operators with precedence. [2022]</p>
+        <p class="qa__a">
+          <p>A Regular Expression (RE) is a notation to describe the set of strings accepted by a finite automaton.</p>
+          <p><strong>RE Operators:</strong></p>
+          <ul>
+            <li><strong>Union (|):</strong> r | s means r or s</li>
+            <li><strong>Concatenation:</strong> rs means r followed by s</li>
+            <li><strong>Kleene Star (*):</strong> r* means zero or more occurrences</li>
+            <li><strong>Plus (+):</strong> r+ means one or more occurrences</li>
+            <li><strong>Optional (?):</strong> r? means zero or one occurrence</li>
+            <li><strong>Parentheses:</strong> Used for grouping</li>
+          </ul>
+          <p><strong>Precedence (highest to lowest):</strong> <code>*</code> (closure) → <code>concatenation</code> → <code>|</code> (union)</p>
+          <p><strong>Examples:</strong></p>
+          <ul>
+            <li>(a|b)* — any string of a's and b's (including empty)</li>
+            <li>(a|b)+ — non-empty string of a's and b's</li>
+            <li>a*b — any a's followed by a single b</li>
+            <li>(0|1)*01 — any binary string ending in 01</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <!-- 15-MARK QUESTIONS -->
+    <div class="qa-group">
+      <h3 class="qa-group__title">15-Mark Questions</h3>
+
+      <div class="qa qa--15m">
+        <span class="qa__tag">15 Marks</span>
+        <p class="qa__q">Construct NFA for the regular expression (0+1)*01 and convert it to DFA using subset construction. [2023]</p>
+        <p class="qa__a">
+          <p><strong>Step 1: NFA for (0+1)*01 using Thompson's Construction:</strong></p>
+          <pre class="ascii-diagram">
+  a=(0+1)*  b=01
+
+       ┌─0─┐
+       │   ▼
+   →(0)─ε─(2)─ε─(4)─┐
+   ┌─1─┐   │        │ε
+   │   ▼   │        ▼
+   (1)─ε─(3)─ε─(5)─(6)─0─(7)─1─(8)→
+                                      *
+                  ε            accept
+          </pre>
+          <p>Construct NFAs for each subexpression (0+1), (0+1)*, 0, 1, 01 and connect with ε-transitions. Final state represents acceptance of the whole RE.</p>
+          <p><strong>Step 2: NFA to DFA via Subset Construction:</strong></p>
+          <table class="grid">
+            <thead><tr><th>DFA State</th><th>On 0</th><th>On 1</th></tr></thead>
+            <tbody>
+              <tr><td>{A} (start)</td><td>{A,B}</td><td>{A}</td></tr>
+              <tr><td>{A,B}</td><td>{A,B}</td><td>{A,C}</td></tr>
+              <tr><td>{A,C}</td><td>{A,B,D}</td><td>{A}</td></tr>
+              <tr><td>{A,B,D} ★</td><td>{A,B,D}</td><td>{A,C,E}</td></tr>
+              <tr><td>{A,C,E} ★</td><td>{A,B,D}</td><td>{A,C,E}</td></tr>
+            </tbody>
+          </table>
+          <p>★ indicates accepting states (contain original NFA final state). 5 DFA states accept all strings ending in "01".</p>
+          <p><strong>Step 3: Minimized DFA:</strong> Apply table-filling — states {A,C,E} and {A,B,D} are both accepting. After partitioning, minimize to 4 states.</p>
+        </p>
+      </div>
+
+      <div class="qa qa--15m">
+        <span class="qa__tag">15 Marks</span>
+        <p class="qa__q">Minimize the given DFA using the table-filling algorithm. Given DFA accepts all binary strings ending with '01'. [2022]</p>
+        <p class="qa__a">
+          <p><strong>Given DFA (5 states):</strong></p>
+          <pre class="ascii-diagram">
+   A --0--> B    A --1--> A
+   B --0--> B    B --1--> C
+   C --0--> D    C --1--> A
+   D --0--> D    D --1--> E  ★
+   E --0--> D    E --1--> A  ★
+  (A = start, D,E = final)
+          </pre>
+          <p><strong>Step 1: Initial marking</strong> — mark all pairs where one is final, one is not:</p>
+          <p>Pairs to check: (A,B), (A,C), (A,D), (A,E), (B,C), (B,D), (B,E), (C,D), (C,E), (D,E)</p>
+          <p>Mark (A,D), (A,E), (B,D), (B,E), (C,D), (C,E) — final/non-final pairs.</p>
+          <p><strong>Step 2: Iterate</strong> — for each unmarked pair, check all inputs:</p>
+          <ul>
+            <li>(A,B): On 0 → (B,B) not in table; on 1 → (A,C). (A,C) not marked. So (A,B) unmarked.</li>
+            <li>(A,C): On 0 → (B,D) marked! So mark (A,C).</li>
+            <li>(B,C): On 0 → (B,D) marked! So mark (B,C).</li>
+          </ul>
+          <p><strong>Step 3: Result</strong> — Only pair (A,B) remains unmarked → A and B are equivalent.</p>
+          <p><strong>Step 4: Merge A and B into single state AB.</strong> Final minimized DFA has 4 states.</p>
+        </p>
+      </div>
+
+      <div class="qa qa--15m">
+        <span class="qa__tag">15 Marks</span>
+        <p class="qa__q">Explain the Lex tool. Write a Lex specification to count number of words in an input file. [2021]</p>
+        <p class="qa__a">
+          <p><strong>Lex (Flex):</strong> A tool that generates a lexical analyzer from RE-based specifications. Input: .l file. Output: C source for yylex().</p>
+          <p><strong>Structure of a Lex file:</strong></p>
+          <pre class="code-block">
+  %{                 ← Declarations (C global vars, #include)
+  #include &lt;stdio.h&gt;
+  int word_count = 0;
+  %}
+  %%                 ← Translation rules (RE { Action })
+  [a-zA-Z]+   { word_count++; }
+  [ \t\n]+    { /* skip whitespace */ }
+  .           { /* skip other chars */ }
+  %%                 ← Auxiliary C functions
+  int main() {
+    yylex();
+    printf("Word count: %d\n", word_count);
+    return 0;
+  }
+          </pre>
+          <p><strong>Working:</strong></p>
+          <ol>
+            <li>User writes .l file with RE patterns and actions.</li>
+            <li>Lex (or Flex) compiles it into C code (lex.yy.c).</li>
+            <li>The C compiler compiles this into executable scanner.</li>
+            <li>When scanner runs, yylex() reads input, matches patterns, executes corresponding actions.</li>
+          </ol>
+          <p><strong>Components:</strong></p>
+          <ul>
+            <li><strong>Definitions section:</strong> %{ %} for C declarations, named patterns.</li>
+            <li><strong>Rules section:</strong> RE patterns with associated C actions.</li>
+            <li><strong>User code section:</strong> Auxiliary functions (main, helper routines).</li>
+          </ul>
+        </p>
+      </div>
+    </div>
+
+    <!-- EXAM TIPS -->
+    <div class="figure">
+      <h3>Unit 2 — Exam Tips</h3>
+      <ul>
+        <li>Token vs Lexeme vs Pattern is the most frequently asked 1-mark question.</li>
+        <li>NFA to DFA conversion using subset construction is a very common 15-mark question — practice the table method.</li>
+        <li>DFA minimization using table-filling is also common — practice with at least 4-5 state DFAs.</li>
+        <li>Write REs for common language constructs — identifier, integer, real, string.</li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+</body>
+</html>

@@ -3,1284 +3,2224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OOP Study Notes — Semester 5</title>
+  <title>OOP with C++ - Study Notes | Semester 5</title>
+  <link rel="stylesheet" href="../../site.css">
   <style>
-    :root {
-      --primary: #10b981;
-      --primary-light: #059669;
-      --surface: #f8fafc;
-      --text: #1e293b;
-      --text-secondary: #64748b;
-      --text-body: #334155;
-      --border: #e2e8f0;
-      --warning-bg: #fefce8;
-      --warning-border: #eab308;
-      --warning-text: #854d0e;
-      --pyq-bg: #f0fdf4;
-      --pyq-border: #bbf7d0;
-      --pyq-text: #166534;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: #f1f5f9;
-      color: var(--text);
-      line-height: 1.6;
-    }
-
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(135deg, #10b981, #059669);
-      z-index: 101;
-      transition: width 0.1s;
-    }
-
-    .sticky-header {
-      position: sticky;
-      top: 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-      z-index: 100;
-      padding: 0.8rem 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .sticky-header h1 {
-      font-size: 1.1rem;
-      margin: 0;
-      color: var(--primary);
-    }
-
-    .toc {
-      background: white;
-      border-bottom: 1px solid var(--border);
-      padding: 0.6rem 1.5rem;
-      display: flex;
-      gap: 1rem;
-      overflow-x: auto;
-      position: sticky;
-      top: 52px;
-      z-index: 99;
-    }
-
-    .toc a {
-      text-decoration: none;
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      white-space: nowrap;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-    }
-
-    .toc a:hover {
-      background: #f1f5f9;
-      color: var(--primary);
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 1.5rem;
-    }
-
-    .subject-title {
-      font-size: 1.8rem;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-
-    .subject-meta {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-      margin-bottom: 1.5rem;
-    }
-
-    .subject-card {
-      background: linear-gradient(135deg, #10b981, #059669);
-      color: white;
-      padding: 1.5rem;
-      border-radius: 12px;
-      margin-bottom: 2rem;
-    }
-
-    .subject-card h2 {
-      margin-top: 0;
-      font-size: 1.3rem;
-    }
-
-    .subject-card p {
-      opacity: 0.9;
-      line-height: 1.6;
-    }
-
-    .unit-section {
-      margin-bottom: 2.5rem;
-    }
-
-    .unit-header {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      margin-bottom: 1rem;
-      cursor: pointer;
-      padding: 0.8rem;
-      background: white;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-    }
-
-    .unit-header:hover {
-      border-color: var(--primary);
-    }
-
-    .unit-number {
-      background: #10b981;
-      color: white;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      font-size: 0.85rem;
-      flex-shrink: 0;
-    }
-
-    .unit-header-text h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      color: var(--text);
-    }
-
-    .unit-header-text p {
-      margin: 0.2rem 0 0;
-      font-size: 0.8rem;
-      color: var(--text-secondary);
-    }
-
-    .unit-content {
-      background: white;
-      border: 1px solid var(--border);
-      border-top: none;
-      border-radius: 0 0 8px 8px;
-      padding: 1.2rem;
-    }
-
-    .topic-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 1rem;
-      margin-bottom: 0.8rem;
-    }
-
-    .topic-card h4 {
-      margin: 0 0 0.5rem;
-      font-size: 0.95rem;
-      color: #10b981;
-    }
-
-    .topic-card p,
-    .topic-card li {
-      color: var(--text-body);
-      line-height: 1.65;
-      font-size: 0.9rem;
-    }
-
-    .topic-card ul {
-      padding-left: 1.2rem;
-      margin: 0.3rem 0;
-    }
-
-    .question-block {
-      background: white;
-      border-left: 3px solid #10b981;
-      padding: 0.8rem 1rem;
-      margin-bottom: 0.6rem;
-      border-radius: 0 6px 6px 0;
-    }
-
-    .question-block .q-label {
-      font-size: 0.75rem;
-      font-weight: bold;
-      color: #10b981;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 0.3rem;
-    }
-
-    .question-block .q-text {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 0.4rem;
-    }
-
-    .question-block .q-answer {
-      color: #475569;
-      line-height: 1.65;
-      font-size: 0.9rem;
-    }
-
-    .highlight-box {
-      background: #f3f4f6;
-      border-left: 3px solid var(--primary-light);
-      padding: 0.7rem 1rem;
-      border-radius: 0 6px 6px 0;
-      margin: 0.6rem 0;
-    }
-
-    .exam-tip {
-      background: var(--warning-bg);
-      border-left: 3px solid var(--warning-border);
-      padding: 0.7rem 1rem;
-      border-radius: 0 6px 6px 0;
-      margin: 0.6rem 0;
-      font-size: 0.85rem;
-    }
-
-    .exam-tip strong {
-      color: var(--warning-text);
-    }
-
-    .pyq-section {
-      margin-top: 1rem;
-      padding-top: 0.8rem;
-      border-top: 1px dashed var(--border);
-    }
-
-    .pyq-section h4 {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 0.5rem;
-    }
-
-    .pyq-item {
-      background: var(--pyq-bg);
-      border: 1px solid var(--pyq-border);
-      border-radius: 6px;
-      padding: 0.5rem 0.8rem;
-      margin-bottom: 0.4rem;
-      font-size: 0.85rem;
-    }
-
-    .pyq-item .year {
-      color: var(--pyq-text);
-      font-weight: bold;
-      font-size: 0.75rem;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      color: #94a3b8;
-      font-size: 0.8rem;
-      border-top: 1px solid var(--border);
-      margin-top: 2rem;
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #10b981;
-      color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
-      opacity: 0;
-      transition: opacity 0.3s;
-      font-size: 1.2rem;
-    }
-
-    .back-to-top.visible {
-      opacity: 1;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.85rem;
-      margin: 0.5rem 0;
-    }
-
-    table th,
-    table td {
-      border: 1px solid var(--border);
-      padding: 0.5rem 0.7rem;
-      text-align: left;
-    }
-
-    table th {
-      background: var(--surface);
-      font-weight: 600;
-      color: var(--primary);
-    }
-
-    .code-block {
-      background: #1e293b;
-      color: #e2e8f0;
-      padding: 1rem;
-      border-radius: 8px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.82rem;
-      overflow-x: auto;
-      margin: 0.5rem 0;
-      line-height: 1.5;
-    }
-
-    .code-block .keyword {
-      color: #c084fc;
-    }
-
-    .code-block .type {
-      color: #67e8f9;
-    }
-
-    .code-block .comment {
-      color: #94a3b8;
-    }
+    /* Per-page accent override */
+    .sheet { --c: #ec4899; }
   </style>
 </head>
 <body>
+  <div class="sheet has-toc">
 
-  <div class="progress-bar" id="progressBar"></div>
-
-  <div class="sticky-header">
-    <h1>📚 Object-Oriented Programming — Study Notes</h1>
-  </div>
-
-  <div class="toc">
-    <a href="#unit-1">Unit 1: Classes & Objects</a>
-    <a href="#unit-2">Unit 2: Constructors & Destructors</a>
-    <a href="#unit-3">Unit 3: Inheritance</a>
-    <a href="#unit-4">Unit 4: Polymorphism</a>
-    <a href="#unit-5">Unit 5: Exception Handling</a>
-    <a href="#unit-6">Unit 6: Advanced OOP</a>
-  </div>
-
-  <div class="container" id="top">
-
-    <div class="subject-card">
-      <h2>Object-Oriented Programming</h2>
-      <p>Master the fundamentals of OOP in C++ — classes, objects, inheritance, polymorphism, exception handling, templates, and STL. This guide covers all 6 units with exam-focused questions and answers.</p>
-    </div>
-
-    <!-- ==================== UNIT 1 ==================== -->
-    <div class="unit-section" id="unit-1">
-      <div class="unit-header">
-        <div class="unit-number">1</div>
-        <div class="unit-header-text">
-          <h3>Classes & Objects</h3>
-          <p>Foundation of OOP — classes, objects, access specifiers, member functions</p>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <a class="topbar__brand" href="../index.html">
+        <span class="topbar__logo">5</span>
+        <div>
+          <div class="topbar__title">Semester 5</div>
+          <div class="topbar__sub">MAKAUT · B.Tech CSE</div>
         </div>
-      </div>
-      <div class="unit-content">
-
-        <div class="topic-card">
-          <h4>Class vs Object</h4>
-          <p>A <strong>class</strong> is a user-defined data type that acts as a blueprint for creating objects. It encapsulates data members (variables) and member functions (methods) into a single unit. An <strong>object</strong> is an instance of a class — a real-world entity that occupies memory when created.</p>
-          <p>Key difference: A class is a logical entity (no memory allocated), while an object is a physical entity (memory allocated). Multiple objects can be created from a single class.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Data Members and Member Functions</h4>
-          <p><strong>Data members</strong> are variables declared inside a class that represent the properties/attributes of objects. <strong>Member functions</strong> are functions declared inside a class that define the behavior of objects.</p>
-          <p>Types of member functions:</p>
-          <ul>
-            <li><strong>Inline functions</strong> — defined inside class, expanded at compile time</li>
-            <li><strong>Const member functions</strong> — cannot modify data members</li>
-            <li><strong>Static member functions</strong> — belong to the class, not any object</li>
-            <li><strong>Friend functions</strong> — non-member functions granted access to private members</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Access Specifiers (public, private, protected)</h4>
-          <p>Access specifiers control the visibility and accessibility of class members:</p>
-          <ul>
-            <li><strong>public</strong> — accessible from anywhere. Default for struct.</li>
-            <li><strong>private</strong> — accessible only within the class. Default for class.</li>
-            <li><strong>protected</strong> — accessible within the class and derived classes.</li>
-          </ul>
-          <p>Encapsulation is achieved by making data members private and providing public getter/setter functions.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>this Pointer and Friend Functions</h4>
-          <p>The <strong>this pointer</strong> is a special pointer that points to the current object. It is passed implicitly to all non-static member functions. Used to differentiate between local variables and data members with the same name.</p>
-          <p>A <strong>friend function</strong> is a non-member function that is granted access to the private and protected members of a class. It is declared using the <code>friend</code> keyword. Friend functions are useful for operator overloading and when two classes need to share data.</p>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Key Concept:</strong> The <code>this</code> pointer is an lvalue pointer, so it cannot be modified. It is implicitly passed as a hidden argument to all non-static member functions. For the object <code>obj.func()</code>, the call internally becomes <code>func(&obj)</code>.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a class?</div>
-          <div class="q-answer">A class is a user-defined data type or blueprint that encapsulates data members and member functions. It defines the structure and behavior that its objects will have. It is a logical entity that does not consume memory until an object is created from it.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What are access specifiers?</div>
-          <div class="q-answer">Access specifiers are keywords (public, private, protected) in C++ that define the visibility and accessibility of class members. They implement data hiding — a core principle of OOP — by restricting direct access to internal data from outside the class.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain class vs object with example.</div>
-          <div class="q-answer">
-            <p><strong>Class</strong> is a blueprint/template that defines attributes and behaviors. <strong>Object</strong> is a concrete instance created from the class.</p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">Student</span> {    <span class="comment">// Class definition</span>
-  <span class="keyword">int</span> rollNo;           <span class="comment">// data member</span>
-  <span class="keyword">char</span> name[20];
-<span class="keyword">public</span>:
-  <span class="keyword">void</span> setData(<span class="keyword">int</span> r, <span class="keyword">char</span> n[]) { <span class="comment">// member function</span>
-    rollNo = r;
-  }
-};
-
-<span class="type">Student</span> s1, s2;  <span class="comment">// s1, s2 are objects (instances of Student)</span></div>
-            <p>Key differences:</p>
-            <ul>
-              <li>Class is declared once; multiple objects can be created.</li>
-              <li>Class does not allocate memory; each object does.</li>
-              <li>Class defines the type; objects hold actual values.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Describe access specifiers with example.</div>
-          <div class="q-answer">
-            <p>Access specifiers control who can access class members:</p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">Demo</span> {
-  <span class="keyword">int</span> a;           <span class="comment">// private by default</span>
-<span class="keyword">public</span>:
-  <span class="keyword">int</span> b;           <span class="comment">// accessible everywhere</span>
-<span class="keyword">protected</span>:
-  <span class="keyword">int</span> c;           <span class="comment">// accessible in derived classes</span>
-};</div>
-            <ul>
-              <li><strong>private</strong>: Only member functions of the same class can access. Not accessible by derived classes or outside code.</li>
-              <li><strong>public</strong>: Accessible from any function in the program.</li>
-              <li><strong>protected</strong>: Accessible within the class and its derived classes. Useful for inheritance.</li>
-            </ul>
-            <p>Encapsulation uses private data members with public accessor functions to maintain data integrity.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain the concept of classes and objects in C++. Write a complete program to demonstrate class with different types of member functions.</div>
-          <div class="q-answer">
-            <p><strong>Classes</strong> are the fundamental building blocks of OOP. They combine data (attributes) and behavior (methods) into a single unit called encapsulation. <strong>Objects</strong> are runtime instances of classes.</p>
-            <p>Types of member functions demonstrated below: inline, inline with parameters, const member function, static member function, and friend function.</p>
-            <div class="code-block"><span class="comment">#include &lt;iostream&gt;</span>
-<span class="keyword">using namespace</span> std;
-
-<span class="keyword">class</span> <span class="type">BankAccount</span> {
-  <span class="keyword">int</span> accountNo;
-  <span class="keyword">double</span> balance;
-  <span class="keyword">static</span> <span class="keyword">int</span> totalAccounts;   <span class="comment">// shared by all objects</span>
-
-<span class="keyword">public</span>:
-  <span class="comment">// Inline constructor</span>
-  <span class="type">BankAccount</span>() { accountNo = 0; balance = 0.0; totalAccounts++; }
-
-  <span class="comment">// Parameterized constructor</span>
-  <span class="type">BankAccount</span>(<span class="keyword">int</span> acc, <span class="keyword">double</span> bal) {
-    accountNo = acc; balance = bal; totalAccounts++;
-  }
-
-  <span class="comment">// Inline member function</span>
-  <span class="keyword">void</span> deposit(<span class="keyword">double</span> amt) { balance += amt; }
-
-  <span class="comment">// Const member function — cannot modify data</span>
-  <span class="keyword">double</span> getBalance() <span class="keyword">const</span> { <span class="keyword">return</span> balance; }
-
-  <span class="comment">// Friend function — can access private members</span>
-  <span class="keyword">friend</span> <span class="keyword">void</span> showAccount(<span class="keyword">const</span> <span class="type">BankAccount</span>&amp;);
-
-  <span class="comment">// Static member function — belongs to class</span>
-  <span class="keyword">static</span> <span class="keyword">int</span> getTotal() { <span class="keyword">return</span> totalAccounts; }
-};
-
-<span class="keyword">int</span> <span class="type">BankAccount</span>::totalAccounts = 0;
-
-<span class="comment">// Friend function definition</span>
-<span class="keyword">void</span> showAccount(<span class="keyword">const</span> <span class="type">BankAccount</span>&amp; acc) {
-  cout &lt;&lt; <span class="string">"Account: "</span> &lt;&lt; acc.accountNo
-       &lt;&lt; <span class="string">", Balance: $"</span> &lt;&lt; acc.balance &lt;&lt; endl;
-}
-
-<span class="keyword">int</span> main() {
-  <span class="type">BankAccount</span> a1(101, 5000);     <span class="comment">// parameterized</span>
-  <span class="type">BankAccount</span> a2(102, 3000);
-  a1.deposit(1000);
-  showAccount(a1);                   <span class="comment">// friend function</span>
-  cout &lt;&lt; <span class="string">"Total accounts: "</span> &lt;&lt; <span class="type">BankAccount</span>::getTotal();
-  <span class="keyword">return</span> 0;
-}</div>
-          </div>
-        </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Define a class <code>Rectangle</code> with length and breadth as data members. Write member functions to calculate area and perimeter.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> What is the difference between private and protected members? When would you use each?
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> Write a C++ program that uses a class with both public and private members, demonstrating the use of getter and setter functions.
-          </div>
-        </div>
-
+      </a>
+      <div class="topbar__actions">
+        <a class="topbar__chip topbar__chip--accent" href="oop_index.html">← OOP Index</a>
       </div>
     </div>
 
-    <!-- ==================== UNIT 2 ==================== -->
-    <div class="unit-section" id="unit-2">
-      <div class="unit-header">
-        <div class="unit-number">2</div>
-        <div class="unit-header-text">
-          <h3>Constructors & Destructors</h3>
-          <p>Special member functions — initialization and cleanup of objects</p>
-        </div>
-      </div>
-      <div class="unit-content">
-
-        <div class="topic-card">
-          <h4>Default, Parameterized, and Copy Constructors</h4>
-          <p>A <strong>constructor</strong> is a special member function automatically called when an object is created. It initializes data members.</p>
-          <ul>
-            <li><strong>Default constructor</strong> — takes no parameters. Initializes with default values.</li>
-            <li><strong>Parameterized constructor</strong> — accepts parameters for initialization.</li>
-            <li><strong>Copy constructor</strong> — creates a new object as a copy of an existing object. Called when: passing by value, returning by value, or explicit copy initialization.</li>
+    <!-- SIDEBAR TOC (sticky) -->
+    <nav class="toc" id="toc">
+      <div class="toc__label">On this page</div>
+      <ul class="toc__list">
+        <li class="toc__group">
+          <span class="toc__group-label">Units</span>
+          <ul class="toc__list">
+            <li class="toc__item"><a href="#unit1"><span class="toc__no">01</span>OOP & C++ Basics</a></li>
+            <li class="toc__item"><a href="#unit2"><span class="toc__no">02</span>Classes & Objects</a></li>
+            <li class="toc__item"><a href="#unit3"><span class="toc__no">03</span>Inheritance & Polymorphism</a></li>
+            <li class="toc__item"><a href="#unit4"><span class="toc__no">04</span>Polymorphism & Virtual Functions</a></li>
+            <li class="toc__item"><a href="#unit5"><span class="toc__no">05</span>Advanced C++ Features</a></li>
+            <li class="toc__item"><a href="#appendix"><span class="toc__no">Ref</span>Comparison Tables</a></li>
           </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Destructor and Dynamic Memory</h4>
-          <p>A <strong>destructor</strong> is a special member function called automatically when an object goes out of scope or is deleted. It has the same name as the class prefixed with <code>~</code> and takes no parameters, returns nothing.</p>
-          <p>Destructors are essential when the class uses <strong>dynamic memory allocation</strong> (via <code>new</code>). The destructor must use <code>delete</code> to free that memory and prevent memory leaks. Destructors are called in reverse order of constructor calls.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Constructor Overloading and this Pointer Usage</h4>
-          <p><strong>Constructor overloading</strong> means having multiple constructors in a class with different parameter lists. The compiler chooses the appropriate one based on the arguments passed.</p>
-          <p>The <strong>this pointer</strong> is used in constructors (and other member functions) when parameter names shadow data member names:</p>
-          <div class="code-block"><span class="type">Box</span>(<span class="keyword">int</span> l, <span class="keyword">int</span> b) {
-  <span class="keyword">this</span>-&gt;length = l;    <span class="comment">// this-&gt;length refers to data member</span>
-  <span class="keyword">this</span>-&gt;breadth = b;  <span class="comment">// l and b are parameters</span>
-}</div>
-        </div>
-
-        <div class="highlight-box">
-          <strong></strong> If a class uses dynamic memory, you must define: destructor, copy constructor, and assignment operator (Rule of Three). C++11 added move constructor and move assignment (Rule of Five).
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a constructor?</div>
-          <div class="q-answer">A constructor is a special member function that is automatically invoked when an object of a class is created. It has the same name as the class, no return type (not even void), and is used to initialize data members to valid initial values.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a destructor?</div>
-          <div class="q-answer">A destructor is a special member function that is automatically called when an object goes out of scope or is explicitly deleted. It has the same name as the class prefixed with <code>~</code>, takes no parameters, returns nothing, and is used to release resources like dynamically allocated memory.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain types of constructors with example.</div>
-          <div class="q-answer">
-            <p><strong>1. Default Constructor:</strong> No parameters. Initializes with default values.</p>
-            <div class="code-block"><span class="type">Student</span>() { roll = 0; marks = 0.0; }</div>
-            <p><strong>2. Parameterized Constructor:</strong> Accepts parameters to initialize with specific values.</p>
-            <div class="code-block"><span class="type">Student</span>(<span class="keyword">int</span> r, <span class="keyword">float</span> m) { roll = r; marks = m; }</div>
-            <p><strong>3. Copy Constructor:</strong> Creates a copy of an existing object.</p>
-            <div class="code-block"><span class="type">Student</span>(<span class="keyword">const</span> <span class="type">Student</span>&amp; s) { roll = s.roll; marks = s.marks; }</div>
-            <p><strong>4. Move Constructor (C++11):</strong> Transfers resources from a temporary (rvalue) object, avoiding expensive deep copies.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">What is a copy constructor? When is it called?</div>
-          <div class="q-answer">
-            <p>A <strong>copy constructor</strong> is a constructor that creates a new object by copying the data from an existing object of the same class. Its parameter must be a reference (usually const reference) to an object of the same class.</p>
-            <p>It is called automatically in these situations:</p>
-            <ul>
-              <li>When an object is initialized from another object of the same type: <code>Student s2 = s1;</code></li>
-              <li>When an object is passed by value to a function.</li>
-              <li>When a function returns an object by value.</li>
-            </ul>
-            <p>Without a user-defined copy constructor, the compiler provides a shallow copy (bitwise copy), which can cause problems with pointers/dynamic memory.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain constructor overloading and copy constructor with suitable C++ program. Also explain when destructor is called.</div>
-          <div class="q-answer">
-            <p><strong>Constructor overloading</strong> allows a class to have multiple constructors with different parameters. This gives flexibility in object creation.</p>
-            <p><strong>Destructor</strong> is called automatically when: an object goes out of scope, a dynamically allocated object is deleted, or the program terminates. Destructors are called in reverse order of construction.</p>
-            <div class="code-block"><span class="comment">#include &lt;iostream&gt;</span>
-<span class="keyword">using namespace</span> std;
-
-<span class="keyword">class</span> <span class="type">Array</span> {
-  <span class="keyword">int</span>* arr;
-  <span class="keyword">int</span> size;
-<span class="keyword">public</span>:
-  <span class="comment">// Default constructor</span>
-  <span class="type">Array</span>() { size = 5; arr = <span class="keyword">new</span> <span class="keyword">int</span>[size]; cout &lt;&lt; <span class="string">"Default ctor\n"</span>; }
-
-  <span class="comment">// Parameterized constructor</span>
-  <span class="type">Array</span>(<span class="keyword">int</span> s) { size = s; arr = <span class="keyword">new</span> <span class="keyword">int</span>[s]; cout &lt;&lt; <span class="string">"Param ctor\n"</span>; }
-
-  <span class="comment">// Copy constructor</span>
-  <span class="type">Array</span>(<span class="keyword">const</span> <span class="type">Array</span>&amp; a) {
-    size = a.size;
-    arr = <span class="keyword">new</span> <span class="keyword">int</span>[size];     <span class="comment">// deep copy</span>
-    <span class="keyword">for</span>(<span class="keyword">int</span> i=0; i&lt;size; i++) arr[i] = a.arr[i];
-    cout &lt;&lt; <span class="string">"Copy ctor\n"</span>;
-  }
-
-  <span class="comment">// Destructor</span>
-  ~<span class="type">Array</span>() {
-    <span class="keyword">delete</span>[] arr;           <span class="comment">// free dynamic memory</span>
-    cout &lt;&lt; <span class="string">"Destructor called\n"</span>;
-  }
-};
-
-<span class="keyword">int</span> main() {
-  <span class="type">Array</span> a1;            <span class="comment">// default ctor</span>
-  <span class="type">Array</span> a2(10);        <span class="comment">// parameterized ctor</span>
-  <span class="type">Array</span> a3 = a2;       <span class="comment">// copy ctor</span>
-  <span class="keyword">return</span> 0;             <span class="comment">// destructors called in reverse: a3, a2, a1</span>
-}</div>
-          </div>
-        </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Differentiate between default, parameterized, and copy constructors with examples.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Write a C++ program that demonstrates constructor overloading for a class <code>Distance</code> with values in feet and inches.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> Why do we need a destructor? Explain with a dynamic memory allocation example.
-          </div>
-        </div>
-
+        </li>
+      </ul>
+      <div class="toc__foot">
+        <div class="toc__progress" style="--p:0%"></div>
+        <div class="toc__progress-label"><span>Reading</span><span>0%</span></div>
       </div>
-    </div>
+    </nav>
 
-    <!-- ==================== UNIT 3 ==================== -->
-    <div class="unit-section" id="unit-3">
-      <div class="unit-header">
-        <div class="unit-number">3</div>
-        <div class="unit-header-text">
-          <h3>Inheritance</h3>
-          <p>Code reusability — deriving new classes from existing ones</p>
+    <!-- MAIN CONTENT -->
+    <div class="content">
+
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero__eyebrow">SEMESTER 5 · OOP WITH C++</div>
+        <h1 class="hero__title">Object-Oriented Programming <em>Study Notes</em></h1>
+        <p class="hero__lead">Complete exam-focused notes covering OOP principles, C++ syntax, classes, inheritance, polymorphism, templates, STL, and exception handling.</p>
+        <div class="hero__tags">
+          <span class="tag">5 Units</span>
+          <span class="tag">Code Examples</span>
+          <span class="tag">PYQs Marked</span>
+          <span class="tag--soft">MAKAUT Pattern</span>
+        </div>
+        <div class="hero__stats">
+          <dl class="hero__stat">
+            <dt>1-Mark Qs</dt>
+            <dd>25+</dd>
+            <small>Definitions</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>5-Mark Qs</dt>
+            <dd>15+</dd>
+            <small>Explanations</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>15-Mark Qs</dt>
+            <dd>10+</dd>
+            <small>Programs & theory</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>PYQs</dt>
+            <dd>2021–24</dd>
+            <small>Previous years</small>
+          </dl>
         </div>
       </div>
-      <div class="unit-content">
 
-        <div class="topic-card">
-          <h4>What is Inheritance?</h4>
-          <p><strong>Inheritance</strong> is the mechanism by which a new class (derived/child class) acquires the properties and behaviors of an existing class (base/parent class). It promotes code reusability and establishes an "is-a" relationship between classes.</p>
-          <p>The derived class can add its own features while inheriting everything from the base class, except constructors, destructors, overloaded operators, and private members.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Types of Inheritance</h4>
-          <p><strong>1. Single:</strong> One base → one derived</p>
-          <p><strong>2. Multilevel:</strong> A → B → C (chain of inheritance)</p>
-          <p><strong>3. Hierarchical:</strong> One base → multiple derived classes</p>
-          <p><strong>4. Multiple:</strong> One derived → multiple base classes</p>
-          <p><strong>5. Hybrid:</strong> Combination of two or more types (e.g., hierarchical + multilevel)</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Modes of Inheritance and Virtual Functions</h4>
-          <p>Inheritance modes determine how base class members are inherited:</p>
-          <ul>
-            <li><strong>public inheritance:</strong> public→public, protected→protected</li>
-            <li><strong>protected inheritance:</strong> public→protected, protected→protected</li>
-            <li><strong>private inheritance:</strong> public→private, protected→private</li>
-          </ul>
-          <p><strong>Virtual functions</strong> enable runtime polymorphism. A virtual function in a base class ensures the correct overridden version is called based on the actual object type, not the pointer/reference type. Declared with <code>virtual</code> keyword.</p>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Multiple Inheritance Ambiguity:</strong> When a derived class inherits from two base classes that have a function with the same name, the compiler cannot decide which to call. This is resolved using the <strong>scope resolution operator</strong> (<code>Base1::func()</code>) or <strong>virtual base class</strong>.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is inheritance?</div>
-          <div class="q-answer">Inheritance is an OOP mechanism where a derived (child) class acquires the properties (data members) and behaviors (member functions) of a base (parent) class. It establishes an "is-a" relationship and promotes code reusability without rewriting existing code.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">Types of inheritance.</div>
-          <div class="q-answer">The five types of inheritance in C++ are: Single (1 base → 1 derived), Multilevel (A→B→C), Hierarchical (1 base → multiple derived), Multiple (1 derived → multiple bases), and Hybrid (combination of two or more types).</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain different types of inheritance with diagrams.</div>
-          <div class="q-answer">
-            <p><strong>Single:</strong> <code>class B : public A</code> — B inherits from A.</p>
-            <p><strong>Multilevel:</strong> <code>class C : public B</code> where B already inherits from A — C gets A's features through B.</p>
-            <p><strong>Hierarchical:</strong> <code>class B : public A</code> and <code>class C : public A</code> — both B and C inherit from A.</p>
-            <p><strong>Multiple:</strong> <code>class C : public A, public B</code> — C inherits from both A and B.</p>
-            <p><strong>Hybrid:</strong> e.g., hierarchical + multilevel — A is base, B and C inherit from A, D inherits from B (combines multiple patterns).</p>
+      <!-- ==================== UNIT 1 ==================== -->
+      <div class="unit" id="unit1">
+        <div class="unit__head">
+          <span class="unit__num">01</span>
+          <div>
+            <h2 class="unit__title">Introduction to OOP &amp; C++ Basics</h2>
+            <p class="unit__sub">Procedural vs OOP · OOP Concepts · C++ Structure · Data Types · Operators · Control Statements · Functions</p>
           </div>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">What is a virtual function?</div>
-          <div class="q-answer">A <strong>virtual function</strong> is a base class function declared with the <code>virtual</code> keyword that can be overridden in derived classes. It enables runtime polymorphism — when called through a base class pointer/reference, the compiler determines the actual function to call at runtime based on the object's true type. The function must be redefined in the derived class with the same signature.</div>
+        <!-- 1-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">1-Mark Questions</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q1.</span></div>
+          <div class="qa__q">Who developed C++?</div>
+          <div class="qa__a">Bjarne Stroustrup at Bell Labs in 1979. Originally called "C with Classes", renamed to C++ in 1983.</div>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain single, multilevel and multiple inheritance with C++ programs. What are ambiguities in multiple inheritance and how are they resolved?</div>
-          <div class="q-answer">
-            <p><strong>Single Inheritance Example:</strong></p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">Animal</span> { <span class="keyword">public</span>: <span class="keyword">void</span> eat() { cout&lt;&lt;<span class="string">"Eating\n"</span>; } };
-<span class="keyword">class</span> <span class="type">Dog</span> : <span class="keyword">public</span> <span class="type">Animal</span> { <span class="keyword">public</span>: <span class="keyword">void</span> bark() { cout&lt;&lt;<span class="string">"Barking\n"</span>; } };</div>
-            <p><strong>Multilevel Inheritance:</strong></p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">A</span> { <span class="keyword">public</span>: <span class="keyword">void</span> showA() {} };
-<span class="keyword">class</span> <span class="type">B</span> : <span class="keyword">public</span> <span class="type">A</span> { <span class="keyword">public</span>: <span class="keyword">void</span> showB() {} };
-<span class="keyword">class</span> <span class="type">C</span> : <span class="keyword">public</span> <span class="type">B</span> { <span class="keyword">public</span>: <span class="keyword">void</span> showC() {} };
-<span class="comment">// C inherits from B which inherits from A</span></div>
-            <p><strong>Multiple Inheritance with Ambiguity:</strong></p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">A</span> { <span class="keyword">public</span>: <span class="keyword">void</span> show() { cout&lt;&lt;<span class="string">"A\n"</span>; } };
-<span class="keyword">class</span> <span class="type">B</span> { <span class="keyword">public</span>: <span class="keyword">void</span> show() { cout&lt;&lt;<span class="string">"B\n"</span>; } };
-<span class="keyword">class</span> <span class="type">C</span> : <span class="keyword">public</span> <span class="type">A</span>, <span class="keyword">public</span> <span class="type">B</span> {
-  <span class="keyword">public</span>:
-    <span class="keyword">void</span> display() {
-      <span class="type">A</span>::show();   <span class="comment">// resolve: A's version</span>
-      <span class="type">B</span>::show();   <span class="comment">// resolve: B's version</span>
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q2.</span></div>
+          <div class="qa__q">What is the extension of C++ source file?</div>
+          <div class="qa__a"><code>.cpp</code> (or .C, .cc, .cxx)</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q3.</span></div>
+          <div class="qa__q">Define Object.</div>
+          <div class="qa__a">An object is a real-world entity that has <strong>state</strong> (data/attributes) and <strong>behavior</strong> (functions/methods). It is an instance of a class.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q4.</span></div>
+          <div class="qa__q">Define Class.</div>
+          <div class="qa__a">A class is a <strong>blueprint/template</strong> that defines the structure (data members) and behavior (member functions) of objects. It is a user-defined data type.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q5.</span></div>
+          <div class="qa__q">What is Encapsulation?</div>
+          <div class="qa__a">Encapsulation is the bundling of <strong>data (variables) and methods (functions)</strong> that operate on that data into a single unit (class), and restricting direct access using <code>private</code> access specifier.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q6.</span></div>
+          <div class="qa__q">What is Abstraction?</div>
+          <div class="qa__a">Abstraction means showing only <strong>essential features</strong> while hiding implementation details. Achieved using abstract classes and interfaces.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q7.</span></div>
+          <div class="qa__q">What is Inheritance?</div>
+          <div class="qa__a">Inheritance is the mechanism where a <strong>derived class</strong> acquires properties and behaviors of a <strong>base class</strong>. It promotes code reusability.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q8.</span></div>
+          <div class="qa__q">What is Polymorphism?</div>
+          <div class="qa__a">Polymorphism means <strong>"many forms"</strong> — the ability of an object to take many forms. Achieved through function overloading (compile-time) and virtual functions (runtime).</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q9.</span></div>
+          <div class="qa__q">What is Dynamic Binding?</div>
+          <div class="qa__a">Dynamic binding (late binding) is the process of linking a <strong>function call</strong> to its <strong>definition at runtime</strong> rather than compile time. Achieved using <code>virtual</code> functions.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q10.</span></div>
+          <div class="qa__q">What is Message Passing?</div>
+          <div class="qa__a">Message passing is the process of <strong>communicating between objects</strong> by calling methods/functions. Objects interact by sending messages (calling functions) to each other.</div>
+        </div>
+
+        <!-- 5-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">5-Mark Questions</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q11.</span></div>
+          <div class="qa__q"><strong>[2023]</strong> Compare Procedural Programming vs OOP.</div>
+          <div class="qa__a">
+            <table class="t">
+              <tr><th>Feature</th><th>Procedural (C)</th><th>OOP (C++)</th></tr>
+              <tr><td>Approach</td><td>Top-down (algorithm)</td><td>Bottom-up (data)</td></tr>
+              <tr><td>Data Security</td><td>No data protection</td><td>Access specifiers (private, protected, public)</td></tr>
+              <tr><td>Code Reuse</td><td>Functions (limited)</td><td>Inheritance (excellent)</td></tr>
+              <tr><td>Data &amp; Functions</td><td>Separate</td><td>Combined in class</td></tr>
+              <tr><td>Polymorphism</td><td>Not supported</td><td>Function/Operator overloading</td></tr>
+              <tr><td>Examples</td><td>C, Pascal, COBOL</td><td>C++, Java, Python</td></tr>
+              <tr><td>Size</td><td>Larger programs</td><td>Modular, smaller</td></tr>
+              <tr><td>Inheritance</td><td>Not supported</td><td>Single, Multiple, Multilevel</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q12.</span></div>
+          <div class="qa__q"><strong>[2022]</strong> Explain cin and cout with example.</div>
+          <div class="qa__a"><code>cin</code> and <code>cout</code> are predefined stream objects for input/output.
+
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int age;
+    string name;
+
+    cout &lt;&lt; "Enter your name: ";   // Output
+    cin &gt;&gt; name;                     // Input
+    cout &lt;&lt; "Enter your age: ";
+    cin &gt;&gt; age;
+    cout &lt;&lt; "Hello " &lt;&lt; name &lt;&lt; ", Age: " &lt;&lt; age &lt;&lt; endl;
+
+    return 0;
+}</code></pre></div>
+
+            <p><code>&lt;&lt;</code> → insertion operator (output)<br>
+            <code>&gt;&gt;</code> → extraction operator (input)<br>
+            <code>endl</code> → newline + flush</p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q13.</span></div>
+          <div class="qa__q">Explain operators in C++ with examples.</div>
+          <div class="qa__a">
+            <p><strong>Arithmetic:</strong> <code>+ - * / %</code> (addition, subtraction, multiplication, division, modulo)</p>
+            <p><strong>Relational:</strong> <code>&lt; &gt; &lt;= &gt;= == !=</code> (returns bool)</p>
+            <p><strong>Logical:</strong> <code>&amp;&amp; || !</code> (AND, OR, NOT)</p>
+            <p><strong>Bitwise:</strong> <code>&amp; | ^ ~ &lt;&lt; &gt;&gt;</code> (bit AND, OR, XOR, NOT, left shift, right shift)</p>
+            <p><strong>Assignment:</strong> <code>= += -= *= /= %=</code></p>
+            <p><strong>Special:</strong> <code>sizeof, ?:, &amp;, *, -&gt;</code></p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q14.</span></div>
+          <div class="qa__q">Explain Call by Value, Call by Reference and Call by Pointer.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Call by Value - COPY is passed
+void byValue(int x) { x = x + 10; }
+
+// Call by Reference - ALIAS is passed
+void byRef(int &amp;x) { x = x + 10; }
+
+// Call by Pointer - ADDRESS is passed
+void byPointer(int *x) { *x = *x + 10; }
+
+int main() {
+    int a = 5, b = 5, c = 5;
+    byValue(a);    // a = 5 (unchanged)
+    byRef(b);      // b = 15 (changed)
+    byPointer(&amp;c); // c = 15 (changed)
+    return 0;
+}</code></pre></div>
+
+            <p><strong>Call by Value:</strong> Copy passed → original unchanged, safe but slower for large data.</p>
+            <p><strong>Call by Reference:</strong> Alias passed → original changes, no extra memory.</p>
+            <p><strong>Call by Pointer:</strong> Address passed → original changes, pointer arithmetic possible.</p>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q15.</span></div>
+          <div class="qa__q">Explain Function Overloading with example.</div>
+          <div class="qa__a">Function overloading allows <strong>multiple functions with the same name</strong> but different parameter lists (type, number, or order of parameters).
+
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Same name, different parameters
+int add(int a, int b)           { return a + b; }
+double add(double a, double b)  { return a + b; }
+int add(int a, int b, int c)    { return a + b + c; }
+
+int main() {
+    cout &lt;&lt; add(2, 3) &lt;&lt; endl;         // 5 (int)
+    cout &lt;&lt; add(2.5, 3.5) &lt;&lt; endl;   // 6.0 (double)
+    cout &lt;&lt; add(1, 2, 3) &lt;&lt; endl;    // 6 (3 params)
+    return 0;
+}</code></pre></div>
+
+            <p>Return type alone <strong>cannot</strong> differentiate overloaded functions.</p>
+          </div>
+        </div>
+
+        <!-- 15-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">15-Mark Questions</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q16.</span></div>
+          <div class="qa__q"><strong>[2023]</strong> Explain in detail the concept of OOP and describe the basic principles of OOP.</div>
+          <div class="qa__a">
+            <p><strong>What is OOP?</strong><br>
+            Object-Oriented Programming (OOP) is a programming paradigm based on the concept of <strong>"objects"</strong> that contain data (attributes) and code (methods/functions). OOP organizes software design around data (objects) rather than functions and logic.</p>
+
+            <p><strong>Need for OOP:</strong> Procedural programming focuses on functions and procedures to operate on data. As programs grow larger, procedural code becomes difficult to maintain. OOP solves this by bundling data and functions together.</p>
+
+            <p><strong>Basic Principles of OOP:</strong></p>
+
+            <p><strong>1. Object:</strong> An object is an instance of a class. It represents a real-world entity with attributes (data) and methods (behavior). Example: <code>Car</code> object with attributes: color, speed; methods: accelerate(), brake().</p>
+
+            <p><strong>2. Class:</strong> A class is a blueprint/template that defines what an object looks like. It doesn't occupy memory until instantiated. Example: <code>class Car { ... };</code></p>
+
+            <p><strong>3. Abstraction:</strong> Hiding internal implementation details and showing only the interface. Users know <em>what</em> a function does, not <em>how</em>. Achieved using abstract classes and pure virtual functions.</p>
+
+            <p><strong>4. Encapsulation:</strong> Wrapping data and functions together and restricting direct access using <code>private</code> members. Data can only be accessed through public member functions (getters/setters).</p>
+
+            <p><strong>5. Inheritance:</strong> Creating a new class (derived) from an existing class (base). The derived class inherits all accessible members of the base class. Types: single, multilevel, hierarchical, multiple, hybrid.</p>
+
+            <p><strong>6. Polymorphism:</strong> Ability to take many forms. Compile-time (overloading) and runtime (virtual functions). Enables writing generic code that works with multiple types.</p>
+
+            <p><strong>7. Dynamic Binding:</strong> The process of linking a function call to its definition at <em>runtime</em>. Achieved using <code>virtual</code> keyword.</p>
+
+            <p><strong>8. Message Passing:</strong> Objects communicate by sending messages (calling methods) to each other.</p>
+
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Car {
+    // Encapsulation: private data
+private:
+    string brand;
+    float speed;
+
+public:
+    // Abstraction: show only interface
+    void setBrand(string b) { brand = b; }
+    string getBrand() { return brand; }
+
+    void accelerate() {
+        speed += 10;
+        cout &lt;&lt; brand &lt;&lt; " accelerating. Speed: " &lt;&lt; speed &lt;&lt; " km/h\n";
     }
-};</div>
-            <p><strong>Resolution using virtual base class:</strong></p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">A</span> { <span class="keyword">public</span>: <span class="keyword">int</span> val; };
-<span class="keyword">class</span> <span class="type">B</span> : <span class="keyword">virtual public</span> <span class="type">A</span> {};
-<span class="keyword">class</span> <span class="type">C</span> : <span class="keyword">virtual public</span> <span class="type">A</span> {};
-<span class="keyword">class</span> <span class="type">D</span> : <span class="keyword">public</span> <span class="type">B</span>, <span class="keyword">public</span> <span class="type">C</span> {};
-<span class="comment">// D has only ONE copy of A (virtual base)</span></div>
-          </div>
-        </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Explain all five types of inheritance with suitable C++ examples.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> What is a virtual base class? Why is it needed? Explain with a program.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> Explain the order of constructor and destructor calls in multilevel inheritance.
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==================== UNIT 4 ==================== -->
-    <div class="unit-section" id="unit-4">
-      <div class="unit-header">
-        <div class="unit-number">4</div>
-        <div class="unit-header-text">
-          <h3>Polymorphism</h3>
-          <p>Multiple forms — overloading, overriding, abstract classes</p>
-        </div>
-      </div>
-      <div class="unit-content">
-
-        <div class="topic-card">
-          <h4>What is Polymorphism?</h4>
-          <p><strong>Polymorphism</strong> means "many forms." It allows objects of different classes to be treated as objects of a common base class, and the correct function is called based on the actual object type at runtime (or compile time for overloading).</p>
-          <p>Two types:</p>
-          <ul>
-            <li><strong>Compile-time polymorphism</strong> (static binding) — achieved through function overloading and operator overloading.</li>
-            <li><strong>Runtime polymorphism</strong> (dynamic binding) — achieved through virtual functions and function overriding.</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Function Overloading and Operator Overloading</h4>
-          <p><strong>Function overloading</strong> allows multiple functions with the same name but different parameter lists. The compiler distinguishes them by the number, type, or order of parameters.</p>
-          <p><strong>Operator overloading</strong> allows redefining the behavior of operators (like <code>+</code>, <code>++</code>, <code>==</code>) for user-defined types. At least one operand must be a user-defined type. Implemented using a special member function or friend function.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Abstract Classes and Pure Virtual Functions</h4>
-          <p>An <strong>abstract class</strong> is a class that cannot be instantiated. It contains at least one <strong>pure virtual function</strong>, declared as <code>virtual returnType func() = 0;</code>. Abstract classes serve as incomplete base classes — derived classes must override all pure virtual functions to become concrete (instantiable).</p>
-          <p>A <strong>pure virtual function</strong> has no implementation in the base class; it only declares the interface that derived classes must implement.</p>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Key Difference:</strong> Function <strong>overloading</strong> happens at compile time with same function name, different parameters. Function <strong>overriding</strong> happens at runtime when a derived class redefines a base class virtual function with the same signature.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is polymorphism?</div>
-          <div class="q-answer">Polymorphism is an OOP concept where a single entity (function name, operator, or object) can take multiple forms. In C++, it allows calling the appropriate function based on the context — at compile time (overloading) or runtime (overriding via virtual functions).</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">Function overloading vs overriding.</div>
-          <div class="q-answer">
-            <p><strong>Overloading:</strong> Same function name, different parameters in the SAME class. Resolved at compile time. Example: <code>add(int,int)</code> and <code>add(float,float)</code>.</p>
-            <p><strong>Overriding:</strong> Same function signature in BASE and DERIVED classes. The derived version replaces the base version. Requires the base function to be <code>virtual</code>. Resolved at runtime.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain operator overloading with example.</div>
-          <div class="q-answer">
-            <p>Operator overloading allows operators to work with user-defined types. Example — overloading <code>+</code> for a <code>Complex</code> class:</p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">Complex</span> {
-  <span class="keyword">int</span> real, imag;
-<span class="keyword">public</span>:
-  <span class="type">Complex</span>(<span class="keyword">int</span> r=0, <span class="keyword">int</span> i=0) { real=r; imag=i; }
-
-  <span class="comment">// Overload + operator</span>
-  <span class="type">Complex</span> <span class="keyword">operator</span>+ (<span class="keyword">const</span> <span class="type">Complex</span>&amp; c) {
-    <span class="keyword">return</span> <span class="type">Complex</span>(real+c.real, imag+c.imag);
-  }
-
-  <span class="keyword">void</span> show() { cout&lt;&lt;real&lt;&lt;<span class="string">"+"</span>&lt;&lt;imag&lt;&lt;<span class="string">"i\n"</span>; }
 };
 
-<span class="keyword">int</span> main() {
-  <span class="type">Complex</span> c1(3,4), c2(5,6), c3;
-  c3 = c1 + c2;    <span class="comment">// uses operator+</span>
-  c3.show();       <span class="comment">// Output: 8+10i</span>
-}</div>
+int main() {
+    Car c1;           // Object creation
+    c1.setBrand("Toyota");
+    c1.accelerate();  // Message passing
+    return 0;
+}</code></pre></div>
           </div>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">What is a pure virtual function?</div>
-          <div class="q-answer">A <strong>pure virtual function</strong> is a virtual function in an abstract class that has no implementation (only declaration) and is initialized to 0: <code>virtual void draw() = 0;</code>. Any class containing at least one pure virtual function becomes an abstract class and cannot be instantiated. Derived classes must override all pure virtual functions to become concrete classes. Pure virtual functions define an interface contract.</div>
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q17.</span></div>
+          <div class="qa__q">Explain control statements and loops in C++ with examples.</div>
+          <div class="qa__a">
+            <p><strong>If-Else:</strong></p>
+            <div class="codeblock"><pre><code>int marks = 75;
+if (marks >= 90)
+    cout &lt;&lt; "Grade A";
+else if (marks >= 60)
+    cout &lt;&lt; "Grade B";
+else
+    cout &lt;&lt; "Grade C";</code></pre></div>
+
+            <p><strong>Switch:</strong></p>
+            <div class="codeblock"><pre><code>int day = 3;
+switch(day) {
+    case 1: cout &lt;&lt; "Mon"; break;
+    case 2: cout &lt;&lt; "Tue"; break;
+    case 3: cout &lt;&lt; "Wed"; break;
+    default: cout &lt;&lt; "Invalid";
+}</code></pre></div>
+
+            <p><strong>For Loop:</strong></p>
+            <div class="codeblock"><pre><code>for(int i = 1; i &lt;= 5; i++)
+    cout &lt;&lt; i &lt;&lt; " ";    // 1 2 3 4 5</code></pre></div>
+
+            <p><strong>While Loop:</strong></p>
+            <div class="codeblock"><pre><code>int i = 1;
+while(i &lt;= 5) {
+    cout &lt;&lt; i &lt;&lt; " ";
+    i++;
+}</code></pre></div>
+
+            <p><strong>Do-While Loop:</strong></p>
+            <div class="codeblock"><pre><code>int i = 1;
+do {
+    cout &lt;&lt; i &lt;&lt; " ";
+    i++;
+} while(i &lt;= 5);    // executes at least once</code></pre></div>
+          </div>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain compile-time and runtime polymorphism in detail. Write C++ programs demonstrating function overloading, operator overloading and virtual functions.</div>
-          <div class="q-answer">
-            <p><strong>Compile-time polymorphism</strong> (static binding):</p>
-            <div class="code-block"><span class="comment">// Function Overloading</span>
-<span class="keyword">class</span> <span class="type">Math</span> {
-<span class="keyword">public</span>:
-  <span class="keyword">int</span> add(<span class="keyword">int</span> a, <span class="keyword">int</span> b) { <span class="keyword">return</span> a+b; }
-  <span class="keyword">int</span> add(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c) { <span class="keyword">return</span> a+b+c; }
-  <span class="keyword">float</span> add(<span class="keyword">float</span> a, <span class="keyword">float</span> b) { <span class="keyword">return</span> a+b; }
-};  <span class="comment">// Resolved at compile time based on parameters</span></div>
-            <p><strong>Operator Overloading:</strong></p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">Point</span> {
-  <span class="keyword">int</span> x, y;
-<span class="keyword">public</span>:
-  <span class="type">Point</span>(<span class="keyword">int</span> x=0, <span class="keyword">int</span> y=0) { <span class="keyword">this</span>-&gt;x=x; <span class="keyword">this</span>-&gt;y=y; }
-  <span class="type">Point</span> <span class="keyword">operator</span>+ (<span class="keyword">const</span> <span class="type">Point</span>&amp; p) {
-    <span class="keyword">return</span> <span class="type">Point</span>(x+p.x, y+p.y);
-  }
-};</div>
-            <p><strong>Runtime Polymorphism (Virtual Functions):</strong></p>
-            <div class="code-block"><span class="keyword">class</span> <span class="type">Shape</span> {
-<span class="keyword">public</span>:
-  <span class="keyword">virtual</span> <span class="keyword">void</span> area() { cout&lt;&lt;<span class="string">"Shape area\n"</span>; }
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q18.</span></div>
+          <div class="qa__q"><strong>[2021]</strong> Explain inline functions, default arguments, and scope resolution operator.</div>
+          <div class="qa__a">
+            <p><strong>Inline Functions:</strong> Suggests compiler to replace function call with function body to reduce call overhead. Suitable for small functions.</p>
+            <div class="codeblock"><pre><code>inline int square(int x) { return x * x; }
+// Compiler replaces: cout &lt;&lt; square(5);
+// with: cout &lt;&lt; (5 * 5);</code></pre></div>
+
+            <p><strong>Default Arguments:</strong> Allows function to be called with fewer arguments by providing default values.</p>
+            <div class="codeblock"><pre><code>float interest(float p, float r = 5.0, int t = 2) {
+    return (p * r * t) / 100.0;
+}
+// All valid:
+interest(1000);          // r=5.0, t=2
+interest(1000, 7.0);     // t=2
+interest(1000, 7.0, 3);  // all args</code></pre></div>
+
+            <p><strong>Scope Resolution Operator (::):</strong> Used to define member functions outside class, access global variables, and access static members.</p>
+            <div class="codeblock"><pre><code>class Demo {
+    int x;
+public:
+    void setX(int x);
+    static int count;
 };
-<span class="keyword">class</span> <span class="type">Circle</span> : <span class="keyword">public</span> <span class="type">Shape</span> {
-<span class="keyword">public</span>:
-  <span class="keyword">void</span> area() { cout&lt;&lt;<span class="string">"pi*r*r\n"</span>; }  <span class="comment">// override</span>
-};
-<span class="keyword">int</span> main() {
-  <span class="type">Shape</span>* s = <span class="keyword">new</span> <span class="type">Circle</span>();
-  s-&gt;area();   <span class="comment">// calls Circle::area() at runtime</span>
-  <span class="keyword">delete</span> s;
-}</div>
+
+// Defining outside class
+void Demo::setX(int x) { this-&gt;x = x; }
+int Demo::count = 0;   // Initialize static member</code></pre></div>
           </div>
         </div>
 
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> Differentiate between compile-time and runtime polymorphism with examples.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Write a C++ program to overload the <code>++</code> operator for a counter class (both prefix and postfix).
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> What is an abstract class? How is it different from an interface?
-          </div>
+        <div class="tips">
+          <strong>Exam Tips:</strong> Procedural vs OOP comparison table is a <em>guaranteed 5-mark question</em>. Function overloading + call by value/reference are frequently asked. Define all 8 OOP concepts clearly.
         </div>
-
       </div>
-    </div>
 
-    <!-- ==================== UNIT 5 ==================== -->
-    <div class="unit-section" id="unit-5">
-      <div class="unit-header">
-        <div class="unit-number">5</div>
-        <div class="unit-header-text">
-          <h3>Exception Handling</h3>
-          <p>Graceful error management — try, catch, throw, custom exceptions</p>
-        </div>
-      </div>
-      <div class="unit-content">
-
-        <div class="topic-card">
-          <h4>What is Exception Handling?</h4>
-          <p><strong>Exception handling</strong> is a mechanism in C++ to handle runtime errors (exceptions) gracefully without crashing the program. It separates error-handling code from normal program logic.</p>
-          <p>Key keywords:</p>
-          <ul>
-            <li><strong>try</strong> — block that contains code that may throw an exception.</li>
-            <li><strong>catch</strong> — block that handles the exception of a specific type.</li>
-            <li><strong>throw</strong> — keyword used to signal (raise) an exception.</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>Catch Handlers and Stack Unwinding</h4>
-          <p><strong>Catch handlers</strong> catch exceptions of a specific type. You can have multiple catch blocks for different exception types, or a catch-all <code>catch(...)</code> block.</p>
-          <p><strong>Stack unwinding</strong> is the process where the C++ runtime destroys all objects on the stack between the <code>try</code> block and the <code>throw</code> statement. As the stack unwinds, destructors are called for all local objects, ensuring proper cleanup.</p>
-        </div>
-
-        <div class="topic-card">
-          <h4>Custom Exceptions and Exception Hierarchy</h4>
-          <p>C++ provides a standard exception class hierarchy rooted at <code>std::exception</code>. Standard exceptions include <code>bad_alloc</code>, <code>out_of_range</code>, <code>invalid_argument</code>, etc.</p>
-          <p>You can create <strong>custom exception classes</strong> by inheriting from <code>std::exception</code> and overriding the <code>what()</code> method:</p>
-          <div class="code-block"><span class="keyword">class</span> <span class="type">NegativeNumber</span> : <span class="keyword">public</span> <span class="keyword">exception</span> {
-<span class="keyword">public</span>:
-  <span class="keyword">const char</span>* what() <span class="keyword">const</span> <span class="keyword">throw</span>() {
-    <span class="keyword">return</span> <span class="string">"Number cannot be negative!"</span>;
-  }
-};</div>
-        </div>
-
-        <div class="highlight-box">
-          <strong>Best Practice:</strong> Always catch exceptions by const reference (<code>catch(const exception& e)</code>) to avoid slicing. Use specific exception types before generic ones. The <code>throw</code> inside a catch block re-throws the same exception.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is exception handling?</div>
-          <div class="q-answer">Exception handling is a C++ mechanism to manage runtime errors (exceptions) without terminating the program. It uses <code>try</code>, <code>catch</code>, and <code>throw</code> keywords to separate normal code from error-handling code, allowing graceful recovery from errors.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">Keywords in exception handling.</div>
-          <div class="q-answer">The three main keywords are: <code>try</code> (defines a block where exceptions may occur), <code>catch</code> (defines a block that handles the exception), and <code>throw</code> (raises/signals an exception). Additional: <code>throws</code> (Java), but in C++, exception specification is deprecated in favor of <code>noexcept</code>.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain try, catch and throw with example.</div>
-          <div class="q-answer">
-            <div class="code-block"><span class="keyword">#include</span> <span class="type">&lt;iostream&gt;</span>
-<span class="keyword">using namespace</span> std;
-
-<span class="keyword">int</span> main() {
-  <span class="keyword">int</span> a, b;
-  cout &lt;&lt; <span class="string">"Enter two numbers: "</span>;
-  cin &gt;&gt; a &gt;&gt; b;
-
-  <span class="keyword">try</span> {
-    <span class="keyword">if</span>(b == 0)
-      <span class="keyword">throw</span> <span class="string">"Division by zero!"</span>;   <span class="comment">// throw string</span>
-    cout &lt;&lt; <span class="string">"Result: "</span> &lt;&lt; a/b &lt;&lt; endl;
-  }
-  <span class="keyword">catch</span>(<span class="keyword">const</span> <span class="keyword">char</span>* msg) {
-    cout &lt;&lt; <span class="string">"Error: "</span> &lt;&lt; msg &lt;&lt; endl;
-  }
-  <span class="keyword">catch</span>(...) {
-    cout &lt;&lt; <span class="string">"Unknown error\n"</span>;
-  }
-  <span class="keyword">return</span> 0;
-}</div>
-            <p>The <code>try</code> block contains risky code. If an exception is <code>throw</code>n, execution jumps to the matching <code>catch</code> block. Multiple <code>catch</code> blocks can handle different exception types.</p>
+      <!-- ==================== UNIT 2 ==================== -->
+      <div class="unit" id="unit2">
+        <div class="unit__head">
+          <span class="unit__num">02</span>
+          <div>
+            <h2 class="unit__title">Classes &amp; Objects</h2>
+            <p class="unit__sub">Class Declaration · Member Functions · Objects · Memory Allocation · Static Members · Constructors · Destructors · this Pointer · Friend Functions · Nested Classes</p>
           </div>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">What is stack unwinding?</div>
-          <div class="q-answer"><strong>Stack unwinding</strong> is the process triggered when an exception is thrown. The C++ runtime walks back up the call stack, destroying all local objects (calling their destructors) until it reaches a matching <code>catch</code> block. This ensures proper resource cleanup (memory, file handles, locks). If no matching catch is found, <code>std::terminate()</code> is called, ending the program.</div>
+        <!-- 1-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">1-Mark Questions</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q1.</span></div>
+          <div class="qa__q">What is a constructor?</div>
+          <div class="qa__a">A special member function that <strong>initializes objects</strong> automatically when they are created. It has the <strong>same name as the class</strong> and no return type.</div>
         </div>
 
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain exception handling mechanism in C++. Write a program that demonstrates custom exception class and multiple catch blocks.</div>
-          <div class="q-answer">
-            <p>C++ exception handling uses three keywords: <code>try</code>, <code>catch</code>, <code>throw</code>. When an exception occurs, the current function's stack is unwound, and control transfers to the nearest matching catch block. This separates error handling from main logic.</p>
-            <div class="code-block"><span class="comment">#include &lt;iostream&gt;</span>
-<span class="comment">#include &lt;exception&gt;</span>
-<span class="keyword">using namespace</span> std;
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q2.</span></div>
+          <div class="qa__q">What is a destructor?</div>
+          <div class="qa__a">A special member function that <strong>destroys objects</strong> when they go out of scope. It has the same name as the class prefixed with <code>~</code> and takes no parameters.</div>
+        </div>
 
-<span class="comment">// Custom exception class</span>
-<span class="keyword">class</span> <span class="type">AgeError</span> : <span class="keyword">public</span> <span class="keyword">exception</span> {
-  <span class="keyword">int</span> age;
-<span class="keyword">public</span>:
-  <span class="type">AgeError</span>(<span class="keyword">int</span> a) : age(a) {}
-  <span class="keyword">const char</span>* what() <span class="keyword">const</span> <span class="keyword">throw</span>() {
-    <span class="keyword">return</span> <span class="string">"Age must be between 18 and 60!"</span>;
-  }
-  <span class="keyword">int</span> getAge() { <span class="keyword">return</span> age; }
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q3.</span></div>
+          <div class="qa__q">What is the <code>this</code> pointer?</div>
+          <div class="qa__a">A hidden pointer available in all non-static member functions that <strong>points to the current object</strong>. It resolves naming conflicts between member variables and parameters.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q4.</span></div>
+          <div class="qa__q">What are static data members?</div>
+          <div class="qa__a">Variables declared with <code>static</code> keyword that are <strong>shared among all objects</strong> of a class. Only one copy exists in memory regardless of the number of objects.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q5.</span></div>
+          <div class="qa__q">What are static member functions?</div>
+          <div class="qa__a">Functions that can access only <strong>static members</strong> of a class. They can be called without creating an object using <code>ClassName::functionName()</code>.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q6.</span></div>
+          <div class="qa__q">What is a friend function?</div>
+          <div class="qa__a">A non-member function that is <strong>granted access to private/protected members</strong> of a class. Declared using <code>friend</code> keyword inside the class.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q7.</span></div>
+          <div class="qa__q">What is a friend class?</div>
+          <div class="qa__a">A class whose member functions can access <strong>all members</strong> (including private) of another class. Declared as <code>friend class ClassName;</code></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q8.</span></div>
+          <div class="qa__q">What is a copy constructor?</div>
+          <div class="qa__a">A constructor that creates a new object as a <strong>copy of an existing object</strong>. Syntax: <code>ClassName(const ClassName &amp;obj) { ... }</code></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q9.</span></div>
+          <div class="qa__q">What is the difference between constructor and destructor?</div>
+          <div class="qa__a">
+            <table class="t">
+              <tr><th>Constructor</th><th>Destructor</th></tr>
+              <tr><td>Same name as class</td><td>Same name with ~ prefix</td></tr>
+              <tr><td>No return type</td><td>No return type</td></tr>
+              <tr><td>Called at object creation</td><td>Called at object destruction</td></tr>
+              <tr><td>Can take parameters</td><td>Cannot take parameters</td></tr>
+              <tr><td>Can be overloaded</td><td>Cannot be overloaded</td></tr>
+              <tr><td>Initializes memory</td><td>Deallocates memory</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q10.</span></div>
+          <div class="qa__q">What is a constant member function?</div>
+          <div class="qa__a">A member function declared with <code>const</code> keyword that <strong>cannot modify any member variables</strong> of the class. Syntax: <code>void show() const;</code></div>
+        </div>
+
+        <!-- 5-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">5-Mark Questions</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q11.</span></div>
+          <div class="qa__q">Explain different types of constructors with example.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Student {
+    string name;
+    int roll;
+    float *marks;  // Dynamic allocation
+
+public:
+    // 1. Default Constructor
+    Student() {
+        name = "Unknown";
+        roll = 0;
+        marks = new float[3]{0, 0, 0};
+    }
+
+    // 2. Parameterized Constructor
+    Student(string n, int r, float m[]) {
+        name = n;
+        roll = r;
+        marks = new float[3];
+        for(int i = 0; i &lt; 3; i++) marks[i] = m[i];
+    }
+
+    // 3. Copy Constructor (deep copy)
+    Student(const Student &amp;s) {
+        name = s.name;
+        roll = s.roll;
+        marks = new float[3];
+        for(int i = 0; i &lt; 3; i++) marks[i] = s.marks[i];
+    }
+
+    // 4. Dynamic Constructor (allocates memory)
+    Student(string n, int r, int nSub) {
+        name = n; roll = r;
+        marks = new float[nSub];
+        for(int i = 0; i &lt; nSub; i++) marks[i] = 0;
+    }
+
+    void display() {
+        cout &lt;&lt; name &lt;&lt; " " &lt;&lt; roll &lt;&lt; " ";
+        for(int i = 0; i &lt; 3; i++) cout &lt;&lt; marks[i] &lt;&lt; " ";
+        cout &lt;&lt; endl;
+    }
+
+    ~Student() { delete[] marks; }  // Destructor
+};</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q12.</span></div>
+          <div class="qa__q">Explain Friend function and Friend class with example.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class BankAccount {
+    double balance;  // private
+
+public:
+    BankAccount(double b) { balance = b; }
+
+    // Friend function - can access private members
+    friend void showBalance(BankAccount &amp;acc);
+
+    // Friend class - all its methods can access private
+    friend class Auditor;
 };
 
-<span class="keyword">void</span> validateAge(<span class="keyword">int</span> age) {
-  <span class="keyword">if</span>(age &lt; 18 || age &gt; 60)
-    <span class="keyword">throw</span> <span class="type">AgeError</span>(age);
-  cout &lt;&lt; <span class="string">"Age valid: "</span> &lt;&lt; age &lt;&lt; endl;
+// Friend function definition
+void showBalance(BankAccount &amp;acc) {
+    cout &lt;&lt; "Balance: " &lt;&lt; acc.balance &lt;&lt; endl;
 }
 
-<span class="keyword">int</span> main() {
-  <span class="keyword">try</span> {
-    validateAge(15);      <span class="comment">// throws AgeError</span>
-    validateAge(25);      <span class="comment">// normal execution</span>
-    <span class="keyword">int</span> x = 10, y = 0;
-    <span class="keyword">if</span>(y == 0) <span class="keyword">throw</span> <span class="string">"Divide by zero"</span>;
-  }
-  <span class="keyword">catch</span>(<span class="keyword">const</span> <span class="type">AgeError</span>&amp; e) {
-    cout &lt;&lt; <span class="string">"Custom Exception: "</span> &lt;&lt; e.what();
-    cout &lt;&lt; <span class="string">" (entered: "</span> &lt;&lt; e.getAge() &lt;&lt; <span class="string">")\n"</span>;
-  }
-  <span class="keyword">catch</span>(<span class="keyword">const</span> <span class="keyword">char</span>* msg) {
-    cout &lt;&lt; <span class="string">"String Exception: "</span> &lt;&lt; msg &lt;&lt; endl;
-  }
-  <span class="keyword">catch</span>(...) {
-    cout &lt;&lt; <span class="string">"Some other exception occurred\n"</span>;
-  }
-  <span class="keyword">return</span> 0;
-}</div>
-          </div>
-        </div>
-
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> What is the purpose of exception handling? List and explain the keywords used. Write a program with multiple catch blocks.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Explain stack unwinding with a suitable example.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> Write a C++ program to create a custom exception class for validating marks (0–100).
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ==================== UNIT 6 ==================== -->
-    <div class="unit-section" id="unit-6">
-      <div class="unit-header">
-        <div class="unit-number">6</div>
-        <div class="unit-header-text">
-          <h3>Advanced OOP</h3>
-          <p>Templates, STL, containers, iterators, file handling, RTTI</p>
-        </div>
-      </div>
-      <div class="unit-content">
-
-        <div class="topic-card">
-          <h4>Templates — Function and Class</h4>
-          <p><strong>Templates</strong> enable writing generic code that works with any data type. They follow the principle of "write once, use with any type."</p>
-          <ul>
-            <li><strong>Function templates:</strong> A single function definition works with multiple types. <code>template&lt;typename T&gt; T max(T a, T b) { return a&gt;b?a:b; }</code></li>
-            <li><strong>Class templates:</strong> An entire class is generic. <code>template&lt;class T&gt; class Box { T data; };</code></li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>STL — Containers, Iterators, Algorithms</h4>
-          <p>The <strong>Standard Template Library (STL)</strong> is a collection of ready-to-use template classes for data structures and algorithms. It has three main components:</p>
-          <ul>
-            <li><strong>Containers:</strong> Store data — <code>vector</code>, <code>list</code>, <code>deque</code>, <code>array</code>, <code>set</code>, <code>map</code>, <code>stack</code>, <code>queue</code>.</li>
-            <li><strong>Iterators:</strong> Objects that point to elements in containers, enabling traversal.</li>
-            <li><strong>Algorithms:</strong> Functions like <code>sort()</code>, <code>find()</code>, <code>reverse()</code> that operate on containers via iterators.</li>
-          </ul>
-        </div>
-
-        <div class="topic-card">
-          <h4>File Handling, RTTI, Virtual Destructors</h4>
-          <p><strong>File handling with classes:</strong> Use <code>fstream</code>, <code>ofstream</code>, <code>ifstream</code> to read/write objects. Objects can be written to files using <code>write()</code> and read using <code>read()</code>.</p>
-          <p><strong>RTTI (Runtime Type Identification):</strong> C++ feature to determine the actual type of an object at runtime using <code>typeid</code> and <code>dynamic_cast</code>. Requires at least one virtual function in the class.</p>
-          <p><strong>Virtual destructor:</strong> Declaring a destructor as <code>virtual</code> ensures the correct destructor chain is called when deleting objects through a base class pointer. Without it, only the base destructor runs, causing memory leaks.</p>
-        </div>
-
-        <div class="highlight-box">
-          <strong>STL Quick Reference:</strong> <code>vector</code> — dynamic array (random access). <code>list</code> — doubly linked list (fast insert/delete). <code>map</code> — key-value pairs (sorted, unique keys). <code>set</code> — unique sorted elements. <code>stack</code> — LIFO. <code>queue</code> — FIFO.
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is a template in C++?</div>
-          <div class="q-answer">A template is a feature in C++ that allows writing generic code. It enables functions or classes to operate with any data type without rewriting code for each type. Declared using the <code>template</code> keyword. The compiler generates the appropriate type-specific code at compile time (template instantiation).</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">1 Mark</div>
-          <div class="q-text">What is STL?</div>
-          <div class="q-answer">STL (Standard Template Library) is a library of C++ template classes providing common data structures (containers) and algorithms. It includes containers (vector, list, map), iterators (pointers to container elements), and algorithms (sort, find, transform). It is part of the C++ standard library.</div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">Explain function template with example.</div>
-          <div class="q-answer">
-            <p>A <strong>function template</strong> defines a generic function that works with any data type. The compiler generates specific versions for each used type.</p>
-            <div class="code-block"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;
-T maximum(T a, T b) {
-  <span class="keyword">return</span> (a &gt; b) ? a : b;
-}
-
-<span class="keyword">int</span> main() {
-  cout &lt;&lt; maximum(<span class="keyword">int</span>(3), <span class="keyword">int</span>(7));       <span class="comment">// T = int</span>
-  cout &lt;&lt; maximum(<span class="keyword">double</span>(3.5), <span class="keyword">double</span>(2.1)); <span class="comment">// T = double</span>
-  cout &lt;&lt; maximum(<span class="keyword">char</span>(<span class="string">'a'</span>), <span class="keyword">char</span>(<span class="string">'z'</span>)); <span class="comment">// T = char</span>
-}</div>
-            <p>The same function works for any type supporting the <code>&gt;</code> operator. This avoids code duplication.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">5 Marks</div>
-          <div class="q-text">What are STL containers?</div>
-          <div class="q-answer">
-            <p><strong>STL containers</strong> are template classes that store collections of objects. They are classified as:</p>
-            <p><strong>Sequence containers:</strong> Maintain insertion order — <code>vector</code> (dynamic array, fast random access), <code>list</code> (doubly linked list, fast insert/delete), <code>deque</code> (double-ended queue).</p>
-            <p><strong>Associative containers:</strong> Sorted by key — <code>set</code> (unique keys), <code>multiset</code> (duplicate keys), <code>map</code> (key-value pairs), <code>multimap</code>.</p>
-            <p><strong>Derived containers:</strong> <code>stack</code> (LIFO), <code>queue</code> (FIFO), <code>priority_queue</code>.</p>
-          </div>
-        </div>
-
-        <div class="question-block">
-          <div class="q-label">15 Marks</div>
-          <div class="q-text">Explain templates and STL in detail. Write programs demonstrating function templates, class templates and using vector and map containers.</div>
-          <div class="q-answer">
-            <p><strong>Templates</strong> allow writing type-independent code. Function templates and class templates are the two main types.</p>
-            <p><strong>Function Template Example:</strong></p>
-            <div class="code-block"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-T add(T a, T b) { <span class="keyword">return</span> a + b; }  <span class="comment">// works for int, float, etc.</span></div>
-            <p><strong>Class Template Example:</strong></p>
-            <div class="code-block"><span class="keyword">template</span> &lt;<span class="keyword">class</span> T&gt;
-<span class="keyword">class</span> <span class="type">Box</span> {
-  T value;
-<span class="keyword">public</span>:
-  <span class="type">Box</span>(T v) : value(v) {}
-  T getValue() { <span class="keyword">return</span> value; }
+// Friend class
+class Auditor {
+public:
+    void audit(BankAccount &amp;acc) {
+        cout &lt;&lt; "Auditing account with balance: "
+             &lt;&lt; acc.balance &lt;&lt; endl;
+    }
 };
 
-<span class="type">Box</span>&lt;<span class="keyword">int</span>&gt; intBox(100);   <span class="comment">// T = int</span>
-<span class="type">Box</span>&lt;<span class="keyword">double</span>&gt; dBox(3.14); <span class="comment">// T = double</span></div>
-            <p><strong>STL vector Example:</strong></p>
-            <div class="code-block"><span class="keyword">#include</span> <span class="type">&lt;vector&gt;</span>
-<span class="keyword">#include</span> <span class="type">&lt;algorithm&gt;</span>
-vector&lt;<span class="keyword">int</span>&gt; v = {5, 2, 8, 1, 9};
-sort(v.begin(), v.end());      <span class="comment">// [1,2,5,8,9]</span>
-v.push_back(12);               <span class="comment">// add element</span></div>
-            <p><strong>STL map Example:</strong></p>
-            <div class="code-block"><span class="keyword">#include</span> <span class="type">&lt;map&gt;</span>
-map&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt; marks;
-marks[<span class="string">"Math"</span>] = 95;
-marks[<span class="string">"Physics"</span>] = 88;
-cout &lt;&lt; marks[<span class="string">"Math"</span>];     <span class="comment">// 95</span></div>
+int main() {
+    BankAccount acc(5000);
+    showBalance(acc);      // Friend function call
+
+    Auditor a;
+    a.audit(acc);          // Friend class method
+    return 0;
+}</code></pre></div>
           </div>
         </div>
 
-        <div class="pyq-section">
-          <h4>📋 Previous Year Questions</h4>
-          <div class="pyq-item">
-            <span class="year">[2023]</span> What are templates? Explain function template and class template with examples.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2022]</span> Explain STL containers: vector, list, and map with suitable C++ programs.
-          </div>
-          <div class="pyq-item">
-            <span class="year">[2021]</span> What is RTTI? Explain <code>dynamic_cast</code> and <code>typeid</code> with examples.
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q13.</span></div>
+          <div class="qa__q">Explain static data members and static member functions.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Counter {
+    int id;
+    static int count;  // shared by ALL objects
+
+public:
+    Counter(int id) {
+        this-&gt;id = id;
+        count++;
+    }
+
+    // Static member function
+    static void showCount() {
+        cout &lt;&lt; "Total objects: " &lt;&lt; count &lt;&lt; endl;
+    }
+
+    void showID() {
+        cout &lt;&lt; "ID: " &lt;&lt; id
+             &lt;&lt; ", Total: " &lt;&lt; count &lt;&lt; endl;
+    }
+};
+
+// Must initialize static member outside class
+int Counter::count = 0;
+
+int main() {
+    Counter c1(1);  c1.showID();   // ID: 1, Total: 1
+    Counter c2(2);  c2.showID();   // ID: 2, Total: 2
+    Counter c3(3);  c3.showID();   // ID: 3, Total: 3
+
+    Counter::showCount();          // Call without object: Total: 3
+    return 0;
+}</code></pre></div>
           </div>
         </div>
 
-      </div>
-    </div>
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q14.</span></div>
+          <div class="qa__q"><strong>[2022]</strong> Explain <code>this</code> pointer with example.</div>
+          <div class="qa__a">The <code>this</code> pointer is a hidden pointer passed as the first argument to all non-static member functions. It points to the object that invoked the function.
 
-  </div>
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
 
-  <footer>
-    Made with care for Semester 5 | OOP Study Notes
-  </footer>
+class Box {
+    int length;
 
-  <a href="#top" class="back-to-top" id="backToTop">↑</a>
+public:
+    // Using this pointer to resolve naming conflict
+    void setLength(int length) {
+        this-&gt;length = length;   // this-&gt;length is member, length is param
+    }
 
-  <script>
-    // Progress bar
-    window.addEventListener('scroll', function() {
-      var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-      var scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      var scrollPercent = (scrollTop / scrollHeight) * 100;
-      document.getElementById('progressBar').style.width = scrollPercent + '%';
+    // Chaining using this pointer
+    Box&amp; increment() {
+        this-&gt;length += 10;
+        return *this;     // returns current object
+    }
 
-      // Back to top visibility
-      var backToTop = document.getElementById('backToTop');
-      if (scrollTop > 300) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
-    });
+    // Comparison
+    bool isLarger(Box b) {
+        return this-&gt;length &gt; b.length;
+    }
 
-    // Smooth scroll for TOC links
-    document.querySelectorAll('.toc a').forEach(function(link) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        var target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    void display() { cout &lt;&lt; length &lt;&lt; endl; }
+};
+
+int main() {
+    Box b1;
+    b1.setLength(50);
+    b1.increment().increment();  // chaining
+    b1.display();   // 70
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <!-- 15-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">15-Mark Questions</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q15.</span></div>
+          <div class="qa__q"><strong>[2023]</strong> Explain in detail constructors and destructors. Include constructor overloading, copy constructor, and deep vs shallow copy.</div>
+          <div class="qa__a">
+            <p><strong>Constructors:</strong> Special member functions invoked automatically when an object is created. Used for initialization.</p>
+
+            <p><strong>Properties:</strong></p>
+            <ul>
+              <li>Same name as class</li>
+              <li>No return type (not even void)</li>
+              <li>Can be overloaded</li>
+              <li>Can have default arguments</li>
+              <li>Cannot be virtual</li>
+              <li>Cannot be inherited (but derived class calls base constructor)</li>
+            </ul>
+
+            <p><strong>Types of Constructors:</strong></p>
+            <ol>
+              <li><strong>Default Constructor:</strong> No parameters. Initializes with default values.</li>
+              <li><strong>Parameterized Constructor:</strong> Accepts parameters. Used to initialize with specific values.</li>
+              <li><strong>Copy Constructor:</strong> Takes reference to another object. Used for initialization and passing-by-value.</li>
+              <li><strong>Dynamic Constructor:</strong> Allocates memory dynamically using <code>new</code>.</li>
+            </ol>
+
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class String {
+    char *str;
+    int len;
+
+public:
+    // Default Constructor
+    String() {
+        len = 0;
+        str = new char[1];
+        str[0] = '\0';
+    }
+
+    // Parameterized Constructor
+    String(const char *s) {
+        len = strlen(s);
+        str = new char[len + 1];
+        strcpy(str, s);
+    }
+
+    // Copy Constructor (DEEP COPY)
+    String(const String &amp;s) {
+        len = s.len;
+        str = new char[len + 1];  // NEW memory allocation
+        strcpy(str, s.str);        // copy data
+    }
+
+    void display() { cout &lt;&lt; str &lt;&lt; endl; }
+
+    ~String() { delete[] str; }   // free memory
+};
+
+int main() {
+    String s1("Hello");           // Parameterized
+    String s2 = s1;               // Copy constructor
+    String s3;                    // Default
+
+    s2.display();   // Hello
+    return 0;
+}</code></pre></div>
+
+            <p><strong>Deep vs Shallow Copy:</strong></p>
+            <ul>
+              <li><strong>Shallow Copy:</strong> Copies pointer value (both point to same memory). Dangerous — modifying one affects other.</li>
+              <li><strong>Deep Copy:</strong> Allocates new memory and copies content. Safe — each object has independent memory.</li>
+            </ul>
+
+            <p><strong>Destructors:</strong> Functions prefixed with <code>~</code>. Called automatically when object goes out of scope. Used for cleanup (freeing memory). Only one destructor per class. Cannot be overloaded.</p>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q16.</span></div>
+          <div class="qa__q"><strong>[2021]</strong> Write a program in C++ to demonstrate the use of nested class and friend class.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Engine {
+    int horsepower;
+
+public:
+    Engine(int hp = 150) : horsepower(hp) {}
+
+    // Friend class can access private members
+    friend class Car;
+
+    void showSpec() {
+        cout &lt;&lt; "Horsepower: " &lt;&lt; horsepower &lt;&lt; endl;
+    }
+};
+
+// Nested class
+class Car {
+    string model;
+    Engine engine;  // Engine as member
+
+public:
+    Car(string m, int hp) : model(m), engine(hp) {}
+
+    // Nested class inside Car
+    class Insurance {
+        string provider;
+        int policyNo;
+
+    public:
+        Insurance(string p, int n) : provider(p), policyNo(n) {}
+
+        void show() {
+            cout &lt;&lt; "Provider: " &lt;&lt; provider
+                 &lt;&lt; ", Policy: " &lt;&lt; policyNo &lt;&lt; endl;
         }
-      });
-    });
-  </script>
+    };
 
+    void showCarDetails() {
+        cout &lt;&lt; "Model: " &lt;&lt; model &lt;&lt; endl;
+        engine.showSpec();   // Can access Engine's public members
+    }
+};
+
+int main() {
+    Car c("Tesla Model 3", 283);
+    c.showCarDetails();
+
+    // Using nested class
+    Car::Insurance ins("ICICI Lombard", 12345);
+    ins.show();
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="tips">
+          <strong>Exam Tips:</strong> Constructor overloading with <em>all 4 types</em> is a <em>very common 15-mark question</em>. Friend function and nested class questions appear regularly. Memory layout diagram for static members is frequently asked.
+        </div>
+      </div>
+
+      <!-- ==================== UNIT 3 ==================== -->
+      <div class="unit" id="unit3">
+        <div class="unit__head">
+          <span class="unit__num">03</span>
+          <div>
+            <h2 class="unit__title">Operator Overloading &amp; Inheritance</h2>
+            <p class="unit__sub">Operator Overloading Rules · Unary/Binary Operators · Special Operators · Type Conversion · Inheritance Types · Ambiguity Resolution · Virtual Base Class · Abstract Classes</p>
+          </div>
+        </div>
+
+        <!-- 1-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">1-Mark Questions</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q1.</span></div>
+          <div class="qa__q">What is operator overloading?</div>
+          <div class="qa__a">Giving special meaning to existing operators for user-defined data types. Allows operators like <code>+</code>, <code>==</code> to work with class objects.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q2.</span></div>
+          <div class="qa__q">Which operators cannot be overloaded in C++?</div>
+          <div class="qa__a"><code>::</code> (scope resolution), <code>.*</code> (member pointer), <code>sizeof</code>, <code>?:</code> (ternary), <code>.</code> (dot/member access)</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q3.</span></div>
+          <div class="qa__q">What is the difference between overloading and overriding?</div>
+          <div class="qa__a">
+            <table class="t">
+              <tr><th>Overloading</th><th>Overriding</th></tr>
+              <tr><td>Same function, different params</td><td>Same function, same params (in derived)</td></tr>
+              <tr><td>Compile-time polymorphism</td><td>Runtime polymorphism</td></tr>
+              <tr><td>Same class</td><td>Base &amp; derived class</td></tr>
+              <tr><td>No virtual keyword needed</td><td>Requires virtual function</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q4.</span></div>
+          <div class="qa__q">What is ambiguity in inheritance?</div>
+          <div class="qa__a">When a derived class inherits the <strong>same member</strong> from multiple base classes, the compiler cannot determine which one to use. Resolved using scope resolution operator.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q5.</span></div>
+          <div class="qa__q">What is a virtual base class?</div>
+          <div class="qa__a">A base class declared with <code>virtual</code> keyword that ensures <strong>only one copy</strong> of the base class exists in the derived class when using multiple inheritance (diamond problem).</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q6.</span></div>
+          <div class="qa__q">What is an abstract class?</div>
+          <div class="qa__a">A class that contains <strong>at least one pure virtual function</strong>. Cannot be instantiated. Used as a base class. Declared using <code>class A { virtual void f() = 0; };</code></div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q7.</span></div>
+          <div class="qa__q">What is a pure virtual function?</div>
+          <div class="qa__a">A virtual function declared with <code>= 0</code> syntax. It has no implementation in the base class. All derived classes must override it. Makes the class abstract.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q8.</span></div>
+          <div class="qa__q">What are the types of inheritance in C++?</div>
+          <div class="qa__a">Single, Multilevel, Multiple, Hierarchical, Hybrid. Access modes: public, protected, private inheritance.</div>
+        </div>
+
+        <!-- 5-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">5-Mark Questions</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q9.</span></div>
+          <div class="qa__q">Explain Operator Overloading with example of overloading <code>+</code> and <code>++</code> operators.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Complex {
+    float real, imag;
+
+public:
+    Complex(float r = 0, float i = 0) : real(r), imag(i) {}
+
+    // Overload + (binary, non-member)
+    friend Complex operator+(Complex c1, Complex c2) {
+        return Complex(c1.real + c2.real, c1.imag + c2.imag);
+    }
+
+    // Overload ++ (unary, prefix - member function)
+    Complex operator++() {
+        real++; imag++;
+        return *this;
+    }
+
+    // Overload ++ (unary, postfix - member function)
+    Complex operator++(int) {
+        Complex temp = *this;
+        real++; imag++;
+        return temp;    // returns old value
+    }
+
+    void display() {
+        cout &lt;&lt; real &lt;&lt; " + " &lt;&lt; imag &lt;&lt; "i" &lt;&lt; endl;
+    }
+};
+
+int main() {
+    Complex c1(2, 3), c2(1, 4);
+    Complex c3 = c1 + c2;   // Uses operator+
+    c3.display();           // 3 + 7i
+
+    ++c1;                   // prefix: c1 = 3 + 4i
+    c1.display();
+
+    c1++;                   // postfix: old value returned
+    c1.display();           // 4 + 5i
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q10.</span></div>
+          <div class="qa__q">Explain Type Conversion between basic and class types.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Distance {
+    float meters;
+
+public:
+    // Constructor for basic-to-class conversion
+    Distance(float m = 0) : meters(m) {}
+
+    // Operator for class-to-basic conversion
+    operator float() { return meters; }
+
+    void show() { cout &lt;&lt; meters &lt;&lt; " meters" &lt;&lt; endl; }
+};
+
+int main() {
+    // Basic to Class: constructor called automatically
+    Distance d1 = 5.5;       // implicit conversion
+    Distance d2(10.0);       // explicit constructor call
+
+    d1.show();   // 5.5
+    d2.show();   // 10
+
+    // Class to Basic: conversion operator called
+    float m = (float)d1;     // explicit
+    float m2 = d2;           // implicit
+    cout &lt;&lt; m &lt;&lt; " " &lt;&lt; m2 &lt;&lt; endl;  // 5.5 10
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q11.</span></div>
+          <div class="qa__q">Explain Inheritance Ambiguity and Virtual Base Class with example.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class A {
+public:
+    void show() { cout &lt;&lt; "Class A\n"; }
+};
+
+class B : public A {};
+class C : public A {};
+
+// Diamond Problem: D inherits from B and C
+class D : public B, public C {
+public:
+    void show() {
+        B::show();    // Ambiguity! Must specify which A
+        C::show();
+    }
+};
+
+// Virtual Base Class Solution
+class A2 {
+public:
+    void show() { cout &lt;&lt; "Virtual A\n"; }
+};
+
+class B2 : virtual public A2 {};
+class C2 : virtual public A2 {};
+
+class D2 : public B2, public C2 {
+public:
+    void show() {
+        A2::show();   // Only ONE copy of A2 exists
+    }
+};
+
+int main() {
+    D d;
+    d.show();        // Calls both A copies
+
+    D2 d2;
+    d2.show();       // Calls single A2
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q12.</span></div>
+          <div class="qa__q"><strong>[2022]</strong> Explain different types of inheritance in C++.</div>
+          <div class="qa__a">
+            <pre>
+1. SINGLE:       One base → one derived      A → B
+2. MULTILEVEL:   Chain: A → B → C
+3. MULTIPLE:     Multiple bases → one derived  A,B → C
+4. HIERARCHICAL: One base → multiple derived  A → B,C,D
+5. HYBRID:       Combination (e.g., hierarchical + multilevel)
+            </pre>
+
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// 1. Single Inheritance
+class Animal {
+public: void eat() { cout &lt;&lt; "Eating\n"; }
+};
+class Dog : public Animal {     // Single
+public: void bark() { cout &lt;&lt; "Barking\n"; }
+};
+
+// 2. Multilevel Inheritance
+class Puppy : public Dog {      // Dog → Puppy (multilevel from Animal)
+public: void weep() { cout &lt;&lt; "Weeping\n"; }
+};
+
+// 3. Multiple Inheritance
+class Bird {
+public: void fly() { cout &lt;&lt; "Flying\n"; }
+};
+class Bat : public Animal, public Bird {   // Multiple
+public: void hang() { cout &lt;&lt; "Hanging\n"; }
+};
+
+// 4. Hierarchical Inheritance
+class Cat : public Animal {     // Same base, different derived
+public: void meow() { cout &lt;&lt; "Meowing\n"; }
+};
+
+// 5. Hybrid: Multiple + Multilevel
+class Kitten : public Cat {};   // Cat→Kitten + Cat from Animal
+
+int main() {
+    Dog d; d.eat(); d.bark();
+    Puppy p; p.eat(); p.bark(); p.weep();
+    Bat b; b.eat(); b.fly(); b.hang();
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <!-- 15-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">15-Mark Questions</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q13.</span></div>
+          <div class="qa__q"><strong>[2023]</strong> Explain in detail Operator Overloading in C++. Include rules, unary/binary overloading, and overloading of special operators (<code>++</code>, <code>[]</code>, <code>()</code>, <code>new</code>/<code>delete</code>).</div>
+          <div class="qa__a">
+            <p><strong>Definition:</strong> Operator overloading allows C++ operators to be redefined for user-defined types. Nearly all operators can be overloaded.</p>
+
+            <p><strong>Rules:</strong></p>
+            <ol>
+              <li>At least one operand must be a user-defined type (class/struct).</li>
+              <li>Cannot change the precedence, associativity, or arity of operators.</li>
+              <li>Cannot create new operators.</li>
+              <li><code>::</code>, <code>.*</code>, <code>sizeof</code>, <code>?:</code>, <code>.</code> cannot be overloaded.</li>
+              <li><code>=</code>, <code>[]</code>, <code>()</code>, <code>-&gt;</code> must be overloaded as member functions.</li>
+              <li>Unary operators: prefer member overloading.</li>
+              <li>Binary operators: prefer friend overloading (symmetry).</li>
+            </ol>
+
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+class Matrix {
+    int mat[3][3];
+
+public:
+    Matrix() { for(int i=0;i&lt;3;i++) for(int j=0;j&lt;3;j++) mat[i][j]=0; }
+    Matrix(int val) {
+        for(int i=0;i&lt;3;i++)
+            for(int j=0;j&lt;3;j++)
+                mat[i][j] = val + i*3 + j;
+    }
+
+    // Overload [] (MUST be member function)
+    int* operator[](int row) { return mat[row]; }
+
+    // Overload () as function call operator
+    Matrix operator()(int scalar) {
+        Matrix temp;
+        for(int i=0;i&lt;3;i++)
+            for(int j=0;j&lt;3;j++)
+                temp.mat[i][j] = mat[i][j] * scalar;
+        return temp;
+    }
+
+    // Overload + (binary, friend for symmetry)
+    friend Matrix operator+(Matrix a, Matrix b) {
+        Matrix temp;
+        for(int i=0;i&lt;3;i++)
+            for(int j=0;j&lt;3;j++)
+                temp.mat[i][j] = a.mat[i][j] + b.mat[i][j];
+        return temp;
+    }
+
+    // Overload == (binary, friend)
+    friend bool operator==(Matrix a, Matrix b) {
+        for(int i=0;i&lt;3;i++)
+            for(int j=0;j&lt;3;j++)
+                if(a.mat[i][j] != b.mat[i][j]) return false;
+        return true;
+    }
+
+    // Overload &lt;&lt; for output (friend)
+    friend ostream&amp; operator&lt;&lt;(ostream &amp;out, Matrix m) {
+        for(int i=0;i&lt;3;i++) {
+            for(int j=0;j&lt;3;j++) out &lt;&lt; m.mat[i][j] &lt;&lt; "\t";
+            out &lt;&lt; endl;
+        }
+        return out;
+    }
+
+    // Overload new/delete (static)
+    void* operator new(size_t size) {
+        cout &lt;&lt; "Overloaded new called\n";
+        return malloc(size);
+    }
+    void operator delete(void* ptr) {
+        cout &lt;&lt; "Overloaded delete called\n";
+        free(ptr);
+    }
+};
+
+int main() {
+    Matrix m1(1), m2(10);
+    Matrix m3 = m1 + m2;
+
+    cout &lt;&lt; "Matrix 1:\n" &lt;&lt; m1;
+    cout &lt;&lt; "Matrix 2:\n" &lt;&lt; m2;
+    cout &lt;&lt; "Matrix 1 + 2:\n" &lt;&lt; m3;
+
+    // [] overloading
+    cout &lt;&lt; "m3[0][0] = " &lt;&lt; m3[0][0] &lt;&lt; endl;
+
+    // () overloading
+    Matrix m4 = m3(2);  // Multiply by 2
+    cout &lt;&lt; "Matrix 3 * 2:\n" &lt;&lt; m4;
+
+    // new/delete overloading
+    Matrix *ptr = new Matrix();
+    cout &lt;&lt; (*ptr == m1) &lt;&lt; endl;  // 1 (true)
+    delete ptr;
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q14.</span></div>
+          <div class="qa__q"><strong>[2022]</strong> Explain different types of constructors with a complete program demonstrating constructor overloading.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;cstring&gt;
+using namespace std;
+
+class Employee {
+    int empID;
+    char name[50];
+    double salary;
+
+public:
+    // 1. Default Constructor
+    Employee() {
+        empID = 0;
+        strcpy(name, "N/A");
+        salary = 0.0;
+        cout &lt;&lt; "Default constructor called\n";
+    }
+
+    // 2. Parameterized Constructor (partial)
+    Employee(int id) {
+        empID = id;
+        strcpy(name, "New Employee");
+        salary = 15000.0;
+        cout &lt;&lt; "Parameterized (1 arg) called for ID " &lt;&lt; id &lt;&lt; endl;
+    }
+
+    // 3. Parameterized Constructor (all args)
+    Employee(int id, const char *n, double s) {
+        empID = id;
+        strcpy(name, n);
+        salary = s;
+        cout &lt;&lt; "Parameterized (3 args) called for " &lt;&lt; n &lt;&lt; endl;
+    }
+
+    // 4. Copy Constructor
+    Employee(const Employee &amp;e) {
+        empID = e.empID;
+        strcpy(name, e.name);
+        salary = e.salary;
+        cout &lt;&lt; "Copy constructor called for " &lt;&lt; e.name &lt;&lt; endl;
+    }
+
+    void display() {
+        cout &lt;&lt; "ID: " &lt;&lt; empID
+             &lt;&lt; ", Name: " &lt;&lt; name
+             &lt;&lt; ", Salary: " &lt;&lt; salary &lt;&lt; endl;
+    }
+
+    ~Employee() { cout &lt;&lt; "Destructor called for " &lt;&lt; name &lt;&lt; endl; }
+};
+
+int main() {
+    cout &lt;&lt; "=== Creating e1 (default) ===\n";
+    Employee e1;              // Default constructor
+    e1.display();
+
+    cout &lt;&lt; "\n=== Creating e2 (parameterized) ===\n";
+    Employee e2(101, "Rahul", 45000);
+    e2.display();
+
+    cout &lt;&lt; "\n=== Creating e3 (copy) ===\n";
+    Employee e3 = e2;         // Copy constructor
+    e3.display();
+
+    cout &lt;&lt; "\n=== Creating e4 (partial params) ===\n";
+    Employee e4(102);         // Parameterized (1 arg)
+    e4.display();
+
+    cout &lt;&lt; "\n=== End of main ===\n";
+    return 0;
+}</code></pre></div>
+
+            <p><strong>Output:</strong><br>
+            Default constructor called<br>
+            ID: 0, Name: N/A, Salary: 0<br>
+            Parameterized (3 args) called for Rahul<br>
+            ID: 101, Name: Rahul, Salary: 45000<br>
+            Copy constructor called for Rahul<br>
+            ID: 101, Name: Rahul, Salary: 45000<br>
+            Parameterized (1 arg) called for ID 102<br>
+            ID: 102, Name: New Employee, Salary: 15000<br>
+            End of main<br>
+            Destructor called for New Employee<br>
+            Destructor called for Rahul<br>
+            Destructor called for Rahul<br>
+            Destructor called for N/A</p>
+          </div>
+        </div>
+
+        <div class="tips">
+          <strong>Exam Tips:</strong> Operator overloading program with <code>+</code>, <code>[]</code>, <code>()</code> is a <em>favorite 15-mark question</em>. Constructor overloading with all types guaranteed. Inheritance ambiguity and virtual base class regularly tested.
+        </div>
+      </div>
+
+      <!-- ==================== UNIT 4 ==================== -->
+      <div class="unit" id="unit4">
+        <div class="unit__head">
+          <span class="unit__num">04</span>
+          <div>
+            <h2 class="unit__title">Polymorphism &amp; Virtual Functions</h2>
+            <p class="unit__sub">Compile-time Polymorphism · Runtime Polymorphism · vtable/vptr Concept · Pure Virtual Functions · Virtual Destructors · Early vs Late Binding · Interface Classes · Shape Hierarchy Example</p>
+          </div>
+        </div>
+
+        <!-- 1-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">1-Mark Questions</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q1.</span></div>
+          <div class="qa__q">What is Polymorphism?</div>
+          <div class="qa__a">The ability of an object to take many forms. In C++, achieved through function/operator overloading (compile-time) and virtual functions (runtime).</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q2.</span></div>
+          <div class="qa__q">What is early binding?</div>
+          <div class="qa__a">Also called <strong>static binding</strong>. Function calls are resolved at <strong>compile time</strong>. Used for overloaded and non-virtual functions.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q3.</span></div>
+          <div class="qa__q">What is late binding?</div>
+          <div class="qa__a">Also called <strong>dynamic binding</strong>. Function calls are resolved at <strong>runtime</strong>. Achieved using <code>virtual</code> functions and vtable mechanism.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q4.</span></div>
+          <div class="qa__q">What is vtable?</div>
+          <div class="qa__a"><strong>Virtual Table</strong> — a table created by the compiler for classes with virtual functions. Contains addresses of virtual functions. Each object has a hidden pointer (vptr) to its class's vtable.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q5.</span></div>
+          <div class="qa__q">What is a virtual destructor?</div>
+          <div class="qa__a">A destructor declared with <code>virtual</code> keyword. Ensures the <strong>correct destructor is called</strong> (derived then base) when deleting through a base pointer.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q6.</span></div>
+          <div class="qa__q">What is an interface class?</div>
+          <div class="qa__a">A class with <strong>only pure virtual functions</strong> and no implementation. It defines a contract that derived classes must implement. (Similar to Java interfaces).</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q7.</span></div>
+          <div class="qa__q">Can a virtual function be private?</div>
+          <div class="qa__a">Yes, but it can only be overridden by derived classes. It cannot be called directly through base class pointer from outside.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q8.</span></div>
+          <div class="qa__q">What is the order of constructor/destructor calls in inheritance?</div>
+          <div class="qa__a">Constructor: <strong>Base first, then Derived</strong>. Destructor: <strong>Derived first, then Base</strong> (reverse order).</div>
+        </div>
+
+        <!-- 5-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">5-Mark Questions</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q9.</span></div>
+          <div class="qa__q"><strong>[2023]</strong> Explain compile-time vs runtime polymorphism.</div>
+          <div class="qa__a">
+            <table class="t">
+              <tr><th>Compile-Time (Static)</th><th>Runtime (Dynamic)</th></tr>
+              <tr><td>Function Overloading</td><td>Virtual Functions</td></tr>
+              <tr><td>Operator Overloading</td><td>Abstract Classes</td></tr>
+              <tr><td>Resolved at compile time</td><td>Resolved at runtime</td></tr>
+              <tr><td>Fast execution</td><td>Slightly slower (vtable lookup)</td></tr>
+              <tr><td>No virtual keyword needed</td><td>Uses virtual keyword</td></tr>
+              <tr><td>Memory efficient</td><td>Requires vtable memory</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q10.</span></div>
+          <div class="qa__q">Explain vtable and vptr mechanism.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>// Memory layout representation:
+
+// vtable for Base:
+//   [0] → Base::show()
+//   [1] → Base::display()
+
+// vtable for Derived:
+//   [0] → Derived::show()   ← overridden
+//   [1] → Base::display()
+
+// Memory for Derived object:
+//  ┌──────────────┐
+//  │    vptr      │──→ points to Derived's vtable
+//  │  base data   │
+//  │derived data  │
+//  └──────────────┘
+
+#include &lt;iostream&gt;
+using namespace std;
+
+class Base {
+public:
+    virtual void show() { cout &lt;&lt; "Base show\n"; }
+    void display() { cout &lt;&lt; "Base display\n"; }
+};
+
+class Derived : public Base {
+public:
+    void show() override { cout &lt;&lt; "Derived show\n"; }  // overrides
+};
+
+int main() {
+    Base *ptr;
+    Derived d;
+    ptr = &amp;d;
+    ptr-&gt;show();     // "Derived show" (runtime via vtable)
+    ptr-&gt;display();  // "Base display" (not virtual)
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q11.</span></div>
+          <div class="qa__q">Explain pure virtual functions and abstract classes.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Abstract class (cannot create objects)
+class Shape {
+public:
+    // Pure virtual function
+    virtual float area() = 0;
+
+    void show() { cout &lt;&lt; "Shape class\n"; }
+};
+
+class Circle : public Shape {
+    float radius;
+
+public:
+    Circle(float r) : radius(r) {}
+    float area() override { return 3.14159 * radius * radius; }
+};
+
+class Rectangle : public Shape {
+    float length, width;
+
+public:
+    Rectangle(float l, float w) : length(l), width(w) {}
+    float area() override { return length * width; }
+};
+
+int main() {
+    // Shape s;     // ERROR: abstract class
+
+    Shape *s1 = new Circle(5);
+    Shape *s2 = new Rectangle(4, 6);
+
+    cout &lt;&lt; "Circle area: " &lt;&lt; s1-&gt;area() &lt;&lt; endl;
+    cout &lt;&lt; "Rectangle area: " &lt;&lt; s2-&gt;area() &lt;&lt; endl;
+
+    delete s1; delete s2;
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <!-- 15-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">15-Mark Questions</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q12.</span></div>
+          <div class="qa__q"><strong>[2023, 2022]</strong> Write a complete C++ program demonstrating Polymorphism using a Shape class hierarchy (Circle, Rectangle, Triangle) with area calculation. Include virtual destructors and explain the complete vtable mechanism.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+// ==================== ABSTRACT BASE CLASS ====================
+class Shape {
+public:
+    // Pure virtual functions → makes Shape abstract
+    virtual float area() = 0;
+    virtual void display() = 0;
+
+    // Virtual destructor - essential for polymorphism
+    virtual ~Shape() {
+        cout &lt;&lt; "Shape destructor called\n";
+    }
+};
+
+// ==================== CIRCLE CLASS ====================
+class Circle : public Shape {
+    float radius;
+
+public:
+    Circle(float r = 0) : radius(r) {}
+
+    // Override pure virtual functions
+    float area() override {
+        return 3.14159f * radius * radius;
+    }
+
+    void display() override {
+        cout &lt;&lt; "Circle [r=" &lt;&lt; radius
+             &lt;&lt; ", Area=" &lt;&lt; area() &lt;&lt; "]\n";
+    }
+
+    ~Circle() { cout &lt;&lt; "Circle destructor called\n"; }
+};
+
+// ==================== RECTANGLE CLASS ====================
+class Rectangle : public Shape {
+    float length, width;
+
+public:
+    Rectangle(float l = 0, float w = 0) : length(l), width(w) {}
+
+    float area() override { return length * width; }
+
+    void display() override {
+        cout &lt;&lt; "Rectangle [l=" &lt;&lt; length
+             &lt;&lt; ", w=" &lt;&lt; width
+             &lt;&lt; ", Area=" &lt;&lt; area() &lt;&lt; "]\n";
+    }
+
+    ~Rectangle() { cout &lt;&lt; "Rectangle destructor called\n"; }
+};
+
+// ==================== TRIANGLE CLASS ====================
+class Triangle : public Shape {
+    float base, height;
+
+public:
+    Triangle(float b = 0, float h = 0) : base(b), height(h) {}
+
+    float area() override { return 0.5f * base * height; }
+
+    void display() override {
+        cout &lt;&lt; "Triangle [b=" &lt;&lt; base
+             &lt;&lt; ", h=" &lt;&lt; height
+             &lt;&lt; ", Area=" &lt;&lt; area() &lt;&lt; "]\n";
+    }
+
+    ~Triangle() { cout &lt;&lt; "Triangle destructor called\n"; }
+};
+
+// ==================== MAIN ====================
+int main() {
+    cout &lt;&lt; "========== POLYMORPHISM DEMO ==========\n\n";
+
+    // Array of Shape pointers (polymorphic)
+    Shape *shapes[5];
+
+    shapes[0] = new Circle(5.0f);
+    shapes[1] = new Rectangle(4.0f, 6.0f);
+    shapes[2] = new Triangle(3.0f, 4.0f);
+    shapes[3] = new Circle(10.0f);
+    shapes[4] = new Rectangle(7.0f, 8.0f);
+
+    // Polymorphic calls - correct area() called at runtime
+    float totalArea = 0;
+    for (int i = 0; i &lt; 5; i++) {
+        shapes[i]-&gt;display();        // Runtime dispatch
+        totalArea += shapes[i]-&gt;area();  // Runtime dispatch
+    }
+
+    cout &lt;&lt; "\nTotal Area of all shapes: " &lt;&lt; totalArea &lt;&lt; endl;
+
+    // Cleanup - virtual destructor ensures correct order
+    cout &lt;&lt; "\nDeleting shapes...\n";
+    for (int i = 0; i &lt; 5; i++) {
+        delete shapes[i];  // Calls correct destructor via vtable
+    }
+
+    cout &lt;&lt; "\n========== END ==========\n";
+    return 0;
+}</code></pre></div>
+
+            <p><strong>vtable Mechanism Explained:</strong></p>
+            <pre>
+Shape vtable:  [0] ~Shape()   [1] area=0   [2] display=0
+Circle vtable: [0] ~Circle()  [1] Circle::area()  [2] Circle::display()
+Rect vtable:   [0] ~Rect()    [1] Rect::area()     [2] Rect::display()
+Tri vtable:    [0] ~Tri()     [1] Tri::area()      [2] Tri::display()
+
+Each object layout:
+Circle object:  [vptr → Circle vtable] [radius]
+Rect object:     [vptr → Rect vtable]   [length] [width]
+            </pre>
+
+            <p>When <code>shapes[i]-&gt;area()</code> is called, the vptr points to the correct vtable, which has the address of the correct <code>area()</code> function. This is <strong>late binding</strong> — resolved at runtime.</p>
+          </div>
+        </div>
+
+        <div class="tips">
+          <strong>Exam Tips:</strong> Shape hierarchy program is a <em>very common 15-mark question</em>. vtable/vptr explanation is essential. Virtual destructor importance often asked. Interface class concept appears frequently.
+        </div>
+      </div>
+
+      <!-- ==================== UNIT 5 ==================== -->
+      <div class="unit" id="unit5">
+        <div class="unit__head">
+          <span class="unit__num">05</span>
+          <div>
+            <h2 class="unit__title">Advanced C++ Features</h2>
+            <p class="unit__sub">Templates · Exception Handling · STL · RTTI · File I/O · Command Line Arguments · new vs malloc</p>
+          </div>
+        </div>
+
+        <!-- 1-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">1-Mark Questions</span></div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q1.</span></div>
+          <div class="qa__q">What is a template in C++?</div>
+          <div class="qa__a">A template is a feature that allows writing <strong>generic code</strong> that works with any data type. Types: function templates and class templates.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q2.</span></div>
+          <div class="qa__q">What is the difference between template and macro?</div>
+          <div class="qa__a">
+            <table class="t">
+              <tr><th>Template</th><th>Macro</th></tr>
+              <tr><td>Type-safe (compiler checks)</td><td>Not type-safe (text replacement)</td></tr>
+              <tr><td>Processed by compiler</td><td>Processed by preprocessor</td></tr>
+              <tr><td>Supports overloading</td><td>No overloading</td></tr>
+              <tr><td>Debuggable</td><td>Hard to debug</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q3.</span></div>
+          <div class="qa__q">What is exception handling?</div>
+          <div class="qa__a">A mechanism to handle <strong>runtime errors</strong> gracefully using <code>try</code>, <code>catch</code>, and <code>throw</code> blocks, preventing program crashes.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q4.</span></div>
+          <div class="qa__q">What is STL?</div>
+          <div class="qa__a"><strong>Standard Template Library</strong> — a collection of C++ template classes for common data structures (containers) and algorithms. Components: containers, iterators, algorithms, function objects.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q5.</span></div>
+          <div class="qa__q">What is RTTI?</div>
+          <div class="qa__a"><strong>Runtime Type Identification</strong> — allows determining the type of an object at runtime using <code>dynamic_cast</code>, <code>typeid</code>, and <code>type_info</code>.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q6.</span></div>
+          <div class="qa__q">What is the difference between <code>new</code> and <code>malloc()</code>?</div>
+          <div class="qa__a">
+            <table class="t">
+              <tr><th>new</th><th>malloc()</th></tr>
+              <tr><td>C++ operator</td><td>C library function</td></tr>
+              <tr><td>Calls constructor</td><td>Does NOT call constructor</td></tr>
+              <tr><td>Returns typed pointer</td><td>Returns void*</td></tr>
+              <tr><td>Use delete to free</td><td>Use free() to free</td></tr>
+              <tr><td>Size calculated automatically</td><td>Size must be specified manually</td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q7.</span></div>
+          <div class="qa__q">What is a vector in STL?</div>
+          <div class="qa__a">A <strong>dynamic array</strong> that can resize itself automatically. Provides random access via <code>[]</code> and methods like <code>push_back()</code>, <code>size()</code>, <code>pop_back()</code>.</div>
+        </div>
+
+        <div class="qa qa--1m">
+          <div class="qa__head"><span class="qa__no">Q8.</span></div>
+          <div class="qa__q">What is an iterator?</div>
+          <div class="qa__a">An object that <strong>points to elements</strong> in a container. Used to traverse through elements. Types: input, output, forward, bidirectional, random access.</div>
+        </div>
+
+        <!-- 5-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">5-Mark Questions</span></div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q9.</span></div>
+          <div class="qa__q">Explain Function Templates with example.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Function template with multiple type parameters
+template &lt;typename T1, typename T2&gt;
+T1 maxValue(T1 a, T2 b) {
+    return (a &gt; b) ? a : (T1)b;
+}
+
+// Overloaded function template
+template &lt;typename T&gt;
+T maxValue(T a, T b, T c) {
+    return (a &gt; b) ? ((a &gt; c) ? a : c) : ((b &gt; c) ? b : c);
+}
+
+int main() {
+    cout &lt;&lt; maxValue(10, 20) &lt;&lt; endl;       // 20 (int)
+    cout &lt;&lt; maxValue(3.5, 2.1) &lt;&lt; endl;    // 3.5 (double)
+    cout &lt;&lt; maxValue(5, 10, 3) &lt;&lt; endl;    // 10 (3 params)
+    cout &lt;&lt; maxValue('A', 65) &lt;&lt; endl;     // A (char vs int)
+
+    // Explicit type specification
+    cout &lt;&lt; maxValue&lt;int&gt;(5.5, 3.2) &lt;&lt; endl;  // 5
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q10.</span></div>
+          <div class="qa__q">Explain Exception Handling with multiple catch blocks.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+void check(int age) {
+    if (age &lt; 0)
+        throw invalid_argument("Age cannot be negative");
+    if (age &lt; 18)
+        throw runtime_error("Under 18 - not eligible");
+    if (age &gt; 100)
+        throw out_of_range("Age seems unrealistic");
+}
+
+int main() {
+    int ages[] = {25, -5, 15, 105, 30};
+
+    for (int i = 0; i &lt; 5; i++) {
+        try {
+            check(ages[i]);
+            cout &lt;&lt; ages[i] &lt;&lt; " - Eligible\n";
+        }
+        catch (const invalid_argument &amp;e) {
+            cout &lt;&lt; "Invalid: " &lt;&lt; e.what() &lt;&lt; endl;
+        }
+        catch (const runtime_error &amp;e) {
+            cout &lt;&lt; "Runtime: " &lt;&lt; e.what() &lt;&lt; endl;
+        }
+        catch (const out_of_range &amp;e) {
+            cout &lt;&lt; "Range: " &lt;&lt; e.what() &lt;&lt; endl;
+        }
+        catch (...) {
+            cout &lt;&lt; "Unknown exception caught\n";
+        }
+    }
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q11.</span></div>
+          <div class="qa__q">Explain STL containers: Vector and Map with examples.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+#include &lt;map&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    // ========== VECTOR ==========
+    cout &lt;&lt; "=== VECTOR ===\n";
+    vector&lt;int&gt; v;
+
+    v.push_back(10);    // Add elements
+    v.push_back(20);
+    v.push_back(30);
+    v.push_back(40);
+
+    cout &lt;&lt; "Size: " &lt;&lt; v.size() &lt;&lt; endl;    // 4
+    cout &lt;&lt; "Element at [2]: " &lt;&lt; v[2] &lt;&lt; endl;  // 30
+
+    v.pop_back();       // Remove last
+    cout &lt;&lt; "After pop: " &lt;&lt; v.size() &lt;&lt; endl;   // 3
+
+    // Iterate using iterator
+    cout &lt;&lt; "Vector: ";
+    for (auto it = v.begin(); it != v.end(); it++)
+        cout &lt;&lt; *it &lt;&lt; " ";       // 10 20 30
+    cout &lt;&lt; endl;
+
+    // Sort and binary search
+    v.push_back(15);
+    sort(v.begin(), v.end());
+    if (binary_search(v.begin(), v.end(), 20))
+        cout &lt;&lt; "20 found!\n";
+
+    // ========== MAP ==========
+    cout &lt;&lt; "\n=== MAP ===\n";
+    map&lt;string, int&gt; grades;
+
+    grades["Alice"] = 85;
+    grades["Bob"] = 92;
+    grades["Charlie"] = 78;
+    grades["Diana"] = 95;
+
+    // Find
+    map&lt;string, int&gt;::iterator it = grades.find("Bob");
+    if (it != grades.end())
+        cout &lt;&lt; "Bob's grade: " &lt;&lt; it-&gt;second &lt;&lt; endl;
+
+    // Iterate (auto-sorted by key)
+    cout &lt;&lt; "All grades:\n";
+    for (auto &amp;p : grades)
+        cout &lt;&lt; p.first &lt;&lt; ": " &lt;&lt; p.second &lt;&lt; endl;
+
+    // Count elements
+    cout &lt;&lt; "Students: " &lt;&lt; grades.size() &lt;&lt; endl;
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--5m">
+          <div class="qa__head"><span class="qa__marks">5 Marks</span><span class="qa__no">Q12.</span></div>
+          <div class="qa__q">Explain File I/O in C++ with example.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;fstream&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    // Writing to file
+    ofstream fout("data.txt");
+    fout &lt;&lt; "Name: Rahul\n";
+    fout &lt;&lt; "Roll: 101\n";
+    fout &lt;&lt; "Marks: 85\n";
+    fout.close();
+
+    // Reading from file
+    ifstream fin("data.txt");
+    string line;
+    while (getline(fin, line)) {
+        cout &lt;&lt; line &lt;&lt; endl;
+    }
+    fin.close();
+
+    // Append mode
+    ofstream fappend("data.txt", ios::app);
+    fappend &lt;&lt; "Grade: A\n";
+    fappend.close();
+
+    // Read/write mode (fstream)
+    fstream file("data.txt", ios::in | ios::out);
+    file.seekp(0, ios::end);
+    file &lt;&lt; "Department: CSE\n";
+    file.close();
+
+    return 0;
+}</code></pre></div>
+
+            <p><strong>File Modes:</strong><br>
+            <code>ios::in</code> (read), <code>ios::out</code> (write), <code>ios::app</code> (append), <code>ios::ate</code> (seek to end), <code>ios::trunc</code> (truncate), <code>ios::binary</code> (binary mode)</p>
+          </div>
+        </div>
+
+        <!-- 15-Mark Questions -->
+        <div class="subhead"><span class="subhead__title">15-Mark Questions</span></div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q13.</span></div>
+          <div class="qa__q"><strong>[2023]</strong> Explain Templates in C++. Write programs for function templates (with multiple parameters and overloading) and class templates.</div>
+          <div class="qa__a">
+            <p>Templates enable <strong>generic programming</strong> — writing code that works with any data type. The compiler generates type-specific code at compile time.</p>
+
+            <p><strong>Function Template:</strong></p>
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Function Template with multiple parameters
+template &lt;typename T1, typename T2&gt;
+void displayPair(T1 first, T2 second) {
+    cout &lt;&lt; first &lt;&lt; " : " &lt;&lt; second &lt;&lt; endl;
+}
+
+// Template with default type
+template &lt;typename T = int&gt;
+T sum(T a, T b) { return a + b; }
+
+// Overloaded function template
+template &lt;typename T&gt;
+T sum(T a, T b, T c) { return a + b + c; }
+template &lt;typename T&gt;
+T sum(T a, T b, T c, T d) { return a + b + c + d; }
+
+// Non-template function (for specific type)
+double sum(double a, double b) {
+    cout &lt;&lt; "[double version] ";
+    return a + b;
+}
+
+int main() {
+    displayPair("Roll", 101);         // string, int
+    displayPair(3.14, "pi");          // double, string
+    displayPair('A', 65);             // char, int
+
+    cout &lt;&lt; sum(10, 20) &lt;&lt; endl;       // 30 (int, 2 args)
+    cout &lt;&lt; sum(1, 2, 3) &lt;&lt; endl;     // 6 (int, 3 args)
+    cout &lt;&lt; sum(1, 2, 3, 4) &lt;&lt; endl;  // 10 (int, 4 args)
+    cout &lt;&lt; sum(2.5, 3.5) &lt;&lt; endl;    // [double version] 6.0
+    return 0;
+}</code></pre></div>
+
+            <p><strong>Class Template:</strong></p>
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+// Class Template
+template &lt;typename T&gt;
+class Calculator {
+    T a, b;
+
+public:
+    Calculator(T x, T y) : a(x), b(y) {}
+
+    T add() { return a + b; }
+    T subtract() { return a - b; }
+    T multiply() { return a * b; }
+    T divide() { return a / b; }
+};
+
+// Template specialization for char*
+template &lt;&gt;
+class Calculator&lt;char*&gt; {
+    char *a, *b;
+
+public:
+    Calculator(char *x, char *y) : a(x), b(y) {}
+
+    // String concatenation
+    void concat() {
+        cout &lt;&lt; "Concatenated: ";
+        while(*a) cout &lt;&lt; *a++;
+        while(*b) cout &lt;&lt; *b++;
+        cout &lt;&lt; endl;
+    }
+};
+
+// Template class with multiple type params
+template &lt;typename K, typename V&gt;
+class KeyValue {
+    K key;
+    V value;
+
+public:
+    KeyValue(K k, V v) : key(k), value(v) {}
+    void show() {
+        cout &lt;&lt; key &lt;&lt; " = " &lt;&lt; value &lt;&lt; endl;
+    }
+};
+
+int main() {
+    // Generic class with int
+    Calculator&lt;int&gt; calcInt(10, 5);
+    cout &lt;&lt; calcInt.add() &lt;&lt; endl;        // 15
+    cout &lt;&lt; calcInt.multiply() &lt;&lt; endl;   // 50
+
+    // Generic class with double
+    Calculator&lt;double&gt; calcDbl(3.5, 2.0);
+    cout &lt;&lt; calcDbl.divide() &lt;&lt; endl;     // 1.75
+
+    // Specialized version
+    char s1[] = "Hello", s2[] = " World";
+    Calculator&lt;char*&gt; calcStr(s1, s2);
+    calcStr.concat();                       // Hello World
+
+    // Multiple type params
+    KeyValue&lt;string, int&gt; kv1("Age", 25);
+    KeyValue&lt;string, double&gt; kv2("Pi", 3.14);
+    kv1.show();   // Age = 25
+    kv2.show();   // Pi = 3.14
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q14.</span></div>
+          <div class="qa__q"><strong>[2021]</strong> Explain Exception Handling mechanism in C++ with a complete program showing try, catch, multiple catch blocks, and catch-all handler.</div>
+          <div class="qa__a">
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;stdexcept&gt;
+using namespace std;
+
+// Function that divides two numbers
+double divide(double a, double b) {
+    if (b == 0)
+        throw runtime_error("Division by zero!");
+    return a / b;
+}
+
+// Function that checks age
+void validateAge(int age) {
+    if (age &lt; 0)
+        throw invalid_argument("Age cannot be negative");
+    if (age &lt; 18)
+        throw out_of_range("Must be 18 or older");
+}
+
+// Function with throw specification (deprecated in C++11)
+void safeDivide(double a, double b) throw() {
+    // throw() means this function doesn't throw any exception
+    if (b == 0) return 0;
+    return a / b;
+}
+
+class BankAccount {
+    double balance;
+
+public:
+    BankAccount(double b) : balance(b) {}
+
+    void withdraw(double amount) {
+        if (amount &gt; balance)
+            throw overflow_error("Insufficient balance");
+        if (amount &lt;= 0)
+            throw invalid_argument("Amount must be positive");
+        balance -= amount;
+    }
+
+    double getBalance() { return balance; }
+};
+
+int main() {
+    cout &lt;&lt; "=== EXCEPTION HANDLING DEMO ===\n\n";
+
+    // Example 1: Division
+    try {
+        cout &lt;&lt; divide(10, 2) &lt;&lt; endl;       // 5
+        cout &lt;&lt; divide(10, 0) &lt;&lt; endl;       // throws
+    }
+    catch (const runtime_error &amp;e) {
+        cout &lt;&lt; "Runtime Error: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+
+    // Example 2: Age validation with multiple catch
+    try {
+        validateAge(-5);      // throws invalid_argument
+    }
+    catch (const invalid_argument &amp;e) {
+        cout &lt;&lt; "Invalid Argument: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+    catch (const out_of_range &amp;e) {
+        cout &lt;&lt; "Out of Range: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+
+    // Example 3: BankAccount with exception
+    try {
+        BankAccount acc(1000);
+        cout &lt;&lt; "Balance: " &lt;&lt; acc.getBalance() &lt;&lt; endl;
+        acc.withdraw(500);
+        cout &lt;&lt; "After withdrawal: " &lt;&lt; acc.getBalance() &lt;&lt; endl;
+        acc.withdraw(600);     // throws
+    }
+    catch (const overflow_error &amp;e) {
+        cout &lt;&lt; "Overflow Error: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+    catch (const invalid_argument &amp;e) {
+        cout &lt;&lt; "Invalid: " &lt;&lt; e.what() &lt;&lt; endl;
+    }
+    catch (...) {
+        cout &lt;&lt; "Caught unknown exception\n";
+    }
+
+    cout &lt;&lt; "\nProgram continues after handling exceptions!\n";
+
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="qa qa--15m">
+          <div class="qa__head"><span class="qa__marks">15 Marks</span><span class="qa__no">Q15.</span></div>
+          <div class="qa__q"><strong>[2022]</strong> Explain RTTI, new vs malloc, and Command Line Arguments with examples.</div>
+          <div class="qa__a">
+            <p><strong>RTTI (Runtime Type Identification):</strong></p>
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+#include &lt;typeinfo&gt;
+using namespace std;
+
+class Base { virtual void f() {} };
+class Derived : public Base {};
+
+int main() {
+    Base *ptr = new Derived();
+
+    // typeid - returns type_info object
+    if (typeid(*ptr) == typeid(Derived))
+        cout &lt;&lt; "ptr points to Derived\n";
+
+    cout &lt;&lt; "Type name: " &lt;&lt; typeid(*ptr).name() &lt;&lt; endl;
+
+    // dynamic_cast - safe downcasting
+    Derived *d = dynamic_cast&lt;Derived*&gt;(ptr);
+    if (d != nullptr)
+        cout &lt;&lt; "Cast successful\n";
+
+    delete ptr;
+    return 0;
+}</code></pre></div>
+
+            <p><strong>new vs malloc:</strong></p>
+            <div class="codeblock"><pre><code>// malloc() - C style
+int *p1 = (int*)malloc(sizeof(int) * 5);  // Returns void*
+*p1 = 10;                                  // No constructor call
+free(p1);                                  // Must match with free()
+
+// new - C++ style
+int *p2 = new int[5];      // Returns typed pointer
+*p2 = 10;                   // Constructor called automatically
+delete[] p2;                // Must match with delete[]
+
+// new for objects
+class MyClass { int x; public: MyClass() { x=0; } };
+MyClass *obj = new MyClass();  // Constructor called
+delete obj;                     // Destructor called</code></pre></div>
+
+            <p><strong>Command Line Arguments:</strong></p>
+            <div class="codeblock"><pre><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main(int argc, char *argv[]) {
+    cout &lt;&lt; "Program name: " &lt;&lt; argv[0] &lt;&lt; endl;
+    cout &lt;&lt; "Arguments count: " &lt;&lt; argc - 1 &lt;&lt; endl;
+
+    for (int i = 1; i &lt; argc; i++)
+        cout &lt;&lt; "Arg " &lt;&lt; i &lt;&lt; ": " &lt;&lt; argv[i] &lt;&lt; endl;
+
+    // Usage: ./program hello 123 3.14
+    // argc = 4, argv[0] = "./program", argv[1] = "hello", etc.
+    return 0;
+}</code></pre></div>
+          </div>
+        </div>
+
+        <div class="tips">
+          <strong>Exam Tips:</strong> Template program (both function and class templates) is a <em>very common 15-mark question</em>. Exception handling with multiple catch blocks appears frequently. STL programs with vector and map are tested. new vs malloc comparison is a <em>guaranteed 5-mark</em> question.
+        </div>
+      </div>
+
+      <!-- ==================== COMPARISON TABLES APPENDIX ==================== -->
+      <div class="unit" id="appendix">
+        <div class="unit__head">
+          <span class="unit__num">Ref</span>
+          <div>
+            <h2 class="unit__title">Quick Reference: Comparison Tables</h2>
+            <p class="unit__sub">Essential comparison tables for last-minute revision</p>
+          </div>
+        </div>
+
+        <div class="subhead"><span class="subhead__title">Inheritance Types Comparison</span></div>
+        <table class="t">
+          <tr><th>Type</th><th>Base Classes</th><th>Derived Classes</th><th>Example</th></tr>
+          <tr><td>Single</td><td>1</td><td>1</td><td>A → B</td></tr>
+          <tr><td>Multiple</td><td>&gt;1</td><td>1</td><td>A,B → C</td></tr>
+          <tr><td>Multilevel</td><td>1</td><td>1 (chain)</td><td>A → B → C</td></tr>
+          <tr><td>Hierarchical</td><td>1</td><td>&gt;1</td><td>A → B, A → C</td></tr>
+          <tr><td>Hybrid</td><td>Mixed</td><td>Mixed</td><td>A → B,C; B → D</td></tr>
+        </table>
+
+        <div class="subhead"><span class="subhead__title">Constructor vs Destructor</span></div>
+        <table class="t">
+          <tr><th>Feature</th><th>Constructor</th><th>Destructor</th></tr>
+          <tr><td>Name</td><td>Same as class</td><td>~ + class name</td></tr>
+          <tr><td>Return Type</td><td>None</td><td>None</td></tr>
+          <tr><td>Parameters</td><td>Can have</td><td>Cannot have</td></tr>
+          <tr><td>Overloading</td><td>Yes</td><td>No</td></tr>
+          <tr><td>When Called</td><td>Object creation</td><td>Object destruction</td></tr>
+          <tr><td>Purpose</td><td>Initialize</td><td>Cleanup</td></tr>
+          <tr><td>Memory</td><td>Stack or Heap</td><td>Always Stack (scope)</td></tr>
+        </table>
+
+        <div class="subhead"><span class="subhead__title">Function Template vs Class Template</span></div>
+        <table class="t">
+          <tr><th>Feature</th><th>Function Template</th><th>Class Template</th></tr>
+          <tr><td>Declaration</td><td><code>template&lt;typename T&gt;</code></td><td><code>template&lt;typename T&gt; class</code></td></tr>
+          <tr><td>Instantiation</td><td>Automatic (argument deduction)</td><td>Explicit: <code>Stack&lt;int&gt;</code></td></tr>
+          <tr><td>Overloading</td><td>Yes (with different params)</td><td>No</td></tr>
+          <tr><td>Specialization</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Use Case</td><td>Generic functions</td><td>Generic data structures</td></tr>
+        </table>
+
+        <div class="subhead"><span class="subhead__title">STL Containers Summary</span></div>
+        <table class="t">
+          <tr><th>Container</th><th>Type</th><th>Key Feature</th><th>Access</th></tr>
+          <tr><td>vector</td><td>Sequence</td><td>Dynamic array</td><td>Random []</td></tr>
+          <tr><td>list</td><td>Sequence</td><td>Doubly linked list</td><td>Sequential</td></tr>
+          <tr><td>deque</td><td>Sequence</td><td>Double-ended queue</td><td>Random []</td></tr>
+          <tr><td>stack</td><td>Container Adapter</td><td>LIFO</td><td>push/pop top</td></tr>
+          <tr><td>queue</td><td>Container Adapter</td><td>FIFO</td><td>push/pop front</td></tr>
+          <tr><td>map</td><td>Associative</td><td>Key-Value pairs, sorted</td><td>By key</td></tr>
+          <tr><td>set</td><td>Associative</td><td>Unique sorted elements</td><td>By value</td></tr>
+          <tr><td>multimap</td><td>Associative</td><td>Multiple values per key</td><td>By key</td></tr>
+          <tr><td>unordered_map</td><td>Hash</td><td>Key-Value, O(1) access</td><td>By key (hash)</td></tr>
+        </table>
+      </div>
+
+    </div><!-- /content -->
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <div class="foot__brand">OOP · Semester 5 · MAKAUT B.Tech CSE</div>
+      <div>Covers all 5 units · Previous Year Questions marked [2023] [2022] [2021]</div>
+    </div>
+
+  </div><!-- /sheet -->
 </body>
 </html>

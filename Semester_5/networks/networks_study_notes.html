@@ -3,431 +3,244 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Computer Networks Study Notes — Semester 5</title>
+  <title>Computer Networks — Study Notes | Semester 5</title>
   <link rel="stylesheet" href="../../site.css">
   <style>
-    :root {
-      --c: #047857;
-      --c-light: #d1fae5;
-      --c-dark: #065f46;
-      --surface: #ffffff;
-      --text: #1a1a2e;
-      --text-secondary: #555770;
-      --text-body: #333350;
-      --border: #e0e0e8;
-      --warning-bg: #fefce8;
-      --warning-border: #eab308;
-      --warning-text: #854d0e;
-      --pyq-bg: #f0fdf4;
-      --pyq-border: #6ee7b7;
-      --pyq-text: #065f46;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Georgia', 'Times New Roman', serif;
-      background: #f5f5f0;
-      color: var(--text);
-      line-height: 1.7;
-      font-size: 15px;
-    }
-    .sheet {
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--surface);
-      min-height: 100vh;
-      border-left: 3px solid var(--c);
-      border-right: 3px solid var(--c);
-    }
-    .band {
-      background: var(--c);
-      color: white;
-      padding: 24px 32px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .band .subject {
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-    .band .subject span {
-      font-weight: 400;
-      opacity: 0.85;
-      font-size: 0.9rem;
-    }
-    .band nav a {
-      color: rgba(255,255,255,0.9);
-      text-decoration: none;
-      font-size: 0.8rem;
-      margin-left: 14px;
-      padding: 3px 8px;
-      border-radius: 3px;
-      transition: background 0.2s;
-    }
-    .band nav a:hover { background: rgba(255,255,255,0.15); }
-    .hero {
-      background: linear-gradient(135deg, var(--c-light) 0%, #ecfdf5 100%);
-      padding: 40px 32px 32px;
-      text-align: center;
-      border-bottom: 2px solid var(--c);
-    }
-    .hero h1 {
-      font-size: 1.8rem;
-      color: var(--c-dark);
-      margin-bottom: 8px;
-    }
-    .hero p {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .hero .meta {
-      margin-top: 12px;
-      font-size: 0.82rem;
-      color: var(--text-secondary);
-    }
-    .content { padding: 28px 32px 60px; }
-    .unit-section {
-      margin-bottom: 36px;
-      padding-bottom: 28px;
-      border-bottom: 1px solid var(--border);
-    }
-    .unit-section:last-child { border-bottom: none; }
-    .unit-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding-bottom: 10px;
-      border-bottom: 2px solid var(--c);
-    }
-    .eyebrow {
-      font-size: 0.7rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--c);
-      font-weight: 700;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    .unit-header h2 {
-      font-size: 1.35rem;
-      color: var(--c-dark);
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    h3 {
-      font-size: 1.05rem;
-      color: var(--c-dark);
-      margin: 18px 0 8px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    h4 {
-      font-size: 0.95rem;
-      color: var(--text);
-      margin: 14px 0 6px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 600;
-    }
-    p, li {
-      color: var(--text-body);
-      margin-bottom: 6px;
-    }
-    ul, ol {
-      margin: 8px 0 12px 20px;
-    }
-    li { margin-bottom: 4px; }
-    .revision-box {
-      background: #f0fdf4;
-      border-left: 3px solid var(--c);
-      padding: 12px 16px;
-      margin: 12px 0;
-      font-size: 0.9rem;
-    }
-    .revision-box strong {
-      color: var(--c-dark);
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    .q-block {
-      margin: 14px 0;
-      padding: 14px 18px;
-      border-radius: 6px;
-      border: 1px solid var(--border);
-      background: #fafafa;
-    }
-    .q-block .mark-badge {
-      display: inline-block;
-      background: var(--c);
-      color: white;
-      font-size: 0.72rem;
-      padding: 2px 10px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      margin-bottom: 6px;
-    }
-    .q-block .pyq-badge {
-      display: inline-block;
-      background: #f59e0b;
-      color: white;
-      font-size: 0.7rem;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      margin-left: 6px;
-    }
-    .q-block .question {
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-    }
-    .q-block .answer {
-      color: var(--text-body);
-      font-size: 0.93rem;
-    }
-    .q-block .answer strong { color: var(--c-dark); }
-    .compare-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 12px 0;
-      font-size: 0.88rem;
-    }
-    .compare-table th {
-      background: var(--c);
-      color: white;
-      padding: 8px 12px;
-      text-align: left;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-      font-weight: 600;
-    }
-    .compare-table td {
-      padding: 7px 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .compare-table tr:nth-child(even) { background: #f9f9f9; }
-    .code-block {
-      background: #1e1e2e;
-      color: #cdd6f4;
-      padding: 14px 18px;
-      border-radius: 6px;
-      font-family: 'Courier New', monospace;
-      font-size: 0.85rem;
-      overflow-x: auto;
-      margin: 10px 0;
-      line-height: 1.5;
-    }
-    .diagram-box {
-      background: #f8fafc;
-      border: 2px dashed var(--c);
-      border-radius: 8px;
-      padding: 18px;
-      text-align: center;
-      margin: 14px 0;
-      font-size: 0.88rem;
-      color: var(--text-secondary);
-    }
-    .diagram-box .diagram-title {
-      font-weight: 700;
-      color: var(--c-dark);
-      margin-bottom: 8px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    .tip-box {
-      background: #fffbeb;
-      border: 1px solid #fcd34d;
-      border-left: 4px solid #f59e0b;
-      padding: 10px 14px;
-      margin: 10px 0;
-      font-size: 0.85rem;
-      border-radius: 4px;
-    }
-    .tip-box strong { color: #b45309; }
-    .port-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 10px 0;
-      font-size: 0.84rem;
-    }
-    .port-table th {
-      background: #065f46;
-      color: white;
-      padding: 6px 10px;
-      text-align: left;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    .port-table td {
-      padding: 5px 10px;
-      border-bottom: 1px solid var(--border);
-    }
-    .port-table tr:nth-child(even) { background: #f0fdf4; }
-    .numerical {
-      background: #fefce8;
-      border: 1px solid #fde68a;
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin: 10px 0;
-    }
-    .numerical .num-title {
-      font-weight: 700;
-      color: #92400e;
-      margin-bottom: 6px;
-      font-family: 'Helvetica Neue', Arial, sans-serif;
-    }
-    .back-to-top {
-      display: inline-block;
-      margin-top: 6px;
-      color: var(--c);
-      text-decoration: none;
-      font-size: 0.8rem;
-      font-weight: 600;
-    }
-    .back-to-top:hover { text-decoration: underline; }
+    /* Per-page accent override */
+    .sheet { --c: #047857; }
   </style>
 </head>
 <body>
-<div class="sheet">
+  <div class="sheet has-toc">
 
-  <!-- ===== BAND / STICKY HEADER ===== -->
-  <div class="band">
-    <div class="subject">
-      Computer Networks <span>— Semester 5 Study Notes</span>
+    <!-- TOP BAR -->
+    <div class="topbar">
+      <a class="topbar__brand" href="../index.html">
+        <span class="topbar__logo">5</span>
+        <div>
+          <div class="topbar__title">Semester 5</div>
+          <div class="topbar__sub">MAKAUT · B.Tech CSE</div>
+        </div>
+      </a>
+      <div class="topbar__actions">
+        <a class="topbar__chip topbar__chip--accent" href="networks_index.html">← Networks Index</a>
+      </div>
     </div>
-    <nav>
-      <a href="#unit-1">U1</a>
-      <a href="#unit-2">U2</a>
-      <a href="#unit-3">U3</a>
-      <a href="#unit-4">U4</a>
-      <a href="#unit-5">U5</a>
-      <a href="#pyq-section">PYQs</a>
+
+    <!-- SIDEBAR TOC (sticky) -->
+    <nav class="toc" id="toc">
+      <div class="toc__label">On this page</div>
+      <ul class="toc__list">
+        <li class="toc__group">
+          <span class="toc__group-label">Units</span>
+          <ul class="toc__list">
+            <li class="toc__item"><a href="#unit-1"><span class="toc__no">01</span>Introduction &amp; Data Communication</a></li>
+            <li class="toc__item"><a href="#unit-2"><span class="toc__no">02</span>Physical &amp; Data Link</a></li>
+            <li class="toc__item"><a href="#unit-3"><span class="toc__no">03</span>Network Layer</a></li>
+            <li class="toc__item"><a href="#unit-4"><span class="toc__no">04</span>Transport Layer</a></li>
+            <li class="toc__item"><a href="#unit-5"><span class="toc__no">05</span>Application &amp; Security</a></li>
+            <li class="toc__item"><a href="#pyq-section"><span class="toc__no">PYQ</span>Previous Year Questions</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div class="toc__foot">
+        <div class="toc__progress" style="--p:0%"></div>
+        <div class="toc__progress-label"><span>Reading</span><span>0%</span></div>
+      </div>
     </nav>
-  </div>
 
-  <!-- ===== HERO ===== -->
-  <div class="hero">
-    <h1>Computer Networks — Complete Study Notes</h1>
-    <p>Exam-focused notes covering all 5 units with 1-mark, 5-mark, and 15-mark questions, numerical examples, comparison tables, and previous year questions for MAKAUT B.Tech CSE Semester 5.</p>
-    <div class="meta">Total Units: 5 &nbsp;|&nbsp; Reference: <em>Data Communications and Networking</em> by Behrouz A. Forouzan</div>
-  </div>
+    <!-- MAIN CONTENT -->
+    <div class="content">
 
-  <!-- ===== CONTENT ===== -->
-  <div class="content">
-
-    <!-- ==================== UNIT 1 ==================== -->
-    <div class="unit-section" id="unit-1">
-      <div class="unit-header">
-        <div class="eyebrow">Unit 1</div>
-        <h2>Introduction &amp; Physical Layer</h2>
-      </div>
-
-      <div class="revision-box">
-        <strong>Quick Revision:</strong> Networks connect devices (hosts) via communication links (wired/wireless). Physical Layer defines electrical/mechanical specs. Topologies define layout. Transmission media carry signals. Multiplexing shares a link. Switching routes data.
-      </div>
-
-      <h3>1-Mark Questions — Definitions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. Define Computer Network.</div>
-        <div class="answer">A <strong>Computer Network</strong> is a collection of autonomous computers interconnected by a single technology (communication medium) for the purpose of sharing resources (files, printers) and information.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a LAN?</div>
-        <div class="answer">A <strong>Local Area Network (LAN)</strong> is a network that connects computers within a limited area such as a home, office, or building, with typical speeds of 100 Mbps to 10 Gbps.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a MAN?</div>
-        <div class="answer">A <strong>Metropolitan Area Network (MAN)</strong> spans a city or metropolitan area (e.g., cable TV network). It covers a larger geographic area than a LAN but smaller than a WAN.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a WAN?</div>
-        <div class="answer">A <strong>Wide Area Network (WAN)</strong> spans countries/continents (e.g., the Internet). It uses leased lines or satellite links and is usually slower than LANs.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a PAN?</div>
-        <div class="answer">A <strong>Personal Area Network (PAN)</strong> connects devices within a range of a few meters (e.g., Bluetooth, NFC, USB). Used for personal devices.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a topology?</div>
-        <div class="answer"><strong>Network Topology</strong> is the physical or logical arrangement of computers, cables, and other components in a network. Common types: Bus, Star, Ring, Mesh, Tree, Hybrid.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the OSI reference model?</div>
-        <div class="answer">The <strong>OSI (Open Systems Interconnection)</strong> model is a 7-layer framework (Physical, Data Link, Network, Transport, Session, Presentation, Application) for standardizing network communication.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the TCP/IP model?</div>
-        <div class="answer">The <strong>TCP/IP model</strong> is a 4-layer model (Network Interface, Internet, Transport, Application) that forms the basis of the Internet.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. Define Simplex, Half-Duplex, and Full-Duplex transmission modes.</div>
-        <div class="answer"><strong>Simplex</strong> — one-way only (TV broadcast). <strong>Half-Duplex</strong> — both directions but not simultaneously (walkie-talkie). <strong>Full-Duplex</strong> — both directions simultaneously (telephone).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is guided transmission media?</div>
-        <div class="answer"><strong>Guided media</strong> uses physical cables/twisted pair, coaxial cable, optical fiber) to transmit signals in a directed path.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is unguided transmission media?</div>
-        <div class="answer"><strong>Unguided media</strong> (wireless) transmits signals through the atmosphere/space without cables. Examples: radio waves, microwaves, infrared.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. Define Multiplexing.</div>
-        <div class="answer"><strong>Multiplexing</strong> is the technique of combining multiple signals into one signal over a shared medium. Types: FDM, TDM, WDM.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Switching?</div>
-        <div class="answer"><strong>Switching</strong> is the method of connecting devices for communication. Types: Circuit Switching, Message Switching, Packet Switching.</div>
-      </div>
-
-      <h3>5-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Explain different network topologies with advantages and disadvantages.</div>
-        <div class="answer">
-          <strong>Bus Topology:</strong> Single cable backbone. All devices connect to it. <em>Adv:</em> Simple, cheap. <em>Disadv:</em> Single point of failure, difficult troubleshooting.<br><br>
-          <strong>Star Topology:</strong> Each device connects to a central hub/switch. <em>Adv:</em> Easy to troubleshoot, one cable failure doesn't affect others. <em>Disadv:</em> Hub failure breaks entire network.<br><br>
-          <strong>Ring Topology:</strong> Devices form a closed loop. <em>Adv:</em> orderly, no collisions. <em>Disadv:</em> One device failure breaks ring.<br><br>
-          <strong>Mesh Topology:</strong> Every device connects to every other. <em>Adv:</em> High redundancy, reliable. <em>Disadv:</em> Very expensive.<br><br>
-          <strong>Tree/Hybrid:</strong> Combination of star and bus. Used in large organizations.
+      <!-- HERO -->
+      <div class="hero">
+        <div class="hero__eyebrow">SEMESTER 5 · COMPUTER NETWORKS</div>
+        <h1 class="hero__title">Computer Networks <em>Study Notes</em></h1>
+        <p class="hero__lead">Exam-focused coverage of all 5 units — OSI/TCP/IP models, switching, subnetting, routing, transport protocols, and network security.</p>
+        <div class="hero__tags">
+          <span class="tag">5 Units</span>
+          <span class="tag">1M + 5M + 15M</span>
+          <span class="tag">PYQs Marked</span>
+          <span class="tag--soft">MAKAUT Pattern</span>
+        </div>
+        <div class="hero__stats">
+          <dl class="hero__stat">
+            <dt>1-Mark Qs</dt>
+            <dd>35+</dd>
+            <small>Definitions &amp; facts</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>5-Mark Qs</dt>
+            <dd>22+</dd>
+            <small>Explanations &amp; diagrams</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>15-Mark Qs</dt>
+            <dd>12+</dd>
+            <small>Detailed answers</small>
+          </dl>
+          <dl class="hero__stat">
+            <dt>PYQs</dt>
+            <dd>2021–24</dd>
+            <small>Previous years</small>
+          </dl>
         </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2022</span>
-        <div class="question">Q. Compare OSI and TCP/IP reference models.</div>
-        <div class="answer">
-          <table class="compare-table">
+      <div class="unit" id="unit-1">
+        <div class="unit__head">
+          <span class="unit__no">01</span>
+          <div>
+            <h2 class="unit__title">Introduction &amp; Physical Layer</h2>
+            <p class="unit__sub"></p>
+          </div>
+        </div>
+        
+        <h2>Introduction &amp; Physical Layer</h2>
+      </div>
+
+      <div class="revision">
+        <div class="revision__icon">↻</div>
+        <div>
+          <div class="revision__title">Quick Revision</div>
+          <div class="revision__body">
+        <strong>Quick Revision:</strong> Networks connect devices (hosts) via communication links (wired/wireless). Physical Layer defines electrical/mechanical specs. Topologies define layout. Transmission media carry signals. Multiplexing shares a link. Switching routes data.
+      </div>
+        </div>
+      </div>
+
+      <div class="subhead">
+        <span class="subhead__title">1-Mark Questions — Definitions</span>
+        <span class="subhead__pill--1m">1-Mark</span>
+      </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">Define Computer Network.</span>
+          </div>
+          <div class="qa__a">A <strong>Computer Network</strong> is a collection of autonomous computers interconnected by a single technology (communication medium) for the purpose of sharing resources (files, printers) and information.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a LAN?</span>
+          </div>
+          <div class="qa__a">A <strong>Local Area Network (LAN)</strong> is a network that connects computers within a limited area such as a home, office, or building, with typical speeds of 100 Mbps to 10 Gbps.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a MAN?</span>
+          </div>
+          <div class="qa__a">A <strong>Metropolitan Area Network (MAN)</strong> spans a city or metropolitan area (e.g., cable TV network). It covers a larger geographic area than a LAN but smaller than a WAN.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a WAN?</span>
+          </div>
+          <div class="qa__a">A <strong>Wide Area Network (WAN)</strong> spans countries/continents (e.g., the Internet). It uses leased lines or satellite links and is usually slower than LANs.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a PAN?</span>
+          </div>
+          <div class="qa__a">A <strong>Personal Area Network (PAN)</strong> connects devices within a range of a few meters (e.g., Bluetooth, NFC, USB). Used for personal devices.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a topology?</span>
+          </div>
+          <div class="qa__a"><strong>Network Topology</strong> is the physical or logical arrangement of computers, cables, and other components in a network. Common types: Bus, Star, Ring, Mesh, Tree, Hybrid.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the OSI reference model?</span>
+          </div>
+          <div class="qa__a">The <strong>OSI (Open Systems Interconnection)</strong> model is a 7-layer framework (Physical, Data Link, Network, Transport, Session, Presentation, Application) for standardizing network communication.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the TCP/IP model?</span>
+          </div>
+          <div class="qa__a">The <strong>TCP/IP model</strong> is a 4-layer model (Network Interface, Internet, Transport, Application) that forms the basis of the Internet.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">Define Simplex, Half-Duplex, and Full-Duplex transmission modes.</span>
+          </div>
+          <div class="qa__a"><strong>Simplex</strong> — one-way only (TV broadcast). <strong>Half-Duplex</strong> — both directions but not simultaneously (walkie-talkie). <strong>Full-Duplex</strong> — both directions simultaneously (telephone).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is guided transmission media?</span>
+          </div>
+          <div class="qa__a"><strong>Guided media</strong> uses physical cables/twisted pair, coaxial cable, optical fiber) to transmit signals in a directed path.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is unguided transmission media?</span>
+          </div>
+          <div class="qa__a"><strong>Unguided media</strong> (wireless) transmits signals through the atmosphere/space without cables. Examples: radio waves, microwaves, infrared.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">Define Multiplexing.</span>
+          </div>
+          <div class="qa__a"><strong>Multiplexing</strong> is the technique of combining multiple signals into one signal over a shared medium. Types: FDM, TDM, WDM.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Switching?</span>
+          </div>
+          <div class="qa__a"><strong>Switching</strong> is the method of connecting devices for communication. Types: Circuit Switching, Message Switching, Packet Switching.</div>
+        </div>
+
+      <div class="subhead">
+        <span class="subhead__title">5-Mark Questions</span>
+        <span class="subhead__pill--5m">5-Mark</span>
+      </div>
+
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain different network topologies with advantages and disadvantages.</span>
+          </div>
+          <div class="qa__a"><strong>Bus Topology:</strong> Single cable backbone. All devices connect to it. <em>Adv:</em> Simple, cheap. <em>Disadv:</em> Single point of failure, difficult troubleshooting.<br><br>
+          <strong>Star Topology:</strong> Each device connects to a central hub/switch. <em>Adv:</em> Easy to troubleshoot, one cable failure doesn't affect others. <em>Disadv:</em> Hub failure breaks entire network.<br><br>
+          <strong>Ring Topology:</strong> Devices form a closed loop. <em>Adv:</em> orderly, no collisions. <em>Disadv:</em> One device failure breaks ring.<br><br>
+          <strong>Mesh Topology:</strong> Every device connects to every other. <em>Adv:</em> High redundancy, reliable. <em>Disadv:</em> Very expensive.<br><br>
+          <strong>Tree/Hybrid:</strong> Combination of star and bus. Used in large organizations.</div>
+        </div>
+
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Compare OSI and TCP/IP reference models.</span>
+          </div>
+          <div class="qa__a"><table class="t">
             <tr><th>Aspect</th><th>OSI Model</th><th>TCP/IP Model</th></tr>
             <tr><td>Layers</td><td>7 layers</td><td>4 layers</td></tr>
             <tr><td>Approach</td><td>Vertical (strict layer separation)</td><td>Horizontal (protocols developed first)</td></tr>
@@ -437,71 +250,67 @@
             <tr><td>Standards</td><td>Defined before protocols</td><td>Protocols defined before model</td></tr>
             <tr><td>Usage</td><td>Theoretical/educational</td><td>Practical (Internet)</td></tr>
           </table>
-          <em>Note: OSI layers → Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP layers → Network Interface, Internet, Transport, Application.</em>
+          <em>Note: OSI layers → Physical, Data Link, Network, Transport, Session, Presentation, Application. TCP/IP layers → Network Interface, Internet, Transport, Application.</em></div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain Frequency Division Multiplexing (FDM) and Time Division Multiplexing (TDM) with diagrams.</div>
-        <div class="answer">
-          <strong>FDM:</strong> The total bandwidth is divided into multiple non-overlapping frequency bands. Each signal modulates a different carrier frequency. Used in radio/TV broadcasting. Guard bands prevent interference.<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain Frequency Division Multiplexing (FDM) and Time Division Multiplexing (TDM) with diagrams.</span>
+          </div>
+          <div class="qa__a"><strong>FDM:</strong> The total bandwidth is divided into multiple non-overlapping frequency bands. Each signal modulates a different carrier frequency. Used in radio/TV broadcasting. Guard bands prevent interference.<br><br>
           <strong>TDM:</strong> Time is divided into frames; each frame is subdivided into time slots. Each signal gets a specific time slot. Used in digital telephony (PCM).<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">FDM Concept</div>
+          <pre class="ascii"><div class="diagram-title">FDM Concept</pre>
             |───Signal A───|───Signal B───|───Signal C───|<br>
-            (Frequency domain — each signal occupies different band)
-          </div>
-          <div class="diagram-box">
-            <div class="diagram-title">TDM Concept</div>
-            Time → |A|B|C|A|B|C|A|B|C|... (Time domain — time slots rotate)
-          </div>
-          <em>WDM</em> is like FDM but for optical fibers — uses different wavelengths (colors) of light.
+            (Frequency domain — each signal occupies different band)</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2021</span>
-        <div class="question">Q. Describe guided transmission media (Twisted Pair, Coaxial Cable, Fiber Optic).</div>
-        <div class="answer">
-          <strong>Twisted Pair:</strong> Two insulated copper wires twisted together. Categories: Cat-5 (100 Mbps), Cat-6 (1 Gbps). Advantages: cheap, easy installation. Disadvantages: attenuation, EMI.<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Describe guided transmission media (Twisted Pair, Coaxial Cable, Fiber Optic).</span>
+          </div>
+          <div class="qa__a"><strong>Twisted Pair:</strong> Two insulated copper wires twisted together. Categories: Cat-5 (100 Mbps), Cat-6 (1 Gbps). Advantages: cheap, easy installation. Disadvantages: attenuation, EMI.<br><br>
           <strong>Coaxial Cable:</strong> Central conductor surrounded by insulator, shield, and outer cover. Used in cable TV. Better shielding than twisted pair, higher bandwidth.<br><br>
-          <strong>Optical Fiber:</strong> Glass/plastic core carries light pulses. Single-mode (long distance, narrow core) vs Multi-mode (short distance, wider core). Advantages: extremely high bandwidth, no EMI, low attenuation. Disadvantages: expensive, fragile.
+          <strong>Optical Fiber:</strong> Glass/plastic core carries light pulses. Single-mode (long distance, narrow core) vs Multi-mode (short distance, wider core). Advantages: extremely high bandwidth, no EMI, low attenuation. Disadvantages: expensive, fragile.</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain Circuit Switching, Message Switching, and Packet Switching.</div>
-        <div class="answer">
-          <strong>Circuit Switching:</strong> A dedicated path is established before data transfer (telephone network). Advantages: guaranteed bandwidth, low delay. Disadvantages: inefficient for bursty data.<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain Circuit Switching, Message Switching, and Packet Switching.</span>
+          </div>
+          <div class="qa__a"><strong>Circuit Switching:</strong> A dedicated path is established before data transfer (telephone network). Advantages: guaranteed bandwidth, low delay. Disadvantages: inefficient for bursty data.<br><br>
           <strong>Message Switching:</strong> Entire message is stored at each node (store-and-forward). Used in email. No dedicated path. Disadvantages: slow, requires large buffers.<br><br>
-          <strong>Packet Switching:</strong> Message is divided into packets. Each packet routed independently. Two approaches: Datagram (each packet independent, may take different paths) and Virtual Circuit (path established before transfer like circuit, but packets follow same path). Used in the Internet.
+          <strong>Packet Switching:</strong> Message is divided into packets. Each packet routed independently. Two approaches: Datagram (each packet independent, may take different paths) and Virtual Circuit (path established before transfer like circuit, but packets follow same path). Used in the Internet.</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Compare guided and unguided transmission media with examples.</div>
-        <div class="answer">
-          <table class="compare-table">
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Compare guided and unguided transmission media with examples.</span>
+          </div>
+          <div class="qa__a"><table class="t">
             <tr><th>Feature</th><th>Guided Media</th><th>Unguided Media</th></tr>
             <tr><td>Medium</td><td>Physical cables</td><td>Atmosphere/Space</td></tr>
             <tr><td>Examples</td><td>Twisted pair, Coax, Fiber</td><td>Radio, Microwave, Infrared, Satellite</td></tr>
             <tr><td>Security</td><td>High (hard to tap)</td><td>Low (easily intercepted)</td></tr>
             <tr><td>Bandwidth</td><td>Very high (especially fiber)</td><td>Limited</td></tr>
             <tr><td>Cost</td><td>Higher installation cost</td><td>Lower installation, high spectrum licensing</td></tr>
-          </table>
+          </table></div>
         </div>
+
+      <div class="subhead">
+        <span class="subhead__title">15-Mark Questions</span>
+        <span class="subhead__pill--5m">15-Mark</span>
       </div>
 
-      <h3>15-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Describe the OSI reference model in detail. Explain the functions of each layer and how data flows through the model. Also compare with TCP/IP model.</div>
-        <div class="answer">
-          <strong>The OSI (Open Systems Interconnection) Reference Model</strong> has 7 layers organized from physical hardware to application software:<br><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Describe the OSI reference model in detail. Explain the functions of each layer and how data flows through the model. Also compare with TCP/IP model.</span>
+          </div>
+          <div class="qa__a"><strong>The OSI (Open Systems Interconnection) Reference Model</strong> has 7 layers organized from physical hardware to application software:<br><br>
           <strong>1. Physical Layer:</strong> Defines electrical, mechanical, procedural specs for activating/maintaining the physical link. Concerned with bits, data rate, physical topology, transmission mode. Devices: hubs, repeaters. Protocols: Ethernet physical, USB.<br><br>
           <strong>2. Data Link Layer:</strong> Responsible for node-to-node delivery, framing, physical addressing, error control, flow control. Sublayers: LLC (Logical Link Control) and MAC (Media Access Control). Devices: switches, bridges. Protocols: Ethernet, PPP, HDLC.<br><br>
           <strong>3. Network Layer:</strong> Responsible for source-to-destination delivery across multiple networks. Handles logical addressing, routing. Devices: routers. Protocols: IP, ICMP, ARP, OSPF, BGP.<br><br>
@@ -512,7 +321,7 @@
           <strong>Data Encapsulation Flow:</strong><br>
           At sender: Application → Session adds header → Presentation → Transport adds TCP/UDP header → Network adds IP header → Data Link adds frame header/trailer → Physical converts to bits.<br>
           At receiver: reverse process — de-encapsulation layer by layer.<br><br>
-          <table class="compare-table">
+          <table class="t">
             <tr><th>OSI Layer</th><th>TCP/IP Layer</th><th>Key Protocols</th></tr>
             <tr><td>Application</td><td rowspan="3">Application</td><td>HTTP, FTP, SMTP, DNS</td></tr>
             <tr><td>Presentation</td><td>SSL/TLS, MIME</td></tr>
@@ -521,15 +330,15 @@
             <tr><td>Network</td><td>Internet</td><td>IP, ICMP, ARP, OSPF</td></tr>
             <tr><td>Data Link + Physical</td><td>Network Interface</td><td>Ethernet, Wi-Fi, PPP</td></tr>
           </table>
-          <em>Key Difference: TCP/IP is protocol-independent in design; OSI is model-first. TCP/IP has no separate Session/Presentation layers.</em>
+          <em>Key Difference: TCP/IP is protocol-independent in design; OSI is model-first. TCP/IP has no separate Session/Presentation layers.</em></div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span>
-        <div class="question">Q. Discuss transmission media in detail. Classify and explain guided and unguided media with their characteristics, advantages, and disadvantages. [2022]</div>
-        <div class="answer">
-          <strong>GUIDED TRANSMISSION MEDIA</strong><br><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Discuss transmission media in detail. Classify and explain guided and unguided media with their characteristics, advantages, and disadvantages. [2022]</span>
+          </div>
+          <div class="qa__a"><strong>GUIDED TRANSMISSION MEDIA</strong><br><br>
           <strong>1. Twisted Pair Cable:</strong><br>
           — Two insulated copper wires twisted to reduce crosstalk/EMI<br>
           — UTP (Unshielded) vs STP (Shielded)<br>
@@ -555,173 +364,181 @@
           <strong>1. Radio Waves:</strong> 3 kHz – 1 GHz. Omni-directional. Penetrate walls. Used in AM/FM radio, Wi-Fi (2.4 GHz), cordless phones.<br><br>
           <strong>2. Microwaves:</strong> 1 GHz – 300 GHz. Directional (require line-of-sight). Parabolic dishes. Used in satellite communication, cellular backhaul.<br><br>
           <strong>3. Infrared:</strong> 300 GHz – 400 THz. Very short range, line-of-sight. Used in TV remotes, IrDA, IR data association.<br><br>
-          <strong>4. Satellite Communication:</strong> Uses geostationary satellites (36,000 km). Covers large areas. Latency ~270 ms due to distance.
+          <strong>4. Satellite Communication:</strong> Uses geostationary satellites (36,000 km). Covers large areas. Latency ~270 ms due to distance.</div>
         </div>
       </div>
 
-      <a class="back-to-top" href="#top">&#8593; Back to Top</a>
-    </div>
-
-    <!-- ==================== UNIT 2 ==================== -->
-    <div class="unit-section" id="unit-2">
-      <div class="unit-header">
-        <div class="eyebrow">Unit 2</div>
+      <div class="unit" id="unit-2">
+        <div class="unit__head">
+          <span class="unit__no">02</span>
+          <div>
+            <h2 class="unit__title">Data Link Layer</h2>
+            <p class="unit__sub"></p>
+          </div>
+        </div>
+        
         <h2>Data Link Layer</h2>
       </div>
 
-      <div class="revision-box">
+      <div class="revision">
+        <div class="revision__icon">↻</div>
+        <div>
+          <div class="revision__title">Quick Revision</div>
+          <div class="revision__body">
         <strong>Quick Revision:</strong> Data Link Layer provides reliable node-to-node delivery. It handles framing, physical addressing (MAC), error detection/correction, flow control, and media access control (CSMA/CD, CSMA/CA).
       </div>
-
-      <h3>1-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Framing?</div>
-        <div class="answer"><strong>Framing</strong> is the process of dividing a stream of bits into manageable units called <em>frames</em>. Each frame contains sender/receiver addresses, payload, and error-checking bits. Methods: character-oriented (BISYNC) and bit-oriented (bit stuffing).</div>
+        </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Error Detection?</div>
-        <div class="answer"><strong>Error Detection</strong> is the technique to detect errors in transmitted data. Methods: Parity Check, Checksum, CRC (Cyclic Redundancy Check).</div>
+      <div class="subhead">
+        <span class="subhead__title">1-Mark Questions</span>
+        <span class="subhead__pill--1m">1-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Parity Check?</div>
-        <div class="answer"><strong>Parity Check</strong> adds one extra bit (parity bit) to make the total number of 1s even (even parity) or odd (odd parity). Can detect single-bit errors only.</div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Framing?</span>
+          </div>
+          <div class="qa__a"><strong>Framing</strong> is the process of dividing a stream of bits into manageable units called <em>frames</em>. Each frame contains sender/receiver addresses, payload, and error-checking bits. Methods: character-oriented (BISYNC) and bit-oriented (bit stuffing).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Error Detection?</span>
+          </div>
+          <div class="qa__a"><strong>Error Detection</strong> is the technique to detect errors in transmitted data. Methods: Parity Check, Checksum, CRC (Cyclic Redundancy Check).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Parity Check?</span>
+          </div>
+          <div class="qa__a"><strong>Parity Check</strong> adds one extra bit (parity bit) to make the total number of 1s even (even parity) or odd (odd parity). Can detect single-bit errors only.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is CRC?</span>
+          </div>
+          <div class="qa__a"><strong>CRC (Cyclic Redundancy Check)</strong> appends an n-bit Frame Check Sequence (FCS) to the data. The FCS is the remainder of polynomial division. Can detect all single-bit, double-bit, and odd-numbered errors.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Error Correction?</span>
+          </div>
+          <div class="qa__a"><strong>Error Correction</strong> not only detects errors but also corrects them. Techniques: Hamming Code (single-bit correction), ARQ (Automatic Repeat reQuest).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is ARQ?</span>
+          </div>
+          <div class="qa__a"><strong>ARQ (Automatic Repeat reQuest)</strong> is an error-control method where the receiver detects errors and requests retransmission of corrupted frames. Types: Stop-and-Wait, Go-Back-N, Selective Repeat.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is CSMA/CD?</span>
+          </div>
+          <div class="qa__a"><strong>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong> is used in wired Ethernet. Before transmitting, a station listens (carrier sense). If idle, it transmits; if collision detected, it stops and waits a random time (binary exponential backoff).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is CSMA/CA?</span>
+          </div>
+          <div class="qa__a"><strong>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</strong> is used in wireless networks (Wi-Fi). Stations sense the channel; if idle, wait DIFS then transmit. Uses ACK and RTS/CTS to avoid collisions.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a MAC address?</span>
+          </div>
+          <div class="qa__a">A <strong>MAC (Media Access Control) address</strong> is a 48-bit (6-byte) physical address burned into the NIC by the manufacturer. Format: XX:XX:XX:XX:XX:XX (hexadecimal). First 24 bits = OUI (manufacturer ID), last 24 bits = device-specific.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Ethernet?</span>
+          </div>
+          <div class="qa__a"><strong>Ethernet</strong> is the dominant LAN technology (IEEE 802.3). Uses CSMA/CD for wired, CSMA/CA for wireless. Standards: 10BASE-T, 100BASE-TX (Fast Ethernet), 1000BASE-T (Gigabit), 10GBASE-T.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the Sliding Window Protocol?</span>
+          </div>
+          <div class="qa__a"><strong>Sliding Window</strong> allows multiple frames to be in transit simultaneously. The sender has a window of size N — can send up to N frames without ACK. The receiver window slides as frames are acknowledged.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Bit Stuffing?</span>
+          </div>
+          <div class="qa__a"><strong>Bit Stuffing</strong> adds an extra 0 bit after every five consecutive 1s in the data (bit-oriented framing). At the receiver, five 1s followed by a 0 triggers removal of the stuffed bit, restoring the original data.</div>
+        </div>
+
+      <div class="subhead">
+        <span class="subhead__title">5-Mark Questions</span>
+        <span class="subhead__pill--5m">5-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is CRC?</div>
-        <div class="answer"><strong>CRC (Cyclic Redundancy Check)</strong> appends an n-bit Frame Check Sequence (FCS) to the data. The FCS is the remainder of polynomial division. Can detect all single-bit, double-bit, and odd-numbered errors.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Error Correction?</div>
-        <div class="answer"><strong>Error Correction</strong> not only detects errors but also corrects them. Techniques: Hamming Code (single-bit correction), ARQ (Automatic Repeat reQuest).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is ARQ?</div>
-        <div class="answer"><strong>ARQ (Automatic Repeat reQuest)</strong> is an error-control method where the receiver detects errors and requests retransmission of corrupted frames. Types: Stop-and-Wait, Go-Back-N, Selective Repeat.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is CSMA/CD?</div>
-        <div class="answer"><strong>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong> is used in wired Ethernet. Before transmitting, a station listens (carrier sense). If idle, it transmits; if collision detected, it stops and waits a random time (binary exponential backoff).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is CSMA/CA?</div>
-        <div class="answer"><strong>CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</strong> is used in wireless networks (Wi-Fi). Stations sense the channel; if idle, wait DIFS then transmit. Uses ACK and RTS/CTS to avoid collisions.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a MAC address?</div>
-        <div class="answer">A <strong>MAC (Media Access Control) address</strong> is a 48-bit (6-byte) physical address burned into the NIC by the manufacturer. Format: XX:XX:XX:XX:XX:XX (hexadecimal). First 24 bits = OUI (manufacturer ID), last 24 bits = device-specific.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Ethernet?</div>
-        <div class="answer"><strong>Ethernet</strong> is the dominant LAN technology (IEEE 802.3). Uses CSMA/CD for wired, CSMA/CA for wireless. Standards: 10BASE-T, 100BASE-TX (Fast Ethernet), 1000BASE-T (Gigabit), 10GBASE-T.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the Sliding Window Protocol?</div>
-        <div class="answer"><strong>Sliding Window</strong> allows multiple frames to be in transit simultaneously. The sender has a window of size N — can send up to N frames without ACK. The receiver window slides as frames are acknowledged.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Bit Stuffing?</div>
-        <div class="answer"><strong>Bit Stuffing</strong> adds an extra 0 bit after every five consecutive 1s in the data (bit-oriented framing). At the receiver, five 1s followed by a 0 triggers removal of the stuffed bit, restoring the original data.</div>
-      </div>
-
-      <h3>5-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Explain CRC error detection with a numerical example. Show encoding and decoding steps.</div>
-        <div class="answer">
-          <strong>CRC Encoding Steps:</strong><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain CRC error detection with a numerical example. Show encoding and decoding steps.</span>
+          </div>
+          <div class="qa__a"><strong>CRC Encoding Steps:</strong><br>
           1. Choose a generator polynomial G(x). E.g., G(x) = x³ + x + 1 → binary 1011 (degree 3, so append 3 zero bits).<br>
           2. Multiply data by 2^r (append r zeros).<br>
           3. Divide by G(x) using binary modulo-2 division (XOR instead of subtraction).<br>
           4. Remainder = CRC bits. Append to original data.<br><br>
-          <div class="numerical">
-            <div class="num-title">Example: Data = 10110011, G(x) = 1011</div>
-            Step 1: r = 3, append 3 zeros → 10110011000<br>
-            Step 2: Divide 10110011000 ÷ 1011:<br>
-            <span style="font-family:monospace;font-size:0.85rem;">
-            10110011000 ÷ 1011 = 10010111 rem. 000<br>
-            (Performing XOR division...)<br>
-            Remainder = 000 (in this case, no error bits)
-            </span>
-            Step 3: CRC = 000. Codeword = 10110011000.<br>
-            At receiver: divide received codeword by 1011. If remainder ≠ 0 → error detected.
-          </div>
+          <div class="diagram"><div class="num-title">Example: Data = 10110011, G(x) = 1011</div>
         </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2022</span>
-        <div class="question">Q. Explain Hamming Code for error correction with a numerical example.</div>
-        <div class="answer">
-          <strong>Hamming Code</strong> can detect and correct single-bit errors. Redundant bits (r) are placed at positions 2^0, 2^1, 2^2, ... Each redundant bit checks specific data bits.<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain Hamming Code for error correction with a numerical example.</span>
+          </div>
+          <div class="qa__a"><strong>Hamming Code</strong> can detect and correct single-bit errors. Redundant bits (r) are placed at positions 2^0, 2^1, 2^2, ... Each redundant bit checks specific data bits.<br><br>
           Formula: 2^r ≥ m + r + 1 (where m = data bits, r = redundant bits)<br><br>
-          <div class="numerical">
-            <div class="num-title">Example: Encode 1011 using Hamming Code</div>
-            Data bits (m=4): D3 D2 D1 D0 = 1 0 1 1<br>
-            Redundant bits needed: 2^r ≥ 4 + r + 1 → r = 3<br>
-            Positions: 1 2 3 4 5 6 7<br>
-            R1 at pos 1 (checks bits where bit1 of pos = 1): positions 1,3,5,7<br>
-            R2 at pos 2 (checks bits where bit2 of pos = 1): positions 2,3,6,7<br>
-            R4 at pos 4 (checks bits where bit3 of pos = 1): positions 4,5,6,7<br><br>
-            Calculate: R1 = D3⊕D1 = 1⊕1 = 0<br>
-            R2 = D3⊕D0 = 1⊕1 = 0<br>
-            R4 = D2⊕D1⊕D0 = 0⊕1⊕1 = 0<br><br>
-            Hamming Code = 0 0 1 0 1 0 1 (positions 1-7)<br><br>
-            If bit at position 5 flips → receiver recalculates check bits:<br>
-            C1 = 0⊕0⊕1 = 1, C2 = 0⊕0⊕1 = 1, C4 = 1⊕0⊕1 = 0<br>
-            Error position = 4×0 + 2×1 + 1×1 = 3 (decimal) → position 3 has error → correct it.
-          </div>
+          <div class="diagram"><div class="num-title">Example: Encode 1011 using Hamming Code</div>
         </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain the Go-Back-N ARQ protocol with sequence diagram.</div>
-        <div class="answer">
-          <strong>Go-Back-N ARQ</strong> allows the sender to have up to N unacknowledged frames (window size N). If a frame is lost or damaged, the receiver discards that frame and all subsequent frames (even if correctly received). The sender must retransmit from the errored frame onwards ("go back").<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">Go-Back-N Sequence Diagram</div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain the Go-Back-N ARQ protocol with sequence diagram.</span>
+          </div>
+          <div class="qa__a"><strong>Go-Back-N ARQ</strong> allows the sender to have up to N unacknowledged frames (window size N). If a frame is lost or damaged, the receiver discards that frame and all subsequent frames (even if correctly received). The sender must retransmit from the errored frame onwards ("go back").<br><br>
+          <pre class="ascii"><div class="diagram-title">Go-Back-N Sequence Diagram</pre>
             Sender: |Frame 0|Frame 1|Frame 2|Frame 3|Frame 2|Frame 3|<br>
             Receiver: |—ACK 0—|—ACK 1—|—Discard—|—Discard—|<br>
-            (Frame 2 lost → ACK 2 never received → Sender times out → retransmits Frame 2 &amp; 3)
-          </div>
-          <strong></strong><br>
-          — Sender window: N frames, Receiver window: 1 frame (only accepts in-order frames)<br>
-          — Uses cumulative ACKs (ACK n means all frames ≤ n received correctly)<br>
-          — Simple but inefficient — retransmits correctly received frames<br>
-          — For window size = 2^(m-1) where m = sequence number bits
+            (Frame 2 lost → ACK 2 never received → Sender times out → retransmits Frame 2 &amp; 3)</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain CSMA/CD with its algorithm steps.</div>
-        <div class="answer">
-          <strong>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong> is the MAC protocol for Ethernet LANs:<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain CSMA/CD with its algorithm steps.</span>
+          </div>
+          <div class="qa__a"><strong>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong> is the MAC protocol for Ethernet LANs:<br><br>
           <strong>Algorithm:</strong><br>
           1. <strong>Listen:</strong> Station checks if the channel is idle or busy.<br>
           2. <strong>Transmit if idle:</strong> If idle, station begins transmitting.<br>
@@ -729,19 +546,22 @@
           4. <strong>Collision detected:</strong> If collision is detected, station immediately stops transmitting and sends a jam signal (48 bits) to ensure all stations detect the collision.<br>
           5. <strong>Backoff:</strong> Station waits for a random time using <strong>Binary Exponential Backoff</strong> — K = min(N, 10) attempts, random delay from 0 to 2^K-1 × 2τ.<br>
           6. <strong>Retry:</strong> After backoff, go back to step 1. After 16 failed attempts, give up.<br><br>
-          <strong>Minimum Frame Size:</strong> Frame must be long enough to detect collision. Minimum frame transmission time ≥ 2τ (round-trip propagation delay). For 10 Mbps Ethernet: minimum frame = 512 bits (64 bytes).
+          <strong>Minimum Frame Size:</strong> Frame must be long enough to detect collision. Minimum frame transmission time ≥ 2τ (round-trip propagation delay). For 10 Mbps Ethernet: minimum frame = 512 bits (64 bytes).</div>
         </div>
+
+      <div class="subhead">
+        <span class="subhead__title">15-Mark Questions</span>
+        <span class="subhead__pill--5m">15-Mark</span>
       </div>
 
-      <h3>15-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Describe the Ethernet standards and MAC sublayer in detail. Explain CSMA/CD, frame format, and Gigabit Ethernet. [2023]</div>
-        <div class="answer">
-          <strong>ETHERNET OVERVIEW:</strong> Ethernet (IEEE 802.3) is the most widely used LAN technology. It uses CSMA/CD for half-duplex and full-duplex switching for modern networks.<br><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Describe the Ethernet standards and MAC sublayer in detail. Explain CSMA/CD, frame format, and Gigabit Ethernet. [2023]</span>
+          </div>
+          <div class="qa__a"><strong>ETHERNET OVERVIEW:</strong> Ethernet (IEEE 802.3) is the most widely used LAN technology. It uses CSMA/CD for half-duplex and full-duplex switching for modern networks.<br><br>
           <strong>EVOLUTION OF ETHERNET STANDARDS:</strong><br>
-          <table class="compare-table">
+          <table class="t">
             <tr><th>Standard</th><th>Speed</th><th>Cable</th><th>Max Distance</th><th>Topology</th></tr>
             <tr><td>10BASE-T</td><td>10 Mbps</td><td>UTP Cat-3/5</td><td>100 m</td><td>Star (hub)</td></tr>
             <tr><td>10BASE-F</td><td>10 Mbps</td><td>Fiber</td><td>2 km</td><td>Star</td></tr>
@@ -758,7 +578,7 @@
           — Frame delimiting and synchronization<br>
           — Error detection (CRC in trailer)<br><br>
           <strong>ETHERNET FRAME FORMAT (IEEE 802.3):</strong><br>
-          <table class="compare-table">
+          <table class="t">
             <tr><th>Field</th><th>Size</th><th>Purpose</th></tr>
             <tr><td>Preamble</td><td>7 bytes</td><td>10101010 pattern for clock sync</td></tr>
             <tr><td>SFD (Start Frame Delimiter)</td><td>1 byte</td><td>10101011 — marks frame start</td></tr>
@@ -780,15 +600,15 @@
           — Encoding: 5-level PAM (Pulse Amplitude Modulation) at 125 MBd → 1 Gbps<br>
           — Uses 4D-PAM5 encoding<br>
           — No CSMA/CD needed in full-duplex mode (switched networks)<br>
-          — Minimum frame size still 64 bytes (with carrier extension in half-duplex)
+          — Minimum frame size still 64 bytes (with carrier extension in half-duplex)</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span>
-        <div class="question">Q. Compare Go-Back-N and Selective Repeat ARQ protocols. Explain sliding window concept with diagrams.</div>
-        <div class="answer">
-          <table class="compare-table">
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Compare Go-Back-N and Selective Repeat ARQ protocols. Explain sliding window concept with diagrams.</span>
+          </div>
+          <div class="qa__a"><table class="t">
             <tr><th>Feature</th><th>Go-Back-N ARQ</th><th>Selective Repeat ARQ</th></tr>
             <tr><td>Sender Window</td><td>2^(m-1) frames</td><td>2^(m-1) frames</td></tr>
             <tr><td>Receiver Window</td><td>1 frame</td><td>2^(m-1) frames</td></tr>
@@ -801,193 +621,215 @@
           </table>
           <strong>Sliding Window Concept:</strong><br>
           The sliding window protocol allows multiple frames to be "in flight" simultaneously. The sender maintains a window of sequence numbers. As each ACK arrives, the window slides forward, allowing the next frame to be sent.<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">Selective Repeat — Sender &amp; Receiver Windows</div>
+          <pre class="ascii"><div class="diagram-title">Selective Repeat — Sender &amp; Receiver Windows</pre>
             Sender Window (size 4): [0, 1, 2, 3] → slides right on each ACK<br>
             Receiver Window (size 4): [0, 1, 2, 3] → accepts frames within window<br><br>
             If Frame 2 is lost: Receiver buffers 3, 4. Sender retransmits only 2.<br>
-            After 2 received: receiver delivers 2, 3, 4 in order to network layer.
-          </div>
-          <strong>Window Size Constraint:</strong> For both protocols, window size must be ≤ 2^(m-1) to avoid sequence number ambiguity (where m = number of bits for sequence number).
+            After 2 received: receiver delivers 2, 3, 4 in order to network layer.</div>
         </div>
       </div>
 
-      <a class="back-to-top" href="#top">&#8593; Back to Top</a>
-    </div>
-
-    <!-- ==================== UNIT 3 ==================== -->
-    <div class="unit-section" id="unit-3">
-      <div class="unit-header">
-        <div class="eyebrow">Unit 3</div>
+      <div class="unit" id="unit-3">
+        <div class="unit__head">
+          <span class="unit__no">03</span>
+          <div>
+            <h2 class="unit__title">Network Layer</h2>
+            <p class="unit__sub"></p>
+          </div>
+        </div>
+        
         <h2>Network Layer</h2>
       </div>
 
-      <div class="revision-box">
+      <div class="revision">
+        <div class="revision__icon">↻</div>
+        <div>
+          <div class="revision__title">Quick Revision</div>
+          <div class="revision__body">
         <strong>Quick Revision:</strong> Network Layer handles routing and forwarding of packets across multiple networks. Key topics: IPv4 addressing &amp; subnetting, IPv6, routing algorithms (distance vector, link state, path vector), ARP/RARP, ICMP, NAT, DHCP, and network devices.
       </div>
-
-      <h3>1-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is IPv4? How many bits is an IPv4 address?</div>
-        <div class="answer"><strong>IPv4 (Internet Protocol version 4)</strong> uses 32-bit addresses written in dotted decimal notation (e.g., 192.168.1.1). It provides ~4.3 billion unique addresses.</div>
+        </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What are the IPv4 address classes?</div>
-        <div class="answer">
-          <strong>Class A:</strong> 0xxxxxxx (1.0.0.0 – 126.255.255.255) /8, 16.7M hosts<br>
+      <div class="subhead">
+        <span class="subhead__title">1-Mark Questions</span>
+        <span class="subhead__pill--1m">1-Mark</span>
+      </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is IPv4? How many bits is an IPv4 address?</span>
+          </div>
+          <div class="qa__a"><strong>IPv4 (Internet Protocol version 4)</strong> uses 32-bit addresses written in dotted decimal notation (e.g., 192.168.1.1). It provides ~4.3 billion unique addresses.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What are the IPv4 address classes?</span>
+          </div>
+          <div class="qa__a"><strong>Class A:</strong> 0xxxxxxx (1.0.0.0 – 126.255.255.255) /8, 16.7M hosts<br>
           <strong>Class B:</strong> 10xxxxxx (128.0.0.0 – 191.255.255.255) /16, 65K hosts<br>
           <strong>Class C:</strong> 110xxxxx (192.0.0.0 – 223.255.255.255) /24, 254 hosts<br>
           <strong>Class D:</strong> 1110xxxx (224.0.0.0 – 239.255.255.255) — Multicast<br>
-          <strong>Class E:</strong> 1111xxxx (240.0.0.0 – 255.255.255.255) — Reserved
+          <strong>Class E:</strong> 1111xxxx (240.0.0.0 – 255.255.255.255) — Reserved</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Subnetting?</div>
-        <div class="answer"><strong>Subnetting</strong> divides a large network into smaller logical sub-networks (subnets) by borrowing bits from the host portion of the IP address. Benefits: reduced traffic, easier management, improved security.</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Subnetting?</span>
+          </div>
+          <div class="qa__a"><strong>Subnetting</strong> divides a large network into smaller logical sub-networks (subnets) by borrowing bits from the host portion of the IP address. Benefits: reduced traffic, easier management, improved security.</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is CIDR?</div>
-        <div class="answer"><strong>CIDR (Classless Inter-Domain Routing)</strong> represents IP addresses as a prefix (e.g., 192.168.1.0/24). It eliminates class boundaries and allows flexible allocation of address blocks. Notation: IP address / prefix length.</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is CIDR?</span>
+          </div>
+          <div class="qa__a"><strong>CIDR (Classless Inter-Domain Routing)</strong> represents IP addresses as a prefix (e.g., 192.168.1.0/24). It eliminates class boundaries and allows flexible allocation of address blocks. Notation: IP address / prefix length.</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is VLSM?</div>
-        <div class="answer"><strong>VLSM (Variable Length Subnet Mask)</strong> allows different subnets to use different subnet masks within the same network. Enables efficient IP address allocation by using smaller subnets where fewer hosts are needed.</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is VLSM?</span>
+          </div>
+          <div class="qa__a"><strong>VLSM (Variable Length Subnet Mask)</strong> allows different subnets to use different subnet masks within the same network. Enables efficient IP address allocation by using smaller subnets where fewer hosts are needed.</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is IPv6?</div>
-        <div class="answer"><strong>IPv6</strong> uses 128-bit addresses (written in hexadecimal groups, e.g., 2001:0db8:85a3::8a2e:370:7334). Provides ~3.4 × 10^38 addresses. Built-in IPSec, simplified header, no broadcast (uses multicast/anycast).</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is IPv6?</span>
+          </div>
+          <div class="qa__a"><strong>IPv6</strong> uses 128-bit addresses (written in hexadecimal groups, e.g., 2001:0db8:85a3::8a2e:370:7334). Provides ~3.4 × 10^38 addresses. Built-in IPSec, simplified header, no broadcast (uses multicast/anycast).</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is ARP?</div>
-        <div class="answer"><strong>ARP (Address Resolution Protocol)</strong> maps a known IPv4 address to its MAC address. When a host needs to send a packet, it broadcasts an ARP request asking "Who has IP X.X.X.X? Tell Y.Y.Y.Y". The owner replies with its MAC address.</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is ARP?</span>
+          </div>
+          <div class="qa__a"><strong>ARP (Address Resolution Protocol)</strong> maps a known IPv4 address to its MAC address. When a host needs to send a packet, it broadcasts an ARP request asking "Who has IP X.X.X.X? Tell Y.Y.Y.Y". The owner replies with its MAC address.</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is RARP?</div>
-        <div class="answer"><strong>RARP (Reverse ARP)</strong> maps a known MAC address to its IP address. Used by diskless workstations at boot time to discover their own IP address. Largely replaced by BOOTP and DHCP.</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is RARP?</span>
+          </div>
+          <div class="qa__a"><strong>RARP (Reverse ARP)</strong> maps a known MAC address to its IP address. Used by diskless workstations at boot time to discover their own IP address. Largely replaced by BOOTP and DHCP.</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is ICMP?</div>
-        <div class="answer"><strong>ICMP (Internet Control Message Protocol)</strong> is used for diagnostic and error-reporting in IP networks. Tools: ping (ICMP Echo Request/Reply), traceroute (ICMP Time Exceeded). ICMP messages include Destination Unreachable, Time Exceeded, Redirect, etc.</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is ICMP?</span>
+          </div>
+          <div class="qa__a"><strong>ICMP (Internet Control Message Protocol)</strong> is used for diagnostic and error-reporting in IP networks. Tools: ping (ICMP Echo Request/Reply), traceroute (ICMP Time Exceeded). ICMP messages include Destination Unreachable, Time Exceeded, Redirect, etc.</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is NAT?</div>
-        <div class="answer"><strong>NAT (Network Address Translation)</strong> translates private IP addresses to public IP addresses (and vice versa) at the router. Types: Static NAT (1:1 mapping), Dynamic NAT (pool of public IPs), PAT (Port Address Translation / NAT Overload — multiple private IPs share one public IP using different port numbers).</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is NAT?</span>
+          </div>
+          <div class="qa__a"><strong>NAT (Network Address Translation)</strong> translates private IP addresses to public IP addresses (and vice versa) at the router. Types: Static NAT (1:1 mapping), Dynamic NAT (pool of public IPs), PAT (Port Address Translation / NAT Overload — multiple private IPs share one public IP using different port numbers).</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is DHCP?</div>
-        <div class="answer"><strong>DHCP (Dynamic Host Configuration Protocol)</strong> automatically assigns IP addresses and network configuration to hosts. Uses DORA process: Discover → Offer → Request → Acknowledge. Port 67 (server), Port 68 (client).</div>
-      </div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is DHCP?</span>
+          </div>
+          <div class="qa__a"><strong>DHCP (Dynamic Host Configuration Protocol)</strong> automatically assigns IP addresses and network configuration to hosts. Uses DORA process: Discover → Offer → Request → Acknowledge. Port 67 (server), Port 68 (client).</div>
+        </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. Name the network devices at each layer.</div>
-        <div class="answer">
-          Physical Layer: <strong>Repeater, Hub</strong> (regenerate signals, broadcast to all ports)<br>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">Name the network devices at each layer.</span>
+          </div>
+          <div class="qa__a">Physical Layer: <strong>Repeater, Hub</strong> (regenerate signals, broadcast to all ports)<br>
           Data Link Layer: <strong>Bridge, Switch</strong> (filter by MAC address, forward to correct port)<br>
           Network Layer: <strong>Router</strong> (forward packets based on IP address, connect different networks)<br>
-          Application Layer: <strong>Gateway</strong> (protocol conversion between different network architectures)
+          Application Layer: <strong>Gateway</strong> (protocol conversion between different network architectures)</div>
         </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a default gateway?</span>
+          </div>
+          <div class="qa__a">The <strong>Default Gateway</strong> is the IP address of the router that a host uses to send packets to destinations outside its local network. It is the next hop for all packets not destined for the local subnet.</div>
+        </div>
+
+      <div class="subhead">
+        <span class="subhead__title">5-Mark Questions</span>
+        <span class="subhead__pill--5m">5-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a default gateway?</div>
-        <div class="answer">The <strong>Default Gateway</strong> is the IP address of the router that a host uses to send packets to destinations outside its local network. It is the next hop for all packets not destined for the local subnet.</div>
-      </div>
-
-      <h3>5-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Explain Classful addressing and the need for CIDR with numerical examples.</div>
-        <div class="answer">
-          <strong>Classful Addressing:</strong> IP addresses divided into 5 classes (A-E) with fixed boundaries. Problems:<br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain Classful addressing and the need for CIDR with numerical examples.</span>
+          </div>
+          <div class="qa__a"><strong>Classful Addressing:</strong> IP addresses divided into 5 classes (A-E) with fixed boundaries. Problems:<br>
           — Class A wastes millions of addresses for small organizations<br>
           — Class C limited to 254 hosts<br>
           — No flexibility for medium-sized networks needing, say, 1000 hosts<br><br>
           <strong>CIDR Solution:</strong> Classless addressing using prefix notation. E.g., 200.10.5.0/23 gives 2^(32-23) = 512 addresses (510 usable).<br><br>
-          <div class="numerical">
-            <div class="num-title">CIDR Block Allocation Example:</div>
-            ISP has 200.10.0.0/20 (4096 addresses).<br>
-            Allocate to:<br>
-            — Org A: 200.10.0.0/23 (512 addresses, 510 usable) — needs 500 hosts<br>
-            — Org B: 200.10.2.0/24 (256 addresses, 254 usable) — needs 200 hosts<br>
-            — Org C: 200.10.3.0/24 (256 addresses) — needs 200 hosts<br>
-            — Org D: 200.10.4.0/23 (512 addresses) — needs 500 hosts<br>
-            — Remaining: 200.10.6.0/23 … (available for future)<br><br>
-            This is called <strong>address aggregation</strong> — ISP advertises only 200.10.0.0/20 instead of all subnets, reducing routing table size.
-          </div>
+          <div class="diagram"><div class="num-title">CIDR Block Allocation Example:</div>
         </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2022</span>
-        <div class="question">Q. Perform subnetting for the network 200.10.5.0/24 to create 4 equal subnets. Show subnet masks, network addresses, and usable host ranges.</div>
-        <div class="answer">
-          <strong>Given:</strong> Network = 200.10.5.0/24. Need 4 subnets.<br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Perform subnetting for the network 200.10.5.0/24 to create 4 equal subnets. Show subnet masks, network addresses, and usable host ranges.</span>
+          </div>
+          <div class="qa__a"><strong>Given:</strong> Network = 200.10.5.0/24. Need 4 subnets.<br>
           <strong>Step 1:</strong> Borrow 2 bits from host portion (2^2 = 4 subnets).<br>
           <strong>Step 2:</strong> New prefix = /24 + 2 = <strong>/26</strong>. Subnet mask = 255.255.255.192<br>
           <strong>Step 3:</strong> Calculate subnets (block size = 2^(32-26) = 64):<br>
-          <table class="compare-table">
+          <table class="t">
             <tr><th>Subnet</th><th>Network Address</th><th>First Usable</th><th>Last Usable</th><th>Broadcast</th></tr>
             <tr><td>Subnet 0</td><td>200.10.5.0</td><td>200.10.5.1</td><td>200.10.5.62</td><td>200.10.5.63</td></tr>
             <tr><td>Subnet 1</td><td>200.10.5.64</td><td>200.10.5.65</td><td>200.10.5.126</td><td>200.10.5.127</td></tr>
             <tr><td>Subnet 2</td><td>200.10.5.128</td><td>200.10.5.129</td><td>200.10.5.190</td><td>200.10.5.191</td></tr>
             <tr><td>Subnet 3</td><td>200.10.5.192</td><td>200.10.5.193</td><td>200.10.5.254</td><td>200.10.5.255</td></tr>
           </table>
-          Each subnet has 62 usable hosts (2^6 - 2 = 62).
+          Each subnet has 62 usable hosts (2^6 - 2 = 62).</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Describe the DHCP DORA process with a sequence diagram.</div>
-        <div class="answer">
-          <strong>DHCP (Dynamic Host Configuration Protocol)</strong> automatically assigns IP addresses to hosts. The process is called <strong>DORA</strong>:<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Describe the DHCP DORA process with a sequence diagram.</span>
+          </div>
+          <div class="qa__a"><strong>DHCP (Dynamic Host Configuration Protocol)</strong> automatically assigns IP addresses to hosts. The process is called <strong>DORA</strong>:<br><br>
           <strong>1. Discover:</strong> Client broadcasts DHCPDISCOVER packet (src IP = 0.0.0.0, dest IP = 255.255.255.255) to find available DHCP servers.<br><br>
           <strong>2. Offer:</strong> DHCP server responds with DHCPOFFER containing available IP address, subnet mask, lease time, and other configuration.<br><br>
           <strong>3. Request:</strong> Client broadcasts DHCPREQUEST accepting the offered IP address. If multiple servers responded, this selects one.<br><br>
           <strong>4. Acknowledge:</strong> Server sends DHCPACK confirming the lease. Client now has a valid IP address and can communicate.<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">DHCP DORA Process</div>
+          <pre class="ascii"><div class="diagram-title">DHCP DORA Process</pre>
             Client → Broadcast: DHCPDISCOVER<br>
             Server → Client: DHCPOFFER (IP: 192.168.1.100)<br>
             Client → Broadcast: DHCPREQUEST<br>
             Server → Client: DHCPACK (Lease confirmed, time: 86400s)<br><br>
             Lease renewal at T1 (50% of lease time) and T2 (87.5%)<br>
-            Release: Client sends DHCPRELEASE when disconnecting.
-          </div>
-          <strong>DHCP Ports:</strong> Server UDP 67, Client UDP 68.
+            Release: Client sends DHCPRELEASE when disconnecting.</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain IPv4 vs IPv6 — key differences and IPv6 address types.</div>
-        <div class="answer">
-          <table class="compare-table">
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain IPv4 vs IPv6 — key differences and IPv6 address types.</span>
+          </div>
+          <div class="qa__a"><table class="t">
             <tr><th>Feature</th><th>IPv4</th><th>IPv6</th></tr>
             <tr><td>Address Length</td><td>32 bits</td><td>128 bits</td></tr>
             <tr><td>Notation</td><td>Dotted decimal (192.168.1.1)</td><td>Hexadecimal groups (2001:db8::1)</td></tr>
@@ -1005,17 +847,20 @@
           — <strong>Multicast:</strong> One-to-many (ff02::1 — all nodes on link)<br>
           — <strong>Anycast:</strong> One-to-nearest (multiple interfaces share same address, nearest one responds)<br>
           — <strong>Link-local:</strong> fe80::/10 (auto-assigned on each interface, not routable)<br>
-          — <strong>Global unicast:</strong> 2000::/3 (routable on the Internet)
+          — <strong>Global unicast:</strong> 2000::/3 (routable on the Internet)</div>
         </div>
+
+      <div class="subhead">
+        <span class="subhead__title">15-Mark Questions</span>
+        <span class="subhead__pill--5m">15-Mark</span>
       </div>
 
-      <h3>15-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Explain subnetting in detail with worked numerical examples for Class A, B, and C networks. Include CIDR and VLSM. [2023]</div>
-        <div class="answer">
-          <strong>SUBNETTING — COMPLETE THEORY</strong><br><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Explain subnetting in detail with worked numerical examples for Class A, B, and C networks. Include CIDR and VLSM. [2023]</span>
+          </div>
+          <div class="qa__a"><strong>SUBNETTING — COMPLETE THEORY</strong><br><br>
           Subnetting divides a large IP network into smaller subnets by borrowing bits from the host portion. It improves efficiency, security, and manageability.<br><br>
           <strong>Formulas:</strong><br>
           — Number of subnets = 2^s (s = borrowed bits)<br>
@@ -1036,31 +881,15 @@
           Each subnet has 32766 usable hosts<br><br>
           <strong>VLSM (Variable Length Subnet Mask):</strong><br>
           Different subnets use different mask lengths within the same network. Allows efficient address allocation.<br><br>
-          <div class="numerical">
-            <div class="num-title">VLSM Example: Network 200.10.0.0/24</div>
-            Requirements: Subnet A needs 100 hosts, B needs 50, C needs 25, D needs 10<br>
-            Step 1: Sort by largest to smallest: A(100), B(50), C(25), D(10)<br>
-            Step 2: A needs 100 hosts → need 128 addresses (2^7) → /25 mask<br>
-            → Subnet A: 200.10.0.0/25 (usable: .1 to .126, 126 hosts)<br>
-            Step 3: B needs 50 hosts → need 64 addresses → /26 mask<br>
-            → Subnet B: 200.10.0.128/26 (usable: .129 to .190, 62 hosts)<br>
-            Step 4: C needs 25 hosts → need 32 addresses → /27 mask<br>
-            → Subnet C: 200.10.0.192/27 (usable: .193 to .222, 30 hosts)<br>
-            Step 5: D needs 10 hosts → need 16 addresses → /28 mask<br>
-            → Subnet D: 200.10.0.224/28 (usable: .225 to .238, 14 hosts)<br>
-            Remaining: .240/28 (14 hosts available for future)<br><br>
-            <em>Without VLSM (fixed /26): Each subnet gets only 62 hosts — wasteful for D (needs only 10).</em>
-          </div>
-          <strong>CIDR (Classless Inter-Domain Routing):</strong><br>
-          Eliminates class boundaries. Represented as IP/prefix (e.g., 192.168.0.0/22). Enables route aggregation. ISP advertises a single CIDR block (e.g., 200.10.0.0/20) instead of multiple classful networks, reducing global routing table size.
+          <div class="diagram"><div class="num-title">VLSM Example: Network 200.10.0.0/24</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span> <span class="pyq-badge">2022</span>
-        <div class="question">Q. Describe routing algorithms in detail — Distance Vector (Bellman-Ford), Link State (Dijkstra/OSPF), and Path Vector (BGP). Compare them. [2022]</div>
-        <div class="answer">
-          <strong>1. DISTANCE VECTOR ROUTING (Bellman-Ford / RIP)</strong><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Describe routing algorithms in detail — Distance Vector (Bellman-Ford), Link State (Dijkstra/OSPF), and Path Vector (BGP). Compare them. [2022]</span>
+          </div>
+          <div class="qa__a"><strong>1. DISTANCE VECTOR ROUTING (Bellman-Ford / RIP)</strong><br>
           — Each router maintains a routing table (destination, next hop, distance)<br>
           — Periodically exchanges entire routing table with neighbors<br>
           — Uses Bellman-Ford equation: D_x(y) = min{ C(x,v) + D_v(y) } for all neighbors v<br>
@@ -1082,7 +911,7 @@
           — eBGP (between ASes) and iBGP (within an AS)<br>
           — <em>Advantages:</em> Handles policy-based routing, scales to Internet size<br>
           — <em>Disadvantages:</em> Slow convergence, complex configuration<br><br>
-          <table class="compare-table">
+          <table class="t">
             <tr><th>Feature</th><th>Distance Vector</th><th>Link State</th><th>Path Vector</th></tr>
             <tr><td>Algorithm</td><td>Bellman-Ford</td><td>Dijkstra</td><td>BGP (policy-based)</td></tr>
             <tr><td>Knowledge</td><td>Only neighbor info</td><td>Full topology map</td><td>Path info (AS sequence)</td></tr>
@@ -1092,12 +921,14 @@
             <tr><td>Loops</td><td>Possible (split horizon helps)</td><td>No</td><td>Prevented by AS path</td></tr>
             <tr><td>Scale</td><td>Small networks</td><td>Medium to large</td><td>Internet-scale (ASes)</td></tr>
             <tr><td>Protocol</td><td>RIP</td><td>OSPF, IS-IS</td><td>BGP</td></tr>
-          </table>
+          </table></div>
         </div>
-      </div>
 
-      <h3>Port Numbers Reference Table</h3>
-      <table class="port-table">
+      <div class="subhead">
+        <span class="subhead__title">Port Numbers Reference Table</span>
+        <span class="subhead__pill--1m">Port</span>
+      </div>
+      <table class="t">
         <tr><th>Protocol</th><th>Port</th><th>Protocol</th><th>Port</th></tr>
         <tr><td>HTTP</td><td>80</td><td>HTTPS</td><td>443</td></tr>
         <tr><td>FTP (control)</td><td>21</td><td>FTP (data)</td><td>20</td></tr>
@@ -1109,96 +940,134 @@
         <tr><td>SNMP</td><td>161</td><td>SNMP Trap</td><td>162</td></tr>
         <tr><td>LDAP</td><td>389</td><td>SMTPS</td><td>465</td></tr>
       </table>
+      </div>
 
-      <a class="back-to-top" href="#top">&#8593; Back to Top</a>
-    </div>
-
-    <!-- ==================== UNIT 4 ==================== -->
-    <div class="unit-section" id="unit-4">
-      <div class="unit-header">
-        <div class="eyebrow">Unit 4</div>
+      <div class="unit" id="unit-4">
+        <div class="unit__head">
+          <span class="unit__no">04</span>
+          <div>
+            <h2 class="unit__title">Transport Layer</h2>
+            <p class="unit__sub"></p>
+          </div>
+        </div>
+        
         <h2>Transport Layer</h2>
       </div>
 
-      <div class="revision-box">
+      <div class="revision">
+        <div class="revision__icon">↻</div>
+        <div>
+          <div class="revision__title">Quick Revision</div>
+          <div class="revision__body">
         <strong>Quick Revision:</strong> Transport Layer provides end-to-end reliable data delivery between processes using port numbers. TCP is reliable/connection-oriented; UDP is unreliable/fast. Congestion control prevents network overload. QoS ensures adequate service for critical applications.
       </div>
-
-      <h3>1-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the role of the Transport Layer?</div>
-        <div class="answer">The <strong>Transport Layer</strong> provides process-to-process delivery (end-to-end) using port numbers. It handles segmentation, flow control, error control, and congestion control. Two main protocols: TCP and UDP.</div>
+        </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a port number?</div>
-        <div class="answer">A <strong>Port Number</strong> is a 16-bit identifier (0–65535) used by the Transport Layer to identify specific processes/applications. Range: 0–1023 (well-known), 1024–49151 (registered), 49152–65535 (dynamic/private).</div>
+      <div class="subhead">
+        <span class="subhead__title">1-Mark Questions</span>
+        <span class="subhead__pill--1m">1-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a socket?</div>
-        <div class="answer">A <strong>Socket</strong> is the combination of an IP address and a port number (e.g., 192.168.1.10:80). It uniquely identifies a process on a host: Socket = IP Address : Port Number.</div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the role of the Transport Layer?</span>
+          </div>
+          <div class="qa__a">The <strong>Transport Layer</strong> provides process-to-process delivery (end-to-end) using port numbers. It handles segmentation, flow control, error control, and congestion control. Two main protocols: TCP and UDP.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a port number?</span>
+          </div>
+          <div class="qa__a">A <strong>Port Number</strong> is a 16-bit identifier (0–65535) used by the Transport Layer to identify specific processes/applications. Range: 0–1023 (well-known), 1024–49151 (registered), 49152–65535 (dynamic/private).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a socket?</span>
+          </div>
+          <div class="qa__a">A <strong>Socket</strong> is the combination of an IP address and a port number (e.g., 192.168.1.10:80). It uniquely identifies a process on a host: Socket = IP Address : Port Number.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is TCP?</span>
+          </div>
+          <div class="qa__a"><strong>TCP (Transmission Control Protocol)</strong> is a connection-oriented, reliable transport protocol. Provides: guaranteed delivery, sequencing, flow control, congestion control. Used by HTTP, FTP, SMTP, SSH.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is UDP?</span>
+          </div>
+          <div class="qa__a"><strong>UDP (User Datagram Protocol)</strong> is a connectionless, unreliable transport protocol. No connection setup, no guaranteed delivery, no sequencing. Used by DNS, VoIP, video streaming, online gaming — where speed matters more than reliability.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the Three-Way Handshake?</span>
+          </div>
+          <div class="qa__a">The <strong>Three-Way Handshake</strong> establishes a TCP connection: (1) Client → SYN, (2) Server → SYN-ACK, (3) Client → ACK. Both sides agree on initial sequence numbers.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Congestion Control?</span>
+          </div>
+          <div class="qa__a"><strong>Congestion Control</strong> prevents overwhelming the network with too much traffic. TCP uses: Slow Start, Congestion Avoidance, Fast Retransmit, and Fast Recovery. Monitors congestion window (cwnd) and slow start threshold (ssthresh).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is QoS?</span>
+          </div>
+          <div class="qa__a"><strong>QoS (Quality of Service)</strong> ensures adequate network performance for critical applications. Mechanisms: Traffic shaping (leaky bucket, token bucket), prioritization, resource reservation. Important for VoIP, video conferencing, and real-time systems.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Flow Control?</span>
+          </div>
+          <div class="qa__a"><strong>Flow Control</strong> prevents a fast sender from overwhelming a slow receiver. TCP uses <strong>Sliding Window</strong> (receiver advertises its window size). Stop-and-Wait is the simplest flow control method.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is MSS?</span>
+          </div>
+          <div class="qa__a"><strong>MSS (Maximum Segment Size)</strong> is the maximum amount of data (in bytes) that TCP can deliver to the receiving TCP in one segment. MSS = MTU - 40 (TCP header 20 bytes + IP header 20 bytes). Default MSS = 536 bytes.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the leaky bucket algorithm?</span>
+          </div>
+          <div class="qa__a">The <strong>Leaky Bucket</strong> algorithm shapes traffic by allowing data to enter at variable rates but exit at a fixed constant rate. If the bucket overflows, packets are discarded. Analogous to water leaking from a bucket at a steady rate.</div>
+        </div>
+
+      <div class="subhead">
+        <span class="subhead__title">5-Mark Questions</span>
+        <span class="subhead__pill--5m">5-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is TCP?</div>
-        <div class="answer"><strong>TCP (Transmission Control Protocol)</strong> is a connection-oriented, reliable transport protocol. Provides: guaranteed delivery, sequencing, flow control, congestion control. Used by HTTP, FTP, SMTP, SSH.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is UDP?</div>
-        <div class="answer"><strong>UDP (User Datagram Protocol)</strong> is a connectionless, unreliable transport protocol. No connection setup, no guaranteed delivery, no sequencing. Used by DNS, VoIP, video streaming, online gaming — where speed matters more than reliability.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the Three-Way Handshake?</div>
-        <div class="answer">The <strong>Three-Way Handshake</strong> establishes a TCP connection: (1) Client → SYN, (2) Server → SYN-ACK, (3) Client → ACK. Both sides agree on initial sequence numbers.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Congestion Control?</div>
-        <div class="answer"><strong>Congestion Control</strong> prevents overwhelming the network with too much traffic. TCP uses: Slow Start, Congestion Avoidance, Fast Retransmit, and Fast Recovery. Monitors congestion window (cwnd) and slow start threshold (ssthresh).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is QoS?</div>
-        <div class="answer"><strong>QoS (Quality of Service)</strong> ensures adequate network performance for critical applications. Mechanisms: Traffic shaping (leaky bucket, token bucket), prioritization, resource reservation. Important for VoIP, video conferencing, and real-time systems.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Flow Control?</div>
-        <div class="answer"><strong>Flow Control</strong> prevents a fast sender from overwhelming a slow receiver. TCP uses <strong>Sliding Window</strong> (receiver advertises its window size). Stop-and-Wait is the simplest flow control method.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is MSS?</div>
-        <div class="answer"><strong>MSS (Maximum Segment Size)</strong> is the maximum amount of data (in bytes) that TCP can deliver to the receiving TCP in one segment. MSS = MTU - 40 (TCP header 20 bytes + IP header 20 bytes). Default MSS = 536 bytes.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the leaky bucket algorithm?</div>
-        <div class="answer">The <strong>Leaky Bucket</strong> algorithm shapes traffic by allowing data to enter at variable rates but exit at a fixed constant rate. If the bucket overflows, packets are discarded. Analogous to water leaking from a bucket at a steady rate.</div>
-      </div>
-
-      <h3>5-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Compare TCP and UDP in detail with a comparison table and suitable application examples for each.</div>
-        <div class="answer">
-          <table class="compare-table">
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Compare TCP and UDP in detail with a comparison table and suitable application examples for each.</span>
+          </div>
+          <div class="qa__a"><table class="t">
             <tr><th>Feature</th><th>TCP</th><th>UDP</th></tr>
             <tr><td>Connection</td><td>Connection-oriented (3-way handshake)</td><td>Connectionless</td></tr>
             <tr><td>Reliability</td><td>Reliable (ACK, retransmission)</td><td>Unreliable (no ACK)</td></tr>
@@ -1212,15 +1081,15 @@
             <tr><td>Applications</td><td>Web (HTTP), Email (SMTP), File Transfer (FTP), SSH</td><td>DNS, VoIP, Video Streaming, Online Games, DHCP</td></tr>
           </table>
           <strong>When to use TCP:</strong> When data integrity and delivery guarantee are critical (file transfers, email, web pages).<br>
-          <strong>When to use UDP:</strong> When speed/latency is critical and some data loss is acceptable (live video, VoIP, gaming, DNS queries).
+          <strong>When to use UDP:</strong> When speed/latency is critical and some data loss is acceptable (live video, VoIP, gaming, DNS queries).</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2022</span>
-        <div class="question">Q. Explain TCP congestion control mechanisms: Slow Start, Congestion Avoidance, Fast Retransmit, and Fast Recovery.</div>
-        <div class="answer">
-          <strong>TCP Congestion Control</strong> prevents the sender from overwhelming the network. It uses two variables: <strong>cwnd</strong> (congestion window — sender's estimate of available network capacity) and <strong>ssthresh</strong> (slow start threshold).<br><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain TCP congestion control mechanisms: Slow Start, Congestion Avoidance, Fast Retransmit, and Fast Recovery.</span>
+          </div>
+          <div class="qa__a"><strong>TCP Congestion Control</strong> prevents the sender from overwhelming the network. It uses two variables: <strong>cwnd</strong> (congestion window — sender's estimate of available network capacity) and <strong>ssthresh</strong> (slow start threshold).<br><br>
           <strong>1. SLOW START:</strong><br>
           — Initially cwnd = 1 MSS<br>
           — For each ACK received, cwnd increases by 1 MSS (exponential growth)<br>
@@ -1238,47 +1107,42 @@
           — For each additional duplicate ACK, cwnd += 1 MSS (inflate window)<br>
           — When new ACK arrives (indicating some data got through), set cwnd = ssthresh<br>
           — If timeout occurs: more severe — ssthresh = cwnd/2, cwnd = 1, restart Slow Start<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">TCP Congestion Control — cwnd Growth Pattern</div>
+          <pre class="ascii"><div class="diagram-title">TCP Congestion Control — cwnd Growth Pattern</pre>
             Slow Start (exponential): cwnd: 1 → 2 → 4 → 8 → 16 → 32 → 64<br>
             Congestion Avoidance (linear): 64 → 65 → 66 → 67 → 68 → 69 …<br>
             On 3 dupACKs: ssthresh = cwnd/2, cwnd = ssthresh + 3<br>
-            On Timeout: ssthresh = cwnd/2, cwnd = 1 (restart Slow Start)
-          </div>
+            On Timeout: ssthresh = cwnd/2, cwnd = 1 (restart Slow Start)</div>
         </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2021</span>
-        <div class="question">Q. Explain the TCP Three-Way Handshake and Four-Way Termination with sequence diagrams.</div>
-        <div class="answer">
-          <strong>THREE-WAY HANDSHAKE (Connection Establishment):</strong><br>
-          <div class="diagram-box">
-            Client → Server: SYN (seq = x, ISN_x)<br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain the TCP Three-Way Handshake and Four-Way Termination with sequence diagrams.</span>
+          </div>
+          <div class="qa__a"><strong>THREE-WAY HANDSHAKE (Connection Establishment):</strong><br>
+          <pre class="ascii">Client → Server: SYN (seq = x, ISN_x)<br>
             Server → Client: SYN-ACK (seq = y, ISN_y; ack = x+1)<br>
             Client → Server: ACK (seq = x+1; ack = y+1)<br><br>
-            Connection ESTABLISHED — data transfer begins
-          </div>
+            Connection ESTABLISHED — data transfer begins</pre>
           Both sides exchange Initial Sequence Numbers (ISNs). ISN should be random for security (prevents TCP sequence prediction attacks).<br><br>
           <strong>FOUR-WAY TERMINATION (Connection Release):</strong><br>
           Since TCP is full-duplex, each direction must be closed independently:<br>
-          <div class="diagram-box">
-            Client → Server: FIN (seq = u) — "I'm done sending"<br>
+          <pre class="ascii">Client → Server: FIN (seq = u) — "I'm done sending"<br>
             Server → Client: ACK (ack = u+1) — "Got your FIN"<br>
             [Server can still send data to Client — half-closed state]<br>
             Server → Client: FIN (seq = v) — "I'm done too"<br>
             Client → Server: ACK (ack = v+1) — "Got your FIN"<br><br>
-            Connection CLOSED after TIME_WAIT (2MSL)
-          </div>
-          <strong>TIME_WAIT (2MSL):</strong> After sending final ACK, client waits 2 × Maximum Segment Lifetime (typically 2 minutes) to ensure the last ACK was received. Prevents delayed duplicates from confusing a new connection.
+            Connection CLOSED after TIME_WAIT (2MSL)</pre>
+          <strong>TIME_WAIT (2MSL):</strong> After sending final ACK, client waits 2 × Maximum Segment Lifetime (typically 2 minutes) to ensure the last ACK was received. Prevents delayed duplicates from confusing a new connection.</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain Leaky Bucket and Token Bucket algorithms for traffic shaping.</div>
-        <div class="answer">
-          <strong>1. LEAKY BUCKET:</strong><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain Leaky Bucket and Token Bucket algorithms for traffic shaping.</span>
+          </div>
+          <div class="qa__a"><strong>1. LEAKY BUCKET:</strong><br>
           — Fixed output rate (like water leaking from a hole at constant rate)<br>
           — Input can be bursty, but output is uniform<br>
           — If bucket overflows, packets are discarded<br>
@@ -1290,25 +1154,25 @@
           — If no tokens available, packet must wait or be discarded<br>
           — Allows bursts up to b tokens/packets<br>
           — More flexible than leaky bucket<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">Token Bucket — Burst Handling Example</div>
+          <pre class="ascii"><div class="diagram-title">Token Bucket — Burst Handling Example</pre>
             Rate r = 1 token/ms, Bucket size b = 10 tokens<br>
             After 10ms of silence: 10 tokens accumulated<br>
             Can now send 10 packets instantly (burst of 10)<br>
-            Then limited to 1 packet per ms (steady rate)
-          </div>
-          <strong>Comparison:</strong> Leaky bucket enforces rigid rate; Token bucket allows controlled bursts. Token bucket is used in Cisco QoS (CAR - Committed Access Rate) and ATM.
+            Then limited to 1 packet per ms (steady rate)</div>
         </div>
+
+      <div class="subhead">
+        <span class="subhead__title">15-Mark Questions</span>
+        <span class="subhead__pill--5m">15-Mark</span>
       </div>
 
-      <h3>15-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Describe the TCP header format in detail. Explain each field with its purpose and the Three-Way Handshake process with a timing diagram. [2023]</div>
-        <div class="answer">
-          <strong>TCP HEADER FORMAT (20-60 bytes minimum):</strong><br>
-          <table class="compare-table">
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Describe the TCP header format in detail. Explain each field with its purpose and the Three-Way Handshake process with a timing diagram. [2023]</span>
+          </div>
+          <div class="qa__a"><strong>TCP HEADER FORMAT (20-60 bytes minimum):</strong><br>
+          <table class="t">
             <tr><th>Field</th><th>Size</th><th>Purpose</th></tr>
             <tr><td>Source Port</td><td>16 bits</td><td>Sender's port number</td></tr>
             <tr><td>Destination Port</td><td>16 bits</td><td>Receiver's port number</td></tr>
@@ -1330,8 +1194,7 @@
           — PSH: Push function — deliver data immediately<br>
           — URG: Urgent pointer is valid<br><br>
           <strong>THREE-WAY HANDSHAKE (Detailed):</strong><br>
-          <div class="diagram-box">
-            <div class="diagram-title">TCP Connection Establishment (Three-Way Handshake)</div>
+          <pre class="ascii"><div class="diagram-title">TCP Connection Establishment (Three-Way Handshake)</pre>
             <pre style="text-align:left;font-size:0.82rem;">
  Client (A)                    Server (B)
     |                               |
@@ -1342,134 +1205,167 @@
     |── ACK (seq=x+1, ack=y+1) ───→|
     |                               |  ESTABLISHED
     |==== DATA TRANSFER ===========|
-            </pre>
-          </div>
-          <strong>Why Three Steps (not two)?</strong> Because the channel is unreliable. If Client's SYN is lost, Client knows (no response). If Server's SYN-ACK is lost, both know: Server retransmits, Client sees duplicate SYN and retransmits ACK. A two-way handshake cannot handle this asymmetry reliably.
+            </pre></div>
         </div>
       </div>
 
-      <a class="back-to-top" href="#top">&#8593; Back to Top</a>
-    </div>
-
-    <!-- ==================== UNIT 5 ==================== -->
-    <div class="unit-section" id="unit-5">
-      <div class="unit-header">
-        <div class="eyebrow">Unit 5</div>
+      <div class="unit" id="unit-5">
+        <div class="unit__head">
+          <span class="unit__no">05</span>
+          <div>
+            <h2 class="unit__title">Application Layer</h2>
+            <p class="unit__sub"></p>
+          </div>
+        </div>
+        
         <h2>Application Layer</h2>
       </div>
 
-      <div class="revision-box">
+      <div class="revision">
+        <div class="revision__icon">↻</div>
+        <div>
+          <div class="revision__title">Quick Revision</div>
+          <div class="revision__body">
         <strong>Quick Revision:</strong> Application Layer provides network services to end-user applications. Key protocols: HTTP/HTTPS (web), DNS (name resolution), SMTP/POP3/IMAP (email), FTP (file transfer), Telnet/SSH (remote login), SNMP (network management). Security: encryption, firewalls, SSL/TLS.
       </div>
-
-      <h3>1-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is HTTP?</div>
-        <div class="answer"><strong>HTTP (HyperText Transfer Protocol)</strong> is the application layer protocol for the World Wide Web. Uses port 80 (HTTP) or 443 (HTTPS). It is stateless — each request is independent.</div>
+        </div>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is HTTPS?</div>
-        <div class="answer"><strong>HTTPS (HTTP Secure)</strong> is HTTP over SSL/TLS. Uses port 443. Provides encryption, server authentication, and data integrity. Prevents eavesdropping and tampering.</div>
+      <div class="subhead">
+        <span class="subhead__title">1-Mark Questions</span>
+        <span class="subhead__pill--1m">1-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is DNS?</div>
-        <div class="answer"><strong>DNS (Domain Name System)</strong> translates human-readable domain names (www.google.com) to IP addresses (142.250.185.14). Uses a hierarchical distributed database. Port 53 (TCP for zone transfers, UDP for queries).</div>
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is HTTP?</span>
+          </div>
+          <div class="qa__a"><strong>HTTP (HyperText Transfer Protocol)</strong> is the application layer protocol for the World Wide Web. Uses port 80 (HTTP) or 443 (HTTPS). It is stateless — each request is independent.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is HTTPS?</span>
+          </div>
+          <div class="qa__a"><strong>HTTPS (HTTP Secure)</strong> is HTTP over SSL/TLS. Uses port 443. Provides encryption, server authentication, and data integrity. Prevents eavesdropping and tampering.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is DNS?</span>
+          </div>
+          <div class="qa__a"><strong>DNS (Domain Name System)</strong> translates human-readable domain names (www.google.com) to IP addresses (142.250.185.14). Uses a hierarchical distributed database. Port 53 (TCP for zone transfers, UDP for queries).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is SMTP?</span>
+          </div>
+          <div class="qa__a"><strong>SMTP (Simple Mail Transfer Protocol)</strong> is used for sending emails between mail servers. Port 25 (plain), 465 (SMTPS/SSL), 587 (STARTTLS). Uses TCP (reliable delivery required).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is POP3?</span>
+          </div>
+          <div class="qa__a"><strong>POP3 (Post Office Protocol v3)</strong> is used by email clients to retrieve emails from a mail server. Downloads and typically deletes from server. Port 110 (plain), 995 (POP3S). Simple, offline access.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is IMAP?</span>
+          </div>
+          <div class="qa__a"><strong>IMAP (Internet Message Access Protocol)</strong> is a more advanced email retrieval protocol. Keeps emails on the server, allows multiple device access, supports folders. Port 143 (plain), 993 (IMAPS).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is FTP?</span>
+          </div>
+          <div class="qa__a"><strong>FTP (File Transfer Protocol)</strong> transfers files between client and server using two connections: Control (port 21, TCP) and Data (port 20, TCP). Modes: Active (server connects to client) and Passive (client connects to server).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is the difference between FTP Active and Passive modes?</span>
+          </div>
+          <div class="qa__a"><strong>Active FTP:</strong> Server connects to client's data port (problematic with firewalls/NAT). <strong>Passive FTP:</strong> Client connects to server's data port (better for firewalls/NAT — client initiates all connections).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is Telnet?</span>
+          </div>
+          <div class="qa__a"><strong>Telnet</strong> is a remote login protocol (port 23) that allows a user to log into a remote host and execute commands. It is <em>unencrypted</em> — all data including passwords is sent in plaintext. Replaced by SSH for security.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is SSH?</span>
+          </div>
+          <div class="qa__a"><strong>SSH (Secure Shell)</strong> is a secure remote login protocol (port 22). Provides encrypted communication, strong authentication (password + public key), and secure file transfer (SCP, SFTP). Replaces insecure Telnet and FTP.</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is SNMP?</span>
+          </div>
+          <div class="qa__a"><strong>SNMP (Simple Network Management Protocol)</strong> is used for monitoring and managing network devices. Uses a manager-agent model. Port 161 (queries), 162 (traps). Versions: SNMPv1, SNMPv2c, SNMPv3 (with security).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is a Firewall?</span>
+          </div>
+          <div class="qa__a">A <strong>Firewall</strong> is a network security device that monitors and filters incoming/outgoing traffic based on predetermined security rules. Types: Packet Filter, Stateful Inspection, Application Proxy, Next-Generation Firewall (NGFW).</div>
+        </div>
+
+      <div class="qa qa--1m">
+          <div class="qa__head">
+            <span class="qa__marks">1M</span>
+            <span class="qa__q">What is SSL/TLS?</span>
+          </div>
+          <div class="qa__a"><strong>SSL (Secure Sockets Layer)</strong> and <strong>TLS (Transport Layer Security)</strong> are cryptographic protocols that provide secure communication over a network. TLS is the modern successor to SSL. They use asymmetric encryption for key exchange and symmetric encryption for data transfer.</div>
+        </div>
+
+      <div class="subhead">
+        <span class="subhead__title">5-Mark Questions</span>
+        <span class="subhead__pill--5m">5-Mark</span>
       </div>
 
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is SMTP?</div>
-        <div class="answer"><strong>SMTP (Simple Mail Transfer Protocol)</strong> is used for sending emails between mail servers. Port 25 (plain), 465 (SMTPS/SSL), 587 (STARTTLS). Uses TCP (reliable delivery required).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is POP3?</div>
-        <div class="answer"><strong>POP3 (Post Office Protocol v3)</strong> is used by email clients to retrieve emails from a mail server. Downloads and typically deletes from server. Port 110 (plain), 995 (POP3S). Simple, offline access.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is IMAP?</div>
-        <div class="answer"><strong>IMAP (Internet Message Access Protocol)</strong> is a more advanced email retrieval protocol. Keeps emails on the server, allows multiple device access, supports folders. Port 143 (plain), 993 (IMAPS).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is FTP?</div>
-        <div class="answer"><strong>FTP (File Transfer Protocol)</strong> transfers files between client and server using two connections: Control (port 21, TCP) and Data (port 20, TCP). Modes: Active (server connects to client) and Passive (client connects to server).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is the difference between FTP Active and Passive modes?</div>
-        <div class="answer"><strong>Active FTP:</strong> Server connects to client's data port (problematic with firewalls/NAT). <strong>Passive FTP:</strong> Client connects to server's data port (better for firewalls/NAT — client initiates all connections).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is Telnet?</div>
-        <div class="answer"><strong>Telnet</strong> is a remote login protocol (port 23) that allows a user to log into a remote host and execute commands. It is <em>unencrypted</em> — all data including passwords is sent in plaintext. Replaced by SSH for security.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is SSH?</div>
-        <div class="answer"><strong>SSH (Secure Shell)</strong> is a secure remote login protocol (port 22). Provides encrypted communication, strong authentication (password + public key), and secure file transfer (SCP, SFTP). Replaces insecure Telnet and FTP.</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is SNMP?</div>
-        <div class="answer"><strong>SNMP (Simple Network Management Protocol)</strong> is used for monitoring and managing network devices. Uses a manager-agent model. Port 161 (queries), 162 (traps). Versions: SNMPv1, SNMPv2c, SNMPv3 (with security).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is a Firewall?</div>
-        <div class="answer">A <strong>Firewall</strong> is a network security device that monitors and filters incoming/outgoing traffic based on predetermined security rules. Types: Packet Filter, Stateful Inspection, Application Proxy, Next-Generation Firewall (NGFW).</div>
-      </div>
-
-      <div class="q-block">
-        <span class="mark-badge">1 Mark</span>
-        <div class="question">Q. What is SSL/TLS?</div>
-        <div class="answer"><strong>SSL (Secure Sockets Layer)</strong> and <strong>TLS (Transport Layer Security)</strong> are cryptographic protocols that provide secure communication over a network. TLS is the modern successor to SSL. They use asymmetric encryption for key exchange and symmetric encryption for data transfer.</div>
-      </div>
-
-      <h3>5-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Explain the DNS resolution process with a step-by-step example. Include recursive and iterative queries.</div>
-        <div class="answer">
-          <strong>DNS Resolution Process:</strong> Converting www.example.com → IP address involves a hierarchical lookup through DNS servers.<br><br>
-          <div class="diagram-box">
-            <div class="diagram-title">DNS Resolution — Step by Step</div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain the DNS resolution process with a step-by-step example. Include recursive and iterative queries.</span>
+          </div>
+          <div class="qa__a"><strong>DNS Resolution Process:</strong> Converting www.example.com → IP address involves a hierarchical lookup through DNS servers.<br><br>
+          <pre class="ascii"><div class="diagram-title">DNS Resolution — Step by Step</pre>
             1. Client queries Local DNS Server (recursive query)<br>
             2. Local DNS queries Root Server (iterative) → ".com" TLD servers<br>
             3. Local DNS queries .com TLD server (iterative) → "example.com" authoritative server<br>
             4. Local DNS queries example.com authoritative server → gets IP (93.184.216.34)<br>
             5. Local DNS returns IP to Client<br>
-            6. Client connects to 93.184.216.34:80
-          </div>
-          <strong>Recursive Query:</strong> Client asks Local DNS to get the answer. Local DNS does all the work (queries root, TLD, authoritative) and returns final answer.<br>
-          <strong>Iterative Query:</strong> DNS server responds with best answer it has (referral to next server) — doesn't query on behalf of requester.<br><br>
-          <strong>DNS Caching:</strong> Results are cached at each level (TTL-based) to reduce lookup time. Negative caching stores "does not exist" responses.<br><br>
-          <strong>DNS Record Types:</strong> A (IPv4), AAAA (IPv6), MX (Mail), CNAME (alias), NS (Name Server), PTR (reverse lookup), TXT (text), SOA (Start of Authority).
+            6. Client connects to 93.184.216.34:80</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span> <span class="pyq-badge">2022</span>
-        <div class="question">Q. Compare POP3 and IMAP. Also explain SMTP mail delivery process.</div>
-        <div class="answer">
-          <table class="compare-table">
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Compare POP3 and IMAP. Also explain SMTP mail delivery process.</span>
+          </div>
+          <div class="qa__a"><table class="t">
             <tr><th>Feature</th><th>POP3</th><th>IMAP</th></tr>
             <tr><td>Port (plain)</td><td>110</td><td>143</td></tr>
             <tr><td>Port (SSL)</td><td>995</td><td>993</td></tr>
@@ -1490,15 +1386,15 @@
           8. Server queues email for delivery<br>
           9. Sender's server connects to recipient's SMTP server and transfers email<br>
           10. Recipient's server stores email in mailbox (user's inbox)<br>
-          11. Recipient's email client uses POP3/IMAP to retrieve email
+          11. Recipient's email client uses POP3/IMAP to retrieve email</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">5 Marks</span>
-        <div class="question">Q. Explain network security basics: encryption types, firewall types, and SSL/TLS handshake process.</div>
-        <div class="answer">
-          <strong>ENCRYPTION TYPES:</strong><br>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q">Explain network security basics: encryption types, firewall types, and SSL/TLS handshake process.</span>
+          </div>
+          <div class="qa__a"><strong>ENCRYPTION TYPES:</strong><br>
           <strong>1. Symmetric Encryption:</strong> Same key for encryption and decryption. Fast. Examples: AES (Advanced Encryption Standard, 128/256-bit), DES, 3DES, RC4.<br><br>
           <strong>2. Asymmetric Encryption:</strong> Public key + private key pair. Slower but solves key distribution problem. Examples: RSA (used in TLS), Diffie-Hellman (key exchange), ECC (Elliptic Curve).<br><br>
           <strong>3. Hashing:</strong> One-way function producing fixed-size digest. Used for integrity verification. Examples: MD5 (broken), SHA-1 (deprecated), SHA-256, SHA-3.<br><br>
@@ -1512,17 +1408,20 @@
           2. Server sends Server Hello (chosen cipher, certificate with public key, random nonce)<br>
           3. Client verifies certificate, generates pre-master secret, encrypts with server's public key → sends to server<br>
           4. Both sides derive session keys from pre-master secret + nonces<br>
-          5. Encrypted communication begins (Finished messages confirm handshake)
+          5. Encrypted communication begins (Finished messages confirm handshake)</div>
         </div>
+
+      <div class="subhead">
+        <span class="subhead__title">15-Mark Questions</span>
+        <span class="subhead__pill--5m">15-Mark</span>
       </div>
 
-      <h3>15-Mark Questions</h3>
-
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span> <span class="pyq-badge">2023</span>
-        <div class="question">Q. Describe HTTP/HTTPS, DNS, and Email protocols (SMTP, POP3, IMAP) in detail. Explain how a web page is loaded step-by-step. [2023]</div>
-        <div class="answer">
-          <strong>HTTP (HyperText Transfer Protocol):</strong><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Describe HTTP/HTTPS, DNS, and Email protocols (SMTP, POP3, IMAP) in detail. Explain how a web page is loaded step-by-step. [2023]</span>
+          </div>
+          <div class="qa__a"><strong>HTTP (HyperText Transfer Protocol):</strong><br>
           — Application layer protocol (port 80), stateless, request-response model<br>
           — Request methods: GET, POST, PUT, DELETE, HEAD, OPTIONS, PATCH<br>
           — Response codes: 1xx (Info), 2xx (Success: 200 OK), 3xx (Redirect: 301, 302), 4xx (Client Error: 404 Not Found, 403 Forbidden), 5xx (Server Error: 500, 503)<br>
@@ -1553,15 +1452,15 @@
           9. Browser parses HTML, discovers CSS/JS/image URLs<br>
           10. Browser sends additional HTTP requests for each resource (parallel, HTTP/2 multiplexed)<br>
           11. Server responds with CSS, JS, images<br>
-          12. Browser renders complete page
+          12. Browser renders complete page</div>
         </div>
-      </div>
 
-      <div class="q-block">
-        <span class="mark-badge">15 Marks</span>
-        <div class="question">Q. Explain FTP and its modes (Active vs Passive). Describe Telnet, SSH, and SNMP. Also discuss network security fundamentals including encryption, firewalls, and the SSL/TLS handshake. [2022]</div>
-        <div class="answer">
-          <strong>FTP (File Transfer Protocol):</strong><br>
+      <div class="qa qa--15m">
+          <div class="qa__head">
+            <span class="qa__marks">15M</span>
+            <span class="qa__q">Explain FTP and its modes (Active vs Passive). Describe Telnet, SSH, and SNMP. Also discuss network security fundamentals including encryption, firewalls, and the SSL/TLS handshake. [2022]</span>
+          </div>
+          <div class="qa__a"><strong>FTP (File Transfer Protocol):</strong><br>
           — Application layer protocol (RFC 959) for transferring files<br>
           — Uses TWO connections:<br>
           &nbsp;&nbsp;• Control Connection: TCP port 21 (commands/responses throughout session)<br>
@@ -1607,132 +1506,232 @@
           6. Both derive session keys (encryption + MAC keys) from pre-master + nonces<br>
           7. Client sends Finished (encrypted with session key)<br>
           8. Server sends Finished (encrypted with session key)<br>
-          9. Encrypted application data transfer begins
+          9. Encrypted application data transfer begins</div>
         </div>
       </div>
 
-      <a class="back-to-top" href="#top">&#8593; Back to Top</a>
-    </div>
-
-    <!-- ==================== PREVIOUS YEAR QUESTIONS ==================== -->
-    <div class="unit-section" id="pyq-section">
-      <div class="unit-header">
-        <div class="eyebrow">PYQs</div>
+      <div class="unit" id="pyq-section">
+        <div class="unit__head">
+          <span class="unit__no">01</span>
+          <div>
+            <h2 class="unit__title">Previous Year Questions (2020–2023)</h2>
+            <p class="unit__sub"></p>
+          </div>
+        </div>
+        
         <h2>Previous Year Questions (2020–2023)</h2>
       </div>
 
-      <div class="revision-box">
+      <div class="revision">
+        <div class="revision__icon">↻</div>
+        <div>
+          <div class="revision__title">Quick Revision</div>
+          <div class="revision__body">
         <strong>Compiled PYQs:</strong> These questions have appeared in previous MAKAUT semester examinations. Study these carefully as similar questions are likely to repeat.
       </div>
-
-      <h3>2023 Questions</h3>
-      <div class="q-block">
-        <span class="pyq-badge">2023</span>
-        <div class="question"><strong>15 Marks:</strong> Describe the OSI reference model in detail. Explain the functions of each layer and how data flows through the model. Also compare with TCP/IP model.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2023</span>
-        <div class="question"><strong>15 Marks:</strong> Describe Ethernet standards and MAC sublayer in detail. Explain CSMA/CD, frame format, and Gigabit Ethernet.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2023</span>
-        <div class="question"><strong>5 Marks:</strong> Explain CRC error detection with a numerical example.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2023</span>
-        <div class="question"><strong>15 Marks:</strong> Explain HTTP/HTTPS, DNS, and Email protocols (SMTP, POP3, IMAP) in detail. Explain how a web page is loaded step-by-step.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2023</span>
-        <div class="question"><strong>15 Marks:</strong> Explain subnetting in detail with worked numerical examples for Class A, B, and C networks. Include CIDR and VLSM.</div>
+        </div>
       </div>
 
-      <h3>2022 Questions</h3>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>15 Marks:</strong> Discuss transmission media in detail — guided and unguided media with characteristics, advantages, and disadvantages.</div>
+      <div class="subhead">
+        <span class="subhead__title">2023 Questions</span>
+        <span class="subhead__pill--1m">2023</span>
       </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>15 Marks:</strong> Describe routing algorithms — Distance Vector (Bellman-Ford/RIP), Link State (Dijkstra/OSPF), and Path Vector (BGP). Compare them.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>5 Marks:</strong> Compare OSI and TCP/IP reference models.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>5 Marks:</strong> Explain Hamming Code for error correction with a numerical example.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>5 Marks:</strong> Perform subnetting for 200.10.5.0/24 to create 4 equal subnets. Show subnet masks, network addresses, and usable host ranges.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>5 Marks:</strong> Explain TCP congestion control mechanisms: Slow Start, Congestion Avoidance, Fast Retransmit, and Fast Recovery.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>15 Marks:</strong> Explain FTP and its modes (Active vs Passive). Describe Telnet, SSH, and SNMP. Discuss network security fundamentals.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2022</span>
-        <div class="question"><strong>5 Marks:</strong> Compare POP3 and IMAP. Explain SMTP mail delivery process.</div>
-      </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Describe the OSI reference model in detail. Explain the functions of each layer and how data flows through the model. Also compare with TCP/IP model.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Describe Ethernet standards and MAC sublayer in detail. Explain CSMA/CD, frame format, and Gigabit Ethernet.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Explain CRC error detection with a numerical example.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Explain HTTP/HTTPS, DNS, and Email protocols (SMTP, POP3, IMAP) in detail. Explain how a web page is loaded step-by-step.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Explain subnetting in detail with worked numerical examples for Class A, B, and C networks. Include CIDR and VLSM.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
 
-      <h3>2021 Questions</h3>
-      <div class="q-block">
-        <span class="pyq-badge">2021</span>
-        <div class="question"><strong>5 Marks:</strong> Describe guided transmission media (Twisted Pair, Coaxial Cable, Fiber Optic).</div>
+      <div class="subhead">
+        <span class="subhead__title">2022 Questions</span>
+        <span class="subhead__pill--1m">2022</span>
       </div>
-      <div class="q-block">
-        <span class="pyq-badge">2021</span>
-        <div class="question"><strong>5 Marks:</strong> Explain the TCP Three-Way Handshake and Four-Way Termination with sequence diagrams.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2021</span>
-        <div class="question"><strong>10 Marks:</strong> Describe different network topologies with advantages and disadvantages.</div>
-      </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Discuss transmission media in detail — guided and unguided media with characteristics, advantages, and disadvantages.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Describe routing algorithms — Distance Vector (Bellman-Ford/RIP), Link State (Dijkstra/OSPF), and Path Vector (BGP). Compare them.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Compare OSI and TCP/IP reference models.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Explain Hamming Code for error correction with a numerical example.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Perform subnetting for 200.10.5.0/24 to create 4 equal subnets. Show subnet masks, network addresses, and usable host ranges.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Explain TCP congestion control mechanisms: Slow Start, Congestion Avoidance, Fast Retransmit, and Fast Recovery.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Explain FTP and its modes (Active vs Passive). Describe Telnet, SSH, and SNMP. Discuss network security fundamentals.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Compare POP3 and IMAP. Explain SMTP mail delivery process.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
 
-      <h3>2020 Questions</h3>
-      <div class="q-block">
-        <span class="pyq-badge">2020</span>
-        <div class="question"><strong>15 Marks:</strong> Explain the Data Link Layer services — framing, error detection, and error correction in detail.</div>
+      <div class="subhead">
+        <span class="subhead__title">2021 Questions</span>
+        <span class="subhead__pill--1m">2021</span>
       </div>
-      <div class="q-block">
-        <span class="pyq-badge">2020</span>
-        <div class="question"><strong>10 Marks:</strong> Explain the OSI reference model and its layers in detail.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2020</span>
-        <div class="question"><strong>5 Marks:</strong> Explain Multiplexing — FDM, TDM, and WDM.</div>
-      </div>
-      <div class="q-block">
-        <span class="pyq-badge">2020</span>
-        <div class="question"><strong>5 Marks:</strong> Describe the DNS resolution process with a step-by-step example.</div>
-      </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Describe guided transmission media (Twisted Pair, Coaxial Cable, Fiber Optic).</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Explain the TCP Three-Way Handshake and Four-Way Termination with sequence diagrams.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>10 Marks:</strong> Describe different network topologies with advantages and disadvantages.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
 
-      <h3>Exam Tips</h3>
-      <div class="tip-box">
+      <div class="subhead">
+        <span class="subhead__title">2020 Questions</span>
+        <span class="subhead__pill--1m">2020</span>
+      </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>15 Marks:</strong> Explain the Data Link Layer services — framing, error detection, and error correction in detail.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>10 Marks:</strong> Explain the OSI reference model and its layers in detail.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Explain Multiplexing — FDM, TDM, and WDM.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+      <div class="qa qa--5m">
+          <div class="qa__head">
+            <span class="qa__marks">5M</span>
+            <span class="qa__q"><strong>5 Marks:</strong> Describe the DNS resolution process with a step-by-step example.</span>
+          </div>
+          <div class="qa__a"></div>
+        </div>
+
+      <div class="subhead">
+        <span class="subhead__title">Exam Tips</span>
+        <span class="subhead__pill--1m">Exam</span>
+      </div>
+      <div class="tips">
+        <div class="tips__icon">💡</div>
+        <div class="tips__body">
         <strong>Tip 1 — Unit Weightage:</strong> Units 1, 3, and 5 typically carry more marks in exams. Focus on OSI model, subnetting, and application layer protocols.
       </div>
-      <div class="tip-box">
+      </div>
+      <div class="tips">
+        <div class="tips__icon">💡</div>
+        <div class="tips__body">
         <strong>Tip 2 — Numerical Practice:</strong> Practice at least 5 subnetting problems, 2 CRC problems, and 1 Hamming code problem. These are guaranteed to appear.
       </div>
-      <div class="tip-box">
+      </div>
+      <div class="tips">
+        <div class="tips__icon">💡</div>
+        <div class="tips__body">
         <strong>Tip 3 — Diagram Practice:</strong> Draw TCP 3-way handshake, 4-way termination, DNS resolution flow, and DHCP DORA — these are easy marks.
       </div>
-      <div class="tip-box">
+      </div>
+      <div class="tips">
+        <div class="tips__icon">💡</div>
+        <div class="tips__body">
         <strong>Tip 4 — Comparison Tables:</strong> Always prepare comparison tables (TCP vs UDP, IPv4 vs IPv6, OSI vs TCP/IP) — they score well and are easy to memorize.
+      </div>
       </div>
       <div class="tip-box">
         <strong>Tip 5 — PYQ Pattern:</strong> Previous 15-mark questions often repeat with slight modifications. The 2022 subnetting question and 2023 version are very similar — practice both patterns.
       </div>
 
+    </div><!-- /content -->
+
+    <!-- FOOTER -->
+    <div class="foot">
+      <div class="foot__brand">Networks · Semester 5 · MAKAUT B.Tech CSE</div>
+      <div>Covers Units 1–5 · Exam-Focused</div>
     </div>
 
-  </div><!-- /content -->
-</div><!-- /sheet -->
+  </div><!-- /sheet -->
 </body>
 </html>
