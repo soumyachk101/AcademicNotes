@@ -1,214 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-accent="blue">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Academic Study Notes — MAKAUT B.Tech CSE Solved Question Banks</title>
-    <meta name="description" content="Solved question banks for MAKAUT B.Tech Computer Science. Every Group A, B and C question answered in full, with diagrams and worked numericals.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="site.css">
-
-    <style>
-        body { padding: 0; }
-
-        @media (max-width: 900px) {
-            .hero { padding-top: clamp(2.25rem, 6vw, 3.5rem); }
-            .topnav-links { display: none; }
-        }
-        @media (max-width: 700px) {
-            .tiles { grid-template-columns: 1fr; }
-        }
-    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Academic study notes organized by semester and subject. Browse comprehensive notes for Engineering Mathematics, OS, AI, Algorithms, DBMS, ML, and more." />
+    <meta property="og:title" content="Academic Study Notes" />
+    <meta property="og:description" content="Comprehensive engineering study notes organized by semester and subject." />
+    <meta property="og:image" content="og-image.png" />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="notes.css" />
+    <link rel="stylesheet" href="notes-notebook.css" />
+    <link rel="stylesheet" href="premium.css" />
+    <link rel="stylesheet" href="qa-styles.css" />
+    <link rel="stylesheet" href="site.css" />
+    <title>Academic Study Notes</title>
 </head>
 <body>
+    <!-- Skip to content link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-<div class="progress" aria-hidden="true"></div>
+    <header class="site-header">
+        <nav class="nav-bar" aria-label="Main navigation">
+            <a class="nav-logo" href="index.html">Academic Study Notes</a>
+            <ul class="nav-links">
+                <li><a href="index.html" aria-current="page">Home</a></li>
+                <li><a href="Semester_5/os/os_index.html">Sem 5 &mdash; OS</a></li>
+                <li><a href="Semester_5/ai/ai_index.html">Sem 5 &mdash; AI</a></li>
+            </ul>
+        </nav>
+    </header>
 
-<nav class="topnav">
-    <a class="wordmark" href="#top">Academic Notes <em>MAKAUT CSE</em></a>
-    <div class="topnav-links">
-        <a href="#sem5">Semester 5</a>
-        <a href="#sem4">Semester 4</a>
-        <a href="#year1">First year</a>
-    </div>
-</nav>
+    <main id="main-content">
+        <section class="hero" aria-labelledby="page-title">
+            <div class="hero-inner">
+                <h1 id="page-title" class="site-logo">Academic <span class="accent">Study</span> Notes</h1>
+                <p class="site-tagline">Organized by semester and subject</p>
+                <div class="hero-divider" aria-hidden="true">
+                    <span class="line"></span>
+                    <span class="ornament">&#9830;</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </section>
 
-<header class="hero" id="top">
-        <p class="eyebrow">MAKAUT &middot; B.Tech &middot; <span class="accent">Computer Science</span></p>
-        <h1>Academic Notes</h1>
-        <p class="lede">
-            MAKAUT previous-year question banks with every answer written out &mdash; 974 across
-            Semester 5 alone, kept in the same Group A / B / C order the exam uses.
-            Each subject also has a topic-wise study notes companion for concept revision.
-        </p>
-        <div class="cta-row">
-            <a class="cta cta-primary" href="#sem5">Browse Semester 5 &rarr;</a>
-            <a class="cta cta-ghost" href="Semester_5/os/os_index.html">Open a question bank</a>
+        <div class="semesters-list">
+            <article class="semester-block">
+                <div class="semester-header">
+                    <h2 class="semester-title">Semester 4</h2>
+                    <span class="semester-count">2 Subjects</span>
+                </div>
+                <div class="subjects-grid">
+                    <a class="subject-card" href="Semester_4/algorithms/algorithms_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F9E0;</span>
+                        <span class="subject-name">Design &amp; Analysis of Algorithms</span>
+                    </a>
+                    <a class="subject-card" href="Semester_4/os/os_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F4BB;</span>
+                        <span class="subject-name">Operating Systems</span>
+                    </a>
+                </div>
+            </article>
+
+            <article class="semester-block">
+                <div class="semester-header">
+                    <h2 class="semester-title">Semester 5</h2>
+                    <span class="semester-count">8 Subjects</span>
+                </div>
+                <div class="subjects-grid">
+                    <a class="subject-card" href="Semester_5/ai/ai_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F916;</span>
+                        <span class="subject-name">Artificial Intelligence</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/dbms/dbms_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F5C2;&#xFE0F;</span>
+                        <span class="subject-name">Database Management Systems</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/em/em_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F4D0;</span>
+                        <span class="subject-name">Engineering Mathematics V</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/iot/iot_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F4E6;</span>
+                        <span class="subject-name">Internet of Things</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/mad/mad_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F3A8;</span>
+                        <span class="subject-name">Mobile Application Development</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/ml/ml_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F5FA;&#xFE0F;</span>
+                        <span class="subject-name">Machine Learning</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/ns/ns_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F310;</span>
+                        <span class="subject-name">Network Security</span>
+                    </a>
+                    <a class="subject-card" href="Semester_5/os/os_index.html">
+                        <span class="subject-icon" aria-hidden="true">&#x1F4BB;</span>
+                        <span class="subject-name">Operating Systems</span>
+                    </a>
+                </div>
+            </article>
         </div>
+    </main>
 
-</header>
-
-<section class="structure">
-    <div class="structure-inner">
-        <div class="structure-lead">
-            <h2>Organised the way the paper is</h2>
-            <p>MAKAUT splits every paper into three groups. Each subject here is split the same way, so revision matches the exam.</p>
-        </div>
-
-        <dl class="grp" style="--g: #2563eb">
-            <dt>GROUP A</dt>
-            <dd><span class="grp-name">Short answer</span>One-mark definitions across the full syllabus. Quick last-night pass.</dd>
-        </dl>
-
-        <dl class="grp" style="--g: #8b5cf6">
-            <dt>GROUP B</dt>
-            <dd><span class="grp-name">Descriptive</span>Five-mark explanations with comparisons and diagrams.</dd>
-        </dl>
-
-        <dl class="grp" style="--g: #c2410c">
-            <dt>GROUP C</dt>
-            <dd><span class="grp-name">Long &amp; numerical</span>Fifteen-mark answers with every step of the working shown.</dd>
-        </dl>
-    </div>
-</section>
-
-<div class="shelf" id="sem5">
-    <div class="band">
-        <h2>Semester 5</h2>
-        <span class="band-note">974 questions &middot; every group solved</span>
-    </div>
-    <section class="tiles">
-
-        <a class="tile" href="Semester_5/os/os_index.html" style="--c: #2563eb">
-            <span class="tile-code">PCC-CS502</span>
-            <h3>Operating Systems</h3>
-            <p>Process scheduling, synchronisation, deadlocks, paging and virtual memory, disk scheduling.</p>
-            <span class="tile-foot"><span>123 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/ai/ai_index.html" style="--c: #8b5cf6">
-            <span class="tile-code">PEC-CS501B</span>
-            <h3>Artificial Intelligence</h3>
-            <p>PEAS agents, A* search, hill climbing, minimax with alpha-beta pruning, FOL resolution, fuzzy logic.</p>
-            <span class="tile-foot"><span>123 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/networks/networks_index.html" style="--c: #047857">
-            <span class="tile-code">PCC-CS504</span>
-            <h3>Computer Networks</h3>
-            <p>OSI and TCP/IP layering, CRC, sliding windows, subnetting and CIDR, congestion control, routing.</p>
-            <span class="tile-foot"><span>123 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/compiler/compiler_index.html" style="--c: #c2410c">
-            <span class="tile-code">PCC-CS501</span>
-            <h3>Compiler Design</h3>
-            <p>Lexical analysis, LL(1) parsing, FIRST and FOLLOW, SLR/LALR/CLR tables, three-address code.</p>
-            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/se/se_index.html" style="--c: #0369a1">
-            <span class="tile-code">ESC501</span>
-            <h3>Software Engineering</h3>
-            <p>Waterfall and Agile Scrum, SRS, DFD levels, cohesion and coupling, COCOMO, McCabe complexity.</p>
-            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/constitution/constitution_index.html" style="--c: #d946ef">
-            <span class="tile-code">MC-CS501</span>
-            <h3>Constitution & IKT</h3>
-            <p>Constitution of India, Fundamental Rights, Directive Principles, IKT, Ancient Indian Philosophies, Vedas, Preamble.</p>
-            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/management/management_index.html" style="--c: #f59e0b">
-            <span class="tile-code">HS-MC501</span>
-            <h3>Industrial Management</h3>
-            <p>Management functions, Taylor/Fayol principles, Motivation theories, Production systems, Inventory Control, PERT/CPM, TQM.</p>
-            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_5/oop/oop_index.html" style="--c: #ec4899">
-            <span class="tile-code">PCC-CS503</span>
-            <h3>Object Oriented Programming</h3>
-            <p>Java OOP principles, Encapsulation, Inheritance, Polymorphism, Exception Handling, Multithreading, Generics, Collections, Design Patterns.</p>
-            <span class="tile-foot"><span>122 questions &middot; A / B / C</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-    </section>
-</div>
-
-<div class="shelf" id="sem4">
-    <div class="band">
-        <h2>Semester 4</h2>
-        <span class="band-note">Papers &amp; module notes</span>
-    </div>
-    <section class="tiles">
-
-        <a class="tile" href="Semester_4/algorithms/algorithms_index.html" style="--c: #2563eb">
-            <span class="tile-code">DAA</span>
-            <h3>Design &amp; Analysis of Algorithms</h3>
-            <p>Divide and conquer, greedy methods, dynamic programming, graph algorithms, NP-completeness.</p>
-            <span class="tile-foot"><span>7 papers</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_4/architecture/architecture_index.html" style="--c: #8b5cf6">
-            <span class="tile-code">COA</span>
-            <h3>Computer Architecture</h3>
-            <p>Amdahl's law, pipelining and hazards, memory hierarchy, ILP, vector and multiprocessor systems.</p>
-            <span class="tile-foot"><span>12 modules &amp; papers</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_4/automata/automata_index.html" style="--c: #c2410c">
-            <span class="tile-code">FLAT</span>
-            <h3>Formal Language &amp; Automata</h3>
-            <p>Finite automata, regular expressions, context-free grammars, pushdown automata, Turing machines.</p>
-            <span class="tile-foot"><span>5 papers</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_4/environment/Environmental_Sciences.html" style="--c: #047857">
-            <span class="tile-code">ENV</span>
-            <h3>Environmental Sciences</h3>
-            <p>Ecosystems and biodiversity, pollution control, impact assessment, sustainable development.</p>
-            <span class="tile-foot"><span>7 papers</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-        <a class="tile" href="Semester_4/biology/Biology.html" style="--c: #0369a1">
-            <span class="tile-code">BIO</span>
-            <h3>Biology</h3>
-            <p>Cell structure and biomolecules, genetics and heredity, enzymes and metabolism.</p>
-            <span class="tile-foot"><span>6 papers</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-    </section>
-</div>
-
-<div class="shelf" id="year1">
-    <div class="band">
-    <h2>First year</h2>
-    <span class="band-note">Foundation papers</span>
-    </div>
-    <section class="tiles">
-
-        <a class="tile" href="PPS/pps_index.html" style="--c: #dc2626">
-            <span class="tile-code">PPS</span>
-            <h3>Programming in Python</h3>
-            <p>Python syntax, data structures, functions, OOP, file handling, libraries.</p>
-            <span class="tile-foot"><span>Papers &amp; modules</span><span class="arrow">&rarr;</span></span>
-        </a>
-
-    </section>
-</div>
-
-<footer class="site-foot">
-    <div class="site-foot-inner">
-        <span>Compiled by <a href="#top">Soumya Chakraborty</a></span>
-        <span class="mono">Group A / B / C &middot; MAKAUT paper structure</span>
-    </div>
-</footer>
-
+    <footer class="site-footer">
+        <p>Academic Study Notes &mdash; Built for focused revision</p>
+    </footer>
 </body>
 </html>
