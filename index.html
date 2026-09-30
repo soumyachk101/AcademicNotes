@@ -1,115 +1,1257 @@
 <!DOCTYPE html>
-<html lang="en" data-accent="blue">
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Academic study notes organized by semester and subject. Browse comprehensive notes for Engineering Mathematics, OS, AI, Algorithms, DBMS, ML, and more." />
-    <meta property="og:title" content="Academic Study Notes" />
-    <meta property="og:description" content="Comprehensive engineering study notes organized by semester and subject." />
-    <meta property="og:image" content="og-image.png" />
+    <meta name="description" content="Academic Study Notes — MAKAUT B.Tech CSE digital repository. Curated revision notes, group-wise solved question banks, and official subject-wise syllabi." />
+    <meta property="og:title" content="Academic Study Notes — MAKAUT CSE" />
+    <meta property="og:description" content="Curated engineering revision notes, official syllabus mappings, and group-wise solved question banks for B.Tech Computer Science." />
     <meta property="og:type" content="website" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231E3A8A'%3E%3Cpath d='M12 2L1 7l11 5 9-4.09V17h2V7L12 2z'/%3E%3Cpath d='M3.5 10.5v5.8C3.5 19 7.3 22 12 22s8.5-3 8.5-5.7v-5.8l-8.5 3.86-8.5-3.86z' opacity='0.8'/%3E%3C/svg%3E" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="notes.css" />
-    <link rel="stylesheet" href="notes-notebook.css" />
-    <link rel="stylesheet" href="premium.css" />
-    <link rel="stylesheet" href="qa-styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="site.css" />
-    <title>Academic Study Notes</title>
+    <title>Academic Study Notes — MAKAUT B.Tech CSE Archive</title>
 </head>
 <body>
-    <!-- Skip to content link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <header class="site-header">
-        <nav class="nav-bar" aria-label="Main navigation">
-            <a class="nav-logo" href="index.html">Academic Study Notes</a>
-            <ul class="nav-links">
-                <li><a href="index.html" aria-current="page">Home</a></li>
-                <li><a href="Semester_5/os/os_index.html">Sem 5 &mdash; OS</a></li>
-                <li><a href="Semester_5/ai/ai_index.html">Sem 5 &mdash; AI</a></li>
-            </ul>
+    <!-- ==================== TOP NAVIGATION ==================== -->
+    <header class="topnav" role="banner">
+        <div class="topnav-inner">
+            <a class="wordmark" href="index.html" aria-label="Academic Study Notes Home">
+                <div class="wordmark-crest" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3L2 8l10 5 10-5-10-5z"></path>
+                        <path d="M4 11.5v5.5c0 2.5 3.6 4.5 8 4.5s8-2 8-4.5v-5.5"></path>
+                        <path d="M12 13v9"></path>
+                    </svg>
+                </div>
+                <div class="wordmark-text">
+                    <span class="wordmark-title">Academic <em>Study</em> Notes</span>
+                    <span class="wordmark-tag">MAKAUT &middot; B.Tech CSE</span>
+                </div>
+            </a>
+
+            <nav class="topnav-links" aria-label="Main Navigation">
+                <a href="#sem5-section" aria-current="page">Semester 5</a>
+                <a href="#syllabus-hub">Syllabus Archive</a>
+                <a href="#sem4-section">Semester 4</a>
+                <a href="#exam-pattern">Exam Pattern</a>
+            </nav>
+
+            <a href="#syllabus-hub" class="nav-cta-pill" aria-label="Jump to 5th Sem Syllabus Repository">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <span>5th Sem Syllabi</span>
+            </a>
+
+            <button class="nav-hamburger" type="button" aria-label="Toggle navigation menu" aria-expanded="false" id="mobile-menu-btn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <nav id="mobile-nav" class="mobile-nav" aria-label="Mobile Navigation">
+            <a href="#sem5-section">Semester 5 (Active)</a>
+            <a href="#syllabus-hub">5th Sem Syllabus Repository</a>
+            <a href="#sem4-section">Semester 4 Archive</a>
+            <a href="#exam-pattern">MAKAUT Paper Pattern (A/B/C)</a>
         </nav>
     </header>
 
+    <!-- ==================== MAIN CONTENT ==================== -->
     <main id="main-content">
+
+        <!-- HERO SECTION -->
         <section class="hero" aria-labelledby="page-title">
             <div class="hero-inner">
-                <h1 id="page-title" class="site-logo">Academic <span class="accent">Study</span> Notes</h1>
-                <p class="site-tagline">Organized by semester and subject</p>
-                <div class="hero-divider" aria-hidden="true">
-                    <span class="line"></span>
-                    <span class="ornament">&#9830;</span>
-                    <span class="line"></span>
+                <div class="hero-eyebrow">
+                    <span class="hero-eyebrow-dot" aria-hidden="true"></span>
+                    <span>Curated Academic Repository &middot; Autonomous Curriculum</span>
+                </div>
+
+                <h1 id="page-title" class="site-logo">
+                    Academic <span class="accent-editorial">Study</span> Notes
+                </h1>
+
+                <p class="site-tagline">
+                    An authoritative engineering archive curated for conceptual depth and exam performance. Complete subject revision guides, official syllabus modules, and solved question banks.
+                </p>
+
+                <!-- Hero Meta Glass Pill -->
+                <div class="hero-meta-glass" aria-label="Archive Statistics">
+                    <div class="hero-meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                        <span><strong>8</strong> Core 5th Sem Subjects</span>
+                    </div>
+                    <span class="hero-meta-dot" aria-hidden="true"></span>
+                    <div class="hero-meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                        <span><strong>7</strong> Official Syllabi Connected</span>
+                    </div>
+                    <span class="hero-meta-dot" aria-hidden="true"></span>
+                    <div class="hero-meta-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <polyline points="9 11 12 14 22 4"></polyline>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                        </svg>
+                        <span><strong>979+</strong> Solved Q&amp;A (Groups A/B/C)</span>
+                    </div>
+                </div>
+
+                <!-- Instant Subject Filter -->
+                <div class="hero-search-wrapper">
+                    <div class="hero-search-bar">
+                        <svg class="hero-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                        </svg>
+                        <input type="text" id="subject-search" class="hero-search-input" placeholder="Search subjects, codes (e.g. PCC-CS501, OS), or topics..." aria-label="Search subjects and syllabus topics" />
+                        <span class="hero-search-badge" id="search-count-badge">14 Subjects</span>
+                    </div>
                 </div>
             </div>
         </section>
 
         <div class="semesters-list">
-            <article class="semester-block">
+
+            <!-- ==================== SEMESTER 5 BLOCK (FLAGSHIP) ==================== -->
+            <article class="semester-block" id="sem5-section" style="--s-color: #1E3A8A; --s-glow: rgba(30, 58, 138, 0.1);">
                 <div class="semester-header">
-                    <h2 class="semester-title">Semester 4</h2>
-                    <span class="semester-count">2 Subjects</span>
+                    <div class="semester-header-info">
+                        <div class="semester-title-row">
+                            <h2 class="semester-title">Semester 5</h2>
+                            <span class="semester-status-pill">
+                                <span class="hero-eyebrow-dot" aria-hidden="true"></span> Active Semester
+                            </span>
+                        </div>
+                        <p class="semester-subtitle">
+                            Autonomous MAKAUT B.Tech CSE Curriculum &mdash; 8 core subjects, solved group questions, and official university syllabus documents.
+                        </p>
+                    </div>
+                    <div class="semester-actions">
+                        <a href="#syllabus-hub" class="btn-syllabus-hub">
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                            <span>Explore 5th Sem Syllabus</span>
+                        </a>
+                        <span class="semester-count-pill">8 Subjects &middot; 979 Q&amp;A</span>
+                    </div>
                 </div>
-                <div class="subjects-grid">
-                    <a class="subject-card" href="Semester_4/algorithms/algorithms_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F9E0;</span>
-                        <span class="subject-name">Design &amp; Analysis of Algorithms</span>
-                    </a>
-                    <a class="subject-card" href="Semester_4/os/os_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F4BB;</span>
-                        <span class="subject-name">Operating Systems</span>
-                    </a>
+
+                <div class="subjects-grid" id="sem5-grid">
+
+                    <!-- 1. Compiler Design -->
+                    <div class="subject-card" style="--card-color: #9A3412;" data-title="Compiler Design" data-code="PCC-CS501" data-keywords="lexical parsing syntax ll1 lr parser grammar intermediate code three address yacc lex">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="4" r="2"></circle>
+                                    <circle cx="6" cy="12" r="2"></circle>
+                                    <circle cx="18" cy="12" r="2"></circle>
+                                    <circle cx="4" cy="20" r="1.5"></circle>
+                                    <circle cx="8" cy="20" r="1.5"></circle>
+                                    <circle cx="16" cy="20" r="1.5"></circle>
+                                    <circle cx="20" cy="20" r="1.5"></circle>
+                                    <line x1="12" y1="6" x2="6" y2="10"></line>
+                                    <line x1="12" y1="6" x2="18" y2="10"></line>
+                                    <line x1="6" y1="14" x2="4" y2="18.5"></line>
+                                    <line x1="6" y1="14" x2="8" y2="18.5"></line>
+                                    <line x1="18" y1="14" x2="16" y2="18.5"></line>
+                                    <line x1="18" y1="14" x2="20" y2="18.5"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">PCC-CS501 &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Compiler Design</h3>
+                            <p class="subject-desc">
+                                Lexical analysis, LL(1) parsing, FIRST/FOLLOW sets, SLR/LALR/CLR parse tables, SDT, and three-address intermediate code generation.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">122 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">6 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/compiler/compiler_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/2_Compiler_Design_PCC-CS501.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 2. Operating Systems -->
+                    <div class="subject-card" style="--card-color: #1E3A8A;" data-title="Operating Systems" data-code="PCC-CS502" data-keywords="os process scheduling deadlocks paging virtual memory synchronization semaphore unix inode disk scan">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                                    <rect x="9" y="9" width="6" height="6"></rect>
+                                    <line x1="9" y1="1" x2="9" y2="4"></line>
+                                    <line x1="15" y1="1" x2="15" y2="4"></line>
+                                    <line x1="9" y1="20" x2="9" y2="23"></line>
+                                    <line x1="15" y1="20" x2="15" y2="23"></line>
+                                    <line x1="20" y1="9" x2="23" y2="9"></line>
+                                    <line x1="20" y1="15" x2="23" y2="15"></line>
+                                    <line x1="1" y1="9" x2="4" y2="9"></line>
+                                    <line x1="1" y1="15" x2="4" y2="15"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">PCC-CS502 &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Operating Systems</h3>
+                            <p class="subject-desc">
+                                Process lifecycle, CPU scheduling, semaphores, deadlock avoidance (Banker's), paging, virtual memory, and UNIX file system inodes.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">123 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">6 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/os/os_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/3_Operating_Systems_PCC-CS502.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 3. Object Oriented Programming -->
+                    <div class="subject-card" style="--card-color: #6D28D9;" data-title="Object Oriented Programming" data-code="PCC-CS503" data-keywords="java oop inheritance polymorphism encapsulation multithreading generics interfaces exception handling">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                    <path d="M2 17l10 5 10-5"></path>
+                                    <path d="M2 12l10 5 10-5"></path>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">PCC-CS503 &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Object Oriented Programming</h3>
+                            <p class="subject-desc">
+                                Core Java OOP paradigm, dynamic binding, inheritance hierarchies, exception handling architecture, multithreading, and collections.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">122 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">6 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/oop/oop_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/4_Object_Oriented_Programming_PCC-CS503.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 4. Computer Networks -->
+                    <div class="subject-card" style="--card-color: #047857;" data-title="Computer Networks" data-code="PCC-CS504" data-keywords="networks osi tcp ip subnetting cidr routing protocols crc sliding window congestion flow control">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <circle cx="4" cy="6" r="2"></circle>
+                                    <circle cx="20" cy="6" r="2"></circle>
+                                    <circle cx="4" cy="18" r="2"></circle>
+                                    <circle cx="20" cy="18" r="2"></circle>
+                                    <line x1="6" y1="7" x2="10" y2="10.5"></line>
+                                    <line x1="18" y1="7" x2="14" y2="10.5"></line>
+                                    <line x1="6" y1="17" x2="10" y2="13.5"></line>
+                                    <line x1="18" y1="17" x2="14" y2="13.5"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">PCC-CS504 &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Computer Networks</h3>
+                            <p class="subject-desc">
+                                OSI 7-layer architecture, TCP/IP stack, sliding window protocols, CRC, CIDR subnetting, distance vector and link-state routing algorithms.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">123 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">6 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/networks/networks_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/networks/networks_study_notes.html" title="View Computer Networks module roadmap">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                                <span>Curriculum</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 5. Software Engineering -->
+                    <div class="subject-card" style="--card-color: #0E7490;" data-title="Software Engineering" data-code="ESC501" data-keywords="software engineering waterfall agile scrum srs dfd uml cohesion coupling cocomo testing metrics">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                    <polyline points="2 17 12 22 22 17"></polyline>
+                                    <polyline points="2 12 12 17 22 12"></polyline>
+                                    <line x1="12" y1="22" x2="12" y2="12"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">ESC501 &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Software Engineering</h3>
+                            <p class="subject-desc">
+                                Lifecycle models (Agile Scrum/Spiral), SRS specifications, DFD leveling, modular cohesion/coupling, COCOMO cost models, and McCabe testing.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">122 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">5 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/se/se_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/1_Software_Engineering_ESC501.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 6. Industrial Management -->
+                    <div class="subject-card" style="--card-color: #B45309;" data-title="Industrial Management" data-code="HSMC-501" data-keywords="management taylor fayol inventory control pert cpm eoq abc tqm break even motivation">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                                    <polyline points="2 6 8 12 14 8 22 16"></polyline>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">HSMC-501 &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Industrial Management</h3>
+                            <p class="subject-desc">
+                                Management principles (Taylor &amp; Fayol), motivation theories, EOQ inventory optimization, PERT/CPM critical paths, and TQM quality control.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">122 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">5 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/management/management_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/5_Industrial_Management_HSMC-501.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 7. Artificial Intelligence -->
+                    <div class="subject-card" style="--card-color: #7C3AED;" data-title="Artificial Intelligence" data-code="PEC-IT501B" data-keywords="ai artificial intelligence peas heuristic search a star minimax alpha beta pruning fol resolution fuzzy logic">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="4"></circle>
+                                    <path d="M12 2v4"></path>
+                                    <path d="M12 18v4"></path>
+                                    <path d="M4.93 4.93l2.83 2.83"></path>
+                                    <path d="M16.24 16.24l2.83 2.83"></path>
+                                    <path d="M2 12h4"></path>
+                                    <path d="M18 12h4"></path>
+                                    <path d="M4.93 19.07l2.83-2.83"></path>
+                                    <path d="M16.24 7.76l2.83-2.83"></path>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">PEC-IT501B &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Artificial Intelligence</h3>
+                            <p class="subject-desc">
+                                PEAS intelligent agents, A* heuristic search, Minimax with alpha-beta pruning, first-order logic resolution, and fuzzy reasoning systems.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">123 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">6 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/ai/ai_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/6_Artificial_Intelligence_PEC-IT501B.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 8. Constitution of India & IKT -->
+                    <div class="subject-card" style="--card-color: #BE123C;" data-title="Constitution of India & IKT" data-code="MC-CS501" data-keywords="constitution india preamble fundamental rights dpsp lok sabha rajya sabha panchayati raj election commission ikt">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="12" cy="12" r="9"></circle>
+                                    <circle cx="12" cy="12" r="3"></circle>
+                                    <line x1="12" y1="3" x2="12" y2="9"></line>
+                                    <line x1="12" y1="15" x2="12" y2="21"></line>
+                                    <line x1="3" y1="12" x2="9" y2="12"></line>
+                                    <line x1="15" y1="12" x2="21" y2="12"></line>
+                                    <line x1="5.64" y1="5.64" x2="9.88" y2="9.88"></line>
+                                    <line x1="14.12" y1="14.12" x2="18.36" y2="18.36"></line>
+                                    <line x1="5.64" y1="18.36" x2="9.88" y2="14.12"></line>
+                                    <line x1="14.12" y1="9.88" x2="18.36" y2="5.64"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">MC-CS501 &middot; Mandatory</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Constitution &amp; IKT</h3>
+                            <p class="subject-desc">
+                                Indian constitutional framework, Preamble, Fundamental Rights &amp; Duties, Union/State executive governance, and Panchayati Raj administration.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">122 Questions</span>
+                                <span class="subject-pill">Groups A / B / C</span>
+                                <span class="subject-pill">5 Modules</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/constitution/constitution_index.html">
+                                <span>Study Notes &amp; Q&amp;A</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/sem5_syllabus/7_Constitution_of_India_MC-CS501.pdf" target="_blank" rel="noopener" title="Open official MAKAUT syllabus PDF">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="12" y1="18" x2="12" y2="12"></line><line x1="9" y1="15" x2="12" y2="18"></line><line x1="15" y1="15" x2="12" y2="18"></line></svg>
+                                <span>Syllabus PDF</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- 9. Database Management Systems -->
+                    <div class="subject-card" style="--card-color: #0284C7;" data-title="Database Management Systems" data-code="PCC-CS50x" data-keywords="dbms database sql er diagram normalization transactions acid bcnf relational model">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                                    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+                                    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">DBMS &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Database Management</h3>
+                            <p class="subject-desc">
+                                Relational algebra, SQL schema normalization (1NF to BCNF), ER modeling, transaction schedules, and ACID concurrency control.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">Core Notes</span>
+                                <span class="subject-pill">Revision Deck</span>
+                                <span class="subject-pill">MAKAUT Scheme</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_5/dbms/dbms_study_notes.html">
+                                <span>Study Notes Deck</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                            <a class="btn-subject-syllabus" href="Semester_5/index.html" title="View in Semester 5 Portal">
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                                <span>Overview</span>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </article>
 
-            <article class="semester-block">
-                <div class="semester-header">
-                    <h2 class="semester-title">Semester 5</h2>
-                    <span class="semester-count">8 Subjects</span>
+            <!-- ==================== 5TH SEMESTER SYLLABUS HUB (INTERACTIVE VIEWER) ==================== -->
+            <section class="syllabus-hub-section" id="syllabus-hub" aria-labelledby="syllabus-hub-heading">
+                <div class="syllabus-hub-header">
+                    <div>
+                        <div class="hero-eyebrow" style="margin-bottom:0.4rem;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                            <span>Official MAKAUT Curricular Repository</span>
+                        </div>
+                        <h2 class="syllabus-hub-title" id="syllabus-hub-heading">5th Semester Subject-Wise Syllabus Hub</h2>
+                        <p class="syllabus-hub-desc">
+                            Directly inspect unit-by-unit syllabus breakdowns, lecture credit allocations, and download official university curriculum PDFs.
+                        </p>
+                    </div>
+                    <a href="Semester_5/index.html" class="btn-subject-syllabus">
+                        <span>Go to Semester 5 Portal &rarr;</span>
+                    </a>
                 </div>
-                <div class="subjects-grid">
-                    <a class="subject-card" href="Semester_5/ai/ai_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F916;</span>
-                        <span class="subject-name">Artificial Intelligence</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/dbms/dbms_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F5C2;&#xFE0F;</span>
-                        <span class="subject-name">Database Management Systems</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/em/em_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F4D0;</span>
-                        <span class="subject-name">Engineering Mathematics V</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/iot/iot_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F4E6;</span>
-                        <span class="subject-name">Internet of Things</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/mad/mad_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F3A8;</span>
-                        <span class="subject-name">Mobile Application Development</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/ml/ml_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F5FA;&#xFE0F;</span>
-                        <span class="subject-name">Machine Learning</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/ns/ns_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F310;</span>
-                        <span class="subject-name">Network Security</span>
-                    </a>
-                    <a class="subject-card" href="Semester_5/os/os_index.html">
-                        <span class="subject-icon" aria-hidden="true">&#x1F4BB;</span>
-                        <span class="subject-name">Operating Systems</span>
-                    </a>
+
+                <!-- Syllabus Tabs -->
+                <div class="syllabus-tabs" role="tablist" aria-label="5th Semester Subjects Syllabus Tabs">
+                    <button class="syllabus-tab-btn is-active" role="tab" aria-selected="true" data-tab="tab-cd">Compiler Design (PCC-CS501)</button>
+                    <button class="syllabus-tab-btn" role="tab" aria-selected="false" data-tab="tab-os">Operating Systems (PCC-CS502)</button>
+                    <button class="syllabus-tab-btn" role="tab" aria-selected="false" data-tab="tab-oop">OOP in Java (PCC-CS503)</button>
+                    <button class="syllabus-tab-btn" role="tab" aria-selected="false" data-tab="tab-se">Software Eng (ESC501)</button>
+                    <button class="syllabus-tab-btn" role="tab" aria-selected="false" data-tab="tab-im">Industrial Mgmt (HSMC-501)</button>
+                    <button class="syllabus-tab-btn" role="tab" aria-selected="false" data-tab="tab-ai">Artificial Intelligence (PEC-IT501B)</button>
+                    <button class="syllabus-tab-btn" role="tab" aria-selected="false" data-tab="tab-coi">Constitution of India (MC-CS501)</button>
+                </div>
+
+                <!-- Tab 1: Compiler Design -->
+                <div class="syllabus-panel is-active" id="tab-cd" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Compiler Design</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: PCC-CS501</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; 3 Credits</span>
+                                <span class="syllabus-meta-pill">Compulsory Theory</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/2_Compiler_Design_PCC-CS501.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Lexical Analysis &amp; Compiler Phases</h4>
+                            <p class="module-topics">Phases of a compiler, pass structure, lexical tokens, regular expressions to finite automata (NFA/DFA), transition diagrams, and LEX lexical analyzer generator.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">10 Hours</span></div>
+                            <h4 class="module-title">Syntax Analysis &amp; Parsing</h4>
+                            <p class="module-topics">Context-Free Grammars, derivation trees, ambiguity. Top-Down LL(1) parsing, FIRST &amp; FOLLOW sets. Bottom-Up LR parsing, Shift-Reduce, SLR(1), LALR(1), CLR(1) tables, YACC parser generator.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">5 Hours</span></div>
+                            <h4 class="module-title">Syntax Directed Translation</h4>
+                            <p class="module-topics">Syntax-directed definitions (SDD), synthesized and inherited attributes, dependency graphs, evaluation orders, translation schemes (SDT), and construction of syntax trees.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">4 Hours</span></div>
+                            <h4 class="module-title">Type Checking &amp; Type Systems</h4>
+                            <p class="module-topics">Type systems, specification of a simple type checker, structural and nominal equivalence of type expressions, implicit &amp; explicit type conversions.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">5 Hours</span></div>
+                            <h4 class="module-title">Run-Time Environments</h4>
+                            <p class="module-topics">Source language issues, activation trees, control stack, symbol tables, storage organization, activation records, static vs stack vs heap allocation strategies, parameter passing techniques.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 6</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Intermediate Code &amp; Optimization</h4>
+                            <p class="module-topics">Intermediate representations, Three-Address Code, quadruples, triples, indirect triples. Basic blocks, flow graphs, DAG representation, loop optimization, and peephole optimization.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Operating Systems -->
+                <div class="syllabus-panel" id="tab-os" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Operating Systems</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: PCC-CS502</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; 3 Credits</span>
+                                <span class="syllabus-meta-pill">Compulsory Theory</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/3_Operating_Systems_PCC-CS502.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">3 Hours</span></div>
+                            <h4 class="module-title">Introduction to Operating Systems</h4>
+                            <p class="module-topics">Generations of OS, OS services, system calls, OS architectures: monolithic, layered, microkernel, virtual machine concepts. Case study on UNIX and Windows.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Processes &amp; CPU Scheduling</h4>
+                            <p class="module-topics">Process concept, PCB, states. Threads &amp; models. Schedulers, context switching. Algorithms: FCFS, SJF, SRTF, Priority, Round Robin, Multilevel Queue scheduling.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Process Synchronization</h4>
+                            <p class="module-topics">Critical section problem, Peterson's solution, hardware synchronization, semaphores, mutexes, monitors. Classical problems: Bounded Buffer, Readers-Writers, Dining Philosophers.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">5 Hours</span></div>
+                            <h4 class="module-title">Deadlocks</h4>
+                            <p class="module-topics">Necessary conditions, Resource Allocation Graphs (RAG), deadlock prevention strategies, avoidance via Banker's algorithm (Safety &amp; Request), detection and recovery.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Memory Management &amp; Virtual Memory</h4>
+                            <p class="module-topics">Contiguous allocation, external &amp; internal fragmentation, paging, TLB hardware, segmentation. Virtual memory, demand paging, page replacement: FIFO, LRU, Optimal, Belady's anomaly, thrashing.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 6</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">File Systems &amp; Disk Scheduling</h4>
+                            <p class="module-topics">File attributes, access methods, directory structures, UNIX Inode indexing. Disk structure, scheduling algorithms: FCFS, SSTF, SCAN, C-SCAN, LOOK, C-LOOK.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 3: Object Oriented Programming -->
+                <div class="syllabus-panel" id="tab-oop" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Object Oriented Programming</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: PCC-CS503</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; 3 Credits</span>
+                                <span class="syllabus-meta-pill">Compulsory Theory</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/4_Object_Oriented_Programming_PCC-CS503.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">4 Hours</span></div>
+                            <h4 class="module-title">Object-Oriented Concepts</h4>
+                            <p class="module-topics">Classes, objects, members of a class, relationships, data abstraction, encapsulation, message passing, Java environment and JVM architecture.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Classes, Methods &amp; Constructors</h4>
+                            <p class="module-topics">Constructor overloading, copy constructors, 'this' keyword, static members, garbage collection mechanisms, finalize method, string manipulation and StringBuffer.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">7 Hours</span></div>
+                            <h4 class="module-title">Inheritance &amp; Polymorphism</h4>
+                            <p class="module-topics">Superclasses and subclasses, 'super' keyword, method overriding, dynamic method dispatch (runtime polymorphism), abstract classes, final keyword, interfaces and multiple inheritance simulation.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">5 Hours</span></div>
+                            <h4 class="module-title">Packages &amp; Exception Handling</h4>
+                            <p class="module-topics">Defining and importing packages, access protection. Exception types, try, catch, throw, throws, finally clauses, custom user-defined exception handling.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Multithreaded Programming</h4>
+                            <p class="module-topics">Thread creation (Thread class vs Runnable), thread priorities, thread synchronization (synchronized methods and blocks), inter-thread communication (wait, notify, notifyAll), deadlocks.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 6</span><span class="module-hours">7 Hours</span></div>
+                            <h4 class="module-title">Generics &amp; Java Collections</h4>
+                            <p class="module-topics">Generic classes and methods, wildcards. Collections Framework: List, Set, Map, ArrayList, LinkedList, HashSet, HashMap, Iterator, File I/O streams.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 4: Software Engineering -->
+                <div class="syllabus-panel" id="tab-se" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Software Engineering</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: ESC501</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; 3 Credits</span>
+                                <span class="syllabus-meta-pill">Engineering Science</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/1_Software_Engineering_ESC501.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Software Process Models</h4>
+                            <p class="module-topics">Software engineering methodologies, SDLC, Waterfall model, Prototyping, Spiral model, Evolutionary models, Agile methodologies (Scrum, Sprint planning, User stories).</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">5 Hours</span></div>
+                            <h4 class="module-title">Requirements Engineering</h4>
+                            <p class="module-topics">Functional and non-functional requirements, SRS document structure (IEEE standard), Data Flow Diagrams (DFD levels 0/1/2), Data Dictionary, UML use case and sequence diagrams.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Design Principles &amp; Modularity</h4>
+                            <p class="module-topics">Architectural design, modularity, functional independence, Cohesion types (coincidental to functional), Coupling types (content to data), Structured coding, information hiding.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Software Testing Strategies</h4>
+                            <p class="module-topics">Verification and validation. Levels of testing: Unit, Integration (top-down, bottom-up), System, Acceptance. Black-box testing (Equivalence Partitioning, BVA). White-box testing (Basis Path, McCabe Cyclomatic Complexity).</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Project Management &amp; Quality</h4>
+                            <p class="module-topics">Software project scheduling, staffing, Configuration Management (SCM), cost estimation (COCOMO models), Software quality assurance, SEI CMM levels, ISO 9000 certification.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 5: Industrial Management -->
+                <div class="syllabus-panel" id="tab-im" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Industrial Management</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: HSMC-501</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; 3 Credits</span>
+                                <span class="syllabus-meta-pill">Humanities &amp; Social Sci</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/5_Industrial_Management_HSMC-501.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">4 Hours</span></div>
+                            <h4 class="module-title">Management Principles &amp; Functions</h4>
+                            <p class="module-topics">Nature and concepts of management, management functions (planning, organizing, leading, controlling). Scientific management: Taylor's principles, Fayol's 14 administrative principles.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Human Resource &amp; Motivation</h4>
+                            <p class="module-topics">Organizational structures, delegation, decentralization. Motivation theories: Maslow's hierarchy, Herzberg's two-factor, McGregor's Theory X/Y. Leadership styles.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Financial Management &amp; Costing</h4>
+                            <p class="module-topics">Financial accounting, Balance Sheet, Profit &amp; Loss statements, depreciation methods, cost elements, Break-Even Analysis (BEP), capital budgeting techniques.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Production &amp; Inventory Control</h4>
+                            <p class="module-topics">Types of production (Job, Batch, Mass). Inventory control models: Economic Order Quantity (EOQ), ABC analysis, VED analysis, Just-in-Time (JIT) production concepts.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Project Networks &amp; Quality</h4>
+                            <p class="module-topics">Network analysis: CPM and PERT, identifying critical paths, slack time calculation. Quality management: Total Quality Management (TQM), Six Sigma, ISO quality systems.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 6: Artificial Intelligence -->
+                <div class="syllabus-panel" id="tab-ai" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Artificial Intelligence</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: PEC-IT501B</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; 3 Credits</span>
+                                <span class="syllabus-meta-pill">Professional Elective</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/6_Artificial_Intelligence_PEC-IT501B.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">3 Hours</span></div>
+                            <h4 class="module-title">AI Foundations &amp; Agents</h4>
+                            <p class="module-topics">Turing test, definitions of AI. Intelligent agents: PEAS model (Performance, Environment, Actuators, Sensors), agent types (reactive, goal-based, utility-based).</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Heuristic Search Techniques</h4>
+                            <p class="module-topics">Uninformed search (BFS, DFS, Uniform Cost). Informed search: Greedy best-first, A* algorithm (admissibility and consistency), Hill climbing, Simulated Annealing.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Adversarial Search &amp; Games</h4>
+                            <p class="module-topics">Game playing, Minimax algorithm, Alpha-Beta pruning, evaluation functions. Constraint Satisfaction Problems (CSP): backtracking, arc consistency.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Knowledge &amp; Logic</h4>
+                            <p class="module-topics">Propositional logic, First-Order Logic (FOL), syntax and semantics, CNF conversion, Resolution refutation, forward and backward chaining, Unification algorithm.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">5 Hours</span></div>
+                            <h4 class="module-title">Probabilistic Reasoning</h4>
+                            <p class="module-topics">Uncertainty handling, Bayesian networks semantics, conditional probability tables, Dempster-Shafer theory, Fuzzy sets, membership functions, and fuzzy logic operations.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 6</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Learning &amp; NLP Foundations</h4>
+                            <p class="module-topics">Forms of learning: inductive learning, decision trees (ID3 algorithm). NLP introduction: syntactic and semantic analysis. Expert systems architecture and rule-based shells.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab 7: Constitution of India -->
+                <div class="syllabus-panel" id="tab-coi" role="tabpanel">
+                    <div class="syllabus-course-banner">
+                        <div class="syllabus-course-details">
+                            <h3>Constitution of India</h3>
+                            <div class="syllabus-course-meta">
+                                <span class="syllabus-meta-pill">Code: MC-CS501</span>
+                                <span class="syllabus-meta-pill">3L/week &middot; Mandatory</span>
+                                <span class="syllabus-meta-pill">Mandatory Non-Credit</span>
+                                <span class="syllabus-meta-pill">25 CA + 70 Exam</span>
+                            </div>
+                        </div>
+                        <a href="Semester_5/sem5_syllabus/7_Constitution_of_India_MC-CS501.pdf" target="_blank" rel="noopener" class="btn-download-pdf">
+                            <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                            <span>Download Official MAKAUT PDF</span>
+                        </a>
+                    </div>
+                    <div class="syllabus-modules-grid">
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 1</span><span class="module-hours">3 Hours</span></div>
+                            <h4 class="module-title">Historical Background &amp; Preamble</h4>
+                            <p class="module-topics">Meaning of constitution, historical evolution, constitutional features, Citizenship, Preamble philosophy, Fundamental Rights, Fundamental Duties, Directive Principles of State Policy (DPSP).</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 2</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Union Government &amp; Administration</h4>
+                            <p class="module-topics">Federal structure, Centre-State relations. President of India (role, powers, election), Prime Minister and Council of Ministers, Cabinet, Lok Sabha, Rajya Sabha legislative process.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 3</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">State Government &amp; Secretariat</h4>
+                            <p class="module-topics">Governor (position, role and constitutional discretion), Chief Minister and Council of Ministers, State Legislative Assembly, State Secretariat structure and executive hierarchy.</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 4</span><span class="module-hours">8 Hours</span></div>
+                            <h4 class="module-title">Local Administration &amp; PRI</h4>
+                            <p class="module-topics">District administration, role of District Magistrate/Collector. Panchayati Raj Institutions (73rd Amendment, Zila Panchayat, Block level, Gram Panchayat). Municipal Corporations (74th Amendment).</p>
+                        </div>
+                        <div class="syllabus-module-card">
+                            <div class="module-header"><span class="module-num">Module 5</span><span class="module-hours">6 Hours</span></div>
+                            <h4 class="module-title">Election Commission &amp; Bodies</h4>
+                            <p class="module-topics">Election Commission of India: roles, powers, Chief Election Commissioner. State Election Commissions. Statutory commissions for welfare of SC/ST/OBC and women.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- ==================== SEMESTER 4 BLOCK (ARCHIVE) ==================== -->
+            <article class="semester-block" id="sem4-section" style="--s-color: #047857; --s-glow: rgba(4, 120, 87, 0.08);">
+                <div class="semester-header">
+                    <div class="semester-header-info">
+                        <div class="semester-title-row">
+                            <h2 class="semester-title">Semester 4</h2>
+                            <span class="semester-status-pill" style="color: #047857; border-color: rgba(4, 120, 87, 0.3);">
+                                Archive &middot; 5 Subjects
+                            </span>
+                        </div>
+                        <p class="semester-subtitle">
+                            Previous Semester Archive &mdash; Design &amp; Analysis of Algorithms, Computer Architecture, Automata Theory, Biology, and Environmental Sciences.
+                        </p>
+                    </div>
+                    <div class="semester-actions">
+                        <a href="Semester_4/index.html" class="btn-subject-syllabus">
+                            <span>Open Sem 4 Portal &rarr;</span>
+                        </a>
+                        <span class="semester-count-pill">5 Subjects &middot; 37 Papers</span>
+                    </div>
+                </div>
+
+                <div class="subjects-grid" id="sem4-grid">
+
+                    <!-- DAA -->
+                    <div class="subject-card" style="--card-color: #1E3A8A;" data-title="Design & Analysis of Algorithms" data-code="DAA" data-keywords="algorithms divide conquer dynamic programming greedy graph dijkstra bellman ford np complete">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">DAA &middot; 4 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Design &amp; Analysis of Algorithms</h3>
+                            <p class="subject-desc">
+                                Asymptotic notations, divide-and-conquer, greedy algorithms, dynamic programming, Bellman-Ford, and NP-completeness reductions.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">7 Solved Papers</span>
+                                <span class="subject-pill">Exam Prep Q&amp;A</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_4/algorithms/algorithms_index.html">
+                                <span>View Subject Archive</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- COA -->
+                    <div class="subject-card" style="--card-color: #7C3AED;" data-title="Computer Architecture" data-code="COA" data-keywords="architecture pipeline hazards memory cache ilp multiprocessor amdahl">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">COA &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Computer Architecture</h3>
+                            <p class="subject-desc">
+                                Pipelining hazards, cache memory hierarchy, Instruction Level Parallelism (ILP), vector processors, and multiprocessor coherence.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">12 Modules</span>
+                                <span class="subject-pill">Solved PYQs</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_4/architecture/architecture_index.html">
+                                <span>View Subject Archive</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- FLAT -->
+                    <div class="subject-card" style="--card-color: #C2410C;" data-title="Formal Language & Automata" data-code="FLAT" data-keywords="automata dfa nfa cfg pda turing machine chomsky regular languages">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <circle cx="6" cy="12" r="3"></circle>
+                                    <circle cx="18" cy="12" r="3"></circle>
+                                    <path d="M9 12h6"></path>
+                                    <path d="M12 9l3 3-3 3"></path>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">FLAT &middot; 3 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Formal Language &amp; Automata</h3>
+                            <p class="subject-desc">
+                                Finite automata (DFA/NFA), regular grammars, pushdown automata (PDA), Turing machines, and Chomsky classification hierarchies.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">5 Solved Papers</span>
+                                <span class="subject-pill">Important Q&amp;A</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_4/automata/automata_index.html">
+                                <span>View Subject Archive</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Biology -->
+                    <div class="subject-card" style="--card-color: #0E7490;" data-title="Biology for Engineers" data-code="BIO" data-keywords="biology dna genetics enzymes biomolecules cell structure heredity">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M2 12c3-4 6-4 10 0s7 4 10 0"></path>
+                                    <path d="M2 12c3 4 6 4 10 0s7-4 10 0"></path>
+                                    <line x1="6" y1="9.5" x2="6" y2="14.5"></line>
+                                    <line x1="12" y1="9.5" x2="12" y2="14.5"></line>
+                                    <line x1="18" y1="9.5" x2="18" y2="14.5"></line>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">BIO &middot; 2 Cr</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Biology for Engineers</h3>
+                            <p class="subject-desc">
+                                Biomolecules, cell organization, DNA genetics, heredity mechanisms, enzyme kinetics, and biological information processing.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">6 Papers</span>
+                                <span class="subject-pill">Suggestions Included</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_4/biology/Biology_index.html">
+                                <span>View Subject Archive</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Environmental Sciences -->
+                    <div class="subject-card" style="--card-color: #047857;" data-title="Environmental Sciences" data-code="ENV" data-keywords="environment ecology pollution sustainable biodiversity climate">
+                        <div class="subject-card-top">
+                            <div class="subject-svg-medallion" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V17a1 1 0 0 1-2 0v-.07A6 6 0 0 1 7 11a1 1 0 0 1 2 0 4 4 0 0 0 4 4 4 4 0 0 0 4-4 1 1 0 0 1 2 0 6 6 0 0 1-4 5.93z"></path>
+                                </svg>
+                            </div>
+                            <span class="subject-code-badge">ENV &middot; Mandatory</span>
+                        </div>
+                        <div class="subject-card-body">
+                            <h3 class="subject-title">Environmental Sciences</h3>
+                            <p class="subject-desc">
+                                Ecosystems, biodiversity preservation, pollution mitigation protocols, sustainable resource management, and impact assessments.
+                            </p>
+                            <div class="subject-meta-tags">
+                                <span class="subject-pill">7 Solved Papers</span>
+                                <span class="subject-pill">Curated Notes</span>
+                            </div>
+                        </div>
+                        <div class="subject-card-actions">
+                            <a class="btn-subject-primary" href="Semester_4/environment/environment_index.html">
+                                <span>View Subject Archive</span>
+                                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </article>
+
         </div>
+
+        <!-- ==================== MAKAUT PAPER STRUCTURE ==================== -->
+        <section class="structure" id="exam-pattern" aria-labelledby="exam-heading">
+            <div class="structure-inner">
+                <div class="structure-lead">
+                    <div class="hero-eyebrow" style="margin-bottom:0.4rem;">
+                        <span>Assessment Protocol</span>
+                    </div>
+                    <h2 id="exam-heading">MAKAUT Examination Question Paper Format</h2>
+                    <p>
+                        Every core semester subject follows the official 70-mark university final examination structure partitioned into Groups A, B, and C.
+                    </p>
+                </div>
+
+                <div class="grp" style="--c: #1E3A8A;">
+                    <div class="grp__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                    </div>
+                    <dl>
+                        <dt>Group A</dt>
+                        <dd class="grp-name">10 &times; 1 = 10 Marks</dd>
+                        <dd>Short definitions, multiple choice questions, truth/false verifications, and core formula applications across all syllabus modules.</dd>
+                    </dl>
+                </div>
+
+                <div class="grp" style="--c: #B45309;">
+                    <div class="grp__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div>
+                    <dl>
+                        <dt>Group B</dt>
+                        <dd class="grp-name">3 &times; 5 = 15 Marks</dd>
+                        <dd>Medium analytical questions requiring clear diagrams, comparative tables, derivation steps, and concise technical explanations.</dd>
+                    </dl>
+                </div>
+
+                <div class="grp" style="--c: #BE123C;">
+                    <div class="grp__icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                    </div>
+                    <dl>
+                        <dt>Group C</dt>
+                        <dd class="grp-name">3 &times; 15 = 45 Marks</dd>
+                        <dd>In-depth design problems, numerical implementations, multi-part algorithmic derivations, and architectural case studies.</dd>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="site-footer">
-        <p>Academic Study Notes &mdash; Built for focused revision</p>
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-foot" role="contentinfo">
+        <div class="site-foot-inner">
+            <div class="foot-brand-row">
+                <div class="foot-brand-info">
+                    <div class="wordmark">
+                        <div class="wordmark-crest" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 3L2 8l10 5 10-5-10-5z"></path><path d="M4 11.5v5.5c0 2.5 3.6 4.5 8 4.5s8-2 8-4.5v-5.5"></path></svg>
+                        </div>
+                        <div class="wordmark-text">
+                            <span class="wordmark-title">Academic <em>Study</em> Notes</span>
+                            <span class="wordmark-tag">MAKAUT &middot; Computer Science</span>
+                        </div>
+                    </div>
+                    <p class="foot-desc">
+                        A focused, beautifully organized archive of engineering revision notes, official syllabi, and group-wise solved question banks. Built for rigorous comprehension and academic excellence.
+                    </p>
+                </div>
+
+                <div class="foot-links-group">
+                    <div class="foot-col">
+                        <h4>5th Sem Subjects</h4>
+                        <ul>
+                            <li><a href="Semester_5/compiler/compiler_index.html">Compiler Design</a></li>
+                            <li><a href="Semester_5/os/os_index.html">Operating Systems</a></li>
+                            <li><a href="Semester_5/oop/oop_index.html">Object Oriented Programming</a></li>
+                            <li><a href="Semester_5/networks/networks_index.html">Computer Networks</a></li>
+                            <li><a href="Semester_5/se/se_index.html">Software Engineering</a></li>
+                            <li><a href="Semester_5/management/management_index.html">Industrial Management</a></li>
+                            <li><a href="Semester_5/ai/ai_index.html">Artificial Intelligence</a></li>
+                            <li><a href="Semester_5/constitution/constitution_index.html">Constitution &amp; IKT</a></li>
+                        </ul>
+                    </div>
+                    <div class="foot-col">
+                        <h4>Official Syllabi</h4>
+                        <ul>
+                            <li><a href="Semester_5/sem5_syllabus/2_Compiler_Design_PCC-CS501.pdf" target="_blank">Compiler Design PDF</a></li>
+                            <li><a href="Semester_5/sem5_syllabus/3_Operating_Systems_PCC-CS502.pdf" target="_blank">Operating Systems PDF</a></li>
+                            <li><a href="Semester_5/sem5_syllabus/4_Object_Oriented_Programming_PCC-CS503.pdf" target="_blank">OOP Java PDF</a></li>
+                            <li><a href="Semester_5/sem5_syllabus/1_Software_Engineering_ESC501.pdf" target="_blank">Software Eng PDF</a></li>
+                            <li><a href="Semester_5/sem5_syllabus/5_Industrial_Management_HSMC-501.pdf" target="_blank">Industrial Mgmt PDF</a></li>
+                            <li><a href="Semester_5/sem5_syllabus/6_Artificial_Intelligence_PEC-IT501B.pdf" target="_blank">Artificial Intelligence PDF</a></li>
+                            <li><a href="Semester_5/sem5_syllabus/7_Constitution_of_India_MC-CS501.pdf" target="_blank">Constitution of India PDF</a></li>
+                        </ul>
+                    </div>
+                    <div class="foot-col">
+                        <h4>Portals</h4>
+                        <ul>
+                            <li><a href="Semester_5/index.html">Semester 5 Main Vault</a></li>
+                            <li><a href="Semester_4/index.html">Semester 4 Main Vault</a></li>
+                            <li><a href="#syllabus-hub">Interactive Syllabus Hub</a></li>
+                            <li><a href="#exam-pattern">MAKAUT Marking Scheme</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="foot-bottom-row">
+                <span>Curated for MAKAUT B.Tech CSE &middot; Autonomous Curriculum 2023-26</span>
+                <span>Crafted by Soumya Chakraborty &middot; Academic Study Notes</span>
+            </div>
+        </div>
     </footer>
+
+    <!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
+    <script>
+        // 1. Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        if (menuBtn && mobileNav) {
+            menuBtn.addEventListener('click', () => {
+                const isOpen = mobileNav.classList.toggle('is-open');
+                menuBtn.classList.toggle('is-open', isOpen);
+                menuBtn.setAttribute('aria-expanded', isOpen);
+            });
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.remove('is-open');
+                    menuBtn.classList.remove('is-open');
+                    menuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+
+        // 2. Syllabus Hub Tab Switching
+        const tabButtons = document.querySelectorAll('.syllabus-tab-btn');
+        const tabPanels = document.querySelectorAll('.syllabus-panel');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-tab');
+                tabButtons.forEach(b => {
+                    b.classList.remove('is-active');
+                    b.setAttribute('aria-selected', 'false');
+                });
+                tabPanels.forEach(p => p.classList.remove('is-active'));
+
+                btn.classList.add('is-active');
+                btn.setAttribute('aria-selected', 'true');
+                const targetPanel = document.getElementById(targetId);
+                if (targetPanel) {
+                    targetPanel.classList.add('is-active');
+                }
+            });
+        });
+
+        // 3. Live Instant Subject Search Filter
+        const searchInput = document.getElementById('subject-search');
+        const countBadge = document.getElementById('search-count-badge');
+        const subjectCards = document.querySelectorAll('.subject-card');
+
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.toLowerCase().trim();
+                let visibleCount = 0;
+
+                subjectCards.forEach(card => {
+                    const title = (card.getAttribute('data-title') || '').toLowerCase();
+                    const code = (card.getAttribute('data-code') || '').toLowerCase();
+                    const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                    const text = card.textContent.toLowerCase();
+
+                    if (!query || title.includes(query) || code.includes(query) || keywords.includes(query) || text.includes(query)) {
+                        card.style.display = 'flex';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                if (countBadge) {
+                    countBadge.textContent = query ? `${visibleCount} Found` : `${subjectCards.length} Subjects`;
+                }
+            });
+        }
+    </script>
 </body>
 </html>
