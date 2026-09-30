@@ -1329,7 +1329,16 @@ table.t tbody tr:hover td { background: color-mix(in srgb, var(--accent) 6%, #ff
    13. Subject accent variables — set per-page by inline style
    ------------------------------------------------------------ */
 
-/* Page-level default — used if no inline override */
-.sheet { --c: var(--ai); }
+
+/* Per-page accent colors — applied by inline <style> on each page */
+.sheet[data-accent="ai"]       { --c: #8b5cf6; }
+.sheet[data-accent="cn"]       { --c: #047857; }
+.sheet[data-accent="oop"]      { --c: #e11d48; }
+.sheet[data-accent="se"]       { --c: #0ea5e9; }
+.sheet[data-accent="compiler"] { --c: #f59e0b; }
+
+/* Default — used if no data-accent is set */
+.sheet { --c: var(--ai, #8b5cf6); }
+
 
 /* When the HTML sets [style*="--c:"] we let it win */

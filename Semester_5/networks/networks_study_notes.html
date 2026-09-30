@@ -11,7 +11,7 @@
   </style>
 </head>
 <body>
-  <div class="sheet has-toc">
+  <div class="sheet has-toc" data-accent="cn">
 
     <!-- TOP BAR -->
     <div class="topbar">
@@ -260,8 +260,8 @@
           </div>
           <div class="qa__a"><strong>FDM:</strong> The total bandwidth is divided into multiple non-overlapping frequency bands. Each signal modulates a different carrier frequency. Used in radio/TV broadcasting. Guard bands prevent interference.<br><br>
           <strong>TDM:</strong> Time is divided into frames; each frame is subdivided into time slots. Each signal gets a specific time slot. Used in digital telephony (PCM).<br><br>
-          <pre class="ascii"><div class="diagram-title">FDM Concept</pre>
-            |───Signal A───|───Signal B───|───Signal C───|<br>
+          <div class="diagram-title">FDM Concept</div>
+          <pre class="ascii">            |───Signal A───|───Signal B───|───Signal C───|<br>
             (Frequency domain — each signal occupies different band)</div>
         </div>
 
@@ -527,8 +527,8 @@
             <span class="qa__q">Explain the Go-Back-N ARQ protocol with sequence diagram.</span>
           </div>
           <div class="qa__a"><strong>Go-Back-N ARQ</strong> allows the sender to have up to N unacknowledged frames (window size N). If a frame is lost or damaged, the receiver discards that frame and all subsequent frames (even if correctly received). The sender must retransmit from the errored frame onwards ("go back").<br><br>
-          <pre class="ascii"><div class="diagram-title">Go-Back-N Sequence Diagram</pre>
-            Sender: |Frame 0|Frame 1|Frame 2|Frame 3|Frame 2|Frame 3|<br>
+          <div class="diagram-title">Go-Back-N Sequence Diagram</div>
+          <pre class="ascii">            Sender: |Frame 0|Frame 1|Frame 2|Frame 3|Frame 2|Frame 3|<br>
             Receiver: |—ACK 0—|—ACK 1—|—Discard—|—Discard—|<br>
             (Frame 2 lost → ACK 2 never received → Sender times out → retransmits Frame 2 &amp; 3)</div>
         </div>
@@ -621,8 +621,8 @@
           </table>
           <strong>Sliding Window Concept:</strong><br>
           The sliding window protocol allows multiple frames to be "in flight" simultaneously. The sender maintains a window of sequence numbers. As each ACK arrives, the window slides forward, allowing the next frame to be sent.<br><br>
-          <pre class="ascii"><div class="diagram-title">Selective Repeat — Sender &amp; Receiver Windows</pre>
-            Sender Window (size 4): [0, 1, 2, 3] → slides right on each ACK<br>
+          <div class="diagram-title">Selective Repeat — Sender &amp; Receiver Windows</div>
+          <pre class="ascii">            Sender Window (size 4): [0, 1, 2, 3] → slides right on each ACK<br>
             Receiver Window (size 4): [0, 1, 2, 3] → accepts frames within window<br><br>
             If Frame 2 is lost: Receiver buffers 3, 4. Sender retransmits only 2.<br>
             After 2 received: receiver delivers 2, 3, 4 in order to network layer.</div>
@@ -815,8 +815,8 @@
           <strong>2. Offer:</strong> DHCP server responds with DHCPOFFER containing available IP address, subnet mask, lease time, and other configuration.<br><br>
           <strong>3. Request:</strong> Client broadcasts DHCPREQUEST accepting the offered IP address. If multiple servers responded, this selects one.<br><br>
           <strong>4. Acknowledge:</strong> Server sends DHCPACK confirming the lease. Client now has a valid IP address and can communicate.<br><br>
-          <pre class="ascii"><div class="diagram-title">DHCP DORA Process</pre>
-            Client → Broadcast: DHCPDISCOVER<br>
+          <div class="diagram-title">DHCP DORA Process</div>
+          <pre class="ascii">            Client → Broadcast: DHCPDISCOVER<br>
             Server → Client: DHCPOFFER (IP: 192.168.1.100)<br>
             Client → Broadcast: DHCPREQUEST<br>
             Server → Client: DHCPACK (Lease confirmed, time: 86400s)<br><br>
@@ -1107,8 +1107,8 @@
           — For each additional duplicate ACK, cwnd += 1 MSS (inflate window)<br>
           — When new ACK arrives (indicating some data got through), set cwnd = ssthresh<br>
           — If timeout occurs: more severe — ssthresh = cwnd/2, cwnd = 1, restart Slow Start<br><br>
-          <pre class="ascii"><div class="diagram-title">TCP Congestion Control — cwnd Growth Pattern</pre>
-            Slow Start (exponential): cwnd: 1 → 2 → 4 → 8 → 16 → 32 → 64<br>
+          <div class="diagram-title">TCP Congestion Control — cwnd Growth Pattern</div>
+          <pre class="ascii">            Slow Start (exponential): cwnd: 1 → 2 → 4 → 8 → 16 → 32 → 64<br>
             Congestion Avoidance (linear): 64 → 65 → 66 → 67 → 68 → 69 …<br>
             On 3 dupACKs: ssthresh = cwnd/2, cwnd = ssthresh + 3<br>
             On Timeout: ssthresh = cwnd/2, cwnd = 1 (restart Slow Start)</div>
@@ -1154,8 +1154,8 @@
           — If no tokens available, packet must wait or be discarded<br>
           — Allows bursts up to b tokens/packets<br>
           — More flexible than leaky bucket<br><br>
-          <pre class="ascii"><div class="diagram-title">Token Bucket — Burst Handling Example</pre>
-            Rate r = 1 token/ms, Bucket size b = 10 tokens<br>
+          <div class="diagram-title">Token Bucket — Burst Handling Example</div>
+          <pre class="ascii">            Rate r = 1 token/ms, Bucket size b = 10 tokens<br>
             After 10ms of silence: 10 tokens accumulated<br>
             Can now send 10 packets instantly (burst of 10)<br>
             Then limited to 1 packet per ms (steady rate)</div>
@@ -1194,8 +1194,8 @@
           — PSH: Push function — deliver data immediately<br>
           — URG: Urgent pointer is valid<br><br>
           <strong>THREE-WAY HANDSHAKE (Detailed):</strong><br>
-          <pre class="ascii"><div class="diagram-title">TCP Connection Establishment (Three-Way Handshake)</pre>
-            <pre style="text-align:left;font-size:0.82rem;">
+          <div class="diagram-title">TCP Connection Establishment (Three-Way Handshake)</div>
+          <pre class="ascii">            <pre style="text-align:left;font-size:0.82rem;">
  Client (A)                    Server (B)
     |                               |
     |── SYN (seq=x) ──────────────→|
@@ -1351,8 +1351,8 @@
             <span class="qa__q">Explain the DNS resolution process with a step-by-step example. Include recursive and iterative queries.</span>
           </div>
           <div class="qa__a"><strong>DNS Resolution Process:</strong> Converting www.example.com → IP address involves a hierarchical lookup through DNS servers.<br><br>
-          <pre class="ascii"><div class="diagram-title">DNS Resolution — Step by Step</pre>
-            1. Client queries Local DNS Server (recursive query)<br>
+          <div class="diagram-title">DNS Resolution — Step by Step</div>
+          <pre class="ascii">            1. Client queries Local DNS Server (recursive query)<br>
             2. Local DNS queries Root Server (iterative) → ".com" TLD servers<br>
             3. Local DNS queries .com TLD server (iterative) → "example.com" authoritative server<br>
             4. Local DNS queries example.com authoritative server → gets IP (93.184.216.34)<br>
@@ -1697,31 +1697,17 @@
         <span class="subhead__pill--1m">Exam</span>
       </div>
       <div class="tips">
-        <div class="tips__icon">💡</div>
-        <div class="tips__body">
-        <strong>Tip 1 — Unit Weightage:</strong> Units 1, 3, and 5 typically carry more marks in exams. Focus on OSI model, subnetting, and application layer protocols.
-      </div>
-      </div>
-      <div class="tips">
-        <div class="tips__icon">💡</div>
-        <div class="tips__body">
-        <strong>Tip 2 — Numerical Practice:</strong> Practice at least 5 subnetting problems, 2 CRC problems, and 1 Hamming code problem. These are guaranteed to appear.
-      </div>
-      </div>
-      <div class="tips">
-        <div class="tips__icon">💡</div>
-        <div class="tips__body">
-        <strong>Tip 3 — Diagram Practice:</strong> Draw TCP 3-way handshake, 4-way termination, DNS resolution flow, and DHCP DORA — these are easy marks.
-      </div>
-      </div>
-      <div class="tips">
-        <div class="tips__icon">💡</div>
-        <div class="tips__body">
-        <strong>Tip 4 — Comparison Tables:</strong> Always prepare comparison tables (TCP vs UDP, IPv4 vs IPv6, OSI vs TCP/IP) — they score well and are easy to memorize.
-      </div>
-      </div>
-      <div class="tip-box">
-        <strong>Tip 5 — PYQ Pattern:</strong> Previous 15-mark questions often repeat with slight modifications. The 2022 subnetting question and 2023 version are very similar — practice both patterns.
+        <div class="tips__head">
+          <div class="tips__icon">💡</div>
+          <div class="tips__title">Final Exam Tips</div>
+        </div>
+        <ul>
+          <li><strong>Unit Weightage:</strong> Units 1, 3, and 5 typically carry more marks in exams. Focus on OSI model, subnetting, and application layer protocols.</li>
+          <li><strong>Numerical Practice:</strong> Practice at least 5 subnetting problems, 2 CRC problems, and 1 Hamming code problem. These are guaranteed to appear.</li>
+          <li><strong>Diagram Practice:</strong> Draw TCP 3-way handshake, 4-way termination, DNS resolution flow, and DHCP DORA — these are easy marks.</li>
+          <li><strong>Comparison Tables:</strong> Always prepare comparison tables (TCP vs UDP, IPv4 vs IPv6, OSI vs TCP/IP) — they score well and are easy to memorize.</li>
+          <li><strong>PYQ Pattern:</strong> Previous 15-mark questions often repeat with slight modifications. The 2022 subnetting question and 2023 version are very similar — practice both patterns.</li>
+        </ul>
       </div>
 
     </div><!-- /content -->
@@ -1732,6 +1718,7 @@
       <div>Covers Units 1–5 · Exam-Focused</div>
     </div>
 
+</div>
   </div><!-- /sheet -->
 </body>
 </html>
