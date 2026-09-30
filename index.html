@@ -113,6 +113,15 @@
                     </div>
                 </div>
 
+                <!-- Academic Category Filter Chips (Notion / Apple Books style) -->
+                <div class="hero-category-filter" role="tablist" aria-label="Filter subjects by domain">
+                    <button class="category-chip is-active" data-cat="all">All Subjects (9)</button>
+                    <button class="category-chip" data-cat="theory">Core Theory (3)</button>
+                    <button class="category-chip" data-cat="systems">Systems &amp; Networks (2)</button>
+                    <button class="category-chip" data-cat="software">Software &amp; Management (2)</button>
+                    <button class="category-chip" data-cat="elective">Electives &amp; Mandatory (2)</button>
+                </div>
+
                 <!-- Instant Subject Filter -->
                 <div class="hero-search-wrapper">
                     <div class="hero-search-bar">
@@ -130,7 +139,7 @@
         <div class="semesters-list">
 
             <!-- ==================== SEMESTER 5 BLOCK (FLAGSHIP) ==================== -->
-            <article class="semester-block" id="sem5-section" style="--s-color: #1E3A8A; --s-glow: rgba(30, 58, 138, 0.1);">
+            <article class="semester-block" id="sem5-section" style="--s-color: #1E3A8A; --s-glow: rgba(30, 58, 138, 0.12);">
                 <div class="semester-header">
                     <div class="semester-header-info">
                         <div class="semester-title-row">
@@ -158,7 +167,7 @@
                 <div class="subjects-grid" id="sem5-grid">
 
                     <!-- 1. Compiler Design -->
-                    <div class="subject-card" style="--card-color: #9A3412;" data-title="Compiler Design" data-code="PCC-CS501" data-keywords="lexical parsing syntax ll1 lr parser grammar intermediate code three address yacc lex">
+                    <div class="subject-card" style="--card-color: #A7320D;" data-category="theory" data-title="Compiler Design" data-code="PCC-CS501" data-keywords="lexical parsing syntax ll1 lr parser grammar intermediate code three address yacc lex sdt">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -184,10 +193,22 @@
                             <p class="subject-desc">
                                 Lexical analysis, LL(1) parsing, FIRST/FOLLOW sets, SLR/LALR/CLR parse tables, SDT, and three-address intermediate code generation.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: Lexical Analysis</span>
+                                    <span class="roadmap-chip">M2: LL(1)/LR Parsing</span>
+                                    <span class="roadmap-chip">M3: SDT</span>
+                                    <span class="roadmap-chip">M4: Type Systems</span>
+                                    <span class="roadmap-chip">M5: Run-Time</span>
+                                    <span class="roadmap-chip">M6: Code Gen</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">122 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">6 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -203,7 +224,7 @@
                     </div>
 
                     <!-- 2. Operating Systems -->
-                    <div class="subject-card" style="--card-color: #1E3A8A;" data-title="Operating Systems" data-code="PCC-CS502" data-keywords="os process scheduling deadlocks paging virtual memory synchronization semaphore unix inode disk scan">
+                    <div class="subject-card" style="--card-color: #1E3A8A;" data-category="systems" data-title="Operating Systems" data-code="PCC-CS502" data-keywords="os process scheduling deadlocks paging virtual memory synchronization semaphore unix inode disk scan">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -226,10 +247,22 @@
                             <p class="subject-desc">
                                 Process lifecycle, CPU scheduling, semaphores, deadlock avoidance (Banker's), paging, virtual memory, and UNIX file system inodes.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: OS &amp; Syscalls</span>
+                                    <span class="roadmap-chip">M2: CPU Scheduling</span>
+                                    <span class="roadmap-chip">M3: Synchronization</span>
+                                    <span class="roadmap-chip">M4: Deadlocks</span>
+                                    <span class="roadmap-chip">M5: Virtual Memory</span>
+                                    <span class="roadmap-chip">M6: UNIX Inodes</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">123 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">6 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -245,7 +278,7 @@
                     </div>
 
                     <!-- 3. Object Oriented Programming -->
-                    <div class="subject-card" style="--card-color: #6D28D9;" data-title="Object Oriented Programming" data-code="PCC-CS503" data-keywords="java oop inheritance polymorphism encapsulation multithreading generics interfaces exception handling">
+                    <div class="subject-card" style="--card-color: #581C87;" data-category="theory" data-title="Object Oriented Programming" data-code="PCC-CS503" data-keywords="java oop inheritance polymorphism encapsulation multithreading generics interfaces exception handling">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -261,10 +294,22 @@
                             <p class="subject-desc">
                                 Core Java OOP paradigm, dynamic binding, inheritance hierarchies, exception handling architecture, multithreading, and collections.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: OOP Concepts</span>
+                                    <span class="roadmap-chip">M2: Constructors</span>
+                                    <span class="roadmap-chip">M3: Polymorphism</span>
+                                    <span class="roadmap-chip">M4: Exceptions</span>
+                                    <span class="roadmap-chip">M5: Multithreading</span>
+                                    <span class="roadmap-chip">M6: Collections</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">122 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">6 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -280,7 +325,7 @@
                     </div>
 
                     <!-- 4. Computer Networks -->
-                    <div class="subject-card" style="--card-color: #047857;" data-title="Computer Networks" data-code="PCC-CS504" data-keywords="networks osi tcp ip subnetting cidr routing protocols crc sliding window congestion flow control">
+                    <div class="subject-card" style="--card-color: #065F46;" data-category="systems" data-title="Computer Networks" data-code="PCC-CS504" data-keywords="networks osi tcp ip subnetting cidr routing protocols crc sliding window congestion flow control">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -302,10 +347,22 @@
                             <p class="subject-desc">
                                 OSI 7-layer architecture, TCP/IP stack, sliding window protocols, CRC, CIDR subnetting, distance vector and link-state routing algorithms.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: Layering Models</span>
+                                    <span class="roadmap-chip">M2: Data Link &amp; CRC</span>
+                                    <span class="roadmap-chip">M3: MAC &amp; Ethernet</span>
+                                    <span class="roadmap-chip">M4: IP &amp; Routing</span>
+                                    <span class="roadmap-chip">M5: Transport TCP</span>
+                                    <span class="roadmap-chip">M6: App Layer</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">123 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">6 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -321,7 +378,7 @@
                     </div>
 
                     <!-- 5. Software Engineering -->
-                    <div class="subject-card" style="--card-color: #0E7490;" data-title="Software Engineering" data-code="ESC501" data-keywords="software engineering waterfall agile scrum srs dfd uml cohesion coupling cocomo testing metrics">
+                    <div class="subject-card" style="--card-color: #0E7490;" data-category="software" data-title="Software Engineering" data-code="ESC501" data-keywords="software engineering waterfall agile scrum srs dfd uml cohesion coupling cocomo testing metrics">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -338,10 +395,21 @@
                             <p class="subject-desc">
                                 Lifecycle models (Agile Scrum/Spiral), SRS specifications, DFD leveling, modular cohesion/coupling, COCOMO cost models, and McCabe testing.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: SDLC &amp; Agile</span>
+                                    <span class="roadmap-chip">M2: SRS &amp; DFD</span>
+                                    <span class="roadmap-chip">M3: Modular Design</span>
+                                    <span class="roadmap-chip">M4: Verification &amp; Test</span>
+                                    <span class="roadmap-chip">M5: COCOMO &amp; SCM</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">122 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">5 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -357,7 +425,7 @@
                     </div>
 
                     <!-- 6. Industrial Management -->
-                    <div class="subject-card" style="--card-color: #B45309;" data-title="Industrial Management" data-code="HSMC-501" data-keywords="management taylor fayol inventory control pert cpm eoq abc tqm break even motivation">
+                    <div class="subject-card" style="--card-color: #B45309;" data-category="software" data-title="Industrial Management" data-code="HSMC-501" data-keywords="management taylor fayol inventory control pert cpm eoq abc tqm break even motivation">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -374,10 +442,21 @@
                             <p class="subject-desc">
                                 Management principles (Taylor &amp; Fayol), motivation theories, EOQ inventory optimization, PERT/CPM critical paths, and TQM quality control.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: Management Principles</span>
+                                    <span class="roadmap-chip">M2: HRM &amp; Motivation</span>
+                                    <span class="roadmap-chip">M3: Costing &amp; BEP</span>
+                                    <span class="roadmap-chip">M4: EOQ Inventory</span>
+                                    <span class="roadmap-chip">M5: PERT/CPM &amp; TQM</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">122 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">5 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -393,7 +472,7 @@
                     </div>
 
                     <!-- 7. Artificial Intelligence -->
-                    <div class="subject-card" style="--card-color: #7C3AED;" data-title="Artificial Intelligence" data-code="PEC-IT501B" data-keywords="ai artificial intelligence peas heuristic search a star minimax alpha beta pruning fol resolution fuzzy logic">
+                    <div class="subject-card" style="--card-color: #7C3AED;" data-category="elective" data-title="Artificial Intelligence" data-code="PEC-IT501B" data-keywords="ai artificial intelligence peas heuristic search a star minimax alpha beta pruning fol resolution fuzzy logic">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -415,10 +494,22 @@
                             <p class="subject-desc">
                                 PEAS intelligent agents, A* heuristic search, Minimax with alpha-beta pruning, first-order logic resolution, and fuzzy reasoning systems.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: PEAS Agents</span>
+                                    <span class="roadmap-chip">M2: A* &amp; Heuristics</span>
+                                    <span class="roadmap-chip">M3: Minimax Games</span>
+                                    <span class="roadmap-chip">M4: FOL Resolution</span>
+                                    <span class="roadmap-chip">M5: Bayes &amp; Fuzzy</span>
+                                    <span class="roadmap-chip">M6: Learning &amp; NLP</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">123 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">6 Modules</span>
+                                <span class="subject-pill">3L/week</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -434,7 +525,7 @@
                     </div>
 
                     <!-- 8. Constitution of India & IKT -->
-                    <div class="subject-card" style="--card-color: #BE123C;" data-title="Constitution of India & IKT" data-code="MC-CS501" data-keywords="constitution india preamble fundamental rights dpsp lok sabha rajya sabha panchayati raj election commission ikt">
+                    <div class="subject-card" style="--card-color: #BE123C;" data-category="elective" data-title="Constitution of India & IKT" data-code="MC-CS501" data-keywords="constitution india preamble fundamental rights dpsp lok sabha rajya sabha panchayati raj election commission ikt">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -457,10 +548,21 @@
                             <p class="subject-desc">
                                 Indian constitutional framework, Preamble, Fundamental Rights &amp; Duties, Union/State executive governance, and Panchayati Raj administration.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: Preamble &amp; Rights</span>
+                                    <span class="roadmap-chip">M2: Union Executive</span>
+                                    <span class="roadmap-chip">M3: State Secretariat</span>
+                                    <span class="roadmap-chip">M4: Local PRI Governance</span>
+                                    <span class="roadmap-chip">M5: Election Commission</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">122 Questions</span>
                                 <span class="subject-pill">Groups A / B / C</span>
-                                <span class="subject-pill">5 Modules</span>
+                                <span class="subject-pill">Non-Credit</span>
                             </div>
                         </div>
                         <div class="subject-card-actions">
@@ -476,7 +578,7 @@
                     </div>
 
                     <!-- 9. Database Management Systems -->
-                    <div class="subject-card" style="--card-color: #0284C7;" data-title="Database Management Systems" data-code="PCC-CS50x" data-keywords="dbms database sql er diagram normalization transactions acid bcnf relational model">
+                    <div class="subject-card" style="--card-color: #0284C7;" data-category="theory" data-title="Database Management Systems" data-code="PCC-CS50x" data-keywords="dbms database sql er diagram normalization transactions acid bcnf relational model">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -492,6 +594,16 @@
                             <p class="subject-desc">
                                 Relational algebra, SQL schema normalization (1NF to BCNF), ER modeling, transaction schedules, and ACID concurrency control.
                             </p>
+                            <!-- Syllabus Modules Roadmap -->
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Official Syllabus Modules</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">M1: Relational Schema</span>
+                                    <span class="roadmap-chip">M2: SQL &amp; Algebra</span>
+                                    <span class="roadmap-chip">M3: Normalization BCNF</span>
+                                    <span class="roadmap-chip">M4: Transactions &amp; ACID</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">Core Notes</span>
                                 <span class="subject-pill">Revision Deck</span>
@@ -890,12 +1002,12 @@
             </section>
 
             <!-- ==================== SEMESTER 4 BLOCK (ARCHIVE) ==================== -->
-            <article class="semester-block" id="sem4-section" style="--s-color: #047857; --s-glow: rgba(4, 120, 87, 0.08);">
+            <article class="semester-block" id="sem4-section" style="--s-color: #065F46; --s-glow: rgba(4, 120, 87, 0.1);">
                 <div class="semester-header">
                     <div class="semester-header-info">
                         <div class="semester-title-row">
                             <h2 class="semester-title">Semester 4</h2>
-                            <span class="semester-status-pill" style="color: #047857; border-color: rgba(4, 120, 87, 0.3);">
+                            <span class="semester-status-pill" style="color: #065F46; border-color: rgba(4, 120, 87, 0.32);">
                                 Archive &middot; 5 Subjects
                             </span>
                         </div>
@@ -914,7 +1026,7 @@
                 <div class="subjects-grid" id="sem4-grid">
 
                     <!-- DAA -->
-                    <div class="subject-card" style="--card-color: #1E3A8A;" data-title="Design & Analysis of Algorithms" data-code="DAA" data-keywords="algorithms divide conquer dynamic programming greedy graph dijkstra bellman ford np complete">
+                    <div class="subject-card" style="--card-color: #1E3A8A;" data-category="theory" data-title="Design & Analysis of Algorithms" data-code="DAA" data-keywords="algorithms divide conquer dynamic programming greedy graph dijkstra bellman ford np complete">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -928,6 +1040,16 @@
                             <p class="subject-desc">
                                 Asymptotic notations, divide-and-conquer, greedy algorithms, dynamic programming, Bellman-Ford, and NP-completeness reductions.
                             </p>
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Curriculum Highlights</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">Divide &amp; Conquer</span>
+                                    <span class="roadmap-chip">Dynamic Prog</span>
+                                    <span class="roadmap-chip">Greedy</span>
+                                    <span class="roadmap-chip">Graph Algorithms</span>
+                                    <span class="roadmap-chip">NP-Hard</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">7 Solved Papers</span>
                                 <span class="subject-pill">Exam Prep Q&amp;A</span>
@@ -942,7 +1064,7 @@
                     </div>
 
                     <!-- COA -->
-                    <div class="subject-card" style="--card-color: #7C3AED;" data-title="Computer Architecture" data-code="COA" data-keywords="architecture pipeline hazards memory cache ilp multiprocessor amdahl">
+                    <div class="subject-card" style="--card-color: #581C87;" data-category="systems" data-title="Computer Architecture" data-code="COA" data-keywords="architecture pipeline hazards memory cache ilp multiprocessor amdahl">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -958,6 +1080,15 @@
                             <p class="subject-desc">
                                 Pipelining hazards, cache memory hierarchy, Instruction Level Parallelism (ILP), vector processors, and multiprocessor coherence.
                             </p>
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Curriculum Highlights</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">Pipelining</span>
+                                    <span class="roadmap-chip">Cache Hierarchy</span>
+                                    <span class="roadmap-chip">ILP Hazards</span>
+                                    <span class="roadmap-chip">Vector Units</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">12 Modules</span>
                                 <span class="subject-pill">Solved PYQs</span>
@@ -972,7 +1103,7 @@
                     </div>
 
                     <!-- FLAT -->
-                    <div class="subject-card" style="--card-color: #C2410C;" data-title="Formal Language & Automata" data-code="FLAT" data-keywords="automata dfa nfa cfg pda turing machine chomsky regular languages">
+                    <div class="subject-card" style="--card-color: #A7320D;" data-category="theory" data-title="Formal Language & Automata" data-code="FLAT" data-keywords="automata dfa nfa cfg pda turing machine chomsky regular languages">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -989,6 +1120,15 @@
                             <p class="subject-desc">
                                 Finite automata (DFA/NFA), regular grammars, pushdown automata (PDA), Turing machines, and Chomsky classification hierarchies.
                             </p>
+                            <div class="subject-modules-roadmap">
+                                <span class="roadmap-label">Curriculum Highlights</span>
+                                <div class="roadmap-pills">
+                                    <span class="roadmap-chip">DFA / NFA</span>
+                                    <span class="roadmap-chip">Regular Expressions</span>
+                                    <span class="roadmap-chip">PDA / CFG</span>
+                                    <span class="roadmap-chip">Turing Machines</span>
+                                </div>
+                            </div>
                             <div class="subject-meta-tags">
                                 <span class="subject-pill">5 Solved Papers</span>
                                 <span class="subject-pill">Important Q&amp;A</span>
@@ -1003,7 +1143,7 @@
                     </div>
 
                     <!-- Biology -->
-                    <div class="subject-card" style="--card-color: #0E7490;" data-title="Biology for Engineers" data-code="BIO" data-keywords="biology dna genetics enzymes biomolecules cell structure heredity">
+                    <div class="subject-card" style="--card-color: #0E7490;" data-category="elective" data-title="Biology for Engineers" data-code="BIO" data-keywords="biology dna genetics enzymes biomolecules cell structure heredity">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -1035,7 +1175,7 @@
                     </div>
 
                     <!-- Environmental Sciences -->
-                    <div class="subject-card" style="--card-color: #047857;" data-title="Environmental Sciences" data-code="ENV" data-keywords="environment ecology pollution sustainable biodiversity climate">
+                    <div class="subject-card" style="--card-color: #065F46;" data-category="elective" data-title="Environmental Sciences" data-code="ENV" data-keywords="environment ecology pollution sustainable biodiversity climate">
                         <div class="subject-card-top">
                             <div class="subject-svg-medallion" aria-hidden="true">
                                 <svg viewBox="0 0 24 24">
@@ -1223,34 +1363,52 @@
             });
         });
 
-        // 3. Live Instant Subject Search Filter
-        const searchInput = document.getElementById('subject-search');
-        const countBadge = document.getElementById('search-count-badge');
+        // 3. Category Filter Chips (Notion / Apple Books style)
+        const catButtons = document.querySelectorAll('.category-chip');
         const subjectCards = document.querySelectorAll('.subject-card');
+        const countBadge = document.getElementById('search-count-badge');
+        const searchInput = document.getElementById('subject-search');
 
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
-                const query = e.target.value.toLowerCase().trim();
-                let visibleCount = 0;
+        let activeCategory = 'all';
 
-                subjectCards.forEach(card => {
-                    const title = (card.getAttribute('data-title') || '').toLowerCase();
-                    const code = (card.getAttribute('data-code') || '').toLowerCase();
-                    const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
-                    const text = card.textContent.toLowerCase();
+        function applyFilters() {
+            const query = (searchInput ? searchInput.value.toLowerCase().trim() : '');
+            let visibleCount = 0;
 
-                    if (!query || title.includes(query) || code.includes(query) || keywords.includes(query) || text.includes(query)) {
-                        card.style.display = 'flex';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+            subjectCards.forEach(card => {
+                const cardCat = card.getAttribute('data-category') || '';
+                const matchesCat = (activeCategory === 'all' || cardCat === activeCategory);
 
-                if (countBadge) {
-                    countBadge.textContent = query ? `${visibleCount} Found` : `${subjectCards.length} Subjects`;
+                const title = (card.getAttribute('data-title') || '').toLowerCase();
+                const code = (card.getAttribute('data-code') || '').toLowerCase();
+                const keywords = (card.getAttribute('data-keywords') || '').toLowerCase();
+                const text = card.textContent.toLowerCase();
+                const matchesQuery = (!query || title.includes(query) || code.includes(query) || keywords.includes(query) || text.includes(query));
+
+                if (matchesCat && matchesQuery) {
+                    card.style.display = 'flex';
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
                 }
             });
+
+            if (countBadge) {
+                countBadge.textContent = `${visibleCount} Subjects`;
+            }
+        }
+
+        catButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                catButtons.forEach(b => b.classList.remove('is-active'));
+                btn.classList.add('is-active');
+                activeCategory = btn.getAttribute('data-cat') || 'all';
+                applyFilters();
+            });
+        });
+
+        if (searchInput) {
+            searchInput.addEventListener('input', applyFilters);
         }
     </script>
 </body>
