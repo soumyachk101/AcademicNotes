@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="notes.css">
-    
+    <link rel="stylesheet" href="../../site.css">
     <style>
         :root {
-            --primary-color: #ef4444; /* Crimson Red for Important Q&A */
+            --primary-color: #EA580C; /* Crimson Red for Important Q&A */
             --primary-light: rgba(239, 68, 68, 0.05);
             --border-color: rgba(239, 68, 68, 0.15);
         }
@@ -77,7 +77,7 @@
             .qa-question {
                 font-size: 1.15rem !important;
                 font-weight: 700 !important;
-                color: #0f172a !important; /* Oxford Blue */
+                color: #1E1510 !important; /* Oxford Blue */
                 margin-bottom: 8px !important;
                 line-height: 1.3 !important;
             }
@@ -92,12 +92,12 @@
                 margin-bottom: 6px !important;
             }
             blockquote {
-                border-left: 3px solid #0f172a !important;
-                background: #f8fafc !important;
+                border-left: 3px solid #1E1510 !important;
+                background: #FAF3E7 !important;
                 padding: 8px 12px !important;
                 margin: 10px 0 !important;
                 font-style: italic !important;
-                color: #475569 !important;
+                color: #5E3B28 !important;
                 font-size: 0.85rem !important;
             }
             .pagination-controls, .chapter-selector-container, .top-nav, .flashcard-header {
@@ -118,13 +118,13 @@
                 font-family: 'Cormorant Garamond', serif;
                 font-size: 4rem;
                 font-weight: 700;
-                color: #0f172a;
+                color: #1E1510;
                 margin-bottom: 10px;
                 line-height: 1.1;
             }
             .cover-subtitle {
                 font-size: 1.5rem;
-                color: #64748b;
+                color: #7A5840;
                 letter-spacing: 2px;
                 text-transform: uppercase;
                 margin-bottom: 40px;
@@ -132,14 +132,14 @@
             .cover-divider {
                 width: 100px;
                 height: 4px;
-                background-color: #0f172a;
+                background-color: #1E1510;
                 margin: 0 auto 40px auto;
             }
             .cover-details {
                 margin-top: auto;
                 margin-bottom: 10vh;
                 font-size: 1.2rem;
-                color: #475569;
+                color: #5E3B28;
             }
             
             /* Interactive PDF Features */
@@ -151,7 +151,7 @@
             .pdf-toc h2 {
                 font-family: 'Cormorant Garamond', serif;
                 font-size: 2.2rem;
-                color: #0f172a;
+                color: #1E1510;
                 border-bottom: 2px solid rgba(15, 23, 42, 0.1);
                 padding-bottom: 10px;
                 margin-bottom: 15px;
@@ -167,7 +167,7 @@
                 padding-bottom: 4px;
             }
             .pdf-toc a {
-                color: #0f172a;
+                color: #1E1510;
                 text-decoration: none;
                 font-weight: 600;
                 display: block;
@@ -180,12 +180,12 @@
                 margin-top: 5px;
                 margin-bottom: 20px;
                 padding-bottom: 10px;
-                border-bottom: 3px solid #0f172a;
+                border-bottom: 3px solid #1E1510;
             }
             .section-header-block h2 {
                 font-family: 'Cormorant Garamond', serif;
                 font-size: 2.2rem;
-                color: #0f172a !important;
+                color: #1E1510 !important;
                 margin: 0;
             }
             .back-to-toc {
@@ -195,7 +195,7 @@
                 margin-bottom: 20px;
             }
             .back-to-toc a {
-                color: #64748b;
+                color: #7A5840;
                 text-decoration: none;
                 font-weight: 500;
                 font-size: 0.85rem;
@@ -203,14 +203,14 @@
             .formula-box {
                 page-break-inside: avoid;
                 border: 1px solid rgba(15,23,42,0.1) !important;
-                background: #f8fafc !important;
+                background: #FAF3E7 !important;
                 padding: 8px !important;
                 border-radius: 4px !important;
                 text-align: center !important;
                 margin: 10px 0 !important;
                 font-family: 'Inter', monospace !important;
                 font-size: 0.85rem !important;
-                color: #0f172a !important;
+                color: #1E1510 !important;
                 word-wrap: break-word !important;
                 overflow-wrap: break-word !important;
             }
@@ -227,26 +227,76 @@
         }
     
         .diagram-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-            border: 1px solid #cbd5e1 !important;
+            background: linear-gradient(155deg, #3B2318 0%, #241811 100%) !important;
+            border: 1px solid rgba(234, 88, 12, 0.35) !important;
             border-radius: 14px !important;
             padding: 1.8rem !important;
             margin: 2.2rem 0 !important;
             text-align: center !important;
-            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 18px 44px -18px rgba(36, 24, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .diagram-container::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            pointer-events: none;
+        }
+        .diagram-container > * { position: relative; z-index: 1; }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+        }
+        .diagram-caption {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
+            margin-top: 1.1rem !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
+        }
+
+        .diagram-container::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            pointer-events: none;
+        }
+        .diagram-container > * { position: relative; z-index: 1; }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+        }
+        .diagram-caption {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
+            margin-top: 1.1rem !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
         }
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
         }
         .diagram-caption {
-            font-size: 0.88rem !important;
-            color: #475569 !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
             margin-top: 1.1rem !important;
-            font-style: italic !important;
+            font-style: normal !important;
             font-weight: 600 !important;
-            letter-spacing: 0.02em !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
         }
 
     </style>
@@ -291,7 +341,7 @@
     
     <!-- JS controlled chapter select (Web Only) -->
     <div class="chapter-selector-container web-only" style="text-align: center; margin-bottom: 1.5rem;">
-        <label for="chapter-select" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #64748b; font-weight: 600; display: block; margin-bottom: 0.5rem;">Current Chapter</label>
+        <label for="chapter-select" style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: #7A5840; font-weight: 600; display: block; margin-bottom: 0.5rem;">Current Chapter</label>
         <select id="chapter-select" onchange="jumpToChapter(this.value)" style="padding: 0.5rem 1rem; border-radius: 8px; border: 2px solid var(--border-color); font-family: 'Inter', sans-serif; font-weight: 600; color: var(--primary-color); background: white; cursor: pointer; outline: none; font-size: 1rem; text-align: center; max-width: 100%; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
         </select>
     </div>
@@ -351,7 +401,7 @@
 <li>1. <strong>Hazards:</strong> Data dependencies (RAW, WAR, WAW), Control dependencies (Branches), and Structural hazards (resource conflicts) stall the pipeline and reduce throughput.</li>
 <li>2. <strong>Imbalanced Stage Delay:</strong> The pipeline clock cycle is determined by the slowest stage. If one stage takes 50ns and another takes 10ns, the clock must run at 50ns, wasting time in the faster stages.</li>
 <li>3. <strong>Pipeline Overhead:</strong> Latch delay (register overhead) between stages adds fixed time to every clock cycle, limiting how deep a pipeline can practically be.</li>
-</ul>
+</ol>
 <p><strong>Differentiate between RAW and WAR with an example:</strong></p>
 <p>* <strong>RAW (Read After Write - True Dependency):</strong> Instruction 2 needs to read a register that Instruction 1 has not yet finished writing to. I2 must wait for I1.</p>
 <p>  <em> </em>Example:* </p>
@@ -374,7 +424,7 @@
 <li>1. <strong>Instruction Count (IC):</strong> Total number of machine instructions executed for a program. Dictated by the algorithm, programming language, compiler, and ISA (RISC vs CISC).</li>
 <li>2. <strong>Clock Cycle Time ($t_c$):</strong> The duration of one clock cycle (inverse of frequency). Dictated by hardware technology and pipeline depth.</li>
 <li>3. <strong>Cycles Per Instruction (CPI):</strong> Average number of clock cycles required to execute a single instruction. Dictated by the CPU architecture and memory hierarchy.</li>
-</ul>
+</ol>
 <p><strong>What is meant by pipeline stall?</strong></p>
 <p>A pipeline stall (also called a bubble) is a deliberate delay injected into the pipeline by the control unit to resolve a hazard. During a stall, subsequent instructions are prevented from advancing to the next stage, effectively wasting clock cycles to wait for data to become available or for a branch target to be resolved.</p>
 <p><strong>Why is CPU-time expressed in terms of average CPI?</strong></p>
@@ -489,7 +539,7 @@
 <li>2. `ADD R2, R3, R4` (R2 = R3 + R4)</li>
 <li>3. `INC R4` (R4 = R4 + 1)</li>
 <li>4. `SUB R6, R3, R7` (R6 = R3 - R7)</li>
-</ul>
+</ol>
 <p><strong>Data Dependencies:</strong></p>
 <p>* There are no True Dependencies (RAW) between consecutive instructions! Instruction 2 uses R3, R4 (neither written by 1). Instruction 3 uses R4 (written by 2? No, `ADD R2, R3, R4` usually means `dest, src1, src2`, so R2 is written. If it means `src1, src2, dest` then R4 is written. Let's assume standard `OP Dest, Src1, Src2`).</p>
 <p>* Assuming `OP Dest, Src1, Src2`:</p>
@@ -608,7 +658,7 @@
 <li>4. `M = Z - Y`: Node Z and Y feed into a `[-]` node. Output is M.</li>
 <li>5. `N = Z <em> X`: Node Z and X feed into a `[</em>]` node. Output is N.</li>
 <li>6. `P = M / N`: Node M and N feed into a `[/]` node. Output is P.</li>
-</ul>
+</ol>
 <blockquote>In a data flow machine, calculations for Z and Y can happen simultaneously the instant X is calculated, exploiting massive implicit parallelism.</blockquote>
 
             </div>
@@ -690,13 +740,13 @@
 <p><strong>Calculation:</strong></p>
 <ol>
 <li>1. <strong>Average CPI:</strong></li>
-</ul>
+</ol>
 <div class="formula-box">CPI_{avg} = \sum (\text{Fraction} \times CPI)</div>
 <div class="formula-box">CPI_{avg} = (0.50 \times 2) + (0.30 \times 5) + (0.20 \times 10)</div>
 <div class="formula-box">CPI_{avg} = 1.0 + 1.5 + 2.0 = 4.5 \text{ cycles/instruction}</div>
 <ol>
 <li>2. <strong>Total Execution Time:</strong></li>
-</ul>
+</ol>
 <div class="formula-box">Time = Instruction Count \times CPI_{avg} \times Cycle Time</div>
 <div class="formula-box">Time = 2500 \times 4.5 \times 0.25 \text{ ns}</div>
 <div class="formula-box">Time = 2812.5 \text{ ns} = 2.8125 \text{ microseconds}</div>
@@ -746,7 +796,7 @@
 <li>2. <strong>Stage 2 (Multiply Phase 2):</strong> Finishes addition of partial products to produce the product $(A \times B)$. At the exact same time, operand C is fetched from memory into a side register.</li>
 <li>3. <strong>Stage 3 (Add):</strong> Feeds the result of $(A \times B)$ and the newly loaded $C$ into a pipeline adder.</li>
 <li>4. <strong>Stage 4 (Normalize/Write):</strong> Normalizes the floating point result and writes $X$ back to the register file.</li>
-</ul>
+</ol>
 
             </div>
         </div>
@@ -781,7 +831,7 @@
 <li>2. `R0 <- (R0) + (M2)` [Add M2 to R0, store in R0]</li>
 <li>3. `R0 <- (R0) * (M2)` [Mult R0 by M2, store in R0]</li>
 <li>4. `M4 <- (R0)` [Store R0 into M4]</li>
-</ul>
+</ol>
 <p><strong>Optimization:</strong></p>
 <p>This code endlessly re-reads and overwrites the exact same register (R0). By utilizing internal forwarding (bypassing), the hardware can completely eliminate the need to write intermediate results to R0 and fetch them back. Register tagging tracks the latest producer of a value.</p>
 <p>Instead of: `Load -> Store to R0 -> Read R0 -> Add -> Store to R0 -> Read R0 -> Mult...`</p>
@@ -929,7 +979,7 @@
 <li> 2. The Segment (8) part indexes into the <strong>Segment Table</strong> in memory to find the base address of the corresponding Page Table (which is 30).</li>
 <li> 3. The Page (04) part indexes into that specific <strong>Page Table</strong> to find the Physical Frame Number (which is 019).</li>
 <li> 4. The Frame Number (019) is combined with the original Offset (40) to target the exact word in the <strong>Main Memory</strong> physical frame.</li>
-</ul>
+</ol>
 
             </div>
         </div>
@@ -941,7 +991,7 @@
 <li> 1. <strong>Compulsory (Cold) Miss:</strong> Occurs on the very first access to a block because it has never been in the cache. These are unavoidable on program startup.</li>
 <li> 2. <strong>Capacity Miss:</strong> Occurs when the cache cannot contain all the blocks needed during execution, causing blocks to be discarded and later retrieved. The working set of the program exceeds the cache size.</li>
 <li> 3. <strong>Conflict (Collision) Miss:</strong> Occurs in direct-mapped or set-associative caches when multiple blocks compete for the exact same cache set, even if the rest of the cache is completely empty.</li>
-</ul>
+</ol>
 <p><strong>Techniques to reduce cache misses:</strong></p>
 <ul>
 <li><strong>Compulsory:</strong> Increase block size (takes advantage of spatial locality by pulling in adjacent words before they are requested). Hardware prefetching also helps.</li>
@@ -1026,7 +1076,7 @@
 <li> 6. Page 7: Miss (Look ahead: 1 and 2 are needed next. 3 is never needed again. Evict 3. Frames: 1, 7, 2)</li>
 <li> 7. Page 1: Hit  (Frames: 1, 7, 2)</li>
 <li> 8. Page 2: Hit  (Frames: 1, 7, 2)</li>
-</ul>
+</ol>
 <blockquote><strong>Total page faults generated = 4.</strong></blockquote>
 
             </div>
@@ -1193,7 +1243,7 @@
 <li> 2. <strong>SIMD (Single Instruction, Multiple Data):</strong> A single control unit dispatches the exact same instruction simultaneously to multiple processing elements (PEs), each operating on different data streams. Highly efficient for highly regular tasks like graphics rendering or matrix multiplication (e.g., Vector processors, Array processors, modern GPUs).</li>
 <li> 3. <strong>MISD (Multiple Instruction, Single Data):</strong> Multiple processors execute entirely different instructions on the exact same data stream. This is extremely rare in commercial computing and is mostly used in highly specialized fault-tolerant systems (e.g., Space Shuttle flight controllers where three redundant systems vote on the same sensor data to ensure reliability).</li>
 <li> 4. <strong>MIMD (Multiple Instruction, Multiple Data):</strong> Multiple autonomous processors executing different instructions on different data entirely independently. This is the dominant architecture of modern computing, encompassing multi-core desktop processors, cloud servers, and massive supercomputing clusters.</li>
-</ul>
+</ol>
 
             </div>
         </div>
@@ -1223,11 +1273,11 @@
 <p><strong>Calculation Methodology:</strong></p>
 <ol>
 <li> 1. <strong>Total Instructions (Instruction Count):</strong></li>
-</ul>
+</ol>
 <div class="formula-box">50,000 + 70,000 + 25,000 + 4,000 = 149,000 \text{ instructions}</div>
 <ol>
 <li> 2. <strong>Total Clock Cycles Required:</strong></li>
-</ul>
+</ol>
 <p>   * Integer: $50,000 \times 1 = 50,000$ cycles</p>
 <p>   * Data: $70,000 \times 2 = 140,000$ cycles</p>
 <p>   * Float: $25,000 \times 2 = 50,000$ cycles</p>
@@ -1235,7 +1285,7 @@
 <p>   * <strong>Total Cycles</strong> = $50,000 + 140,000 + 50,000 + 8,000 = 248,000 \text{ cycles}$</p>
 <ol>
 <li> 3. <strong>Total Execution Time:</strong></li>
-</ul>
+</ol>
 <div class="formula-box">Time = Total Cycles \times Clock Cycle Time</div>
 <div class="formula-box">Time = 248,000 \times 20 \text{ ns} = 4,960,000 \text{ ns}</div>
 <p>   <strong>Execution Time = 4.96 milliseconds</strong></p>

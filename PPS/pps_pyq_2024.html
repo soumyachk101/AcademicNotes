@@ -11,18 +11,17 @@
     
     <!-- Shared Stylesheets -->
     <link rel="stylesheet" href="../notes.css">
-    <link rel="stylesheet" href="../notes.css">
     
     <!-- MathJax for formulas -->
     <script type="text/javascript" id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
     <style>
         :root {
-            --primary-color: #0d9488; /* Teal Accent */
+            --primary-color: #EA580C; /* Teal Accent */
             --primary-light: rgba(13, 148, 136, 0.06);
             --border-color: rgba(13, 148, 136, 0.2);
-            --code-bg: #0f172a;
-            --code-text: #e2e8f0;
+            --code-bg: #1E1510;
+            --code-text: #EADDC0;
         }
 
         .mark-badge {
@@ -86,7 +85,7 @@
             font-family: 'Inter', sans-serif;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #1e293b;
+            color: #241811;
             margin-bottom: 1.2rem;
             line-height: 1.5;
             display: flex;
@@ -104,7 +103,7 @@
         .answer {
             font-size: 1rem;
             line-height: 1.7;
-            color: #334155;
+            color: #3B2418;
         }
 
         .answer p {
@@ -133,22 +132,22 @@
             overflow-x: auto;
             margin: 1rem 0;
             line-height: 1.6;
-            border: 1px solid #334155;
+            border: 1px solid #3B2418;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .output-box {
-            background-color: #f8fafc;
+            background-color: #FAF3E7;
             border-left: 4px solid var(--primary-color);
             padding: 1rem 1.25rem;
             margin: 1rem 0;
             font-family: 'Fira Code', monospace;
             font-size: 0.9rem;
-            color: #1e293b;
+            color: #241811;
             border-radius: 0 6px 6px 0;
-            border-top: 1px solid #e2e8f0;
-            border-right: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
+            border-top: 1px solid #EADDC0;
+            border-right: 1px solid #EADDC0;
+            border-bottom: 1px solid #EADDC0;
         }
 
         .output-label {
@@ -169,19 +168,19 @@
         }
 
         table.comp-table th, table.comp-table td {
-            border: 1px solid #cbd5e1;
+            border: 1px solid #C9AE94;
             padding: 0.75rem 1rem;
             text-align: left;
         }
 
         table.comp-table th {
-            background-color: #f1f5f9;
-            color: #0f172a;
+            background-color: #F3EAD8;
+            color: #1E1510;
             font-weight: 700;
         }
 
         table.comp-table tr:nth-child(even) {
-            background-color: #f8fafc;
+            background-color: #FAF3E7;
         }
 
         .top-nav {
@@ -222,26 +221,76 @@
         }
     
         .diagram-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-            border: 1px solid #cbd5e1 !important;
+            background: linear-gradient(155deg, #3B2318 0%, #241811 100%) !important;
+            border: 1px solid rgba(234, 88, 12, 0.35) !important;
             border-radius: 14px !important;
             padding: 1.8rem !important;
             margin: 2.2rem 0 !important;
             text-align: center !important;
-            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 18px 44px -18px rgba(36, 24, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .diagram-container::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            pointer-events: none;
+        }
+        .diagram-container > * { position: relative; z-index: 1; }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+        }
+        .diagram-caption {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
+            margin-top: 1.1rem !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
+        }
+
+        .diagram-container::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            pointer-events: none;
+        }
+        .diagram-container > * { position: relative; z-index: 1; }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+        }
+        .diagram-caption {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
+            margin-top: 1.1rem !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
         }
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
         }
         .diagram-caption {
-            font-size: 0.88rem !important;
-            color: #475569 !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
             margin-top: 1.1rem !important;
-            font-style: italic !important;
+            font-style: normal !important;
             font-weight: 600 !important;
-            letter-spacing: 0.02em !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
         }
 
     </style>
@@ -261,12 +310,12 @@
 <div class="container" style="max-width: 1100px; margin: 0 auto; background: #fff; padding: 4rem 3.5rem; border-radius: 8px; border: 1px solid rgba(44,62,80,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
     <header style="text-align: center; margin-bottom: 3rem;">
         <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.2em; background: var(--primary-light); padding: 0.4rem 1.2rem; border-radius: 20px; border: 1px solid var(--border-color);">MAKAUT Solved Paper · UPID : 002008</span>
-        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; color: #1e293b; margin: 1rem 0 0.5rem 0;">Programming for Problem Solving</h1>
-        <p style="font-size: 1.1rem; color: #64748b; font-weight: 500;">B.Tech Even Semester Examination 2023–2024 · Paper Code: ESCS201 · Full Marks: 70</p>
+        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; color: #241811; margin: 1rem 0 0.5rem 0;">Programming for Problem Solving</h1>
+        <p style="font-size: 1.1rem; color: #7A5840; font-weight: 500;">B.Tech Even Semester Examination 2023–2024 · Paper Code: ESCS201 · Full Marks: 70</p>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
-            <span style="height: 1px; width: 60px; background: #cbd5e1;"></span>
+            <span style="height: 1px; width: 60px; background: #C9AE94;"></span>
             <span style="color: var(--primary-color); font-size: 1.2rem;">❖</span>
-            <span style="height: 1px; width: 60px; background: #cbd5e1;"></span>
+            <span style="height: 1px; width: 60px; background: #C9AE94;"></span>
         </div>
     </header>
     
@@ -800,7 +849,7 @@ Minimum Value : 3
 Maximum Value : 89
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #cbd5e1;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
 
                 <p><b>(b) Palindrome Numbers in a Given Range Using Function [8 Marks]:</b></p>
                 <p>A numeric palindrome is an integer that remains unchanged when its digits are reversed (e.g., <code>121</code>, <code>1331</code>, <code>404</code>). We implement a function <code>int isPalindrome(int num)</code> which reverses the number algebraically using modulo 10 extraction and division.</p>
@@ -866,7 +915,7 @@ Total palindrome numbers found: 10
                 <p><b>(a) Merge Sort Algorithm (Divide and Conquer) [10 Marks]:</b></p>
                 <p>Merge Sort splits the unsorted array into two halves recursively until each sub-array contains only 1 element (which is inherently sorted), then merges the sorted halves back together in linear time.</p>
                 
-                <div style="background:#f8fafc; padding:1.25rem; border:1px solid #cbd5e1; border-radius:6px; font-family:'Fira Code',monospace; font-size:0.9rem; line-height:1.7; margin:1rem 0;">
+                <div style="background:#FAF3E7; padding:1.25rem; border:1px solid #C9AE94; border-radius:6px; font-family:'Fira Code',monospace; font-size:0.9rem; line-height:1.7; margin:1rem 0;">
 <b>Algorithm MERGE-SORT(ARR, left, right):</b><br>
 1. IF left &lt; right THEN:<br>
 2. &nbsp;&nbsp;&nbsp;&nbsp;mid = floor((left + right) / 2)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// Step 1: Divide<br>
@@ -886,7 +935,7 @@ Total palindrome numbers found: 10
 9. Copy remaining elements of R[] (if any) to ARR[]
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #cbd5e1;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
 
                 <p><b>(b) Time Complexity Calculation of Merge Sort [5 Marks]:</b></p>
                 <p>Let \(T(n)\) be the time taken by Merge Sort to sort an array of \(n\) elements.
@@ -997,7 +1046,7 @@ Enter a positive integer to compute factorial: 7
 Factorial of 7 = 5040
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #cbd5e1;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
 
                 <p><b>(b) C Program to Print Fibonacci Series Upto n-th Term [7 Marks]:</b></p>
                 <div class="code-block">#include &lt;stdio.h&gt;
@@ -1044,7 +1093,7 @@ First 12 terms of Fibonacci Sequence:
 
     </div> <!-- End Section -->
 
-    <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(44,62,80,0.15); color: #64748b; font-size: 0.95rem;">
+    <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(44,62,80,0.15); color: #7A5840; font-size: 0.95rem;">
         <p>Programming for Problem Solving · B.Tech SEM-2 Solved Paper (2023–2024) · <a href="pps_index.html" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Return to PPS Menu</a></p>
     </footer>
 </div>

@@ -33,62 +33,62 @@
             <h1 class="section-title" id="basics">Automata Basics & FSM</h1>
             
             <div class="qa-card">
-<div class="diagram-container" style="background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #cbd5e1; border-radius: 12px; padding: 1.8rem; margin: 2rem 0; text-align: center; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), inset 0 1px 1px #fff;">
+<div class="diagram-container" style="background: linear-gradient(135deg, #FAF3E7 0%, #F3EAD8 100%); border: 1px solid #C9AE94; border-radius: 12px; padding: 1.8rem; margin: 2rem 0; text-align: center; box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.06), inset 0 1px 1px #fff;">
     <svg width="640" height="180" viewBox="0 0 640 180" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <filter id="shadowAuto" x="-10%" y="-10%" width="130%" height="130%">
-                <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0f172a" flood-opacity="0.08"/>
+                <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#241811" flood-opacity="0.08"/>
             </filter>
             <linearGradient id="stateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#eff6ff"/><stop offset="100%" stop-color="#bfdbfe"/>
             </linearGradient>
             <linearGradient id="finalStateGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stop-color="#dcfce7"/><stop offset="100%" stop-color="#86efac"/>
+                <stop offset="0%" stop-color="#F3D9A8"/><stop offset="100%" stop-color="#86efac"/>
             </linearGradient>
             <marker id="arrowAuto" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-                <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b"/>
+                <path d="M 0 1 L 10 5 L 0 9 z" fill="#3B2318"/>
             </marker>
         </defs>
 
         <pattern id="gridAuto" width="20" height="20" patternUnits="userSpaceOnUse">
-            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#cbd5e1" stroke-width="0.5" stroke-dasharray="2,2"/>
+            <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#EADDC0" stroke-width="0.5" stroke-dasharray="2,2"/>
         </pattern>
         <rect width="640" height="180" fill="url(#gridAuto)" opacity="0.3" rx="8"/>
 
         <!-- Start Pointer -->
-        <path d="M 30 90 L 75 90" stroke="#1e293b" stroke-width="2.5" marker-end="url(#arrowAuto)"/>
-        <text x="45" y="80" font-size="11" font-weight="800" text-anchor="middle" fill="#2563eb">Start</text>
+        <path d="M 30 90 L 75 90" stroke="#3B2318" stroke-width="2.5" marker-end="url(#arrowAuto)"/>
+        <text x="45" y="80" font-size="11" font-weight="800" text-anchor="middle" fill="#EA580C">Start</text>
 
         <!-- State q0 -->
-        <circle cx="105" cy="90" r="26" fill="url(#stateGrad)" stroke="#2563eb" stroke-width="2.5" filter="url(#shadowAuto)"/>
-        <text x="105" y="95" font-size="14" font-weight="800" text-anchor="middle" fill="#1e3a8a">q0</text>
+        <circle cx="105" cy="90" r="26" fill="url(#stateGrad)" stroke="#EA580C" stroke-width="2.5" filter="url(#shadowAuto)"/>
+        <text x="105" y="95" font-size="14" font-weight="800" text-anchor="middle" fill="#ea580c">q0</text>
 
         <!-- State q1 -->
-        <circle cx="270" cy="90" r="26" fill="url(#stateGrad)" stroke="#2563eb" stroke-width="2.5" filter="url(#shadowAuto)"/>
-        <text x="270" y="95" font-size="14" font-weight="800" text-anchor="middle" fill="#1e3a8a">q1</text>
+        <circle cx="270" cy="90" r="26" fill="url(#stateGrad)" stroke="#EA580C" stroke-width="2.5" filter="url(#shadowAuto)"/>
+        <text x="270" y="95" font-size="14" font-weight="800" text-anchor="middle" fill="#ea580c">q1</text>
 
         <!-- State q2 (Final) -->
-        <circle cx="440" cy="90" r="26" fill="url(#finalStateGrad)" stroke="#16a34a" stroke-width="2.5" filter="url(#shadowAuto)"/>
-        <circle cx="440" cy="90" r="21" fill="none" stroke="#16a34a" stroke-width="2"/>
-        <text x="440" y="95" font-size="14" font-weight="800" text-anchor="middle" fill="#15803d">q2</text>
+        <circle cx="440" cy="90" r="26" fill="url(#finalStateGrad)" stroke="#9A3412" stroke-width="2.5" filter="url(#shadowAuto)"/>
+        <circle cx="440" cy="90" r="21" fill="none" stroke="#9A3412" stroke-width="2"/>
+        <text x="440" y="95" font-size="14" font-weight="800" text-anchor="middle" fill="#6E432A">q2</text>
 
         <!-- Transitions -->
-        <path d="M 131 90 L 244 90" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowAuto)"/>
-        <rect x="175" y="72" width="24" height="18" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="187" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#2563eb">1</text>
+        <path d="M 131 90 L 244 90" stroke="#3B2318" stroke-width="2" marker-end="url(#arrowAuto)"/>
+        <rect x="175" y="72" width="24" height="18" rx="4" fill="#FFFDF8fff" stroke="#EADDC0"/>
+        <text x="187" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#EA580C">1</text>
 
-        <path d="M 296 90 L 414 90" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowAuto)"/>
-        <rect x="345" y="72" width="24" height="18" rx="4" fill="#ffffff" stroke="#cbd5e1"/>
-        <text x="357" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#2563eb">1</text>
+        <path d="M 296 90 L 414 90" stroke="#3B2318" stroke-width="2" marker-end="url(#arrowAuto)"/>
+        <rect x="345" y="72" width="24" height="18" rx="4" fill="#FFFDF8fff" stroke="#EADDC0"/>
+        <text x="357" y="85" font-size="12" font-weight="800" text-anchor="middle" fill="#EA580C">1</text>
 
         <!-- Self Loops -->
-        <path d="M 100 65 C 80 25, 130 25, 110 64" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowAuto)"/>
+        <path d="M 100 65 C 80 25, 130 25, 110 64" fill="none" stroke="#3B2318" stroke-width="2" marker-end="url(#arrowAuto)"/>
         <text x="105" y="20" font-size="11" font-weight="800" text-anchor="middle" fill="#d97706">0</text>
 
-        <path d="M 435 65 C 415 25, 465 25, 445 64" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#arrowAuto)"/>
+        <path d="M 435 65 C 415 25, 465 25, 445 64" fill="none" stroke="#3B2318" stroke-width="2" marker-end="url(#arrowAuto)"/>
         <text x="440" y="20" font-size="11" font-weight="800" text-anchor="middle" fill="#d97706">0, 1</text>
     </svg>
-    <div class="diagram-caption" style="font-size: 0.88rem; color: #475569; margin-top: 1rem; font-style: italic; font-weight: 600;">Figure 1: Finite State Automata (DFA) Transition Graph for Sequence Detection</div>
+    <div class="diagram-caption" style="font-size: 0.88rem; color: #5E3B28; margin-top: 1rem; font-style: italic; font-weight: 600;">Figure 1: Finite State Automata (DFA) Transition Graph for Sequence Detection</div>
 </div>
                 <div class="q-text">
                     <span class="q-badge">Q1</span>
@@ -432,11 +432,11 @@
             </div>
             
             <!-- EXAM SPECIAL SECTION -->
-            <h1 class="section-title" id="exam-special" style="color: #b91c1c; border-bottom-color: #fca5a5;">Exam Special: Specific Problem Solutions</h1>
+            <h1 class="section-title" id="exam-special" style="color: #9A3412; border-bottom-color: #fca5a5;">Exam Special: Specific Problem Solutions</h1>
             
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q20</span>
+                    <span class="q-badge" style="background:#9A3412;">Q20</span>
                     <span>Convert the following Context-Free Grammar into an equivalent grammar in CNF:<br>S &rarr; 1A | 0B<br>A &rarr; 1AA | 0S | 0<br>B &rarr; 0BB | 1S | 1</span>
                 </div>
                 <div class="a-text">
@@ -463,7 +463,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q21</span>
+                    <span class="q-badge" style="background:#9A3412;">Q21</span>
                     <span>Using Pumping Lemma prove that L = {a^{n^3} | n &ge; 1} is not regular.</span>
                 </div>
                 <div class="a-text">
@@ -483,7 +483,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q22</span>
+                    <span class="q-badge" style="background:#9A3412;">Q22</span>
                     <span>Design a Turing Machine that accepts all strings over {0, 1} with an even number of 0s and even number of 1s.</span>
                 </div>
                 <div class="a-text">
@@ -510,7 +510,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q23</span>
+                    <span class="q-badge" style="background:#9A3412;">Q23</span>
                     <span>Construct a PDA for the language L = {a^n b^n | n &ge; 1} by empty stack.</span>
                 </div>
                 <div class="a-text">
@@ -528,7 +528,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q24</span>
+                    <span class="q-badge" style="background:#9A3412;">Q24</span>
                     <span>Design a Non-Deterministic Pushdown Automata for accepting palindromes over {a,b} by Empty stack (ww^R).</span>
                 </div>
                 <div class="a-text">
@@ -549,7 +549,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q25</span>
+                    <span class="q-badge" style="background:#9A3412;">Q25</span>
                     <span>Find a GNF (Greibach Normal Form) equivalent to: A1 &rarr; A2A3, A2 &rarr; A3A1 | b, A3 &rarr; A1A2 | a.</span>
                 </div>
                 <div class="a-text">
@@ -572,7 +572,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q26</span>
+                    <span class="q-badge" style="background:#9A3412;">Q26</span>
                     <span>Write the regular expressions describe the same set of strings as the grammar: S &rarr; Ax | By; A &rarr; By | Cw; B &rarr; x | Bw; C &rarr; y</span>
                 </div>
                 <div class="a-text">
@@ -589,11 +589,11 @@
             </div>
             
             <!-- EXAM SPECIAL PART 2 -->
-            <h2 class="section-title" style="color: #b91c1c; font-size: 1.8rem; margin-top: 2rem;">Exam Special: Final Extensive Solutions</h2>
+            <h2 class="section-title" style="color: #9A3412; font-size: 1.8rem; margin-top: 2rem;">Exam Special: Final Extensive Solutions</h2>
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q27</span>
+                    <span class="q-badge" style="background:#9A3412;">Q27</span>
                     <span>Draw sequence detector diagram, table, k-map and circuit for the sequence 0101 which generates a 1 as output after every 0101 sequence (overlapping allowed).</span>
                 </div>
                 <div class="a-text">
@@ -617,7 +617,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q28</span>
+                    <span class="q-badge" style="background:#9A3412;">Q28</span>
                     <span>What will be the regular expression over the alphabet {a,b} for the language L = {a^n b^m : n &ge; 4, m &le; 3}?</span>
                 </div>
                 <div class="a-text">
@@ -632,7 +632,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q29</span>
+                    <span class="q-badge" style="background:#9A3412;">Q29</span>
                     <span>Construct grammar for language a^l b^m c^n where l + m = n.</span>
                 </div>
                 <div class="a-text">
@@ -646,7 +646,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q30</span>
+                    <span class="q-badge" style="background:#9A3412;">Q30</span>
                     <span>Construct a TM that accepts {0^n 1^n | n &ge; 1}.</span>
                 </div>
                 <div class="a-text">
@@ -671,7 +671,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q31</span>
+                    <span class="q-badge" style="background:#9A3412;">Q31</span>
                     <span>Remove ambiguity from the grammar: E &rarr; E+E | E*E | a.</span>
                 </div>
                 <div class="a-text">
@@ -686,7 +686,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q32</span>
+                    <span class="q-badge" style="background:#9A3412;">Q32</span>
                     <span>Construct an NPDA that accepts the language generated by S &rarr; aSa | bSb | c. Show the ID (Instantaneous Description) for the string "abcba".</span>
                 </div>
                 <div class="a-text">
@@ -712,7 +712,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q33</span>
+                    <span class="q-badge" style="background:#9A3412;">Q33</span>
                     <span>Construct a DFA for the NFA given by Present State: &rarr;q0 (0: q0,q1 | 1: q2), q1 (0: q2 | 1: q1), q2 (final) (0: q1 | 1: q2).</span>
                 </div>
                 <div class="a-text">
@@ -738,7 +738,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q34</span>
+                    <span class="q-badge" style="background:#9A3412;">Q34</span>
                     <span>Define Left Linear and Right Linear Grammar. Construct grammar for Palindrome for binary numbers.</span>
                 </div>
                 <div class="a-text">
@@ -751,11 +751,11 @@
             </div>
             
             <!-- EXAM SPECIAL PART 3 -->
-            <h2 class="section-title" style="color: #b91c1c; font-size: 1.8rem; margin-top: 2rem;">Exam Special: Part 3 (Final 16 Questions)</h2>
+            <h2 class="section-title" style="color: #9A3412; font-size: 1.8rem; margin-top: 2rem;">Exam Special: Part 3 (Final 16 Questions)</h2>
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q35</span>
+                    <span class="q-badge" style="background:#9A3412;">Q35</span>
                     <span>State the Myhill-Nerode Theorem.</span>
                 </div>
                 <div class="a-text">
@@ -766,7 +766,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q36</span>
+                    <span class="q-badge" style="background:#9A3412;">Q36</span>
                     <span>Construct a Regular Grammar G generating the regular set represented by P = a*b(a+b)*.</span>
                 </div>
                 <div class="a-text">
@@ -779,7 +779,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q37</span>
+                    <span class="q-badge" style="background:#9A3412;">Q37</span>
                     <span>Construct a DFA which reads strings from {a,b} and ends with "aaa".</span>
                 </div>
                 <div class="a-text">
@@ -800,7 +800,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q38</span>
+                    <span class="q-badge" style="background:#9A3412;">Q38</span>
                     <span>Construct a PDA for L = {a^n b^m c^n | m,n &ge; 1} by empty stack.</span>
                 </div>
                 <div class="a-text">
@@ -818,7 +818,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q39</span>
+                    <span class="q-badge" style="background:#9A3412;">Q39</span>
                     <span>Construct an NFA for the regular expression (0+1)*00(0+1)*.</span>
                 </div>
                 <div class="a-text">
@@ -837,7 +837,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q40</span>
+                    <span class="q-badge" style="background:#9A3412;">Q40</span>
                     <span>Construct a DFA for the regular expression 0(0+1)*1.</span>
                 </div>
                 <div class="a-text">
@@ -853,7 +853,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q41</span>
+                    <span class="q-badge" style="background:#9A3412;">Q41</span>
                     <span>Design a DFA where every string either starts with 01 or ends with 01.</span>
                 </div>
                 <div class="a-text">
@@ -864,7 +864,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q42</span>
+                    <span class="q-badge" style="background:#9A3412;">Q42</span>
                     <span>Find the CFG for the language L = a^n b^n c^m d^m.</span>
                 </div>
                 <div class="a-text">
@@ -878,7 +878,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q43</span>
+                    <span class="q-badge" style="background:#9A3412;">Q43</span>
                     <span>Prove that L = {0^n 1^n} is not regular.</span>
                 </div>
                 <div class="a-text">
@@ -892,7 +892,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q44</span>
+                    <span class="q-badge" style="background:#9A3412;">Q44</span>
                     <span>Prove that the intersection of a Context-Free Language (CFL) and a Regular Language (RL) is a Context-Free Language.</span>
                 </div>
                 <div class="a-text">
@@ -907,7 +907,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q45</span>
+                    <span class="q-badge" style="background:#9A3412;">Q45</span>
                     <span>What is a reduced grammar?</span>
                 </div>
                 <div class="a-text">
@@ -922,7 +922,7 @@
             
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q46</span>
+                    <span class="q-badge" style="background:#9A3412;">Q46</span>
                     <span>Is the grammar S &rarr; aB | bA; A &rarr; a | aS | bAA; B &rarr; b | bS | aBB ambiguous?</span>
                 </div>
                 <div class="a-text">
@@ -933,7 +933,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q47</span>
+                    <span class="q-badge" style="background:#9A3412;">Q47</span>
                     <span>Construct a CFG for even integers.</span>
                 </div>
                 <div class="a-text">
@@ -948,7 +948,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q48</span>
+                    <span class="q-badge" style="background:#9A3412;">Q48</span>
                     <span>Differentiate between Syntax and Semantics.</span>
                 </div>
                 <div class="a-text">
@@ -959,7 +959,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q49</span>
+                    <span class="q-badge" style="background:#9A3412;">Q49</span>
                     <span>What is the role of production rules in a grammar?</span>
                 </div>
                 <div class="a-text">
@@ -969,7 +969,7 @@
 
             <div class="qa-card">
                 <div class="q-text">
-                    <span class="q-badge" style="background:#b91c1c;">Q50</span>
+                    <span class="q-badge" style="background:#9A3412;">Q50</span>
                     <span>Construct a TM for the addition of two integers.</span>
                 </div>
                 <div class="a-text">

@@ -7,12 +7,12 @@
   <link rel="stylesheet" href="../../site.css">
   <link rel="stylesheet" href="../../premium.css">
   <style>
-    :root { --c: #dc2626; }
+    :root { --c: #EA580C; }
   </style>
 </head>
 <body>
 
-<header class="sheet sheet--subject" style="--c:#dc2626">
+<header class="sheet sheet--subject" style="--c:#EA580C">
   <div class="sheet__bg"></div>
   <div class="sheet__inner">
     <span class="eyebrow">MAKAUT · B.Tech CSE · Semester 5</span>
@@ -103,36 +103,103 @@
 
     <div class="figure">
       <h3>1.3 Phases of a Compiler</h3>
-      <pre class="ascii-diagram">
-Source Code
-    │
-    ▼
-┌─────────────────────────────────────────┐
-│           ANALYSIS PHASES                │
-│                                         │
-│  ┌──────────┐   ┌──────────┐   ┌─────┐ │
-│  │  Lexical │──▶│  Syntax  │──▶│ Sem │ │
-│  │ Analyzer │   │ Analyzer │   │ Analy│ │
-│  │ (Scanner)│   │ (Parser) │   │ tics │ │
-│  └──────────┘   └──────────┘   └─────┘ │
-│                                         │
-│           SYNTHESIS PHASES               │
-│                                         │
-│  ┌──────────┐   ┌──────────┐   ┌─────┐ │
-│  │Intermed. │──▶│  Code    │──▶│ Code│ │
-│  │  Code    │   │ Optimizer│   │ Gen │ │
-│  │  Gen     │   │          │   │     │ │
-│  └──────────┘   └──────────┘   └─────┘ │
-│                                         │
-│  ┌──────────────────────────────────┐   │
-│  │    Symbol Table Management       │   │
-│  │    Error Handling (all phases)   │   │
-│  └──────────────────────────────────┘   │
-└─────────────────────────────────────────┘
-    │
-    ▼
-Target Code (Machine Code)
-      </pre>
+      <div class="diagram-container">
+        <svg viewBox="0 0 640 420" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;">
+          <!-- Background grid dots -->
+          <defs>
+            <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+              <circle cx="1" cy="1" r="0.8" fill="rgba(234,88,12,0.07)"/>
+            </pattern>
+            <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L0,6 L6,3 z" fill="#EA580C"/>
+            </marker>
+            <linearGradient id="chocoGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#3B2318"/>
+              <stop offset="100%" stop-color="#241811"/>
+            </linearGradient>
+            <linearGradient id="orangeGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#EA580C"/>
+              <stop offset="100%" stop-color="#FF7A1A"/>
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="4" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="640" height="420" fill="url(#grid)"/>
+
+          <!-- Title -->
+          <text x="320" y="28" text-anchor="middle" font-family="JetBrains Mono, monospace"
+                font-size="13" font-weight="700" fill="#FF7A1A" letter-spacing="0.15em">COMPILER PHASE PIPELINE</text>
+
+          <!-- Input -->
+          <rect x="220" y="46" width="200" height="36" rx="8" fill="#241811" stroke="rgba(234,88,12,0.4)" stroke-width="1.5"/>
+          <text x="320" y="69" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#FAF3E7">Source Code</text>
+
+          <!-- Arrow input to analysis -->
+          <line x1="320" y1="82" x2="320" y2="112" stroke="url(#orangeGrad)" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- ANALYSIS GROUP -->
+          <rect x="30" y="114" width="580" height="130" rx="12" fill="url(#chocoGrad)" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
+          <text x="44" y="134" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700"
+                fill="#EA580C" letter-spacing="0.1em">ANALYSIS PHASES</text>
+          <line x1="44" y1="140" x2="596" y2="140" stroke="rgba(234,88,12,0.2)" stroke-width="1"/>
+
+          <!-- Lexical -->
+          <rect x="60" y="154" width="130" height="60" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
+          <text x="125" y="178" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#FAF3E7">Lexical</text>
+          <text x="125" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#C9AE94">Scanner</text>
+
+          <!-- Syntax -->
+          <rect x="245" y="154" width="130" height="60" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
+          <text x="310" y="178" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#FAF3E7">Syntax</text>
+          <text x="310" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#C9AE94">Parser</text>
+
+          <!-- Semantic -->
+          <rect x="430" y="154" width="130" height="60" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
+          <text x="495" y="178" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#FAF3E7">Semantic</text>
+          <text x="495" y="196" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#C9AE94">Analyzer</text>
+
+          <!-- Arrows between analysis boxes -->
+          <line x1="190" y1="184" x2="245" y2="184" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="375" y1="184" x2="430" y2="184" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Analysis → Synthesis -->
+          <line x1="320" y1="244" x2="320" y2="268" stroke="url(#orangeGrad)" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+          <!-- SYNTHESIS GROUP -->
+          <rect x="30" y="270" width="580" height="100" rx="12" fill="url(#chocoGrad)" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
+          <text x="44" y="290" font-family="JetBrains Mono, monospace" font-size="10" font-weight="700"
+                fill="#EA580C" letter-spacing="0.1em">SYNTHESIS PHASES</text>
+          <line x1="44" y1="296" x2="596" y2="296" stroke="rgba(234,88,12,0.2)" stroke-width="1"/>
+
+          <!-- Intermediate -->
+          <rect x="60" y="310" width="130" height="44" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
+          <text x="125" y="337" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#FAF3E7">Intermediate Code</text>
+
+          <!-- Optimizer -->
+          <rect x="245" y="310" width="130" height="44" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
+          <text x="310" y="337" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#FAF3E7">Optimizer</text>
+
+          <!-- Code Gen -->
+          <rect x="430" y="310" width="130" height="44" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
+          <text x="495" y="337" text-anchor="middle" font-family="Manrope, sans-serif" font-size="11" font-weight="700" fill="#FAF3E7">Code Gen</text>
+
+          <!-- Synthesis arrows -->
+          <line x1="190" y1="332" x2="245" y2="332" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow)"/>
+          <line x1="375" y1="332" x2="430" y2="332" stroke="#EA580C" stroke-width="2" marker-end="url(#arrow)"/>
+
+          <!-- Symbol Table (spanning) -->
+          <rect x="60" y="248" width="500" height="22" rx="4" fill="rgba(234,88,12,0.12)" stroke="rgba(234,88,12,0.25)" stroke-width="1"/>
+          <text x="320" y="263" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#EA580C">Symbol Table  ·  Error Handling  (all phases)</text>
+
+          <!-- Output -->
+          <line x1="320" y1="370" x2="320" y2="390" stroke="url(#orangeGrad)" stroke-width="2.5" marker-end="url(#arrow)"/>
+          <rect x="220" y="392" width="200" height="30" rx="8" fill="#EA580C" filter="url(#glow)"/>
+          <text x="320" y="412" text-anchor="middle" font-family="Manrope, sans-serif" font-size="12" font-weight="700" fill="#FFFDF8">Target Code</text>
+        </svg>
+        <div class="diagram-caption">Phases of a Compiler — Analysis to Synthesis</div>
+      </div>
     </div>
 
     <div class="figure">
@@ -1024,7 +1091,6 @@ T  → int
         </table>
       </p>
     </div>
-    </div>
 
     <!-- EXAM TIPS -->
     <div class="figure">
@@ -1325,7 +1391,6 @@ void swap(int &amp;a, int &amp;b) { int t=a; a=b; b=t; }
           <li><strong>Call by Name:</strong> Textual substitution using thunks. Actual is re-evaluated each time formal is used. Most flexible but slowest.</li>
         </ol>
       </p>
-    </div>
     </div>
 
     <!-- EXAM TIPS -->

@@ -1,0 +1,2368 @@
+/* ============================================================
+   site.css — Academic Study Notes — Scholar's Editorial Archive
+   Aesthetic: Rich Creamy Archival Parchment + High-Gloss Liquid Glass
+   Style: Elite University Library / Academic Press (Notion + MIT OCW + Apple Books)
+   Typography: Newsreader (Editorial Serif) + Plus Jakarta Sans + JetBrains Mono
+   Standard: 100% Bespoke Vector SVGs — Absolutely Zero Emojis
+   ============================================================ */
+
+/* ── 1. GOOGLE FONTS ────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* ============================================================
+   2. DESIGN TOKENS — RICH CREAMY PARCHMENT & LIQUID GLASS
+   ============================================================ */
+
+:root {
+  /* ---- Rich Creamy Substrate & Tactile Parchment Tones ---- */
+  --cream-50:   #FCFBF7;
+  --cream-100:  #F7F3EA;
+  --cream-200:  #EFE8D8;
+  --cream-300:  #E4D9C3;
+  --cream-400:  #D4C5A9;
+  --cream-500:  #BFAD8E;
+  --cream-600:  #A49171;
+
+  /* ---- Deep Scholarly Ink & Text Tones ---- */
+  --ink-950:    #11100E;
+  --ink-900:    #1A1815;
+  --ink-800:    #2B2823;
+  --ink-700:    #403B33;
+  --ink-600:    #575147;
+  --ink-500:    #766F62;
+  --ink-400:    #9C9485;
+  --ink-300:    #C8C0B0;
+  --ink-200:    #E7E1D4;
+
+  /* ---- Academic Heritage Accents (Oxford / Cambridge / Ivy / Royal) ---- */
+  /* Oxford Blue (Operating Systems, Architecture) */
+  --oxford-700: #172554;
+  --oxford-600: #1E3A8A;
+  --oxford-500: #2563EB;
+  --oxford-400: #3B82F6;
+  --oxford-soft: rgba(37, 99, 235, 0.09);
+
+  /* Cambridge Terracotta (Compiler Design, Algorithms) */
+  --terra-700:  #831F08;
+  --terra-600:  #A7320D;
+  --terra-500:  #C2410C;
+  --terra-400:  #EA580C;
+  --terra-soft: rgba(194, 65, 12, 0.09);
+
+  /* Ivy Green (Networks, Environment, Verified Standards) */
+  --ivy-700:    #064E3B;
+  --ivy-600:    #065F46;
+  --ivy-500:    #047857;
+  --ivy-400:    #059669;
+  --ivy-soft:   rgba(4, 120, 87, 0.09);
+
+  /* Royal Amethyst (Artificial Intelligence, Machine Learning) */
+  --amethyst-700: #4C1D95;
+  --amethyst-600: #581C87;
+  --amethyst-500: #7C3AED;
+  --amethyst-400: #8B5CF6;
+  --amethyst-soft: rgba(124, 58, 237, 0.09);
+
+  /* Claret / Venetian Crimson (Constitution of India, Humanities) */
+  --claret-700: #700D28;
+  --claret-600: #881337;
+  --claret-500: #BE123C;
+  --claret-400: #E11D48;
+  --claret-soft: rgba(190, 18, 60, 0.09);
+
+  /* Guild Amber / Ochre (Industrial Management, Economics) */
+  --amber-700:  #78350F;
+  --amber-600:  #92400E;
+  --amber-500:  #B45309;
+  --amber-400:  #D97706;
+  --amber-soft: rgba(180, 83, 9, 0.09);
+
+  /* Prussian Slate / Cyan (Software Engineering, OOP Java, DBMS) */
+  --cyan-700:   #0C4A6E;
+  --cyan-600:   #0E7490;
+  --cyan-500:   #0284C7;
+  --cyan-400:   #06B6D4;
+  --cyan-soft:  rgba(2, 132, 199, 0.09);
+
+  /* ---- Semantic Surfaces ---- */
+  --bg:           var(--cream-100);
+  --bg-subtle:    var(--cream-200);
+  --bg-card:      var(--cream-50);
+  --bg-raised:    #FFFFFF;
+
+  /* ---- True Liquid Glass Architecture ---- */
+  --glass-surface:        linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.44) 100%);
+  --glass-surface-hover:  linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.58) 100%);
+  --glass-nav:            rgba(247, 243, 234, 0.86);
+  --glass-modal:          rgba(253, 251, 247, 0.96);
+  --glass-border:         rgba(255, 255, 255, 0.92);
+  --glass-border-subtle:  rgba(175, 155, 130, 0.22);
+  --glass-outline:        rgba(150, 125, 95, 0.14);
+
+  /* ---- Standard Academic Borders ---- */
+  --border-subt:  rgba(120, 95, 65, 0.11);
+  --border:       rgba(120, 95, 65, 0.18);
+  --border-med:   rgba(120, 95, 65, 0.28);
+  --border-strong:rgba(120, 95, 65, 0.44);
+
+  /* ---- Typography Colors ---- */
+  --text-1: var(--ink-950);
+  --text-2: var(--ink-700);
+  --text-3: var(--ink-500);
+  --text-4: var(--ink-400);
+
+  /* ---- Typography Families ---- */
+  --font-display: 'Newsreader', 'Cormorant Garamond', Georgia, serif;
+  --font-body:    'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
+
+  /* ---- Sizing Scale ---- */
+  --fs-2xs:  0.6875rem;
+  --fs-xs:   0.75rem;
+  --fs-sm:   0.875rem;
+  --fs-base: 1rem;
+  --fs-md:   1.125rem;
+  --fs-lg:   1.25rem;
+  --fs-xl:   1.5rem;
+  --fs-2xl:  1.875rem;
+  --fs-3xl:  2.375rem;
+  --fs-hero: clamp(2.5rem, 5.4vw, 4rem);
+
+  /* ---- Line Heights ---- */
+  --lh-tight:   1.16;
+  --lh-snug:    1.32;
+  --lh-base:    1.62;
+  --lh-relaxed: 1.78;
+
+  /* ---- Weights ---- */
+  --fw-normal:   400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-bold:     700;
+  --fw-extrabold:800;
+
+  /* ---- Spacing Scale ---- */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-5: 1.25rem;
+  --sp-6: 1.5rem;
+  --sp-7: 1.75rem;
+  --sp-8: 2rem;
+  --sp-9: 2.5rem;
+  --sp-10:3rem;
+  --sp-12:4rem;
+  --sp-14:5rem;
+  --sp-16:6rem;
+
+  /* ---- Fluid Motion ---- */
+  --ease:        cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --d-fast: 150ms;
+  --d-base: 280ms;
+  --d-slow: 450ms;
+
+  /* ---- Pronounced Liquid Glass Elevations & Bevels ---- */
+  --sh-glass:
+    0 1px 3px rgba(70, 50, 25, 0.04),
+    0 8px 24px -2px rgba(70, 50, 25, 0.06),
+    0 20px 48px -6px rgba(70, 50, 25, 0.08),
+    inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.98),
+    inset 0 -1.5px 2px 0 rgba(140, 110, 75, 0.06);
+
+  --sh-glass-hover:
+    0 2px 4px rgba(70, 50, 25, 0.05),
+    0 14px 36px -4px rgba(70, 50, 25, 0.11),
+    0 32px 68px -8px rgba(70, 50, 25, 0.14),
+    inset 0 2px 2px 0 rgba(255, 255, 255, 1),
+    inset 0 -1.5px 2px 0 rgba(140, 110, 75, 0.08);
+
+  --sh-1:
+    0 1px 2px rgba(70, 50, 25, 0.04),
+    0 4px 12px -2px rgba(70, 50, 25, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+
+  --sh-2:
+    0 4px 16px -2px rgba(70, 50, 25, 0.07),
+    0 12px 32px -4px rgba(70, 50, 25, 0.07),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95);
+
+  --sh-3:
+    0 8px 28px -4px rgba(70, 50, 25, 0.09),
+    0 28px 64px -8px rgba(70, 50, 25, 0.12),
+    inset 0 1px 2px rgba(255, 255, 255, 1);
+
+  /* ---- Radii ---- */
+  --r-xs:  6px;
+  --r-sm:  10px;
+  --r-md:  14px;
+  --r-lg:  20px;
+  --r-xl:  26px;
+  --r-2xl: 34px;
+  --r-full:9999px;
+
+  /* ---- Layout ---- */
+  --content-max: 1260px;
+  --nav-h:       70px;
+
+  --z-nav:    90;
+  --z-sticky: 50;
+  --z-modal:  110;
+  --z-top:    120;
+}
+
+/* ============================================================
+   3. BASE & RICH CREAMY ARCHIVAL PARCHMENT
+   ============================================================ */
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: var(--lh-base);
+  color: var(--text-1);
+  background-color: #F7F3EA;
+  /* Rich Tactile Vellum Parchment Atmosphere */
+  background-image:
+    radial-gradient(1300px 750px at 15% 0%, rgba(238, 218, 188, 0.55), transparent 70%),
+    radial-gradient(1100px 650px at 85% 12%, rgba(230, 200, 175, 0.42), transparent 65%),
+    radial-gradient(1200px 850px at 50% 50%, rgba(236, 222, 200, 0.48), transparent 75%),
+    radial-gradient(1000px 650px at 10% 88%, rgba(226, 210, 188, 0.52), transparent 70%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.30  0 0 0 0 0.22  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(30, 58, 138, 0.16);
+  color: var(--ink-950);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* ============================================================
+   4. ACCESSIBILITY — SKIP LINK
+   ============================================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 1.5rem;
+  background: var(--ink-900);
+  color: var(--cream-50);
+  padding: var(--sp-3) var(--sp-5);
+  z-index: var(--z-top);
+  border-radius: 0 0 var(--r-md) var(--r-md);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  box-shadow: var(--sh-3);
+  transition: top var(--d-fast) var(--ease);
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ============================================================
+   5. TOP NAVIGATION — FLOATING LIQUID FROSTED GLASS BAR
+   ============================================================ */
+
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-nav);
+  height: var(--nav-h);
+  background: var(--glass-nav);
+  backdrop-filter: blur(28px) saturate(200%) contrast(102%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%) contrast(102%);
+  border-bottom: 1px solid var(--glass-border-subtle);
+  box-shadow:
+    0 1px 2px rgba(80, 55, 30, 0.03),
+    0 6px 20px -2px rgba(80, 55, 30, 0.05),
+    inset 0 1px 1px rgba(255, 255, 255, 0.85);
+  transition: all var(--d-base) var(--ease);
+}
+
+.topnav-inner {
+  max-width: var(--content-max);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 clamp(var(--sp-4), 4vw, var(--sp-8));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+
+/* Liquid Specular Edge */
+.topnav::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 5%, rgba(130, 105, 80, 0.18) 25%, rgba(30, 58, 138, 0.35) 50%, rgba(130, 105, 80, 0.18) 75%, transparent 95%);
+  pointer-events: none;
+}
+
+/* Brand Emblem */
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3);
+  text-decoration: none;
+  color: var(--text-1);
+  transition: opacity var(--d-fast) var(--ease);
+  flex-shrink: 0;
+}
+
+.wordmark:hover {
+  opacity: 0.88;
+}
+
+.wordmark-crest {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%);
+  display: grid;
+  place-items: center;
+  color: #FFFFFF;
+  box-shadow:
+    0 4px 14px rgba(30, 58, 138, 0.28),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45);
+}
+
+.wordmark-crest svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.wordmark-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.wordmark-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.015em;
+  color: var(--ink-950);
+  line-height: 1.1;
+}
+
+.wordmark-title em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--oxford-600);
+}
+
+.wordmark-tag {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  font-weight: 600;
+}
+
+/* Nav Links */
+.topnav-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.topnav-links a {
+  position: relative;
+  padding: 0.48rem 0.95rem;
+  border-radius: var(--r-full);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-2);
+  transition: all var(--d-fast) var(--ease);
+}
+
+.topnav-links a:hover {
+  color: var(--ink-950);
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.topnav-links a[aria-current="page"] {
+  color: var(--oxford-600);
+  font-weight: var(--fw-semibold);
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(70, 50, 30, 0.08);
+}
+
+/* Nav CTA Pill */
+.nav-cta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.48rem 1.05rem;
+  border-radius: var(--r-full);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--sh-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  color: var(--oxford-600);
+  transition: all var(--d-base) var(--ease);
+}
+
+.nav-cta-pill:hover {
+  background: #FFFFFF;
+  color: var(--ink-950);
+  box-shadow: var(--sh-2);
+  transform: translateY(-1px);
+}
+
+.nav-cta-pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Mobile Hamburger */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+  background: var(--glass-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+}
+
+.nav-hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--ink-800);
+  border-radius: 1px;
+  transition: all var(--d-fast) var(--ease);
+}
+
+.nav-hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.is-open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile Menu Drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  background: var(--glass-modal);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border-bottom: 1px solid var(--border);
+  padding: var(--sp-5) var(--sp-6);
+  flex-direction: column;
+  gap: var(--sp-2);
+  box-shadow: var(--sh-3);
+  z-index: 89;
+}
+
+.mobile-nav.is-open {
+  display: flex;
+}
+
+.mobile-nav a {
+  padding: 0.75rem 1rem;
+  border-radius: var(--r-sm);
+  font-weight: var(--fw-medium);
+  color: var(--text-1);
+}
+
+.mobile-nav a:hover {
+  background: rgba(30, 58, 138, 0.08);
+}
+
+/* ============================================================
+   6. HERO SECTION — PRESTIGIOUS EDITORIAL ARCHIVE
+   ============================================================ */
+
+.hero {
+  position: relative;
+  padding: clamp(var(--sp-10), 6vw, var(--sp-16)) clamp(var(--sp-4), 4.5vw, var(--sp-12));
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Scholarly Eyebrow Badge */
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 0.4rem 1.1rem;
+  border-radius: var(--r-full);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--sh-1);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-700);
+  margin-bottom: var(--sp-5);
+}
+
+.hero-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ivy-600);
+  box-shadow: 0 0 10px rgba(4, 120, 87, 0.5);
+}
+
+/* Hero Title */
+.site-logo {
+  font-family: var(--font-display);
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: -0.025em;
+  color: var(--ink-950);
+  margin-bottom: var(--sp-4);
+}
+
+.site-logo .accent-editorial {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--terra-600);
+  position: relative;
+}
+
+.site-logo .accent-editorial::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.08em;
+  width: 100%;
+  height: 4px;
+  background: rgba(194, 65, 12, 0.25);
+  border-radius: 2px;
+}
+
+/* Tagline */
+.site-tagline {
+  font-size: clamp(var(--fs-base), 1.6vw, var(--fs-md));
+  color: var(--text-2);
+  max-width: 66ch;
+  margin: 0 auto var(--sp-6);
+  line-height: var(--lh-relaxed);
+  font-weight: 400;
+}
+
+/* Hero Stats Bar — Liquid Frosted Glass Pill */
+.hero-meta-glass {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-4) var(--sp-6);
+  padding: 0.9rem 1.8rem;
+  border-radius: var(--r-full);
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--sh-glass);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  margin-top: var(--sp-2);
+}
+
+.hero-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--fs-sm);
+  color: var(--ink-700);
+}
+
+.hero-meta-item svg {
+  width: 17px;
+  height: 17px;
+  color: var(--oxford-600);
+  flex-shrink: 0;
+}
+
+.hero-meta-item strong {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--ink-950);
+}
+
+.hero-meta-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--border-med);
+}
+
+/* Category Filter Chips in Hero */
+.hero-category-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: var(--sp-6) auto 0;
+  max-width: 1040px;
+}
+
+.category-chip {
+  padding: 0.42rem 0.88rem;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--border-subt);
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--ink-600);
+  cursor: pointer;
+  transition: all var(--d-fast) var(--ease);
+  white-space: nowrap;
+}
+
+.category-chip:hover {
+  background: #FFFFFF;
+  color: var(--ink-950);
+  border-color: var(--border-med);
+  box-shadow: var(--sh-1);
+}
+
+.category-chip.is-active {
+  background: var(--ink-900);
+  color: var(--cream-50);
+  border-color: var(--ink-900);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
+/* Hero Search & Filter Bar */
+.hero-search-wrapper {
+  margin: var(--sp-6) auto 0;
+  max-width: 600px;
+  position: relative;
+}
+
+.hero-search-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: 0.5rem 0.7rem 0.5rem 1.3rem;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-full);
+  box-shadow: var(--sh-2);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  transition: all var(--d-base) var(--ease);
+}
+
+.hero-search-bar:focus-within {
+  background: #FFFFFF;
+  border-color: var(--oxford-500);
+  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.14), 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+.hero-search-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--ink-500);
+  flex-shrink: 0;
+}
+
+.hero-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  color: var(--ink-950);
+  outline: none;
+}
+
+.hero-search-input::placeholder {
+  color: var(--ink-400);
+}
+
+.hero-search-badge {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--r-full);
+  background: var(--cream-200);
+  color: var(--ink-600);
+  font-weight: 600;
+}
+
+/* ============================================================
+   7. SEMESTER BLOCKS & LIQUID GLASS CONTAINERS
+   ============================================================ */
+
+.semesters-list {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: var(--sp-6) clamp(var(--sp-4), 4vw, var(--sp-8)) var(--sp-14);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-10);
+}
+
+/* Semester Block — Heavy Frosted Liquid Platter */
+.semester-block {
+  position: relative;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-2xl);
+  padding: clamp(var(--sp-6), 4vw, var(--sp-10));
+  box-shadow: var(--sh-glass);
+  backdrop-filter: blur(32px) saturate(210%) contrast(102%);
+  -webkit-backdrop-filter: blur(32px) saturate(210%) contrast(102%);
+  outline: 1px solid var(--glass-outline);
+  outline-offset: -1px;
+  transition: box-shadow var(--d-base) var(--ease), border-color var(--d-base) var(--ease);
+  overflow: hidden;
+}
+
+.semester-block:hover {
+  box-shadow: var(--sh-glass-hover);
+  border-color: #FFFFFF;
+}
+
+/* Top Specular Sheen Stripe */
+.semester-block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--s-color, var(--oxford-600)) 0%, var(--terra-600) 60%, var(--ivy-600) 100%);
+  border-radius: var(--r-2xl) var(--r-2xl) 0 0;
+  opacity: 0.9;
+}
+
+/* Semester Header */
+.semester-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-7);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--border-subt);
+}
+
+.semester-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.semester-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.semester-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-xl), 3.2vw, var(--fs-3xl));
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ink-950);
+}
+
+.semester-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.8rem;
+  border-radius: var(--r-full);
+  background: rgba(4, 120, 87, 0.12);
+  border: 1px solid rgba(4, 120, 87, 0.28);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  color: var(--ivy-700);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.semester-subtitle {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  max-width: 62ch;
+  line-height: var(--lh-snug);
+}
+
+.semester-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+/* Syllabus Hub Trigger Button */
+.btn-syllabus-hub {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.58rem 1.2rem;
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%);
+  color: #FFFFFF;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  border: none;
+  box-shadow:
+    0 4px 14px rgba(30, 58, 138, 0.28),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all var(--d-fast) var(--ease);
+}
+
+.btn-syllabus-hub:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.38);
+  background: linear-gradient(135deg, #172554 0%, #1E40AF 100%);
+}
+
+.btn-syllabus-hub svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.semester-count-pill {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 0.48rem 0.9rem;
+  border-radius: var(--r-full);
+  background: var(--cream-200);
+  border: 1px solid var(--border);
+  color: var(--ink-700);
+}
+
+/* ============================================================
+   8. SUBJECTS GRID — ACADEMIC COURSE DOSSIERS (LIQUID GLASS)
+   ============================================================ */
+
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: var(--sp-6);
+}
+
+/* Subject Card — Liquid Glass Folio */
+.subject-card {
+  position: relative;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6) var(--sp-6) var(--sp-5);
+  box-shadow: var(--sh-glass);
+  backdrop-filter: blur(28px) saturate(200%) contrast(102%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%) contrast(102%);
+  outline: 1px solid var(--glass-outline);
+  outline-offset: -1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  transition: all var(--d-base) var(--ease-spring);
+  overflow: hidden;
+}
+
+/* Specular diagonal reflection line */
+.subject-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0.2) 35%, transparent 65%);
+  pointer-events: none;
+}
+
+/* Ambient colored back-glow */
+.subject-card::after {
+  content: "";
+  position: absolute;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  top: -20px;
+  right: -20px;
+  background: radial-gradient(circle, var(--card-color, var(--oxford-500)), transparent 70%);
+  opacity: 0.12;
+  filter: blur(30px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.subject-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  background: var(--glass-surface-hover);
+  border-color: #FFFFFF;
+  box-shadow: var(--sh-glass-hover);
+}
+
+.subject-card:hover::after {
+  opacity: 0.24;
+  transform: scale(1.2);
+}
+
+/* Subject Card Top Header */
+.subject-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  position: relative;
+  z-index: 2;
+}
+
+/* Frosted SVG Icon Medallion */
+.subject-svg-medallion {
+  width: 50px;
+  height: 50px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--card-color, var(--oxford-600)) 12%, #FFFFFF);
+  border: 1px solid color-mix(in srgb, var(--card-color, var(--oxford-600)) 28%, transparent);
+  box-shadow:
+    0 4px 14px rgba(70, 50, 25, 0.05),
+    inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95);
+  display: grid;
+  place-items: center;
+  color: var(--card-color, var(--oxford-600));
+  flex-shrink: 0;
+  transition: transform var(--d-base) var(--ease-spring), background var(--d-base) var(--ease);
+}
+
+.subject-card:hover .subject-svg-medallion {
+  transform: scale(1.08) rotate(2deg);
+  background: color-mix(in srgb, var(--card-color, var(--oxford-600)) 18%, #FFFFFF);
+}
+
+.subject-svg-medallion svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+}
+
+/* Course Code Badge */
+.subject-code-badge {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.32rem 0.75rem;
+  border-radius: var(--r-full);
+  background: color-mix(in srgb, var(--card-color, var(--oxford-600)) 9%, transparent);
+  border: 1px solid color-mix(in srgb, var(--card-color, var(--oxford-600)) 26%, transparent);
+  color: var(--card-color, var(--oxford-600));
+}
+
+/* Subject Content Body */
+.subject-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+  position: relative;
+  z-index: 2;
+}
+
+.subject-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: -0.018em;
+  color: var(--ink-950);
+  line-height: var(--lh-snug);
+}
+
+.subject-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: 1.54;
+}
+
+/* Module Syllabus Roadmap Pills on the Card */
+.subject-modules-roadmap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: 0.3rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.52);
+  border: 1px solid var(--border-subt);
+}
+
+.roadmap-label {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-500);
+}
+
+.roadmap-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+.roadmap-chip {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--r-full);
+  background: var(--cream-100);
+  color: var(--ink-700);
+  border: 1px solid var(--border-subt);
+}
+
+/* Subject Meta Badges */
+.subject-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-top: 0.2rem;
+}
+
+.subject-pill {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 600;
+  padding: 0.22rem 0.6rem;
+  border-radius: var(--r-full);
+  background: var(--cream-200);
+  color: var(--ink-600);
+  border: 1px solid var(--border-subt);
+}
+
+/* Subject Card Action Buttons (Dual Actions) */
+.subject-card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-subt);
+  position: relative;
+  z-index: 2;
+}
+
+/* Primary Button: Enter Vault / Notes */
+.btn-subject-primary {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.62rem 1rem;
+  border-radius: var(--r-sm);
+  background: var(--card-color, var(--oxford-700));
+  color: #FFFFFF;
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  transition: all var(--d-fast) var(--ease);
+  box-shadow: 0 3px 10px -2px rgba(44, 38, 28, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.btn-subject-primary:hover {
+  filter: brightness(1.1);
+  color: #FFFFFF;
+  transform: translateY(-1.5px);
+  box-shadow: 0 8px 22px -3px rgba(44, 38, 28, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.btn-subject-primary svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+  transition: transform var(--d-fast) var(--ease);
+}
+
+.btn-subject-primary:hover svg {
+  transform: translateX(3px);
+}
+
+/* Secondary Button: Official Syllabus PDF */
+.btn-subject-syllabus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.62rem 0.95rem;
+  border-radius: var(--r-sm);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(214, 203, 185, 0.8);
+  color: var(--ink-800);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(44, 38, 28, 0.04), inset 0 1px 0 #FFFFFF;
+  transition: all var(--d-fast) var(--ease);
+}
+
+.btn-subject-syllabus:hover {
+  background: #FFFFFF;
+  border-color: var(--card-color, var(--oxford-600));
+  color: var(--card-color, var(--oxford-600));
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(44, 38, 28, 0.08), inset 0 1px 0 #FFFFFF;
+}
+
+.btn-subject-syllabus svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* ============================================================
+   9. INTERACTIVE SYLLABUS HUB & CURRICULAR EXPLORER
+   ============================================================ */
+
+.syllabus-hub-section {
+  position: relative;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-2xl);
+  padding: clamp(var(--sp-6), 4vw, var(--sp-10));
+  box-shadow: var(--sh-glass);
+  backdrop-filter: blur(32px) saturate(210%) contrast(102%);
+  -webkit-backdrop-filter: blur(32px) saturate(210%) contrast(102%);
+  outline: 1px solid var(--glass-outline);
+  outline-offset: -1px;
+  margin-top: var(--sp-4);
+}
+
+.syllabus-hub-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+  padding-bottom: var(--sp-5);
+  border-bottom: 1px solid var(--border-subt);
+}
+
+.syllabus-hub-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-lg), 2.8vw, var(--fs-2xl));
+  font-weight: 700;
+  color: var(--ink-950);
+}
+
+.syllabus-hub-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  max-width: 66ch;
+  margin-top: 0.25rem;
+}
+
+/* Syllabus Tabs Row */
+.syllabus-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: var(--sp-3);
+  scrollbar-width: thin;
+}
+
+.syllabus-tab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.58rem 1.1rem;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-700);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--d-fast) var(--ease);
+}
+
+.syllabus-tab-btn:hover {
+  background: #FFFFFF;
+  color: var(--ink-950);
+  border-color: var(--border-med);
+}
+
+.syllabus-tab-btn.is-active {
+  background: var(--ink-900);
+  color: var(--cream-50);
+  border-color: var(--ink-900);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+}
+
+/* Active Syllabus Viewer Panel */
+.syllabus-panel {
+  display: none;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.syllabus-panel.is-active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Syllabus Header Banner inside Panel */
+.syllabus-course-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6);
+  background: #FFFFFF;
+  border: 1px solid var(--border-subt);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-1);
+  margin-bottom: var(--sp-6);
+}
+
+.syllabus-course-details h3 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--ink-950);
+}
+
+.syllabus-course-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+}
+
+.syllabus-meta-pill {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-600);
+  background: var(--cream-100);
+  padding: 0.22rem 0.65rem;
+  border-radius: var(--r-full);
+  border: 1px solid var(--border-subt);
+}
+
+/* Download PDF Action Button */
+.btn-download-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.62rem 1.25rem;
+  border-radius: var(--r-full);
+  background: linear-gradient(135deg, var(--terra-700) 0%, var(--terra-600) 100%);
+  color: #FFFFFF;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 4px 14px rgba(194, 65, 12, 0.28),
+    inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
+  transition: all var(--d-fast) var(--ease);
+}
+
+.btn-download-pdf:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(194, 65, 12, 0.38);
+}
+
+.btn-download-pdf svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+/* Modules Grid in Syllabus */
+.syllabus-modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--sp-4);
+}
+
+.syllabus-module-card {
+  background: #FFFFFF;
+  border: 1px solid var(--border-subt);
+  border-radius: var(--r-md);
+  padding: var(--sp-5);
+  box-shadow: 0 2px 10px rgba(70, 50, 25, 0.04);
+  transition: transform var(--d-fast) var(--ease), box-shadow var(--d-fast) var(--ease);
+}
+
+.syllabus-module-card:hover {
+  transform: translateY(-2.5px);
+  box-shadow: var(--sh-2);
+}
+
+.module-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.module-num {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--oxford-600);
+}
+
+.module-hours {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--ink-500);
+  font-weight: 600;
+}
+
+.module-title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink-900);
+  margin-bottom: 0.35rem;
+}
+
+.module-topics {
+  font-size: var(--fs-xs);
+  color: var(--text-2);
+  line-height: 1.54;
+}
+
+/* ============================================================
+   10. MAKAUT EXAMINATION STRUCTURE GUIDE
+   ============================================================ */
+
+.structure {
+  border-top: 1px solid var(--border-subt);
+  border-bottom: 1px solid var(--border-subt);
+  background: rgba(255, 255, 255, 0.45);
+  position: relative;
+}
+
+.structure-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: clamp(var(--sp-8), 5vw, var(--sp-12)) clamp(var(--sp-4), 4.5vw, var(--sp-8));
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--sp-6);
+}
+
+@media (min-width: 768px) {
+  .structure-inner {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.structure-lead {
+  grid-column: 1 / -1;
+  text-align: center;
+  max-width: 660px;
+  margin: 0 auto var(--sp-4);
+}
+
+.structure-lead h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--ink-950);
+  margin-bottom: 0.35rem;
+}
+
+.structure-lead p {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: var(--lh-relaxed);
+}
+
+/* Group Cards (A / B / C) */
+.grp {
+  position: relative;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-top: 3.5px solid var(--c, var(--oxford-600));
+  border-radius: var(--r-lg);
+  padding: var(--sp-6);
+  box-shadow: var(--sh-glass);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  transition: transform var(--d-base) var(--ease), box-shadow var(--d-base) var(--ease);
+}
+
+.grp:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sh-glass-hover);
+}
+
+.grp__icon {
+  display: inline-grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--c, var(--oxford-600)) 14%, transparent);
+  color: var(--c, var(--oxford-600));
+  margin-bottom: var(--sp-3);
+}
+
+.grp__icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.grp dt {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c, var(--oxford-600));
+  margin-bottom: 0.2rem;
+}
+
+.grp .grp-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  margin-bottom: 0.35rem;
+}
+
+.grp dd {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: var(--lh-base);
+}
+
+/* ============================================================
+   11. NOTE PAGE SHEET & MASTHEAD (FOR SUBPAGES)
+   ============================================================ */
+
+.sheet {
+  position: relative;
+  max-width: 1200px;
+  margin: var(--sp-8) auto;
+  background: var(--glass-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-2xl);
+  box-shadow: var(--sh-glass);
+  backdrop-filter: blur(32px) saturate(210%);
+  -webkit-backdrop-filter: blur(32px) saturate(210%);
+  outline: 1px solid var(--glass-outline);
+  outline-offset: -1px;
+  padding: clamp(var(--sp-6), 4vw, var(--sp-10));
+}
+
+.sheet .back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--oxford-600);
+  padding: 0.4rem 0.85rem;
+  border-radius: var(--r-full);
+  background: var(--cream-200);
+  border: 1px solid var(--border-subt);
+  margin-bottom: var(--sp-6);
+  transition: all var(--d-fast) var(--ease);
+}
+
+.sheet .back:hover {
+  background: #FFFFFF;
+  color: var(--ink-950);
+  transform: translateX(-3px);
+  box-shadow: var(--sh-1);
+}
+
+.masthead {
+  margin-bottom: var(--sp-8);
+  padding-bottom: var(--sp-6);
+  border-bottom: 1px solid var(--border-subt);
+}
+
+.masthead .eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--terra-600);
+  margin-bottom: 0.35rem;
+}
+
+.masthead h1 {
+  font-family: var(--font-display);
+  font-size: clamp(var(--fs-2xl), 4vw, var(--fs-3xl));
+  font-weight: 700;
+  color: var(--ink-950);
+  line-height: var(--lh-tight);
+  margin-bottom: 0.5rem;
+}
+
+.masthead .standfirst {
+  font-size: var(--fs-md);
+  color: var(--text-2);
+  max-width: 62ch;
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--sp-4);
+}
+
+.masthead .paper-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+}
+
+.masthead .paper-meta span {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-600);
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--r-full);
+  background: var(--cream-200);
+  border: 1px solid var(--border-subt);
+}
+
+.masthead .paper-meta b {
+  color: var(--ink-950);
+  font-weight: 700;
+}
+
+/* Bands */
+.band {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: var(--sp-8) 0 var(--sp-5);
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border-subt);
+}
+
+.band h2 {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--ink-950);
+}
+
+.band-note {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  color: var(--ink-500);
+}
+
+/* Tiles Section (for subject directories) */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--sp-5);
+}
+
+.tile {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.64) 100%);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--r-xl);
+  padding: var(--sp-6);
+  box-shadow: 0 8px 24px -4px rgba(44, 38, 28, 0.06), 0 2px 8px rgba(44, 38, 28, 0.03), inset 0 1.5px 2px rgba(255, 255, 255, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  transition: transform var(--d-fast) var(--ease), box-shadow var(--d-fast) var(--ease), border-color var(--d-fast) var(--ease);
+}
+
+.tile:hover {
+  transform: translateY(-3.5px);
+  box-shadow: 0 16px 36px -6px rgba(44, 38, 28, 0.1), inset 0 1.5px 2px #FFFFFF;
+  border-color: rgba(154, 52, 18, 0.35);
+  background: #FFFFFF;
+}
+
+.tile-code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--c, var(--oxford-600));
+  text-transform: uppercase;
+}
+
+.tile h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ink-950);
+}
+
+.tile p {
+  font-size: var(--fs-xs);
+  color: var(--text-2);
+  line-height: 1.54;
+  flex: 1;
+}
+
+.tile-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--ink-500);
+  border-top: 1px solid var(--border-subt);
+  padding-top: var(--sp-3);
+}
+
+.tile-foot .arrow {
+  font-weight: 700;
+  color: var(--c, var(--oxford-600));
+}
+
+/* ============================================================
+   11B. STUDY NOTES CHAPTERS & SECTIONS (CREAMY LIQUID GLASS)
+   ============================================================ */
+
+.sheet--subject {
+  position: relative;
+  max-width: 1240px;
+  margin: 2rem auto;
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.66) 100%);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: var(--r-2xl);
+  padding: clamp(2rem, 4vw, 3.5rem);
+  box-shadow: 0 16px 40px -8px rgba(44, 38, 28, 0.07), inset 0 1.5px 2px rgba(255, 255, 255, 0.98);
+}
+
+.sheet__inner {
+  margin-bottom: 2rem;
+}
+
+.sheet__inner .eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--terra-600);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.sheet__title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.8vw, 3rem);
+  font-weight: 700;
+  color: var(--ink-950);
+  line-height: 1.15;
+  margin: 0 0 0.5rem;
+}
+
+.sheet__sub {
+  font-size: 1.05rem;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin: 0 0 1.25rem;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.meta-row .chip {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-700);
+  padding: 0.3rem 0.8rem;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-subt);
+  box-shadow: 0 1px 3px rgba(44, 38, 28, 0.04);
+}
+
+/* Quick review grid */
+.quick-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1.25rem;
+  margin: 1.5rem 0 2.5rem;
+}
+
+.quick-card {
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 217, 202, 0.85);
+  border-radius: 14px;
+  padding: 1.25rem 1.4rem;
+  box-shadow: 0 4px 16px -2px rgba(44, 38, 28, 0.04), inset 0 1px 1px #FFFFFF;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.quick-card:hover {
+  transform: translateY(-2.5px);
+  box-shadow: 0 10px 24px -4px rgba(44, 38, 28, 0.08), inset 0 1px 1px #FFFFFF;
+  border-color: rgba(154, 52, 18, 0.35);
+  background: #FFFFFF;
+}
+
+.quick-card__no {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--terra-600);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.quick-card strong {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.quick-card p {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Subject chapters */
+.subject {
+  margin: 3.5rem 0;
+  padding-top: 1rem;
+}
+
+.subject__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-bottom: 1.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--border-subt);
+}
+
+.subject__no {
+  font-family: var(--font-mono);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--terra-600);
+  background: rgba(154, 52, 18, 0.08);
+  border: 1px solid rgba(154, 52, 18, 0.25);
+  border-radius: 12px;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.subject__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+  font-weight: 700;
+  color: var(--ink-950);
+  margin: 0 0 0.35rem;
+}
+
+.subject__sub {
+  font-size: 0.95rem;
+  color: var(--text-2);
+  margin: 0;
+}
+
+/* Study note figures & content cards */
+.figure {
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(226, 217, 202, 0.85);
+  border-radius: 16px;
+  padding: 1.85rem 2.15rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 18px -2px rgba(44, 38, 28, 0.04), inset 0 1px 1px #FFFFFF;
+}
+
+.figure h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  margin: 0 0 1rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--border-subt);
+}
+
+.figure p {
+  color: var(--text-body);
+  font-size: 0.98rem;
+  line-height: 1.76;
+  margin: 0 0 0.95rem;
+}
+
+.figure p:last-child {
+  margin-bottom: 0;
+}
+
+.figure ul,
+.figure ol {
+  padding-left: 1.5rem;
+  color: var(--text-body);
+  font-size: 0.96rem;
+  line-height: 1.74;
+}
+
+.figure li {
+  margin-bottom: 0.45rem;
+}
+
+/* Grid comparison tables */
+table.grid {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 1.35rem 0;
+  border: 1px solid var(--border-med);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #FFFFFF;
+  font-size: 0.92rem;
+  box-shadow: 0 4px 12px rgba(44, 38, 28, 0.04);
+}
+
+table.grid th {
+  background: #F4ECE1;
+  font-weight: 700;
+  color: var(--ink-950);
+  padding: 0.85rem 1.15rem;
+  border-bottom: 1.5px solid var(--border-med);
+  border-right: 1px solid rgba(214, 203, 185, 0.6);
+  text-align: left;
+}
+
+table.grid td {
+  padding: 0.8rem 1.15rem;
+  border-bottom: 1px solid rgba(214, 203, 185, 0.45);
+  border-right: 1px solid rgba(214, 203, 185, 0.45);
+  color: var(--text-2);
+}
+
+table.grid tr:last-child td {
+  border-bottom: none;
+}
+
+table.grid th:last-child,
+table.grid td:last-child {
+  border-right: none;
+}
+
+table.grid tr:nth-child(even) td {
+  background: rgba(250, 246, 238, 0.55);
+}
+
+/* ASCII architectural diagrams */
+pre.ascii-diagram {
+  background: #1E293B;
+  color: #F8FAFC;
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.55;
+  overflow-x: auto;
+  margin: 1.35rem 0;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.25), 0 4px 14px rgba(44, 38, 28, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* QA groups inside study notes */
+.qa-group {
+  margin: 2.25rem 0;
+}
+
+.qa-group__title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1.5px solid var(--border-subt);
+}
+
+.qa {
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(226, 217, 202, 0.85);
+  border-radius: 14px;
+  padding: 1.35rem 1.65rem;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 3px 14px -2px rgba(44, 38, 28, 0.04), inset 0 1px 1px #FFFFFF;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.qa:hover {
+  transform: translateY(-2px);
+  border-color: rgba(154, 52, 18, 0.35);
+  box-shadow: 0 8px 22px -4px rgba(44, 38, 28, 0.08), inset 0 1px 1px #FFFFFF;
+  background: #FFFFFF;
+}
+
+.qa__tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(30, 58, 138, 0.08);
+  color: var(--oxford-600);
+  border: 1px solid rgba(30, 58, 138, 0.22);
+  margin-bottom: 0.65rem;
+}
+
+.qa--5m .qa__tag {
+  background: rgba(154, 52, 18, 0.08);
+  color: var(--terra-600);
+  border-color: rgba(154, 52, 18, 0.22);
+}
+
+.qa--15m .qa__tag {
+  background: rgba(109, 40, 217, 0.08);
+  color: #6D28D9;
+  border-color: rgba(109, 40, 217, 0.22);
+}
+
+.qa__q {
+  font-weight: 700;
+  color: var(--ink-950);
+  font-size: 1.06rem;
+  margin: 0 0 0.55rem;
+  line-height: 1.48;
+}
+
+.qa__a {
+  color: var(--text-2);
+  font-size: 0.96rem;
+  line-height: 1.74;
+  margin: 0;
+  padding-left: 1.15rem;
+  border-left: 3px solid rgba(154, 52, 18, 0.35);
+}
+
+/* ============================================================
+   11C. BANDS, REVISION BOXES & NOTE CONTAINERS
+   ============================================================ */
+
+main:not(.sheet):not(.content) {
+  max-width: 1240px;
+  margin: 0 auto 4.5rem;
+  padding: 0 clamp(1rem, 3.5vw, 2.5rem);
+}
+
+.band:has(.band__inner),
+.band:has(.quick-grid) {
+  display: block;
+  width: 100%;
+}
+
+.band__inner {
+  width: 100%;
+}
+
+.band__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.2vw, 1.85rem);
+  font-weight: 700;
+  color: var(--ink-950);
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1.5px solid var(--border-subt);
+}
+
+.top-band {
+  background: rgba(250, 246, 238, 0.85);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 1px solid var(--border-parchment);
+  padding: 0.95rem clamp(1.2rem, 3.5vw, 2.5rem);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px -2px rgba(44, 38, 28, 0.04);
+}
+
+.top-band__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.top-band__left {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.top-band__icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(154, 52, 18, 0.08);
+  border: 1px solid rgba(154, 52, 18, 0.22);
+  color: var(--terra-600);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.top-band__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--ink-950);
+  line-height: 1.2;
+}
+
+.top-band__sub {
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--ink-500);
+}
+
+.top-band__right .btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1.05rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid var(--border-subt);
+  color: var(--ink-950);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(44, 38, 28, 0.04);
+}
+
+.top-band__right .btn:hover {
+  background: #FFFFFF;
+  border-color: var(--terra-600);
+  color: var(--terra-600);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 14px rgba(44, 38, 28, 0.08);
+}
+
+.subject-band {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.52) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subt);
+  padding: 2.25rem clamp(1.2rem, 3.5vw, 2.5rem);
+  margin-bottom: 2.5rem;
+}
+
+.subject-band__inner {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.subject-band__info {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.35rem;
+}
+
+.subject-band__code {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--terra-600);
+  background: rgba(154, 52, 18, 0.1);
+  border: 1px solid rgba(154, 52, 18, 0.25);
+  border-radius: 12px;
+  padding: 0.5rem 0.95rem;
+  flex-shrink: 0;
+}
+
+.subject-band__name {
+  font-family: var(--font-display);
+  font-size: clamp(1.85rem, 3.2vw, 2.6rem);
+  font-weight: 700;
+  color: var(--ink-950);
+  margin: 0 0 0.4rem;
+  line-height: 1.18;
+}
+
+.subject-band__tags {
+  font-size: 0.92rem;
+  color: var(--text-2);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.unit-band {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.65rem 1.15rem;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid var(--border-subt);
+  border-radius: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink-700);
+  width: fit-content;
+}
+
+.unit-band__sep {
+  color: var(--border-med);
+}
+
+.revision-box {
+  background: rgba(254, 243, 199, 0.45);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0 1.85rem;
+  font-size: 0.94rem;
+  line-height: 1.7;
+  color: #78350F;
+}
+
+.qa-list {
+  padding-left: 1.55rem;
+  margin: 1rem 0;
+}
+
+.qa-list li {
+  margin-bottom: 1.15rem;
+  line-height: 1.74;
+  color: var(--text-body);
+}
+
+.qa-list li strong {
+  color: var(--ink-950);
+  font-weight: 700;
+  display: inline-block;
+  margin-bottom: 0.2rem;
+}
+
+.bottom-band {
+  max-width: 1240px;
+  margin: 3.5rem auto 5rem;
+  padding: 1.75rem 2rem;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subt);
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(44, 38, 28, 0.04);
+}
+
+/* ============================================================
+   12. FOOTER — SCHOLAR'S COLOPHON
+   ============================================================ */
+
+.site-foot {
+  border-top: 1px solid var(--border-subt);
+  background: var(--glass-surface);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  padding: var(--sp-10) clamp(var(--sp-4), 4.5vw, var(--sp-8)) var(--sp-12);
+  margin-top: var(--sp-12);
+}
+
+.site-foot-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.foot-brand-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-6);
+}
+
+.foot-brand-info {
+  max-width: 460px;
+}
+
+.foot-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-top: 0.4rem;
+}
+
+.foot-links-group {
+  display: flex;
+  gap: var(--sp-8);
+  flex-wrap: wrap;
+}
+
+.foot-col h4 {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-950);
+  margin-bottom: var(--sp-3);
+}
+
+.foot-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.foot-col a {
+  font-size: var(--fs-sm);
+  color: var(--text-2);
+  transition: color var(--d-fast) var(--ease);
+}
+
+.foot-col a:hover {
+  color: var(--oxford-600);
+}
+
+.foot-bottom-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--border-subt);
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  color: var(--ink-500);
+}
+
+/* ============================================================
+   13. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+@media (max-width: 900px) {
+  .topnav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .subjects-grid { grid-template-columns: 1fr; }
+  .syllabus-modules-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .hero-meta-glass { border-radius: var(--r-lg); }
+  .hero-search-bar { border-radius: var(--r-lg); }
+  .subject-card-actions { flex-direction: column; }
+  .btn-subject-primary, .btn-subject-syllabus { width: 100%; }
+}

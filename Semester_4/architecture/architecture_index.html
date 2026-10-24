@@ -21,16 +21,16 @@
 
         :root {
             /* Palette for book spine accents */
-            --color-u1: #3b82f6; /* Blue/Indigo for Pipelining */
-            --color-u2: #8b5cf6; /* Royal Purple for Memory */
-            --color-u3: #f97316; /* Terracotta Orange for ILP */
-            --color-u4: #0ea5e9; /* Ocean Sky for Vector */
-            --color-u5: #10b981; /* Forest Green for Multiprocessor */
+            --color-u1: #EA580C;; /* Blue/Indigo for Pipelining */
+            --color-u2: #C2410C;; /* System Blue for Memory */
+            --color-u3: #9A3412;; /* Terracotta Orange for ILP */
+            --color-u4: #7C2D12;; /* Ocean Sky for Vector */
+            --color-u5: #431407;; /* Forest Green for Multiprocessor */
             
             --bg-desk: #eae6db; /* Desk/Surface ambient tone */
-            --bg-paper: #fefdfb; /* Fine book paper background */
-            --text-main: #1e293b; /* Charcoal ink */
-            --text-muted: #57687e; /* Muted ink */
+            --bg-paper: #FFFDF8; /* Fine book paper background */
+            --text-main: #241811; /* Charcoal ink */
+            --text-muted: #7A5840; /* Muted ink */
             --border-light: rgba(44, 62, 80, 0.1);
         }
 
@@ -104,7 +104,7 @@
             font-size: 3.6rem;
             font-weight: 700;
             line-height: 1.1;
-            color: #0f172a;
+            color: #1E1510;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
@@ -168,7 +168,7 @@
         .stat-val {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #0f172a;
+            color: #1E1510;
         }
 
         .stat-lbl {
@@ -272,7 +272,7 @@
             font-size: 1.35rem;
             font-weight: 700;
             line-height: 1.25;
-            color: #0f172a;
+            color: #1E1510;
             margin-bottom: 0.5rem;
         }
 
@@ -296,7 +296,7 @@
             display: flex;
             align-items: baseline;
             font-size: 0.78rem;
-            color: #475569;
+            color: #5E3B28;
         }
 
         .toc-lbl {
@@ -423,7 +423,7 @@
         
         .card-progress-fill {
             height: 100%;
-            background-color: var(--chapter-color, #1e293b);
+            background-color: var(--chapter-color, #241811);
             border-radius: 2px;
             transition: width 0.4s ease;
         }
@@ -468,26 +468,53 @@
         }
     
         .diagram-container {
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
-            border: 1px solid #cbd5e1 !important;
+            background: linear-gradient(155deg, #3B2318 0%, #241811 100%) !important;
+            border: 1px solid rgba(234, 88, 12, 0.35) !important;
             border-radius: 14px !important;
             padding: 1.8rem !important;
             margin: 2.2rem 0 !important;
             text-align: center !important;
-            box-shadow: 0 10px 30px -4px rgba(15, 23, 42, 0.08), inset 0 1px 1px rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 18px 44px -18px rgba(36, 24, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+            position: relative;
+            overflow: hidden;
+        }
+        .diagram-container::before {
+            content: ""; position: absolute; inset: 0;
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            pointer-events: none;
+        }
+        .diagram-container > * { position: relative; z-index: 1; }
+        .diagram-container svg {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+        }
+        .diagram-caption {
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
+            margin-top: 1.1rem !important;
+            font-style: normal !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
         }
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 4px 10px rgba(15, 23, 42, 0.05));
+            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
         }
         .diagram-caption {
-            font-size: 0.88rem !important;
-            color: #475569 !important;
+            font-family: 'JetBrains Mono', monospace !important;
+            font-size: 0.72rem !important;
+            color: #FF7A1A !important;
             margin-top: 1.1rem !important;
-            font-style: italic !important;
+            font-style: normal !important;
             font-weight: 600 !important;
-            letter-spacing: 0.02em !important;
+            letter-spacing: 0.1em !important;
+            text-transform: uppercase !important;
+            text-align: center !important;
         }
 
     </style>
@@ -729,7 +756,7 @@
         </a>
 
         <!-- PYQ -->
-        <a href="pyq.html" class="chapter-card" style="--chapter-color: #eab308;" id="module-pyq">
+        <a href="pyq.html" class="chapter-card" style="--chapter-color: #EA580C;" id="module-pyq">
             <div class="card-content">
                 <div class="chapter-header">
                     <div class="chapter-num">Bonus</div>
@@ -766,10 +793,8 @@
             </div>
         </a>
 
-        </a>
-
         <!-- IMPORTANT Q&A -->
-        <a href="important_qa.html" class="chapter-card" style="--chapter-color: #ef4444;" id="module-qa">
+        <a href="important_qa.html" class="chapter-card" style="--chapter-color: #EA580C;" id="module-qa">
             <div class="card-content">
                 <div class="chapter-header">
                     <div class="chapter-num">Featured</div>
@@ -814,6 +839,7 @@
         <p class="colophon-text">
             Compounded and published by <a href="#">Soumya Chakraborty</a>. Hand-crafted notes to crush exam preparation.
         </p>
+    </footer>
 </main>
 
 <!-- Interactive Script for Progress Tracking -->

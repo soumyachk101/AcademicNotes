@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="../../site.css">
   <style>
     /* Per-page accent override */
-    .sheet { --c: #047857; }
+    .sheet { --c: #9A3412; }
   </style>
 </head>
 <body>
@@ -262,7 +262,8 @@
           <strong>TDM:</strong> Time is divided into frames; each frame is subdivided into time slots. Each signal gets a specific time slot. Used in digital telephony (PCM).<br><br>
           <div class="diagram-title">FDM Concept</div>
           <pre class="ascii">            |───Signal A───|───Signal B───|───Signal C───|<br>
-            (Frequency domain — each signal occupies different band)</div>
+            (Frequency domain — each signal occupies different band)</pre>
+</div>
         </div>
 
       <div class="qa qa--5m">
@@ -530,7 +531,8 @@
           <div class="diagram-title">Go-Back-N Sequence Diagram</div>
           <pre class="ascii">            Sender: |Frame 0|Frame 1|Frame 2|Frame 3|Frame 2|Frame 3|<br>
             Receiver: |—ACK 0—|—ACK 1—|—Discard—|—Discard—|<br>
-            (Frame 2 lost → ACK 2 never received → Sender times out → retransmits Frame 2 &amp; 3)</div>
+            (Frame 2 lost → ACK 2 never received → Sender times out → retransmits Frame 2 &amp; 3)</pre>
+</div>
         </div>
 
       <div class="qa qa--5m">
@@ -625,7 +627,8 @@
           <pre class="ascii">            Sender Window (size 4): [0, 1, 2, 3] → slides right on each ACK<br>
             Receiver Window (size 4): [0, 1, 2, 3] → accepts frames within window<br><br>
             If Frame 2 is lost: Receiver buffers 3, 4. Sender retransmits only 2.<br>
-            After 2 received: receiver delivers 2, 3, 4 in order to network layer.</div>
+            After 2 received: receiver delivers 2, 3, 4 in order to network layer.</pre>
+</div>
         </div>
       </div>
 
@@ -821,7 +824,8 @@
             Client → Broadcast: DHCPREQUEST<br>
             Server → Client: DHCPACK (Lease confirmed, time: 86400s)<br><br>
             Lease renewal at T1 (50% of lease time) and T2 (87.5%)<br>
-            Release: Client sends DHCPRELEASE when disconnecting.</div>
+            Release: Client sends DHCPRELEASE when disconnecting.</pre>
+</div>
         </div>
 
       <div class="qa qa--5m">
@@ -1111,7 +1115,8 @@
           <pre class="ascii">            Slow Start (exponential): cwnd: 1 → 2 → 4 → 8 → 16 → 32 → 64<br>
             Congestion Avoidance (linear): 64 → 65 → 66 → 67 → 68 → 69 …<br>
             On 3 dupACKs: ssthresh = cwnd/2, cwnd = ssthresh + 3<br>
-            On Timeout: ssthresh = cwnd/2, cwnd = 1 (restart Slow Start)</div>
+            On Timeout: ssthresh = cwnd/2, cwnd = 1 (restart Slow Start)</pre>
+</div>
         </div>
       </div>
 
@@ -1158,7 +1163,8 @@
           <pre class="ascii">            Rate r = 1 token/ms, Bucket size b = 10 tokens<br>
             After 10ms of silence: 10 tokens accumulated<br>
             Can now send 10 packets instantly (burst of 10)<br>
-            Then limited to 1 packet per ms (steady rate)</div>
+            Then limited to 1 packet per ms (steady rate)</pre>
+</div>
         </div>
 
       <div class="subhead">
@@ -1205,7 +1211,8 @@
     |── ACK (seq=x+1, ack=y+1) ───→|
     |                               |  ESTABLISHED
     |==== DATA TRANSFER ===========|
-            </pre></div>
+            </pre></pre>
+</div>
         </div>
       </div>
 
@@ -1357,7 +1364,8 @@
             3. Local DNS queries .com TLD server (iterative) → "example.com" authoritative server<br>
             4. Local DNS queries example.com authoritative server → gets IP (93.184.216.34)<br>
             5. Local DNS returns IP to Client<br>
-            6. Client connects to 93.184.216.34:80</div>
+            6. Client connects to 93.184.216.34:80</pre>
+</div>
         </div>
 
       <div class="qa qa--5m">
@@ -1718,7 +1726,6 @@
       <div>Covers Units 1–5 · Exam-Focused</div>
     </div>
 
-</div>
   </div><!-- /sheet -->
 </body>
 </html>
