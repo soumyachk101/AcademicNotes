@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         /* CSS Reset & Variables */
@@ -21,21 +21,21 @@
 
         :root {
             /* Palette for book spine accents */
-            --color-u1: #EA580C;; /* Blue/Indigo for Pipelining */
-            --color-u2: #C2410C;; /* System Blue for Memory */
-            --color-u3: #9A3412;; /* Terracotta Orange for ILP */
-            --color-u4: #7C2D12;; /* Ocean Sky for Vector */
-            --color-u5: #431407;; /* Forest Green for Multiprocessor */
+            --color-u1: #0A7470;; /* Blue/Indigo for Pipelining */
+            --color-u2: #14B3AD;; /* System Blue for Memory */
+            --color-u3: #6FE9E2;; /* Terracotta Orange for ILP */
+            --color-u4: #F0AC1B;; /* Ocean Sky for Vector */
+            --color-u5: #C8870A;; /* Forest Green for Multiprocessor */
             
-            --bg-desk: #eae6db; /* Desk/Surface ambient tone */
-            --bg-paper: #FFFDF8; /* Fine book paper background */
-            --text-main: #241811; /* Charcoal ink */
-            --text-muted: #7A5840; /* Muted ink */
+            --bg-desk: #EEF7F1; /* Desk/Surface ambient tone */
+            --bg-paper: #FFFFFF; /* Fine book paper background */
+            --text-main: #0E2A3D; /* Charcoal ink */
+            --text-muted: #557079; /* Muted ink */
             --border-light: rgba(44, 62, 80, 0.1);
         }
 
         body {
-            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             background-color: var(--bg-desk);
             /* Soft paper/desk texture overlay */
             background-image: 
@@ -91,20 +91,21 @@
         }
 
         .book-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
+            font-size: 0.7rem;
+            font-weight: 600;
             color: var(--text-muted);
-            letter-spacing: 0.25em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
             margin-bottom: 1.25rem;
         }
 
         .book-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 3.6rem;
             font-weight: 700;
             line-height: 1.1;
-            color: #1E1510;
+            color: #0E2A3D;
             margin-bottom: 0.5rem;
             letter-spacing: -0.02em;
         }
@@ -136,7 +137,7 @@
         }
 
         .book-subtitle {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-style: italic;
             font-size: 1.3rem;
             line-height: 1.5;
@@ -168,7 +169,7 @@
         .stat-val {
             font-size: 1.25rem;
             font-weight: 700;
-            color: #1E1510;
+            color: #0E2A3D;
         }
 
         .stat-lbl {
@@ -199,7 +200,7 @@
         .chapter-card {
             background-color: #ffffff;
             border: 1px solid rgba(44, 62, 80, 0.1);
-            border-radius: 8px;
+            border-radius: 18px;
             padding: 2.2rem 1.8rem;
             text-decoration: none;
             color: inherit;
@@ -209,11 +210,10 @@
             min-height: 390px;
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.15s ease;
             will-change: transform, box-shadow;
-            box-shadow: 
-                0 2px 4px rgba(0, 0, 0, 0.02),
-                0 4px 12px -2px rgba(0, 0, 0, 0.03);
+            box-shadow:
+                0 16px 40px -8px rgba(12, 35, 52, 0.08);
         }
 
         /* Colored Spine Bindings */
@@ -242,10 +242,10 @@
 
         .chapter-card:hover {
             transform: translateY(-8px) rotate(-1deg);
-            border-color: rgba(44, 62, 80, 0.18);
-            box-shadow: 
-                0 16px 28px -8px rgba(30, 41, 59, 0.08),
-                0 6px 12px -2px rgba(30, 41, 59, 0.04);
+            border-color: rgba(20, 179, 173, 0.35);
+            box-shadow:
+                0 16px 40px -8px rgba(12, 35, 52, 0.12),
+                0 8px 24px -8px rgba(20, 179, 173, 0.28);
         }
 
         .chapter-card:hover::before {
@@ -258,7 +258,7 @@
         }
 
         .chapter-num {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
@@ -268,11 +268,11 @@
         }
 
         .chapter-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 1.35rem;
             font-weight: 700;
             line-height: 1.25;
-            color: #1E1510;
+            color: #0E2A3D;
             margin-bottom: 0.5rem;
         }
 
@@ -296,7 +296,7 @@
             display: flex;
             align-items: baseline;
             font-size: 0.78rem;
-            color: #5E3B28;
+            color: #3C5B6A;
         }
 
         .toc-lbl {
@@ -318,7 +318,7 @@
 
         .toc-idx {
             flex-shrink: 0;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-style: italic;
             font-weight: 600;
             color: var(--text-muted);
@@ -386,7 +386,7 @@
         }
 
         .colophon-text {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-style: italic;
             font-size: 1rem;
             color: var(--text-muted);
@@ -423,14 +423,14 @@
         
         .card-progress-fill {
             height: 100%;
-            background-color: var(--chapter-color, #241811);
+            background-color: var(--chapter-color, #0E2A3D);
             border-radius: 2px;
             transition: width 0.4s ease;
         }
         
         .card-progress-text {
             font-size: 0.95rem;
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-weight: 700;
             color: var(--text-main);
             min-width: 32px;
@@ -468,31 +468,31 @@
         }
     
         .diagram-container {
-            background: linear-gradient(155deg, #3B2318 0%, #241811 100%) !important;
-            border: 1px solid rgba(234, 88, 12, 0.35) !important;
+            background: linear-gradient(155deg, #0C2334 0%, #0E2A3D 100%) !important;
+            border: 1px solid rgba(20, 179, 173, 0.35) !important;
             border-radius: 14px !important;
             padding: 1.8rem !important;
             margin: 2.2rem 0 !important;
             text-align: center !important;
-            box-shadow: 0 18px 44px -18px rgba(36, 24, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 18px 44px -18px rgba(12, 35, 52, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
             position: relative;
             overflow: hidden;
         }
         .diagram-container::before {
             content: ""; position: absolute; inset: 0;
-            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(20, 179, 173, 0.14), transparent 60%);
             pointer-events: none;
         }
         .diagram-container > * { position: relative; z-index: 1; }
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+            filter: drop-shadow(0 6px 14px rgba(20, 179, 173, 0.18));
         }
         .diagram-caption {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.72rem !important;
-            color: #FF7A1A !important;
+            color: #6FE9E2 !important;
             margin-top: 1.1rem !important;
             font-style: normal !important;
             font-weight: 600 !important;
@@ -503,12 +503,12 @@
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+            filter: drop-shadow(0 6px 14px rgba(20, 179, 173, 0.18));
         }
         .diagram-caption {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.72rem !important;
-            color: #FF7A1A !important;
+            color: #6FE9E2 !important;
             margin-top: 1.1rem !important;
             font-style: normal !important;
             font-weight: 600 !important;
@@ -524,7 +524,7 @@
 
 <nav class="top-nav" style="width: 100%; padding: 1rem 2rem; background: var(--bg-paper); border-bottom: 1px solid rgba(44,62,80,0.1); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10; margin-bottom: 2rem;">
     <a href="../index.html" style="text-decoration: none; color: var(--text-muted); font-weight: 600; font-size: 0.9rem;">← Main Library</a>
-    <span style="font-family: 'Cormorant Garamond', serif; font-weight: 700; color: var(--text-main); font-size: 1.2rem;">Computer Architecture</span>
+    <span style="font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif; font-weight: 700; color: var(--text-main); font-size: 1.2rem;">Computer Architecture</span>
     <span style="width: 80px;"></span>
 </nav>
 
@@ -756,7 +756,7 @@
         </a>
 
         <!-- PYQ -->
-        <a href="pyq.html" class="chapter-card" style="--chapter-color: #EA580C;" id="module-pyq">
+        <a href="pyq.html" class="chapter-card" style="--chapter-color: #14B3AD;" id="module-pyq">
             <div class="card-content">
                 <div class="chapter-header">
                     <div class="chapter-num">Bonus</div>
@@ -794,7 +794,7 @@
         </a>
 
         <!-- IMPORTANT Q&A -->
-        <a href="important_qa.html" class="chapter-card" style="--chapter-color: #EA580C;" id="module-qa">
+        <a href="important_qa.html" class="chapter-card" style="--chapter-color: #14B3AD;" id="module-qa">
             <div class="card-content">
                 <div class="chapter-header">
                     <div class="chapter-num">Featured</div>

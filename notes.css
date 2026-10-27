@@ -1,5 +1,113 @@
-/* notes.css — premium reading experience · dark theme
-   Reuses tokens from site.css. No purple/indigo accents. */
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* notes.css — premium reading experience · mint paper / teal accent
+   Single chromatic accent (--accent, teal). Danger-only coral alias. */
+
+/* ============================================================
+   0. TOKENS
+   ============================================================ */
+:root {
+  /* Surfaces */
+  --canvas: #EEF7F1;
+  --surface: #FFFFFF;
+  --bg-card: var(--surface);
+  --bg-card-alt: #F4FAF7;
+
+  /* Ink */
+  --ink: #0E2A3D;
+  --ink-2: #3C5B6A;
+  --ink-3: #557079;
+  --text-1: var(--ink);
+  --text-2: var(--ink-2);
+  --text-3: var(--ink-3);
+  --text-4: #7FA6A8;
+
+  /* Accent — single chromatic color (teal) */
+  --accent: #14B3AD;
+  --accent-bright: #6FE9E2;
+  --accent-soft: rgba(20,179,173,0.08);
+  --accent-glow: rgba(20,179,173,0.25);
+  --gold: #F0AC1B;
+  --gold-deep: #C8870A;
+  --coral: #EF5F5F;
+  --coral-soft: rgba(239,95,95,0.10);
+  --success: var(--ink-2);
+  --warning: var(--ink-2);
+  --danger: var(--coral);
+  --done-bg: #D6EEE9;
+  --attention-bg: #FBEDE3;
+
+  /* Borders */
+  --border: #D7E6E0;
+  --border-med: #B9D2C9;
+  --border-subt: #E5F0EB;
+
+  /* Spacing scale (4/8/12/16/24/32/48/64) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* Radii */
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 18px;
+  --r-full: 9999px;
+
+  /* Fonts */
+  --sans: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+  --display: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Motion */
+  --dur-fast: 150ms;
+  --dur-ease: ease;
+
+  /* Soft navy-tinted card shadows */
+  --lift-1: 0 1px 2px rgba(12,35,52,0.04), 0 2px 6px rgba(12,35,52,0.05);
+  --lift-2: 0 2px 4px rgba(12,35,52,0.04), 0 10px 28px -14px rgba(12,35,52,0.14);
+}
+
+[data-theme='dark'] {
+  --canvas: #0C2334;
+  --surface: #0E2A3D;
+  --bg-card: var(--surface);
+  --bg-card-alt: #0C2334;
+
+  --ink: #EAF6F2;
+  --ink-2: #A9C7CC;
+  --ink-3: #7FA6A8;
+  --text-1: var(--ink);
+  --text-2: var(--ink-2);
+  --text-3: var(--ink-3);
+  --text-4: #557079;
+
+  --accent: #6FE9E2;
+  --accent-bright: #6FE9E2;
+  --accent-soft: rgba(111,233,226,0.1);
+  --accent-glow: rgba(111,233,226,0.3);
+  --coral: #EF5F5F;
+  --coral-soft: rgba(239,95,95,0.14);
+  --done-bg: #12343C;
+  --attention-bg: #2A2018;
+
+  --border: #1F4763;
+  --border-med: #2A4F63;
+  --border-subt: #16344A;
+
+  --lift-1: 0 1px 2px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.35);
+  --lift-2: 0 2px 4px rgba(0,0,0,0.35), 0 10px 28px -14px rgba(0,0,0,0.55);
+}
+
+html {
+  background: var(--canvas);
+  color: var(--ink);
+}
 
 /* ============================================================
    1. SHEET
@@ -15,6 +123,9 @@
   border-radius: var(--r-xl);
   box-shadow: var(--lift-2);
   position: relative;
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
 }
 .sheet::before {
   content: "";
@@ -22,8 +133,8 @@
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(234,88,12,.35), transparent 40%,
-              transparent 60%, rgba(234,88,12,.2));
+  background: linear-gradient(180deg, rgba(20,179,173,.35), transparent 40%,
+              transparent 60%, rgba(20,179,173,.2));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
           mask-composite: exclude;
@@ -44,16 +155,16 @@
   border-bottom: 1px solid var(--border);
   font-family: var(--mono);
   font-size: .72rem;
-  color: var(--text-3);
+  color: var(--ink-3);
   letter-spacing: .04em;
 }
 .topbar > * { display: inline-flex; align-items: center; gap: .4rem; }
 .topbar__code {
   padding: .28rem .65rem;
   border-radius: var(--r-full);
-  background: rgba(234,88,12,.1);
-  border: 1px solid rgba(234,88,12,.3);
-  color: #EA580C;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
+  color: var(--accent);
   font-weight: 700;
   letter-spacing: .08em;
 }
@@ -61,7 +172,7 @@
   font-family: var(--display);
   font-size: .98rem;
   font-weight: 700;
-  color: var(--text-1);
+  color: var(--ink);
   letter-spacing: -.01em;
 }
 .topbar__sep {
@@ -70,7 +181,7 @@
   background: var(--border-med);
 }
 .topbar__time strong, .topbar__updated strong {
-  color: var(--text-1);
+  color: var(--ink);
   font-weight: 600;
 }
 
@@ -86,18 +197,18 @@
   font-family: var(--mono);
   font-size: .72rem;
   letter-spacing: .04em;
-  color: var(--text-3);
+  color: var(--ink-3);
 }
 .breadcrumbs a {
-  color: var(--text-2);
+  color: var(--ink-2);
   text-decoration: none;
   padding: .2rem .55rem;
   border-radius: var(--r-sm);
-  transition: color var(--dur-fast), background var(--dur-fast);
+  transition: color var(--dur-fast) var(--dur-ease), background var(--dur-fast) var(--dur-ease);
 }
-.breadcrumbs a:hover { color: var(--text-1); background: rgba(255,255,255,.04); }
+.breadcrumbs a:hover { color: var(--ink); background: var(--accent-soft); }
 .breadcrumbs .sep { color: var(--text-4); user-select: none; }
-.breadcrumbs .current { color: var(--text-1); font-weight: 600; }
+.breadcrumbs .current { color: var(--ink); font-weight: 600; }
 
 /* ============================================================
    4. SECTIONS & HEADINGS
@@ -110,10 +221,10 @@
 
 .section > h2 {
   font-family: var(--display);
-  font-size: clamp(1.35rem, 2.2vw, 1.7rem);
+  font-size: 24px;
   font-weight: 800;
   letter-spacing: -.025em;
-  color: var(--text-1);
+  color: var(--ink);
   padding-bottom: .6rem;
   margin-bottom: 1rem;
   border-bottom: 1px solid var(--border);
@@ -124,7 +235,7 @@
   position: absolute;
   left: 0; bottom: -1px;
   width: 56px; height: 2px;
-  background: linear-gradient(90deg, #EA580C, #EA580C);
+  background: var(--accent);
   border-radius: 1px;
 }
 
@@ -133,10 +244,10 @@
   font-size: clamp(1.08rem, 1.6vw, 1.22rem);
   font-weight: 700;
   letter-spacing: -.015em;
-  color: var(--text-1);
+  color: var(--ink);
   margin: 1.5rem 0 .75rem;
   padding-left: .75rem;
-  border-left: 3px solid #EA580C;
+  border-left: 3px solid var(--accent);
 }
 
 .subsection h4 {
@@ -145,8 +256,18 @@
   font-weight: 700;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: #EA580C;
+  color: var(--accent);
   margin: 1.25rem 0 .55rem;
+}
+
+/* Page title */
+.sheet h1 {
+  font-family: var(--display);
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  color: var(--ink);
+  margin: 0 0 1rem;
 }
 
 /* ============================================================
@@ -166,13 +287,13 @@ table.read {
   border-collapse: separate;
   border-spacing: 0;
   font-size: .92rem;
-  color: var(--text-2);
+  color: var(--ink-2);
 }
 table.read thead {
   position: sticky;
   top: 0;
   z-index: 2;
-  background: rgba(15,23,42,.96);
+  background: var(--surface);
   backdrop-filter: blur(6px);
 }
 table.read th {
@@ -183,7 +304,7 @@ table.read th {
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: #EA580C;
+  color: var(--accent);
   border-bottom: 1px solid var(--border-med);
   white-space: nowrap;
 }
@@ -194,8 +315,8 @@ table.read td {
   line-height: 1.55;
 }
 table.read tbody tr:last-child td { border-bottom: none; }
-table.read tbody tr:nth-child(even) td { background: rgba(255,255,255,.018); }
-table.read tbody tr:hover td { background: rgba(234,88,12,.06); color: var(--text-1); }
+table.read tbody tr:nth-child(even) td { background: rgba(20,179,173,.025); }
+table.read tbody tr:hover td { background: var(--accent-soft); color: var(--ink); }
 table.read code { font-size: .82em; }
 
 /* ============================================================
@@ -205,16 +326,21 @@ pre.code, pre.read {
   position: relative;
   margin: 1.1rem 0;
   padding: 1.15rem 1.25rem;
-  background: #1E1510;
-  color: var(--slate-300);
-  border: 1px solid rgba(0,0,0,.4);
+  background: #F4FAF7;
+  color: var(--ink);
+  border: 1px solid var(--border);
   border-radius: var(--r-md);
   font-family: var(--mono);
   font-size: .85rem;
   line-height: 1.65;
   overflow-x: auto;
   white-space: pre;
-  box-shadow: 0 14px 32px -22px rgba(0,0,0,.7);
+  box-shadow: var(--lift-1);
+}
+[data-theme='dark'] pre.code, [data-theme='dark'] pre.read {
+  background: #16344A;
+  color: var(--ink-2);
+  border-color: var(--border-med);
 }
 pre.code::before {
   content: "";
@@ -222,9 +348,9 @@ pre.code::before {
   top: 9px; left: 14px;
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: rgba(255,255,255,.25);
-  box-shadow: 14px 0 0 rgba(255,255,255,.25), 28px 0 0 rgba(234,88,12,.8);
-  opacity: .65;
+  background: var(--border-med);
+  box-shadow: 14px 0 0 var(--border-med), 28px 0 0 var(--accent);
+  opacity: .7;
 }
 pre.code > code {
   display: block;
@@ -242,37 +368,38 @@ code {
   font-size: .88em;
   padding: .12em .42em;
   border-radius: 5px;
-  background: rgba(234,88,12,.08);
-  color: #EA580C;
-  border: 1px solid rgba(234,88,12,.18);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
   white-space: nowrap;
 }
-/* Syntax tokens */
-pre .tk-c { color: #9A7B62; font-style: italic; }
-pre .tk-k { color: #FF7A1A; font-weight: 600; }
-pre .tk-s { color: #EA580C; }
-pre .tk-n { color: var(--slate-300); }
-pre .tk-f { color: var(--slate-300); }
-pre .tk-t { color: var(--slate-300); }
-pre .tk-o { color: var(--slate-400); }
+/* Syntax tokens — single-accent: ink family + accent, no color ramp */
+pre .tk-c { color: var(--ink-3); font-style: italic; }
+pre .tk-k { color: var(--accent); font-weight: 600; }
+pre .tk-s { color: var(--ink); }
+pre .tk-n { color: var(--ink); }
+pre .tk-f { color: var(--ink); }
+pre .tk-t { color: var(--ink-2); }
+pre .tk-o { color: var(--ink-3); }
 
 /* Copy button */
 .copy-btn {
   position: absolute;
   top: .55rem; right: .65rem;
   padding: .25rem .55rem;
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 6px;
-  background: transparent;
-  color: #9A7B62;
+  border: 1px solid var(--border-med);
+  border-radius: var(--r-sm);
+  background: var(--surface);
+  color: var(--ink-3);
   font-family: var(--mono);
   font-size: .68rem;
   cursor: pointer;
   opacity: 0;
-  transition: opacity var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  transition: opacity var(--dur-fast) var(--dur-ease), color var(--dur-fast) var(--dur-ease),
+              border-color var(--dur-fast) var(--dur-ease);
 }
 pre.code:hover .copy-btn, pre.read:hover .copy-btn { opacity: 1; }
-.copy-btn:hover { color: var(--slate-300); border-color: rgba(255,255,255,.25); }
+.copy-btn:hover { color: var(--accent); border-color: var(--accent-glow); }
 
 /* ============================================================
    7. FIGURES / DIAGRAMS
@@ -281,7 +408,7 @@ figure {
   margin: 1.5rem 0;
   padding: 1.25rem;
   background: var(--bg-card-alt);
-  border: 1px dashed rgba(234,88,12,.28);
+  border: 1px dashed var(--accent-glow);
   border-radius: var(--r-md);
   text-align: center;
 }
@@ -297,12 +424,12 @@ figcaption {
   margin-top: .75rem;
   font-family: var(--mono);
   font-size: .78rem;
-  color: var(--text-3);
+  color: var(--ink-3);
   letter-spacing: .02em;
 }
 figcaption::before {
   content: "Fig. ";
-  color: #EA580C;
+  color: var(--accent);
   font-weight: 700;
   letter-spacing: .1em;
   text-transform: uppercase;
@@ -310,9 +437,9 @@ figcaption::before {
 
 /* ─── Callout boxes ─── */
 .callout {
-  --c: #EA580C;
-  --bg: rgba(234,88,12,.06);
-  --bd: rgba(234,88,12,.22);
+  --c: var(--accent);
+  --bg: var(--accent-soft);
+  --bd: var(--accent-glow);
   display: flex;
   align-items: flex-start;
   gap: .9rem;
@@ -336,8 +463,8 @@ figcaption::before {
   width: 30px; height: 30px;
   display: grid;
   place-items: center;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--c) 18%, transparent);
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--c) 14%, transparent);
   color: var(--c);
   font-family: var(--display);
   font-weight: 800;
@@ -356,18 +483,18 @@ figcaption::before {
 .callout__body {
   font-size: .94rem;
   line-height: 1.65;
-  color: var(--text-2);
+  color: var(--ink-2);
 }
 .callout__body > *:first-child { margin-top: 0; }
 .callout__body > *:last-child  { margin-bottom: 0; }
-.callout__body strong { color: var(--text-1); }
+.callout__body strong { color: var(--ink); }
 
-/* Variants */
-.callout--defn    { --c: #EA580C; --bg: rgba(234,88,12,.06); --bd: rgba(234,88,12,.22); }
-.callout--formula { --c: #EA580C; --bg: rgba(234,88,12,.06); --bd: rgba(234,88,12,.24); }
-.callout--example { --c: #FF7A1A; --bg: rgba(234,88,12,.06); --bd: rgba(234,88,12,.22); }
-.callout--warning { --c: #FF7A1A; --bg: rgba(234,88,12,.08); --bd: rgba(234,88,12,.3); }
-.callout--tip     { --c: #EA580C; --bg: rgba(234,88,12,.05); --bd: rgba(234,88,12,.18); }
+/* Variants — single-accent: violet + semantic surface tints (done/attention) */
+.callout--defn    { --c: var(--accent); --bg: var(--accent-soft);  --bd: var(--accent-glow); }
+.callout--formula { --c: var(--accent); --bg: var(--accent-soft);  --bd: var(--accent-glow); }
+.callout--example { --c: var(--ink-2);  --bg: var(--done-bg);      --bd: var(--border-med); }
+.callout--warning { --c: var(--ink-2);  --bg: var(--attention-bg); --bd: var(--border-med); }
+.callout--tip     { --c: var(--accent); --bg: var(--done-bg);      --bd: var(--border-med); }
 
 /* ============================================================
    9. MATH / FORMULAS
@@ -376,23 +503,23 @@ figcaption::before {
   display: block;
   margin: 1.1rem 0;
   padding: 1.05rem 1.25rem;
-  background: rgba(234,88,12,.05);
-  border: 1px solid rgba(234,88,12,.22);
-  border-left: 3px solid #EA580C;
+  background: var(--accent-soft);
+  border: 1px solid var(--accent-glow);
+  border-left: 3px solid var(--accent);
   border-radius: 0 var(--r-md) var(--r-md) 0;
   font-family: var(--mono);
   font-size: .96rem;
   line-height: 1.7;
-  color: var(--text-1);
+  color: var(--ink);
   text-align: center;
   overflow-x: auto;
-  box-shadow: inset 2px 2px 6px rgba(0,0,0,.18);
+  box-shadow: var(--lift-1);
 }
 .formula code, .formula .math {
   background: transparent;
   border: none;
   padding: 0;
-  color: #FF7A1A;
+  color: var(--accent);
   font-weight: 600;
 }
 .math-inline {
@@ -400,9 +527,9 @@ figcaption::before {
   font-size: .92em;
   padding: .08em .35em;
   border-radius: 4px;
-  background: rgba(234,88,12,.08);
-  color: #FF7A1A;
-  border: 1px solid rgba(234,88,12,.18);
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid var(--accent-glow);
 }
 
 /* ============================================================
@@ -417,52 +544,56 @@ figcaption::before {
   width: 1.1rem; height: 1.1rem;
   display: grid;
   place-items: center;
-  border-radius: 5px;
+  border-radius: var(--r-sm);
   color: var(--text-4);
   text-decoration: none;
   font-family: var(--mono);
   font-size: .9rem;
   opacity: 0;
-  transition: opacity var(--dur-fast), color var(--dur-fast), background var(--dur-fast);
+  transition: opacity var(--dur-fast) var(--dur-ease), color var(--dur-fast) var(--dur-ease),
+              background var(--dur-fast) var(--dur-ease);
 }
 .heading:hover .anchor-link, .anchor-link:focus-visible { opacity: 1; }
-.anchor-link:hover { color: #EA580C; background: rgba(234,88,12,.1); }
+.anchor-link:hover { color: var(--accent); background: var(--accent-soft); }
 :target { scroll-margin-top: 100px; }
 
 /* ============================================================
    11. PROSE — paragraphs, lists, blockquote, links
    ============================================================ */
-.prose { color: var(--text-2); font-size: 1rem; line-height: 1.8; }
+.prose { color: var(--ink-2); font-size: 16.5px; line-height: 1.7; }
 .prose > * + * { margin-top: .9rem; }
-.prose strong { color: var(--text-1); font-weight: 600; }
-.prose em     { color: var(--slate-300); font-style: italic; }
+.prose strong { color: var(--ink); font-weight: 600; }
+.prose em     { color: var(--ink-3); font-style: italic; }
 .prose a {
-  color: #EA580C;
+  color: var(--accent);
   text-decoration: none;
-  border-bottom: 1px solid rgba(234,88,12,.35);
-  transition: color var(--dur-fast), border-color var(--dur-fast);
+  border-bottom: 1px solid var(--accent-glow);
+  transition: color var(--dur-fast) var(--dur-ease), border-color var(--dur-fast) var(--dur-ease);
 }
-.prose a:hover { color: #EA580C; border-bottom-color: #EA580C; }
+.prose a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .prose ul, .prose ol { padding-left: 1.4rem; }
 .prose li { margin: .3rem 0; }
-.prose li::marker { color: #EA580C; font-weight: 700; }
+.prose li::marker { color: var(--accent); font-weight: 700; }
 .prose blockquote {
   margin: 1.1rem 0;
   padding: .75rem 1.1rem;
-  border-left: 3px solid #EA580C;
-  background: rgba(234,88,12,.04);
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
   border-radius: 0 var(--r-sm) var(--r-sm) 0;
-  color: var(--text-2);
+  color: var(--ink-2);
   font-style: italic;
 }
 
 /* ============================================================
-   12. PRINT + REDUCED MOTION
+   12. MOTION / PRINT / REDUCED MOTION
    ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
+    animation: none !important;
     animation-duration: .01ms !important;
     transition-duration: .01ms !important;
+    transition: none !important;
+    transform: none !important;
   }
 }
 
@@ -502,6 +633,7 @@ figcaption::before {
    ============================================================ */
 @media (max-width: 640px) {
   .sheet { padding: 1.25rem 1rem 2rem; border-radius: var(--r-lg); }
+  .sheet h1 { font-size: 30px; }
   .topbar { font-size: .68rem; padding: .75rem 1rem; }
   .breadcrumbs { font-size: .68rem; }
   table.read th, table.read td { padding: .6rem .7rem; font-size: .85rem; }

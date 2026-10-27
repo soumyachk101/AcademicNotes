@@ -1,109 +1,124 @@
 /* ============================================================
-   site.css — Academic Study Notes — Scholar's Editorial Archive
-   Aesthetic: Rich Creamy Archival Parchment + High-Gloss Liquid Glass
-   Style: Elite University Library / Academic Press (Notion + MIT OCW + Apple Books)
-   Typography: Fraunces (Editorial Serif) + Manrope + JetBrains Mono
+   site.css — Academic Study Notes — Mint Paper & Navy Ink
+   Aesthetic: Ditto-inspired mint paper, navy inks, single teal accent
+   Typography: Hanken Grotesk + JetBrains Mono
    Standard: 100% Bespoke Vector SVGs — Absolutely Zero Emojis
    ============================================================ */
 
 /* ── 1. GOOGLE FONTS ────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 /* ============================================================
-   2. DESIGN TOKENS — RICH CREAMY PARCHMENT & LIQUID GLASS
+   2. DESIGN TOKENS — MINT PAPER · NAVY INK · SINGLE TEAL ACCENT
    ============================================================ */
 
 :root {
-  /* ---- Rich Creamy Substrate & Tactile Parchment Tones ---- */
-  --cream-50:   #FCFBF7;
-  --cream-100:  #F7F3EA;
-  --cream-200:  #EFE8D8;
-  --cream-300:  #E4D9C3;
-  --cream-400:  #D4C5A9;
-  --cream-500:  #BFAD8E;
-  --cream-600:  #A49171;
+  /* ---- Mint Paper Surfaces & Tints ---- */
+  --cream-50:   #FFFFFF;
+  --cream-100:  #EEF7F1;
+  --cream-200:  #E7F4EC;
+  --cream-300:  #C5E0D7;
+  --cream-400:  #A9D3C5;
+  --cream-500:  #85BAA9;
+  --cream-600:  #5E9E8D;
 
-  /* ---- Deep Scholarly Ink & Text Tones ---- */
-  --ink-950:    #1E1510;
-  --ink-900:    #241811;
-  --ink-800:    #3B2418;
-  --ink-700:    #4E3524;
-  --ink-600:    #5E3B28;
-  --ink-500:    #7A5840;
-  --ink-400:    #9A7B62;
-  --ink-300:    #C9AE94;
-  --ink-200:    #EADDC0;
+  /* ---- Navy Ink Hierarchy ---- */
+  --ink-950:    #0C2334;
+  --ink-900:    #0E2A3D;
+  --ink-800:    #1F4763;
+  --ink-700:    #2A4F63;
+  --ink-600:    #3C5B6A;
+  --ink-500:    #557079;
+  --ink-400:    #7FA6A8;
+  --ink-300:    #A9C7CC;
+  --ink-200:    #CFE3E3;
 
-  /* ---- Academic Heritage Accents (Oxford / Cambridge / Ivy / Royal) ---- */
-  /* Oxford Blue (Operating Systems, Architecture) */
-  --oxford-700: #7C2D12;
-  --oxford-600: #9A3412;
-  --oxford-500: #C2410C;
-  --oxford-400: #EA580C;
-  --oxford-soft: rgba(194, 65, 12, 0.09);
+  /* ---- Single Accent: Teal (mint/teal chromatic accent) ---- */
+  --accent-deep:   #0A7470;
+  --accent-bright: #6FE9E2;
+  --accent-soft:   rgba(20, 179, 173, 0.09);
+  --accent-glow:   rgba(20, 179, 173, 0.35);
 
-  /* Cambridge Terracotta (Compiler Design, Algorithms) */
-  --terra-700:  #7C2D12;
-  --terra-600:  #9A3412;
-  --terra-500:  #C2410C;
-  --terra-400:  #EA580C;
-  --terra-soft: rgba(194, 65, 12, 0.09);
+  /* ---- Secondary: Gold (highlights, badges, progress) ---- */
+  --gold:       #F0AC1B;
+  --gold-deep:  #C8870A;
+  --gold-soft:  rgba(240, 172, 27, 0.12);
 
-  /* Ivy Green (Networks, Environment, Verified Standards) */
-  --ivy-700:    #7C2D12;
-  --ivy-600:    #9A3412;
-  --ivy-500:    #C2410C;
-  --ivy-400:    #EA580C;
-  --ivy-soft:   rgba(194, 65, 12, 0.09);
+  /* ---- Danger Only: Coral ---- */
+  --coral:     #EF5F5F;
+  --coral-soft: rgba(239, 95, 95, 0.12);
 
-  /* Royal Amethyst (Artificial Intelligence, Machine Learning) */
-  --amethyst-700: #7C2D12;
-  --amethyst-600: #9A3412;
-  --amethyst-500: #C2410C;
-  --amethyst-400: #EA580C;
-  --amethyst-soft: rgba(194, 65, 12, 0.09);
+  /* ---- Single-Acccent Aliases (Heritage names keep pointing at teal tints) ---- */
+  /* Oxford (Operating Systems, Architecture) */
+  --oxford-700: #0A7470;
+  --oxford-600: #0A7470;
+  --oxford-500: #14B3AD;
+  --oxford-400: #14B3AD;
+  --oxford-soft: rgba(20, 179, 173, 0.09);
+
+  /* Cambridge (Compiler Design, Algorithms) */
+  --terra-700:  #0A7470;
+  --terra-600:  #0A7470;
+  --terra-500:  #14B3AD;
+  --terra-400:  #14B3AD;
+  --terra-soft: rgba(20, 179, 173, 0.09);
+
+  /* Ivy (Networks, Environment, Verified Standards) */
+  --ivy-700:    #0A7470;
+  --ivy-600:    #0A7470;
+  --ivy-500:    #14B3AD;
+  --ivy-400:    #14B3AD;
+  --ivy-soft:   rgba(20, 179, 173, 0.09);
+
+  /* Amethyst (Artificial Intelligence, Machine Learning) */
+  --amethyst-700: #0A7470;
+  --amethyst-600: #0A7470;
+  --amethyst-500: #14B3AD;
+  --amethyst-400: #14B3AD;
+  --amethyst-soft: rgba(20, 179, 173, 0.09);
 
   /* Claret / Venetian Crimson (Constitution of India, Humanities) */
-  --claret-700: #7C2D12;
-  --claret-600: #9A3412;
-  --claret-500: #C2410C;
-  --claret-400: #EA580C;
-  --claret-soft: rgba(194, 65, 12, 0.09);
+  --claret-700: #0A7470;
+  --claret-600: #0A7470;
+  --claret-500: #14B3AD;
+  --claret-400: #14B3AD;
+  --claret-soft: rgba(20, 179, 173, 0.09);
 
-  /* Guild Amber / Ochre (Industrial Management, Economics) */
-  --amber-700:  #7C2D12;
-  --amber-600:  #9A3412;
-  --amber-500:  #C2410C;
-  --amber-400:  #EA580C;
-  --amber-soft: rgba(194, 65, 12, 0.09);
+  /* Amber / Ochre (Industrial Management, Economics) */
+  --amber-700:  #0A7470;
+  --amber-600:  #0A7470;
+  --amber-500:  #14B3AD;
+  --amber-400:  #14B3AD;
+  --amber-soft: rgba(20, 179, 173, 0.09);
 
-  /* Prussian Slate / Cyan (Software Engineering, OOP Java, DBMS) → orange scale */
-  --cyan-700:   #7C2D12;
-  --cyan-600:   #9A3412;
-  --cyan-500:   #C2410C;
-  --cyan-400:   #EA580C;
-  --cyan-soft:  rgba(194, 65, 12, 0.09);
+  /* Cyan / Slate (Software Engineering, OOP Java, DBMS) */
+  --cyan-700:   #0A7470;
+  --cyan-600:   #0A7470;
+  --cyan-500:   #14B3AD;
+  --cyan-400:   #14B3AD;
+  --cyan-soft:  rgba(20, 179, 173, 0.09);
 
   /* ---- Semantic Surfaces ---- */
   --bg:           var(--cream-100);
   --bg-subtle:    var(--cream-200);
   --bg-card:      var(--cream-50);
   --bg-raised:    #FFFFFF;
+  --bg-dark:      #0C2334;
 
-  /* ---- True Liquid Glass Architecture ---- */
+  /* ---- Liquid Glass Architecture (light mint) ---- */
   --glass-surface:        linear-gradient(135deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.44) 100%);
   --glass-surface-hover:  linear-gradient(135deg, rgba(255, 255, 255, 0.90) 0%, rgba(255, 255, 255, 0.58) 100%);
-  --glass-nav:            rgba(247, 243, 234, 0.86);
-  --glass-modal:          rgba(253, 251, 247, 0.96);
+  --glass-nav:            rgba(231, 244, 236, 0.86);
+  --glass-modal:          rgba(255, 255, 255, 0.96);
   --glass-border:         rgba(255, 255, 255, 0.92);
-  --glass-border-subtle:  rgba(175, 155, 130, 0.22);
-  --glass-outline:        rgba(150, 125, 95, 0.14);
+  --glass-border-subtle:  rgba(30, 79, 99, 0.14);
+  --glass-outline:        rgba(30, 79, 99, 0.10);
 
-  /* ---- Standard Academic Borders ---- */
-  --border-subt:  rgba(120, 95, 65, 0.11);
-  --border:       rgba(120, 95, 65, 0.18);
-  --border-med:   rgba(120, 95, 65, 0.28);
-  --border-strong:rgba(120, 95, 65, 0.44);
+  /* ---- Standard Navy-Tinted Borders ---- */
+  --border-subt:  rgba(30, 79, 99, 0.11);
+  --border:       rgba(30, 79, 99, 0.18);
+  --border-med:   rgba(30, 79, 99, 0.28);
+  --border-strong:rgba(30, 79, 99, 0.44);
 
   /* ---- Typography Colors ---- */
   --text-1: var(--ink-950);
@@ -112,8 +127,8 @@
   --text-4: var(--ink-400);
 
   /* ---- Typography Families ---- */
-  --font-display: 'Fraunces', 'Fraunces', Georgia, serif;
-  --font-body:    'Manrope', 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+  --font-body:    'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
   --font-mono:    'JetBrains Mono', ui-monospace, Menlo, Monaco, Consolas, monospace;
 
   /* ---- Sizing Scale ---- */
@@ -164,48 +179,52 @@
   --d-base: 280ms;
   --d-slow: 450ms;
 
-  /* ---- Pronounced Liquid Glass Elevations & Bevels ---- */
+  /* ---- Soft Navy-Tinted Elevations & Bevels ---- */
   --sh-glass:
-    0 1px 3px rgba(70, 50, 25, 0.04),
-    0 8px 24px -2px rgba(70, 50, 25, 0.06),
-    0 20px 48px -6px rgba(70, 50, 25, 0.08),
+    0 1px 3px rgba(12, 35, 52, 0.04),
+    0 8px 24px -2px rgba(12, 35, 52, 0.06),
+    0 20px 48px -6px rgba(12, 35, 52, 0.08),
     inset 0 1.5px 2px 0 rgba(255, 255, 255, 0.98),
-    inset 0 -1.5px 2px 0 rgba(140, 110, 75, 0.06);
+    inset 0 -1.5px 2px 0 rgba(30, 79, 99, 0.06);
 
   --sh-glass-hover:
-    0 2px 4px rgba(70, 50, 25, 0.05),
-    0 14px 36px -4px rgba(70, 50, 25, 0.11),
-    0 32px 68px -8px rgba(70, 50, 25, 0.14),
+    0 2px 4px rgba(12, 35, 52, 0.05),
+    0 14px 36px -4px rgba(12, 35, 52, 0.11),
+    0 32px 68px -8px rgba(12, 35, 52, 0.14),
+    0 0 24px -6px rgba(20, 179, 173, 0.18),
     inset 0 2px 2px 0 rgba(255, 255, 255, 1),
-    inset 0 -1.5px 2px 0 rgba(140, 110, 75, 0.08);
+    inset 0 -1.5px 2px 0 rgba(30, 79, 99, 0.08);
 
   --sh-1:
-    0 1px 2px rgba(70, 50, 25, 0.04),
-    0 4px 12px -2px rgba(70, 50, 25, 0.05),
+    0 1px 2px rgba(12, 35, 52, 0.04),
+    0 4px 12px -2px rgba(12, 35, 52, 0.05),
     inset 0 1px 1px rgba(255, 255, 255, 0.9);
 
   --sh-2:
-    0 4px 16px -2px rgba(70, 50, 25, 0.07),
-    0 12px 32px -4px rgba(70, 50, 25, 0.07),
+    0 4px 16px -2px rgba(12, 35, 52, 0.07),
+    0 12px 32px -4px rgba(12, 35, 52, 0.07),
     inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95);
 
   --sh-3:
-    0 8px 28px -4px rgba(70, 50, 25, 0.09),
-    0 28px 64px -8px rgba(70, 50, 25, 0.12),
+    0 8px 28px -4px rgba(12, 35, 52, 0.09),
+    0 28px 64px -8px rgba(12, 35, 52, 0.12),
     inset 0 1px 2px rgba(255, 255, 255, 1);
 
   /* ---- Radii ---- */
-  --r-xs:  6px;
+  --r-xs:  8px;
   --r-sm:  10px;
   --r-md:  14px;
-  --r-lg:  20px;
-  --r-xl:  26px;
-  --r-2xl: 34px;
+  --r-lg:  18px;
+  --r-xl:  20px;
+  --r-2xl: 30px;
   --r-full:9999px;
 
   /* ---- Layout ---- */
   --content-max: 1260px;
   --nav-h:       70px;
+
+  /* ---- Single chromatic accent: teal ---- */
+  --accent:      #14B3AD;
 
   --z-nav:    90;
   --z-sticky: 50;
@@ -234,14 +253,13 @@ body {
   font-size: var(--fs-base);
   line-height: var(--lh-base);
   color: var(--text-1);
-  background-color: #F7F3EA;
-  /* Rich Tactile Vellum Parchment Atmosphere */
+  background-color: var(--cream-100);
+  /* Soft Mint Paper Atmosphere */
   background-image:
-    radial-gradient(1300px 750px at 15% 0%, rgba(238, 218, 188, 0.55), transparent 70%),
-    radial-gradient(1100px 650px at 85% 12%, rgba(230, 200, 175, 0.42), transparent 65%),
-    radial-gradient(1200px 850px at 50% 50%, rgba(236, 222, 200, 0.48), transparent 75%),
-    radial-gradient(1000px 650px at 10% 88%, rgba(226, 210, 188, 0.52), transparent 70%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.30  0 0 0 0 0.22  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+    radial-gradient(1300px 750px at 15% 0%, rgba(197, 224, 215, 0.45), transparent 70%),
+    radial-gradient(1100px 650px at 85% 12%, rgba(141, 200, 188, 0.25), transparent 65%),
+    radial-gradient(1200px 850px at 50% 50%, rgba(165, 211, 197, 0.30), transparent 75%),
+    radial-gradient(1000px 650px at 10% 88%, rgba(197, 224, 215, 0.45), transparent 70%);
   background-attachment: fixed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -251,8 +269,61 @@ body {
 }
 
 ::selection {
-  background: rgba(30, 58, 138, 0.16);
+  background: var(--accent-soft);
   color: var(--ink-950);
+}
+
+/* ============================================================
+   KINETIC SCHOLAR — ambient layers
+   Paper-ember grain + lamp glow that follows the cursor
+   ============================================================ */
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+  opacity: 0.04;
+  background-image: repeating-linear-gradient(45deg, var(--ink-300) 0 1px, transparent 1px 3px);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 900px;
+  height: 900px;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.9;
+  mix-blend-mode: multiply;
+  background: radial-gradient(circle at 50% 50%, rgba(20, 179, 173, 0.10) 0%, rgba(20, 179, 173, 0.05) 35%, transparent 62%);
+  transform: translate(calc(var(--lamp-x, 50vw) - 450px), calc(var(--lamp-y, 30vh) - 450px));
+}
+
+/* Thin ember progress line — the "the page is alive" signal */
+.page-pulse {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  z-index: calc(var(--z-nav) + 10);
+  background: linear-gradient(90deg, var(--accent) 0%, var(--cream-300) 50%, var(--accent) 100%);
+  background-size: 200% 100%;
+  animation: pulse-run 5s linear infinite;
+  opacity: 0.55;
+}
+@keyframes pulse-run {
+  0%   { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-pulse { animation: none; }
+  body::after { display: none; }
 }
 
 a {
@@ -300,8 +371,8 @@ button {
   -webkit-backdrop-filter: blur(28px) saturate(200%) contrast(102%);
   border-bottom: 1px solid var(--glass-border-subtle);
   box-shadow:
-    0 1px 2px rgba(80, 55, 30, 0.03),
-    0 6px 20px -2px rgba(80, 55, 30, 0.05),
+    0 1px 2px rgba(12, 35, 52, 0.03),
+    0 6px 20px -2px rgba(12, 35, 52, 0.05),
     inset 0 1px 1px rgba(255, 255, 255, 0.85);
   transition: all var(--d-base) var(--ease);
 }
@@ -325,7 +396,7 @@ button {
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent 5%, rgba(130, 105, 80, 0.18) 25%, rgba(30, 58, 138, 0.35) 50%, rgba(130, 105, 80, 0.18) 75%, transparent 95%);
+  background: linear-gradient(90deg, transparent 5%, rgba(30, 79, 99, 0.18) 25%, rgba(20, 179, 173, 0.35) 50%, rgba(30, 79, 99, 0.18) 75%, transparent 95%);
   pointer-events: none;
 }
 
@@ -348,12 +419,12 @@ button {
   width: 38px;
   height: 38px;
   border-radius: 11px;
-  background: linear-gradient(135deg, #EA580C 0%, #FF7A1A 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
   display: grid;
   place-items: center;
   color: #FFFFFF;
   box-shadow:
-    0 4px 14px rgba(30, 58, 138, 0.28),
+    0 4px 14px rgba(20, 179, 173, 0.28),
     inset 0 1.5px 1.5px rgba(255, 255, 255, 0.45);
 }
 
@@ -420,7 +491,7 @@ button {
   color: var(--oxford-600);
   font-weight: var(--fw-semibold);
   background: #FFFFFF;
-  box-shadow: 0 1px 4px rgba(70, 50, 30, 0.08);
+  box-shadow: 0 1px 4px rgba(12, 35, 52, 0.08);
 }
 
 /* Nav CTA Pill */
@@ -509,7 +580,7 @@ button {
 }
 
 .mobile-nav a:hover {
-  background: rgba(30, 58, 138, 0.08);
+  background: rgba(20, 179, 173, 0.08);
 }
 
 /* ============================================================
@@ -553,8 +624,81 @@ button {
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: var(--ivy-600);
-  box-shadow: 0 0 10px rgba(4, 120, 87, 0.5);
+  background: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+  animation: ember-breathe 2.6s var(--ease) infinite;
+}
+
+/* Pulse the dot when it appears standalone */
+.hero-eyebrow .hero-eyebrow-dot {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-eyebrow-dot { animation: none; }
+}
+
+@keyframes ember-breathe {
+  0%, 100% { box-shadow: 0 0 4px var(--accent-glow); }
+  50%      { box-shadow: 0 0 14px var(--accent-glow); }
+}
+
+/* ============================================================
+   KINETIC SCHOLAR — the LETTERSPINE (signature moment)
+   Individually addressable Fraunces letters: scramble-decode
+   on load, cursor distortion, and scroll pull.
+   ============================================================ */
+
+.letterspine {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144;
+  font-size: clamp(2.4rem, 12.5vw, 9rem);
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  line-height: 1.05;
+  color: var(--ink-950);
+  margin: 0 0 var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.08em;
+  will-change: transform, opacity;
+}
+
+.letterspine .l-line {
+  display: flex;
+  justify-content: center;
+}
+
+.letterspine .l {
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+  transition: transform 180ms var(--ease-spring), color 200ms var(--ease);
+  transform: translateY(calc(var(--my, 0) * -8px)) scale(calc(1 + var(--mx, 0) * 0.06));
+  color: color-mix(in srgb, var(--ink-950) calc((1 - var(--mx, 0)) * 100%), var(--accent));
+}
+
+.letterspine .l.is-scrambling {
+  color: var(--ink-300);
+}
+
+.letterspine .l-space {
+  display: inline-block;
+  width: 0.6em;
+}
+
+@media (max-width: 640px) {
+  .letterspine {
+    font-size: clamp(1.8rem, 8.5vw, 3rem);
+    letter-spacing: 0.18em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letterspine .l {
+    transition: none;
+  }
 }
 
 /* Hero Title */
@@ -582,7 +726,7 @@ button {
   bottom: 0.08em;
   width: 100%;
   height: 4px;
-  background: rgba(194, 65, 12, 0.25);
+  background: rgba(20, 179, 173, 0.25);
   border-radius: 2px;
 }
 
@@ -677,7 +821,7 @@ button {
   background: var(--ink-900);
   color: var(--cream-50);
   border-color: var(--ink-900);
-  box-shadow: 0 4px 14px rgba(36, 24, 17, 0.14);
+  box-shadow: 0 4px 14px rgba(12, 35, 52, 0.14);
 }
 
 /* Hero Search & Filter Bar */
@@ -704,7 +848,7 @@ button {
 .hero-search-bar:focus-within {
   background: #FFFFFF;
   border-color: var(--oxford-500);
-  box-shadow: 0 8px 32px rgba(30, 58, 138, 0.14), 0 0 0 3px rgba(37, 99, 235, 0.15);
+  box-shadow: 0 8px 32px rgba(20, 179, 173, 0.14), 0 0 0 3px rgba(20, 179, 173, 0.15);
 }
 
 .hero-search-icon {
@@ -824,8 +968,8 @@ button {
   gap: 0.35rem;
   padding: 0.28rem 0.8rem;
   border-radius: var(--r-full);
-  background: rgba(4, 120, 87, 0.12);
-  border: 1px solid rgba(4, 120, 87, 0.28);
+  background: rgba(20, 179, 173, 0.12);
+  border: 1px solid rgba(20, 179, 173, 0.28);
   font-family: var(--font-mono);
   font-size: var(--fs-2xs);
   font-weight: 700;
@@ -855,14 +999,14 @@ button {
   gap: 0.5rem;
   padding: 0.58rem 1.2rem;
   border-radius: var(--r-full);
-  background: linear-gradient(135deg, #EA580C 0%, #FF7A1A 100%);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
   color: #FFFFFF;
   font-size: var(--fs-xs);
   font-weight: var(--fw-semibold);
   letter-spacing: 0.02em;
   border: none;
   box-shadow:
-    0 4px 14px rgba(30, 58, 138, 0.28),
+    0 4px 14px rgba(20, 179, 173, 0.28),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
   cursor: pointer;
   transition: all var(--d-fast) var(--ease);
@@ -870,8 +1014,8 @@ button {
 
 .btn-syllabus-hub:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.38);
-  background: linear-gradient(135deg, #EA580C 0%, #FF7A1A 100%);
+  box-shadow: 0 6px 20px rgba(20, 179, 173, 0.38);
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-bright) 100%);
 }
 
 .btn-syllabus-hub svg {
@@ -979,7 +1123,7 @@ button {
   background: color-mix(in srgb, var(--card-color, var(--oxford-600)) 12%, #FFFFFF);
   border: 1px solid color-mix(in srgb, var(--card-color, var(--oxford-600)) 28%, transparent);
   box-shadow:
-    0 4px 14px rgba(70, 50, 25, 0.05),
+    0 4px 14px rgba(12, 35, 52, 0.05),
     inset 0 1.5px 1.5px rgba(255, 255, 255, 0.95);
   display: grid;
   place-items: center;
@@ -1123,14 +1267,14 @@ button {
   font-size: var(--fs-xs);
   font-weight: 700;
   transition: all var(--d-fast) var(--ease);
-  box-shadow: 0 3px 10px -2px rgba(110, 70, 30,0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  box-shadow: 0 3px 10px -2px rgba(30, 79, 99,0.18), inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .btn-subject-primary:hover {
   filter: brightness(1.1);
   color: #FFFFFF;
   transform: translateY(-1.5px);
-  box-shadow: 0 8px 22px -3px rgba(110, 70, 30,0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 22px -3px rgba(30, 79, 99,0.25), inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .btn-subject-primary svg {
@@ -1155,11 +1299,11 @@ button {
   padding: 0.62rem 0.95rem;
   border-radius: var(--r-sm);
   background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(214, 203, 185, 0.8);
+  border: 1px solid rgba(30, 79, 99, 0.8);
   color: var(--ink-800);
   font-size: var(--fs-xs);
   font-weight: 600;
-  box-shadow: 0 1px 3px rgba(110, 70, 30,0.04), inset 0 1px 0 #FFFFFF;
+  box-shadow: 0 1px 3px rgba(30, 79, 99,0.04), inset 0 1px 0 #FFFFFF;
   transition: all var(--d-fast) var(--ease);
 }
 
@@ -1168,7 +1312,7 @@ button {
   border-color: var(--card-color, var(--oxford-600));
   color: var(--card-color, var(--oxford-600));
   transform: translateY(-1.5px);
-  box-shadow: 0 4px 14px rgba(110, 70, 30,0.08), inset 0 1px 0 #FFFFFF;
+  box-shadow: 0 4px 14px rgba(30, 79, 99,0.08), inset 0 1px 0 #FFFFFF;
 }
 
 .btn-subject-syllabus svg {
@@ -1259,7 +1403,7 @@ button {
   background: var(--ink-900);
   color: var(--cream-50);
   border-color: var(--ink-900);
-  box-shadow: 0 4px 14px rgba(36, 24, 17, 0.14);
+  box-shadow: 0 4px 14px rgba(12, 35, 52, 0.14);
 }
 
 /* Active Syllabus Viewer Panel */
@@ -1331,14 +1475,14 @@ button {
   font-weight: var(--fw-semibold);
   letter-spacing: 0.02em;
   box-shadow:
-    0 4px 14px rgba(194, 65, 12, 0.28),
+    0 4px 14px rgba(20, 179, 173, 0.28),
     inset 0 1px 1.5px rgba(255, 255, 255, 0.4);
   transition: all var(--d-fast) var(--ease);
 }
 
 .btn-download-pdf:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(194, 65, 12, 0.38);
+  box-shadow: 0 6px 20px rgba(20, 179, 173, 0.38);
 }
 
 .btn-download-pdf svg {
@@ -1361,7 +1505,7 @@ button {
   border: 1px solid var(--border-subt);
   border-radius: var(--r-md);
   padding: var(--sp-5);
-  box-shadow: 0 2px 10px rgba(70, 50, 25, 0.04);
+  box-shadow: 0 2px 10px rgba(12, 35, 52, 0.04);
   transition: transform var(--d-fast) var(--ease), box-shadow var(--d-fast) var(--ease);
 }
 
@@ -1651,7 +1795,7 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: var(--r-xl);
   padding: var(--sp-6);
-  box-shadow: 0 8px 24px -4px rgba(110, 70, 30,0.06), 0 2px 8px rgba(110, 70, 30,0.03), inset 0 1.5px 2px rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 24px -4px rgba(30, 79, 99,0.06), 0 2px 8px rgba(30, 79, 99,0.03), inset 0 1.5px 2px rgba(255, 255, 255, 1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -1661,8 +1805,8 @@ button {
 
 .tile:hover {
   transform: translateY(-3.5px);
-  box-shadow: 0 16px 36px -6px rgba(110, 70, 30,0.1), inset 0 1.5px 2px #FFFFFF;
-  border-color: rgba(154, 52, 18, 0.35);
+  box-shadow: 0 16px 36px -6px rgba(30, 79, 99,0.1), inset 0 1.5px 2px #FFFFFF;
+  border-color: rgba(20, 179, 173, 0.35);
   background: #FFFFFF;
 }
 
@@ -1719,7 +1863,7 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.95);
   border-radius: var(--r-2xl);
   padding: clamp(2rem, 4vw, 3.5rem);
-  box-shadow: 0 16px 40px -8px rgba(110, 70, 30,0.07), inset 0 1.5px 2px rgba(255, 255, 255, 0.98);
+  box-shadow: 0 16px 40px -8px rgba(30, 79, 99,0.07), inset 0 1.5px 2px rgba(255, 255, 255, 0.98);
 }
 
 .sheet__inner {
@@ -1769,7 +1913,7 @@ button {
   border-radius: var(--r-full);
   background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--border-subt);
-  box-shadow: 0 1px 3px rgba(110, 70, 30,0.04);
+  box-shadow: 0 1px 3px rgba(30, 79, 99,0.04);
 }
 
 /* Quick review grid */
@@ -1784,17 +1928,17 @@ button {
   background: rgba(255, 255, 255, 0.74);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 217, 202, 0.85);
+  border: 1px solid rgba(30, 79, 99, 0.85);
   border-radius: 14px;
   padding: 1.25rem 1.4rem;
-  box-shadow: 0 4px 16px -2px rgba(110, 70, 30,0.04), inset 0 1px 1px #FFFFFF;
+  box-shadow: 0 4px 16px -2px rgba(30, 79, 99,0.04), inset 0 1px 1px #FFFFFF;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .quick-card:hover {
   transform: translateY(-2.5px);
-  box-shadow: 0 10px 24px -4px rgba(110, 70, 30,0.08), inset 0 1px 1px #FFFFFF;
-  border-color: rgba(154, 52, 18, 0.35);
+  box-shadow: 0 10px 24px -4px rgba(30, 79, 99,0.08), inset 0 1px 1px #FFFFFF;
+  border-color: rgba(20, 179, 173, 0.35);
   background: #FFFFFF;
 }
 
@@ -1843,8 +1987,8 @@ button {
   font-size: 1.35rem;
   font-weight: 800;
   color: var(--terra-600);
-  background: rgba(154, 52, 18, 0.08);
-  border: 1px solid rgba(154, 52, 18, 0.25);
+  background: rgba(20, 179, 173, 0.08);
+  border: 1px solid rgba(20, 179, 173, 0.25);
   border-radius: 12px;
   width: 48px;
   height: 48px;
@@ -1872,11 +2016,11 @@ button {
   background: rgba(255, 255, 255, 0.74);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 217, 202, 0.85);
+  border: 1px solid rgba(30, 79, 99, 0.85);
   border-radius: 16px;
   padding: 1.85rem 2.15rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 18px -2px rgba(110, 70, 30,0.04), inset 0 1px 1px #FFFFFF;
+  box-shadow: 0 4px 18px -2px rgba(30, 79, 99,0.04), inset 0 1px 1px #FFFFFF;
 }
 
 .figure h3 {
@@ -1923,23 +2067,23 @@ table.grid {
   overflow: hidden;
   background: #FFFFFF;
   font-size: 0.92rem;
-  box-shadow: 0 4px 12px rgba(110, 70, 30,0.04);
+  box-shadow: 0 4px 12px rgba(30, 79, 99,0.04);
 }
 
 table.grid th {
-  background: #F4ECE1;
+  background: var(--cream-200);
   font-weight: 700;
   color: var(--ink-950);
   padding: 0.85rem 1.15rem;
   border-bottom: 1.5px solid var(--border-med);
-  border-right: 1px solid rgba(214, 203, 185, 0.6);
+  border-right: 1px solid rgba(30, 79, 99, 0.6);
   text-align: left;
 }
 
 table.grid td {
   padding: 0.8rem 1.15rem;
-  border-bottom: 1px solid rgba(214, 203, 185, 0.45);
-  border-right: 1px solid rgba(214, 203, 185, 0.45);
+  border-bottom: 1px solid rgba(30, 79, 99, 0.45);
+  border-right: 1px solid rgba(30, 79, 99, 0.45);
   color: var(--text-2);
 }
 
@@ -1953,13 +2097,13 @@ table.grid td:last-child {
 }
 
 table.grid tr:nth-child(even) td {
-  background: rgba(250, 246, 238, 0.55);
+  background: rgba(231, 244, 236, 0.55);
 }
 
 /* ASCII architectural diagrams */
 pre.ascii-diagram {
-  background: #3B2418;
-  color: #FAF3E7;
+  background: var(--bg-dark);
+  color: #EAF6F2;
   border-radius: 14px;
   padding: 1.5rem 1.75rem;
   font-family: var(--font-mono);
@@ -1967,7 +2111,7 @@ pre.ascii-diagram {
   line-height: 1.55;
   overflow-x: auto;
   margin: 1.35rem 0;
-  box-shadow: inset 0 2px 6px rgba(36, 24, 17, 0.25), 0 4px 14px rgba(110, 70, 30,0.06);
+  box-shadow: inset 0 2px 6px rgba(12, 35, 52, 0.25), 0 4px 14px rgba(30, 79, 99,0.06);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -1990,18 +2134,18 @@ pre.ascii-diagram {
   background: rgba(255, 255, 255, 0.74);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(226, 217, 202, 0.85);
+  border: 1px solid rgba(30, 79, 99, 0.85);
   border-radius: 14px;
   padding: 1.35rem 1.65rem;
   margin-bottom: 1.25rem;
-  box-shadow: 0 3px 14px -2px rgba(110, 70, 30,0.04), inset 0 1px 1px #FFFFFF;
+  box-shadow: 0 3px 14px -2px rgba(30, 79, 99,0.04), inset 0 1px 1px #FFFFFF;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .qa:hover {
   transform: translateY(-2px);
-  border-color: rgba(154, 52, 18, 0.35);
-  box-shadow: 0 8px 22px -4px rgba(110, 70, 30,0.08), inset 0 1px 1px #FFFFFF;
+  border-color: rgba(20, 179, 173, 0.35);
+  box-shadow: 0 8px 22px -4px rgba(30, 79, 99,0.08), inset 0 1px 1px #FFFFFF;
   background: #FFFFFF;
 }
 
@@ -2012,22 +2156,22 @@ pre.ascii-diagram {
   font-weight: 700;
   padding: 0.2rem 0.55rem;
   border-radius: 6px;
-  background: rgba(30, 58, 138, 0.08);
+  background: rgba(20, 179, 173, 0.08);
   color: var(--oxford-600);
-  border: 1px solid rgba(30, 58, 138, 0.22);
+  border: 1px solid rgba(20, 179, 173, 0.22);
   margin-bottom: 0.65rem;
 }
 
 .qa--5m .qa__tag {
-  background: rgba(154, 52, 18, 0.08);
+  background: rgba(20, 179, 173, 0.08);
   color: var(--terra-600);
-  border-color: rgba(154, 52, 18, 0.22);
+  border-color: rgba(20, 179, 173, 0.22);
 }
 
 .qa--15m .qa__tag {
-  background: rgba(109, 40, 217, 0.08);
-  color: #EA580C;
-  border-color: rgba(109, 40, 217, 0.22);
+  background: rgba(20, 179, 173, 0.08);
+  color: var(--accent);
+  border-color: rgba(20, 179, 173, 0.22);
 }
 
 .qa__q {
@@ -2044,7 +2188,7 @@ pre.ascii-diagram {
   line-height: 1.74;
   margin: 0;
   padding-left: 1.15rem;
-  border-left: 3px solid rgba(154, 52, 18, 0.35);
+  border-left: 3px solid rgba(20, 179, 173, 0.35);
 }
 
 /* ============================================================
@@ -2078,7 +2222,7 @@ main:not(.sheet):not(.content) {
 }
 
 .top-band {
-  background: rgba(250, 246, 238, 0.85);
+  background: rgba(231, 244, 236, 0.85);
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border-parchment);
@@ -2086,7 +2230,7 @@ main:not(.sheet):not(.content) {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 4px 20px -2px rgba(110, 70, 30,0.04);
+  box-shadow: 0 4px 20px -2px rgba(30, 79, 99,0.04);
 }
 
 .top-band__inner {
@@ -2108,8 +2252,8 @@ main:not(.sheet):not(.content) {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: rgba(154, 52, 18, 0.08);
-  border: 1px solid rgba(154, 52, 18, 0.22);
+  background: rgba(20, 179, 173, 0.08);
+  border: 1px solid rgba(20, 179, 173, 0.22);
   color: var(--terra-600);
   display: grid;
   place-items: center;
@@ -2143,7 +2287,7 @@ main:not(.sheet):not(.content) {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(110, 70, 30,0.04);
+  box-shadow: 0 1px 3px rgba(30, 79, 99,0.04);
 }
 
 .top-band__right .btn:hover {
@@ -2151,7 +2295,7 @@ main:not(.sheet):not(.content) {
   border-color: var(--terra-600);
   color: var(--terra-600);
   transform: translateY(-1.5px);
-  box-shadow: 0 4px 14px rgba(110, 70, 30,0.08);
+  box-shadow: 0 4px 14px rgba(30, 79, 99,0.08);
 }
 
 .subject-band {
@@ -2179,8 +2323,8 @@ main:not(.sheet):not(.content) {
   font-size: 1rem;
   font-weight: 800;
   color: var(--terra-600);
-  background: rgba(154, 52, 18, 0.1);
-  border: 1px solid rgba(154, 52, 18, 0.25);
+  background: rgba(20, 179, 173, 0.1);
+  border: 1px solid rgba(20, 179, 173, 0.25);
   border-radius: 12px;
   padding: 0.5rem 0.95rem;
   flex-shrink: 0;
@@ -2223,14 +2367,14 @@ main:not(.sheet):not(.content) {
 }
 
 .revision-box {
-  background: rgba(254, 243, 199, 0.45);
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  background: rgba(240, 172, 27, 0.45);
+  border: 1px solid rgba(200, 135, 10, 0.3);
   border-radius: 14px;
   padding: 1.25rem 1.5rem;
   margin: 1.25rem 0 1.85rem;
   font-size: 0.94rem;
   line-height: 1.7;
-  color: #EA580C;
+  color: var(--accent);
 }
 
 .qa-list {
@@ -2260,7 +2404,7 @@ main:not(.sheet):not(.content) {
   border: 1px solid var(--border-subt);
   border-radius: 18px;
   text-align: center;
-  box-shadow: 0 4px 16px rgba(110, 70, 30,0.04);
+  box-shadow: 0 4px 16px rgba(30, 79, 99,0.04);
 }
 
 /* ============================================================
@@ -2347,6 +2491,276 @@ main:not(.sheet):not(.content) {
   font-family: var(--font-mono);
   font-size: var(--fs-2xs);
   color: var(--ink-500);
+}
+
+/* ============================================================
+   KINETIC SCHOLAR — the subject marquee strip
+   ============================================================ */
+
+.marquee {
+  overflow: hidden;
+  background: var(--cream-200);
+  border-block: 1px solid var(--ink-950);
+  height: 88px;
+  display: flex;
+  align-items: center;
+  transform: rotate(-1.5deg);
+  margin: 3.5rem 0 4.5rem;
+  position: relative;
+  z-index: 1;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.marquee-track {
+  display: inline-flex;
+  align-items: center;
+  gap: 2.5rem;
+  padding-right: 2.5rem;
+  flex-shrink: 0;
+  width: max-content;
+  animation: marquee-slide 28s linear infinite;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  color: var(--ink-900);
+  white-space: nowrap;
+}
+
+.marquee-code {
+  font-family: var(--font-mono);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  color: var(--ink-500);
+  white-space: nowrap;
+}
+
+.marquee-sep {
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+@keyframes marquee-slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .marquee {
+    height: 56px;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Semester 5 Index Spread — sticky chapter rail */
+.semester-block #sem5-section .semester-header,
+#sem5-section {
+  scroll-margin-top: calc(var(--nav-h) + 1rem);
+}
+
+/* ============================================================
+   KINETIC SCHOLAR — archive ghost stamp & reveal system
+   ============================================================ */
+
+.ghost-stamp {
+  position: absolute;
+  top: -0.6rem;
+  right: 0.25rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(3rem, 6vw, 4.5rem);
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink-300);
+  transform: rotate(-3deg);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--i, 0) * 80ms);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+/* PPS interjection row */
+.pps-row {
+  margin-top: var(--sp-6);
+  border-left: 3px solid var(--accent);
+  background: var(--cream-200);
+  padding: var(--sp-4) var(--sp-5);
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  border-radius: 0 var(--r-sm) var(--r-sm) 0;
+  flex-wrap: wrap;
+}
+
+.pps-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow);
+  flex-shrink: 0;
+}
+
+.pps-text {
+  font-size: var(--fs-sm);
+  color: var(--ink-700);
+  flex: 1;
+  min-width: 220px;
+}
+
+.pps-link {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--fs-sm);
+  color: var(--ink-800);
+  transition: color var(--d-fast) var(--ease);
+}
+
+.pps-link:hover {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   KINETIC SCHOLAR — exam anatomy: self-drawing rule,
+   ink drops, and stamp-in group cards
+   ============================================================ */
+
+.exam-rule {
+  position: relative;
+  height: 3px;
+  background: linear-gradient(90deg, var(--ink-300) 0%, var(--ink-300) 60%, var(--accent) 100%);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms var(--ease);
+  margin: var(--sp-8) 0 var(--sp-6);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.exam-rule.in-view {
+  transform: scaleX(1);
+}
+
+.exam-drop {
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px rgba(20, 179, 173, 0.35);
+  transform: translate(-50%, -50%);
+}
+
+.marks-stamp {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: rotate(90deg) translateX(50%);
+  transform-origin: right center;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: var(--fs-sm);
+  color: var(--ink-400);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+@keyframes stamp-in {
+  0%   { opacity: 0; }
+  50%  { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+/* ============================================================
+   KINETIC SCHOLAR — colophon: rubber stamp + archive strip
+   ============================================================ */
+
+.site-foot {
+  position: relative;
+}
+
+.foot-stamp {
+  position: absolute;
+  top: var(--sp-6);
+  left: clamp(var(--sp-4), 4.5vw, var(--sp-8));
+  width: 76px;
+  height: 76px;
+  border: 1px solid rgba(20, 179, 173, 0.45);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.5;
+  color: rgba(20, 179, 173, 0.75);
+  background: rgba(20, 179, 173, 0.05);
+  transform: rotate(-8deg);
+  opacity: 0.55;
+  user-select: none;
+  pointer-events: none;
+}
+
+.foot-strip {
+  margin-top: var(--sp-8);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border-subt);
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: var(--fs-2xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--ink-500);
+}
+
+.foot-strip .ember-dot {
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent-glow);
+  margin-right: 0.5rem;
+  vertical-align: middle;
 }
 
 /* ============================================================

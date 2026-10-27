@@ -1,54 +1,62 @@
 /* ============================================================
-   qa-styles.css — Academic Study Repository (Parchment & Liquid Glass)
+   qa-styles.css — Academic Study Repository (Mint Paper & Liquid Glass)
    B.Tech Computer Science & Engineering (MAKAUT Autonomous)
-   Scholarly Editorial Styling · Bespoke Vector Accents · ZERO Emojis
+   Hanken Grotesk + JetBrains Mono · Single Teal Accent · ZERO Emojis
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* Creamy Parchment & Liquid Glass Foundation */
-  --bg-page: #FAF6EE;
+  /* Mint Paper & Liquid Glass Foundation */
+  --bg-page: #EEF7F1;
   --bg-card: rgba(255, 255, 255, 0.74);
   --bg-card-hover: rgba(255, 255, 255, 0.92);
-  --bg-glass-nav: rgba(250, 246, 238, 0.85);
+  --bg-glass-nav: rgba(231, 244, 236, 0.85);
 
-  /* Academic Ink Hierarchy */
-  --text-main: #1E1510;
-  --text-body: #4E3524;
-  --text-muted: #7A5840;
-  --text-subtle: #9A7B62;
+  /* Navy Ink Hierarchy */
+  --text-main: #0E2A3D;
+  --text-body: #3C5B6A;
+  --text-muted: #557079;
+  --text-subtle: #7FA6A8;
 
-  /* Group Badges & Heritage Colors */
-  --oxford-blue: #EA580C;
-  --oxford-light: rgba(30, 58, 138, 0.08);
-  --oxford-border: rgba(30, 58, 138, 0.25);
+  /* Group Badges — single accent (teal tints) */
+  --oxford-blue: #14B3AD;
+  --oxford-light: rgba(20, 179, 173, 0.08);
+  --oxford-border: rgba(20, 179, 173, 0.25);
 
-  --cambridge-amber: #9A3412;
-  --cambridge-light: rgba(154, 52, 18, 0.08);
-  --cambridge-border: rgba(154, 52, 18, 0.28);
+  --cambridge-amber: #0A7470;
+  --cambridge-light: rgba(20, 179, 173, 0.08);
+  --cambridge-border: rgba(20, 179, 173, 0.28);
 
-  --royal-purple: #EA580C;
-  --royal-light: rgba(109, 40, 217, 0.08);
-  --royal-border: rgba(109, 40, 217, 0.28);
+  --royal-purple: #6FE9E2;
+  --royal-light: rgba(111, 233, 226, 0.08);
+  --royal-border: rgba(111, 233, 226, 0.28);
 
-  /* Borders & Specular Glass Refractions */
+  /* Gold secondary & coral danger (spec tokens) */
+  --gold: #F0AC1B;
+  --gold-deep: #C8870A;
+  --coral: #EF5F5F;
+  --coral-soft: rgba(239, 95, 95, 0.12);
+  --accent-bright: #6FE9E2;
+  --bg-dark: #0C2334;
+
+  /* Borders & Specular Glass Refractions (navy-tinted) */
   --border-glass: rgba(255, 255, 255, 0.95);
-  --border-parchment: rgba(214, 203, 185, 0.75);
-  --border-light: rgba(226, 217, 202, 0.65);
+  --border-parchment: rgba(30, 79, 99, 0.22);
+  --border-light: rgba(30, 79, 99, 0.14);
 
-  /* Elevation Shadows */
-  --shadow-glass: 0 16px 40px -8px rgba(44, 38, 28, 0.07), 0 4px 14px rgba(44, 38, 28, 0.03);
-  --shadow-card: 0 4px 18px -2px rgba(44, 38, 28, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.95);
-  --shadow-card-hover: 0 14px 34px -4px rgba(44, 38, 28, 0.09), inset 0 1px 1px #FFFFFF;
+  /* Soft Navy-Tinted Elevation Shadows */
+  --shadow-glass: 0 16px 40px -8px rgba(12, 35, 52, 0.08), 0 4px 14px rgba(12, 35, 52, 0.03);
+  --shadow-card: 0 4px 18px -2px rgba(12, 35, 52, 0.04), inset 0 1px 1px rgba(255, 255, 255, 0.95);
+  --shadow-card-hover: 0 14px 34px -4px rgba(12, 35, 52, 0.09), inset 0 1px 1px #FFFFFF;
   --shadow-specular: inset 0 1.5px 2px rgba(255, 255, 255, 0.98);
 
   /* Typography */
-  --font-serif: 'Fraunces', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  --font-serif: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
-  /* Legacy compatibility aliases */
+  /* Legacy compatibility aliases — single-accent rule */
   --grp-a: var(--oxford-blue);
   --grp-b: var(--cambridge-amber);
   --grp-c: var(--royal-purple);
@@ -58,8 +66,8 @@
   --text-2: var(--text-body);
   --text-3: var(--text-muted);
   --text-4: var(--text-subtle);
-  --accent: var(--cambridge-amber);
-  --accent-glow: rgba(154, 52, 18, 0.2);
+  --accent: var(--oxford-blue);
+  --accent-glow: rgba(20, 179, 173, 0.2);
 }
 
 /* ============================================================
@@ -76,12 +84,11 @@ html {
 body {
   font-family: var(--font-sans);
   background-color: var(--bg-page);
-  /* Tactile Vellum Parchment Atmosphere with SVG Fractal Grain */
+  /* Soft Mint Paper Atmosphere */
   background-image:
-    radial-gradient(1200px 700px at 15% 0%, rgba(238, 218, 188, 0.55), transparent 70%),
-    radial-gradient(1100px 650px at 85% 12%, rgba(230, 200, 175, 0.42), transparent 65%),
-    radial-gradient(1200px 850px at 50% 50%, rgba(236, 222, 200, 0.48), transparent 75%),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='paperGrain'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.62' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.38  0 0 0 0 0.30  0 0 0 0 0.22  0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23paperGrain)'/%3E%3C/svg%3E");
+    radial-gradient(1200px 700px at 15% 0%, rgba(197, 224, 215, 0.45), transparent 70%),
+    radial-gradient(1100px 650px at 85% 12%, rgba(141, 200, 188, 0.25), transparent 65%),
+    radial-gradient(1200px 850px at 50% 50%, rgba(165, 211, 197, 0.30), transparent 75%);
   background-attachment: fixed;
   color: var(--text-body);
   margin: 0;
@@ -94,7 +101,7 @@ body {
 }
 
 ::selection {
-  background: rgba(154, 52, 18, 0.16);
+  background: rgba(20, 179, 173, 0.16);
   color: var(--text-main);
 }
 
@@ -113,7 +120,7 @@ body {
   backdrop-filter: blur(24px) saturate(180%);
   -webkit-backdrop-filter: blur(24px) saturate(180%);
   border-bottom: 1px solid var(--border-parchment);
-  box-shadow: 0 4px 20px -2px rgba(44, 38, 28, 0.04), inset 0 -1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(12, 35, 52, 0.04), inset 0 -1px 0 rgba(255, 255, 255, 0.85);
   gap: 1.25rem;
 }
 
@@ -141,7 +148,7 @@ body {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 3px rgba(44, 38, 28, 0.04), inset 0 1px 0 #FFFFFF;
+  box-shadow: 0 1px 3px rgba(12, 35, 52, 0.04), inset 0 1px 0 #FFFFFF;
   white-space: nowrap;
 }
 
@@ -150,7 +157,7 @@ body {
   transform: translateY(-1.5px);
   border-color: var(--cambridge-amber);
   color: var(--cambridge-amber);
-  box-shadow: 0 4px 14px rgba(44, 38, 28, 0.08), inset 0 1px 0 #FFFFFF;
+  box-shadow: 0 4px 14px rgba(12, 35, 52, 0.08), inset 0 1px 0 #FFFFFF;
 }
 
 /* ============================================================
@@ -177,7 +184,7 @@ body {
   max-height: calc(100vh - 105px);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(214, 203, 185, 0.8) transparent;
+  scrollbar-color: rgba(30, 79, 99, 0.8) transparent;
 }
 
 .sidebar::-webkit-scrollbar,
@@ -187,7 +194,7 @@ body {
 
 .sidebar::-webkit-scrollbar-thumb,
 .qa-sidebar::-webkit-scrollbar-thumb {
-  background: rgba(214, 203, 185, 0.85);
+  background: rgba(30, 79, 99, 0.85);
   border-radius: 4px;
 }
 
@@ -239,7 +246,7 @@ body {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 2px rgba(44, 38, 28, 0.02);
+  box-shadow: 0 1px 2px rgba(12, 35, 52, 0.02);
 }
 
 .toc-box a b {
@@ -249,8 +256,8 @@ body {
 .toc-box a:hover {
   background: #FFFFFF;
   transform: translateX(4px);
-  border-color: rgba(154, 52, 18, 0.35);
-  box-shadow: 0 4px 14px rgba(44, 38, 28, 0.06), inset 0 1px 0 #FFFFFF;
+  border-color: rgba(20, 179, 173, 0.35);
+  box-shadow: 0 4px 14px rgba(12, 35, 52, 0.06), inset 0 1px 0 #FFFFFF;
   color: var(--cambridge-amber);
 }
 
@@ -320,15 +327,15 @@ body {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
-  box-shadow: 0 1px 2px rgba(44, 38, 28, 0.02);
+  box-shadow: 0 1px 2px rgba(12, 35, 52, 0.02);
 }
 
 .sidebar-nav a:hover {
   background: #FFFFFF;
   color: var(--cambridge-amber);
-  border-color: rgba(154, 52, 18, 0.35);
+  border-color: rgba(20, 179, 173, 0.35);
   transform: translateX(4px);
-  box-shadow: 0 4px 14px rgba(44, 38, 28, 0.06), inset 0 1px 0 #FFFFFF;
+  box-shadow: 0 4px 14px rgba(12, 35, 52, 0.06), inset 0 1px 0 #FFFFFF;
 }
 
 .back-btn {
@@ -430,7 +437,7 @@ body {
   background: var(--bg-card);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 217, 202, 0.85);
+  border: 1px solid rgba(30, 79, 99, 0.85);
   border-radius: 18px;
   padding: 1.65rem 1.95rem;
   margin-bottom: 1.85rem;
@@ -446,13 +453,13 @@ body {
 .qa-card:hover {
   transform: translateY(-2.5px);
   background: var(--bg-card-hover);
-  border-color: rgba(154, 52, 18, 0.38);
+  border-color: rgba(20, 179, 173, 0.38);
   box-shadow: var(--shadow-card-hover);
 }
 
 .qa-card:target {
   border-color: var(--cambridge-amber);
-  box-shadow: 0 0 0 3.5px rgba(154, 52, 18, 0.2), var(--shadow-card-hover);
+  box-shadow: 0 0 0 3.5px rgba(20, 179, 173, 0.2), var(--shadow-card-hover);
   background: #FFFFFF;
 }
 
@@ -522,7 +529,7 @@ body {
   line-height: 1.78;
   color: var(--text-body);
   padding-left: 1.35rem;
-  border-left: 3.5px solid rgba(154, 52, 18, 0.35);
+  border-left: 3.5px solid rgba(20, 179, 173, 0.35);
   transition: border-left-color 0.22s ease;
 }
 
@@ -602,19 +609,19 @@ p > code,
 li > code {
   font-family: var(--font-mono);
   font-size: 0.88em;
-  background: rgba(44, 38, 28, 0.05);
+  background: rgba(12, 35, 52, 0.05);
   padding: 0.16em 0.45em;
   border-radius: 5px;
   color: var(--cambridge-amber);
-  border: 1px solid rgba(36, 24, 17, 0.06);
+  border: 1px solid rgba(12, 35, 52, 0.06);
 }
 
 /* Code Blocks & Terminal Windows */
 .code-block,
 pre,
 .qa-answer pre {
-  background: #3B2418;
-  color: #FAF3E7;
+  background: var(--bg-dark);
+  color: #EAF6F2;
   border-radius: 12px;
   padding: 1.25rem 1.45rem;
   font-family: var(--font-mono);
@@ -622,7 +629,7 @@ pre,
   line-height: 1.64;
   overflow-x: auto;
   margin: 1.35rem 0;
-  box-shadow: inset 0 2px 5px rgba(36, 24, 17, 0.25), 0 4px 12px rgba(44, 38, 28, 0.05);
+  box-shadow: inset 0 2px 5px rgba(12, 35, 52, 0.25), 0 4px 12px rgba(12, 35, 52, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -647,13 +654,13 @@ pre code {
   font-size: 0.93rem;
   line-height: 1.65;
   color: var(--text-main);
-  box-shadow: inset 2px 2px 5px rgba(44, 38, 28, 0.02), 0 3px 10px rgba(44, 38, 28, 0.04);
+  box-shadow: inset 2px 2px 5px rgba(12, 35, 52, 0.02), 0 3px 10px rgba(12, 35, 52, 0.04);
   overflow-x: auto;
 }
 
 /* Highlight Text */
 .highlight {
-  background: rgba(154, 52, 18, 0.12);
+  background: rgba(20, 179, 173, 0.12);
   color: var(--cambridge-amber);
   padding: 0.12em 0.4em;
   border-radius: 4px;
@@ -662,7 +669,7 @@ pre code {
 
 /* Sleek Mac Studio Window Containers */
 .mac-window {
-  background: #1E1510;
+  background: var(--bg-dark);
   border-radius: 14px;
   overflow: hidden;
   margin: 1.5rem 0;
@@ -675,7 +682,7 @@ pre code {
   align-items: center;
   gap: 8px;
   padding: 0.65rem 1rem;
-  background: #3B2418;
+  background: var(--bg-dark);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -683,12 +690,12 @@ pre code {
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  box-shadow: inset 0 1px 1px rgba(36, 24, 17, 0.2);
+  box-shadow: inset 0 1px 1px rgba(12, 35, 52, 0.2);
 }
 
-.mac-dot.red { background: #EA580C; }
-.mac-dot.yellow { background: #EA580C; }
-.mac-dot.green { background: #C2410C; }
+.mac-dot.red { background: var(--coral); }
+.mac-dot.yellow { background: var(--gold); }
+.mac-dot.green { background: var(--accent); }
 
 .mac-title {
   margin-left: auto;
@@ -696,13 +703,13 @@ pre code {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #9A7B62;
+  color: var(--text-subtle);
   font-weight: 700;
 }
 
 .mac-body {
   padding: 0;
-  background: #1E1510;
+  background: var(--bg-dark);
 }
 
 .mac-body pre {
@@ -727,24 +734,24 @@ table {
   overflow: hidden;
   background: #FFFFFF;
   font-size: 0.93rem;
-  box-shadow: 0 4px 14px rgba(44, 38, 28, 0.04);
+  box-shadow: 0 4px 14px rgba(12, 35, 52, 0.04);
 }
 
 th {
-  background: #F4ECE1;
+  background: #E7F4EC;
   font-family: var(--font-sans);
   font-weight: 700;
   color: var(--text-main);
   padding: 0.85rem 1.2rem;
   border-bottom: 1.5px solid var(--border-parchment);
-  border-right: 1px solid rgba(214, 203, 185, 0.6);
+  border-right: 1px solid rgba(30, 79, 99, 0.6);
   text-align: left;
 }
 
 td {
   padding: 0.85rem 1.2rem;
-  border-bottom: 1px solid rgba(214, 203, 185, 0.45);
-  border-right: 1px solid rgba(214, 203, 185, 0.45);
+  border-bottom: 1px solid rgba(30, 79, 99, 0.45);
+  border-right: 1px solid rgba(30, 79, 99, 0.45);
   color: var(--text-body);
   line-height: 1.65;
 }
@@ -759,7 +766,7 @@ td:last-child {
 }
 
 tr:nth-child(even) td {
-  background: rgba(250, 246, 238, 0.55);
+  background: rgba(231, 244, 236, 0.55);
 }
 
 .diagram-container {
@@ -769,7 +776,7 @@ tr:nth-child(even) td {
   padding: 1.85rem;
   margin: 1.6rem 0;
   text-align: center;
-  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(44, 38, 28, 0.03);
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.9), 0 4px 12px rgba(12, 35, 52, 0.03);
 }
 
 .diagram-caption {
@@ -786,7 +793,7 @@ tr:nth-child(even) td {
   background: var(--bg-card);
   backdrop-filter: blur(18px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
-  border: 1px solid rgba(226, 217, 202, 0.88);
+  border: 1px solid rgba(30, 79, 99, 0.88);
   border-radius: 20px;
   padding: clamp(1.5rem, 3vw, 2.25rem);
   margin-bottom: 2.25rem;
@@ -821,7 +828,7 @@ tr:nth-child(even) td {
   border-radius: 12px;
   padding: 1.75rem 1.25rem;
   overflow-x: auto;
-  box-shadow: inset 0 1px 2px rgba(44, 38, 28, 0.03);
+  box-shadow: inset 0 1px 2px rgba(12, 35, 52, 0.03);
 }
 
 /* ============================================================
@@ -924,7 +931,7 @@ tr:nth-child(even) td {
 
   .qa-card {
     break-inside: avoid;
-    border: 1px solid rgba(234,88,12,0.3) !important;
+    border: 1px solid rgba(30,79,99,0.3) !important;
     box-shadow: none !important;
     background: #FFFFFF !important;
     margin-bottom: 1.5rem !important;

@@ -7,7 +7,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Shared Stylesheets -->
     <link rel="stylesheet" href="../notes.css">
@@ -17,11 +17,11 @@
     
     <style>
         :root {
-            --primary-color: #EA580C; /* Teal Accent */
-            --primary-light: rgba(13, 148, 136, 0.06);
-            --border-color: rgba(13, 148, 136, 0.2);
-            --code-bg: #1E1510;
-            --code-text: #EADDC0;
+            --primary-color: #14B3AD; /* Teal Accent */
+            --primary-light: rgba(20, 179, 173, 0.06);
+            --border-color: rgba(20, 179, 173, 0.2);
+            --code-bg: #0C2334;
+            --code-text: #C5E0D7;
         }
 
         .mark-badge {
@@ -31,7 +31,7 @@
             padding: 0.25rem 0.65rem;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-weight: 700;
             margin-left: 0.5rem;
             vertical-align: middle;
@@ -41,7 +41,7 @@
         }
 
         .section-heading {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 2.2rem;
             font-weight: 700;
             color: var(--text-main);
@@ -56,7 +56,7 @@
         }
 
         .section-sub {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 0.95rem;
             font-weight: 600;
             color: var(--primary-color);
@@ -68,7 +68,7 @@
 
         .qa-card {
             background: #ffffff;
-            border: 1px solid rgba(44, 62, 80, 0.12);
+            border: 1px solid rgba(12, 35, 52, 0.12);
             border-radius: 8px;
             padding: 1.8rem;
             margin-bottom: 1.8rem;
@@ -77,15 +77,15 @@
         }
 
         .qa-card:hover {
-            border-color: rgba(13, 148, 136, 0.35);
+            border-color: rgba(20, 179, 173, 0.35);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
         }
 
         .qa-question {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 1.15rem;
             font-weight: 700;
-            color: #241811;
+            color: #0E2A3D;
             margin-bottom: 1.2rem;
             line-height: 1.5;
             display: flex;
@@ -103,7 +103,7 @@
         .answer {
             font-size: 1rem;
             line-height: 1.7;
-            color: #3B2418;
+            color: #1F4763;
         }
 
         .answer p {
@@ -115,8 +115,8 @@
         }
 
         .highlight {
-            background-color: rgba(13, 148, 136, 0.08);
-            color: #0f766e;
+            background-color: rgba(20, 179, 173, 0.08);
+            color: #0A7470;
             font-weight: 600;
             padding: 0.15rem 0.4rem;
             border-radius: 4px;
@@ -125,29 +125,29 @@
         .code-block {
             background-color: var(--code-bg);
             color: var(--code-text);
-            font-family: 'Fira Code', monospace;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
             font-size: 0.9rem;
             padding: 1.25rem;
             border-radius: 6px;
             overflow-x: auto;
             margin: 1rem 0;
             line-height: 1.6;
-            border: 1px solid #3B2418;
+            border: 1px solid #1F4763;
             box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
         }
 
         .output-box {
-            background-color: #FAF3E7;
+            background-color: #EEF7F1;
             border-left: 4px solid var(--primary-color);
             padding: 1rem 1.25rem;
             margin: 1rem 0;
-            font-family: 'Fira Code', monospace;
+            font-family: 'JetBrains Mono', ui-monospace, monospace;
             font-size: 0.9rem;
-            color: #241811;
+            color: #0E2A3D;
             border-radius: 0 6px 6px 0;
-            border-top: 1px solid #EADDC0;
-            border-right: 1px solid #EADDC0;
-            border-bottom: 1px solid #EADDC0;
+            border-top: 1px solid #C5E0D7;
+            border-right: 1px solid #C5E0D7;
+            border-bottom: 1px solid #C5E0D7;
         }
 
         .output-label {
@@ -168,19 +168,19 @@
         }
 
         table.comp-table th, table.comp-table td {
-            border: 1px solid #C9AE94;
+            border: 1px solid #7FA6A8;
             padding: 0.75rem 1rem;
             text-align: left;
         }
 
         table.comp-table th {
-            background-color: #F3EAD8;
-            color: #1E1510;
+            background-color: #C5E0D7;
+            color: #0C2334;
             font-weight: 700;
         }
 
         table.comp-table tr:nth-child(even) {
-            background-color: #FAF3E7;
+            background-color: #EEF7F1;
         }
 
         .top-nav {
@@ -202,7 +202,7 @@
             gap: 0.4rem;
             padding: 0.5rem 1rem;
             background: #fff;
-            border: 1px solid rgba(44, 62, 80, 0.15);
+            border: 1px solid rgba(12, 35, 52, 0.15);
             border-radius: 6px;
             transition: all 0.2s ease;
         }
@@ -214,38 +214,38 @@
         }
 
         .nav-title {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
             font-size: 1.3rem;
             font-weight: 700;
             color: var(--text-main);
         }
     
         .diagram-container {
-            background: linear-gradient(155deg, #3B2318 0%, #241811 100%) !important;
-            border: 1px solid rgba(234, 88, 12, 0.35) !important;
+            background: linear-gradient(155deg, #0C2334 0%, #0E2A3D 100%) !important;
+            border: 1px solid rgba(20, 179, 173, 0.35) !important;
             border-radius: 14px !important;
             padding: 1.8rem !important;
             margin: 2.2rem 0 !important;
             text-align: center !important;
-            box-shadow: 0 18px 44px -18px rgba(36, 24, 17, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
+            box-shadow: 0 18px 44px -18px rgba(12, 35, 52, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05) !important;
             position: relative;
             overflow: hidden;
         }
         .diagram-container::before {
             content: ""; position: absolute; inset: 0;
-            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(20, 179, 173, 0.14), transparent 60%);
             pointer-events: none;
         }
         .diagram-container > * { position: relative; z-index: 1; }
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+            filter: drop-shadow(0 6px 14px rgba(20, 179, 173, 0.18));
         }
         .diagram-caption {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.72rem !important;
-            color: #FF7A1A !important;
+            color: #6FE9E2 !important;
             margin-top: 1.1rem !important;
             font-style: normal !important;
             font-weight: 600 !important;
@@ -256,19 +256,19 @@
 
         .diagram-container::before {
             content: ""; position: absolute; inset: 0;
-            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(234, 88, 12, 0.14), transparent 60%);
+            background: radial-gradient(ellipse 90% 60% at 50% -10%, rgba(20, 179, 173, 0.14), transparent 60%);
             pointer-events: none;
         }
         .diagram-container > * { position: relative; z-index: 1; }
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+            filter: drop-shadow(0 6px 14px rgba(20, 179, 173, 0.18));
         }
         .diagram-caption {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.72rem !important;
-            color: #FF7A1A !important;
+            color: #6FE9E2 !important;
             margin-top: 1.1rem !important;
             font-style: normal !important;
             font-weight: 600 !important;
@@ -279,12 +279,12 @@
         .diagram-container svg {
             max-width: 100%;
             height: auto;
-            filter: drop-shadow(0 6px 14px rgba(234, 88, 12, 0.18));
+            filter: drop-shadow(0 6px 14px rgba(20, 179, 173, 0.18));
         }
         .diagram-caption {
             font-family: 'JetBrains Mono', monospace !important;
             font-size: 0.72rem !important;
-            color: #FF7A1A !important;
+            color: #6FE9E2 !important;
             margin-top: 1.1rem !important;
             font-style: normal !important;
             font-weight: 600 !important;
@@ -302,20 +302,20 @@
     <a href="pps_index.html">← PPS Menu</a>
     <span class="nav-title">SEM-2 · 2024–2025 Solved Paper</span>
     <div style="display:flex;gap:0.5rem;">
-        <span style="opacity: 0.3; cursor: not-allowed; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 600; border: 1px solid #ccc; border-radius: 6px; background: #fff;">← Prev</span>
+        <span style="opacity: 0.3; cursor: not-allowed; padding: 0.5rem 1rem; font-size: 0.9rem; font-weight: 600; border: 1px solid #7FA6A8; border-radius: 6px; background: #fff;">← Prev</span>
         <a href="pps_pyq_2024.html">2023–24 Paper →</a>
     </div>
 </nav>
 
-<div class="container" style="max-width: 1100px; margin: 0 auto; background: #fff; padding: 4rem 3.5rem; border-radius: 8px; border: 1px solid rgba(44,62,80,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
+<div class="container" style="max-width: 1100px; margin: 0 auto; background: #fff; padding: 4rem 3.5rem; border-radius: 8px; border: 1px solid rgba(12,35,52,0.15); box-shadow: 0 10px 30px rgba(0,0,0,0.05);">
     <header style="text-align: center; margin-bottom: 3rem;">
         <span style="font-size: 0.8rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 0.2em; background: var(--primary-light); padding: 0.4rem 1.2rem; border-radius: 20px; border: 1px solid var(--border-color);">MAKAUT Solved Paper · UPID : 002008</span>
-        <h1 style="font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; color: #241811; margin: 1rem 0 0.5rem 0;">Programming for Problem Solving</h1>
-        <p style="font-size: 1.1rem; color: #7A5840; font-weight: 500;">B.Tech Even Semester Examination 2024–2025 · Paper Code: ESCS201 · Full Marks: 70</p>
+        <h1 style="font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif; font-size: 3.2rem; color: #0E2A3D; margin: 1rem 0 0.5rem 0;">Programming for Problem Solving</h1>
+        <p style="font-size: 1.1rem; color: #557079; font-weight: 500;">B.Tech Even Semester Examination 2024–2025 · Paper Code: ESCS201 · Full Marks: 70</p>
         <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
-            <span style="height: 1px; width: 60px; background: #C9AE94;"></span>
+            <span style="height: 1px; width: 60px; background: #7FA6A8;"></span>
             <span style="color: var(--primary-color); font-size: 1.2rem;">❖</span>
-            <span style="height: 1px; width: 60px; background: #C9AE94;"></span>
+            <span style="height: 1px; width: 60px; background: #7FA6A8;"></span>
         </div>
     </header>
     
@@ -831,7 +831,7 @@ After Shift  : 0011 0100  (52)
             <div class="answer">
                 <p><b>(a) Flowchart to Evaluate Factorial of a Number [5 Marks]:</b></p>
                 <p>The factorial of a non-negative integer \(n\), denoted by \(n!\), is the product of all positive integers less than or equal to \(n\). Below is the structured algorithm represented as a textual flowchart step diagram:</p>
-                <div style="background:#F3EAD8; padding:1.5rem; border-radius:6px; font-family:'Fira Code',monospace; font-size:0.9rem; line-height:1.8; border:1px solid #C9AE94; margin-bottom:1.5rem;">
+                <div style="background:#C5E0D7; padding:1.5rem; border-radius:6px; font-family:'JetBrains Mono',ui-monospace,monospace; font-size:0.9rem; line-height:1.8; border:1px solid #7FA6A8; margin-bottom:1.5rem;">
   [ START ]<br>
       |<br>
       v<br>
@@ -859,7 +859,7 @@ After Shift  : 0011 0100  (52)
       +-----( Jump back to condition I &lt;= N )<br>
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(b) C Program to Generate Fibonacci Series upto n-terms using loop [5 Marks]:</b></p>
                 <p>The Fibonacci sequence begins with terms 0 and 1. Every subsequent term is the algebraic sum of the two preceding terms: \(F_n = F_{n-1} + F_{n-2}\).</p>
@@ -906,7 +906,7 @@ Fibonacci Series up to 10 terms:
 0, 1, 1, 2, 3, 5, 8, 13, 21, 34
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(c) Preprocessor Directives Explained with Example [5 Marks]:</b></p>
                 <p><b>Definition:</b> The C Preprocessor is a macro processor that transforms the source code automatically before the actual compiler translation phase begins. All preprocessor directives begin with the hash/pound symbol <code>#</code> and do not end with a semicolon.</p>
@@ -1001,7 +1001,7 @@ Total Sum (S) of factorials from 1! to 5! = 153
 (Math verification: 1 + 2 + 6 + 24 + 120 = 153)
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(b) Swapping Two Variables Using Call by Value [7 Marks]:</b></p>
                 <p><b>Important Conceptual Note for Examiners:</b> In C, standard parameter passing is strictly <i>call by value</i>. When variables are passed by value to a function, the function receives independent copies. Therefore, swapping the parameters inside the function only swaps the local copies on the stack frame of the called function; it does <b>not</b> modify the original variables in the caller (e.g., <code>main</code>). To permanently swap variables in the caller, one must use pointers (Call by Address). Below, we write the program demonstrating Call by Value and print the values inside the function to prove how the local swap occurs!</p>
@@ -1120,7 +1120,7 @@ Prime numbers between 10 and 50 are:
 Total prime numbers found in range: 11
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(b) Consonant or Vowel Validation with 'wrong input' Check [7 Marks]:</b></p>
                 <p>We first check if the entered character is an alphabet using the standard library function <code>isalpha(ch)</code> from <code>&lt;ctype.h&gt;</code> (or manual ASCII range check: <code>(ch >= 'a' &amp;&amp; ch <= 'z') || (ch >= 'A' &amp;&amp; ch <= 'Z')</code>). If it is not an alphabet, we output <code>wrong input</code>. If it is an alphabet, we convert it to lowercase using <code>tolower(ch)</code> and check against <code>'a', 'e', 'i', 'o', 'u'</code>.</p>
@@ -1186,7 +1186,7 @@ char str2[]  = "Hello";                         // String literal (compiler appe
 
 printf("Message: %s\n", str2);</div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(b) How Strings are Represented in Memory [4 Marks]:</b></p>
                 <p>When a string is created, its characters are allocated in <b>contiguous (sequential) memory addresses</b>. Every individual character occupies exactly 1 byte of memory. The string must always conclude with the null terminator <code>'\0'</code> so that string-handling functions (like <code>strlen</code>, <code>printf</code>, <code>strcpy</code>) know exactly where the character sequence terminates.</p>
@@ -1201,7 +1201,7 @@ printf("Message: %s\n", str2);</div>
                             <td><code>str[3]</code></td>
                             <td><code>str[4]</code></td>
                             <td><code>str[5]</code></td>
-                            <td style="background:#fef08a; font-weight:700;"><code>str[6]</code></td>
+                            <td style="background:rgba(240, 172, 27, 0.3); font-weight:700;"><code>str[6]</code></td>
                         </tr>
                         <tr>
                             <th>Character</th>
@@ -1211,7 +1211,7 @@ printf("Message: %s\n", str2);</div>
                             <td><b>'A'</b></td>
                             <td><b>'U'</b></td>
                             <td><b>'T'</b></td>
-                            <td style="background:#fef08a; font-weight:700; color:#ea580c;"><b>'\0'</b></td>
+                            <td style="background:rgba(240, 172, 27, 0.3); font-weight:700; color:#C8870A;"><b>'\0'</b></td>
                         </tr>
                         <tr>
                             <th>ASCII Value</th>
@@ -1221,7 +1221,7 @@ printf("Message: %s\n", str2);</div>
                             <td>65</td>
                             <td>85</td>
                             <td>84</td>
-                            <td style="background:#fef08a; font-weight:700;">0</td>
+                            <td style="background:rgba(240, 172, 27, 0.3); font-weight:700;">0</td>
                         </tr>
                         <tr>
                             <th>Memory Address</th>
@@ -1231,12 +1231,12 @@ printf("Message: %s\n", str2);</div>
                             <td>2003</td>
                             <td>2004</td>
                             <td>2005</td>
-                            <td style="background:#fef08a;">2006</td>
+                            <td style="background:rgba(240, 172, 27, 0.3);">2006</td>
                         </tr>
                     </table>
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(c) C Program to Check if String is Palindrome or Not [6 Marks]:</b></p>
                 <p>A string is a palindrome if it reads exactly the same backward as forward (e.g., <code>"madam"</code>, <code>"racecar"</code>, <code>"level"</code>). We use two indices: <code>left = 0</code> and <code>right = length - 1</code>, comparing characters moving inward until they meet in the middle.</p>
@@ -1333,7 +1333,7 @@ Enter two positive integers separated by space: 48 18
 GCD of 48 and 18 is = 6
                 </div>
 
-                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #C9AE94;">
+                <hr style="margin:1.5rem 0; border:0; border-top:1px dashed #7FA6A8;">
 
                 <p><b>(b) C Program to Sort Names of Students in a Class [10 Marks]:</b></p>
                 <p>To store multiple student names, we use a <b>2-dimensional character array</b> <code>char names[N][MAX_LEN]</code> (or an array of string pointers). To sort the names in alphabetical (lexicographical) order, we apply a sorting algorithm like Bubble Sort or Selection Sort, comparing adjacent names using <code>strcmp()</code> and swapping them using <code>strcpy()</code> when they are out of order.</p>
@@ -1419,7 +1419,7 @@ Student 5: Chandan Mitra
 
     </div> <!-- End Section -->
 
-    <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(44,62,80,0.15); color: #7A5840; font-size: 0.95rem;">
+    <footer style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(12,35,52,0.15); color: #557079; font-size: 0.95rem;">
         <p>Programming for Problem Solving · B.Tech SEM-2 Solved Paper (2024–2025) · <a href="pps_index.html" style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Return to PPS Menu</a></p>
     </footer>
 </div>

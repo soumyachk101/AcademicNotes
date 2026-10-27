@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Management Study Notes — Semester 5</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
     :root {
-      --primary: #C2410C;
-      --primary-light: #0e7490;
-      --surface: #FAF3E7;
-      --text: #241811;
-      --text-secondary: #7A5840;
-      --text-body: #3B2418;
-      --border: #EADDC0;
-      --warning-bg: #fefce8;
-      --warning-border: #EA580C;
-      --warning-text: #854d0e;
-      --pyq-bg: #f0fdfa;
-      --pyq-border: #99f6e4;
-      --pyq-text: #155e75;
+      --primary: #14B3AD;
+      --primary-light: #0A7470;
+      --surface: #FFFFFF;
+      --text: #0E2A3D;
+      --text-secondary: #3C5B6A;
+      --text-body: #3C5B6A;
+      --border: #C5E0D7;
+      --warning-bg: #FFF6E3;
+      --warning-border: #F0AC1B;
+      --warning-text: #C8870A;
+      --pyq-bg: #EEF7F1;
+      --pyq-border: #C5E0D7;
+      --pyq-text: #0A7470;
     }
 
     * {
@@ -28,8 +29,8 @@
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-      background: #F3EAD8;
+      font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+      background: #E7F4EC;
       color: var(--text);
       line-height: 1.6;
     }
@@ -39,7 +40,7 @@
       top: 0;
       left: 0;
       height: 3px;
-      background: linear-gradient(135deg, #C2410C, #0e7490);
+      background: linear-gradient(135deg, #0A7470, #14B3AD);
       z-index: 101;
       transition: width 0.1s;
     }
@@ -84,7 +85,7 @@
     }
 
     .toc a:hover {
-      background: #F3EAD8;
+      background: #E7F4EC;
       color: var(--primary);
     }
 
@@ -107,7 +108,7 @@
     }
 
     .subject-card {
-      background: linear-gradient(135deg, #C2410C, #0e7490);
+      background: linear-gradient(135deg, #0A7470, #14B3AD);
       color: white;
       padding: 1.5rem;
       border-radius: 12px;
@@ -145,7 +146,7 @@
     }
 
     .unit-number {
-      background: #C2410C;
+      background: #0A7470;
       color: white;
       width: 32px;
       height: 32px;
@@ -189,7 +190,7 @@
     .topic-card h4 {
       margin: 0 0 0.5rem;
       font-size: 0.95rem;
-      color: #C2410C;
+      color: #0A7470;
     }
 
     .topic-card p,
@@ -206,7 +207,7 @@
 
     .question-block {
       background: white;
-      border-left: 3px solid #C2410C;
+      border-left: 3px solid #14B3AD;
       padding: 0.8rem 1rem;
       margin-bottom: 0.6rem;
       border-radius: 0 6px 6px 0;
@@ -215,7 +216,7 @@
     .question-block .q-label {
       font-size: 0.75rem;
       font-weight: bold;
-      color: #C2410C;
+      color: #0A7470;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       margin-bottom: 0.3rem;
@@ -228,13 +229,13 @@
     }
 
     .question-block .q-answer {
-      color: #5E3B28;
+      color: #3C5B6A;
       line-height: 1.65;
       font-size: 0.9rem;
     }
 
     .highlight-box {
-      background: #f3f4f6;
+      background: #EEF7F1;
       border-left: 3px solid var(--primary-light);
       padding: 0.7rem 1rem;
       border-radius: 0 6px 6px 0;
@@ -284,7 +285,7 @@
     footer {
       text-align: center;
       padding: 2rem;
-      color: #9A7B62;
+      color: #557079;
       font-size: 0.8rem;
       border-top: 1px solid var(--border);
       margin-top: 2rem;
@@ -294,7 +295,7 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      background: #C2410C;
+      background: #14B3AD;
       color: white;
       width: 40px;
       height: 40px;
@@ -303,7 +304,7 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      box-shadow: 0 2px 10px rgba(8, 145, 178, 0.3);
+      box-shadow: 0 2px 10px rgba(20, 179, 173, 0.3);
       opacity: 0;
       transition: opacity 0.3s;
       font-size: 1.2rem;
@@ -334,11 +335,11 @@
     }
 
     .code-block {
-      background: #241811;
-      color: #EADDC0;
+      background: #0C2334;
+      color: #EAF6F2;
       padding: 1rem;
       border-radius: 8px;
-      font-family: 'Courier New', monospace;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
       font-size: 0.82rem;
       overflow-x: auto;
       margin: 0.5rem 0;
@@ -346,15 +347,15 @@
     }
 
     .code-block .keyword {
-      color: #c084fc;
+      color: #6FE9E2;
     }
 
     .code-block .type {
-      color: #67e8f9;
+      color: #F0AC1B;
     }
 
     .code-block .comment {
-      color: #9A7B62;
+      color: #557079;
     }
   </style>
 </head>

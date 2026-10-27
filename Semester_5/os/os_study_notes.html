@@ -47,7 +47,7 @@
 <!-- ============================================================ -->
 <!-- SHEET                                                         -->
 <!-- ============================================================ -->
-<div class="sheet" style="--c:#EA580C">
+<div class="sheet" style="--c:#14B3AD">
 
   <!-- UNIT HEADER BAND -->
   <div class="unit-band">
@@ -345,14 +345,14 @@
         <svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;">
           <defs>
             <pattern id="osGrid" width="24" height="24" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="0.8" fill="rgba(234,88,12,0.06)"/>
+              <circle cx="1" cy="1" r="0.8" fill="rgba(20,179,173,0.06)"/>
             </pattern>
             <marker id="osArrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L6,3 z" fill="#EA580C"/>
+              <path d="M0,0 L0,6 L6,3 z" fill="#14B3AD"/>
             </marker>
             <linearGradient id="osGrad" x1="0" y1="0" x2="0.5" y2="1">
-              <stop offset="0%" stop-color="#3B2318"/>
-              <stop offset="100%" stop-color="#241811"/>
+              <stop offset="0%" stop-color="#0E2A3D"/>
+              <stop offset="100%" stop-color="#0C2334"/>
             </linearGradient>
             <filter id="osGlow" x="-50%" y="-50%" width="200%" height="200%">
               <feGaussianBlur stdDeviation="5" result="b"/>
@@ -362,59 +362,59 @@
           <rect width="640" height="300" fill="url(#osGrid)"/>
 
           <text x="320" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace"
-                font-size="13" font-weight="700" fill="#FF7A1A" letter-spacing="0.12em">PROCESS STATE MODEL</text>
+                font-size="13" font-weight="700" fill="#6FE9E2" letter-spacing="0.12em">PROCESS STATE MODEL</text>
 
           <!-- New state -->
-          <circle cx="80" cy="150" r="38" fill="#241811" stroke="rgba(234,88,12,0.4)" stroke-width="1.5"/>
-          <text x="80" y="154" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="700" fill="#FAF3E7">New</text>
+          <circle cx="80" cy="150" r="38" fill="#0C2334" stroke="rgba(20,179,173,0.4)" stroke-width="1.5"/>
+          <text x="80" y="154" text-anchor="middle" font-family="Hanken Grotesk" font-size="12" font-weight="700" fill="#EAF6F2">New</text>
 
           <!-- Ready state -->
-          <circle cx="280" cy="150" r="46" fill="#3B2418" stroke="rgba(234,88,12,0.5)" stroke-width="2"/>
-          <text x="280" y="146" text-anchor="middle" font-family="Manrope" font-size="13" font-weight="700" fill="#FAF3E7">Ready</text>
-          <text x="280" y="164" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">queue</text>
+          <circle cx="280" cy="150" r="46" fill="#0E2A3D" stroke="rgba(20,179,173,0.5)" stroke-width="2"/>
+          <text x="280" y="146" text-anchor="middle" font-family="Hanken Grotesk" font-size="13" font-weight="700" fill="#EAF6F2">Ready</text>
+          <text x="280" y="164" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">queue</text>
 
           <!-- Running state (CPU) -->
-          <circle cx="480" cy="150" r="52" fill="#EA580C" filter="url(#osGlow)"/>
-          <text x="480" y="146" text-anchor="middle" font-family="Manrope" font-size="13" font-weight="800" fill="#FFFDF8">Running</text>
-          <text x="480" y="164" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="rgba(255,253,248,0.85)">on CPU</text>
+          <circle cx="480" cy="150" r="52" fill="#14B3AD" filter="url(#osGlow)"/>
+          <text x="480" y="146" text-anchor="middle" font-family="Hanken Grotesk" font-size="13" font-weight="800" fill="#EAF6F2">Running</text>
+          <text x="480" y="164" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="rgba(234,246,242,0.85)">on CPU</text>
 
           <!-- Waiting state -->
-          <circle cx="480" cy="255" r="40" fill="#241811" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
-          <text x="480" y="252" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="700" fill="#FAF3E7">Waiting</text>
-          <text x="480" y="268" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">blocked</text>
+          <circle cx="480" cy="255" r="40" fill="#0C2334" stroke="rgba(20,179,173,0.35)" stroke-width="1.5"/>
+          <text x="480" y="252" text-anchor="middle" font-family="Hanken Grotesk" font-size="12" font-weight="700" fill="#EAF6F2">Waiting</text>
+          <text x="480" y="268" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">blocked</text>
 
           <!-- Terminated state -->
-          <circle cx="280" cy="255" r="38" fill="#241811" stroke="rgba(234,88,12,0.25)" stroke-width="1.5"/>
-          <text x="280" y="260" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="700" fill="#9A7B62">Terminated</text>
+          <circle cx="280" cy="255" r="38" fill="#0C2334" stroke="rgba(20,179,173,0.25)" stroke-width="1.5"/>
+          <text x="280" y="260" text-anchor="middle" font-family="Hanken Grotesk" font-size="12" font-weight="700" fill="#557079">Terminated</text>
 
           <!-- Transitions -->
           <!-- New → Ready -->
-          <line x1="118" y1="150" x2="234" y2="150" stroke="#EA580C" stroke-width="2" marker-end="url(#osArrow)"/>
-          <text x="176" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#EA580C">Admit</text>
+          <line x1="118" y1="150" x2="234" y2="150" stroke="#14B3AD" stroke-width="2" marker-end="url(#osArrow)"/>
+          <text x="176" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#14B3AD">Admit</text>
 
           <!-- Ready → Running -->
-          <line x1="326" y1="150" x2="428" y2="150" stroke="#EA580C" stroke-width="2.5" marker-end="url(#osArrow)"/>
-          <text x="377" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#FF7A1A">Dispatch</text>
+          <line x1="326" y1="150" x2="428" y2="150" stroke="#14B3AD" stroke-width="2.5" marker-end="url(#osArrow)"/>
+          <text x="377" y="142" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#6FE9E2">Dispatch</text>
 
           <!-- Running → Waiting -->
-          <line x1="480" y1="202" x2="480" y2="215" stroke="#EA580C" stroke-width="2" marker-end="url(#osArrow)"/>
-          <text x="518" y="213" font-family="JetBrains Mono" font-size="10" fill="#EA580C">I/O request</text>
+          <line x1="480" y1="202" x2="480" y2="215" stroke="#14B3AD" stroke-width="2" marker-end="url(#osArrow)"/>
+          <text x="518" y="213" font-family="JetBrains Mono" font-size="10" fill="#14B3AD">I/O request</text>
 
           <!-- Waiting → Ready -->
-          <path d="M 440,255 Q 340,275 310,192" fill="none" stroke="#EA580C" stroke-width="2" marker-end="url(#osArrow)"/>
-          <text x="365" y="272" font-family="JetBrains Mono" font-size="10" fill="#EA580C">I/O complete</text>
+          <path d="M 440,255 Q 340,275 310,192" fill="none" stroke="#14B3AD" stroke-width="2" marker-end="url(#osArrow)"/>
+          <text x="365" y="272" font-family="JetBrains Mono" font-size="10" fill="#14B3AD">I/O complete</text>
 
           <!-- Running → Terminated -->
-          <path d="M 440,196 Q 380,250 318,242" fill="none" stroke="#EA580C" stroke-width="2" marker-end="url(#osArrow)"/>
-          <text x="390" y="236" font-family="JetBrains Mono" font-size="10" fill="#EA580C">Finish</text>
+          <path d="M 440,196 Q 380,250 318,242" fill="none" stroke="#14B3AD" stroke-width="2" marker-end="url(#osArrow)"/>
+          <text x="390" y="236" font-family="JetBrains Mono" font-size="10" fill="#14B3AD">Finish</text>
 
           <!-- Running → Ready (preempt) -->
-          <path d="M 430,130 Q 380,100 325,130" fill="none" stroke="#C2410C" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#osArrow)"/>
-          <text x="377" y="105" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C2410C">Preempt</text>
+          <path d="M 430,130 Q 380,100 325,130" fill="none" stroke="#0A7470" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#osArrow)"/>
+          <text x="377" y="105" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#0A7470">Preempt</text>
 
           <!-- CPU label -->
-          <rect x="548" y="130" width="70" height="40" rx="6" fill="rgba(234,88,12,0.12)" stroke="rgba(234,88,12,0.3)"/>
-          <text x="583" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#EA580C">CPU</text>
+          <rect x="548" y="130" width="70" height="40" rx="6" fill="rgba(20,179,173,0.12)" stroke="rgba(20,179,173,0.3)"/>
+          <text x="583" y="154" text-anchor="middle" font-family="JetBrains Mono" font-size="11" font-weight="700" fill="#14B3AD">CPU</text>
         </svg>
         <div class="diagram-caption">Five-Stage Process State Model — Admit → Dispatch → Preempt → I/O → Finish</div>
       </div>
@@ -485,74 +485,74 @@
         <svg viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg" style="max-width:560px;">
           <defs>
             <pattern id="osGrid2" width="24" height="24" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="0.8" fill="rgba(234,88,12,0.06)"/>
+              <circle cx="1" cy="1" r="0.8" fill="rgba(20,179,173,0.06)"/>
             </pattern>
             <marker id="osArrow2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
-              <path d="M0,0 L0,6 L6,3 z" fill="#EA580C"/>
+              <path d="M0,0 L0,6 L6,3 z" fill="#14B3AD"/>
             </marker>
             <linearGradient id="osGrad2" x1="0" y1="0" x2="0.5" y2="1">
-              <stop offset="0%" stop-color="#3B2318"/>
-              <stop offset="100%" stop-color="#241811"/>
+              <stop offset="0%" stop-color="#0E2A3D"/>
+              <stop offset="100%" stop-color="#0C2334"/>
             </linearGradient>
           </defs>
           <rect width="640" height="340" fill="url(#osGrid2)"/>
 
           <text x="320" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace"
-                font-size="13" font-weight="700" fill="#FF7A1A" letter-spacing="0.12em">PROCESS SCHEDULING ARCHITECTURE</text>
+                font-size="13" font-weight="700" fill="#6FE9E2" letter-spacing="0.12em">PROCESS SCHEDULING ARCHITECTURE</text>
 
           <!-- Job Queue (disk) -->
-          <rect x="40" y="60" width="150" height="50" rx="8" fill="#241811" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
-          <text x="115" y="82" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="700" fill="#FAF3E7">Job Queue</text>
-          <text x="115" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">on disk</text>
+          <rect x="40" y="60" width="150" height="50" rx="8" fill="#0C2334" stroke="rgba(20,179,173,0.3)" stroke-width="1.5"/>
+          <text x="115" y="82" text-anchor="middle" font-family="Hanken Grotesk" font-size="12" font-weight="700" fill="#EAF6F2">Job Queue</text>
+          <text x="115" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">on disk</text>
 
           <!-- Long-term scheduler -->
-          <line x1="190" y1="85" x2="230" y2="85" stroke="#EA580C" stroke-width="2.5" marker-end="url(#osArrow2)"/>
-          <text x="210" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#EA580C">LTS</text>
+          <line x1="190" y1="85" x2="230" y2="85" stroke="#14B3AD" stroke-width="2.5" marker-end="url(#osArrow2)"/>
+          <text x="210" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#14B3AD">LTS</text>
 
           <!-- Ready Queue -->
-          <rect x="232" y="60" width="150" height="50" rx="8" fill="#3B2418" stroke="rgba(234,88,12,0.5)" stroke-width="2"/>
-          <text x="307" y="82" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="700" fill="#FAF3E7">Ready Queue</text>
-          <text x="307" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">in memory</text>
+          <rect x="232" y="60" width="150" height="50" rx="8" fill="#0E2A3D" stroke="rgba(20,179,173,0.5)" stroke-width="2"/>
+          <text x="307" y="82" text-anchor="middle" font-family="Hanken Grotesk" font-size="12" font-weight="700" fill="#EAF6F2">Ready Queue</text>
+          <text x="307" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">in memory</text>
 
           <!-- Short-term scheduler -->
-          <line x1="382" y1="85" x2="420" y2="85" stroke="#EA580C" stroke-width="2.5" marker-end="url(#osArrow2)"/>
-          <text x="401" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#EA580C">STS</text>
+          <line x1="382" y1="85" x2="420" y2="85" stroke="#14B3AD" stroke-width="2.5" marker-end="url(#osArrow2)"/>
+          <text x="401" y="78" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#14B3AD">STS</text>
 
           <!-- CPU -->
-          <rect x="422" y="60" width="170" height="50" rx="8" fill="#EA580C"/>
-          <text x="507" y="82" text-anchor="middle" font-family="Manrope" font-size="13" font-weight="800" fill="#FFFDF8">CPU</text>
-          <text x="507" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="rgba(255,253,248,0.85)">running</text>
+          <rect x="422" y="60" width="170" height="50" rx="8" fill="#14B3AD"/>
+          <text x="507" y="82" text-anchor="middle" font-family="Hanken Grotesk" font-size="13" font-weight="800" fill="#EAF6F2">CPU</text>
+          <text x="507" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="rgba(234,246,242,0.85)">running</text>
 
           <!-- Device queues -->
-          <rect x="422" y="170" width="170" height="44" rx="8" fill="#241811" stroke="rgba(234,88,12,0.3)" stroke-width="1.5"/>
-          <text x="507" y="190" text-anchor="middle" font-family="Manrope" font-size="12" font-weight="700" fill="#FAF3E7">Device Queues</text>
-          <text x="507" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">I/O blocked</text>
+          <rect x="422" y="170" width="170" height="44" rx="8" fill="#0C2334" stroke="rgba(20,179,173,0.3)" stroke-width="1.5"/>
+          <text x="507" y="190" text-anchor="middle" font-family="Hanken Grotesk" font-size="12" font-weight="700" fill="#EAF6F2">Device Queues</text>
+          <text x="507" y="205" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">I/O blocked</text>
 
           <!-- CPU → Device -->
-          <line x1="507" y1="110" x2="507" y2="170" stroke="#EA580C" stroke-width="2" marker-end="url(#osArrow2)"/>
-          <text x="540" y="142" font-family="JetBrains Mono" font-size="9" fill="#EA580C">I/O req</text>
+          <line x1="507" y1="110" x2="507" y2="170" stroke="#14B3AD" stroke-width="2" marker-end="url(#osArrow2)"/>
+          <text x="540" y="142" font-family="JetBrains Mono" font-size="9" fill="#14B3AD">I/O req</text>
 
           <!-- Device → Ready -->
-          <path d="M 422,192 Q 307,220 307,110" fill="none" stroke="#EA580C" stroke-width="2" marker-end="url(#osArrow2)"/>
-          <text x="307" y="210" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#EA580C">I/O done</text>
+          <path d="M 422,192 Q 307,220 307,110" fill="none" stroke="#14B3AD" stroke-width="2" marker-end="url(#osArrow2)"/>
+          <text x="307" y="210" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#14B3AD">I/O done</text>
 
           <!-- Medium-term scheduler -->
-          <rect x="100" y="170" width="180" height="56" rx="8" fill="url(#osGrad2)" stroke="rgba(234,88,12,0.35)" stroke-width="1.5"/>
-          <text x="190" y="192" text-anchor="middle" font-family="Manrope" font-size="11" font-weight="700" fill="#FAF3E7">Medium-Term</text>
-          <text x="190" y="210" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">Swapping (MMS)</text>
+          <rect x="100" y="170" width="180" height="56" rx="8" fill="url(#osGrad2)" stroke="rgba(20,179,173,0.35)" stroke-width="1.5"/>
+          <text x="190" y="192" text-anchor="middle" font-family="Hanken Grotesk" font-size="11" font-weight="700" fill="#EAF6F2">Medium-Term</text>
+          <text x="190" y="210" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">Swapping (MMS)</text>
 
           <!-- MTS to Ready (swap in) -->
-          <path d="M 280,198 Q 307,160 307,110" fill="none" stroke="#C2410C" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#osArrow2)"/>
-          <text x="298" y="165" font-family="JetBrains Mono" font-size="9" fill="#C2410C">swap in</text>
+          <path d="M 280,198 Q 307,160 307,110" fill="none" stroke="#0A7470" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#osArrow2)"/>
+          <text x="298" y="165" font-family="JetBrains Mono" font-size="9" fill="#0A7470">swap in</text>
 
           <!-- Ready to MTS (swap out) -->
-          <path d="M 265,110 Q 240,155 235,170" fill="none" stroke="#C2410C" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#osArrow2)"/>
-          <text x="218" y="150" font-family="JetBrains Mono" font-size="9" fill="#C2410C">swap out</text>
+          <path d="M 265,110 Q 240,155 235,170" fill="none" stroke="#0A7470" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#osArrow2)"/>
+          <text x="218" y="150" font-family="JetBrains Mono" font-size="9" fill="#0A7470">swap out</text>
 
           <!-- Scheduler boxes -->
-          <rect x="40" y="270" width="550" height="44" rx="8" fill="rgba(234,88,12,0.08)" stroke="rgba(234,88,12,0.25)" stroke-width="1"/>
-          <text x="320" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="700" fill="#EA580C" letter-spacing="0.08em">SCHEDULERS</text>
-          <text x="320" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#C9AE94">LTS (job)  ·  STS (CPU)  ·  MMS (swapping)</text>
+          <rect x="40" y="270" width="550" height="44" rx="8" fill="rgba(20,179,173,0.08)" stroke="rgba(20,179,173,0.25)" stroke-width="1"/>
+          <text x="320" y="288" text-anchor="middle" font-family="JetBrains Mono" font-size="10" font-weight="700" fill="#14B3AD" letter-spacing="0.08em">SCHEDULERS</text>
+          <text x="320" y="306" text-anchor="middle" font-family="JetBrains Mono" font-size="10" fill="#7FA6A8">LTS (job)  ·  STS (CPU)  ·  MMS (swapping)</text>
         </svg>
         <div class="diagram-caption">Three-Level Scheduling — LTS / STS / MMS with Job, Ready &amp; Device Queues</div>
       </div>
@@ -670,7 +670,7 @@
           <strong>Numerical Example 1 (FCFS):</strong><br>
           Processes: P1 (AT=0, BT=6), P2 (AT=2, BT=4), P3 (AT=4, BT=2)<br>
           Gantt Chart:<br>
-          <pre style="background:#F3EAD8;padding:10px;border-radius:6px;font-size:14px;overflow-x:auto;">
+          <pre style="background:#EEF7F1;padding:10px;border-radius:6px;font-size:14px;overflow-x:auto;">
 | P1  |     P2     | P3  |
 0     6            10    12    16
           </pre>
@@ -843,7 +843,7 @@
           <strong>Peterson's Solution (for 2 processes):</strong><br>
           Uses two shared variables: <code>flag[i]</code> (boolean, indicates process i wants to enter CS) and <code>turn</code> (indicates whose turn it is).<br><br>
 
-          <pre style="background:#F3EAD8;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;">
+          <pre style="background:#EEF7F1;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;">
 // Shared variables:
 boolean flag[2];  // Initially false
 int turn;          // 0 or 1
@@ -880,7 +880,7 @@ do {
           <strong>Producer-Consumer Problem using Semaphores:</strong><br>
           Problem: Producer produces items, puts them in buffer. Consumer takes items from buffer. Buffer has finite size. Need synchronization to avoid overproduction/underproduction.<br><br>
 
-          <pre style="background:#F3EAD8;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;">
+          <pre style="background:#EEF7F1;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;">
 semaphore mutex = 1;       // Mutual exclusion for buffer access
 semaphore empty = n;       // Number of empty slots in buffer
 semaphore full = 0;        // Number of filled slots in buffer
@@ -950,7 +950,7 @@ do {
           <strong>Solution using Semaphores:</strong><br>
           Each chopstick is a semaphore (value 1). Philosopher i picks up left fork, then right fork, eats, puts both down.<br><br>
 
-          <pre style="background:#F3EAD8;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;">
+          <pre style="background:#EEF7F1;padding:12px;border-radius:6px;font-size:13px;overflow-x:auto;">
 semaphore chopstick[5];   // One semaphore per chopstick
 
 void philosopher(int i) {
@@ -1369,7 +1369,7 @@ void philosopher(int i) {
           Reference String: 7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0, 1<br>
           Number of Frames = 3<br><br>
           Step-by-step FIFO simulation:<br>
-          <pre style="background:#F3EAD8;padding:10px;border-radius:6px;font-size:12px;overflow-x:auto;">
+          <pre style="background:#EEF7F1;padding:10px;border-radius:6px;font-size:12px;overflow-x:auto;">
 Ref  | F1 | F2 | F3 | Fault?
 7     | 7  |    |    | Y (new)
 0     | 7  | 0  |    | Y
@@ -1705,7 +1705,7 @@ Total Page Faults (FIFO, 3 frames): 15
   <!-- ============================================================ -->
   <!-- FORMULA REFERENCE CARD                                        -->
   <!-- ============================================================ -->
-  <div class="sheet" style="--c:#EA580C">
+  <div class="sheet" style="--c:#14B3AD">
     <div class="unit-band">
       <span class="unit-band__label">Quick Reference</span>
       <span class="unit-band__sep">/</span>
