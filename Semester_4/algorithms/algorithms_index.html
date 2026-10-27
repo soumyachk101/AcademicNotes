@@ -14,6 +14,395 @@
     <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="notes.css" />
     <link rel="stylesheet" href="../../premium.css" />
+
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Palette for book spine accents */
+            --color-u1: #0A7470;;
+            --color-u2: #14B3AD;;
+            --color-u3: #6FE9E2;;
+            --color-u4: #F0AC1B;;
+            --color-u5: #C8870A;;
+
+            --bg-desk: #E7F4EC; /* Desk/Surface ambient tone */
+            --bg-paper: #FFFFFF; /* Fine book paper background */
+            --text-main: #0C2334; /* Charcoal ink */
+            --text-muted: #557079; /* Muted ink */
+            --border-light: rgba(44, 62, 80, 0.1);
+        }
+
+        body {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            background-color: var(--bg-desk);
+            /* Soft paper/desk texture overlay */
+            background-image:
+                radial-gradient(rgba(30, 41, 59, 0.03) 1px, transparent 1px),
+                radial-gradient(rgba(30, 41, 59, 0.03) 1px, var(--bg-desk) 1px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding-bottom: 2rem;
+        }
+
+        /* FOLIO PAGE WRAPPER (Visual book simulator page) */
+        .folio-page {
+            max-width: 1100px;
+            width: 100%;
+            background-color: var(--bg-paper);
+            border: 1px solid rgba(44, 62, 80, 0.15);
+            border-radius: 4px;
+            padding: 4.5rem 3.5rem;
+            position: relative;
+            box-shadow:
+                0 1px 2px rgba(0, 0, 0, 0.05),
+                0 8px 32px -4px rgba(0, 0, 0, 0.08),
+                0 24px 64px -12px rgba(0, 0, 0, 0.12),
+                inset 0 0 100px rgba(255, 255, 255, 0.8);
+        }
+
+        /* Inset Folio Border Line */
+        .folio-page::before {
+            content: '';
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 1px dashed rgba(44, 62, 80, 0.08);
+            pointer-events: none;
+            border-radius: 2px;
+        }
+
+        /* TITLE PAGE HEADER */
+        .title-page {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 760px;
+            margin: 0 auto 3.5rem;
+        }
+
+        .book-badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+        }
+
+        .book-title {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-size: 3.6rem;
+            font-weight: 700;
+            line-height: 1.1;
+            color: #0E2A3D;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        /* Book divider style with ornament */
+        .book-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.5rem 0 1.75rem;
+        }
+
+        .book-divider .line {
+            height: 1px;
+            width: 90px;
+            background: linear-gradient(to right, rgba(44, 62, 80, 0.25), transparent);
+        }
+
+        .book-divider .line:first-child {
+            background: linear-gradient(to left, rgba(44, 62, 80, 0.25), transparent);
+        }
+
+        .book-divider .ornament {
+            font-size: 1.2rem;
+            color: rgba(44, 62, 80, 0.45);
+            user-select: none;
+            line-height: 1;
+        }
+
+        .book-subtitle {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-style: italic;
+            font-size: 1.3rem;
+            line-height: 1.5;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* SUBJECT SUB NAV */
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.2rem 0;
+            margin-bottom: 3.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-link {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #14B3AD;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-4px);
+        }
+
+        .imprint {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-muted);
+        }
+
+        /* CHAPTERS GRID */
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 1.5rem;
+        }
+
+        /* CHAPTER CARDS (Individual dividers) */
+        .chapter-card {
+            background-color: #ffffff;
+            border: 1px solid rgba(44, 62, 80, 0.1);
+            border-radius: 8px;
+            padding: 2.2rem 1.8rem;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 390px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: transform, box-shadow;
+            box-shadow:
+                0 2px 4px rgba(0, 0, 0, 0.02),
+                0 4px 12px -2px rgba(0, 0, 0, 0.03);
+        }
+
+        /* Colored Spine Bindings */
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 6px;
+            background-color: var(--chapter-color);
+            transition: width 0.3s ease;
+        }
+
+        /* Visual sheet shadow to mimic a thick paper page edge */
+        .chapter-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to right, rgba(0,0,0,0.01), rgba(0,0,0,0.04));
+            pointer-events: none;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-8px) rotate(-1deg);
+            border-color: rgba(44, 62, 80, 0.18);
+            box-shadow:
+                0 16px 28px -8px rgba(30, 41, 59, 0.08),
+                0 6px 12px -2px rgba(30, 41, 59, 0.04);
+        }
+
+        .chapter-card:hover::before {
+            width: 10px;
+        }
+
+        /* Chapter Card Content details */
+        .chapter-header {
+            margin-bottom: 1.25rem;
+        }
+
+        .card-content {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .chapter-num {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--chapter-color);
+            margin-bottom: 0.4rem;
+        }
+
+        .chapter-title {
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            line-height: 1.25;
+            color: #0E2A3D;
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-desc {
+            font-size: 0.8rem;
+            line-height: 1.45;
+            color: var(--text-muted);
+        }
+
+        /* MINI TABLE OF CONTENTS (Leader Dots index) */
+        .mini-toc {
+            margin-top: 1.25rem;
+            border-top: 1px dashed rgba(44, 62, 80, 0.06);
+            padding-top: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .toc-item {
+            display: flex;
+            align-items: baseline;
+            font-size: 0.78rem;
+            color: #3C5B6A;
+        }
+
+        .toc-lbl {
+            flex-shrink: 0;
+            font-weight: 500;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 75%;
+        }
+
+        .toc-dots {
+            flex-grow: 1;
+            border-bottom: 1px dotted rgba(44, 62, 80, 0.2);
+            margin: 0 0.4rem;
+            position: relative;
+            top: -3px;
+        }
+
+        .toc-idx {
+            flex-shrink: 0;
+            font-family: 'Hanken Grotesk', -apple-system, 'Segoe UI', sans-serif;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* CARD FOOTER */
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+            border-top: 1px solid rgba(44, 62, 80, 0.05);
+            padding-top: 1rem;
+        }
+
+        .badge-count {
+            background-color: rgba(44, 62, 80, 0.05);
+            color: var(--text-main);
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.35rem 0.75rem;
+            border-radius: 4px;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .read-action {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--chapter-color);
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            transition: gap 0.2s ease;
+        }
+
+        .read-action .arrow {
+            font-size: 1.1rem;
+            line-height: 1;
+            transition: transform 0.2s ease;
+        }
+
+        .chapter-card:hover .read-action {
+            gap: 0.4rem;
+        }
+
+        .chapter-card:hover .read-action .arrow {
+            transform: translateX(2px);
+        }
+
+        /* RESPONSIVE LAYOUT adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem 0.5rem;
+            }
+            .folio-page {
+                padding: 3rem 1.75rem;
+            }
+            .book-title {
+                font-size: 2.5rem;
+            }
+            .chapters-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .chapter-card {
+                min-height: auto;
+            }
+            .nav-bar {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+        }
+    </style>
+
     <title>Design &amp; Analysis of Algorithms Notes</title>
 </head>
 <body>

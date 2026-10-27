@@ -104,6 +104,11 @@
             color: var(--text-main);
             line-height: 1.1;
             margin-bottom: 0.75rem;
+            overflow-wrap: break-word;
+        }
+
+        @media (max-width: 480px) {
+            .book-title { font-size: 2rem; }
         }
 
         .book-subtitle {
@@ -174,7 +179,7 @@
         /* CHAPTERS GRID */
         .chapters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
             gap: 2.5rem;
             position: relative;
             z-index: 2;

@@ -7,7 +7,10 @@
 <meta name="description" content="DBMS study notes for MAKAUT Semester 5 PEC-CS505B — complete Q&A with 1-mark, 5-mark, and 15-mark questions covering ER model, SQL, normalization, transactions, indexing, and advanced topics.">
 <link rel="stylesheet" href="../../qa-styles.css">
 <link rel="stylesheet" href="../../premium.css">
-<style>@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');</style>
+<style>@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+table { min-width: 640px; }
+</style>
 </head>
 <body>
 
@@ -291,6 +294,7 @@
     </div>
     <div class="qa-answer">
       <p><strong>Answer:</strong></p>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr><th>Key Type</th><th>Description</th></tr>
@@ -303,6 +307,7 @@
           <tr><td><strong>Foreign Key</strong></td><td>Attribute referencing primary key of another relation. Enforces referential integrity.</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </div>
@@ -645,6 +650,7 @@ WHERE E.Grade = (<br>
   </div>
   <div class="qa-answer">
     <p><strong>Answer:</strong></p>
+    <div class="table-scroll">
     <table>
       <thead>
         <tr><th>Normal Form</th><th>Requirements</th><th>Removes</th></tr>
@@ -672,6 +678,7 @@ WHERE E.Grade = (<br>
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </div>
 
@@ -726,6 +733,7 @@ WHERE E.Grade = (<br>
     </div>
     <div class="qa-answer">
       <p><strong>Original Table (Unnormalised):</strong></p>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr><th>Student_ID</th><th>Student_Name</th><th>Course_ID</th><th>Course_Name</th><th>Instructor</th><th>Instructor_Office</th></tr>
@@ -734,7 +742,9 @@ WHERE E.Grade = (<br>
           <tr><td>S101</td><td>Amit</td><td>C1, C2</td><td>DBMS, ML</td><td>Dr. Singh, Dr. Patel</td><td>R201, R305</td></tr>
         </tbody>
       </table>
+      </div>
       <p><strong>Step 1 &mdash; Convert to 1NF</strong> (Remove multi-valued attributes):</p>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr><th>Student_ID</th><th>Student_Name</th><th>Course_ID</th><th>Course_Name</th><th>Instructor</th><th>Instructor_Office</th></tr>
@@ -744,6 +754,7 @@ WHERE E.Grade = (<br>
           <tr><td>S101</td><td>Amit</td><td>C2</td><td>ML</td><td>Dr. Patel</td><td>R305</td></tr>
         </tbody>
       </table>
+      </div>
       <p><strong>Step 2 &mdash; Convert to 2NF</strong> (Remove partial dependency): Primary key = (Student_ID, Course_ID). Course_Name depends only on Course_ID (partial), so separate Course table.</p>
       <p><strong>Student(Student_ID, Student_Name)</strong></p>
       <p><strong>Course(Course_ID, Course_Name, Instructor, Instructor_Office)</strong></p>
@@ -1103,6 +1114,7 @@ COMMIT;  -- Durability: changes now permanently saved
         <li><strong>Delete:</strong> Remove key from leaf. If underflow, merge or redistribute keys with sibling.</li>
       </ul>
       <p><strong>B+ Tree vs B Tree:</strong></p>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr><th>Feature</th><th>B+ Tree</th><th>B Tree</th></tr>
@@ -1115,6 +1127,7 @@ COMMIT;  -- Durability: changes now permanently saved
           <tr><td>Height</td><td>Shorter (more keys per node)</td><td>Comparatively taller</td></tr>
         </tbody>
       </table>
+      </div>
       <p><strong>Why B+ Tree in DBMS?</strong> Most DBMS (Oracle, MySQL InnoDB, PostgreSQL) use B+ trees for primary and secondary indexes because of efficient range queries and balanced structure.</p>
     </div>
   </div>
@@ -1270,6 +1283,7 @@ COMMIT;  -- Durability: changes now permanently saved
         <li><strong>Front-end Tools:</strong> Reporting, dashboards, data mining.</li>
       </ol>
       <p><strong>Data Warehouse vs Data Mart:</strong></p>
+      <div class="table-scroll">
       <table>
         <thead>
           <tr><th>Aspect</th><th>Data Warehouse</th><th>Data Mart</th></tr>
@@ -1283,6 +1297,7 @@ COMMIT;  -- Durability: changes now permanently saved
           <tr><td>Schema</td><td>Normalized (3NF) or dimensional</td><td>Dimensional (star schema)</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
   </div>
 </div>

@@ -6,6 +6,11 @@
   <title>OS Study Notes — Operating Systems (Sem 5)</title>
   <link rel="stylesheet" href="../../site.css" />
   <link rel="stylesheet" href="../../premium.css" />
+<style>
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+    table.grid { min-width: 640px; }
+    .qa-list li { overflow-wrap: anywhere; }
+  </style>
 </head>
 <body>
 
@@ -219,6 +224,7 @@
           &bull; <em>Soft Real-Time:</em> Deadline misses degrade quality but don't cause failure (Video streaming, Online booking).<br><br>
 
           <strong>Comparison Table:</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Feature</th><th>Batch</th><th>Multiprogrammed</th><th>Time-Sharing</th><th>Distributed</th><th>Real-Time</th></tr></thead>
             <tbody>
@@ -229,6 +235,7 @@
               <tr><td>Examples</td><td>Payroll</td><td>Mainframe OS</td><td>Unix, Linux</td><td>LOCUS</td><td>VxWorks, QNX</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -265,6 +272,7 @@
           &bull; <em>Examples:</em> Windows NT (NT Kernel), macOS XNU (XNU = Mach + BSD).<br><br>
 
           <strong>Detailed Comparison Table:</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Aspect</th><th>Monolithic</th><th>Layered</th><th>Modular</th><th>Microkernel</th><th>Hybrid</th></tr></thead>
             <tbody>
@@ -278,6 +286,7 @@
               <tr><td>Examples</td><td>Linux, Unix</td><td>THE</td><td>Modern Linux</td><td>Minix, QNX</td><td>Windows NT, XNU</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -602,6 +611,7 @@
           <strong>(5) Response Time:</strong> Time from request submission to first response produced. Important for interactive/time-sharing systems. First response, not full output.<br><br>
 
           <strong>Summary:</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Criterion</th><th>Description</th><th>Minimize/Maximize</th></tr></thead>
             <tbody>
@@ -612,6 +622,7 @@
               <tr><td>Response Time</td><td>First response time</td><td>Minimize</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -1269,6 +1280,7 @@ void philosopher(int i) {
           Total Page Faults (LRU, 3 frames): <strong>9</strong><br><br>
 
           <strong>Summary (Reference string: 1,2,3,4,1,2,5,1,2,3,4,5, 3 frames):</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Algorithm</th><th>Page Faults</th></tr></thead>
             <tbody>
@@ -1277,6 +1289,7 @@ void philosopher(int i) {
               <tr><td>LRU</td><td>9</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -1409,6 +1422,7 @@ Total Page Faults (FIFO, 3 frames): 15
           Optimal and LRU are <em>stack algorithms</em> — they never exhibit Belady's Anomaly.<br><br>
 
           <strong>Page Fault Count Comparison (Reference String above):</strong><br>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Algorithm</th><th>3 Frames</th><th>4 Frames</th></tr></thead>
             <tbody>
@@ -1417,6 +1431,7 @@ Total Page Faults (FIFO, 3 frames): 15
               <tr><td>LRU</td><td>12</td><td>10</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
       </ol>
     </div>
@@ -1523,6 +1538,7 @@ Total Page Faults (FIFO, 3 frames): 15
           &bull; <em>Variations:</em> Linked scheme (multiple index blocks), Multi-level index (Unix i-node), Combined scheme.<br><br>
 
           <strong>Comparison Table:</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Feature</th><th>Contiguous</th><th>Linked</th><th>Indexed</th></tr></thead>
             <tbody>
@@ -1534,6 +1550,7 @@ Total Page Faults (FIFO, 3 frames): 15
               <tr><td>Access Speed</td><td>Fast</td><td>Slow</td><td>Medium</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -1579,6 +1596,7 @@ Total Page Faults (FIFO, 3 frames): 15
           Movement: 15+2+31+24+2+59+169+23 = <strong>325</strong><br><br>
 
           <strong>Summary (Total Head Movement):</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Algorithm</th><th>Total Head Movement</th><th>% of FCFS</th></tr></thead>
             <tbody>
@@ -1590,6 +1608,7 @@ Total Page Faults (FIFO, 3 frames): 15
               <tr><td>C-LOOK</td><td>325</td><td>50.5%</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -1601,6 +1620,7 @@ Total Page Faults (FIFO, 3 frames): 15
           (4) <strong>Indexing:</strong> Use an index block (like file indexing) where the first block of the group points to index blocks containing addresses of free blocks. Can find many free blocks quickly. Example: BSD UNIX uses 8192-bit (1024-block) index blocks.<br><br>
 
           <strong>Comparison:</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Method</th><th>Speed</th><th>Space Overhead</th><th>Complexity</th></tr></thead>
             <tbody>
@@ -1610,6 +1630,7 @@ Total Page Faults (FIFO, 3 frames): 15
               <tr><td>Indexing</td><td>Fast</td><td>Medium</td><td>Complex</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
       </ol>
     </div>
@@ -1664,6 +1685,7 @@ Total Page Faults (FIFO, 3 frames): 15
           Distances: 15+2+31+24+2+59+169+23 = <strong>325 cylinders</strong><br><br>
 
           <strong>Performance Comparison:</strong>
+          <div class="table-scroll">
           <table class="grid">
             <thead><tr><th>Algorithm</th><th>Total Movement</th><th>Avg Seek</th><th>Fairness</th><th>Starvation</th></tr></thead>
             <tbody>
@@ -1675,6 +1697,7 @@ Total Page Faults (FIFO, 3 frames): 15
               <tr><td>C-LOOK</td><td>325</td><td>40.6</td><td>Better</td><td>None</td></tr>
             </tbody>
           </table>
+          </div>
         </li>
 
         <li>
@@ -1714,6 +1737,7 @@ Total Page Faults (FIFO, 3 frames): 15
 
     <div class="figure">
       <h3>CPU Scheduling Formulas</h3>
+      <div class="table-scroll">
       <table class="grid">
         <thead><tr><th>Formula</th><th>Description</th></tr></thead>
         <tbody>
@@ -1726,10 +1750,12 @@ Total Page Faults (FIFO, 3 frames): 15
           <tr><td>EMAT = m + α × m</td><td>Effective Memory Access Time with TLB</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div class="figure">
       <h3>Memory Management Formulas</h3>
+      <div class="table-scroll">
       <table class="grid">
         <thead><tr><th>Formula</th><th>Description</th></tr></thead>
         <tbody>
@@ -1743,10 +1769,12 @@ Total Page Faults (FIFO, 3 frames): 15
           <tr><td>Effective AT = (1-p) × m + p × page_fault_time</td><td>Avg memory access time</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div class="figure">
       <h3>Disk Scheduling Formulas</h3>
+      <div class="table-scroll">
       <table class="grid">
         <thead><tr><th>Formula</th><th>Description</th></tr></thead>
         <tbody>
@@ -1758,6 +1786,7 @@ Total Page Faults (FIFO, 3 frames): 15
           <tr><td>Bandwidth = Bytes Transferred / Total Time</td><td>Data transfer rate</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
 
     <div class="figure">
