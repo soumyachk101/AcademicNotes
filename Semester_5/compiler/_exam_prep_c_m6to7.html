@@ -1,0 +1,254 @@
+<!-- FRAG M6-M7: answer fragment -->
+
+<section class="module-section" id="module-6">
+<h2>Module 6 Questions</h2>
+
+<div class="qa-card" id="q1-6">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">Translate the arithmetic expression x + (b + c / d) into a syntax tree. Explain interpreted vs syntax-directed translation with suitable examples. What are the two types of attributes associated with a grammar symbol (inherited vs synthesized)?</p>
+
+<p><b>Syntax tree of <code>x + (b + c / d)</code></b> (internal nodes = operators, leaves = operands, respecting precedence and parentheses):</p>
+<pre><code>
+            +
+           / \
+          x   +
+             / \
+            b   /
+               / \
+              c   d
+</code></pre>
+<p>An <b>interpretation</b> of a grammar is a rule that assigns a meaning (value, action) to each production. Two forms: <b>(i) Interpreted translation</b> — the parse tree itself is evaluated by an interpreter; the grammar productions are annotated with semantic functions that compute the value of the node from its children. Example: evaluating <code>a + b * c</code> by walking the tree and applying the function at each operator node. <b>(ii) Syntax-directed translation</b> — each production carries translation rules (attribute equations or semantic actions) that synthesize the output (postfix, 3-address code, object code) during parsing; a single parse of the input drives the generation. Example: production <code>E &rarr; E + T</code> emits <code>E' T' +</code> for postfix.</p>
+
+<p><b>Attributes</b> are values (of any data type) associated with grammar symbols (non-terminals and terminals). The two kinds:</p>
+<ul>
+<li><b>Synthesized attributes:</b> value of a parent is computed <i>from its children</i> (bottom-up); needs no context. Example: value of an <code>expr</code> node from its operand nodes.</li>
+<li><b>Inherited attributes:</b> value of a child is computed <i>from its parent and/or siblings</i> (top-down flow); gives a node context. Example: a type-checker passing the expected result type down from a statement node to its expression child.</li>
+</ul>
+<p>Synthesized attributes yield S-attributed definitions; inherited ones (where needed) yield L-attributed definitions.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-6">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">What is an attribute? What is a syntax-directed definition (SDD)? Illustrate with an example (postfix-evaluation SDD). What is an attributed grammar? What is ambiguity in a grammar? What is the necessity to generate a parse tree? Any technique to remove ambiguity (left factoring / grammar rewriting)?</p>
+
+<p><b>Attribute:</b> a value associated with a grammar symbol — it can be a number, string, AST node, error code, or any program object (e.g. the value of an expression node, the type of a declaration, the generated code for a statement).</p>
+
+<p><b>Syntax-directed definition (SDD):</b> a grammar augmented with an action attached to each production. The action is either (i) an equation over attributes or (ii) executable code. It is written as <code>production ::= action</code>, with actions of a non-terminal separated by <code>|</code>, e.g. <code>expr ::= term | expr "+" term</code>.</p>
+
+<p><b>Postfix-evaluation SDD example:</b></p>
+<pre><code>expr &gt;= expr1 '+' expr2      expr &gt;&gt; print ( expr1.postfix
+                                       . expr2.postfix . "+" )
+term &gt;= id                     term &gt;&gt; print ( id.value )
+     | '(' expr ')'            term &gt;&gt; print ( expr.postfix . ")" )
+</code></pre>
+<p>With input <code>((2*(3+x))*((2+y)))</code> the tree bottom-up evaluation yields postfix <code>2 3 x + * 2 y + * * *</code>.</p>
+
+<p><b>Attributed grammar:</b> a grammar whose productions carry attribute rules (synthesized or inherited). The parse tree plus attribute rules forms the attributed parse tree; evaluating the rules is the translation.</p>
+
+<p><b>Ambiguity:</b> a grammar is ambiguous if some string has more than one <i>leftmost</i> (equivalently, rightmost) derivation, i.e. more than one parse tree — e.g. <code>E &rarr; E + E | E * E</code> for <code>a + b * c</code>. Ambiguity must be resolved because an unambiguous tree is needed for deterministic semantic action.</p>
+
+<p><b>Necessity of a parse tree:</b> the tree fixes the order of operations (precedence/association), localises each node's context (needed for inherited-attribute flow), supports optimization (DAG sharing), and drives code generation.</p>
+
+<p><b>Removing ambiguity:</b> (i) <b>Grammar rewriting</b> — restructure into precedence levels: <code>E &rarr; T | E + T; T &rarr; F | T * F; F &rarr; id | '(' E ')'</code> — now one tree per string. (ii) <b>Left factoring</b> — extract a common prefix (<code>A &rarr; cAb | cAc &rarr; c A (b|c)</code>); this makes the grammar suitable for top-down (LL) parsing by removing the common-prefix choice; it does not by itself remove ambiguity, so combine both techniques.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-6">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">Draw a DAG for the expression statement: if x ≠ 0 then x := 3*(y + 1) else z := y + 1. Show the DAG with node sharing where applicable.</p>
+
+<p>A <b>DAG</b> is obtained from the expression tree by sharing every common subexpression: identical children are identified into one node. Here <code>y + 1</code> occurs in both branches — it is shared. The boolean test <code>x &ne; 0</code> produces <code>true</code>/<code>false</code> leaves driving the two conditional edges. Labelled edges <code>T/F</code> (true branch / false branch) and assignments are terminal actions.</p>
+<pre><code>
+                 +-----------+
+                 | x  neq  0 |   boolean test: T if x != 0
+                 +-----+-----+
+             T/   |           \F
+                  v            v
+            +-----------+  +-----------+
+            | 3 * (y+1) |  |   y + 1   |
+            +-----+-----+  +-----------+
+                  |            |
+                  v            v
+          (assign x := )   (assign z := )
+</code></pre>
+<p><b>Reading the DAG:</b> root is the conditional; on <code>T</code> we compute <code>3 * (y+1)</code> and assign to <code>x</code>; on <code>F</code> we compute <code>y + 1</code> and assign to <code>z</code>. Because <code>y+1</code> appears under both branches, a single node is shared between the two paths. The shared <code>y + 1</code> lets the compiler lift that subexpression out of the conditional once (<i>common subexpression hoisting</i>):</p>
+<pre><code>
+   t := y + 1            // hoisted, evaluated ONCE
+   if x != 0 then x := 3 * t
+   else z := t
+</code></pre>
+<p>Optimization payoff: one subtraction/addition, one store to <code>t</code>, one conditional store. The <code>&ne;</code> test node also collapses a constant-fold when <code>x</code> is a compile-time constant (e.g. <code>if 5 &ne; 0</code> always <code>T</code>; <code>if 0 &ne; 0</code> always <code>F</code> — dead-code elimination).</p>
+</div>
+</div>
+
+<div class="qa-card" id="q4-6">
+<span class="qa-num">4</span>
+<div class="qa-body">
+<p class="qa-question">Translate the arithmetic expression x * (b + c) into a syntax tree and postfix notation. Design a DAG for a + a*0 + 0*0 + 0 + d + 0 + 0, showing constant-folding simplification.</p>
+
+<p><b>Syntax tree of <code>x * (b + c)</code>:</b></p>
+<pre><code>
+            *
+           / \
+          x   +
+             / \
+            b   c
+</code></pre>
+<p>Postfix (operands, then operator in postorder): <code>x b c + *</code>.</p>
+
+<p><b>DAG of <code>a + a*0 + 0*0 + 0 + d + 0 + 0</code>:</b> The sheet prints the constant as <code>0</code> (the original source uses <code>O</code> typographically). We assume <b><code>0</code> is the numeric constant zero</b> (identity for multiplication, identity for addition in the usual ring), not an indeterminate variable or an operator letter. With this assumption every term involving 0 folds:</p>
+<pre><code>
+   Assumption: the "O" printed in the source is the numeric constant 0,
+   so that:  x * 0 = 0   and   0 * 0 = 0   and   x + 0 = x.
+
+   a + a*0 + 0*0 + 0 + d + 0 + 0
+   = a + 0   + 0   + 0 + d + 0 + 0      (constant folding: a*0 &rarr; 0, 0*0 &rarr; 0)
+   = a + d                                 (adding 0 is identity)
+</code></pre>
+<p>The resulting DAG is a single add node with leaves <code>a</code> and <code>d</code>:</p>
+<pre><code>
+   +
+  / \
+ a   d
+</code></pre>
+<p><b>Assumption explicitly stated (for marking):</b> the source uses the letter <code>O</code> where the constant zero <code>0</code> is meant; we treat it as the integer constant 0 with the standard ring axioms so that multiplication by 0 and addition of 0 are identities. The DAG has two leaves and one internal <code>+</code> node. No subexpression sharing is needed beyond that because each leaf is distinct. (If the original symbol were instead the variable <code>O</code>, the expression would not fold to <code>a + d</code>; the simplification therefore depends on this reading.)</p>
+</div>
+</div>
+
+<div class="qa-card" id="q5-6">
+<span class="qa-num">5</span>
+<div class="qa-body">
+<p class="qa-question">How do we mean by Syntax-Directed Translation? Compare S-attributed and L-attributed SDDs in a table. What are the main contributions of SDT?</p>
+
+<p><b>Syntax-Directed Translation (SDT):</b> a grammar G = (V, &Sigma;, P, S) augmented with attribute equations (or semantic actions) attached to productions, such that every parse of an input sentence has a <i>meaning</i> — the generated target (postfix, intermediate code, object code). A parse of a sentence w with root R evaluates the equation tree rooted at R to yield G(w) in the output language.</p>
+
+<table>
+<thead>
+<tr><th>Aspect</th><th>S-attributed SDDs</th><th>L-attributed SDDs</th></tr>
+</thead>
+<tbody>
+<tr><td>Flow of values</td><td>bottom-up: children &rarr; parent</td><td>top-down <i>and</i> left-to-right into children; only synthesized from above</td></tr>
+<tr><td>Typical use</td><td>tree evaluation, static analysis, most semantic checks</td><td>code generation, register allocation, type-checking</td></tr>
+<tr><td>Evaluation order</td><td>postorder of the parse tree</td><td>inorder (left-to-right) of leaves</td></tr>
+<tr><td>Number of passes</td><td>one bottom-up pass over the tree suffices</td><td>requires a single <b>left-to-right</b> traversal; <i>no</i> second pass — each child can be evaluated as soon as all its <i>left</i> siblings and its parent's attributes are known</td></tr>
+<tr><td>Feasibility</td><td>tree evaluation only</td><td>can be evaluated <i>online</i> by any top-down parser (LL, even some LR with care)</td></tr>
+<tr><td>Example equation</td><td><code>expr.val = expr1.val + expr2.val</code></td><td><code>stmt.type = stmt1.type</code> — the L attribute flows <i>down</i> to child stmt1 from parent stmt</td></tr>
+<tr><td>When used</td><td>when the result of a node depends only on its own descendants</td><td>when the result must flow into children (e.g. target machine code depends on which register a variable lives in)</td></tr>
+</tbody>
+</table>
+
+<p><b>Contributions of SDT to automatic code generation:</b> (1) it converts parsing into generation: a single bottom-up or left-to-right pass simultaneously computes the meaning and emits output, e.g. an <i>interpreter</i> (postfix code evaluation) or an <i>assembler</i> (assembling object code while parsing the source). (2) It unifies syntax and semantics: the semantic action is declared <i>with</i> the production, making it provably well-formed and machine-checkable. (3) It supports <i>two-stage</i> compilers: an attributed parse tree yields a target program that can later be re-optimized. (4) It supports the separation of concerns: <i>parsing</i> is the syntactic role, <i>translation</i> is the semantic role — a clean decomposition that is the backbone of every production compiler.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q6-6">
+<span class="qa-num">6</span>
+<div class="qa-body">
+<p class="qa-question">What is an input-buffering implementation? What problems can arise when implementing the input buffer (lookahead beyond a single character, token boundaries spanning buffer boundaries, end-of-file)? What is a sentinel and its use?</p>
+
+<p><b>Input buffering:</b> the compiler reads the source into a large buffer (<b>input buffer</b>) rather than character-by-character; the parser pulls <b>tokens</b> from the buffer via a <code>next_token()</code> routine. Each token is cached, with a pointer to the next character. The buffer must hold enough input for the parser's <i>lookahead</i> window.</p>
+
+<p><b>Problems:</b></p>
+<ul>
+<li><b>Lookahead &gt; 1 character.</b> If the buffer holds only one character, a token like <code>==</code> (2 chars) or an identifier <code>abc</code> (3 chars) cannot be emitted. The buffer must hold <i>enough characters to see the complete next token</i>. For a grammar with max <i>k</i>-lookahead, hold <i>k</i> characters.</li>
+<li><b>Token boundary spans the buffer edge.</b> A token may straddle the boundary between two <code>read()</code> chunks — e.g. a 512-byte buffer holds <code>foo</code> in the first chunk but <code>bar</code> in the second; the tokenization engine must not split identifiers, string literals or comments at the buffer edge. One must either (i) read the whole file at once, or (ii) implement a sliding buffer that holds the tail of the previous chunk plus the head of the new chunk so tokenization never straddles the join.</li>
+<li><b>End of file.</b> When the buffer runs out of characters the matcher must detect it without dereferencing <code>*buffer_ptr = 0</code>. The usual technique: append a special marker (<b>sentinel</b>) so the parser can recognise that no more input follows.</li>
+</ul>
+
+<p><b>Sentinel:</b> a special character — commonly <code>$</code> or an internal <code>EOF</code> token — that the lexer <i>consumes</i> (recognises as "no more input") but that the parser never attempts to <i>match</i> against a grammar production. The sentinel terminates the input: a matching loop checks <code>if (*buf == SENTINEL) return;</code> before emitting a token; the parser's productions do not have <code>$</code> on their right-hand side, so the parser only sees the sentinel to <i>know</i> the input has ended, not to parse it.</p>
+
+<p><b>Why a sentinel matters:</b> it separates the <i>lexing</i> concern (how far to read) from the <i>matching</i> concern (which production does this token match). Without it, every matcher must special-case the "is this the last character" check, and an unterminated identifier/string would otherwise be silently split at EOF. With it, the buffer can be refilled or exhausted; the sentinel is the fixed point the matcher converges on.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q7-6">
+<span class="qa-num">7</span>
+<div class="qa-body">
+<p class="qa-question">Mention different loop-optimization techniques. What is a dependency graph? What is an LR(1) parser (brief recap in the code-generation context)?</p>
+
+<p><b>Loop-optimization techniques:</b></p>
+<ul>
+<li><b>Loop unrolling:</b> duplicate the loop body 2, 4 or <i>k</i> times so that the branch-per-iteration is amortised over <i>k</i> iterations. The loop bound <code>n</code> must be a compile-time multiple of <i>k</i> (or a residual tail loop handles the remainder). Speedup: 1/<i>k</i> fewer branch checks; code size: <i>k</i>&times; larger. Example: <code>for(i=0;i&lt;n;i+=4){b[i]=a[i]*2; b[i+1]=a[i+1]*2; b[i+2]=a[i+2]*2; b[i+3]=a[i+3]*2;}</code></li>
+<li><b>Loop jamming:</b> combine two (or more) consecutive loops over the same range into one loop over <i>one</i> array traversal, reducing memory traffic and instruction fetch. <code>for(i) t[i]=a[i]+b[i];</code> jammed with <code>for(i) c[i]=t[i]*2;</code> becomes one loop.</li>
+<li><b>Induction variable elimination (strength reduction):</b> replace a costly induction variable (like <code>i*k</code>, the address calculation) with an add-by-constant chain. If <code>i = i + 1</code> each iteration, <code>addr = base + i*k</code> becomes a <code>addr = addr + k</code> update, one integer add per iteration instead of a multiply.</li>
+<li><b>Strength reduction:</b> replace a hard operation with a cheaper equivalent on the path: <code>x*8 &rarr; x &lt;&lt; 3</code>; <code>pow(n,2) &rarr; n*n</code> when <code>n</code> is small.</li>
+<li><b>Peephole optimization:</b> a local scan of a window of <i>w</i> instructions (usually a register or stack) that applies local rewrites: <code>x = x + 0</code> delete; <code>x = 1; x = x*2; &rarr; x = 2</code>; <code>LOAD t; LOAD s; &rarr; LOAD s</code>.</li>
+<li><b>Loop invariant code motion (LICM):</b> hoist statements whose value does not change within the loop body out of the loop (e.g. <code>addr = &amp;mat[i][j]</code> outside a <code>for(k) { ... }</code> loop that does not write <code>i</code> or <code>j</code>).</li>
+</ul>
+
+<p><b>Dependency graph:</b> a directed graph whose nodes are the statements of a loop; an edge <code>S<sub>i</sub> &rarr; S<sub>j</sub></code> means S<sub>j</sub> reads a value that S<sub>i</sub> writes (a <b>data dependency</b>, i.e. <i>flow</i>). Two subcases: a <i>loop-carried</i> edge (S<sub>j</sub> is in the next iteration of S<sub>i</sub>'s value) is a true dependency that prevents parallel execution; a <i>anti-dependency</i> (write-after-read) can be removed by renaming registers/arrays. The graph exposes which iterations can be run simultaneously — the basis of <i>loop parallelisation</i>.</p>
+
+<p><b>LR(1) parser (recap):</b> a bottom-up (shift-reduce) parser that keeps a stack of states and reads exactly <b>one</b> lookaheads (hence "LR(1)"). It is constructed from the grammar by the <i>item sets</i> method: <b>LR(0)</b> items are a production with a dot in some position; the <b>closure</b> and <b>goto</b> functions close sets on non-terminals after the dot. The parser has a finite automaton of <i>states</i>; each state has <b>LR(1) sets</b> of <i>(item, lookaheads)</i> pairs that determine whether to shift or reduce. LR(1) can handle every language that is unambiguous in the sense of <i>leftmost-derivation + 1 lookaheads</i> — a strict superset of LL(1). In code generation it is the workhorse of bottom-up semantic evaluation: reductions give the bottom-up order needed for S-attributed SDDs; inherited attributes can be handled by passing values through the stack. <i>LR(k)</i> (k &gt; 1) adds more lookahead but blows up the state table; k = 1 is the sweet spot — enough lookahead for most imperative-language grammars.</p>
+</div>
+</div>
+
+</section>
+
+<section class="module-section" id="module-7">
+<h2>Module 7 Questions</h2>
+
+<div class="qa-card" id="q1-7">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">What is type checking? Differentiate dynamic and static type checking.</p>
+
+<p><b>Type checking:</b> a verification step that confirms every value in a program is used in a way consistent with its declared type, and that every expression / declaration / statement has a <i>type</i> that can be assigned. The goal is to catch errors early that would otherwise surface as runtime crashes, garbage data, or silent mis-computation. Type systems are the language's specification of which values are interchangeable.</p>
+
+<table>
+<thead>
+<tr><th>Aspect</th><th>Static type checking</th><th>Dynamic type checking</th></tr>
+</thead>
+<tbody>
+<tr><td>When errors are detected</td><td>at <b>compile time</b> (before execution)</td><td>at <b>runtime</b>, as the values flow through the program</td></tr>
+<tr><td>Mechanism</td><td>type inference / type checker walks the AST and checks each node</td><td>each operation inspects the actual values' tags before execution; incompatible &rarr; raise an exception</td></tr>
+<tr><td>Example language</td><td><b>Java</b>: <code>int x = "abc";</code> — rejected at compile time; also <code>long y = 3.14;</code> needs explicit cast</td><td><b>Python</b>: <code>x = "abc" + 1</code> raises <code>TypeError</code> only when the line executes (a variable can be reassigned to any type)</td></tr>
+<tr><td>Cost at runtime</td><td>low — checks done once; generated code can assume types are correct</td><td>high — every operation has an attached tag check; the interpreter must inspect values</td></tr>
+<tr><td>Effect on program structure</td><td>types propagate; a type error forces restructuring before running</td><td>types evolve; no compile-time contract; errors localize at the site of execution</td></tr>
+<tr><td>Strength of guarantee</td><td>if the type system is <i>sound</i>, every run obeys it (all type errors detected before running)</td><td>if a check fails the program <i>aborts</i>; a <i>partial</i> guarantee — some errors are caught, others silently propagate</td></tr>
+<tr><td>Typical error class</td><td>missing return types, wrong argument types, uninitialised variables, unhandled checked exceptions</td><td>runtime type errors, e.g. <code>None</code> handling in Python, dynamic-dispatch failures</td></tr>
+<tr><td>Trade-off</td><td>catches more bugs earlier; the programmer pays in boilerplate; hard to write ad-hoc polymorphism</td><td>flexible, less code; bugs surface late; slower execution due to tag checks</td></tr>
+</tbody>
+</table>
+
+<p><b>Note on Java vs Python:</b> Java is <i>statically</i> type-checked and strongly typed — a <code>String</code> literal may not be assigned to an <code>int</code> variable without a compile-time error. Python is <i>dynamically</i> type-checked: variables have no declared type; the type is that of the <i>value</i>, and <code>x + 1</code> only works when the <i>current</i> value of <code>x</code> is <code>int</code>. Python also does <i>not</i> do static checking — it uses duck typing (check the method, not the type) at each call site, so its dynamic check is a <i>method dispatch</i> failure, not a tag-check failure.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-7">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">What are the types of type systems? What are the specifications of a simple type checker (type inference rules, unification, subsumption, environment)?</p>
+
+<p><b>Types of type systems</b> (classified on several axes):</p>
+<ul>
+<li><b>Typed vs untyped:</b> untyped (machine code, raw C with <code>void*</code>) — every expression has the same type; typed — every expression has a distinct type.</li>
+<li><b>Strongly vs weakly typed:</b> strongly — operations only between values of compatible types (<code>"a" + 1</code> is an error); weakly — implicit conversions are allowed (<code>"a" + 1</code> becomes <code>"a1"</code> in JavaScript); strong + strict = <i>sound</i> type system.</li>
+<li><b>Explicit (nominal) vs implicit (structural):</b> nominal — two types are identical only if the programmer named them identically (Java <code>class Dog1</code> vs <code>class Dog2</code>); structural — two types are interchangeable if their shape (fields, methods) match (<code>interface</code>-style, in Go and in many functional languages).</li>
+<li><b>Sound vs unsound:</b> sound — if the type checker accepts a program, no run-time type error can occur; unsound — the checker lets through a program that will break at runtime (e.g. implicit <code>any</code> in TypeScript, unchecked generics in some languages).</li>
+</ul>
+
+<p><b>Specifications of a simple type checker:</b> A simple type checker assigns a type to every expression and verifies that every application matches its expected signature.</p>
+
+<p><b>(1) Type inference rules.</b> A set of rules of the form <code>(Γ, E) &rarr; τ</code>, where <code>Γ</code> is the environment (map from variable &rarr; type), <code>E</code> is an expression, and <code>τ</code> is the inferred type. Examples:</p>
+<ul>
+<li><b>Literals:</b> <code>Γ ⊢ 42 : int</code>; <code>Γ ⊢ "hi" : string</code></li>
+<li><b>Variables:</b> <code>if x : t ∈ Γ, then Γ ⊢ x : t</code></li>
+<li><b>Application:</b> <code>Γ ⊢ e1 : t1 → t2</code> and <code>Γ ⊢ e2 : t1</code> implies <code>Γ ⊢ e1(e2) : t2</code></li>
+<li><b>Let:</b> <code>Γ, x : t ⊢ e2 : t'</code> and <code>Γ ⊢ e1 : t</code> implies <code>Γ ⊢ let x = e1 in e2 : t'</code> (with <code>let</code>-generalisation for polymorphic types)</li>
+</ul>
+
+<p><b>(2) Unification.</b> When two type expressions must be equal (e.g. function argument type = parameter type), the checker solves <i>equations between type variables</i> to make them compatible. E.g. unifying <code>a → int</code> with <code>string → b</code> binds <code>a := string</code> and <code>b := int</code>, giving the most general type <code>string → int</code>. The unifier is the engine of inference: it either succeeds with a binding, or fails with a <i>type clash</i>.</p>
+
+<p><b>(3) Subsumption.</b> A <i>subsumption</i> rule says that <code>τ₁ ⊑ τ₂</code> (τ₁ is a subtype of τ₂) — a value of type τ₁ may be used where τ₂ is expected. A subsumption rule in a checker: if <code>Γ ⊢ e : τ₁</code> and <code>τ₁ ⊑ τ₂</code>, then <code>Γ ⊢ e : τ₂</code>. Inheritance: a <code>Dog</code> value can fill a slot expecting <code>Animal</code> (<code>Dog ⊑ Animal</code>).</p>
+
+<p><b>(4) Environment.</b> The <b>type environment</b> <code>Γ</code> is a mapping from each free variable in scope to its <i>declared</i> type. It grows as new variables come into scope (<code>Γ, x : t</code>) and shrinks when they leave (<code>Γ \ {x}</code>). The checker keeps a stack of environments (one per scope); the most-inner binding shadows outer ones. The environment plus the rules defines the typing context; the checker's verdict is <code>Γ ⊢ E : τ</code> for some well-formed <code>τ</code> — or a <code>type error</code> if no <code>τ</code> exists.</p>
+
+<p><b>Putting it together</b> (the four pillars of a simple checker): the <i>environment</i> supplies the declared types; the <i>inference rules</i> walk the AST and assign types; <i>unification</i> solves the type-variable equations that arise; <i>subsumption</i> allows subtypes to fill supertype slots. A program type-checks iff it type-checks under all four rules simultaneously.</p>
+</div>
+</div>
+
+</section>

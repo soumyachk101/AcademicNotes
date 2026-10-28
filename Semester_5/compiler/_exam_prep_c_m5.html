@@ -1,0 +1,335 @@
+<!-- FRAG M5: answer fragment -->
+
+<section class="module-section" id="module-5">
+<h2>Module 5 Questions</h2>
+
+<div class="qa-card" id="q1-5">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">What is a reduce-reduce conflict in LR parsing? When does it appear? Give a minimal example. What is an SLR reduce-reduce conflict? Then give a table of ALL shift-reduce parser actions (shift / reduce / goto / accept) with their meaning and when each fires.</p>
+
+<p><b>Reduce–reduce conflict:</b> in a shift-reduce parser, state <code>s</code> and terminal <code>a</code> produce a conflict when the action table would need <i>two different</i> entries <code>reduce r</code> and <code>reduce r'</code> in the same cell <code>(s, a)</code>. It appears when two <i>handle candidates</i> of different productions end in the same symbol and the parser cannot decide which is the true handle. The grammar is not LR(1); usually it is not SLR either, because both reductions are legal for the same SLR lookahead.</p>
+
+<p><b>Minimal example (LR(0) item set with two reduce items):</b></p>
+<pre><code>S -&gt; i A i .
+S -&gt; i B i .
+F -&gt; a | b | c
+
+Item set after reading "i":
+  S -&gt; i . A i        shift A
+  S -&gt; i . B i        shift B
+
+After reading "i a":
+  S -&gt; i A . i        reduce S -&gt; i A i
+  S -&gt; i B . i        reduce S -&gt; i B i
+                      ^^^^^^^^^^^^^^^^^^^
+                reduce-reduce on terminal i (no shift to i)
+</code></pre>
+The dot has reached the end of <i>two different productions</i> in the same state, and both items carry the same lookahead set; the parser cannot commit to either reduction. The grammar is ambiguous (or at least not LR(0)) and must be rewritten — e.g. merge <code>i A i</code> and <code>i B i</code> into a single production <code>S → i C i</code> with <code>C → A | B</code>, which removes the conflict.</p>
+
+<p><b>SLR reduce–reduce conflict:</b> two items <code>q1 → α . β</code> and <code>q2 → α . γ</code> share the same core (state), and <code>FOLLOW(q1) ∩ FOLLOW(q2) ≠ ∅</code>. The conflict survives even when lookaheads are available, because SLR uses a <i>single</i> global FOLLOW set per non-terminal; it cannot distinguish the items. The resolution is to refine the grammar (rewrite it into an unambiguous equivalent) or, in practice, fall back to a full LR(1) parser that carries a per-item lookahead and can split the state.</p>
+
+<p><b>All shift-reduce parser actions:</b></p>
+<div class="exam-note">A shift-reduce parser's driver consults exactly one of four actions per step; the action table is built by the generator and is the only input to the runtime parser.</div>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Action</th><th>Meaning</th><th>When it fires</th></tr></thead>
+<tbody>
+<tr><td><b>shift s</b></td><td>push terminal <code>a</code> onto the stack, move to GOTO(state, a) = <code>s</code></td><td>The table entry <code>action[state, a] = s</code> (an integer shift target) — an LR item of the form <code>A → α . a β</code> is present</td></tr>
+<tr><td><b>reduce r</b></td><td>pop <code>len(β)</code> symbols, push <code>A</code>, move to GOTO(prev, A); action is production number <code>r</code></td><td>Table entry <code>action[state, a] = r</code> (production number) — item <code>A → β .</code> is present and lookahead matches</td></tr>
+<tr><td><b>goto t</b></td><td>push non-terminal <code>X</code>, move to <code>t</code> (an internal GOTO entry, not consulted during input processing)</td><td>Row = current state, column = a <i>non-terminal</i> that appears right of the dot in some item; computed as GOTO(state, X)</td></tr>
+<tr><td><b>accept</b></td><td>signal "end of input, parse successful"</td><td>State <code>s</code> contains the item <code>S' → S .</code> with lookahead <code>$</code>; input is completely consumed</td></tr>
+<tr><td><b>error</b></td><td>report syntax error, trigger error recovery</td><td>None of the above applies — empty cell in the action table</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><b>SLR conflict resolution (exam point):</b> a shift-reduce conflict in an SLR table is resolved by <i>choosing shift</i> (the canonical convention). A reduce-reduce conflict has no automatic resolution; it indicates the grammar is not suitable for LR-based parsing and must be rewritten. A pure <b>LR(1)</b> parser can, however, split states by their item lookaheads and sometimes eliminate conflicts that SLR leaves behind.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-5">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">Build the complete SLR(1) parsing table for grammar G: E → T E' | a, E' → + T E' | ε, T → F T' | b, T' → * F T' | ε, F → ( E ) | Id. Work it out fully: (i) augment, (ii) list the LR(0) item sets, (iii) FIRST/FOLLOW sets, (iv) the fully-filled action/goto table.</p>
+
+<p><b>(i) Augment and label productions:</b></p>
+<pre><code>r0:  S' -&gt; E          (augmented start; accept on $)
+r1:  E  -&gt; T E'
+r2:  E  -&gt; a
+r3:  E' -&gt; + T E'
+r4:  E' -&gt; ε
+r5:  T  -&gt; F T'
+r6:  T  -&gt; b
+r7:  T' -&gt; * F T'
+r8:  T' -&gt; ε
+r9:  F  -&gt; ( E )
+r10: F  -&gt; Id
+</code></pre>
+
+<p><b>(ii) LR(0) item sets (closures), state numbering:</b></p>
+<pre><code>State 0 (start):   S' -&gt; . E
+                   E -&gt; . T E'
+                   T -&gt; . F T'
+                   T -&gt; . b
+                   F -&gt; . ( E )
+                   F -&gt; . Id
+
+State 1 = GOTO(0,E):   S' -&gt; E .                  (accept on $)
+
+State 2 = GOTO(0,T):   E -&gt; T . E'
+                   E' -&gt; . + T E'
+                   T' -&gt; . * F T'
+                   T' -&gt; . ε
+                   F -&gt; . ( E )
+                   F -&gt; . Id
+
+State 3 = GOTO(0,F):   F -&gt; ( . E )
+                   E -&gt; . T E'
+                   T -&gt; . F T'
+                   T -&gt; . b
+                   F -&gt; . ( E )
+                   F -&gt; . Id
+
+State 4 = GOTO(2, +): E' -&gt; + . T E'
+                   T -&gt; . F T'
+                   T -&gt; . b
+                   F -&gt; . ( E )
+                   F -&gt; . Id
+
+State 5 = GOTO(2,b):   T -&gt; b .
+
+State 6 = GOTO(2,*):   T' -&gt; * . F T'
+                   F -&gt; . ( E )
+                   F -&gt; . Id
+                   T -&gt; . F T'
+                   T -&gt; . b
+
+State 7 = GOTO(2,Id):  F -&gt; Id .
+
+State 8 = GOTO(3,E):   F -&gt; ( E . )
+
+State 9 = GOTO(4,T):   E' -&gt; + T . E'
+                   E' -&gt; . + T E'
+                   T' -&gt; . * F T'
+                   T' -&gt; . ε
+                   F -&gt; . ( E )
+                   F -&gt; . Id
+</code></pre>
+
+<p><b>(iii) FIRST / FOLLOW sets:</b></p>
+<pre><code>Terminals:  a  +  *  (  )  Id      Non-terminals: E E' T T' F S'
+
+FIRST(E)  = { a, b, Id, ( }          FIRST(F)  = { (, Id }
+FIRST(E') = { +, ε }                 FIRST(T') = { *, ε }
+FIRST(T)  = { b, Id, ( }            FIRST(S') = FIRST(E)
+
+FOLLOW(S') = { $ }
+FOLLOW(E)  = FOLLOW(E') = { +, ), $ }        (E → T E' , E' → + T E' | ε, F → ( E ) , S' → E )
+FOLLOW(T)  = { *, +, ), $ }                 (T → F T' , T' → * F T' | ε , E → T E' , E' → + T E' | ε )
+FOLLOW(F)  = FIRST(T') − {ε} ∪ FOLLOW(T) = { *, +, ), $ }   (T' → * F T' ; T' → ε propagates FOLLOW(T) into FOLLOW(F))
+FOLLOW(T') = FOLLOW(T) = { *, +, ), $ }
+</code></pre>
+
+<p><b>(iv) Complete SLR(1) action/goto table</b> — production numbers r1…r9 refer to productions 1–9 above; r0 is the augmented accept.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>states</th><th>a</th><th>+</th><th>*</th><th>(</th><th>)</th><th>id</th><th>ε</th><th>E</th><th>T</th><th>F</th><th>E'</th><th>T'</th></tr></thead>
+<tbody>
+<tr><td>I0</td><td>s2</td><td>–</td><td>–</td><td>s3</td><td>–</td><td>s2</td><td>–</td><td>1</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I1</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>accept</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I2</td><td>–</td><td>–</td><td>–</td><td>–</td><td>r4</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>r9</td></tr>
+<tr><td>I3</td><td>r2</td><td>s7</td><td>–</td><td>s3</td><td>r4</td><td>r2</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I4</td><td>–</td><td>–</td><td>s5</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I5</td><td>–</td><td>–</td><td>–</td><td>s3</td><td>r8</td><td>s3</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I6</td><td>r1</td><td>s7</td><td>–</td><td>–</td><td>r1</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I7</td><td>r2</td><td>s7</td><td>–</td><td>s3</td><td>r4</td><td>r2</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I8</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="exam-note">Production r-number reference: r1 = E → T E', r2 = E → a, r3 = E' → + T E', r4 = E' → ε, r5 = T → F T', r6 = T' → * F T', r7 = T' → ε, r8 = F → ( E ), r9 = F → Id. "–" = no action (error on that terminal from that state).</div>
+
+<p><b>Conflict check (why this grammar is SLR-clean):</b> the ε-productions r4 (E' → ε) and r7/r8 reduce on FOLLOW sets. I3 has shift <code>s7</code> on <code>+</code> and reduce r4 on FOLLOW(E')={+, ), $} — the <code>+</code> cell is a <i>shift-reduce</i> conflict in LR(0), resolved by shift (standard). I7: same pattern, shift on <code>+</code> wins over r4. No reduce–reduce conflicts. The accept entry is in I1 (S' → E .) on <code>$</code> (shown as "accept" in the ε column as a convention for the end-marker).</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-5">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">Describe an LR(1) parser with a blocking diagram (input buffer, parse stack, action table, GOTO table, driver loop). Give the major advantages of LR(1): no left-factoring requirement, single left-to-right pass, no parse-time lookahead computation, minimal context. Contrast with predictive parsing limits.</p>
+
+<p><b>LR(1) parser — blocking diagram:</b></p>
+<pre><code>                    +-----------------------------+
+                    |        ACTION TABLE          |
+                    |  (state, terminal) →         |
+                    |    shift s / reduce r        |
+                    |    accept / error             |
+                    +-----------------------------+
+                                   |
+                                   | consulted each step
+                                   v
+  +------------------------------------------------------------------+
+  |                        DRIVER LOOP                               |
+  |                                                                  |
+  |  1. state = top(stack);  terminal = head(input)                |
+  |  2. action = ACTION[state, terminal]                            |
+  |     ┌─ shift s :  push(terminal, s); advance input              |
+  |     ├─ reduce r : pop len(β); push(A, GOTO[prev,A]);           |
+  |     │               emit production r                            |
+  |     ├─ accept   : declare "syntax OK", halt                     |
+  |     └─ error    : trigger recovery, halt                         |
+  |  3. if not accepted, goto step 1                                  |
+  +------------------------------------------------------------------+
+        |                                            |
+        | stack ops                                  | input read
+        v                                            v
+  +----------------------+              +-------------------------+
+  |       PARSE STACK     |            |      INPUT BUFFER        |
+  |  bottom: start symbol |            |  "a + b * c $"           |
+  |  top:   state N       |            |  (scanned L→R, head     |
+  |                        |            |   points to next sym)   |
+  +----------------------+              +-------------------------+
+                                   +-----------------------------+
+                                   |        GOTO TABLE           |
+                                   |  GOTO(state, nonterm) →     |
+                                   |  next-state (used after    |
+                                   |   every reduce)             |
+                                   +-----------------------------+
+</code></pre>
+The stack stores <i>(symbol, state)</i> pairs. After a <code>reduce r : A → β</code> is performed, the parser pops <code>len(β)</code> states and consults <code>GOTO[prev_state, A]</code> to find the new top state. The input buffer is read left-to-right, one terminal at a time, with an end-marker <code>$</code>.</p>
+
+<p><b>Major advantages of LR(1):</b></p>
+<ul>
+<li><b>Covers all practical programming-language constructs</b> without left-factoring. Left recursion (a <code>while</code>, a for-loop, <code>a - b - c</code>) is a non-issue; LL(1) parsers must rewrite the grammar to eliminate it.</li>
+<li><b>Single left-to-right pass</b> — no backtracking, no multiple scans, no context-free ambiguity resolution at parse time. Amortised O(n).</li>
+<li><b>Lookahead embedded in items</b> — the parser never computes a FIRST set on the fly; the generator precomputes item-lookaheads and the runtime just indexes into the table.</li>
+<li><b>Minimal context (usually 1 symbol of lookahead)</b> — one terminal symbol determines the action; the table size is bounded and known in advance.</li>
+<li><b>Handles non-LR(0) grammars</b> — e.g. an <code>if-else</code> statement, two-statement blocks, and expression grammars that are not LR(0) but are LR(1) or LR(2).</li>
+</ul>
+
+<p><b>Contrast with (top-down) predictive / LL(1) parsing:</b></p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Criterion</th><th>LR(1) (bottom-up)</th><th>LL(1) / Predictive (top-down)</th></tr></thead>
+<tbody>
+<tr><td>Left recursion</td><td>Handles naturally; no factoring</td><td>Must be factored out or rewritten</td></tr>
+<tr><td>First/follow split</td><td>Lookahead sets computed once at generation</td><td>Computed at every decision point; split must be disjoint</td></tr>
+<tr><td>Grammar class</td><td>LR(1) ⊃ LL(1); broader class</td><td>LL(1) is a strict subset; many practical grammars are not LL(1)</td></tr>
+<tr><td>Backtracking</td><td>Never</td><td>Never (when LL(1)); required in LL(k) or with backtracking for non-LL(1)</td></tr>
+<tr><td>Context window</td><td>1 terminal (minimal)</td><td>1 terminal for LL(1), k for LL(k)</td></tr>
+<tr><td>Table size</td><td>Number of states × number of terminals (bounded)</td><td>Same structure, but more first-sets to check</td></tr>
+<tr><td>Generation cost</td><td>Higher (item sets carry lookaheads)</td><td>Lower (FIRST/FOLLOW per non-terminal)</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="exam-note">In practice, most modern parsers use LALR(1) (an LR(1) optimisation that merges states with the same core and lookahead-set, shrinking the table while keeping LR(1) power). LALR(1) can introduce reduce-reduce conflicts that pure LR(1) avoids; Yacc and CUP default to LALR(1).</div>
+</div>
+</div>
+
+<div class="qa-card" id="q4-5">
+<span class="qa-num">4</span>
+<div class="qa-body">
+<p class="qa-question">Build the LR(0) set of items and the SLR(1) table for the right-recursive grammar S' → S, S → iXSS | a, X → iXSS | b (terminals i, a, b). Show item sets, the table, and note any conflicts and how SLR(1) lookahead resolves them.</p>
+
+<p><b>Productions and FOLLOW sets:</b></p>
+<pre><code>0: S' -&gt; S
+1: S  -&gt; i X S S
+2: S  -&gt; a
+3: X  -&gt; i X S S
+4: X  -&gt; b
+
+FOLLOW(S) = { i, a, $ }   (S appears in S → i X S S, FIRST(S) = {i,a} ⊆ FOLLOW(S); $ from S' → S)
+FOLLOW(X) = { i, a }      (X is followed by S S; FIRST(S) = {i,a}; S cannot be ε)
+</code></pre>
+
+<p><b>LR(0) item sets:</b></p>
+<pre><code>I0:  S' -&gt; . S              S -&gt; . i X S S      S -&gt; . a
+I1:  S -&gt; i . X S S        X -&gt; . i X S S      X -&gt; . b
+I2:  S -&gt; a .
+I3:  S -&gt; i X . S S        S -&gt; . i X S S      S -&gt; . a
+I4:  X -&gt; i . X S S        X -&gt; . i X S S      X -&gt; . b
+I5:  X -&gt; b .
+I6:  S -&gt; i X S . S S      S -&gt; . i X S S      S -&gt; . a
+I7:  X -&gt; i X . S S        S -&gt; . i X S S      S -&gt; . a
+I8:  X -&gt; i X S . S S      S -&gt; . i X S S      S -&gt; . a
+I9:  X -&gt; i X S S .        S -&gt; . i X S S      S -&gt; . a
+I10: S -&gt; i X S S .        S -&gt; . i X S S      S -&gt; . a
+I11: S' -&gt; S .             (accept)
+</code></pre>
+
+<p><b>SLR(1) action / goto table:</b></p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>state</th><th>i</th><th>a</th><th>b</th><th>$</th><th>S</th><th>X</th></tr></thead>
+<tbody>
+<tr><td>I0</td><td>s1</td><td>s2</td><td>–</td><td>–</td><td>11</td><td>–</td></tr>
+<tr><td>I1</td><td>s4</td><td>–</td><td>s5</td><td>–</td><td>–</td><td>3</td></tr>
+<tr><td>I2</td><td>r2</td><td>r2</td><td>–</td><td>r2</td><td>–</td><td>–</td></tr>
+<tr><td>I3</td><td>s1</td><td>s2</td><td>–</td><td>–</td><td>6</td><td>–</td></tr>
+<tr><td>I4</td><td>s4</td><td>–</td><td>s5</td><td>–</td><td>–</td><td>7</td></tr>
+<tr><td>I5</td><td>r4</td><td>r4</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I6</td><td>s1</td><td>s2</td><td>–</td><td>–</td><td>10</td><td>–</td></tr>
+<tr><td>I7</td><td>s1</td><td>s2</td><td>–</td><td>–</td><td>8</td><td>–</td></tr>
+<tr><td>I8</td><td>s1</td><td>s2</td><td>–</td><td>–</td><td>9</td><td>–</td></tr>
+<tr><td>I9</td><td>s1⚠</td><td>s2⚠</td><td>–</td><td>–</td><td>–</td><td>–</td></tr>
+<tr><td>I10</td><td>s1⚠</td><td>s2⚠</td><td>–</td><td>r1</td><td>–</td><td>–</td></tr>
+<tr><td>I11</td><td>–</td><td>–</td><td>–</td><td>acc</td><td>–</td><td>–</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="exam-note">⚠ = shift/reduce conflict resolved by shift (standard SLR convention). I9: r3 (X → iXSS) conflicts with shift on i,a — resolved by shift. I10: r1 (S → iXSS) conflicts with shift on i,a — resolved by shift; r1 on $ has no shift counterpart, so no conflict there.</div>
+
+<p><b>Conflict analysis:</b> I9 contains the reduce item <code>X → iXSS .</code> (r3) with FOLLOW(X)={i,a}, and shift items for i and a — a shift/reduce conflict on both terminals. I10 contains <code>S → iXSS .</code> (r1) with FOLLOW(S)={i,a,$} and shift on i,a — another shift/reduce conflict. SLR(1) resolves both by <i>preferring shift</i>. The grammar is therefore SLR(1) with conflicts; it is not unambiguously SLR-clean but is parseable under the shift-dominant rule. A full LR(1) table would carry per-item lookaheads that can split I9 and I10 into separate states with distinct lookahead sets, eliminating the conflicts entirely.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q5-5">
+<span class="qa-num">5</span>
+<div class="qa-body">
+<p class="qa-question">Compare the LR(1) table with the SLR table from Q4 (size + whether the conflicts disappear under LR(1) — explain why item lookaheads split the state). Then a short note on handle parsing: handles, rightmost derivation run in reverse, one worked handle-reduction trace for (i * i) + i.</p>
+
+<p><b>LR(1) vs SLR(1) table for Q4 grammar:</b></p>
+
+<p><b>Size:</b> SLR uses 11 states (I0–I10 + I11 accept). LR(1) carries a <i>lookahead symbol</i> in each item, splitting states whose LR(0) cores are identical but whose lookahead sets differ. For this grammar, I9 and I10 each split into two sub-states: one with lookahead {i,a} (from the FOLLOW set, where shift dominates) and one with lookahead {$} (where no shift counterpart exists). The LR(1) table therefore has approximately 13 states vs SLR's 11, and the action table is the same width but with more rows.</p>
+
+<p><b>Conflicts:</b> The SLR shift/reduce conflicts in I9 (on i and a) and I10 (on i and a) <b>disappear under LR(1)</b>. The reason: in SLR, all items in a state share the same production number and the lookahead is the <i>global</i> FOLLOW set of the non-terminal. In LR(1), each item is <code>(A → α . β, a)</code> where <code>a</code> is the <i>specific</i> terminal that can legally follow this particular item in context. Items in I9 with lookahead {i} and items with lookahead {a} end up in different states after closure, so the reduce action fires only on the specific terminal, and the shift action fires on the other — no conflict. This is the fundamental LR(1) advantage: item lookaheads <i>split the state</i> and make the table deterministic.</p>
+
+<p><b>Short contrast table:</b></p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Property</th><th>SLR(1)</th><th>LR(1)</th></tr></thead>
+<tbody>
+<tr><td>Item form</td><td>LR(0) item + global FOLLOW</td><td>(LR(0) item, specific lookahead a)</td></tr>
+<tr><td>State granularity</td><td>One state per LR(0) core</td><td>Split per (core, lookahead) pair</td></tr>
+<tr><td>Table size</td><td>Smaller (~11 states here)</td><td>Larger (~13 states here)</td></tr>
+<tr><td>Conflicts</td><td>Shift/reduce in I9, I10 (resolved by shift)</td><td>None — lookaheads split the states</td></tr>
+<tr><td>Grammar power</td><td>Subsumes most practical grammars</td><td>Strictly more powerful; handles grammars SLR rejects</td></tr>
+</tbody>
+</table>
+</div>
+
+<p><b>Handle parsing — short note:</b> A <i>handle</i> is a substring of the input that can be reduced to a non-terminal using a single production, and which corresponds to the <i>rightmost</i> derivation step in reverse. Handle parsing (bottom-up) works by finding the handle in the current sentential form, reducing it, and repeating until the start symbol is reached. The parse is the <b>reverse of the rightmost derivation</b>: the last production applied in the rightmost derivation becomes the first reduction (handle) in the parse. Every sentential form in a handle parse is a <i>suffix</i> of some prefix of the input — this is the "left context" property that makes bottom-up parsing feasible without lookahead.</p>
+
+<p><b>Worked handle-reduction trace for <code>(i * i) + i</code></b> (using the standard expression grammar: E → E + T | T, T → T * F | F, F → ( E ) | i):</p>
+<pre><code>Step  Sentential form              Handle reduced    Production
+────  ───────────────────────────  ────────────────  ─────────────────
+ 0    ( i * i ) + i $             –                  (start)
+ 1    ( i * i ) + F $             i → F              F -&gt; i
+ 2    ( i * i ) + T $             F → T              T -&gt; F
+ 3    ( i * F ) + T $             i → F              F -&gt; i
+ 4    ( i * F ) + T $             i → F              F -&gt; i
+ 5    ( F * F ) + T $             F → T              T -&gt; F
+ 6    ( T * F ) + T $             T * F → T          T -&gt; T * F
+ 7    ( T ) + T $                 ( T ) → F          F -&gt; ( E )
+ 8    ( E ) + T $                 T → E              E -&gt; T
+ 9    E + T $                     E → ( E )?         (wait - see below)
+ 10   E $                         E + T → E          E -&gt; E + T
+ 11   E $                         accept               S' -&gt; E
+</code></pre>
+<p><b>Correction at step 9–10:</b> the reduce sequence is: <code>(T)+T</code> → <code>F+T</code> (reduce T to F via F → T, handle = T) → <code>T+T</code> is not a production; the actual chain is: <code>(E)+T</code> → reduce <code>(E)</code> to F: <code>F+T</code> → reduce F to T: <code>T+T</code> is still not a production; the correct path is: reduce <code>(E)</code> → F, then <code>F + T</code> has no production; instead, reduce the entire <code>(E)</code> sub-expression to T, giving <code>T + T</code>, which then reduces via <code>E → T</code> on the left side: <code>E + T</code> → <code>E</code>. The handle at each step is always the <i>rightmost</i> substring that is the RHS of some production in context — the parser never guesses; the handle is uniquely determined by the stack top and the action table.</p>
+</div>
+</div>

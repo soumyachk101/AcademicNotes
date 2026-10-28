@@ -1,0 +1,459 @@
+<!-- UNITS 3-4: answer fragment -->
+
+<section class="module-section" id="module-3">
+<h2>Module 3 Questions</h2>
+
+<div class="qa-card" id="q1-3">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">Describe the two basic operations on a semaphore. Explain whether any integer variable with similar operations can act as a semaphore or not. What is a race condition? Explain Peterson's solution to avoiding a race condition. What are the conditions for a solution to the mutual exclusion problem? Mention the conditions for achieving mutual exclusion.</p>
+
+<p><b>Semaphore (Dijkstra, 1965):</b> a non-negative integer on which only two <i>atomic</i> operations are defined — the classical names are <code>V()</code> (release) and <code>P()</code> (acquire), modern names <code>signal()</code> and <code>wait()</code>.</p>
+<pre><code>typedef struct { int value; ... } semaphore;
+
+P(S) / wait(S)        V(S) / signal(S)
+-------------------   -------------------
+while (S.value <= 0)  S.value++;
+  ; /* no-op spin */  /* wake one process blocked in wait, if any */
+S.value--;
+</code></pre>
+<p><code>P</code> (probeit) decrements and, if the value goes negative, blocks the calling process; <code>V</code> (vor) increments and wakes one blocked waiter. <b>The whole test-and-decrement / test-and-increment must be atomic</b> — no interrupt may arrive between the read of <code>value</code> and its update.</p>
+
+<p><b>Can an ordinary integer work?</b> No. A plain C <code>int</code> implements a non-atomic read-modify-write: with two processes, P1 may read <code>S=1</code>, P2 reads <code>S=1</code> before P1 writes, both write <code>S=0</code> — two processes entered the critical section although only one should have. The operation must be indivisible at the hardware level (atomic exchange / test-and-set, or disabling interrupts in kernel mode).</p>
+
+<p><b>Race condition:</b> the final result depends on the relative, unpredictable timing (interleaving) of concurrently executing processes — a non-deterministic bug, e.g. two threads reading, modifying and writing a shared counter and losing an update.</p>
+
+<p><b>Peterson's solution</b> (two processes, shared <code>flag</code> array and <code>turn</code>; <code>read-modify-write</code> of one shared variable is atomic on most real hardware — Dijkstra's "atomicity assumption"):</p>
+<pre><code>// Process Pi
+do {
+  flag[i] = true;
+  turn = j;                       // let the OTHER process go first
+  while (flag[j] && turn == j)    // yield: spin while j wants in AND j's turn
+    ;                             // busy wait
+  /* critical section */
+  flag[i] = false;               // announce exit
+  /* remainder section */
+} while (true);
+</code></pre>
+<p><b>Mutual exclusion:</b> if both are at the test and <code>turn = j</code>, P<sub>i</sub> spins because <code>turn == j</code>; P<sub>j</sub> passes. The invariant "at most one in the CS" holds. <b>Progress (turn-taking):</b> after P<sub>i</sub> exits (<code>flag[i]=false</code>), P<sub>j</sub> sees it and proceeds; if P<sub>j</sub> is in its remainder section while P<sub>i</sub> retries, P<sub>i</sub> passes since <code>flag[j]</code> is false. A third condition, <b>bounded waiting</b>, also holds: a process waits only one turn. <b>Extension to N processes:</b> two locks sharing a counter (a lock per pair of processes), or a shared <code>entry</code> array scanned before entering.</p>
+
+<p><b>Conditions for a correct mutual-exclusion solution:</b> (1) <b>Mutual exclusion</b> — never two in the CS; (2) <b>Progress</b> — if no process is in the CS and some wish to enter, only those outside the CS may decide who enters next, and the decision is not postponed forever; (3) <b>Bounded waiting</b> — a bound exists on how long other processes may enter after a request. (A practical fourth: the algorithm must not depend on relative speeds or timing.)</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-3">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">What is the critical section problem? What are the requirements that must be met by a solution to the critical section problem? Explain the race condition in the context of process synchronization. What is a mutex? How are semaphores used to solve the critical section problem?</p>
+
+<p><b>Critical section problem:</b> every process has a code segment that accesses shared data (the <b>critical section</b>, or CS); the problem is to design an algorithm so that whenever several processes execute CS code, <b>at most one is in its CS at any instant</b>. The part after the CS is the <b>remainder section</b>.</p>
+
+<p><b>Requirements for a solution</b> (three classical, one practical):</p>
+<ol>
+<li><b>Mutual exclusion:</b> no two processes are simultaneously in their critical sections.</li>
+<li><b>Progress:</b> if no process is executing in its CS and one or more wish to enter, only processes outside their CS can take part in deciding which enters next, and that decision cannot be postponed indefinitely.</li>
+<li><b>Bounded waiting:</b> there is a finite upper bound on the number of times other processes can enter their CS after a process has requested to enter and before that request is granted.</li>
+<li><b>(Practical) No timing assumption:</b> correctness must not depend on relative speeds of processors or on absolute timing; and no process may be permanently denied (no starvation).</li>
+</ol>
+
+<p><b>Race condition in synchronization:</b> the outcome of the program depends on the relative timing of concurrently running processes. Example: <code>counter++</code> compiled as <code>temp = counter; temp = temp+1; counter = temp;</code> — if P1 and P2 read <code>counter=7</code> before either writes, the result is 8 instead of 9. Two concurrent executions that share a memory location (a <b>shared variable</b>) "race" to reach the correct write; the fix is a mutual-exclusion protocol around the shared code.</p>
+
+<p><b>Mutex:</b> a <b>mutual-exclusion lock</b> — a binary semaphore with value in {0, 1}, whose only purpose is to serialize entry to a CS: one process acquires it (<code>P(lock)</code>), the rest block; the holder releases it on exit (<code>V(lock)</code>). It is the canonical primitive of locking.</p>
+
+<p><b>Semaphores solve the CS problem</b> by pairing a mutex with each shared resource:</p>
+<pre><code>semaphore mutex = 1;            // binary, one per resource
+
+void main() {
+  P(mutex);
+  /* critical section */
+  V(mutex);
+  /* remainder section */
+}
+</code></pre>
+<p>Because <code>P</code> and <code>V</code> are atomic hardware primitives, two processes cannot both pass the <code>P(mutex)</code> when the value is 1: the first decrements it to 0, the second sees 0 and blocks. Mutual exclusion holds; exactly one blocked process is woken on each <code>V</code>; progress and bounded waiting are satisfied by the kernel's wake-up discipline (the scheduler guarantees no process blocks forever — the wake-up queue is FIFO on most kernels, giving bounded waiting).</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-3">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">What are the operations on a semaphore? What is a semaphore? What is the problem with these operations if they follow the classical definition? What is the possible remedy to the above problem? Write Peterson's algorithm for the two-process critical section problem.</p>
+
+<p><b>Semaphore:</b> a synchronization primitive introduced by Dijkstra — an integer variable <code>S ≥ 0</code> with only two atomic operations:</p>
+<pre><code>P(S) / wait(S)          V(S) / signal(S)
+-------------------      -------------------
+while (S.value <= 0)     S.value++;
+  ; /* busy wait */      /* wake one waiting process if any */
+S.value--;
+</code></pre>
+<p><code>P</code> = probe/test ("wait to acquire"), <code>V</code> = release ("signal to release"). Both are indivisible at the hardware level.</p>
+
+<p><b>Problem with the classical definition:</b> the classical <code>P</code> is written as a <b>busy-wait (spin) loop</b> — <code>while (S.value &lt;= 0) ;</code>. Two serious defects: (i) <b>Wasted CPU time</b> — the blocked process occupies a CPU and burns cycles doing nothing; on a uniprocessor this is fatal, because a <b>preempted</b> spinning process will never get another chance to retest while the process it is waiting for is the one running the CPU. (ii) <b>Priority inversion</b> — a low-priority process spins while a high-priority process it would unblock is starved of the CPU. The classical test-then-decrement is also <b>non-atomic</b> if implemented with ordinary load/store instructions, which is exactly the race condition we are trying to remove.</p>
+
+<p><b>Remedy:</b> (a) <b>Hardware support for atomicity.</b> Modern CPUs provide an atomic <code>test-and-set</code> (exchange) instruction: <code>TA&amp;S(loc) { temp = *loc; *loc = 1; return temp; }</code> executed as a single instruction; the CS becomes <code>while (TA&amp;S(lock)); </code> followed by <code>*lock = 0;</code>. Or an atomic swap / compare-and-swap instruction. (b) <b>Kernel sleep instead of spin.</b> When <code>P</code> finds <code>S ≤ 0</code>, the kernel blocks the process on the semaphore's <code>waitQ</code> and the CPU is released to other work; <code>V</code> moves one waiting process to the ready queue. This removes the wasted-CPU defect.</p>
+
+<p><b>Peterson's algorithm</b> — two processes, shared <code>int turn;</code> and <code>bool flag[2];</code> (initially <code>turn = 0</code>, <code>flag[0] = flag[1] = false</code>; each read-modify-write of a single shared variable is assumed atomic, Dijkstra's assumption):</p>
+<pre><code>// Process Pi, with j = 1 - i
+do {
+  flag[i] = true;
+  turn = j;                       // "please go first"
+  while (flag[j] && turn == j)
+    ; /* yield — busy wait */
+  /* critical section */
+  flag[i] = false;               // announce departure
+  /* remainder section */
+} while (true);
+</code></pre>
+<p><b>Mutual exclusion</b> is proved by contradiction: suppose both are in the CS. P<sub>i</sub> can be in it only because when it last tested, <code>flag[j]</code> was false or <code>turn</code> was <code>i</code>. P<sub>j</sub> can be in it only by the symmetric condition. But the last write to <code>turn</code> set it to one value; say <code>turn = j</code>. Then P<sub>i</sub> passes only if <code>flag[j]</code> was false; P<sub>j</sub>, being in the CS, has already set <code>flag[j] = true</code> — contradiction. <b>Progress:</b> the last process to arrive sets <code>turn</code> to the other's index, so the other enters. <b>Bounded waiting:</b> a process waits at most one other's turn. <b>N-process extension:</b> one <code>lock</code> array per pair of processes, entry guarded by the two locks that include process <code>i</code>; or a single shared <code>turn</code> pointer combined with per-process <code>flag</code> bits scanned in order.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q4-3">
+<span class="qa-num">4</span>
+<div class="qa-body">
+<p class="qa-question">State the producer-consumer problem. Give a solution to the producer-consumer problem, using a semaphore. Justify that your solution guarantees mutual exclusion. What is message passing? What are event counters?</p>
+
+<p><b>Producer-consumer (bounded buffer) problem:</b> N producer processes generate data and deposit it into a shared fixed-size buffer; M consumer processes remove data and process it. The buffer cannot overflow (full → producer must wait) or underflow (empty → consumer must wait), and the buffer must be accessed by at most one process at a time.</p>
+
+<p><b>Semaphore solution</b> (three semaphores: <code>full</code> counts the number of used slots, <code>empty</code> counts the number of free slots, <code>mutex</code> is the buffer lock):</p>
+<pre><code>semaphore empty = N;   // N free slots at start
+semaphore full  = 0;   // no data in the buffer
+semaphore mutex = 1;   // one at a time in the buffer
+
+// Producer
+do {
+  item = produce();
+  P(empty);            // wait for a free slot
+  P(mutex);            // exclusive buffer access
+  insert(item);
+  V(mutex);            // release the buffer
+  V(full);             // announce a data item
+} while (true);
+
+// Consumer
+do {
+  P(full);             // wait for a data item
+  P(mutex);            // exclusive buffer access
+  item = remove();
+  V(mutex);
+  V(empty);            // announce a free slot
+  consume(item);
+} while (true);
+</code></pre>
+<p><b>Why mutual exclusion holds:</b> the pair <code>P(mutex); … V(mutex)</code> is serialized by a binary semaphore; no two processes can both hold <code>mutex</code>. Moreover the invariants <code>full + empty = N</code> always and <code>0 ≤ full ≤ N</code> hold in every reachable state. Suppose a producer is in the critical region: it holds <code>mutex</code>; the number of free slots it sees is <code>empty</code>, which is at least 1 because it just performed <code>P(empty)</code> successfully. A simultaneous consumer would need <code>full ≥ 1</code> AND <code>mutex</code>. But while the producer is between <code>V(mutex)</code> and <code>V(full)</code>, it holds neither, so the invariant is not broken; the only way to break mutual exclusion would be for both to hold <code>mutex</code> at once, which the binary semaphore forbids. Hence at most one process accesses the buffer at a time.</p>
+
+<p><b>Message passing:</b> an inter-process communication model in which processes exchange data by <code>send(destination, message)</code> and <code>receive(source, &amp;message)</code> system calls, with <i>no shared memory</i>. The message is a copy; the kernel handles routing and buffering. It contrasts with shared-memory synchronization (semaphores, locks, monitors). Two variants exist: <b>synchronous</b> send blocks until the receiver reads the message; <b>asynchronous</b> send returns immediately and the message is queued. The receiver can specify a <i>source set</i> and/or a <i>message-type predicate</i> to select which messages to match — this is the mechanism by which processes coordinate without sharing memory.</p>
+
+<p><b>Event counters (Dijkstra):</b> a semaphore specialized to count occurrences of a <i>completed event</i>. The counter starts at 0 and only goes up when the event occurs; a process calls <code>P(e)</code> to wait for the <i>nth</i> occurrence. Unlike a general counting semaphore, an event counter never goes negative because it is incremented exactly once per event and decremented once per wait. In producer-consumer, <code>full</code> and <code>empty</code> are event counters: <code>full</code> counts "an item has been inserted"; <code>empty</code> counts "a slot is free". They are used to <b>order events</b> (consumer must wait for producer to finish inserting before removing), not to exclude simultaneous access to a shared variable, which is what the <code>mutex</code> does.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q5-3">
+<span class="qa-num">5</span>
+<div class="qa-body">
+<p class="qa-question">What is the Readers-Writers problem? How to implement a solution to the Readers-Writers problem with the use of semaphores? What is the bounded buffer problem? Explain with the solution. Differentiate between binary and counting semaphore. What is the advantage of using a counting semaphore than a binary semaphore?</p>
+
+<p><b>Readers-Writers problem:</b> a shared data object (a database file, a table) is accessed by <b>readers</b> (which only read, many can be inside at the same time) and <b>writers</b> (which write, only one can be inside, and no reader may be inside while a writer writes). Three policies: <b>first problem</b> — no starvation, fair between readers and writers; <b>second problem</b> — reader-preferred: no reader waits while any reader is active; <b>third problem</b> — writer-preferred: once a writer requests access, no subsequent reader may enter.</p>
+
+<p><b>Reader-preferring (second problem)</b> — readers share; writers are exclusive:</p>
+<pre><code>semaphore mutex = 1;   // protects counter
+int readCount = 0;     // readers currently in the CS
+semaphore RWlock = 1;  // exclusive for writers
+
+// Reader
+P(mutex);
+readCount++;
+if (readCount == 1)
+  P(RWlock);           // first reader locks the whole object
+V(mutex);
+
+/* read the shared object */
+
+P(mutex);
+readCount--;
+if (readCount == 0)
+  V(RWlock);           // last reader releases the lock
+V(mutex);
+
+// Writer
+P(RWlock);
+/* write */
+V(RWlock);
+</code></pre>
+<p>This is <b>reader-preferred</b>: readers that arrive after the first reader do not wait (they increment <code>readCount</code> and proceed without touching <code>RWlock</code>). A writer may be starved if readers keep arriving — the second problem accepts that.</p>
+
+<p><b>Writer-preferred (third problem)</b> — one extra semaphore <code>writeCount</code>:</p>
+<pre><code>semaphore RWlock = 1, writeGate = 0, mutex = 1;
+int writeCount = 0;   // writers waiting (protected by mutex)
+int readCount  = 0;   // readers in the object (protected by mutex)
+
+// Reader
+P(mutex);
+if (writeCount &gt; 0) { V(mutex); P(writeGate); P(mutex); }
+readCount++;
+if (readCount == 1) P(RWlock);       // first reader locks the object
+V(mutex);
+/* read */
+P(mutex);
+readCount--;
+if (readCount == 0) {
+  V(RWlock);
+  if (writeCount &gt; 0) V(writeGate);  // let the next waiting writer in
+}
+V(mutex);
+
+// Writer
+P(mutex);  writeCount++;  V(mutex);
+if (writeCount &gt; 1) P(writeGate);    // queue behind earlier writers
+P(RWlock);
+/* write */
+V(RWlock);
+P(mutex);
+writeCount--;
+if (writeCount &gt; 0) V(writeGate);    // release the next queued writer
+V(mutex);
+</code></pre>
+<p>Because a reader blocks on <code>writeGate</code> whenever <code>writeCount &gt; 0</code>, once any writer arrives it gets the object before subsequent readers — <b>writer preference</b> without starving writers, while readers that arrive when no writer is waiting proceed without waiting.</p>
+
+<p><b>Bounded buffer problem:</b> N producers write items to a fixed-size array of N slots; M consumers read them. A producer must wait when the buffer is full; a consumer must wait when it is empty; only one process accesses the buffer at a time.</p>
+
+<p><b>Solution (three semaphores):</b></p>
+<pre><code>semaphore empty = N;   // N free slots
+semaphore full  = 0;   // no items yet
+semaphore mutex = 1;   // exclusive buffer access
+
+// Producer
+P(empty);  P(mutex);  insert();  V(mutex);  V(full);
+// Consumer
+P(full);   P(mutex);  remove();  V(mutex);  V(empty);
+</code></pre>
+
+<p><b>Binary vs counting semaphore:</b></p>
+<table>
+<thead><tr><th>Aspect</th><th>Binary semaphore</th><th>Counting semaphore</th></tr></thead>
+<tbody>
+<tr><td>Value range</td><td>{0, 1} — a lock</td><td>0 … N — a counter</td></tr>
+<tr><td>Purpose</td><td>Mutual exclusion on a shared resource</td><td>Limits concurrent access; counts resources or events</td></tr>
+<tr><td>Example</td><td>Lock on the shared buffer (mutex)</td><td><code>full</code>, <code>empty</code> in bounded buffer; count of free device instances</td></tr>
+</tbody>
+</table>
+
+<p><b>Advantage of a counting semaphore:</b> a counting semaphore expresses "at most <i>k</i> may be inside at once" in one line — <code>semaphore S = k;</code> with <code>P(S)/V(S)</code> around the shared region. Modeling "at most 5 processes" with five separate binary semaphores and a mutex that assigns one of them requires a table plus a lock; the counting semaphore does it in one primitive. It also carries a <b>quantitative state</b> (the number of waiting processes is the value itself), which a binary semaphore cannot. This makes counting semaphores the natural choice for bounded buffers, device pools, and event counters.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q6-3">
+<span class="qa-num">6</span>
+<div class="qa-body">
+<p class="qa-question">What is the Dining Philosophers problem? How can a semaphore be used for the Dining Philosophers problem? How does synchronization and scheduling go hand in hand? What are the problems of busy-wait implementation of a semaphore? Explain how it is solved.</p>
+
+<p><b>Dining Philosophers problem:</b> five philosophers sit around a circular table with one fork between each pair; to eat, a philosopher must pick up both the left and right fork. The problem is to design an algorithm that prevents <b>deadlock</b> — all five holding one fork each and waiting forever for the other.</p>
+
+<p><b>Classic 5-fork solution</b> (one semaphore per fork):</p>
+<pre><code>semaphore fork[5] = {1,1,1,1,1};  // one per fork
+
+// Philosopher i (forks i and (i+1)%5)
+do {
+  P(fork[i]);
+  P(fork[(i + 1) % 5]);
+  /* eat */
+  V(fork[i]);
+  V(fork[(i + 1) % 5]);
+  /* think */
+} while (true);
+</code></pre>
+<p>This solution <b>deadlocks</b> if all five simultaneously pick up their left fork: the circular wait is formed (P1 holds fork 1, wants fork 2; … P5 holds fork 5, wants fork 1).</p>
+
+<p><b>Deadlock-breaking solutions:</b></p>
+<ol>
+<li><b>Asymmetric pickup:</b> philosopher 4 picks up the right fork first, others the left. At least one philosopher breaks the circular chain — mutual exclusion and progress are preserved by the ordering asymmetry.</li>
+<li><b>Resource hierarchy:</b> number the forks 1–5; every philosopher picks up the <b>lower-numbered</b> fork first. A cycle is impossible because the fork numbers around the loop would have to strictly increase and then decrease — this is the classic Coffman prevention of circular wait.</li>
+<li><b>Waiter semaphore:</b> only 4 of 5 may sit at a time — <code>semaphore in = 4;</code> each does <code>P(in)</code> before the first fork, <code>V(in)</code> after both. With 4 seated, the 5th fork is always free — the circular-wait condition cannot form.</li>
+</ol>
+
+<p><b>Synchronization and scheduling go hand in hand:</b> synchronization is the <i>protocol</i> that decides which process may use which resource; scheduling is the <i>mechanism</i> by which the OS picks which ready process runs. A process blocked on a semaphore goes to its <code>waitQ</code> and the CPU goes to another ready process; a <code>signal()</code> moves one waiter to the ready queue. The two must stay consistent on what "blocked" and "ready" mean: a fork-holder that is preempted is still a holder, and a woken process that is preempted again must still be counted as waiting.</p>
+
+<p><b>Problems of busy-wait (spin-wait) semaphores:</b></p>
+<ol>
+<li><b>CPU waste:</b> a process calling <code>P(S)</code> with <code>S = 0</code> spins in a tight loop doing no useful work — on a multiprocessor it idles one core; on a uniprocessor it is catastrophic, since the spinner occupies the CPU while the process that must call <code>V(S)</code> is starved of it.</li>
+<li><b>Priority inversion:</b> a low-priority spinner occupies the CPU; a high-priority process that must call <code>V(S)</code> to make progress is starved, because the spinner is not being preempted. The OS must preempt the spinner to let the woken process run — defeating the purpose of the spin.</li>
+</ol>
+<p><b>Solution — kernel sleep (waitQ):</b> when <code>P(S)</code> finds <code>S ≤ 0</code>, the kernel blocks the process on the semaphore's <code>waitQ</code> and gives the CPU to another ready process; when <code>V(S)</code> is called and <code>waitQ</code> is non-empty, the kernel moves one process from <code>waitQ</code> to the ready queue. No CPU cycles are wasted. The cost is a context switch on every <code>P</code> that blocks — expensive for a lock held only briefly — so spin locks are still preferred for very short critical sections on multiprocessors.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q7-3">
+<span class="qa-num">7</span>
+<div class="qa-body">
+<p class="qa-question">Explain how the use of monitors guarantee mutual exclusion?</p>
+
+<p><b>Monitor (Hoare, 1974):</b> a language-level module in which all shared data and the procedures that access it live, and in which the <b>compiler enforces that at most one process is inside the monitor at any time</b>. The monitor is a record with a set of procedures; entry is serialized by the monitor's intrinsic mutual-exclusion protocol — the compiler inserts a lock at the top of every monitor procedure and releases it on exit.</p>
+
+<pre><code>monitor database {
+  int read_count = 0, write_count = 0;
+  condition can_read, can_write;
+
+  procedure read() {
+    read_count++;
+    if (write_count &gt; 0)
+      wait(can_read);     // a writer is active or waiting — yield
+  }
+
+  procedure end_read() {
+    read_count--;
+    if (read_count == 0 &amp;&amp; write_count &gt; 0)
+      signal(can_write);  // last reader gone — wake a waiting writer
+  }
+
+  procedure write() {
+    write_count++;
+    if (write_count &gt; 1 || read_count &gt; 0)
+      wait(can_write);    // wait for exclusive access
+  }
+
+  procedure end_write() {
+    write_count--;
+    if (write_count == 0)
+      signal(can_read);   // no writer left — wake waiting readers
+    else
+      signal(can_write);  // pass the turn to the next writer
+  }
+}
+</code></pre>
+
+<p><b>How mutual exclusion is guaranteed:</b> (i) <b>Intrinsic lock</b> — the monitor is entered through exactly one procedure; the compiler inserts a binary lock at the entry of each procedure and releases it on every exit path. Two processes cannot both be inside the monitor body at once — this is the guarantee of mutual exclusion. (ii) <b>Condition variables</b> — a <code>condition c</code> has two operations: <code>wait(c)</code> releases the monitor's lock, blocks the calling process on <code>c</code>'s queue, and re-acquires the lock when the process is woken; <code>signal(c)</code> moves one waiting process from <code>c</code>'s queue to the ready state. Because only the lock-holder may call wait/signal, and because a process inside <code>wait(c)</code> holds no part of the invariant it protects, the monitor's data invariant (here: "at most one writer active, and no writer while <code>read_count &gt; 0</code>") remains true on entry and on every exit — no process can observe or corrupt it mid-step. (iii) <b>No busy-wait</b> — blocking is done by the kernel on the condition's queue, so the CPU is not wasted on spinning, unlike a classical semaphore.</p>
+
+<p><b>Contrast with semaphores:</b> semaphores are <i>low-level</i> — the programmer must get the <code>P</code>/<code>V</code> ordering right; a misplaced <code>V</code> before a <code>P</code> can corrupt state. Monitors are <i>high-level</i> — the compiler serializes entry and exit, and condition variables replace the <code>waitQ</code> + <code>mutex</code> dance with two clean operations <code>wait(c)</code> and <code>signal(c)</code>. The monitor encapsulates the shared data and its synchronization protocol, making it a <b>safe data structure</b> in the language sense. The main cost: a monitor is a language construct, so it must be supported by the compiler and the OS; semaphores are a hardware/kernel primitive, so they are always available.</p>
+</div>
+</div>
+</section>
+
+<section class="module-section" id="module-4">
+<h2>Module 4 Questions</h2>
+
+<div class="exam-note">★ Note: Solve problems on Banker's Algorithm ★</div>
+
+<div class="qa-card" id="q1-4">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">What is deadlock? What is starvation? Give the difference between deadlock and starvation. Explain Banker's algorithm. Show how it is helpful to overcome deadlock. "All unsafe states may not lead to deadlock" - why or why not? Describe the necessary and sufficient conditions for the occurrence of deadlock.</p>
+
+<p><b>Deadlock:</b> a set of processes is <b>deadlocked</b> if each process in the set is waiting for an event that only another process in the same set can cause; none can make progress. The four <b>Coffman conditions</b> must all hold:</p>
+<ol>
+<li><b>Mutual exclusion</b> — at least one resource is non-shareable.</li>
+<li><b>Hold and wait</b> — a process holds at least one resource while waiting for another.</li>
+<li><b>No preemption</b> — a resource can be released only voluntarily by the holder.</li>
+<li><b>Circular wait</b> — a closed chain of processes exists, each waiting for a resource held by the next.</li>
+</ol>
+
+<p><b>Starvation:</b> a process is indefinitely delayed — it waits forever for a resource that is perpetually granted to others. Starvation needs no closed loop; it is an unfairness in the scheduling/allocation policy.</p>
+<table>
+<thead><tr><th>Aspect</th><th>Deadlock</th><th>Starvation</th></tr></thead>
+<tbody>
+<tr><td>State</td><td>Closed circular wait among the set</td><td>No closed loop; one process is always delayed</td></tr>
+<tr><td>Cause</td><td>Resource-allocation cycle</td><td>Scheduling/priority policy (unfairness)</td></tr>
+<tr><td>Recovery</td><td>Terminate / preempt / roll back</td><td>Change the priority policy; add a fairness bound</td></tr>
+</tbody>
+</table>
+
+<p><b>Banker's algorithm</b> (Dijkstra, 1965) is a <b>deadlock-avoidance</b> algorithm. Each process declares its <b>maximum claim</b> per resource type before it starts. A request is granted only if the resulting state is <b>safe</b> — i.e. a <b>safe sequence</b> P<sub>1</sub>, …, P<sub>n</sub> exists such that for each k, P<sub>k</sub>'s remaining need ≤ (available + resources held by P<sub>1</sub> … P<sub>k−1</sub>). If no such sequence exists the state is <b>unsafe</b> and the request is refused.</p>
+
+<p><b>How it helps overcome deadlock:</b> by confining the system to safe states — and since every deadlock is an unsafe state — no deadlock can ever be reached: it is <i>avoidance</i>, checked at every allocation.</p>
+
+<p><b>Worked example.</b> Five processes, three resource types A(10), B(5), C(7) — 22 instances total. Initial state:</p>
+<table>
+<thead><tr><th></th><th>Allocation (A B C)</th><th>Max (A B C)</th><th>Need = Max − Alloc (A B C)</th></tr></thead>
+<tbody>
+<tr><td>P0</td><td>0 1 0</td><td>7 5 3</td><td>7 4 3</td></tr>
+<tr><td>P1</td><td>2 0 0</td><td>3 2 2</td><td>1 2 2</td></tr>
+<tr><td>P2</td><td>3 0 2</td><td>9 0 2</td><td>6 0 0</td></tr>
+<tr><td>P3</td><td>2 1 1</td><td>2 2 2</td><td>0 1 1</td></tr>
+<tr><td>P4</td><td>0 0 2</td><td>4 3 3</td><td>4 3 1</td></tr>
+</tbody>
+</table>
+<p><b>Available = (3, 3, 2).</b> Find a safe sequence. P1: need (1,2,2) ≤ avail (3,3,2)? Yes. P1 finishes: avail ← (3,3,2) + (2,0,0) = (5,3,2). P3: need (0,1,1) ≤ (5,3,2)? Yes. avail ← (5,3,2) + (2,1,1) = (7,4,3). P4: need (4,3,1) ≤ (7,4,3)? Yes. avail ← (7,4,3) + (0,0,2) = (7,4,5). P0: need (7,4,3) ≤ (7,4,5)? Yes. avail ← (7,4,5) + (0,1,0) = (7,5,5). P2: need (6,0,0) ≤ (7,5,5)? Yes. <b>Safe sequence ⟨P1, P3, P4, P0, P2⟩</b> — the state is safe.</p>
+
+<p><b>Now test an unsafe request.</b> P0 requests (0, 0, 2): P0's need is (7,4,3), so the request is valid (0 ≤ 7, 0 ≤ 4, 2 ≤ 3). Simulate the grant: P0's allocation becomes (0,1,2), and Available ← (3,3,2) − (0,0,2) = (3,3,0). Search for a safe sequence: P1 needs 2 C but 0 available; P3 needs 1 C; P4 needs 1 C and 4 A; P0 needs 4 C; P2 needs 6 A but only 3 available. No process can finish — the state is <b>unsafe</b>, so the request must be <b>refused</b> and P0 must wait until some process releases resources.</p>
+
+<p><b>"All unsafe states may not lead to deadlock" — why?</b> An <b>unsafe</b> state is one in which no safe sequence exists for the <i>current</i> allocation. But a process may still release resources and exit; a <i>safe</i> state may be reachable by a future release. Deadlock requires that <b>no process in the circular-wait set can ever proceed</b> — an unsafe state is necessary but not sufficient for deadlock. The system may enter an unsafe state and still recover.</p>
+
+<p><b>Necessary and sufficient condition for deadlock:</b> a deadlock occurs <b>if and only if</b> the resource-allocation graph contains a cycle <i>and</i> every resource type in that cycle is single-instance (at most one instance per type, so no free instance can break the loop). The four Coffman conditions are the necessary ones; the cycle criterion is the sufficient one.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-4">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">Critically comment on the following topic: A cycle in a resource allocation graph does not always imply the occurrence of deadlock. What is the optimistic assumption made in the deadlock detection algorithm? How can this assumption be violated?</p>
+
+<p><b>Resource Allocation Graph (RAG):</b> a directed graph with two kinds of vertices: <b>processes</b> (circles) and <b>resource types</b> (squares, with one dot per available instance). A <b>request edge</b> P → R means P is waiting for an instance of R; an <b>assignment edge</b> R → P means P currently holds an instance. The key theorem:</p>
+
+<p><b>Single-instance resource types:</b> if the system has <b>at most one instance per resource type</b>, then a <b>cycle in the RAG is both necessary and sufficient</b> for deadlock. Necessity: deadlock requires circular wait, and circular wait is exactly a cycle in the RAG. Sufficiency: if every resource in the cycle has exactly one instance and each process in the cycle is waiting for the instance held by the next, no process in the cycle can ever be released, so the cycle is a permanent deadlock.</p>
+
+<p><b>Multi-instance resource types:</b> if a resource type has more than one instance, <b>a cycle is necessary but not sufficient</b> for deadlock. A cycle may exist while a process in the cycle still has access to <i>enough</i> instances of every resource it needs (because it is not the only one waiting for that type). The process can complete and release its resources, breaking the cycle. A cycle in a multi-instance RAG <i>may</i> be resolved; it is not a proof of deadlock. To detect deadlock in a multi-instance system, one must use a <b>deadlock-detection algorithm</b> (e.g. a <b>wait-kill</b> graph or the <b>resource allocation cycle</b> search) that walks the request-and-hold relationships across all instances.</p>
+
+<p><b>Optimistic assumption in the detection algorithm:</b> the algorithm assumes that the system <b>will eventually reach a safe state</b> — that is, every process will eventually release the resources it holds, so the detection algorithm can find a <i>deadlock-free</i> schedule. In other words, the detection algorithm assumes that <b>no process will hold a resource indefinitely</b> (no indefinite hold, no livelock). This is the <b>optimism</b> of the detection approach: it does not prevent a process from acquiring a resource and then never releasing it; it only <i>detects</i> the deadlock after it has formed.</p>
+
+<p><b>How the assumption is violated:</b> (i) <b>A bug</b> in the user program: a process may have a coding error that causes it to hold a resource forever without ever releasing it. The detection algorithm sees the cycle and reports deadlock, but the "deadlock" is actually a bug — the process is not waiting for another process; it is simply broken. (ii) <b>Livelock</b>: two or more processes may constantly change state in response to each other, making no progress. A polite-diners example: two people in a narrow hallway each step to the right to let the other pass, but they both step right at the same time, then both step left, and so on, in an endless synchronized cycle. No process is blocked; no process makes progress. A detection algorithm that looks for a <i>cycle in the waiting graph</i> will not find one — the processes are not <i>waiting</i> on each other in a closed loop; they are <i>actively</i> changing state. The livelock is not a deadlock, but it has the same observable effect: no progress. (iii) <b>Priority inversion</b>: a high-priority process may be blocked by a low-priority process that holds a resource; the high-priority process can never run to release its own resources, so the system appears deadlocked. The detection algorithm may flag it as a deadlock, but the root cause is the scheduling policy, not a circular wait.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-4">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">With an example, describe if resources are not properly allocated to the processes it may lead from a safe state to an unsafe state. Prove that linear ordering for denying the "circular wait" condition actually prevents circuits from developing in the Resource Allocation Graph (RAG). What are the methods for handling deadlock?</p>
+
+<p><b>Safe → unsafe transition:</b> a <b>safe</b> state is one in which a safe sequence exists; the system moves to an <b>unsafe</b> state when a new allocation request is granted. The transition is dangerous because an unsafe state may lead to deadlock (Banker's algorithm refuses exactly such requests).</p>
+
+<p><b>Example:</b> two resource types A and B, each with 3 instances. Three processes with maximum claims:</p>
+<table>
+<thead><tr><th>Process</th><th>Hold A</th><th>Hold B</th><th>Max A</th><th>Max B</th><th>Need A</th><th>Need B</th></tr></thead>
+<tbody>
+<tr><td>P0</td><td>2</td><td>0</td><td>3</td><td>0</td><td>1</td><td>0</td></tr>
+<tr><td>P1</td><td>0</td><td>2</td><td>0</td><td>3</td><td>0</td><td>1</td></tr>
+<tr><td>P2</td><td>0</td><td>1</td><td>2</td><td>1</td><td>2</td><td>0</td></tr>
+</tbody>
+</table>
+<p>Available: A = 3 − 2 = 1, B = 3 − 3 = 0. <b>Safe sequence:</b> P0 needs (1,0) ≤ avail (1,0) → P0 completes, releasing its 2 A → avail (3,0). P2 needs (2,0) ≤ (3,0) → P2 completes, releasing its 1 B → avail (3,1). P1 needs (0,1) ≤ (3,1) → P1 completes. <b>⟨P0, P2, P1⟩ — the system is in a safe state.</b></p>
+
+<p><b>Now P2 requests 1 instance of A</b> (it already holds 1 B; after the request it holds 1 A + 1 B, still below its max of 2 A). Granting it leaves Available = A: 0, B: 0, and P2's remaining need is (1,0). No process can complete: P0 and P2 each need 1 A but none is available, and P1 needs 1 B while all 3 B are held. The state is <b>unsafe</b> — in fact a deadlock, since P0 waits for the A held by P2, P2 waits for the A held by P0, and P1 waits for B held by P2. The Banker's algorithm, simulating the grant, finds no safe sequence and <b>refuses the request</b>; P2 waits, and the system stays safe. The same request granted without checking takes the system from a safe state to an unsafe one.</p>
+
+<p><b>Linear ordering prevents circular wait.</b> Assign to every resource type a <b>strict total order</b> R<sub>1</sub> &lt; R<sub>2</sub> &lt; … &lt; R<sub>n</sub>; each process may request resources only in <b>increasing</b> index order, and a request is granted only if the resource's index exceeds the index of every resource the process currently holds.</p>
+
+<p><b>Proof:</b> suppose a circular wait exists: P<sub>i</sub> waits for <i>r<sub>i</sub></i>, which P<sub>i+1</sub> holds. By the ordering rule, P<sub>i</sub> may request <i>r<sub>i</sub></i> only if <i>index(r<sub>i</sub>)</i> exceeds the index of every resource P<sub>i</sub> holds; and P<sub>i+1</sub> may request <i>r<sub>i+1</sub></i> only if <i>index(r<sub>i+1</sub>) &gt; index(r<sub>i</sub>)</i> (since P<sub>i+1</sub> holds <i>r<sub>i</sub></i>). Going once around the loop gives <i>index(r<sub>n</sub>) &gt; index(r<sub>n−1</sub>) &gt; … &gt; index(r<sub>1</sub>) &gt; index(r<sub>n</sub>)</i> — a contradiction, since a strict total order cannot cycle. Hence no circuit can form in the RAG; circular wait is <b>broken</b> and deadlock is impossible. ∎</p>
+
+<p><b>Methods for handling deadlock:</b></p>
+<ol>
+<li><b>Prevention</b> — break one or more of the four Coffman conditions: make the resource shareable (mutual exclusion); require all resources to be requested and allocated at once (hold-and-wait); allow the OS to forcibly take a resource (no-preemption); impose a linear ordering on resource requests (circular wait).</li>
+<li><b>Avoidance</b> — dynamically check the state before each grant and refuse requests that would make it unsafe (Banker's algorithm); the system stays in the safe region.</li>
+<li><b>Detection and recovery</b> — allow deadlock to occur, periodically find a cycle in the RAG / wait-for graph, then recover by terminating processes, preempting resources, or rolling back to checkpoints.</li>
+<li><b>Ignore the problem (treatment)</b> — the OS takes no action; the application detects deadlock (e.g. by timeouts) and kills the process. This is the approach of most real operating systems (UNIX, Linux, Windows).</li>
+</ol>
+</div>
+</div>
+
+<div class="qa-card" id="q4-4">
+<span class="qa-num">4</span>
+<div class="qa-body">
+<p class="qa-question">State four necessary conditions for deadlocks. Explain circular wait for the occurrence of deadlock and how it can be prevented. What is livelock? List down the methods of deadlock detection and deadlock avoidance. Explain how deadlock can be recovered through deadlock.</p>
+
+<p><b>Four Coffman necessary conditions for deadlock:</b> (1) <b>Mutual exclusion</b> — at least one resource is non-shareable; (2) <b>Hold and wait</b> — a process holds at least one resource and waits for another; (3) <b>No preemption</b> — a resource can only be released by the holder; (4) <b>Circular wait</b> — a closed chain of processes exists such that each waits for a resource held by the next.</p>
+
+<p><b>Circular wait:</b> the most directly exploitable condition for <b>prevention</b> — a closed loop P<sub>1</sub> → P<sub>2</sub> → … → P<sub>n</sub> → P<sub>1</sub> in which P<sub>i</sub> waits for a resource held by P<sub>i+1</sub>. <b>Prevention methods that break circular wait:</b> (a) <b>Linear ordering</b> — assign a total order to resource types; each process requests resources only in increasing index order, which makes a cycle impossible. (b) <b>All-or-nothing allocation</b> — a process requests all the resources it will need before it starts; the OS allocates them all at once or makes the process wait, breaking <b>hold-and-wait</b> (which in turn destroys circular wait). (c) <b>Resource hierarchy</b> — a process may request only types of lower index than any it holds, the same argument as (a).</p>
+
+<p><b>Livelock:</b> a set of processes is <b>constantly changing state</b> in response to each other but <b>making no progress</b>. The classic <b>polite-diners</b> example: two people in a narrow hallway each step right to let the other pass, then both step left, endlessly. No process is blocked, but none makes progress. Livelock is <b>not</b> deadlock: in deadlock the processes are <i>blocked</i> (waiting); in livelock they are <i>active</i> (changing state). It is also <b>not</b> starvation: in starvation a single process is indefinitely delayed; in livelock <i>all</i> processes are actively moving, yet no progress is made.</p>
+
+<p><b>Methods of deadlock detection:</b> (i) <b>RAG cycle detection</b> — for single-instance resources, a cycle in the resource allocation graph is a deadlock; search with DFS. (ii) <b>Wait-for graph</b> — for multi-instance resources, an edge P → Q means P waits for a resource that Q holds; a cycle is a deadlock. (iii) <b>Timeouts</b> — each process sets a timer; if it fires before the resource is acquired, a deadlock is assumed (simple, but a slow process may be falsely flagged). (iv) <b>Wait-kill graph</b> — encodes "P waits for Q, so kill Q"; the algorithm finds a minimal set of processes to kill to break the deadlock.</p>
+
+<p><b>Methods of deadlock avoidance:</b> (i) <b>Banker's algorithm</b> — the process declares its maximum claim; a request is granted only if the resulting state is safe. (ii) <b>Restricted allocation</b> — the OS restricts how many processes may be active at once (e.g. at most N−1 of N philosophers at the table). (iii) <b>Resource hierarchy / linear ordering</b> — a total ordering of resources; the OS allocates only in increasing order. (iv) <b>Periodic detection with rollback</b> — the OS checks for deadlocks and rolls one process back to its last checkpoint when found.</p>
+
+<p><b>Deadlock recovery</b> — when a deadlock is detected, the OS must break it:</p>
+<ol>
+<li><b>Process termination</b> — kill one or more of the deadlocked processes. Simplest: kill the whole set; more conservative: kill one process at a time, re-checking the RAG until no cycle remains. Cost: the killed processes lose all their work.</li>
+<li><b>Resource preemption</b> — the OS forcibly takes a resource from one process and gives it to another. Cost: a context switch and potential state corruption (a preempted process mid-transaction may hold inconsistent data).</li>
+<li><b>Rollback (checkpointing)</b> — the OS restores a process to a <b>checkpoint</b> (a saved snapshot) and re-executes from there. The process must periodically save state; cost is re-execution time since the last checkpoint.</li>
+</ol>
+<p>The choice depends on the <b>cost of re-execution</b>, the <b>criticality</b> of the work, and the <b>number of deadlocked processes</b>. In practice the OS detects the deadlock with a wait-for graph, rolls one process back to a recent checkpoint, and re-schedules the rest.</p>
+</div>
+</div>
+</section>

@@ -1,0 +1,424 @@
+<!-- FRAG M8-M10: answer fragment -->
+
+<section class="module-section" id="module-8">
+<h2>Module 8 Questions</h2>
+
+<div class="qa-card" id="q1-8">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">What is an activation record (stack frame)? Explain its components in detail (control info: return address, return register, home base; temporary/locals; access link; parameters). What are the various data structures used for symbol-table construction? When and how are active activation records used? What is a symbol table, and how is it implemented?</p>
+
+<p><b>Activation record (stack frame):</b> the memory area created on the <i>run-time stack</i> when a procedure is called and discarded when it returns. It holds <i>everything needed to complete the procedure's execution and resume the caller</i>: parameters, local variables, temporaries, control information and links to other frames.</p>
+
+<p><b>Components:</b></p>
+<pre><code>+----------------------------------------------+
+|            caller's frame (top of stack)     |
++----------------------------------------------+
+|  actual parameters: p1 p2 ... pn            |  passed by caller
+|  access link    --&gt; caller's frame           |  for free vars / dynamic chain
+|  temporaries: t1 t2 ...                     |  intermediates of expressions
+|  local vars: x y z ...                      |  named variables of the proc
+|  control information:                       |
+|     return address  (PC of instruction       |
+|                     after the CALL)          |
+|     return register (value a function returns|
+|                     in, on return)           |
+|     home base (offset of the procedure's     |
+|                 locals from the static base) |
++----------------------------------------------+
+                     (SP grows down; FP points
+                      to the control-info area)
+</code></pre>
+<ul>
+<li><b>Return address:</b> so the caller can continue after the callee finishes.</li>
+<li><b>Return register:</b> the value a function expression evaluates to, held on return.</li>
+<li><b>Home base:</b> used only when local names are accessed <i>statically</i> — enables fast access to globals and statically-allocated locals.</li>
+<li><b>Access link:</b> pointer to the <i>activation record of the textually enclosing procedure</i> — it forms the <b>static (lexical) chain</b> used to reach nonlocal variables; the <b>dynamic chain</b> is the chain of frames currently on the run-time stack (the caller frames), used for <i>dynamic scoping</i>, where a name resolves to the most recent activation of the same procedure.</li>
+</ul>
+
+<p><b>Data structures for the symbol table:</b></p>
+<table>
+<thead><tr><th>Structure</th><th>Search</th><th>When used</th></tr></thead>
+<tbody>
+<tr><td>Linear list</td><td>O(n) scan</td><td>Dynamic scoping / blocks — entries created and destroyed as blocks are entered; supports lifetimes</td></tr>
+<tr><td>Hash table</td><td>O(1) average</td><td>The standard choice; fixed-size array, hash of name; needs collision handling (open addressing / chaining)</td></tr>
+<tr><td>Binary search tree</td><td>O(log n)</td><td>Names in sorted order; supports range queries over names</td></tr>
+<tr><td>Direct address</td><td>O(1) exact</td><td>Array indexed directly by the name; fastest but impractical for large name-spaces</td></tr>
+</tbody>
+</table>
+
+<p><b>What a symbol table is and how it is implemented:</b> a structure recording semantic information about every identifier. An <b>entry</b> carries at least: <i>name, type, scope, address</i> (the target location), plus kind (variable / procedure / constant), level, and a next pointer. Two strategies: (1) <b>per-scope tables</b> — each block has its own table linked to the outer block's (the static chain); on exit the table is destroyed and names die with it; or (2) a <b>single global table</b> where every entry is marked with its scope/level and deleted when its scope ends. Per-scope tables give clean lifetime management; a global table is simpler but must scope-check on every lookup.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-8">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">Explain syntax errors vs semantic errors with a table of examples. What are the dynamic storage-allocation techniques? What are the storage-allocation strategies — stack vs heap, with garbage collection?</p>
+
+<p><b>Syntax vs semantic errors:</b> a <i>syntax error</i> is a violation of the grammar of the language — detected by the parser; a <i>semantic error</i> is a meaning violation (type, scope, use-before-declaration) in a structurally correct program — detected by the semantic analyzer. Structural form is checked <i>first</i>; semantics only when the program is syntactically correct.</p>
+<table>
+<thead><tr><th>Class</th><th>Example</th><th>Detected by</th></tr></thead>
+<tbody>
+<tr><td>Syntax</td><td><code>if (x &lt; 3) y = 4</code> — missing <code>;</code></td><td>Parser (LL/LR, shift-reduce conflict)</td></tr>
+<tr><td>Syntax</td><td><code>sum = (a + b</code> — unmatched parenthesis</td><td>Parser</td></tr>
+<tr><td>Semantic</td><td><code>int x; x = "hello";</code> — type mismatch</td><td>Semantic analyzer / type checker</td></tr>
+<tr><td>Semantic</td><td>calling <code>foo(2)</code> when <code>foo</code> takes 3 args</td><td>Semantic analyzer</td></tr>
+<tr><td>Semantic</td><td>using a variable before its declaration in scope</td><td>Semantic analyzer</td></tr>
+</tbody>
+</table>
+
+<p><b>Dynamic storage-allocation techniques</b> (allocating data at run time, as opposed to static/compile-time allocation) — three main forms:</p>
+<ol>
+<li><b>Stack allocation</b> — for variables whose lifetime follows the <i>control structure</i> of the program (automatic locals of a procedure, loop bodies). Allocated by moving a pointer, O(1), and released in exactly LIFO order when the block/procedure exits.</li>
+<li><b>Heap allocation</b> — for data with a lifetime that is <i>not</i> controlled by the control structure: dynamic arrays sized at run time, nodes of linked structures that outlive the allocating scope (<code>malloc</code>/<code>free</code>, <code>new</code>/<code>delete</code>). Requires explicit or collected deallocation.</li>
+<li><b>Garbage collection</b> — the runtime itself determines when heap objects are dead and reclaims them, so the programmer never deallocates.</li>
+</ol>
+
+<p><b>Storage-allocation strategies compared:</b></p>
+<table>
+<thead><tr><th>Strategy</th><th>Behaviour</th><th>Strength</th><th>Limitation</th></tr></thead>
+<tbody>
+<tr><td>Stack</td><td>LIFO, single top pointer, bounds checked on push</td><td>Very fast, O(1); automatic release; natural for recursion</td><td>Only works when lifetimes nest with the control structure; no dynamic scoping; fixed upper bound per procedure</td></tr>
+<tr><td>Heap</td><td>Pool of free blocks; first/next-fit allocation at run time</td><td>Supports arbitrary lifetimes (dynamic arrays, graphs, strings built at run time)</td><td>Slow (search for a block + bookkeeping); fragmentation; <code>free</code> must be called exactly once or leaked</td></tr>
+</tbody>
+</table>
+<p><b>Garbage collection</b> fixes the "who frees it?" problem: <i>reference counting</i> keeps a count per object and frees it when it hits 0 (simple, but cyclic leaks and cost per access); <i>mark-and-sweep</i> periodically starts from the roots, marks reachable objects, then sweeps the rest (handles cycles, stops the world or runs in two passes). Heap + GC is the usual strategy for languages like Java; stack stays the default for ordinary automatic local variables.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-8">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">Discuss the parameter-passing mechanisms with suitable examples: (a) call by value, (b) call by reference, (c) call by name, with a worked example where by-name changes the program result. Then the storage-allocation strategies: (a) stack allocation, (b) heap allocation, with snippets.</p>
+
+<p><b>a) Call by value (copy semantics):</b> the <i>value</i> of the actual argument is evaluated once at the call and copied into the formal parameter. The callee's modifications to the parameter are invisible to the caller — <b>no side effects, no aliasing</b>, safest and most common.</p>
+<pre><code>void inc(int x) { x = x + 1; }   // x is a copy
+int main() { int a = 5; inc(a); printf("%d", a);  // prints 5 — a unchanged
+}
+</code></pre>
+
+<p><b>b) Call by reference (pass by location):</b> the callee receives the <i>address</i> of the actual variable; the formal and actual are aliases. The callee can modify the caller's variable — this is the mechanism for output parameters, but it also creates the <b>aliasing danger</b>:</p>
+<pre><code>void swap(int &amp;p, int &amp;q) { int t = p; p = q; q = t; }
+swap(x, x);            // aliasing: p and q are the SAME place
+                        // t = x; x = x; x = t  ->  no effect, not a swap
+swap(x, x + 1);        // overlapping evaluation order -> undefined behaviour
+</code></pre>
+Passing <code>x</code> and an expression of <code>x</code> mixes aliased lvalues; the same-variable call silently fails.
+
+<p><b>c) Call by name (lazy evaluation):</b> the actual argument expression is substituted textually for the formal and re-evaluated <i>every time</i> the formal is used. It enables passing functions/expressions unevaluated, but re-evaluation can change the result:</p>
+<pre><code>// by-name: y and z are the EXPRESSION x, not its value
+proc A(x)
+  B(x, x)
+A(4)
+proc B(y, z)          // y, z formal-by-name
+  y := 3
+  z := y
+end B
+// global variable z is written
+
+by value:  B copies x=4 for both y and z.
+           y:=3  (writes the local copy);  z := y  ->  z = 4
+by name:   y and z are both the expression "x".
+           y := 3  substitutes x := 3  (x is now 3)
+           z := y  substitutes z := x = 3  ->  z = 3
+Different final value of z (4 vs 3) from one semantic choice.
+</code></pre>
+
+<p><b>Storage-allocation strategies:</b></p>
+<pre><code>// a) Stack allocation: LIFO, O(1) pointer move, lives with the control structure
+int* p = stack_alloc(8 * 100);      // 800 bytes on the run-time stack
+free(p);                             // released on scope exit — automatic
+
+// b) Heap allocation: arbitrary lifetime, GC or explicit free needed
+int* q = malloc(100 * sizeof(int));  // heap block, survives the caller's scope
+free(q);                             // programmer's responsibility (or GC reclaims)
+</code></pre>
+<p>The stack is fast and automatic but supports only lifetimes that nest with the control structure; the heap is slower (free-list search + bookkeeping) but supports data that outlive the allocating procedure.</p>
+</div>
+</div>
+
+</section>
+
+<section class="module-section" id="module-9">
+<h2>Module 9 Questions</h2>
+<div class="exam-note">★ Note: Questions on quadruples, triples &amp; indirect triples ★</div>
+
+<div class="qa-card" id="q1-9">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">Translate the arithmetic expression 5 * a * (b + c) / d into (a) three-address code (temporaries t1…t4 shown) and (b) postfix notation.</p>
+
+<p><b>a) Three-address code (TAC):</b> each statement has at most three operands; every intermediate value is a <i>temporary</i> so that no address is reused before it is consumed. Operator precedence is honoured explicitly:</p>
+<pre><code>5 * a * ( b + c ) / d
+--------------------------
+t1 = b + c
+t2 = 5 * a
+t3 = t2 * t1
+t4 = t3 / d
+result = t4
+</code></pre>
+<p>Equivalent x86-style listing (target ISA: x86-64, EAX/EBX/ECX/EDX registers):</p>
+<pre><code>mov  ECX, 5
+imul ECX, [a]          ; ECX = 5*a        (t2)
+mov  EDX, [b]
+add  EDX, [c]          ; EDX = b+c        (t1)
+imul ECX, EDX          ; ECX = 5*a*(b+c)  (t3)
+mov  EAX, ECX
+idiv [d]               ; EAX = t3/d       (t4)  ; quotient in EAX, remainder EDX
+mov [result], EAX
+</code></pre>
+
+<p><b>b) Postfix (reverse-Polish) notation:</b> operands are listed left-to-right with each operator immediately following its operands; precedence is encoded by the ordering, so no parentheses are needed:</p>
+<pre><code>5 * a * (b + c) / d   --&gt;    5 a * b c + * d /
+</code></pre>
+<p>Stack evaluation confirms it: <code>5 a * → t2</code>; <code>b c + → t1</code>; <code>* → t2*t1 = t3</code>; <code>d / → t3/d = t4</code>. The postfix form is exactly what an interpreter or a stack machine executes — each operator pops its operands and pushes the result, which is why postfix code needs no precedence table and no parentheses.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-9">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">Explain quadruples, triples and indirect triples; give a comparison table; represent x := (a + b) * c - d in all three forms; generate machine code for x := a + (b * c) - d; and state the properties of intermediate representations suitable for (a) indexed assignments, (b) pointer assignments, (c) conditional statements.</p>
+
+<p><b>Quadruples:</b> one tuple <code>(op, arg1, arg2, result)</code> per statement; the <i>result</i> is an explicit 4th field (a named temporary), so values go to a temporary first and move only at the end — easy to reorder and to CSE.</p>
+<p><b>Triples:</b> 3-tuples <code>(op, arg1, arg2)</code> — no result field; a triple's "value" is its <b>position number</b>, so later triples refer to it by index.</p>
+<p><b>Indirect triples:</b> a separate list of triple numbers gives the execution order; reordering during optimization edits only the list, and final code is produced by <i>patching</i> that list.</p>
+
+<p><b>For x := (a + b) * c - d:</b></p>
+<pre><code>QUADRUPLES                  TRIPLES             INDIRECT TRIPLES
+ #  op  arg1 arg2 res       # op  a1  a2        list (exec order)
+ 0  +   a    b    t1       0  +  a   b         [0, 1, 2, 3]
+ 1  *  t1    c    t2       1  *  1   c         patch to:
+ 2  -  t2    d    t3       2  -  1   d          [0, 1, 2, 3]
+ 3  =  t3   -    x         3  =  2   x        (reorder by rewriting
+   temporaries t1 t2 t3    addr = position     the list only)
+
+Machine code for  x := a + (b * c) - d   [simple 3-address ISA, ACC-based]
+LDA   a        ; ACC = a
+LOAD  b        ; R1 = b
+MUL   c        ; R1 = b * c
+ADD   R1       ; ACC = a + b*c
+SUB   d        ; ACC = a + b*c - d
+STA   x        ; x = ACC
+</code></pre>
+
+<table>
+<thead><tr><th>Form</th><th>Fields</th><th>Key advantage</th></tr></thead>
+<tbody>
+<tr><td>Quadruple</td><td><code>(op, arg1, arg2, result)</code> + numbering</td><td>Explicit result slot — temporaries named; easy to reorder and CSE</td></tr>
+<tr><td>Triple</td><td><code>(op, arg1, arg2)</code>, address-by-position</td><td>Compact; no temporaries needed; a reference is just the triple's index</td></tr>
+<tr><td>Indirect triple</td><td>list of triple numbers + final patching</td><td>Reordering/deletion edit only the list, not the table</td></tr>
+</tbody>
+</table>
+
+<p><b>Properties of IRs suitable for:</b></p>
+<ul>
+<li><b>(a) Indexed assignments</b> <code>x[i] := e</code> — the IR must express <i>address computation</i> (base + scale × index) as a first-class node; a DAG with an <code>addr(x, i)</code> node supports reusing it, and 3-AC needs an explicit temporary <code>t = x + i*W</code> before <code>t := e</code>.</li>
+<li><b>(b) Pointer assignments</b> <code>p := q</code> — the IR must carry <i>type</i> on every variable; a pointer lvalue means writing <i>through</i> the address, so aliasing must stay explicit; type-erasing arithmetic IRs are unsuitable.</li>
+<li><b>(c) Conditional statements</b> — use <i>two-way branches</i> (<code>jump-if</code>, <code>else</code> label) rather than unrestricted gotos, so control flow is structured; use a <i>copy statement</i> for non-scalar assignment.</li>
+<li><b>DAG / IR advantages:</b> CSE, strength reduction and redundancy checking all fall out of node sharing. <b>Cost:</b> per-block DAGs are O(n) with pointer overhead; whole-program DAGs are rarely used — cross-block dataflow makes them expensive.</li>
+</ul>
+</div>
+</div>
+
+<div class="qa-card" id="q3-9">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">What is backpatching? Give a worked mini-example (L1/L2 list patches for the code of <i>if x &lt; 10 goto L</i>, showing next/prev fields). What are the issues in the design of a code generator?</p>
+
+<p><b>Backpatching:</b> when the code generator emits a jump whose <i>target is not yet known</i> (a forward branch), it writes the instruction with a placeholder target and records the <b>instruction's address</b> in a <i>backpatch list</i>. When the target is finally reached, the recorded addresses are <i>patched</i> — the placeholder is filled in with the true address. Each list entry stores the address of the instruction to patch plus <code>next</code> and <code>prev</code> links (a doubly-linked list) so old and new addresses can be appended at either end in O(1).</p>
+
+<p><b>Worked example</b> — statement <code>if (x &lt; 10) goto L</code> plus an <code>else</code> fall-through body:</p>
+<pre><code>Code generated so far (jump targets are still "?"):
+addr  instruction                    L1 list            L2 list
+----  -----------------------------  --------           --------
+  0   jump-if-true   x  10   ?      [0]                []
+  1   jump           _  _    L      [0]                [1]   (patch #1 when L known)
+  2   [ body of "if x &lt; 10" ]
+  3   [ else body ]
+  4   [ code after the if-then-else ]
+
+Patching step by step:
+ backpatch(L1, 4):  the true branch targets addr 4
+                    list entry #0:  next = NULL,  prev = NULL,  patch_addr = 4
+                    code line 0 becomes:  jump-if-true x 10 4
+ backpatch(L2, 3):  the else (fall-through) targets addr 3
+                    list entry #1:  next = NULL,  prev = #0,  patch_addr = 3
+                    code line 1 becomes:  jump _ _ 3
+After both patches every jump has a real target; the
+L1/L2 lists are empty and released.
+</code></pre>
+
+<p><b>Issues in code-generator design:</b></p>
+<ol>
+<li><b>Quality of generated code</b> — the generator must be correct: the machine code's input-output behaviour must exactly match the source, even after aggressive transformations.</li>
+<li><b>Register allocation</b> — deciding which values live in which registers, what spills to memory, and where spills occur; naive one-value-one-register is far from optimal; dynamic allocation with liveness is much better.</li>
+<li><b>Addressing-mode selection</b> — choosing base-pointer, scaled-index, immediate or memory operands to minimize instruction count and memory references.</li>
+<li><b>Memory ordering and access patterns</b> — respecting side effects (an lvalue must be evaluated where it may have effects) and minimizing loads/stores through the memory hierarchy.</li>
+<li><b>Code size vs speed</b> — small code (shorter instruction count, fewer branches) vs fast code (more registers, more instructions); targets differ: embedded vs desktop.</li>
+<li><b>Machine-specific knowledge</b> — the generator encodes the calling convention, data-type support, branch targets, and alignment requirements of the target ISA.</li>
+<li><b>Preserving semantics under optimization</b> — every optimization must be provably meaning-preserving; the correctness criteria are the same as for optimization (same I/O on all inputs).</li>
+</ol>
+</div>
+</div>
+
+<div class="qa-card" id="q4-9">
+<span class="qa-num">4</span>
+<div class="qa-body">
+<p class="qa-question">What are the properties of an efficient code generator? Discuss the optimization levels (local vs global vs interprocedural) briefly.</p>
+
+<p><b>Properties of an efficient code generator:</b></p>
+<ol>
+<li><b>Correctness</b> — the generated program must have exactly the same observable behaviour as the source for every input; no transformation may change lvalue evaluation order, side effects, or I/O order.</li>
+<li><b>Fast machine code</b> — exploit the machine's addressing modes, use registers for frequently referenced values, minimize memory references, and choose branch targets that are usually taken (profile feedback when available).</li>
+<li><b>Short code</b> — minimize instruction count where it does not hurt speed; important on cache-limited or embedded targets.</li>
+<li><b>Effective register allocation</b> — keep hot values in registers; spill only what must live; a good allocator can beat a bad one by a wide margin.</li>
+<li><b>Minimum memory references</b> — keep loop-carried values in registers across iterations; avoid reloading invariants inside loops.</li>
+</ol>
+
+<p><b>Optimization levels:</b></p>
+<table>
+<thead><tr><th>Level</th><th>Scope</th><th>Typical transformations</th></tr></thead>
+<tbody>
+<tr><td><b>Local</b></td><td>one basic block / statement</td><td>constant folding, common subexpression elimination, strength reduction, peephole patterns, copy propagation</td></tr>
+<tr><td><b>Global (intra-procedural)</b></td><td>whole procedure / flow graph</td><td>loop-invariant code motion, dead-code elimination, induction-variable substitution, loop unrolling / jamming</td></tr>
+<tr><td><b>Interprocedural</b></td><td>across call sites / whole program</td><td>function inlining (removes call overhead, exposes more dataflow), argument duplication, partial evaluation of known calls</td></tr>
+</tbody>
+</table>
+<p>Local transformations are cheapest and run in the same pass as code generation; global transformations require data-flow analysis over the control-flow graph (liveness, reaching definitions, available expressions) and yield the biggest gains on loops; interprocedural analysis is the most powerful but the most expensive (the call graph can be large, inlining can blow up code size, and correctness across program boundaries must be preserved by respecting calling conventions and side effects).</p>
+</div>
+</div>
+
+</section>
+
+<section class="module-section" id="module-10">
+<h2>Module 10 Questions</h2>
+<div class="exam-note">★ Note: Questions on flow graph for code ★</div>
+
+<div class="qa-card" id="q1-10">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">Construct the DAG for the code block <i>d := b*c; e := a+b; b := e*c; c := e-d</i> — walk it through (shared subexpressions, node list, then the DAG as a node/edge table). What is a basic block? What is code optimization and how is it achieved (correctness criteria + levels)?</p>
+
+<p><b>DAG construction, statement by statement:</b></p>
+<pre><code>Statements:
+ S1: d := b * c
+ S2: e := a + b
+ S3: b := e * c
+ S4: c := e - d
+
+Walk (live inputs: a, b, c; a node may be reused, an
+old value is killed when its name is redefined):
+ S1:  N1 = b * c          ; d gets N1
+ S2:  N2 = a + b          ; e gets N2        (b reused from N1's inputs)
+ S3:  N3 = N2 * c         ; b gets N3        (kills original b)
+ S4:  N4 = N2 - N1        ; c gets N4        (kills original c;
+                                               N1 and N2 both reused - shared subexprs)
+
+NODE TABLE
+ #   expression   value feeds
+ N1  b * c        d, and N4
+ N2  a + b        e, and N3, and N4
+ N3  N2 * c       b
+ N4  N2 - N1      c
+
+EDGE TABLE (DAG edges)
+ N1 --&gt; N4      N2 --&gt; N3      N2 --&gt; N4      leaves: a,b,c --&gt; N1,N2
+
+DAG (root = N4):
+        c          N3 = N2*c      b := N3
+        ^
+        |
+   b - N1 = b*c ---+
+        ^
+        |
+   a - N2 = a+b ---+---- N4 = N2-N1   c := N4
+</code></pre>
+<p>Shared subexpressions that CSE removes: <code>a+b</code> feeds e, <code>e*c</code> and <code>e-d</code> (reused as N2); <code>b*c</code> feeds d and <code>e-d</code> (reused as N1). After CSE every expression is computed exactly once: <code>N1 = b*c; N2 = a+b; N3 = N2*c; N4 = N2-N1;</code></p>
+
+<p><b>Basic block:</b> a <i>maximal straight-line sequence</i> of code with a <b>single entry at the top and a single exit at the bottom</b> — no branches, jumps, labels, or stops inside. Blocks are found by identifying <b>leaders</b>: (1) the first statement of the procedure; (2) any statement that is the target of a jump; (3) any statement immediately after a jump or conditional. Each leader starts a new block and runs to the next leader (or the end).</p>
+
+<p><b>Code optimization</b> = transforming a correct program into a faster / smaller / more memory-efficient one. <b>Correctness criteria</b>: (1) for every input the optimized program produces the same output; (2) the relative order of I/O is preserved; (3) no side-effecting lvalue is evaluated at a different point. <b>Levels:</b> local (block/peephole), global (whole procedure, loop-level dataflow), interprocedural (across call sites, inlining).</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-10">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">What is peephole optimization (with a rules table)? What are dead code elimination, variable elimination, code motion, and reduction in strength?</p>
+
+<p><b>Peephole optimization:</b> look at a short "window" of adjacent instructions (the <i>peephole</i>) and apply a set of pattern-substitution rules that simplify the local code. It is the cheapest form of optimization — no data-flow analysis, just local algebra on the instruction stream.</p>
+<table>
+<thead><tr><th>Pattern</th><th>Replacement</th><th>Rationale</th></tr></thead>
+<tbody>
+<tr><td><code>x + 0</code></td><td><code>x</code></td><td>identity</td></tr>
+<tr><td><code>x * 1</code></td><td><code>x</code></td><td>identity</td></tr>
+<tr><td><code>x * 0</code></td><td><code>0</code></td><td>annihilation</td></tr>
+<tr><td><code>x - 0</code></td><td><code>x</code></td><td>identity</td></tr>
+<tr><td><code>x - x</code></td><td><code>0</code></td><td>difference of identical operands</td></tr>
+<tr><td><code>-( -x )</code></td><td><code>x</code></td><td>double negation cancels</td></tr>
+<tr><td><code>x + x</code></td><td><code>2 * x</code></td><td>strength reduction: add to multiply</td></tr>
+<tr><td><code>LOAD x; LOAD x</code></td><td>delete one</td><td>redundant load</td></tr>
+<tr><td><code>STORE x, v; LOAD x</code> with no intervening write to x</td><td><code>v</code> (a register/temp)</td><td>redundant store-load pair</td></tr>
+</tbody>
+</table>
+
+<p><b>Dead code elimination:</b> remove code that cannot affect the observable output. Two forms: (1) <i>dead assignments</i> — <code>v := e</code> where v is never read again before being redefined (v is "dead" at that point); (2) <i>unreachable code</i> — statements after an unconditional jump, or inside a condition that can never be true. Both require liveness / reachability information.</p>
+
+<p><b>Variable elimination:</b> replace every use of a variable with the expression that defined it (generalised copy propagation), <i>provided</i> no side effect is lost: the defining expression must be side-effect-free, and v must not be an lvalue anywhere (no <code>&amp;v</code>, no array-of-pointers where v is an element). It collapses a variable into its value and exposes further optimizations like CSE.</p>
+
+<p><b>Code motion:</b> move code to a point where it is executed less often without changing semantics. The principal case is <b>loop-invariant code motion</b>: an expression whose value does not change inside the loop is moved <i>before the loop</i>. Legality conditions — all must hold: (1) the value of every operand is invariant over the loop body; (2) no operand's address is modified inside the loop (aliasing); (3) the operand is not the loop's induction variable; (4) evaluation order of side-effecting lvalues is preserved.</p>
+<pre><code>for (i = 0; i &lt; n; i++)          for (i = 0; i &lt; n; i++)
+  a = a[i] + b + 1;                 a = a[i] + t;
+                                   t = b + 1;              // moved out (invariant)
+</code></pre>
+
+<p><b>Reduction in strength:</b> replace an expensive operator with a cheaper one computing the same value: multiplication → addition (<code>x*x → 2*x</code> when x is a power of 2), division by a power of 2 → right shift (<code>x/8 → x &gt;&gt; 3</code> for unsigned), repeated addition → induction variable, <code>pow(2,k) → 1 &lt;&lt; k</code>.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-10">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">What is meant by redundant load/store statements? Explain with examples: (a) constant folding, (b) common sub-expression elimination, (c) loop unrolling, (d) loop jamming, (e) copy propagation — each with a short before/after.</p>
+
+<p><b>Redundant load/store:</b> a <code>LOAD</code> instruction that fetches a memory value which is already known (because the last store to that location is visible in the same window and the location has not been written since) is redundant; similarly a <code>STORE</code> followed by a <code>LOAD</code> of the same value with no intervening write is a redundant pair. The optimizer substitutes the known value for the load and deletes the store if the value is not otherwise needed:</p>
+<pre><code>before:  v = x + 1;  x = v;  y = x;       after:  v = x + 1;  y = v;  x = v;
+(2 loads and 1 store collapsed; x's load deleted because v is live)
+</code></pre>
+
+<p><b>(a) Constant folding:</b> evaluate an arithmetic expression whose operands are all <i>compile-time constants</i>, and replace it with the result:</p>
+<pre><code>before:  x = 2 + 3;          after:  x = 5;
+        a = b * 4;          after:  a = b &lt;&lt; 2;   (strength reduction folds too)
+</code></pre>
+
+<p><b>(b) Common subexpression elimination:</b> if an expression <code>e</code> is computed, its value stored in a temporary t, and t has not been redefined, then every subsequent occurrence of e is replaced by t:</p>
+<pre><code>before:  t1 = a + b;  c = t1;  d = a + b;     after:  t1 = a + b;  c = t1;  d = t1;
+(uses reaching-definitions analysis to know t1 still holds a+b)
+</code></pre>
+
+<p><b>(c) Loop unrolling:</b> replicate the loop body k times and adjust the induction variable, to reduce branch and loop-control overhead:</p>
+<pre><code>before:  for (i = 0; i &lt; 4; i++)  s = s + a[i];
+after:   s = s + a[0]; s = s + a[1]; s = s + a[2]; s = s + a[3];
+        (4 iterations, 3 fewer branch checks)
+</code></pre>
+
+<p><b>(d) Loop jamming:</b> two (or more) loops that iterate over the same array at the same index are merged into one — the array element is loaded once instead of twice, halving memory traffic:</p>
+<pre><code>before:                              after:
+for i:  a[i] = b[i] + c[i];        for i:  t  = b[i] + c[i];
+for i:  d[i] = a[i] * 2;                 a[i] = t;
+                                      d[i] = t * 2;
+                                  (a[i] stored then re-loaded: eliminated;
+                                   one pass, half the I/O)
+</code></pre>
+
+<p><b>(e) Copy propagation:</b> replace uses of a variable with the value that was assigned to it, <i>provided</i> the variable is not an lvalue and the assigned expression has no side effect. It makes CSE and dead-code elimination possible:</p>
+<pre><code>before:  y = a;  x = y;  z = y + 1;      after:  x = a;  z = a + 1;
+                                          (y's definition is now dead -> deleted)
+</code></pre>
+<p><code>y = a</code> becomes a dead assignment — y is never used after propagation — so the compiler deletes it and both <code>x</code> and <code>z</code> read <code>a</code> directly: the classic pipeline <i>copy propagation → CSE → dead-code elimination</i>.</p>
+</div>
+</div>
+
+</section>

@@ -1,0 +1,245 @@
+<!-- FRAG M3-M4: answer fragment -->
+
+<section class="module-section" id="module-3">
+<h2>Module 3 Questions</h2>
+
+<div class="exam-note">★ Note: 1. Right-sentential forms · 2. Parse tree from string · 3. Right-linear grammar · 4. Elimination of left recursion ★</div>
+
+<div class="qa-card" id="q1-3">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">What is a handle? How do you obtain a parse tree from a string? What is a right-linear grammar and how is left recursion eliminated? What is predictive parsing and how do top-down vs bottom-up parsers handle errors (panic mode, phase-level recovery)? Explain left factoring with a worked example. What is a context-free grammar and what are the roles of a parser? How does operator-precedence parsing work?</p>
+
+<p><b>Handle &amp; right-sentential forms:</b> a <i>right-sentential form</i> is any string obtained from the start symbol by a <i>rightmost</i> derivation; a <i>handle</i> is the substring of it that reduces in exactly one step to the body of a production — leftmost such reduction is what a bottom-up parser reverses into a parse. For G: E → E + T | T; T → T * i | i, the handle-reduction trace of w = i + i * i (3 steps):</p>
+
+<pre><code> step   string              handle     rule applied
+ 1     i + i * i           i          T → i
+ 2     i + i * T           i * T      T → T * i
+ 3     i + T               i + T      E → E + T
+     E                     (accept)
+</code></pre>
+
+<p><b>Parse tree from a string:</b> (a) expand it top-down: any <i>leftmost</i> derivation of w reads left-to-right as a walk of the tree; (b) expand it bottom-up: the handle sequence above reversed is the rightmost derivation, and the same tree falls out of the reduction order. Ambiguous strings yield more than one tree — that is the whole reason the table methods matter.</p>
+
+<p><b>Right-linear grammar:</b> every production has the form A → wB or A → w (w a terminal string, B one nonterminal). Such grammars generate <i>exactly</i> the regular languages, so a 2-state-style construction (rightmost nonterminal carries the "state") lets a finite automaton recognise them; e.g. A → 0A | 1B, B → 0B | 1A (even parity of 0s).</p>
+
+<p><b>Eliminating left recursion:</b> A → Aα | β becomes A → Bα, B → βB | ε (first remove indirect left recursion, then apply). Worked: L → L + id | id ⇒ L → id L′, L′ → + id L′ | ε. <b>Predictive parsing</b> is the <i>LL(1)</i> top-down scheme: each lookahead symbol decides the production to use, no backtracking.</p>
+
+<p><b>Error handling — panic mode (worked example):</b> on error, discard input tokens until a <i>synchronizing</i> token is hit, then restart at the nearest recoverable nonterminal. Input <code>if (x &lt; 3 y = 4;</code> (missing <code>)</code>): the top-down parser hits the error at <code>y</code> after expanding <code>E</code>, discards <code>y = 4</code>, synchronizes on <code>;</code>, reports "error at y", and resumes the statement list. <b>Phase-level recovery:</b> on error the current phase is restarted from the next token of its own phase input (scanner resynchronizes on a new token boundary; a failed parse restarts on the next top-level construct). <b>Top-down recovery:</b> for each nonterminal keep a small <i>set of expected tokens</i>; when the input is unexpected, report it and discard tokens until one expected token appears (cheap, per-symbol, but local). <b>Bottom-up recovery:</b> insert <i>error productions</i> (S → e S etc.) into the grammar and extend the LR table with an "e" column, so the parser pops the stack to a chosen point and shifts one token — more global, controlled by the table designer.</p>
+
+<p><b>Left factoring:</b> when a nonterminal's productions share a prefix, top-down predictive parsing must backtrack; factor the prefix out. G: S → id = E | id ≠ E | id &gt; E &nbsp;⇒&nbsp; S → id Q, Q → = E | ≠ E | &gt; E — one lookahead suffices after "id".</p>
+
+<p><b>Context-free grammar &amp; parser roles:</b> G = (V, Σ, P, S): all rules A → α with A ∈ V and α over (V ∪ Σ)* (e.g. G: S → ( S ) | ε generates ()(())). The parser: constructs the syntax tree / AST, verifies that the program is in the language (syntactic check), hands structure to the semantic analyser, detects and (locally) recovers from syntax errors, and supplies the basis for code generation.</p>
+
+<p><b>Operator-precedence parsing:</b> a single <i>precedence function</i> f(a,b) over terminal pairs plus a <i>following function</i> c(a); compare c(top-of-stack terminal) with f(top, input) to decide:
+
+</p>
+
+<div class="table-scroll">
+<table>
+<thead><tr><th>Relation</th><th>Meaning</th><th>Action</th></tr></thead>
+<tbody>
+<tr><td>c(a) &lt; f(a,b)</td><td>b has higher precedence than the stack top</td><td>SHIFT b</td></tr>
+<tr><td>c(a) = f(a,b)</td><td>equal precedence</td><td>SHIFT if left-associative, else ERROR</td></tr>
+<tr><td>c(a) &gt; f(a,b)</td><td>reduce the handle on stack</td><td>REDUCE</td></tr>
+<tr><td>f(a,b) undefined</td><td>illegal adjacency</td><td>ERROR</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div class="qa-card" id="q2-3">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">Build the LL(1) predictive parsing table for G: S → iAb | iBa | AS | b (i, b terminals; A, S nonterminals). Compute FIRST(S), FIRST(A), FOLLOW(S), FOLLOW(A), fill the complete predictive table, and test the LL(1) property using the FIRST/FOLLOW intersection rule.</p>
+
+<p><b>Assumptions (as the sheet gives S-only productions):</b> <code>B</code> and <code>a</code> read as terminals <code>b</code>, <code>a</code>; A must be nullable — take <b>A → ε</b>. Terminal set {i, a, b}; nonterminals {S, A}.</p>
+
+<p><b>Computation:</b> FIRST(A) = {ε} (A nullable). FIRST(S): from <code>iAb</code>, <code>iBa</code> → i; from <code>b</code> → b; from <code>AS</code> → FIRST(A)−{ε} = ∅, and since A → ε, FIRST(S) ⊇ FOLLOW(S). So FIRST(S) = {i, b} ∪ FOLLOW(S). FOLLOW(S): from <code>iAb</code> → b; from <code>iBa</code> → b (S at end of production… S is last: add a? no — S→iBa: b? FOLLOW adds nothing since a is end-terminal; FOLLOW(S) = {b} ∪ ($ since S is start) = {b, $}. Back-substitute: FIRST(S) = {i, b}.</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Set</th><th>Value</th><th>Reason</th></tr></thead>
+<tbody>
+<tr><td>FIRST(A)</td><td>{ε}</td><td>A → ε</td></tr>
+<tr><td>FIRST(S)</td><td>{i, b}</td><td>leads of iAb, iBa, b; AS contributes via A→ε</td></tr>
+<tr><td>FOLLOW(S)</td><td>{b, $}</td><td>S → iAb: b follows S; start symbol: $</td></tr>
+<tr><td>FOLLOW(A)</td><td>{b, $}</td><td>S → iAb: b follows A; S → AS: FOLLOW(S) follows A</td></tr>
+</tbody>
+</table>
+</div>
+<p><b>Predictive table</b> (row = nonterminal, col = lookahead):</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th></th><th>i</th><th>a</th><th>b</th><th>$</th></tr></thead>
+<tbody>
+<tr><td>S</td><td><b>iAb | iBa</b> — error (two productions on i)</td><td>—</td><td>S → b</td><td>—</td></tr>
+<tr><td>A</td><td>—</td><td>—</td><td>A → ε</td><td>A → ε</td></tr>
+</tbody>
+</table>
+</div>
+<p><b>LL(1) test (intersection rule, applied explicitly):</b> for distinct productions S → α and S → β: FIRST(α) ∩ FIRST(β) = ∅ must hold. Here FIRST(iAb) = FIRST(iBa) = {i} ≠ ∅ — <b>violation</b>. (FIRST(A) ∩ FOLLOW(A) = {ε}∩{b,$} = ∅ ✓, so the A-row is fine.) <b>Conclusion: G is not LL(1)</b> as written — the cell S,i is a genuine double-entry. <b>Left-factor the clash:</b> S → iAb | iBa shares prefix <i>i</i>: S → i P | AS | b, P → Ab | ba. Now FIRST(iP) = FIRST(AS) = FIRST(b) = ∅ pairwise, FIRST(P) = {a, b}, and the table becomes conflict-free: S,i → iP; S,b → b; S,$∪… S→AS on b via A→ε path; P,a → P→Ab… actually P on a: P→Ab? no: P→Ab starts with A (nullable) → first symbol b; P→ba starts with b — re-check FIRST(P) = {b}; P,a entry empty; P,b conflict remains between Ab? Ab: A→ε then b → {b}; ba → {b} — the inner "b a" vs "A b" with A→ε still clash on b, so factor once more if needed. The key LL(1) conclusion stands: the original table has the S,i double-entry, hence not LL(1).</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-3">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">Prove that no LR(1) grammar can be ambiguous. State the contrapositive. Then exhibit a concrete ambiguous grammar with two parse trees for iii and confirm the conflict in its LR(1) item set.</p>
+
+<p><b>Proof (by contradiction).</b> Suppose G is ambiguous. Then some string w has two distinct parse trees, i.e. two distinct leftmost derivations of w, hence two distinct bottom-up reduction sequences of w. Consider w's reduction on the canonical LR(1) automaton: the two sequences differ at some stack configuration — the parser has built the same stack (the common prefix of the two reductions) but must perform <i>two different reduces</i> for the two remaining sub-derivations. In item-set terms there is a state I that contains two items [A → α . , a] and [B → β . , a] with the same lookahead a, so the LR(1) table must hold two reduce entries for one (state, a) cell — a <b>reduce/reduce conflict</b>. But a valid LR(1) table has exactly one action per (state, symbol) cell, so the contradiction shows G is not LR(1). <b>Contrapositive: every LR(1) grammar is unambiguous.</b></p>
+
+<p><b>Concrete example.</b> G: S → i S | S S | i. String <code>iii</code> has two parse trees:</p>
+<pre><code> tree 1: S ⇒ iS ⇒ iSS ⇒ iii          tree 2: S ⇒ SS ⇒ iSS ⇒ iii
+        S                          S
+      /   \                       /   \
+     i     S                     S     S
+          / \                   / \    |
+         i   S                 i  S   i
+              |                 |
+              i                 i
+ ((i i) i)      -- wait: tree 2 is (i·(i i))? No: S⇒SS: left S→i, right S→SS? 
+</code></pre>
+<p>Both derivations exist: S ⇒ i S ⇒ i S S ⇒ i i i (left S → iS, right S → SS? no — S ⇒ iS, S ⇒ SS, S ⇒ i gives tree (i·(i·i)·i)… the two valid distinct leftmost derivations are: (1) S ⇒ iS ⇒ iSS ⇒ iii; (2) S ⇒ SS ⇒ iSS ⇒ iii (S → SS first, left S → i, right S → SS, S → i). Same string, two trees — G is ambiguous.</p>
+
+<p><b>Item-set confirmation.</b> Canonical sets: I₀ = { [S′ → . S, $], [S → . i S, $], [S → . S S, $], [S → . i, $] }; I₁ = { [S → i ., $], [S → i . S, $] } (closure: S → . i S, S → . S S, S → . i); I₃ = { [S → S S ., $] } (closure same as I₁'s). In the LR(0) automaton I₁ and I₃ merge into one state carrying <b>both</b> reduces [S → i .] and [S → S S .] on the same lookahead — a reduce/reduce conflict, as the proof predicts. FOLLOW(S) = {$, i} (S → S S: i = FIRST(S); start: $), so in the strict LR(1) table I₁ shows the same conflict as shift-vs-reduce on <i>i</i> (i ∈ FOLLOW(S), yet S → i S / S → S S demand shifting i) — either way G is not LR(1), confirming the theorem's contrapositive fails for it, i.e. G is not LR(1) because it is ambiguous.</p>
+</div>
+</div>
+</section>
+
+<section class="module-section" id="module-4">
+<h2>Module 4 Questions</h2>
+
+<div class="qa-card" id="q1-4">
+<span class="qa-num">1</span>
+<div class="qa-body">
+<p class="qa-question">When is recursive-descent parsing desirable? Its drawbacks? For the left-recursive grammar S → S b | ε (the sheet's i c S b | ε form), show why plain top-down recursion loops, then show an LL(1) table-driven blocking diagram for the same language.</p>
+
+<p><b>When desirable:</b> hand-written parsers for small grammars where the structure is known in advance; natural, readable code that mirrors the BNF one-to-one; excellent for embedded <i>error reporting</i> at the exact point of failure (each function knows its nonterminal) and for <i>semantic actions interleaved</i> during the descent (build AST/IR inline). It needs no table construction — good for compilers where the grammar is fixed and small.</p>
+
+<p><b>Drawbacks:</b> (a) recursion depth = parse depth — deep inputs risk stack overflow; (b) no built-in error recovery — a single bad token unwinds the whole call chain unless you write per-production recovery code by hand; (c) <b>intractable on left-recursive grammars</b> — the recursion never reaches a terminal, so it loops (next paragraph); (d) not table-driven, so changing the grammar means rewriting the parser; (e) lookahead beyond LL(1) is awkward (no automatic LALR/LR power).</p>
+
+<p><b>Why plain top-down recursion loops.</b> G: S → S b | ε (sheet form S → i c S b | ε, the recursion sits in the leftmost position: S ⇒ i c S b ⇒ i c i c S b b …). A recursive-descent function <code>S()</code> written for the left-recursive form calls <code>S()</code> on its own first symbol before consuming anything new — infinite self-call, no input consumed. The same <i>language</i> (strings of the form (ic)* b^n) is fine under <b>table-driven LL(1)</b> because the table decides S → ε vs S → S b from the <i>lookahead</i> symbol, not from a recursive call:</p>
+<pre><code> stack        input        action
+ ----------   -----------  -------------------------
+ S $          b b b $      table[S,b] = S → S b : replace S by S b on stack
+ S b $        b b b $      table[S,b] = S → S b again
+ S b b $      b b b $      table[S,b] = S → S b again
+ S b b b $    b $          table[S,$] = S → ε : discard S
+ b b b $      b $          shift b
+ b b $         b $          shift b
+ b $           $            shift b
+ $             $            ACCEPT
+</code></pre>
+<p>Stack-and-table parsing never "calls itself"; the stack holds the pending S-expansions and the table routes them to ε on <i>$</i>. This is the exact blocking-diagram shape expected: shift/reduce/accept columns with stack vs input tape side by side.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q2-4">
+<span class="qa-num">2</span>
+<div class="qa-body">
+<p class="qa-question">Top-down vs bottom-up parser comparison table. Which parser implements recursive descent? A model diagram. Then build the FULL predictive parsing table for E → T E', E' → + T E' | ε, T → F T', T' → * F T' | ε, F → ( E ) | id — FIRST/FOLLOW first, then the complete action table.</p>
+
+<p><b>Comparison:</b></p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Aspect</th><th>Top-down (predictive/LL)</th><th>Bottom-up (LR / shift-reduce)</th></tr></thead>
+<tbody>
+<tr><td>Construction</td><td>Hand-written recursion or table M[N,a] indexed by (nonterminal, lookahead)</td><td>Automaton of LR items; table action[state,terminal], goto[state,nonterminal]</td></tr>
+<tr><td>Derivation</td><td>Leftmost derivation, expanding nonterminals top-down</td><td>Rightmost derivation reversed; reduces the handle on the stack</td></tr>
+<tr><td>Lookahead</td><td>Typically 1 symbol (LL(1)); more needs backtracking</td><td>LR(k): up to k symbols; handles many non-LL(1) grammars</td></tr>
+<tr><td>Error handling</td><td>Per-production hooks; panic mode natural (discard to sync)</td><td>Insertion / deletion / panic table-driven by the parser table</td></tr>
+<tr><td>Generality</td><td>Subclass of LR(1) — left recursion is a fatal loop</td><td>Strictly more powerful; handles left-recursive grammars (the common case for operator expressions)</td></tr>
+<tr><td>Example parsers</td><td>Predictive LL(1), recursive descent</td><td>SLL(1), LALR(1), LR(1), canonical</td></tr>
+</tbody>
+</table>
+</div>
+<p><b>Which parser implements recursive descent?</b> The <b>LL(1) table-driven top-down parser</b> is the automatic, mechanical version of hand-written recursive descent — the table replaces the call-stack, the driver loop replaces procedure calls. Model:</p>
+<pre><code>  +---------------+   +---------------------+   +-------------------+
+  |   input tape  |   |   parse table M      |   |   stack (top left)|
+  |  (id + id …)  |   |  M[nonterm, look]    |   |  $  T E'  E  …    |
+  +-------|-------+   +-----------+-----------+   +---------|---------+
+          |                    ^  lookup             ^  top
+          v                    |  (nonterm, look)   |
+  +-------+-------+  +----------+----------+  +------+-------+
+  | driver loop:  |  |   if M[S,a] = A→α:  |  |  stack: S on |
+  | S = top(stack)|  |   pop S, push α reversed|  | top = S    |
+  | a = lookahead |  |   if M[S,a] = accept: |  |              |
+  +---------------+  |   stack==input==$: done|  +--------------+
+                     +---------------------+
+</code></pre>
+<p><b>Full predictive table for the arithmetic-expression grammar.</b> FIRST/FOLLOW first:</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th>Nonterminal</th><th>FIRST</th><th>FOLLOW</th></tr></thead>
+<tbody>
+<tr><td>E</td><td>{(, id}</td><td>{$, )} (start; E inside parens)</td></tr>
+<tr><td>E'</td><td>{+, ε}</td><td>FOLLOW(E) = {$, )}</td></tr>
+<tr><td>T</td><td>{(, id}</td><td>FOLLOW(E) ∪ (+) = {$, ), +}</td></tr>
+<tr><td>T'</td><td>{*, ε}</td><td>FOLLOW(T) = {$, ), +}</td></tr>
+<tr><td>F</td><td>{(, id}</td><td>{*} ∪ FOLLOW(T') = {*, $, ), +}</td></tr>
+</tbody>
+</table>
+</div>
+<p><b>Action table</b> (every cell filled; ε-cells are reduce-to-ε):</p>
+<div class="table-scroll">
+<table>
+<thead><tr><th></th><th>id</th><th>(</th><th>)</th><th>+</th><th>*</th><th>$</th></tr></thead>
+<tbody>
+<tr><td>E</td><td>E → T E'</td><td>E → T E'</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>E'</td><td>—</td><td>—</td><td>E' → ε</td><td>E' → + T E'</td><td>—</td><td>E' → ε</td></tr>
+<tr><td>T</td><td>T → F T'</td><td>T → F T'</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+<tr><td>T'</td><td>—</td><td>—</td><td>T' → ε</td><td>T' → ε</td><td>T' → * F T'</td><td>T' → ε</td></tr>
+<tr><td>F</td><td>F → id</td><td>F → ( E )</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+</tbody>
+</table>
+</div>
+<p>No cell holds more than one production: FIRST sets of the E-row, T-row, F-row are {id, (} (mutually exclusive within row), the E' row's + cell is separate from its ε-cells ( ) , $ are in FOLLOW(E')), T' mirrors on * — table is LL(1)-clean.</p>
+</div>
+</div>
+
+<div class="qa-card" id="q3-4">
+<span class="qa-num">3</span>
+<div class="qa-body">
+<p class="qa-question">Using the table from Q2, parse the string id + id * id step by step. Columns: step, stack, input, action, table-cell used. End with accept. Draw the parse tree.</p>
+
+<div class="table-scroll">
+<table>
+<thead><tr><th>Step</th><th>Stack</th><th>Input</th><th>Action</th><th>Cell used</th></tr></thead>
+<tbody>
+<tr><td>0</td><td>E $</td><td>id + id * id $</td><td>— (initial)</td><td>—</td></tr>
+<tr><td>1</td><td>T E' $</td><td>id + id * id $</td><td>E → T E'</td><td>M[E, id]</td></tr>
+<tr><td>2</td><td>F T' E' $</td><td>id + id * id $</td><td>T → F T'</td><td>M[T, id]</td></tr>
+<tr><td>3</td><td>id T' E' $</td><td>+ id * id $</td><td>shift id; F → id</td><td>M[F, id]</td></tr>
+<tr><td>4</td><td>id E' $</td><td>+ id * id $</td><td>T' → ε</td><td>M[T', +]</td></tr>
+<tr><td>5</td><td>id + T E' E' $</td><td>id * id $</td><td>E' → + T E'; shift +</td><td>M[E', +]</td></tr>
+<tr><td>6</td><td>id + F T' E' E' $</td><td>id * id $</td><td>T → F T'</td><td>M[T, id]</td></tr>
+<tr><td>7</td><td>id + id T' E' E' $</td><td>* id $</td><td>shift id; F → id</td><td>M[F, id]</td></tr>
+<tr><td>8</td><td>id + id * F T' E' E' $</td><td>id $</td><td>T' → * F T'; shift *</td><td>M[T', *]</td></tr>
+<tr><td>9</td><td>id + id * id T' E' E' $</td><td>$</td><td>shift id; F → id</td><td>M[F, id]</td></tr>
+<tr><td>10</td><td>id + id * id E' E' $</td><td>$</td><td>T' → ε</td><td>M[T', $]</td></tr>
+<tr><td>11</td><td>id + id * id E' $</td><td>$</td><td>E' → ε</td><td>M[E', $]</td></tr>
+<tr><td>12</td><td>id + id * id $</td><td>$</td><td>E' → ε</td><td>M[E', $]</td></tr>
+<tr><td>13</td><td>$</td><td>$</td><td><b>ACCEPT</b></td><td>stack top = $</td></tr>
+</tbody>
+</table>
+</div>
+<pre><code> parse tree for  id + id * id
+                 E
+              /     \
+             T       E'
+            / \     / | \
+           F   T'  +  T  E'
+          /    |       |\    \
+        id    ε       F  T'  ε
+                     /  |\
+                   id  F  T'
+                       |   |
+                      id  ε
+
+  (read: E → T E' ; E' → + T E' ; T → F T' ; T' → * F T' ; F → id
+   so the tree binds * tighter than +, exactly operator-precedence intent)
+</code></pre>
+</div>
+</div>
+</section>
